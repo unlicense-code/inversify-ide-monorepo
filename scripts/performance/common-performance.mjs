@@ -39,11 +39,15 @@
  * @returns {PromiseLike<string>} the path to the recorded performance profiling trace file
  */
 
-const fs = require('fs');
-const { resolve } = require('path');
+import { readFileSync, existsSync, writeFileSync } from 'fs';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const performanceTag = braceText('Performance');
-const lcp = 'Largest Contentful Paint (LCP)';
+export const lcp = 'Largest Contentful Paint (LCP)';
 
 /**
  * A GitHub performance results record.
@@ -61,7 +65,7 @@ const lcp = 'Largest Contentful Paint (LCP)';
  * @property {boolean} enabled whether GitHub result reporting is enabled (`false` by default)
  * @property {Array<PerformanceResult>} results the performance results, if reporting is enabled
  */
-var githubReporting = { enabled: false, results: [] };
+export const githubReporting = { enabled: false, results: [] };
 
 /**
  * Measure the performance of a `test` function implementing some `scenario` of interest.
@@ -74,7 +78,7 @@ var githubReporting = { enabled: false, results: [] };
  * @param {EventPredicate} isStartEvent a predicate matching the trace event that marks the start of the measured scenario
  * @param {EventPredicate} isEndEvent a predicate matching the trace event that marks the end of the measured scenario
  */
-async function measure(name, scenario, runs, test, isStartEvent, isEndEvent) {
+export async function measure(name, scenario, runs, test, isStartEvent, isEndEvent) {
     const durations = [];
     for (let i = 0; i < runs; i++) {
         const runNr = i + 1;
@@ -128,14 +132,14 @@ function prec(value, precision = 3) {
  * @param {PerformanceResult} result the performance result to report
  */
 function githubResult(result) {
-    const resultsFile = resolve('../..', 'performance-result.json');
+    const resultsFile = resolve(__dirname, '../..', 'performance-result.json');
 
     // We append to any previous results that there may have been from another script
-    const previousResults = fs.existsSync(resultsFile) ? JSON.parse(fs.readFileSync(resultsFile, 'utf-8')) : [];
+    const previousResults = existsSync(resultsFile) ? JSON.parse(readFileSync(resultsFile, 'utf-8')) : [];
     githubReporting.results.push(...previousResults);
 
     githubReporting.results.push(result);
-    fs.writeFileSync(resultsFile, JSON.stringify(githubReporting.results, undefined, 2), 'utf-8');
+    writeFileSync(resultsFile, JSON.stringify(githubReporting.results, undefined, 2), 'utf-8');
 }
 
 /**
@@ -145,9 +149,9 @@ function githubResult(result) {
  * @param {EventPredicate} isStartEvent a predicate matching the trace event that marks the start of the measured scenario
  * @param {EventPredicate} isEndEvent a predicate matching the trace event that marks the end of the measured scenario
  */
-async function analyzeTrace(profilePath, isStartEvent, isEndEvent) {
+export async function analyzeTrace(profilePath, isStartEvent, isEndEvent) {
     let startEvent;
-    const tracing = JSON.parse(fs.readFileSync(profilePath, 'utf8'));
+    const tracing = JSON.parse(readFileSync(profilePath, 'utf8'));
     const endEvents = tracing.traceEvents.filter(e => {
         if (startEvent === undefined && isStartEvent(e)) {
             startEvent = e;
@@ -169,7 +173,7 @@ async function analyzeTrace(profilePath, isStartEvent, isEndEvent) {
  * @param {TraceEvent} event an event in the performance trace
  * @returns whether the `event` is an LCP candidate
  */
-function isLCP(event) {
+export function isLCP(event) {
     return event.name === 'largestContentfulPaint::Candidate';
 }
 
@@ -180,7 +184,7 @@ function isLCP(event) {
  * @param {TraceEvent} startEvent the duration start event
  * @returns the duration, in seconds
  */
-function duration(event, startEvent) {
+export function duration(event, startEvent) {
     return (event.ts - startEvent.ts) / 1_000_000;
 }
 
@@ -193,7 +197,7 @@ function duration(event, startEvent) {
  * @param {number} duration the duration, in seconds, of the measured scenario
  * @param {boolean} [multipleRuns=true] whether the `run` logged is one of many being logged (default: `true`)
  */
-function logDuration(name, run, metric, duration, multipleRuns = true) {
+export function logDuration(name, run, metric, duration, multipleRuns = true) {
     let runText = '';
     if (multipleRuns) {
         runText = braceText(run);
@@ -226,7 +230,7 @@ function logException(name, run, metric, exception, multipleRuns = true) {
  * @param {number[]} array an array of numbers to average
  * @returns the average of the `array`
  */
-function calculateMean(array) {
+export function calculateMean(array) {
     let sum = 0;
     array.forEach(x => {
         sum += x;
@@ -240,7 +244,7 @@ function calculateMean(array) {
  * @param {number[]} array an array of numbers
  * @returns the standard deviation of the `array` from its mean
  */
-function calculateStandardDeviation(mean, array) {
+export function calculateStandardDeviation(mean, array) {
     let sumOfDiffsSquared = 0;
     array.forEach(time => {
         sumOfDiffsSquared += Math.pow((time - mean), 2)
@@ -255,7 +259,7 @@ function calculateStandardDeviation(mean, array) {
  * @param {string|number} text a string of text or a number that can be rendered as text
  * @returns the `text` in braces
  */
-function braceText(text) {
+export function braceText(text) {
     return '[' + text + ']';
 }
 
@@ -265,17 +269,8 @@ function braceText(text) {
  * @param {number} time a delay, in milliseconds
  * @returns a promise that will resolve after the given number of milliseconds
  */
-function delay(time) {
+export function delay(time) {
     return new Promise(function (resolve) {
         setTimeout(resolve, time)
     });
 }
-
-module.exports = {
-    githubReporting,
-    measure, analyzeTrace,
-    calculateMean, calculateStandardDeviation,
-    duration, logDuration, logSummary,
-    braceText, delay,
-    lcp, isLCP
-};

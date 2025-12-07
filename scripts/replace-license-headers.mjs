@@ -14,11 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-const fs = require('fs-extra');
-const glob = require('glob');
-const util = require('util');
+import { readFile, writeFile } from 'fs-extra';
+import { createRequire } from 'module';
+import { realpath } from 'fs/promises';
 
-const realpath = util.promisify(require('fs').realpath.native);
+const require = createRequire(import.meta.url);
+const { Glob } = require('glob');
 
 const oldHeaderRegexp = new RegExp(String.raw`
 \/\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
@@ -56,7 +57,7 @@ const newHeaderTemplate = `\
 // SPDX-License-Identifier: $2
 // *****************************************************************************`;
 
-const search = new glob.Glob('**/*.{ts,tsx,js,jsx,c,cc,cpp,cxx}', {
+const search = new Glob('**/*.{ts,tsx,js,jsx,c,cc,cpp,cxx}', {
     ignore: [
         '**/node_modules/**/*',
         '**/lib/**/*'
@@ -70,11 +71,11 @@ search.on('match', async file => {
         return;
     }
     seen.add(file);
-    const original = await fs.readFile(file, 'utf8');
+    const original = await readFile(file, 'utf8');
     const replaced = original.replace(oldHeaderRegexp, newHeaderTemplate);
     if (original !== replaced) {
         matches += 1;
         console.log('Rewriting', file, matches);
-        await fs.writeFile(file, replaced);
+        await writeFile(file, replaced);
     }
 });

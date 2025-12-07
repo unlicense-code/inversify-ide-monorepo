@@ -15,7 +15,6 @@
 // *****************************************************************************
 
 import { FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { inject, injectable } from '@theia/core/shared/inversify';
 import { AnthropicLanguageModelsManager, AnthropicModelDescription } from '../common';
 import { API_KEY_PREF, MODELS_PREF } from '../common/anthropic-preferences';
 import { AICorePreferences, PREFERENCE_NAME_MAX_RETRIES } from '@theia/ai-core/lib/common/ai-core-preferences';
@@ -37,17 +36,13 @@ const DEFAULT_MODEL_MAX_TOKENS: Record<string, number> = {
     'claude-opus-4-1': 32000
 };
 
-@injectable()
 export class AnthropicFrontendApplicationContribution implements FrontendApplicationContribution {
 
-    @inject(PreferenceService)
-    protected preferenceService: PreferenceService;
-
-    @inject(AnthropicLanguageModelsManager)
-    protected manager: AnthropicLanguageModelsManager;
-
-    @inject(AICorePreferences)
-    protected aiCorePreferences: AICorePreferences;
+    constructor(
+        protected preferenceService: PreferenceService,
+        protected manager: AnthropicLanguageModelsManager,
+        protected aiCorePreferences: AICorePreferences
+    ) {}
 
     protected prevModels: string[] = [];
 

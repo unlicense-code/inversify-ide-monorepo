@@ -14,12 +14,22 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 // @ts-check
-const fsx = require('fs-extra');
-const { resolve } = require('path');
-const { spawn, ChildProcess } = require('child_process');
-const { delay, githubReporting, isLCP, lcp, measure } = require('./common-performance');
-const traceConfigTemplate = require('./electron-trace-config.json');
-const { exit } = require('process');
+import { existsSync, emptyDirSync, writeFileSync } from 'fs-extra';
+import { resolve, dirname } from 'path';
+import { spawn, ChildProcess } from 'child_process';
+import { delay, githubReporting, isLCP, lcp, measure } from './common-performance.mjs';
+import { readFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const traceConfigTemplate = JSON.parse(readFileSync(join(__dirname, 'electron-trace-config.json'), 'utf8'));
+import { exit } from 'process';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const basePath = resolve(__dirname, '../..');
 const profilesPath = resolve(__dirname, './profiles/');
@@ -35,8 +45,9 @@ let debugging = false;
 (async () => {
     let defaultWorkspace = true;
 
-    const yargs = require('yargs');
-    const args = yargs(process.argv.slice(2)).option('name', {
+    const yargsModule = await import('yargs');
+    const { default: yargs } = yargsModule;
+    const args = await yargs(process.argv.slice(2)).option('name', {
         alias: 'n',
         desc: 'A name for the test suite',
         type: 'string',
@@ -60,7 +71,7 @@ let debugging = false;
         alias: 'X',
         desc: 'Whether to log debug information',
         boolean: true
-    }).wrap(Math.min(120, yargs.terminalWidth())).argv;
+    }).wrap(Math.min(120, yargs.terminalWidth())).parse();
 
     if (args.name) {
         name = args.name.toString();
@@ -86,21 +97,22 @@ let debugging = false;
 
     // Verify that the application exists
     const indexHTML = resolve(electronExample, 'src-gen/frontend/index.html');
-    if (!fsx.existsSync(indexHTML)) {
+    if (!existsSync(indexHTML)) {
         console.error('Electron example app does not exist. Please build it before running this script.');
         process.exit(1);
     }
 
     if (defaultWorkspace) {
         // Ensure that it exists
-        fsx.ensureDirSync(workspace);
+        const { ensureDirSync } = await import('fs-extra');
+        ensureDirSync(workspace);
     }
 
     await measurePerformance();
 })();
 
 async function measurePerformance() {
-    fsx.emptyDirSync(resolve(profilesPath, folder));
+    emptyDirSync(resolve(profilesPath, folder));
     const traceConfigPath = resolve(profilesPath, folder, 'trace-config.json');
 
     /**
@@ -112,7 +124,7 @@ async function measurePerformance() {
         const traceConfig = { ...traceConfigTemplate };
         const traceFilePath = resolve(profilesPath, folder, `${runNr}.json`);
         traceConfig.result_file = traceFilePath
-        fsx.writeFileSync(traceConfigPath, JSON.stringify(traceConfig, undefined, 2), 'utf-8');
+        writeFileSync(traceConfigPath, JSON.stringify(traceConfig, undefined, 2), 'utf-8');
         return traceFilePath;
     };
 
@@ -134,7 +146,7 @@ async function measurePerformance() {
 
     let electron;
 
-    /** @type import('./common-performance').TestFunction */
+    /** @type import('./common-performance.mjs').TestFunction */
     const testScenario = async (runNr) => {
         const traceFile = traceConfigGenerator(runNr);
         electron = await launchElectron(traceConfigPath);

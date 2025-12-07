@@ -14,23 +14,30 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 // @ts-check
-const { execSync, exec } = require('child_process');
-const { EOL } = require('os');
-const { copyFileSync, readdirSync, writeFileSync, appendFileSync, unlinkSync, readFileSync, rmdirSync } = require('fs');
-const { ensureFileSync } = require('fs-extra');
-const mkdirp = require('mkdirp');
-const path = require('path');
+import { execSync, exec } from 'child_process';
+import { EOL } from 'os';
+import { copyFileSync, readdirSync, writeFileSync, appendFileSync, unlinkSync, readFileSync, rmdirSync } from 'fs';
+import { ensureFileSync } from 'fs-extra';
+import mkdirp from 'mkdirp';
+import { resolve, dirname, delimiter } from 'path';
+import { exit } from 'process';
+import { fileURLToPath } from 'url';
+import { createRequire } from 'module';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const require = createRequire(import.meta.url);
+
 const env = Object.assign({}, process.env);
-env.PATH = path.resolve("../../node_modules/.bin") + path.delimiter + env.PATH;
+env.PATH = resolve("../../node_modules/.bin") + delimiter + env.PATH;
 let basePackage;
-const { exit } = require('process');
 let runs = 10;
 let baseTime;
 let extensions = [];
 let yarn = false;
 let url;
 let workspace;
-let file = path.resolve('./script.csv');
+let file = resolve('./script.csv');
 let hostApp = 'browser';
 
 async function sigintHandler() {
@@ -46,8 +53,9 @@ async function exitHandler() {
     process.on('SIGINT', sigintHandler);
     process.on('exit', exitHandler);
 
-    const yargs = require('yargs');
-    const args = yargs(process.argv.slice(2))
+    const yargsModule = await import('yargs');
+    const { default: yargs } = yargsModule;
+    const args = await yargs(process.argv.slice(2))
         .option('base-time', {
             alias: 'b',
             desc: 'Pass an existing mean of the base application',
@@ -91,7 +99,7 @@ async function exitHandler() {
             type: 'string',
             choices: ['browser', 'electron'],
             default: 'browser'
-        }).wrap(Math.min(120, yargs.terminalWidth())).argv;
+        }).wrap(Math.min(120, yargs.terminalWidth())).parse();
     if (args.baseTime) {
         baseTime = parseFloat(args.baseTime.toString()).toFixed(3);
     }
@@ -115,7 +123,7 @@ async function exitHandler() {
         workspace = args.workspace;
     }
     if (args.file) {
-        file = path.resolve(args.file);
+        file = resolve(args.file);
         if (!file.endsWith('.csv')) {
             console.error('--file must end with .csv');
             return;
@@ -153,7 +161,7 @@ async function extensionImpact(extensions) {
 function preparePackageTemplate() {
     const core = require('../../packages/core/package.json');
     const version = core.version;
-    const content = readFileSync(path.resolve(__dirname, './base-package.json'), 'utf-8')
+    const content = readFileSync(resolve(__dirname, './base-package.json'), 'utf-8')
         .replace(/\{\{app\}\}/g, hostApp)
         .replace(/\{\{version\}\}/g, version);
     basePackage = JSON.parse(content);
@@ -227,12 +235,12 @@ async function calculateExtension(extensionQualifier) {
         let cwd;
         switch (app) {
             case 'browser':
-                command = `concurrently --success first -k -r "cd scripts/performance && node browser-performance.js --name Browser --folder browser --runs ${runs}${url ? ' --url ' + url : ''}" `
+                command = `concurrently --success first -k -r "cd scripts/performance && node browser-performance.mjs --name Browser --folder browser --runs ${runs}${url ? ' --url ' + url : ''}" `
                     + `"npm run start:browser | grep -v '.*'"`
-                cwd = path.resolve(__dirname, '../../');
+                cwd = resolve(__dirname, '../../');
                 break;
             case 'electron':
-                command = `node electron-performance.js  --name Electron --folder electron --runs ${runs}${workspace ? ' --workspace "' + workspace + '"' : ''}`
+                command = `node electron-performance.mjs  --name Electron --folder electron --runs ${runs}${workspace ? ' --workspace "' + workspace + '"' : ''}`
                 cwd = __dirname;
                 break;
             default:

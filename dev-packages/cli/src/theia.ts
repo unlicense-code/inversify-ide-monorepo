@@ -597,7 +597,7 @@ async function theiaCli(): Promise<void> {
                         const serverProcess = manager.start(toStringArray(theiaArgs));
                         serverProcess.on('message', resolve);
                         serverProcess.on('error', reject);
-                        serverProcess.on('close', (code, signal) => reject(`Server process exited unexpectedly: ${code ?? signal}`));
+                        serverProcess.on('close', (code: number | null, signal: NodeJS.Signals | null) => reject(`Server process exited unexpectedly: ${code ?? signal}`));
                     }),
                     launch: {
                         args: args,

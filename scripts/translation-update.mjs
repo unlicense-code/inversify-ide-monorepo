@@ -1,4 +1,4 @@
-const cp = require('child_process');
+import { spawnSync } from 'child_process';
 
 console.log('Extracting all localization calls...');
 performNlsExtract();
@@ -17,7 +17,7 @@ if (hasNlsFileChanged()) {
 }
 
 function performNlsExtract() {
-    cp.spawnSync('npx', [
+    spawnSync('npx', [
         'theia', 'nls-extract',
         '-o', './packages/core/i18n/nls.json',
         '-e', 'vscode',
@@ -29,7 +29,7 @@ function performNlsExtract() {
 }
 
 function hasNlsFileChanged() {
-    const childProcess = cp.spawnSync('git', ['diff', '--exit-code', './packages/core/i18n/nls.json']);
+    const childProcess = spawnSync('git', ['diff', '--exit-code', './packages/core/i18n/nls.json']);
     return childProcess.status === 1;
 }
 
@@ -38,7 +38,7 @@ function getDeepLToken() {
 }
 
 function performDeepLTranslation(token) {
-    const childProcess = cp.spawnSync('npx', [
+    const childProcess = spawnSync('npx', [
         'theia', 'nls-localize',
         '-f', './packages/core/i18n/nls.json',
         '--free-api', '-k', token

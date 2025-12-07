@@ -15,21 +15,18 @@
 // *****************************************************************************
 
 import { LanguageModelRegistry, LanguageModelStatus, TokenUsageService } from '@theia/ai-core';
-import { inject, injectable } from '@theia/core/shared/inversify';
 import { AnthropicModel, DEFAULT_MAX_TOKENS } from './anthropic-language-model';
 import { AnthropicLanguageModelsManager, AnthropicModelDescription } from '../common';
 
-@injectable()
 export class AnthropicLanguageModelsManagerImpl implements AnthropicLanguageModelsManager {
 
     protected _apiKey: string | undefined;
     protected _proxyUrl: string | undefined;
 
-    @inject(LanguageModelRegistry)
-    protected readonly languageModelRegistry: LanguageModelRegistry;
-
-    @inject(TokenUsageService)
-    protected readonly tokenUsageService: TokenUsageService;
+    constructor(
+        protected readonly languageModelRegistry: LanguageModelRegistry,
+        protected readonly tokenUsageService: TokenUsageService
+    ) {}
 
     get apiKey(): string | undefined {
         return this._apiKey ?? process.env.ANTHROPIC_API_KEY;

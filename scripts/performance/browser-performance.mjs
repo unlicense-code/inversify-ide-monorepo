@@ -14,10 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 // @ts-check
-const puppeteer = require('puppeteer');
-const fsx = require('fs-extra');
-const { resolve } = require('path');
-const { delay, githubReporting, isLCP, lcp, measure } = require('./common-performance');
+import puppeteer from 'puppeteer';
+import { existsSync, ensureDirSync } from 'fs-extra';
+import { resolve, dirname } from 'path';
+import { delay, githubReporting, isLCP, lcp, measure } from './common-performance.mjs';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const workspacePath = resolve('./workspace');
 const profilesPath = './profiles/';
@@ -30,8 +34,9 @@ let runs = 10;
 
 (async () => {
     let defaultUrl = true;
-    const yargs = require('yargs');
-    const args = yargs(process.argv.slice(2)).option('name', {
+    const yargsModule = await import('yargs');
+    const { default: yargs } = yargsModule;
+    const args = await yargs(process.argv.slice(2)).option('name', {
         alias: 'n',
         desc: 'A name for the test suite',
         type: 'string',
@@ -55,7 +60,7 @@ let runs = 10;
         desc: 'Run in headless mode (do not open a browser)',
         type: 'boolean',
         default: headless
-    }).wrap(Math.min(120, yargs.terminalWidth())).argv;
+    }).wrap(Math.min(120, yargs.terminalWidth())).parse();
 
     if (args.name) {
         name = args.name.toString();
@@ -79,15 +84,15 @@ let runs = 10;
 
     // Verify that the application exists
     const indexHTML = resolve(__dirname, '../../examples/browser/src-gen/frontend/index.html');
-    if (!fsx.existsSync(indexHTML)) {
+    if (!existsSync(indexHTML)) {
         console.error('Browser example app does not exist. Please build it before running this script.');
         process.exit(1);
     }
 
-    if (defaultUrl) { fsx.ensureDirSync(workspacePath); }
-    fsx.ensureDirSync(profilesPath);
+    if (defaultUrl) { ensureDirSync(workspacePath); }
+    ensureDirSync(profilesPath);
     const folderPath = profilesPath + folder;
-    fsx.ensureDirSync(folderPath);
+    ensureDirSync(folderPath);
 
     const deployed = await waitForDeployed(url, 10, 500);
     if (deployed == false) {
@@ -99,7 +104,7 @@ let runs = 10;
 
 async function measurePerformance(name, url, folder, headless, runs) {
 
-    /** @type import('./common-performance').TestFunction */
+    /** @type import('./common-performance.mjs').TestFunction */
     const testScenario = async (runNr) => {
         const browser = await puppeteer.launch({ headless: headless });
         const page = await browser.newPage();

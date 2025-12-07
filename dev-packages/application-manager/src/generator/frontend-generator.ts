@@ -74,6 +74,7 @@ export class FrontendGenerator extends AbstractGenerator {
 // @ts-check
 require('reflect-metadata');
 const { Container } = require('@theia/core/shared/inversify');
+const { ServiceRegistry } = require('@theia/core/lib/common/service-registry');
 const { FrontendApplicationConfigProvider } = require('@theia/core/lib/browser/frontend-application-config-provider');
 
 FrontendApplicationConfigProvider.set(${this.prettyStringify(this.pck.props.frontend.config)});
@@ -85,17 +86,56 @@ self.MonacoEnvironment = {
     }
 }`)}
 
-function load(container, jsModule) {
+// Hybrid loader: supports both ContainerModule (old) and initialization functions (new)
+function load(container, registry, jsModule) {
     return Promise.resolve(jsModule)
-        .then(containerModule => container.load(containerModule.default));
+        .then(module => {
+            // Check for initialization function exports (new format)
+            // Look for functions that start with "initialize" and take one parameter (registry)
+            const initKeys = Object.keys(module).filter(key => 
+                key.startsWith('initialize') && typeof module[key] === 'function' && module[key].length === 1
+            );
+            if (initKeys.length > 0) {
+                // Use the first initialization function found
+                module[initKeys[0]](registry);
+                return Promise.resolve();
+            }
+            
+            // Check if module.default is a ContainerModule (old format)
+            if (module.default) {
+                if (typeof module.default === 'function') {
+                    // Try ContainerModule first (old format)
+                    try {
+                        container.load(module.default);
+                        return Promise.resolve();
+                    } catch (e) {
+                        // If container.load fails, check if it's an initialization function
+                        if (module.default.length === 1) {
+                            module.default(registry);
+                            return Promise.resolve();
+                        }
+                        throw e;
+                    }
+                }
+            }
+            
+            console.warn('Module does not export default ContainerModule or initialization function');
+            return Promise.resolve();
+        });
 }
 
-async function preload(container) {
+async function preload(container, registry) {
     try {
 ${Array.from(frontendPreloadModules.values(), jsModulePath => `\
-        await load(container, ${this.importOrRequire()}('${jsModulePath}'));`).join(EOL)}
+        await load(container, registry, ${this.importOrRequire()}('${jsModulePath}'));`).join(EOL)}
         const { Preloader } = require('@theia/core/lib/browser/preload/preloader');
-        const preloader = container.get(Preloader);
+        // Try registry first, fallback to container
+        let preloader;
+        try {
+            preloader = registry.get(require('@theia/core/lib/browser/preload/preloader').Preloader);
+        } catch {
+            preloader = container.get(require('@theia/core/lib/browser/preload/preloader').Preloader);
+        }
         await preloader.initialize();
     } catch (reason) {
         console.error('Failed to run preload scripts.');
@@ -106,15 +146,23 @@ ${Array.from(frontendPreloadModules.values(), jsModulePath => `\
 }
 
 module.exports = (async () => {
+    // Create both container (for old modules) and registry (for new modules)
+    const container = new Container();
+    const registry = new ServiceRegistry();
+    
+    // Store registry in window for compatibility
+    (window['theia'] = window['theia'] || {}).registry = registry;
+    (window['theia'] = window['theia'] || {}).container = container;
+
+    // Load core modules - these still use ContainerModule for now
     const { messagingFrontendModule } = require('@theia/core/lib/${this.pck.isBrowser() || this.pck.isBrowserOnly()
                 ? 'browser/messaging/messaging-frontend-module'
                 : 'electron-browser/messaging/electron-messaging-frontend-module'}');
-    const container = new Container();
     container.load(messagingFrontendModule);
     ${this.ifBrowserOnly(`const { messagingFrontendOnlyModule } = require('@theia/core/lib/browser-only/messaging/messaging-frontend-only-module');
     container.load(messagingFrontendOnlyModule);`)}
 
-    await preload(container);
+    await preload(container, registry);
 
     ${this.ifMonaco(() => `
     const { MonacoInit } = require('@theia/monaco/lib/browser/monaco-init');
@@ -134,7 +182,7 @@ module.exports = (async () => {
 
     try {
 ${Array.from(frontendModules.values(), jsModulePath => `\
-        await load(container, ${this.importOrRequire()}('${jsModulePath}'));`).join(EOL)}
+        await load(container, registry, ${this.importOrRequire()}('${jsModulePath}'));`).join(EOL)}
         ${this.ifMonaco(() => `
         MonacoInit.init(container);
         `)};
@@ -147,8 +195,14 @@ ${Array.from(frontendModules.values(), jsModulePath => `\
     }
 
     function start() {
-        (window['theia'] = window['theia'] || {}).container = container;
-        return container.get(FrontendApplication).start();
+        // Try registry first, fallback to container
+        let app;
+        try {
+            app = registry.get(FrontendApplication);
+        } catch {
+            app = container.get(FrontendApplication);
+        }
+        return app.start();
     }
 })();
 `;

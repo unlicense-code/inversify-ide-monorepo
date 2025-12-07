@@ -15,12 +15,15 @@
  ********************************************************************************/
 
 import { parse as parseUrl, Url } from 'url';
-import * as httpAgent from 'http-proxy-agent';
-import * as httpsAgent from 'https-proxy-agent';
+import HttpProxyAgentModule = require('http-proxy-agent');
+import HttpsProxyAgentModule = require('https-proxy-agent');
 
-export type ProxyAgent = httpAgent.HttpProxyAgent | httpsAgent.HttpsProxyAgent;
+const HttpProxyAgent = HttpProxyAgentModule as any;
+const HttpsProxyAgent = HttpsProxyAgentModule as any;
 
-function getSystemProxyURI(requestURL: Url, env: typeof process.env): string | undefined {
+export type ProxyAgent = InstanceType<typeof HttpProxyAgent> | InstanceType<typeof HttpsProxyAgent>;
+
+function getSystemProxyURI(requestURL: Url, env: NodeJS.ProcessEnv): string | undefined {
     if (requestURL.protocol === 'http:') {
         return env.HTTP_PROXY || env.http_proxy;
     } else if (requestURL.protocol === 'https:') {
@@ -35,7 +38,7 @@ export interface ProxySettings {
     strictSSL?: boolean;
 }
 
-export function getProxyAgent(rawRequestURL: string, env: typeof process.env, options: ProxySettings = {}): ProxyAgent | undefined {
+export function getProxyAgent(rawRequestURL: string, env: NodeJS.ProcessEnv, options: ProxySettings = {}): ProxyAgent | undefined {
     const requestURL = parseUrl(rawRequestURL);
     const proxyURL = options.proxyUrl || getSystemProxyURI(requestURL, env);
 
@@ -49,13 +52,16 @@ export function getProxyAgent(rawRequestURL: string, env: typeof process.env, op
         return undefined;
     }
 
-    const opts = {
-        host: proxyEndpoint.hostname || '',
-        port: proxyEndpoint.port || (proxyEndpoint.protocol === 'https' ? '443' : '80'),
-        auth: proxyEndpoint.auth,
+    // Build proxy URL string (proxyEndpoint already has the full URL from parseUrl)
+    const proxyUrl = proxyURL;
+    
+    const agentOptions: any = {
         rejectUnauthorized: !!options.strictSSL,
     };
 
-    const createAgent = requestURL.protocol === 'http:' ? httpAgent : httpsAgent;
-    return createAgent(opts);
+    if (requestURL.protocol === 'http:') {
+        return new HttpProxyAgent(proxyUrl, agentOptions);
+    } else {
+        return new HttpsProxyAgent(proxyUrl, agentOptions);
+    }
 }

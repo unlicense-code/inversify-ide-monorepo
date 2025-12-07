@@ -1,0 +1,17 @@
+{
+  "name": "@theia/migration-scripts",
+  "version": "1.0.0",
+  "description": "Migration scripts for Inversify to ES Modules refactoring",
+  "type": "module",
+  "scripts": {
+    "migrate": "tsx migrate-inversify-tsmorph.ts",
+    "migrate-module": "tsx migrate-module-bindings.ts"
+  },
+  "dependencies": {
+    "ts-morph": "^23.0.0",
+    "tsx": "^4.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  }
+}

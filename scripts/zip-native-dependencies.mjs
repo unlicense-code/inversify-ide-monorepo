@@ -14,16 +14,23 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-const { promisify } = require('util');
-const glob = promisify(require('glob'));
-const fs = require('fs');
-const path = require('path');
-const archiver = require('archiver');
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
+const glob = require('glob');
+import { createWriteStream } from 'fs';
+import { join, dirname } from 'path';
+import archiver from 'archiver';
+import { stat } from 'fs/promises';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 async function run() {
-    const repoPath = path.resolve(__dirname, '..');
-    const zipFile = path.join(__dirname, `native-dependencies-${process.platform}-${process.arch}.zip`);
-    const browserAppPath = path.join(repoPath, 'examples', 'browser');
+    const repoPath = join(__dirname, '..');
+    const zipFile = join(__dirname, `native-dependencies-${process.platform}-${process.arch}.zip`);
+    const browserAppPath = join(repoPath, 'examples', 'browser');
     const nativeDependencies = await glob('lib/backend/native/**', {
         cwd: browserAppPath
     });
@@ -34,17 +41,17 @@ async function run() {
         cwd: browserAppPath
     });
     const archive = archiver('zip');
-    const output = fs.createWriteStream(zipFile, { flags: "w" });
+    const output = createWriteStream(zipFile, { flags: "w" });
     archive.pipe(output);
     for (const file of [
         ...nativeDependencies,
         ...buildDependencies,
         ...trashDependencies
     ]) {
-        const filePath = path.join(browserAppPath, file);
+        const filePath = join(browserAppPath, file);
         archive.file(filePath, {
             name: file,
-            mode: (await fs.promises.stat(filePath)).mode
+            mode: (await stat(filePath)).mode
         });
     }
     await archive.finalize();

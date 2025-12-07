@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others
+// Copyright (C) 2019 TypeFox and others.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,14 @@
 // *****************************************************************************
 // @ts-check
 
-const path = require('path');
-const chalk = require('chalk').default;
-const cp = require('child_process');
-const fs = require('fs');
+import { resolve, dirname } from 'path';
+import chalk from 'chalk';
+import { execSync, exec } from 'child_process';
+import { readFile } from 'fs/promises';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const distTag = process.argv[2];
 
@@ -28,10 +32,10 @@ checkPublish(distTag).catch(error => {
 });
 
 async function checkPublish(distTag) {
-    const workspaces = JSON.parse(cp.execSync('npx lerna ls --json --loglevel=silent').toString());
+    const workspaces = JSON.parse(execSync('node scripts/get-workspaces.mjs --json').toString());
     await Promise.all(workspaces.map(async workspace => {
-        const packagePath = path.resolve(workspace.location, 'package.json');
-        const pck = JSON.parse(await fs.promises.readFile(packagePath, 'utf8'));
+        const packagePath = resolve(workspace.location, 'package.json');
+        const pck = JSON.parse(await readFile(packagePath, 'utf8'));
         if (!pck.private) {
             let pckName;
             let npmViewOutput;
@@ -39,7 +43,7 @@ async function checkPublish(distTag) {
             if (distTag === 'next') {
                 pckName = `${pck.name}@next`;
                 npmViewOutput = await new Promise(
-                    resolve => cp.exec(`npm view ${pckName} version`,
+                    resolve => exec(`npm view ${pckName} version`,
                         (error, stdout, stderr) => {
                             if (error) {
                                 console.error(error);
@@ -55,7 +59,7 @@ async function checkPublish(distTag) {
             } else {
                 pckName = `${pck.name}@${pck.version}`
                 npmViewOutput = await new Promise(
-                    resolve => cp.exec(`npm view ${pckName} version`,
+                    resolve => exec(`npm view ${pckName} version`,
                         (error, stdout, stderr) => {
                             if (error) {
                                 console.error(error);

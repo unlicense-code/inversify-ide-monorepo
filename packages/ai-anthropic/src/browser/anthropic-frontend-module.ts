@@ -14,19 +14,35 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
+import { ServiceRegistry } from '@theia/core/lib/common/service-registry';
 import { AnthropicPreferencesSchema } from '../common/anthropic-preferences';
-import { FrontendApplicationContribution, RemoteConnectionProvider, ServiceConnectionProvider } from '@theia/core/lib/browser';
+import { RemoteConnectionProvider, ServiceConnectionProvider } from '@theia/core/lib/browser';
 import { AnthropicFrontendApplicationContribution } from './anthropic-frontend-application-contribution';
 import { ANTHROPIC_LANGUAGE_MODELS_MANAGER_PATH, AnthropicLanguageModelsManager } from '../common';
-import { PreferenceContribution } from '@theia/core';
+import { PreferenceContribution, PreferenceService } from '@theia/core';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser';
+import { AICorePreferences } from '@theia/ai-core/lib/common/ai-core-preferences';
 
-export default new ContainerModule(bind => {
-    bind(PreferenceContribution).toConstantValue({ schema: AnthropicPreferencesSchema });
-    bind(AnthropicFrontendApplicationContribution).toSelf().inSingletonScope();
-    bind(FrontendApplicationContribution).toService(AnthropicFrontendApplicationContribution);
-    bind(AnthropicLanguageModelsManager).toDynamicValue(ctx => {
-        const provider = ctx.container.get<ServiceConnectionProvider>(RemoteConnectionProvider);
+export function initializeAnthropicFrontendModule(registry: ServiceRegistry): void {
+    // Register preference contribution
+    registry.registerSingleton(PreferenceContribution, () => ({ schema: AnthropicPreferencesSchema }));
+
+    // Register AnthropicLanguageModelsManager (dynamic value)
+    registry.registerSingleton(AnthropicLanguageModelsManager, () => {
+        const provider = registry.get<ServiceConnectionProvider>(RemoteConnectionProvider);
         return provider.createProxy<AnthropicLanguageModelsManager>(ANTHROPIC_LANGUAGE_MODELS_MANAGER_PATH);
-    }).inSingletonScope();
-});
+    });
+
+    // Register AnthropicFrontendApplicationContribution
+    registry.registerSingleton(AnthropicFrontendApplicationContribution, () => {
+        const preferenceService = registry.get(PreferenceService);
+        const manager = registry.get(AnthropicLanguageModelsManager);
+        const aiCorePreferences = registry.get(AICorePreferences);
+        return new AnthropicFrontendApplicationContribution(preferenceService, manager, aiCorePreferences);
+    });
+
+    // Register as FrontendApplicationContribution
+    registry.registerSingleton(FrontendApplicationContribution, () => 
+        registry.get(AnthropicFrontendApplicationContribution)
+    );
+}

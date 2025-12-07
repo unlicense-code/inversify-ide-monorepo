@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others
+// Copyright (C) 2018 TypeFox and others.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,17 +16,21 @@
 // *****************************************************************************
 // @ts-check
 
-const fs = require('fs');
-const path = require('path');
-const child_process = require('child_process');
+import { readFileSync, writeFileSync } from 'fs';
+import { basename, join, dirname } from 'path';
+import { execSync } from 'child_process';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 function replaceCopyrights() {
-    const fileNames = child_process.execSync(`git grep --name-only 'Copyright'`, { encoding: 'utf8' })
+    const fileNames = execSync(`git grep --name-only 'Copyright'`, { encoding: 'utf8' })
         .split(new RegExp('\r?\n'))
         .filter(_ => _.trim().length !== 0);
     for (const fileName of fileNames) {
         try {
-            const content = fs.readFileSync(fileName, { encoding: 'UTF-8' });
+            const content = readFileSync(fileName, { encoding: 'UTF-8' });
             const result = content.replace(new RegExp('\\/\\*.*\r?\n.*(Copyright.*\\d{4}.*)(\r?\n|.)*?\\*\\/'), `/********************************************************************************
  * $1
  *
@@ -42,7 +46,7 @@ function replaceCopyrights() {
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  ********************************************************************************/`);
-            fs.writeFileSync(fileName, result);
+            writeFileSync(fileName, result);
         } catch (e) {
             console.error(`Failed to replace copyrights for ${fileName}`, e);
         }
@@ -50,21 +54,21 @@ function replaceCopyrights() {
 }
 
 function replaceLicenses() {
-    const fileNames = child_process.execSync(`git grep --name-only 'Apache-2.0'`, { encoding: 'utf8' })
+    const fileNames = execSync(`git grep --name-only 'Apache-2.0'`, { encoding: 'utf8' })
         .split(new RegExp('\r?\n'))
         .filter(_ => _.trim().length !== 0);
     for (const fileName of fileNames) {
         try {
-            if (path.basename(fileName) === 'README.md') {
-                const content = fs.readFileSync(fileName, { encoding: 'UTF-8' });
+            if (basename(fileName) === 'README.md') {
+                const content = readFileSync(fileName, { encoding: 'UTF-8' });
                 const result = content.replace('[Apache-2.0](https://github.com/eclipse-theia/theia/blob/master/LICENSE)', `- [Eclipse Public License 2.0](http://www.eclipse.org/legal/epl-2.0/)
 - [一 (Secondary) GNU General Public License, version 2 with the GNU Classpath Exception](https://projects.eclipse.org/license/secondary-gpl-2.0-cp)`);
-                fs.writeFileSync(fileName, result);
+                writeFileSync(fileName, result);
             }
-            if (path.basename(fileName) === 'package.json') {
-                const content = fs.readFileSync(fileName, { encoding: 'UTF-8' });
+            if (basename(fileName) === 'package.json') {
+                const content = readFileSync(fileName, { encoding: 'UTF-8' });
                 const result = content.replace('"license": "Apache-2.0"', '"license": "EPL-2.0 OR GPL-2.0-with-classpath-exception"');
-                fs.writeFileSync(fileName, result);
+                writeFileSync(fileName, result);
             }
         } catch (e) {
             console.error(`Failed to replace license for ${fileName}`, e);

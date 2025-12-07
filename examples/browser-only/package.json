@@ -71,7 +71,7 @@
     "@theia/workspace": "1.66.0"
   },
   "scripts": {
-    "prepare:no-native": "lerna run prepare --scope=\"@theia/re-exports\" && lerna run generate-theia-re-exports --scope=\"@theia/core\"",
+    "prepare:no-native": "node ../../scripts/run-workspaces.mjs prepare --scope=\"@theia/re-exports\" && node ../../scripts/run-workspaces.mjs generate-theia-re-exports --scope=\"@theia/core\"",
     "clean": "theia clean",
     "build": "theiaext build && npm run -s bundle",
     "bundle": "theia build --mode development",

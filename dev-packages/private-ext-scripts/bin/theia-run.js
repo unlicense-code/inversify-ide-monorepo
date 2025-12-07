@@ -29,7 +29,18 @@ if (index === -1) {
     index = process.argv.findIndex(arg => arg.indexOf('run') !== -1);
 }
 const args = process.argv.slice(index + 1);
-const scopedArgs = args.length > 1 ? [args[0], '--scope', ...args.slice(1)] : args;
-process.argv = [...process.argv.slice(0, index + 1), 'run', ...scopedArgs];
+const script = args[0];
+const scope = args.length > 1 ? args[1] : undefined;
+const scriptArgs = args.slice(2);
 
-require(path.resolve(__dirname, '..', '..', 'scripts', 'lerna'));
+// Build command for run-workspaces.mjs
+const runWorkspacesPath = path.resolve(__dirname, '..', '..', '..', 'scripts', 'run-workspaces.mjs');
+const cmd = ['node', runWorkspacesPath, script];
+if (scope) {
+    cmd.push(`--scope=${scope}`);
+}
+if (scriptArgs.length > 0) {
+    cmd.push('--', ...scriptArgs);
+}
+
+require('child_process').execSync(cmd.join(' '), { stdio: 'inherit' });
