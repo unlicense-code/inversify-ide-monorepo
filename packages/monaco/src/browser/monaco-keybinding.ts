@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { KeybindingContribution, KeybindingRegistry, KeybindingScope, KeyCode } from '@theia/core/lib/browser';
-import { MonacoCommands } from './monaco-command';
-import { MonacoCommandRegistry } from './monaco-command-registry';
+import { injectable, inject, postConstruct } from 'inversify';
+import { KeybindingContribution, KeybindingRegistry, KeybindingScope, KeyCode } from '@theia/core/lib/browser/index.js';
+import { MonacoCommands } from './monaco-command.js';
+import { MonacoCommandRegistry } from './monaco-command-registry.js';
 import { CommandRegistry, DisposableCollection, environment, isOSX } from '@theia/core';
-import { MonacoResolvedKeybinding } from './monaco-resolved-keybinding';
-import { KeybindingsRegistry } from '@theia/monaco-editor-core/esm/vs/platform/keybinding/common/keybindingsRegistry';
-import { StandaloneKeybindingService, StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { IKeybindingService } from '@theia/monaco-editor-core/esm/vs/platform/keybinding/common/keybinding';
-import { MonacoContextKeyService } from './monaco-context-key-service';
-import { KEY_CODE_MAP } from './monaco-keycode-map';
+import { MonacoResolvedKeybinding } from './monaco-resolved-keybinding.js';
+import { KeybindingsRegistry } from '@theia/monaco-editor-core/esm/vs/platform/keybinding/common/keybindingsRegistry.js';
+import { StandaloneKeybindingService, StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { IKeybindingService } from '@theia/monaco-editor-core/esm/vs/platform/keybinding/common/keybinding.js';
+import { MonacoContextKeyService } from './monaco-context-key-service.js';
+import { KEY_CODE_MAP } from './monaco-keycode-map.js';
 import * as monaco from '@theia/monaco-editor-core';
 
 @injectable()
@@ -74,7 +74,7 @@ export class MonacoKeybindingContribution implements KeybindingContribution {
                 this.toDisposeOnKeybindingChange.push(monacoKeybindingRegistry.addDynamicKeybinding(
                     binding.command,
                     this.toMonacoKeybindingNumber(resolved),
-                    (_, ...args) => this.theiaCommandRegistry.executeCommand(command, ...args),
+                    (_: any, ...args: any[]) => this.theiaCommandRegistry.executeCommand(command, ...args),
                     when,
                 ));
             }

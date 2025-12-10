@@ -15,16 +15,16 @@
 // *****************************************************************************
 
 import * as path from 'path';
-import * as fs from '@theia/core/shared/fs-extra';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import * as fs from 'fs-extra';
+import { inject, injectable } from 'inversify';
 import type { RecursivePartial, URI } from '@theia/core';
-import { Deferred, firstTrue } from '@theia/core/lib/common/promise-util';
+import { Deferred, firstTrue } from '@theia/core/lib/common/promise-util.js';
 import {
     PluginDeployerDirectoryHandler, PluginDeployerEntry, PluginDeployerDirectoryHandlerContext,
     PluginDeployerEntryType, PluginPackage, PluginIdentifiers
 } from '@theia/plugin-ext';
-import { PluginCliContribution } from '@theia/plugin-ext/lib/main/node/plugin-cli-contribution';
-import { TMP_DIR_PREFIX } from './plugin-vscode-utils';
+import { PluginCliContribution } from '@theia/plugin-ext/lib/main/node/plugin-cli-contribution.js';
+import { TMP_DIR_PREFIX } from './plugin-vscode-utils.js';
 
 @injectable()
 export class PluginVsCodeDirectoryHandler implements PluginDeployerDirectoryHandler {

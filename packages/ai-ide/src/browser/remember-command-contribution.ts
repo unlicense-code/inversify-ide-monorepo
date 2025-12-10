@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { PromptService } from '@theia/ai-core/lib/common';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
+import { inject, injectable } from 'inversify';
+import { PromptService } from '@theia/ai-core/lib/common/index.js';
 import { nls } from '@theia/core';
-import { AGENT_DELEGATION_FUNCTION_ID } from '@theia/ai-chat/lib/browser/agent-delegation-tool';
+import { AGENT_DELEGATION_FUNCTION_ID } from '@theia/ai-chat/lib/browser/agent-delegation-tool.js';
 
 /**
  * Contribution that registers the `/remember` slash command for AI chat agents.

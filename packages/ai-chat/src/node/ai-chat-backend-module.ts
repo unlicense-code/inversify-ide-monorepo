@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { PreferenceContribution } from '@theia/core';
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { aiChatPreferences } from '../common/ai-chat-preferences';
-import { chatToolPreferences } from '../common/chat-tool-preferences';
+import { PreferenceContribution } from '@theia/core/lib/common/index.js';
+import { ContainerModule } from 'inversify';
+import { aiChatPreferences } from '../common/ai-chat-preferences.js';
+import { chatToolPreferences } from '../common/chat-tool-preferences.js';
 
 export default new ContainerModule(bind => {
     bind(PreferenceContribution).toConstantValue({ schema: aiChatPreferences });

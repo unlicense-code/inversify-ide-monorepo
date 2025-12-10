@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,20 +15,20 @@
 // *****************************************************************************
 import '../../../src/browser/style/debug.css';
 
-import { ConsoleSessionManager } from '@theia/console/lib/browser/console-session-manager';
-import { ConsoleOptions, ConsoleWidget } from '@theia/console/lib/browser/console-widget';
-import { AbstractViewContribution, bindViewContribution, codicon, Widget, WidgetFactory } from '@theia/core/lib/browser';
-import { ContextKey, ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { nls } from '@theia/core/lib/common/nls';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { Command, CommandRegistry } from '@theia/core/lib/common/command';
-import { Severity } from '@theia/core/lib/common/severity';
-import { inject, injectable, interfaces, postConstruct } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { SelectComponent, SelectOption } from '@theia/core/lib/browser/widgets/select-component';
-import { DebugSession } from '../debug-session';
-import { DebugSessionManager, DidChangeActiveDebugSession } from '../debug-session-manager';
-import { DebugConsoleSession, DebugConsoleSessionFactory } from './debug-console-session';
+import { ConsoleSessionManager } from '@theia/console/lib/browser/console-session-manager.js';
+import { ConsoleOptions, ConsoleWidget } from '@theia/console/lib/browser/console-widget.js';
+import { AbstractViewContribution, bindViewContribution, codicon, Widget, WidgetFactory } from '@theia/core/lib/browser/index.js';
+import { ContextKey, ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { Command, CommandRegistry } from '@theia/core/lib/common/command.js';
+import { Severity } from '@theia/core/lib/common/severity.js';
+import { inject, injectable, interfaces, postConstruct } from 'inversify';
+import * as React from 'react';
+import { SelectComponent, SelectOption } from '@theia/core/lib/browser/widgets/select-component.js';
+import { DebugSession } from '../debug-session.js';
+import { DebugSessionManager, DidChangeActiveDebugSession } from '../debug-session-manager.js';
+import { DebugConsoleSession, DebugConsoleSessionFactory } from './debug-console-session.js';
 import { InMemoryResources } from '@theia/core';
 
 export type InDebugReplContextKey = ContextKey<boolean>;

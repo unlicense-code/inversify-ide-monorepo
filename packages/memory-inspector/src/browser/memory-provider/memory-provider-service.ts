@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2021 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,15 +15,15 @@
  ********************************************************************************/
 
 import { ContributionProvider } from '@theia/core';
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import { DebugVariable } from '@theia/debug/lib/browser/console/debug-console-items';
-import { DebugSession } from '@theia/debug/lib/browser/debug-session';
-import { DebugSessionManager } from '@theia/debug/lib/browser/debug-session-manager';
+import { inject, injectable, named } from 'inversify';
+import { DebugVariable } from '@theia/debug/lib/browser/console/debug-console-items.js';
+import { DebugSession } from '@theia/debug/lib/browser/debug-session.js';
+import { DebugSessionManager } from '@theia/debug/lib/browser/debug-session-manager.js';
 import { DebugProtocol } from '@vscode/debugprotocol';
-import { Interfaces } from '../utils/memory-widget-utils';
-import { VariableRange } from '../utils/memory-widget-variable-utils';
-import { DefaultMemoryProvider, MemoryProvider } from './memory-provider';
-import { nls } from '@theia/core/lib/common/nls';
+import { Interfaces } from '../utils/memory-widget-utils.js';
+import { VariableRange } from '../utils/memory-widget-variable-utils.js';
+import { DefaultMemoryProvider, MemoryProvider } from './memory-provider.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 @injectable()
 export class MemoryProviderService {

@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 import { CommandService, deepClone, Emitter, Event, MessageService, PreferenceService, URI } from '@theia/core';
-import { ChatRequest, ChatRequestModel, ChatService, ChatSession, isActiveSessionChangedEvent, MutableChatModel } from '@theia/ai-chat';
-import { BaseWidget, codicon, ExtractableWidget, Message, PanelLayout, StatefulWidget } from '@theia/core/lib/browser';
-import { nls } from '@theia/core/lib/common/nls';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { AIChatInputWidget } from './chat-input-widget';
-import { ChatViewTreeWidget } from './chat-tree-view/chat-view-tree-widget';
-import { AIActivationService } from '@theia/ai-core/lib/browser/ai-activation-service';
-import { AIVariableResolutionRequest } from '@theia/ai-core';
-import { ProgressBarFactory } from '@theia/core/lib/browser/progress-bar-factory';
+import { ChatRequest, ChatRequestModel, ChatService, ChatSession, isActiveSessionChangedEvent, MutableChatModel } from '@theia/ai-chat/lib/common/index.js';
+import { BaseWidget, codicon, ExtractableWidget, Message, PanelLayout, StatefulWidget } from '@theia/core/lib/browser/index.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { inject, injectable, postConstruct } from 'inversify';
+import { AIChatInputWidget } from './chat-input-widget.js';
+import { ChatViewTreeWidget } from './chat-tree-view/chat-view-tree-widget.js';
+import { AIActivationService } from '@theia/ai-core/lib/browser/ai-activation-service.js';
+import { AIVariableResolutionRequest } from '@theia/ai-core/lib/common/index.js';
+import { ProgressBarFactory } from '@theia/core/lib/browser/progress-bar-factory.js';
 import { FrontendVariableService } from '@theia/ai-core/lib/browser';
 
 export namespace ChatViewWidget {

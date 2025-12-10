@@ -29,7 +29,7 @@ describe('SCM', function () {
     const { ScmService } = require('@theia/scm/lib/browser/scm-service');
     const { ScmWidget } = require('@theia/scm/lib/browser/scm-widget');
     const { CommandRegistry } = require('@theia/core/lib/common');
-    const { PreferenceService } = require('@theia/core/lib/browser');
+    const { PreferenceService } = require('@theia/core/lib/browser/index.js');
 
 
     /** @type {import('inversify').Container} */

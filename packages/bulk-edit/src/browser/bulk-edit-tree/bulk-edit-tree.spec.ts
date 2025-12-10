@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 import * as chai from 'chai';
-import { ResourceTextEdit } from '@theia/monaco-editor-core/esm/vs/editor/browser/services/bulkEditService';
-import { URI as Uri } from '@theia/core/shared/vscode-uri';
+import { ResourceTextEdit } from '@theia/monaco-editor-core/esm/vs/editor/browser/services/bulkEditService.js';
+import { URI as Uri } from 'vscode-uri';
 
 let disableJSDOM = enableJSDOM();
 
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 FrontendApplicationConfigProvider.set({});
 
-import { Container } from '@theia/core/shared/inversify';
-import { BulkEditInfoNode, BulkEditTree } from './bulk-edit-tree';
+import { Container } from 'inversify';
+import { BulkEditInfoNode, BulkEditTree } from './bulk-edit-tree.js';
 
 const expect = chai.expect;
 let bulkEditTree: BulkEditTree;

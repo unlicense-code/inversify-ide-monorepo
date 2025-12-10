@@ -24,10 +24,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
-import { UriComponents } from './uri-components';
-import { Location, Range } from './plugin-api-rpc-model';
+import { UriComponents } from './uri-components.js';
+import { Location, Range } from './plugin-api-rpc-model.js';
 import { isObject } from '@theia/core';
-import * as languageProtocol from '@theia/core/shared/vscode-languageserver-protocol';
+import * as languageProtocol from 'vscode-languageserver-protocol';
 
 export enum TestRunProfileKind {
     Run = 1,
@@ -35,7 +35,7 @@ export enum TestRunProfileKind {
     Coverage = 3
 }
 
-export interface TestRunProfileDTO {
+export type TestRunProfileDTO = {
     readonly id: string;
     readonly label: string;
     readonly kind: TestRunProfileKind;
@@ -43,13 +43,13 @@ export interface TestRunProfileDTO {
     readonly tag: string;
     readonly canConfigure: boolean;
 }
-export interface TestRunDTO {
+export type TestRunDTO = {
     readonly id: string;
     readonly name: string;
     readonly isRunning: boolean;
 }
 
-export interface TestOutputDTO {
+export type TestOutputDTO = {
     readonly output: string;
     readonly location?: Location;
     readonly itemPath?: string[];
@@ -64,12 +64,12 @@ export enum TestExecutionState {
     Errored = 6
 }
 
-export interface TestStateChangeDTO {
+export type TestStateChangeDTO = {
     readonly state: TestExecutionState;
     readonly itemPath: string[];
 }
 
-export interface TestFailureDTO extends TestStateChangeDTO {
+export type TestFailureDTO = TestStateChangeDTO & {
     readonly state: TestExecutionState.Failed | TestExecutionState.Errored;
     readonly messages: TestMessageDTO[];
     readonly duration?: number;
@@ -81,18 +81,18 @@ export namespace TestFailureDTO {
             && (ref.state === TestExecutionState.Failed || ref.state === TestExecutionState.Errored);
     }
 }
-export interface TestSuccessDTO extends TestStateChangeDTO {
+export type TestSuccessDTO = TestStateChangeDTO & {
     readonly state: TestExecutionState.Passed;
     readonly duration?: number;
 }
 
-export interface TestMessageStackFrameDTO {
+export type TestMessageStackFrameDTO = {
     uri?: languageProtocol.DocumentUri;
     position?: languageProtocol.Position;
     label: string;
 }
 
-export interface TestMessageDTO {
+export type TestMessageDTO = {
     readonly expected?: string;
     readonly actual?: string;
     readonly location?: languageProtocol.Location;
@@ -101,7 +101,7 @@ export interface TestMessageDTO {
     readonly stackTrace?: TestMessageStackFrameDTO[];
 }
 
-export interface TestItemDTO {
+export type TestItemDTO = {
     readonly id: string;
     readonly label: string;
     readonly range?: Range;
@@ -115,7 +115,7 @@ export interface TestItemDTO {
     readonly children?: TestItemDTO[];
 }
 
-export interface TestRunRequestDTO {
+export type TestRunRequestDTO = {
     controllerId: string;
     profileId: string;
     name: string;
@@ -124,7 +124,7 @@ export interface TestRunRequestDTO {
     preserveFocus: boolean;
 }
 
-export interface TestItemReference {
+export type TestItemReference = {
     typeTag: '$type_test_item_reference',
     controllerId: string;
     testPath: string[];
@@ -147,7 +147,7 @@ export namespace TestItemReference {
     }
 }
 
-export interface TestMessageArg {
+export type TestMessageArg = {
     testItemReference: TestItemReference | undefined,
     testMessage: TestMessageDTO
 }

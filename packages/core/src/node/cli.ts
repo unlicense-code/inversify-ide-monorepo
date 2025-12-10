@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,17 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as yargs from 'yargs';
+import yargs from 'yargs';
 import { inject, named, injectable } from 'inversify';
-import { ContributionProvider } from '../common/contribution-provider';
-import { MaybePromise } from '../common/types';
+import { ContributionProvider } from '../common/contribution-provider.js';
+import { MaybePromise } from '../common/types.js';
 
 export const CliContribution = Symbol('CliContribution');
 
-/**
- * Call back for extension to contribute options to the cli.
- */
-export interface CliContribution {
+export type CliContribution = {
     configure(conf: yargs.Argv): void;
     setArguments(args: yargs.Arguments): MaybePromise<void>;
 }

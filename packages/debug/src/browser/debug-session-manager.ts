@@ -15,55 +15,55 @@
 // *****************************************************************************
 
 import { DisposableCollection, Emitter, Event, MessageService, nls, ProgressService, WaitUntilEvent } from '@theia/core';
-import { LabelProvider, ApplicationShell, ConfirmDialog } from '@theia/core/lib/browser';
-import { ContextKey, ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import URI from '@theia/core/lib/common/uri';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { QuickOpenTask } from '@theia/task/lib/browser/quick-open-task';
-import { TaskService, TaskEndedInfo, TaskEndedTypes } from '@theia/task/lib/browser/task-service';
+import { LabelProvider, ApplicationShell, ConfirmDialog } from '@theia/core/lib/browser/index.js';
+import { ContextKey, ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { QuickOpenTask } from '@theia/task/lib/browser/quick-open-task.js';
+import { TaskService, TaskEndedInfo, TaskEndedTypes } from '@theia/task/lib/browser/task-service.js';
 import { VariableResolverService } from '@theia/variable-resolver/lib/browser';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { DebugConfiguration } from '../common/debug-common';
-import { DebugError, DebugService } from '../common/debug-service';
-import { BreakpointManager } from './breakpoint/breakpoint-manager';
-import { DebugConfigurationManager } from './debug-configuration-manager';
-import { DebugSession, DebugState, debugStateContextValue } from './debug-session';
-import { DebugSessionContributionRegistry, DebugSessionFactory } from './debug-session-contribution';
-import { DebugCompoundRoot, DebugCompoundSessionOptions, DebugConfigurationSessionOptions, DebugSessionOptions, InternalDebugSessionOptions } from './debug-session-options';
-import { DebugStackFrame } from './model/debug-stack-frame';
-import { DebugThread } from './model/debug-thread';
+import { inject, injectable, postConstruct } from 'inversify';
+import { DebugConfiguration } from '../common/debug-common.js';
+import { DebugError, DebugService } from '../common/debug-service.js';
+import { BreakpointManager } from './breakpoint/breakpoint-manager.js';
+import { DebugConfigurationManager } from './debug-configuration-manager.js';
+import { DebugSession, DebugState, debugStateContextValue } from './debug-session.js';
+import { DebugSessionContributionRegistry, DebugSessionFactory } from './debug-session-contribution.js';
+import { DebugCompoundRoot, DebugCompoundSessionOptions, DebugConfigurationSessionOptions, DebugSessionOptions, InternalDebugSessionOptions } from './debug-session-options.js';
+import { DebugStackFrame } from './model/debug-stack-frame.js';
+import { DebugThread } from './model/debug-thread.js';
 import { TaskIdentifier } from '@theia/task/lib/common';
-import { DebugSourceBreakpoint } from './model/debug-source-breakpoint';
-import { DebugFunctionBreakpoint } from './model/debug-function-breakpoint';
+import { DebugSourceBreakpoint } from './model/debug-source-breakpoint.js';
+import { DebugFunctionBreakpoint } from './model/debug-function-breakpoint.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { DebugInstructionBreakpoint } from './model/debug-instruction-breakpoint';
-import { DebugSessionConfigurationLabelProvider } from './debug-session-configuration-label-provider';
-import { DebugDataBreakpoint } from './model/debug-data-breakpoint';
-import { DebugVariable } from './console/debug-console-items';
+import { DebugInstructionBreakpoint } from './model/debug-instruction-breakpoint.js';
+import { DebugSessionConfigurationLabelProvider } from './debug-session-configuration-label-provider.js';
+import { DebugDataBreakpoint } from './model/debug-data-breakpoint.js';
+import { DebugVariable } from './console/debug-console-items.js';
 
-export interface WillStartDebugSession extends WaitUntilEvent {
+export type WillStartDebugSession = WaitUntilEvent & {
 }
 
-export interface WillResolveDebugConfiguration extends WaitUntilEvent {
+export type WillResolveDebugConfiguration = WaitUntilEvent & {
     debugType: string
 }
 
-export interface DidChangeActiveDebugSession {
+export type DidChangeActiveDebugSession = {
     previous: DebugSession | undefined
     current: DebugSession | undefined
 }
 
-export interface DidChangeBreakpointsEvent {
+export type DidChangeBreakpointsEvent = {
     session?: DebugSession
     uri: URI
 }
 
-export interface DidResolveLazyVariableEvent {
+export type DidResolveLazyVariableEvent = {
     readonly session: DebugSession
     readonly variable: DebugVariable
 }
 
-export interface DebugSessionCustomEvent {
+export type DebugSessionCustomEvent = {
     readonly body?: any // eslint-disable-line @typescript-eslint/no-explicit-any
     readonly event: string
     readonly session: DebugSession
@@ -685,9 +685,9 @@ export class DebugSessionManager {
             return this.doPostTaskAction(nls.localize('theia/debug/couldNotRunTask', "Could not run the task '{0}'.", taskLabel));
         }
 
-        const getExitCodePromise: Promise<TaskEndedInfo> = this.taskService.getExitCode(taskInfo.taskId).then(result =>
+        const getExitCodePromise: Promise<TaskEndedInfo> = this.taskService.getExitCode(taskInfo.taskId).then((result: number) =>
             ({ taskEndedType: TaskEndedTypes.TaskExited, value: result }));
-        const isBackgroundTaskEndedPromise: Promise<TaskEndedInfo> = this.taskService.isBackgroundTaskEnded(taskInfo.taskId).then(result =>
+        const isBackgroundTaskEndedPromise: Promise<TaskEndedInfo> = this.taskService.isBackgroundTaskEnded(taskInfo.taskId).then((result: boolean) =>
             ({ taskEndedType: TaskEndedTypes.BackgroundTaskEnded, value: result }));
 
         // After start running the task, we wait for the task process to exit and if it is a background task, we also wait for a feedback

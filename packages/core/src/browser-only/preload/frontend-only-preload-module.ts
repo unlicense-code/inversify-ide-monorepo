@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { ContainerModule } from 'inversify';
-import { LocalizationServer } from '../../common/i18n/localization-server';
-import { OS, OSBackendProvider } from '../../common/os';
-import { Localization } from '../../common/i18n/localization';
+import { LocalizationServer } from '../../common/i18n/localization-server.js';
+import { OS, OSBackendProvider } from '../../common/os.js';
+import { Localization } from '../../common/i18n/localization.js';
 
 // loaded after regular preload module
 export default new ContainerModule((bind, unbind, isBound, rebind) => {

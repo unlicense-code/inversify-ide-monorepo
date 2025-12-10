@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import { GrammarDefinition, GrammarDefinitionProvider, LanguageGrammarDefinitionContribution, TextmateRegistry } from '@theia/monaco/lib/browser/textmate';
 import * as monaco from '@theia/monaco-editor-core';
 import { Command, CommandContribution, CommandRegistry, nls } from '@theia/core';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
 
-import { codicon, Widget } from '@theia/core/lib/browser';
-import { EditorWidget, ReplaceOperation } from '@theia/editor/lib/browser';
-import { PromptService, PromptText, ToolInvocationRegistry } from '../common';
-import { ProviderResult } from '@theia/monaco-editor-core/esm/vs/editor/common/languages';
-import { AIVariableService } from '../common/variable-service';
+import { codicon, Widget } from '@theia/core/lib/browser/index.js';
+import { EditorWidget, ReplaceOperation } from '@theia/editor/lib/browser/index.js';
+import { PromptService, PromptText, ToolInvocationRegistry } from '../common/index.js';
+import { ProviderResult } from '@theia/monaco-editor-core/esm/vs/editor/common/languages.js';
+import { AIVariableService } from '../common/variable-service.js';
 
 const PROMPT_TEMPLATE_LANGUAGE_ID = 'theia-ai-prompt-template';
 const PROMPT_TEMPLATE_TEXTMATE_SCOPE = 'source.prompttemplate';

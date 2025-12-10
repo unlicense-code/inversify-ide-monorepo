@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import * as assert from 'assert';
-import { FileUri } from '@theia/core/lib/common/file-uri';
-import { FileChangeCollection } from './file-change-collection';
-import { FileChangeType } from '../common/files';
+import { FileUri } from '@theia/core/lib/node/index.js';
+import { FileChangeCollection } from './file-change-collection.js';
+import { FileChangeType } from '../common/files.js';
 
 describe('FileChangeCollection', () => {
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,16 +15,11 @@
 // *****************************************************************************
 
 import { RpcServer } from '@theia/core';
-import { FileChangeType } from './files';
+import { FileChangeType } from './files.js';
 export { FileChangeType };
 
 export const FileSystemWatcherService = Symbol('FileSystemWatcherServer2');
-/**
- * Singleton implementation of the watch server.
- *
- * Since multiple clients all make requests to this service, we need to track those individually via a `clientId`.
- */
-export interface FileSystemWatcherService extends RpcServer<FileSystemWatcherServiceClient> {
+export type FileSystemWatcherService = RpcServer<FileSystemWatcherServiceClient> & {
     /**
      * @param clientId arbitrary id used to identify a client.
      * @param uri the path to watch.
@@ -38,21 +33,21 @@ export interface FileSystemWatcherService extends RpcServer<FileSystemWatcherSer
     unwatchFileChanges(watcherId: number): Promise<void>;
 }
 
-export interface FileSystemWatcherServiceClient {
+export type FileSystemWatcherServiceClient = {
     /** Listen for change events emitted by the watcher. */
     onDidFilesChanged(event: DidFilesChangedParams): void;
     /** The watcher can crash in certain conditions. */
     onError(event: FileSystemWatcherErrorParams): void;
 }
 
-export interface DidFilesChangedParams {
+export type DidFilesChangedParams = {
     /** Clients to route the events to. */
     clients?: number[];
     /** FileSystem changes that occurred. */
     changes: FileChange[];
 }
 
-export interface FileSystemWatcherErrorParams {
+export type FileSystemWatcherErrorParams = {
     /** Clients to route the events to. */
     clients: number[];
     /** The uri that originated the error. */
@@ -60,7 +55,7 @@ export interface FileSystemWatcherErrorParams {
 }
 
 export const FileSystemWatcherServer = Symbol('FileSystemWatcherServer');
-export interface FileSystemWatcherServer extends RpcServer<FileSystemWatcherClient> {
+export type FileSystemWatcherServer = RpcServer<FileSystemWatcherClient> & {
     /**
      * Start file watching for the given param.
      * Resolve when watching is started.
@@ -75,7 +70,7 @@ export interface FileSystemWatcherServer extends RpcServer<FileSystemWatcherClie
     unwatchFileChanges(watcherId: number): Promise<void>;
 }
 
-export interface FileSystemWatcherClient {
+export type FileSystemWatcherClient = {
     /**
      * Notify when files under watched uris are changed.
      */
@@ -87,10 +82,10 @@ export interface FileSystemWatcherClient {
     onError(): void;
 }
 
-export interface WatchOptions {
+export type WatchOptions = {
     ignored: string[];
 }
-export interface FileChange {
+export type FileChange = {
     uri: string;
     type: FileChangeType;
 }

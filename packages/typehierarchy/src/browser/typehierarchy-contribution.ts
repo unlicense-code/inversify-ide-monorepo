@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,27 +14,27 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, named, postConstruct } from '@theia/core/shared/inversify';
-import { MenuModelRegistry } from '@theia/core/lib/common/menu';
-import { ApplicationShell } from '@theia/core/lib/browser/shell';
-import { KeybindingRegistry } from '@theia/core/lib/browser/keybinding';
-import { Command, CommandRegistry } from '@theia/core/lib/common/command';
-import { EDITOR_CONTEXT_MENU } from '@theia/editor/lib/browser/editor-menu';
-import { EditorAccess, EditorManager } from '@theia/editor/lib/browser/editor-manager';
-import { AbstractViewContribution, OpenViewArguments } from '@theia/core/lib/browser/shell/view-contribution';
-import { TypeHierarchyTree } from './tree/typehierarchy-tree';
-import { TypeHierarchyTreeWidget } from './tree/typehierarchy-tree-widget';
-import { TypeHierarchyDirection } from './typehierarchy-provider';
-import { TypeHierarchyServiceProvider } from './typehierarchy-service';
-import URI from '@theia/core/lib/common/uri';
+import { injectable, inject, named, postConstruct } from 'inversify';
+import { MenuModelRegistry } from '@theia/core/lib/common/index.js';
+import { ApplicationShell } from '@theia/core/lib/browser/index.js';
+import { KeybindingRegistry } from '@theia/core/lib/browser/keybinding.js';
+import { Command, CommandRegistry } from '@theia/core/lib/common/command.js';
+import { EDITOR_CONTEXT_MENU } from '@theia/editor/lib/browser/editor-menu.js';
+import { EditorAccess, EditorManager } from '@theia/editor/lib/browser/editor-manager.js';
+import { AbstractViewContribution, OpenViewArguments } from '@theia/core/lib/browser/shell/view-contribution.js';
+import { TypeHierarchyTree } from './tree/typehierarchy-tree.js';
+import { TypeHierarchyTreeWidget } from './tree/typehierarchy-tree-widget.js';
+import { TypeHierarchyDirection } from './typehierarchy-provider.js';
+import { TypeHierarchyServiceProvider } from './typehierarchy-service.js';
+import { URI } from '@theia/core/lib/common/uri.js';
 
-import { ContextKey, ContextKeyService } from '@theia/core/lib/browser/context-key-service';
+import { ContextKey, ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
 
 @injectable()
 export class TypeHierarchyContribution extends AbstractViewContribution<TypeHierarchyTreeWidget> {
 
     @inject(ApplicationShell)
-    protected override readonly shell: ApplicationShell;
+    protected declare readonly shell: ApplicationShell;
 
     @inject(EditorAccess)
     @named(EditorAccess.CURRENT)
@@ -147,14 +147,14 @@ export class TypeHierarchyContribution extends AbstractViewContribution<TypeHier
 
 }
 
-export interface TypeHierarchyOpenViewArguments extends OpenViewArguments {
+export type TypeHierarchyOpenViewArguments = OpenViewArguments & {
 
     /**
      * The type hierarchy direction for the view argument.
      */
     readonly direction: TypeHierarchyDirection;
 
-}
+};
 
 export namespace TypeHierarchyCommands {
 

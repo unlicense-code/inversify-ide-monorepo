@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, interfaces, postConstruct, inject } from '@theia/core/shared/inversify';
-import { Message, TreeModel, TreeNode } from '@theia/core/lib/browser';
-import { SourceTreeWidget } from '@theia/core/lib/browser/source-tree';
-import { VSXExtensionsSource, VSXExtensionsSourceOptions } from './vsx-extensions-source';
-import { nls } from '@theia/core/lib/common/nls';
-import { BadgeWidget } from '@theia/core/lib/browser/view-container';
-import { Emitter, Event } from '@theia/core/lib/common';
-import { AlertMessage } from '@theia/core/lib/browser/widgets/alert-message';
-import * as React from '@theia/core/shared/react';
+import { injectable, interfaces, postConstruct, inject } from 'inversify';
+import { Message, TreeModel, TreeNode } from '@theia/core/lib/browser/index.js';
+import { SourceTreeWidget } from '@theia/core/lib/browser/source-tree/source-tree-widget.js';
+import { VSXExtensionsSource, VSXExtensionsSourceOptions } from './vsx-extensions-source.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { BadgeWidget } from '@theia/core/lib/browser/view-container.js';
+import { Emitter, Event } from '@theia/core/lib/common/index.js';
+import { AlertMessage } from '@theia/core/lib/browser/widgets/alert-message.js';
+import * as React from 'react';
 
 @injectable()
 export class VSXExtensionsWidgetOptions extends VSXExtensionsSourceOptions {

@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { LanguageModelRequirement } from '@theia/ai-core/lib/common';
-import { injectable } from '@theia/core/shared/inversify';
-import { AbstractStreamParsingChatAgent } from '@theia/ai-chat/lib/common/chat-agents';
+import { LanguageModelRequirement } from '@theia/ai-core/lib/common/index.js';
+import { injectable } from 'inversify';
+import { AbstractStreamParsingChatAgent } from '@theia/ai-chat/lib/common/chat-agents.js';
 import { nls } from '@theia/core';
-import { universalTemplate, universalTemplateVariant } from './universal-prompt-template';
+import { universalTemplate, universalTemplateVariant } from './universal-prompt-template.js';
 
 export const UniversalChatAgentId = 'Universal';
 @injectable()

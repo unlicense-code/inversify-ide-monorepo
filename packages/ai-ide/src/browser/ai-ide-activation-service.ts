@@ -13,12 +13,12 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
+import { inject, injectable } from 'inversify';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
 import { Emitter, MaybePromise, Event, PreferenceService, } from '@theia/core';
-import { ContextKeyService, ContextKey } from '@theia/core/lib/browser/context-key-service';
-import { AIActivationService, ENABLE_AI_CONTEXT_KEY } from '@theia/ai-core/lib/browser/ai-activation-service';
-import { PREFERENCE_NAME_ENABLE_AI } from '../common/ai-ide-preferences';
+import { ContextKeyService, ContextKey } from '@theia/core/lib/browser/context-key-service.js';
+import { AIActivationService, ENABLE_AI_CONTEXT_KEY } from '@theia/ai-core/lib/browser/ai-activation-service.js';
+import { PREFERENCE_NAME_ENABLE_AI } from '../common/ai-ide-preferences.js';
 
 /**
  * Implements AI Activation Service based on preferences.

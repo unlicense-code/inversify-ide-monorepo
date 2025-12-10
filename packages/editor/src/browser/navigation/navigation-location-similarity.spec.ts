@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { expect } from 'chai';
-import { NavigationLocation } from './navigation-location';
-import { NavigationLocationSimilarity } from './navigation-location-similarity';
+import { NavigationLocation } from './navigation-location.js';
+import { NavigationLocationSimilarity } from './navigation-location-similarity.js';
 
 describe('navigation-location-similarity', () => {
 

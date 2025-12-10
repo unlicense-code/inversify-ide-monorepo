@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { DebugProtocol } from '@vscode/debugprotocol/lib/debugProtocol';
-import URI from '@theia/core/lib/common/uri';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { LabelProvider, DISABLED_CLASS } from '@theia/core/lib/browser';
-import { TreeElement } from '@theia/core/lib/browser/source-tree';
-import { DebugSession } from '../debug-session';
-import { BaseBreakpoint } from '../breakpoint/breakpoint-marker';
-import { BreakpointManager } from '../breakpoint/breakpoint-manager';
+import * as React from 'react';
+import { DebugProtocol } from '@vscode/debugprotocol/lib/debugProtocol.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { LabelProvider, DISABLED_CLASS } from '@theia/core/lib/browser/index.js';
+import { TreeElement } from '@theia/core/lib/browser/source-tree/tree-source.js';
+import { DebugSession } from '../debug-session.js';
+import { BaseBreakpoint } from '../breakpoint/breakpoint-marker.js';
+import { BreakpointManager } from '../breakpoint/breakpoint-manager.js';
 import { nls } from '@theia/core';
 
 export class DebugBreakpointData {

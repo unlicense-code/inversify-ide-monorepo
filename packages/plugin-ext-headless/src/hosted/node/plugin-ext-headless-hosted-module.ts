@@ -15,19 +15,19 @@
 // *****************************************************************************
 
 import * as path from 'path';
-import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider';
+import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider.js';
 import { BackendApplicationContribution } from '@theia/core/lib/node';
-import { ContainerModule, interfaces } from '@theia/core/shared/inversify';
+import { ContainerModule, interfaces } from 'inversify';
 import { ExtPluginApiProvider, HostedPluginServer, PluginHostEnvironmentVariable, PluginScanner } from '@theia/plugin-ext';
-import { HostedPluginSupport } from '@theia/plugin-ext/lib/hosted/node/hosted-plugin';
-import { HostedPluginProcess, HostedPluginProcessConfiguration } from '@theia/plugin-ext/lib/hosted/node/hosted-plugin-process';
-import { BackendPluginHostableFilter } from '@theia/plugin-ext/lib/hosted/node/plugin-service';
+import { HostedPluginSupport } from '@theia/plugin-ext/lib/hosted/node/hosted-plugin.js';
+import { HostedPluginProcess, HostedPluginProcessConfiguration } from '@theia/plugin-ext/lib/hosted/node/hosted-plugin-process.js';
+import { BackendPluginHostableFilter } from '@theia/plugin-ext/lib/hosted/node/plugin-service.js';
 import { MaybePromise } from '@theia/core';
-import { HeadlessPluginContainerModule } from '../../common/headless-plugin-container';
-import { HeadlessHostedPluginSupport, isHeadlessPlugin } from './headless-hosted-plugin';
-import { TheiaHeadlessPluginScanner } from './scanners/scanner-theia-headless';
-import { SupportedHeadlessActivationEvents } from '../../common/headless-plugin-protocol';
-import { HeadlessHostedPluginServerImpl } from './headless-plugin-service';
+import { HeadlessPluginContainerModule } from '../../common/headless-plugin-container.js';
+import { HeadlessHostedPluginSupport, isHeadlessPlugin } from './headless-hosted-plugin.js';
+import { TheiaHeadlessPluginScanner } from './scanners/scanner-theia-headless.js';
+import { SupportedHeadlessActivationEvents } from '../../common/headless-plugin-protocol.js';
+import { HeadlessHostedPluginServerImpl } from './headless-plugin-service.js';
 
 export function bindCommonHostedBackend(bind: interfaces.Bind): void {
     bind(HostedPluginProcess).toSelf().inSingletonScope();

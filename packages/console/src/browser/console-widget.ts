@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,25 +14,25 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ElementExt } from '@theia/core/shared/@lumino/domutils';
-import { injectable, inject, postConstruct, interfaces, Container } from '@theia/core/shared/inversify';
-import { TreeSourceNode } from '@theia/core/lib/browser/source-tree';
-import { ContextKeyService, ContextKey } from '@theia/core/lib/browser/context-key-service';
-import { BaseWidget, PanelLayout, Widget, Message, MessageLoop, StatefulWidget, CompositeTreeNode } from '@theia/core/lib/browser';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
-import URI from '@theia/core/lib/common/uri';
-import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider';
-import { ConsoleHistory } from './console-history';
-import { ConsoleContentWidget } from './console-content-widget';
-import { ConsoleSession } from './console-session';
-import { ConsoleSessionManager } from './console-session-manager';
+import { ElementExt } from '@lumino/domutils';
+import { injectable, inject, postConstruct, interfaces } from 'inversify';
+import { TreeSourceNode } from '@theia/core/lib/browser/source-tree/source-tree.js';
+import { ContextKeyService, ContextKey } from '@theia/core/lib/browser/context-key-service.js';
+import { BaseWidget, PanelLayout, Widget, Message, MessageLoop, StatefulWidget, CompositeTreeNode } from '@theia/core/lib/browser/index.js';
+import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider.js';
+import { ConsoleHistory } from './console-history.js';
+import { ConsoleContentWidget } from './console-content-widget.js';
+import { ConsoleSession } from './console-session.js';
+import { ConsoleSessionManager } from './console-session-manager.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { Disposable } from '@theia/core/lib/common/disposable';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { MonacoEditorService } from '@theia/monaco/lib/browser/monaco-editor-service';
+import { Disposable } from '@theia/core/lib/common/disposable.js';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { MonacoEditorService } from '@theia/monaco/lib/browser/monaco-editor-service.js';
 
 export const ConsoleOptions = Symbol('ConsoleWidgetOptions');
-export interface ConsoleOptions {
+export type ConsoleOptions = {
     id: string
     title?: {
         label?: string
@@ -55,7 +55,7 @@ export class ConsoleWidget extends BaseWidget implements StatefulWidget {
         input: 'theia-console-input',
     };
 
-    static createContainer(parent: interfaces.Container, options: ConsoleOptions): Container {
+    static createContainer(parent: interfaces.Container, options: ConsoleOptions) {
         const child = ConsoleContentWidget.createContainer(parent);
         child.bind(ConsoleHistory).toSelf();
         child.bind(ConsoleOptions).toConstantValue(options);

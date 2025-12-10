@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,14 +15,14 @@
 // *****************************************************************************
 
 import { CommandContribution, PreferenceContribution } from '@theia/core';
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { CollaborationColorService } from './collaboration-color-service';
-import { CollaborationFrontendContribution } from './collaboration-frontend-contribution';
-import { CollaborationInstance, CollaborationInstanceFactory, CollaborationInstanceOptions, createCollaborationInstanceContainer } from './collaboration-instance';
-import { CollaborationUtils } from './collaboration-utils';
-import { CollaborationWorkspaceService } from './collaboration-workspace-service';
-import { collaborationPreferencesSchema } from '../common/collaboration-preferences';
+import { ContainerModule } from 'inversify';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { CollaborationColorService } from './collaboration-color-service.js';
+import { CollaborationFrontendContribution } from './collaboration-frontend-contribution.js';
+import { CollaborationInstance, CollaborationInstanceFactory, CollaborationInstanceOptions, createCollaborationInstanceContainer } from './collaboration-instance.js';
+import { CollaborationUtils } from './collaboration-utils.js';
+import { CollaborationWorkspaceService } from './collaboration-workspace-service.js';
+import { collaborationPreferencesSchema } from '../common/collaboration-preferences.js';
 
 export default new ContainerModule((bind, _, __, rebind) => {
     bind(CollaborationWorkspaceService).toSelf().inSingletonScope();

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Container, interfaces } from '@theia/core/shared/inversify';
-import { Git } from '../../common/git';
-import { DugiteGit } from '../dugite-git';
-import { bindGit, GitBindingOptions } from '../git-backend-module';
-import { bindLogger } from '@theia/core/lib/node/logger-backend-module';
-import { NoSyncRepositoryManager } from '.././test/no-sync-repository-manager';
-import { GitEnvProvider, DefaultGitEnvProvider } from '../env/git-env-provider';
-import { MessageService, LogLevel } from '@theia/core/lib/common';
+import { Container, interfaces } from 'inversify';
+import { Git } from '../../common/git.js';
+import { DugiteGit } from '../dugite-git.js';
+import { bindGit, GitBindingOptions } from '../git-backend-module.js';
+import { bindLogger } from '@theia/core/lib/node/logger-backend-module.js';
+import { NoSyncRepositoryManager } from '.././test/no-sync-repository-manager.js';
+import { GitEnvProvider, DefaultGitEnvProvider } from '../env/git-env-provider.js';
+import { MessageService, LogLevel } from '@theia/core/lib/common/index.js';
 import { MessageClient } from '@theia/core';
-import { ILogger } from '@theia/core/lib/common/logger';
+import { ILogger } from '@theia/core/lib/common/logger.js';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function initializeBindings(): { container: Container, bind: interfaces.Bind } {

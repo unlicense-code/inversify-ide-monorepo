@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { OpenAiPreferencesSchema } from '../common/openai-preferences';
-import { FrontendApplicationContribution, RemoteConnectionProvider, ServiceConnectionProvider } from '@theia/core/lib/browser';
-import { OpenAiFrontendApplicationContribution } from './openai-frontend-application-contribution';
-import { OPENAI_LANGUAGE_MODELS_MANAGER_PATH, OpenAiLanguageModelsManager } from '../common';
+import { ContainerModule } from 'inversify';
+import { OpenAiPreferencesSchema } from '../common/openai-preferences.js';
+import { FrontendApplicationContribution, RemoteConnectionProvider, ServiceConnectionProvider } from '@theia/core/lib/browser/index.js';
+import { OpenAiFrontendApplicationContribution } from './openai-frontend-application-contribution.js';
+import { OPENAI_LANGUAGE_MODELS_MANAGER_PATH, OpenAiLanguageModelsManager } from '../common/index.js';
 import { PreferenceContribution } from '@theia/core';
 
 export default new ContainerModule(bind => {

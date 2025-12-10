@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
+import * as React from 'react';
 import { CommandMenu, CommandRegistry, CompoundMenuNode, DisposableCollection, Emitter, Event, MenuModelRegistry, MenuPath, RenderedMenuNode } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { NotebookCellSidebar, NotebookCellToolbar } from './notebook-cell-toolbar';
-import { ContextMenuRenderer } from '@theia/core/lib/browser';
-import { NotebookCellModel } from '../view-model/notebook-cell-model';
-import { NotebookContextManager } from '../service/notebook-context-manager';
+import { inject, injectable } from 'inversify';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { NotebookCellSidebar, NotebookCellToolbar } from './notebook-cell-toolbar.js';
+import { ContextMenuRenderer } from '@theia/core/lib/browser/index.js';
+import { NotebookCellModel } from '../view-model/notebook-cell-model.js';
+import { NotebookContextManager } from '../service/notebook-context-manager.js';
 
-export interface NotebookCellToolbarItem {
+export type NotebookCellToolbarItem = {
     id: string;
     icon?: string;
     label?: string;
@@ -31,7 +31,7 @@ export interface NotebookCellToolbarItem {
     isVisible: () => boolean;
 }
 
-export interface toolbarItemOptions {
+export type toolbarItemOptions = {
     contextMenuArgs?: () => unknown[];
     commandArgs?: () => unknown[];
 }

@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 import { MaybePromise, nls } from '@theia/core';
-import { injectable } from '@theia/core/shared/inversify';
-import { AIVariable, ResolvedAIVariable, AIVariableContribution, AIVariableResolver, AIVariableService, AIVariableResolutionRequest, AIVariableContext } from './variable-service';
+import { injectable } from 'inversify';
+import { AIVariable, ResolvedAIVariable, AIVariableContribution, AIVariableResolver, AIVariableService, AIVariableResolutionRequest, AIVariableContext } from './variable-service.js';
 
 export namespace TodayVariableArgs {
     export const IN_UNIX_SECONDS = 'inUnixSeconds';
@@ -36,7 +36,7 @@ export const TODAY_VARIABLE: AIVariable = {
     ]
 };
 
-export interface ResolvedTodayVariable extends ResolvedAIVariable {
+export type ResolvedTodayVariable = ResolvedAIVariable & {
     date: Date;
 }
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,10 +19,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Disposable, Path } from '@theia/core';
-import { injectable } from '@theia/core/shared/inversify';
-import { NotebookRendererDescriptor } from '../common/notebook-protocol';
+import { injectable } from 'inversify';
+import { NotebookRendererDescriptor } from '../common/notebook-protocol.js';
 
-export interface NotebookRendererInfo {
+export type NotebookRendererInfo = {
     readonly id: string;
     readonly displayName: string;
     readonly mimeTypes: string[];
@@ -30,7 +30,7 @@ export interface NotebookRendererInfo {
     readonly requiresMessaging: boolean;
 }
 
-export interface NotebookPreloadInfo {
+export type NotebookPreloadInfo = {
     readonly type: string;
     readonly entrypoint: string;
 }

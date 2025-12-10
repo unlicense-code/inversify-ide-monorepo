@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,16 +18,16 @@ import { interfaces } from 'inversify';
 import {
     bindContributionProvider, DefaultResourceProvider, MaybePromise, MessageClient,
     MessageService, ResourceProvider, ResourceResolver
-} from '../common';
-import { PreferenceProvider } from '../common/preferences/preference-provider';
+} from '../common/index.js';
+import { PreferenceProvider } from '../common/preferences/preference-provider.js';
 import {
     bindPreferenceSchemaProvider,
     PreferenceValidationService
-} from './preferences';
+} from './preferences/index.js';
 import {
     InjectablePreferenceProxy, PreferenceProviderProvider, PreferenceProxyFactory,
     PreferenceProxyOptions, PreferenceProxySchema, PreferenceSchema, PreferenceScope, PreferenceService, PreferenceServiceImpl
-} from '../common/preferences';
+} from '../common/preferences/index.js';
 
 export function bindMessageService(bind: interfaces.Bind): interfaces.BindingWhenOnSyntax<MessageService> {
     bind(MessageClient).toSelf().inSingletonScope();

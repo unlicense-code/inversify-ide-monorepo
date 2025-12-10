@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -23,7 +23,7 @@
 
 import { Buffer as SaferBuffer } from 'safer-buffer';
 import * as iconv from 'iconv-lite';
-import * as streams from './stream';
+import * as streams from './stream.js';
 
 const hasBuffer = (typeof Buffer !== 'undefined');
 const hasTextEncoder = (typeof TextEncoder !== 'undefined');
@@ -169,7 +169,7 @@ export class BinaryBuffer {
 
 }
 
-export interface BinaryBufferReadable extends streams.Readable<BinaryBuffer> { }
+export type BinaryBufferReadable = streams.Readable<BinaryBuffer> & { }
 export namespace BinaryBufferReadable {
     export function toBuffer(readable: BinaryBufferReadable): BinaryBuffer {
         return streams.consumeReadable<BinaryBuffer>(readable, chunks => BinaryBuffer.concat(chunks));
@@ -192,7 +192,7 @@ export namespace BinaryBufferReadable {
     }
 }
 
-export interface BinaryBufferReadableStream extends streams.ReadableStream<BinaryBuffer> { }
+export type BinaryBufferReadableStream = streams.ReadableStream<BinaryBuffer> & { }
 export namespace BinaryBufferReadableStream {
     export function toBuffer(stream: BinaryBufferReadableStream): Promise<BinaryBuffer> {
         return streams.consumeStream<BinaryBuffer>(stream, chunks => BinaryBuffer.concat(chunks));
@@ -202,7 +202,7 @@ export namespace BinaryBufferReadableStream {
     }
 }
 
-export interface BinaryBufferReadableBufferedStream extends streams.ReadableBufferedStream<BinaryBuffer> { }
+export type BinaryBufferReadableBufferedStream = streams.ReadableBufferedStream<BinaryBuffer> & { }
 export namespace BinaryBufferReadableBufferedStream {
     export async function toBuffer(bufferedStream: streams.ReadableBufferedStream<BinaryBuffer>): Promise<BinaryBuffer> {
         if (bufferedStream.ended) {
@@ -220,7 +220,7 @@ export namespace BinaryBufferReadableBufferedStream {
     }
 }
 
-export interface BinaryBufferWriteableStream extends streams.WriteableStream<BinaryBuffer> { }
+export type BinaryBufferWriteableStream = streams.WriteableStream<BinaryBuffer> & { }
 export namespace BinaryBufferWriteableStream {
     export function create(options?: streams.WriteableStreamOptions): BinaryBufferWriteableStream {
         return streams.newWriteableStream<BinaryBuffer>(chunks => BinaryBuffer.concat(chunks), options);

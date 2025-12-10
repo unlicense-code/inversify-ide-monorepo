@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, multiInject, postConstruct, optional } from '@theia/core/shared/inversify';
-import { ILogger, ConnectionErrorHandler } from '@theia/core/lib/common';
-import { HostedPluginClient, PluginModel, ServerPluginRunner } from '../../common/plugin-protocol';
-import { LogPart } from '../../common/types';
-import { HostedPluginProcess } from './hosted-plugin-process';
+import { injectable, inject, multiInject, postConstruct, optional } from 'inversify';
+import { ILogger, ConnectionErrorHandler } from '@theia/core/lib/common/index.js';
+import { HostedPluginClient, PluginModel, ServerPluginRunner } from '../../common/plugin-protocol.js';
+import { LogPart } from '../../common/types.js';
+import { HostedPluginProcess } from './hosted-plugin-process.js';
 
-export interface IPCConnectionOptions {
+export type IPCConnectionOptions = {
     readonly serverName: string;
     readonly logger: ILogger;
     readonly args: string[];

@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ChatRequest } from '@theia/ai-chat';
-import { Disposable } from '@theia/core/lib/common/disposable';
-import { Emitter, Event } from '@theia/core/lib/common/event';
+import { ChatRequest } from '@theia/ai-chat/lib/common/index.js';
+import { Disposable } from '@theia/core/lib/common/disposable.js';
+import { Emitter, Event } from '@theia/core';
 import * as monaco from '@theia/monaco-editor-core';
-import { MonacoEditorZoneWidget } from '@theia/monaco/lib/browser/monaco-editor-zone-widget';
-import { AskAIInputFactory, AskAIInputWidget } from './ask-ai-input-widget';
+import { MonacoEditorZoneWidget } from '@theia/monaco/lib/browser/monaco-editor-zone-widget.js';
+import { AskAIInputFactory, AskAIInputWidget } from './ask-ai-input-widget.js';
 
 /**
  * A widget that shows the Ask AI input UI in a Monaco editor zone.

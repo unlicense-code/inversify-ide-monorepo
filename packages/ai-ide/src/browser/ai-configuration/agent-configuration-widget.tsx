@@ -26,20 +26,20 @@ import {
     PROMPT_FUNCTION_REGEX,
     PromptFragmentCustomizationService,
     PromptService,
-} from '@theia/ai-core/lib/common';
-import { codicon, QuickInputService } from '@theia/core/lib/browser';
-import { URI } from '@theia/core/lib/common';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { AIConfigurationSelectionService } from './ai-configuration-service';
-import { LanguageModelRenderer } from './language-model-renderer';
-import { LanguageModelAliasRegistry, LanguageModelAlias } from '@theia/ai-core/lib/common/language-model-alias';
-import { AIVariableConfigurationWidget } from './variable-configuration-widget';
+} from '@theia/ai-core/lib/common/index.js';
+import { codicon, QuickInputService } from '@theia/core/lib/browser/index.js';
+import { URI } from '@theia/core/lib/common/index.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import * as React from 'react';
+import { AIConfigurationSelectionService } from './ai-configuration-service.js';
+import { LanguageModelRenderer } from './language-model-renderer.js';
+import { LanguageModelAliasRegistry, LanguageModelAlias } from '@theia/ai-core/lib/common/language-model-alias.js';
+import { AIVariableConfigurationWidget } from './variable-configuration-widget.js';
 import { nls } from '@theia/core';
-import { PromptVariantRenderer } from './template-settings-renderer';
-import { AIListDetailConfigurationWidget } from './base/ai-list-detail-configuration-widget';
+import { PromptVariantRenderer } from './template-settings-renderer.js';
+import { AIListDetailConfigurationWidget } from './base/ai-list-detail-configuration-widget.js';
 
-interface ParsedPrompt {
+type ParsedPrompt = {
     functions: string[];
     globalVariables: string[];
     agentSpecificVariables: string[];
@@ -435,7 +435,7 @@ export class AIAgentConfigurationWidget extends AIListDetailConfigurationWidget<
     };
 }
 
-interface AgentGlobalVariablesProps {
+type AgentGlobalVariablesProps = {
     variables: string[];
     variableService: AIVariableService;
 }
@@ -478,7 +478,7 @@ const AgentGlobalVariables = ({ variables: globalVariables, variableService }: A
     );
 };
 
-interface AgentFunctionsProps {
+type AgentFunctionsProps = {
     functions: string[];
 }
 const AgentFunctions = ({ functions }: AgentFunctionsProps) => {
@@ -492,7 +492,7 @@ const AgentFunctions = ({ functions }: AgentFunctionsProps) => {
     </>;
 };
 
-interface AgentSpecificVariablesProps {
+type AgentSpecificVariablesProps = {
     promptVariables: string[];
     agent: Agent;
 }
@@ -514,7 +514,7 @@ const AgentSpecificVariables = ({ promptVariables, agent }: AgentSpecificVariabl
         )}
     </div>;
 };
-interface AgentSpecificVariableProps {
+type AgentSpecificVariableProps = {
     variableId: string;
     agent: Agent;
     promptVariables: string[];

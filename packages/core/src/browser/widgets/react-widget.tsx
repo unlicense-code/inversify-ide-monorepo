@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,8 +16,8 @@
 
 import * as React from 'react';
 import { injectable, unmanaged } from 'inversify';
-import { Disposable } from '../../common';
-import { BaseWidget, Message } from './widget';
+import { Disposable } from '../../common/index.js';
+import { BaseWidget, Message } from './widget.js';
 import { Widget } from '@lumino/widgets';
 import { createRoot, Root } from 'react-dom/client';
 

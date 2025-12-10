@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import * as paths from 'path';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import { RpcProxyFactory, DisposableCollection } from '@theia/core';
-import { IPCConnectionProvider } from '@theia/core/lib/node';
-import { GitLocator, GitLocateOptions } from './git-locator-protocol';
+import { IPCConnectionProvider } from '@theia/core/lib/node/index.js';
+import { GitLocator, GitLocateOptions } from './git-locator-protocol.js';
 
 @injectable()
 export class GitLocatorClient implements GitLocator {

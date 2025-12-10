@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
+import { injectable, inject } from 'inversify';
 import { URI } from '@theia/core';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { ContextFileValidationService, FileValidationResult, FileValidationState } from '@theia/ai-chat/lib/browser/context-file-validation-service';
-import { WorkspaceFunctionScope } from './workspace-functions';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
+import { ContextFileValidationService, FileValidationResult, FileValidationState } from '@theia/ai-chat/lib/browser/context-file-validation-service.js';
+import { WorkspaceFunctionScope } from './workspace-functions.js';
 
 @injectable()
 export class ContextFileValidationServiceImpl implements ContextFileValidationService {

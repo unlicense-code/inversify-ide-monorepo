@@ -14,13 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ApplicationShell } from '../shell';
-import { Widget } from './widget';
+import { ApplicationShell } from '../shell/index.js';
+import { Widget } from './widget.js';
 
-/**
- * A contract for widgets that are extractable to a secondary window.
- */
-export interface ExtractableWidget extends Widget {
+export type ExtractableWidget = Widget & {
     /** Set to `true` to mark the widget to be extractable. */
     isExtractable: boolean;
     /** The secondary window that the window was extracted to or `undefined` if it is not yet extracted. */

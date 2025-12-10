@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,23 +14,23 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { SymbolInformation, WorkspaceSymbolParams } from '@theia/core/shared/vscode-languageserver-protocol';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { ProblemManager } from '@theia/markers/lib/browser/problem/problem-manager';
-import URI from '@theia/core/lib/common/uri';
-import { MaybePromise, Mutable } from '@theia/core/lib/common/types';
-import { Disposable } from '@theia/core/lib/common/disposable';
-import { CancellationToken } from '@theia/core/lib/common/cancellation';
-import { Language, LanguageService } from '@theia/core/lib/browser/language-service';
-import { MonacoMarkerCollection } from './monaco-marker-collection';
-import { ProtocolToMonacoConverter } from './protocol-to-monaco-converter';
+import { SymbolInformation, WorkspaceSymbolParams } from 'vscode-languageserver-protocol';
+import { injectable, inject, postConstruct } from 'inversify';
+import { ProblemManager } from '@theia/markers/lib/browser/problem/problem-manager.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { MaybePromise, Mutable } from '@theia/core/lib/common/types.js';
+import { Disposable } from '@theia/core/lib/common/disposable.js';
+import { CancellationToken } from '@theia/core/lib/common/cancellation.js';
+import { Language, LanguageService } from '@theia/core/lib/browser/language-service.js';
+import { MonacoMarkerCollection } from './monaco-marker-collection.js';
+import { ProtocolToMonacoConverter } from './protocol-to-monaco-converter.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { FileStat } from '@theia/filesystem/lib/common/files';
-import { FileStatNode } from '@theia/filesystem/lib/browser';
-import { ILanguageService } from '@theia/monaco-editor-core/esm/vs/editor/common/languages/language';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
+import { FileStat } from '@theia/filesystem/lib/common/files.js';
+import { FileStatNode } from '@theia/filesystem/lib/browser/index.js';
+import { ILanguageService } from '@theia/monaco-editor-core/esm/vs/editor/common/languages/language.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
 
-export interface WorkspaceSymbolProvider {
+export type WorkspaceSymbolProvider = {
     provideWorkspaceSymbols(params: WorkspaceSymbolParams, token: CancellationToken): MaybePromise<SymbolInformation[] | undefined>;
     resolveWorkspaceSymbol?(symbol: SymbolInformation, token: CancellationToken): Thenable<SymbolInformation | undefined>
 }
@@ -48,7 +48,7 @@ export class MonacoLanguages extends LanguageService {
 
     @postConstruct()
     protected init(): void {
-        this.problemManager.onDidChangeMarkers(uri => this.updateMarkers(uri));
+        this.problemManager.onDidChangeMarkers((uri: URI) => this.updateMarkers(uri));
         monaco.editor.onDidCreateModel(model => this.updateModelMarkers(model));
     }
 
@@ -96,7 +96,7 @@ export class MonacoLanguages extends LanguageService {
         if (obj instanceof URI) {
             return this.detectLanguageByURI(obj);
         }
-        if (FileStat.is(obj)) {
+        if (FileStat.is(obj) && obj.resource) {
             return this.detectLanguageByURI(obj.resource);
         }
         if (FileStatNode.is(obj)) {
@@ -126,10 +126,10 @@ export class MonacoLanguages extends LanguageService {
 
     override registerIcon(languageId: string, iconClass: string): Disposable {
         this.icons.set(languageId, iconClass);
-        this.onDidChangeIconEmitter.fire({ languageId });
+        (this as any).onDidChangeIconEmitter.fire({ languageId });
         return Disposable.create(() => {
             this.icons.delete(languageId);
-            this.onDidChangeIconEmitter.fire({ languageId });
+            (this as any).onDidChangeIconEmitter.fire({ languageId });
         });
     }
 

@@ -15,16 +15,11 @@
 // *****************************************************************************
 
 import { ContributionProvider, Event, Emitter } from '@theia/core';
-import { ChangeSet } from '@theia/ai-chat';
-import { inject, injectable, named, postConstruct } from '@theia/core/shared/inversify';
+import { ChangeSet } from '@theia/ai-chat/lib/common/index.js';
+import { inject, injectable, named, postConstruct } from 'inversify';
 
 export const ChangeSetActionRenderer = Symbol('ChangeSetActionRenderer');
-/**
- * The CodePartRenderer offers to contribute arbitrary React nodes to the rendered code part.
- * Technically anything can be rendered, however it is intended to be used for actions, like
- * "Copy to Clipboard" or "Insert at Cursor".
- */
-export interface ChangeSetActionRenderer {
+export type ChangeSetActionRenderer = {
     readonly id: string;
     onDidChange?: Event<void>;
     render(changeSet: ChangeSet): React.ReactNode;

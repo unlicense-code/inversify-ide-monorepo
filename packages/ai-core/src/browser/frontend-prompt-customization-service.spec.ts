@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { expect } from 'chai';
-import { parseTemplateWithMetadata, ParsedTemplate } from './prompttemplate-parser';
+import { parseTemplateWithMetadata, ParsedTemplate } from './prompttemplate-parser.js';
 
 describe('Prompt Template Parser', () => {
 

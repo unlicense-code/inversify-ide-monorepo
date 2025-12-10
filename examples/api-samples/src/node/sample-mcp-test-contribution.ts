@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { ILogger } from '@theia/core/lib/common/logger';
+import { inject, injectable } from 'inversify';
+import { ILogger } from '@theia/core/lib/common/logger.js';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { MCPBackendContribution } from '@theia/ai-mcp-server/lib/node/mcp-theia-server';
+import { MCPBackendContribution } from '@theia/ai-mcp-server/lib/node/mcp-theia-server.js';
 
 @injectable()
 export class MCPTestContribution implements MCPBackendContribution {
@@ -28,19 +28,18 @@ export class MCPTestContribution implements MCPBackendContribution {
     async configure(server: McpServer): Promise<void> {
         this.logger.info('MCPTestContribution.configure() called - MCP system is working!');
 
-        server.tool('test-tool', {
-            type: 'object',
-            properties: {},
-            required: []
-        }, async () => {
-            this.logger.info('test-tool called');
-            return {
-                content: [{
-                    type: 'text',
-                    text: 'Test tool executed successfully!'
-                }]
-            };
-        });
+        server.tool(
+            'test-tool',
+            'Test tool that demonstrates MCP server tool registration.',
+            async () => {
+                this.logger.info('test-tool called');
+                return {
+                    content: [{
+                        type: 'text',
+                        text: 'Test tool executed successfully!'
+                    }]
+                };
+            });
 
         this.logger.info('MCPTestContribution: test-tool registered successfully');
     }

@@ -14,27 +14,27 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ChatResponsePartRenderer } from '@theia/ai-chat-ui/lib/browser/chat-response-part-renderer';
-import { ResponseNode } from '@theia/ai-chat-ui/lib/browser/chat-tree-view';
-import { ChatResponseContent, ToolCallChatResponseContent } from '@theia/ai-chat/lib/common';
-import { LabelProvider } from '@theia/core/lib/browser';
-import { URI } from '@theia/core/lib/common/uri';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { ReactNode } from '@theia/core/shared/react';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { ClaudeCodeToolCallChatResponseContent } from '../claude-code-tool-call-content';
-import { CollapsibleToolRenderer } from './collapsible-tool-renderer';
+import { ChatResponsePartRenderer } from '@theia/ai-chat-ui/lib/browser/chat-response-part-renderer.js';
+import { ResponseNode } from '@theia/ai-chat-ui/lib/browser/chat-tree-view/index.js';
+import { ChatResponseContent, ToolCallChatResponseContent } from '@theia/ai-chat/lib/common/index.js';
+import { LabelProvider } from '@theia/core/lib/browser/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { inject, injectable } from 'inversify';
+import * as React from 'react';
+import { ReactNode } from 'react';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { ClaudeCodeToolCallChatResponseContent } from '../claude-code-tool-call-content.js';
+import { CollapsibleToolRenderer } from './collapsible-tool-renderer.js';
 import { nls } from '@theia/core';
 
-interface EditOperation {
+type EditOperation = {
     old_string: string;
     new_string: string;
     replace_all?: boolean;
 }
 
-interface MultiEditToolInput {
+type MultiEditToolInput = {
     file_path: string;
     edits: EditOperation[];
 }

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { Container } from 'inversify';
-import { ContributionProvider } from '../../common';
-import { CorePreferences } from '../../common/core-preferences';
-import { FrontendApplicationContribution } from '../frontend-application-contribution';
-import { DefaultWindowService } from './default-window-service';
+import { ContributionProvider } from '../../common/index.js';
+import { CorePreferences } from '../../common/core-preferences.js';
+import { FrontendApplicationContribution } from '../frontend-application-contribution.js';
+import { DefaultWindowService } from './default-window-service.js';
 import assert = require('assert');
 
 describe('DefaultWindowService', () => {

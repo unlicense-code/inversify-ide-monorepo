@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -22,14 +22,14 @@
 
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
 
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
 import * as theia from '@theia/plugin';
-import { URI } from '@theia/core/shared/vscode-uri';
-import { SemanticTokens, SemanticTokensEdit, SemanticTokensEdits } from '../types-impl';
-import { DocumentsExtImpl } from '../documents';
-import { toRange } from '../type-converters';
-import { encodeSemanticTokensDto } from '../../common/semantic-tokens-dto';
-import { Range } from '../../common/plugin-api-rpc-model';
+import { URI } from 'vscode-uri';
+import { SemanticTokens, SemanticTokensEdit, SemanticTokensEdits } from '../types-impl.js';
+import { DocumentsExtImpl } from '../documents.js';
+import { toRange } from '../type-converters.js';
+import { encodeSemanticTokensDto } from '../../common/semantic-tokens-dto.js';
+import { Range } from '../../common/plugin-api-rpc-model.js';
 
 class SemanticTokensPreviousResult {
     constructor(

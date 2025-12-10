@@ -15,7 +15,7 @@
 // *****************************************************************************
 export const ANTHROPIC_LANGUAGE_MODELS_MANAGER_PATH = '/services/anthropic/language-model-manager';
 export const AnthropicLanguageModelsManager = Symbol('AnthropicLanguageModelsManager');
-export interface AnthropicModelDescription {
+export type AnthropicModelDescription = {
     /**
      * The identifier of the model which will be shown in the UI.
      */
@@ -46,7 +46,7 @@ export interface AnthropicModelDescription {
     maxRetries: number;
 
 }
-export interface AnthropicLanguageModelsManager {
+export type AnthropicLanguageModelsManager = {
     apiKey: string | undefined;
     setApiKey(key: string | undefined): void;
     setProxyUrl(proxyUrl: string | undefined): void;

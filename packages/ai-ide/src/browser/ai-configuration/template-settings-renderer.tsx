@@ -13,11 +13,11 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { PromptService, PromptVariantSet } from '@theia/ai-core/lib/common';
-import * as React from '@theia/core/shared/react';
-import { nls } from '@theia/core/lib/common/nls';
+import { PromptService, PromptVariantSet } from '@theia/ai-core/lib/common/index.js';
+import * as React from 'react';
+import { nls } from '@theia/core/lib/common/nls.js'
 
-export interface PromptVariantRendererProps {
+export type PromptVariantRendererProps = {
     agentId: string;
     promptVariantSet: PromptVariantSet;
     promptService: PromptService;

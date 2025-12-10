@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { MetricsFrontendApplicationContribution } from './metrics-frontend-application-contribution';
-import { MeasurementNotificationService, measurementNotificationServicePath } from '../common';
-import { FrontendApplicationContribution, WebSocketConnectionProvider } from '@theia/core/lib/browser';
+import { ContainerModule } from 'inversify';
+import { MetricsFrontendApplicationContribution } from './metrics-frontend-application-contribution.js';
+import { MeasurementNotificationService, measurementNotificationServicePath } from '../common/index.js';
+import { FrontendApplicationContribution, WebSocketConnectionProvider } from '@theia/core/lib/browser/index.js';
 
 export default new ContainerModule(bind => {
     bind(FrontendApplicationContribution).to(MetricsFrontendApplicationContribution).inSingletonScope();

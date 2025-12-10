@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 Typefox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { CliContribution } from '@theia/core/lib/node/cli';
-import { PreferenceCliContribution } from './preference-cli-contribution';
-import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module';
-import { CliPreferences, CliPreferencesPath } from '../common/cli-preferences';
-import { bindPreferenceProviders } from './preference-bindings';
-import { PreferenceStorageFactory } from '../common/abstract-resource-preference-provider';
+import { ContainerModule } from 'inversify';
+import { CliContribution } from '@theia/core/lib/node/cli.js';
+import { PreferenceCliContribution } from './preference-cli-contribution.js';
+import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module.js';
+import { CliPreferences, CliPreferencesPath } from '../common/cli-preferences.js';
+import { bindPreferenceProviders } from './preference-bindings.js';
+import { PreferenceStorageFactory } from '../common/abstract-resource-preference-provider.js';
 import { PreferenceScope, URI } from '@theia/core';
-import { BackendPreferenceStorage } from './backend-preference-storage';
-import { JSONCEditor } from '../common/jsonc-editor';
-import { EncodingService } from '@theia/core/lib/common/encoding-service';
-import { DiskFileSystemProvider } from '@theia/filesystem/lib/node/disk-file-system-provider';
+import { BackendPreferenceStorage } from './backend-preference-storage.js';
+import { JSONCEditor } from '../common/jsonc-editor.js';
+import { EncodingService } from '@theia/core/lib/common/encoding-service.js';
+import { DiskFileSystemProvider } from '@theia/filesystem/lib/node/disk-file-system-provider.js';
 
 const preferencesConnectionModule = ConnectionContainerModule.create(({ bind, bindBackendService }) => {
     bindBackendService(CliPreferencesPath, CliPreferences);

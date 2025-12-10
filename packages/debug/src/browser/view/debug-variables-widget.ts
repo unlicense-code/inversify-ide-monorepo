@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,20 +14,21 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct, interfaces, Container } from '@theia/core/shared/inversify';
-import { MenuPath, Disposable, CommandRegistry, MenuModelRegistry, DisposableCollection, Command } from '@theia/core/lib/common';
-import { SourceTreeWidget, TreeElementNode } from '@theia/core/lib/browser/source-tree';
-import { DebugVariablesSource } from './debug-variables-source';
-import { DebugViewModel } from './debug-view-model';
-import { nls } from '@theia/core/lib/common/nls';
-import { MouseEvent } from '@theia/core/shared/react';
-import { SelectableTreeNode, TreeNode, TreeSelection } from '@theia/core/lib/browser';
-import { DebugVariable } from '../console/debug-console-items';
-import { BreakpointManager } from '../breakpoint/breakpoint-manager';
-import { DataBreakpoint, DataBreakpointSource, DataBreakpointSourceType } from '../breakpoint/breakpoint-marker';
-import { DebugSessionManager } from '../debug-session-manager';
-import { DebugSession } from '../debug-session';
-import { DebugStackFrame } from '../model/debug-stack-frame';
+import { injectable, inject, postConstruct, interfaces } from 'inversify';
+import { MenuPath, Disposable, CommandRegistry, MenuModelRegistry, DisposableCollection, Command } from '@theia/core/lib/common/index.js';
+import { SourceTreeWidget } from '@theia/core/lib/browser/source-tree/source-tree-widget.js';
+import { TreeElementNode } from '@theia/core/lib/browser/source-tree/source-tree.js';
+import { DebugVariablesSource } from './debug-variables-source.js';
+import { DebugViewModel } from './debug-view-model.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { MouseEvent } from 'react';
+import { SelectableTreeNode, TreeNode, TreeSelection } from '@theia/core/lib/browser/index.js';
+import { DebugVariable } from '../console/debug-console-items.js';
+import { BreakpointManager } from '../breakpoint/breakpoint-manager.js';
+import { DataBreakpoint, DataBreakpointSource, DataBreakpointSourceType } from '../breakpoint/breakpoint-marker.js';
+import { DebugSessionManager } from '../debug-session-manager.js';
+import { DebugSession } from '../debug-session.js';
+import { DebugStackFrame } from '../model/debug-stack-frame.js';
 
 @injectable()
 export class DebugVariablesWidget extends SourceTreeWidget {
@@ -37,7 +38,7 @@ export class DebugVariablesWidget extends SourceTreeWidget {
     static WATCH_MENU: MenuPath = [...DebugVariablesWidget.CONTEXT_MENU, 'b_watch'];
     static DATA_BREAKPOINT_MENU: MenuPath = [...DebugVariablesWidget.CONTEXT_MENU, 'c_data_breakpoints'];
     static FACTORY_ID = 'debug:variables';
-    static override createContainer(parent: interfaces.Container): Container {
+    static override createContainer(parent: interfaces.Container): interfaces.Container {
         const child = SourceTreeWidget.createContainer(parent, {
             contextMenuPath: DebugVariablesWidget.CONTEXT_MENU,
             virtualized: false,

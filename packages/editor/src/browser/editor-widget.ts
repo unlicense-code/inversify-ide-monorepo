@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Disposable, SelectionService, Event, UNTITLED_SCHEME, DisposableCollection } from '@theia/core/lib/common';
-import { Widget, BaseWidget, Message, Saveable, SaveableSource, Navigatable, StatefulWidget, lock, TabBar, DockPanel, unlock, ExtractableWidget } from '@theia/core/lib/browser';
-import URI from '@theia/core/lib/common/uri';
-import { find } from '@theia/core/shared/@lumino/algorithm';
-import { TextEditor } from './editor';
+import { Disposable, SelectionService, Event, UNTITLED_SCHEME, DisposableCollection } from '@theia/core/lib/common/index.js';
+import { Widget, BaseWidget, Message, Saveable, SaveableSource, Navigatable, StatefulWidget, lock, TabBar, DockPanel, unlock, ExtractableWidget } from '@theia/core/lib/browser/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { find } from '@lumino/algorithm';
+import { TextEditor } from './editor.js';
 
 export class EditorWidget extends BaseWidget implements SaveableSource, Navigatable, StatefulWidget, ExtractableWidget {
 
@@ -95,7 +95,7 @@ export class EditorWidget extends BaseWidget implements SaveableSource, Navigata
     protected checkForTabbarChange(): void {
         const { parent } = this;
         if (parent instanceof DockPanel) {
-            const newTabbar = find(parent.tabBars(), tabbar => !!tabbar.titles.find(title => title === this.title));
+            const newTabbar = find(parent.tabBars(), (tabbar: any) => !!tabbar.titles.find((title: any) => title === this.title));
             if (this.currentTabbar !== newTabbar) {
                 this.toDisposeOnTabbarChange.dispose();
                 const listener = () => this.checkForTabbarChange();

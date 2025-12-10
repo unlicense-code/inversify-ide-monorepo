@@ -20,22 +20,22 @@
 // copied and modified from https://github.com/microsoft/vscode/blob/1.96.3/src/vs/workbench/contrib/mergeEditor/browser/model/mergeEditorModel.ts,
 // https://github.com/microsoft/vscode/blob/1.96.3/src/vs/workbench/contrib/mergeEditor/browser/view/viewModel.ts
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, postConstruct } from 'inversify';
 import { ArrayUtils, Disposable, DisposableCollection } from '@theia/core';
 import { Autorun, DerivedObservable, Observable, ObservableUtils, SettableObservable } from '@theia/core/lib/common/observable';
-import { DiffComputer } from '@theia/core/lib/common/diff';
-import { Range } from '@theia/core/shared/vscode-languageserver-protocol';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
-import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model';
-import { MonacoToProtocolConverter } from '@theia/monaco/lib/browser/monaco-to-protocol-converter';
-import { MergeRange, MergeRangeAcceptedState, MergeRangeResultState, MergeSide } from './merge-range';
-import { DetailedLineRangeMapping, DocumentLineRangeMap, DocumentRangeMap, LineRangeMapping, RangeMapping } from './range-mapping';
-import { LiveDiff, LiveDiffState } from './live-diff';
-import { LineRange } from './line-range';
-import { LineRangeEdit } from './range-editing';
+import { DiffComputer } from '@theia/core/lib/common/diff.js';
+import { Range } from 'vscode-languageserver-protocol';
+import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor.js';
+import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model.js';
+import { MonacoToProtocolConverter } from '@theia/monaco/lib/browser/monaco-to-protocol-converter.js';
+import { MergeRange, MergeRangeAcceptedState, MergeRangeResultState, MergeSide } from './merge-range.js';
+import { DetailedLineRangeMapping, DocumentLineRangeMap, DocumentRangeMap, LineRangeMapping, RangeMapping } from './range-mapping.js';
+import { LiveDiff, LiveDiffState } from './live-diff.js';
+import { LineRange } from './line-range.js';
+import { LineRangeEdit } from './range-editing.js';
 
 export const MergeEditorModelProps = Symbol('MergeEditorModelProps');
-export interface MergeEditorModelProps {
+export type MergeEditorModelProps = {
     readonly baseEditor: MonacoEditor;
     readonly side1Editor: MonacoEditor;
     readonly side2Editor: MonacoEditor;
@@ -617,7 +617,7 @@ class AttachedHistory implements Disposable {
     }
 }
 
-interface IAttachedHistoryElement {
+type IAttachedHistoryElement = {
     undo(): void;
     redo(): void;
 }

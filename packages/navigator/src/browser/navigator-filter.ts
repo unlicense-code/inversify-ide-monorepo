@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, postConstruct } from 'inversify';
 import { Minimatch } from 'minimatch';
-import { MaybePromise } from '@theia/core/lib/common/types';
-import { Event, Emitter } from '@theia/core/lib/common/event';
-import { FileSystemPreferences, FileSystemConfiguration } from '@theia/filesystem/lib/common/filesystem-preferences';
-import { FileNavigatorPreferences, FileNavigatorConfiguration } from '../common/navigator-preferences';
+import { MaybePromise } from '@theia/core/lib/common/types.js';
+import { Event, Emitter } from '@theia/core/lib/common/event.js';
+import { FileSystemPreferences, FileSystemConfiguration } from '@theia/filesystem/lib/common/index.js';
+import { FileNavigatorPreferences, FileNavigatorConfiguration } from '../common/navigator-preferences.js';
 import { PreferenceChangeEvent } from '@theia/core';
 
 /**
@@ -47,12 +47,12 @@ export class FileNavigatorFilter {
 
     protected async doInit(): Promise<void> {
         this.filterPredicate = this.createFilterPredicate(this.filesPreferences['files.exclude']);
-        this.filesPreferences.onPreferenceChanged(event => this.onFilesPreferenceChanged(event));
-        this.preferences.onPreferenceChanged(event => this.onPreferenceChanged(event));
+        this.filesPreferences.onPreferenceChanged((event: PreferenceChangeEvent<FileSystemConfiguration>) => this.onFilesPreferenceChanged(event));
+        this.preferences.onPreferenceChanged((event: any) => this.onPreferenceChanged(event));
     }
 
     async filter<T extends { id: string }>(items: MaybePromise<T[]>): Promise<T[]> {
-        return (await items).filter(item => this.filterItem(item));
+        return (await items).filter((item: T) => this.filterItem(item));
     }
 
     get onFilterChanged(): Event<void> {

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,51 +17,51 @@
 import { Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import { WebglAddon } from 'xterm-addon-webgl';
-import { inject, injectable, named, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, named, postConstruct } from 'inversify';
 import { ContributionProvider, Disposable, Event, Emitter, ILogger, DisposableCollection, Channel, OS, generateUuid } from '@theia/core';
 import {
     Widget, Message, StatefulWidget, isFirefox, MessageLoop, KeyCode, ExtractableWidget, ContextMenuRenderer,
     DecorationStyle
-} from '@theia/core/lib/browser';
-import { isOSX } from '@theia/core/lib/common';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { ShellTerminalServerProxy, IShellTerminalPreferences } from '../common/shell-terminal-protocol';
-import { terminalsPath } from '../common/terminal-protocol';
-import { IBaseTerminalServer, TerminalProcessInfo, TerminalExitReason } from '../common/base-terminal-protocol';
-import { TerminalWatcher } from '../common/terminal-watcher';
+} from '@theia/core/lib/browser/index.js';
+import { isOSX } from '@theia/core/lib/common/index.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { ShellTerminalServerProxy, IShellTerminalPreferences } from '../common/shell-terminal-protocol.js';
+import { terminalsPath } from '../common/terminal-protocol.js';
+import { IBaseTerminalServer, TerminalProcessInfo, TerminalExitReason } from '../common/base-terminal-protocol.js';
+import { TerminalWatcher } from '../common/terminal-watcher.js';
 import {
     TerminalWidgetOptions, TerminalWidget, TerminalDimensions, TerminalExitStatus, TerminalLocationOptions,
     TerminalLocation,
     TerminalBuffer
-} from './base/terminal-widget';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { TerminalPreferences } from '../common/terminal-preferences';
-import URI from '@theia/core/lib/common/uri';
-import { TerminalService } from './base/terminal-service';
-import { TerminalSearchWidgetFactory, TerminalSearchWidget } from './search/terminal-search-widget';
-import { TerminalCopyOnSelectionHandler } from './terminal-copy-on-selection-handler';
-import { TerminalThemeService } from './terminal-theme-service';
-import { CommandLineOptions, ShellCommandBuilder } from '@theia/process/lib/common/shell-command-builder';
-import { Key } from '@theia/core/lib/browser/keys';
-import { nls } from '@theia/core/lib/common/nls';
-import { TerminalMenus } from './terminal-frontend-contribution';
+} from './base/terminal-widget.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { TerminalPreferences } from '../common/terminal-preferences.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { TerminalService } from './base/terminal-service.js';
+import { TerminalSearchWidgetFactory, TerminalSearchWidget } from './search/terminal-search-widget.js';
+import { TerminalCopyOnSelectionHandler } from './terminal-copy-on-selection-handler.js';
+import { TerminalThemeService } from './terminal-theme-service.js';
+import { CommandLineOptions, ShellCommandBuilder } from '@theia/process/lib/common/shell-command-builder.js';
+import { Key } from '@theia/core/lib/browser/keys.js';
+import { nls } from '@theia/core/lib/common/nls.js';
+import { TerminalMenus } from './terminal-frontend-contribution.js';
 import debounce = require('p-debounce');
-import { MarkdownString, MarkdownStringImpl } from '@theia/core/lib/common/markdown-rendering/markdown-string';
-import { EnhancedPreviewWidget } from '@theia/core/lib/browser/widgets/enhanced-preview-widget';
-import { MarkdownRenderer, MarkdownRendererFactory } from '@theia/core/lib/browser/markdown-rendering/markdown-renderer';
-import { RemoteConnectionProvider, ServiceConnectionProvider } from '@theia/core/lib/browser/messaging/service-connection-provider';
-import { ColorRegistry } from '@theia/core/lib/browser/color-registry';
-import { guessShellTypeFromExecutable } from '../common/shell-type';
+import { MarkdownString, MarkdownStringImpl } from '@theia/core/lib/common/markdown-rendering/markdown-string.js';
+import { EnhancedPreviewWidget } from '@theia/core/lib/browser/widgets/enhanced-preview-widget.js';
+import { MarkdownRenderer, MarkdownRendererFactory } from '@theia/core/lib/browser/markdown-rendering/markdown-renderer.js';
+import { RemoteConnectionProvider, ServiceConnectionProvider } from '@theia/core/lib/browser/messaging/service-connection-provider.js';
+import { ColorRegistry } from '@theia/core/lib/browser/color-registry.js';
+import { guessShellTypeFromExecutable } from '../common/shell-type.js';
 
 export const TERMINAL_WIDGET_FACTORY_ID = 'terminal';
 
-export interface TerminalWidgetFactoryOptions extends Partial<TerminalWidgetOptions> {
+export type TerminalWidgetFactoryOptions = Partial<TerminalWidgetOptions> & {
     /* a unique string per terminal */
     created: string
 }
 
 export const TerminalContribution = Symbol('TerminalContribution');
-export interface TerminalContribution {
+export type TerminalContribution = {
     onCreate(term: TerminalWidgetImpl): void;
 }
 
@@ -216,7 +216,7 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
 
         this.initializeLinkHover();
 
-        this.toDispose.push(this.preferences.onPreferenceChanged(change => {
+        this.toDispose.push(this.preferences.onPreferenceChanged((change: { preferenceName: string }) => {
             this.updateConfig();
             this.needsResize = true;
             this.update();
@@ -234,7 +234,7 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
         });
         this.toDispose.push(titleChangeListenerDispose);
 
-        this.toDispose.push(this.terminalWatcher.onTerminalError(({ terminalId, error, attached }) => {
+        this.toDispose.push(this.terminalWatcher.onTerminalError(({ terminalId, error, attached }: { terminalId: number; error: Error; attached?: boolean }) => {
             if (terminalId === this.terminalId) {
                 this.exitStatus = { code: undefined, reason: TerminalExitReason.Process };
                 this.logger.error(`The terminal process terminated. Cause: ${error}`);
@@ -243,7 +243,7 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
                 }
             }
         }));
-        this.toDispose.push(this.terminalWatcher.onTerminalExit(({ terminalId, code, reason, attached }) => {
+        this.toDispose.push(this.terminalWatcher.onTerminalExit(({ terminalId, code, reason, attached }: { terminalId: number; code?: number; reason?: TerminalExitReason; attached?: boolean }) => {
             if (terminalId === this.terminalId) {
                 if (reason) {
                     this.exitStatus = { code, reason };
@@ -689,8 +689,8 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
         const waitForConnection = this.waitForConnection = new Deferred<Channel>();
         this.connectionProvider.listen(
             `${terminalsPath}/${this.terminalId}`,
-            (_path, connection) => {
-                connection.onMessage(e => {
+            (_path: string, connection: Channel) => {
+                connection.onMessage((e: () => { readString(): string }) => {
                     this.write(e().readString());
                 });
 
@@ -792,7 +792,7 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
 
     sendText(text: string): void {
         if (this.waitForConnection) {
-            this.waitForConnection.promise.then(connection =>
+            this.waitForConnection.promise.then((connection: Channel) =>
                 connection.getWriteBuffer().writeString(text).commit()
             );
         }

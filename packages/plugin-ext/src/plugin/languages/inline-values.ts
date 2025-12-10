@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { URI } from '@theia/core/shared/vscode-uri';
+import { URI } from 'vscode-uri';
 import * as theia from '@theia/plugin';
-import { InlineValue, InlineValueContext, Range } from '../../common/plugin-api-rpc-model';
-import { DocumentsExtImpl } from '../documents';
-import * as Converter from '../type-converters';
+import { InlineValue, InlineValueContext, Range } from '../../common/plugin-api-rpc-model.js';
+import { DocumentsExtImpl } from '../documents.js';
+import * as Converter from '../type-converters.js';
 
 export class InlineValuesAdapter {
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,18 +16,18 @@
 
 import * as React from 'react';
 import { injectable, inject, postConstruct } from 'inversify';
-import { ReactRenderer } from '../widgets';
-import { BreadcrumbsService } from './breadcrumbs-service';
-import { BreadcrumbRenderer } from './breadcrumb-renderer';
+import { ReactRenderer } from '../widgets/react-renderer.js';
+import { BreadcrumbsService } from './breadcrumbs-service.js';
+import { BreadcrumbRenderer } from './breadcrumb-renderer.js';
 import PerfectScrollbar from 'perfect-scrollbar';
-import URI from '../../common/uri';
-import { Emitter, Event } from '../../common';
-import { BreadcrumbPopupContainer } from './breadcrumb-popup-container';
-import { CorePreferences } from '../../common/core-preferences';
-import { Breadcrumb, Styles } from './breadcrumbs-constants';
-import { LabelProvider } from '../label-provider';
+import { URI } from '../../common/uri.js';
+import { Emitter, Event } from '../../common/index.js';
+import { BreadcrumbPopupContainer } from './breadcrumb-popup-container.js';
+import { CorePreferences } from '../../common/core-preferences.js';
+import { Breadcrumb, Styles } from './breadcrumbs-constants.js';
+import { LabelProvider } from '../label-provider.js';
 
-interface Cancelable {
+type Cancelable = {
     canceled: boolean;
 }
 
@@ -54,7 +54,7 @@ export class BreadcrumbsRenderer extends ReactRenderer {
     protected uri: URI | undefined;
     protected breadcrumbs: Breadcrumb[] = [];
     protected popup: BreadcrumbPopupContainer | undefined;
-    protected scrollbar: PerfectScrollbar | undefined;
+    protected scrollbar: any;
 
     get active(): boolean {
         return !!this.breadcrumbs.length;
@@ -74,7 +74,7 @@ export class BreadcrumbsRenderer extends ReactRenderer {
                 this.refresh(this.uri);
             }
         }));
-        this.toDispose.push(this.corePreferences.onPreferenceChanged(change => {
+        this.toDispose.push(this.corePreferences.onPreferenceChanged((change: { preferenceName: string; }) => {
             if (change.preferenceName === 'breadcrumbs.enabled') {
                 this.refresh(this.uri);
             }
@@ -131,7 +131,7 @@ export class BreadcrumbsRenderer extends ReactRenderer {
     protected createScrollbar(): void {
         const { breadCrumbsContainer } = this;
         if (breadCrumbsContainer) {
-            this.scrollbar = new PerfectScrollbar(breadCrumbsContainer, {
+            this.scrollbar = new (PerfectScrollbar as any)(breadCrumbsContainer, {
                 handlers: ['drag-thumb', 'keyboard', 'wheel', 'touch'],
                 useBothWheelAxes: true,
                 scrollXMarginOffset: 4,
@@ -180,6 +180,6 @@ export class BreadcrumbsRenderer extends ReactRenderer {
 }
 
 export const BreadcrumbsRendererFactory = Symbol('BreadcrumbsRendererFactory');
-export interface BreadcrumbsRendererFactory {
+export type BreadcrumbsRendererFactory = {
     (): BreadcrumbsRenderer;
 }

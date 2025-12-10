@@ -16,11 +16,11 @@
 
 import * as ffmpeg from './ffmpeg';
 
-export interface CheckFfmpegOptions extends ffmpeg.FfmpegOptions {
+export type CheckFfmpegOptions = ffmpeg.FfmpegOptions & {
     json?: boolean
 }
 
-export interface CheckFfmpegResult {
+export type CheckFfmpegResult = {
     free: ffmpeg.Codec[],
     proprietary: ffmpeg.Codec[],
 }

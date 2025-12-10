@@ -26,27 +26,27 @@
 /* tslint:disable:typedef */
 
 import * as theia from '@theia/plugin';
-import { CancellationToken, CancellationTokenSource } from '@theia/core/lib/common/cancellation';
+import { CancellationToken, CancellationTokenSource } from '@theia/core';
 import { Disposable, DisposableCollection, Emitter, Event } from '@theia/core';
-import { hash } from '@theia/core/lib/common/hash';
+import { hash } from '@theia/core/lib/common/hash.js';
 
-import { isDefined } from '@theia/core/lib/common/types';
-import { TestingExt, PLUGIN_RPC_CONTEXT, TestingMain } from '../common/plugin-api-rpc';
-import { CommandRegistryImpl } from './command-registry';
-import { RPCProtocol } from '../common/rpc-protocol';
-import { generateUuid } from '@theia/core/lib/common/uuid';
-import * as Convert from './type-converters';
-import { TestItemImpl, TestItemCollection } from './test-item';
-import { AccumulatingTreeDeltaEmitter, TreeDelta } from '@theia/test/lib/common/tree-delta';
+import { isDefined } from '@theia/core/lib/common/types.js';
+import { TestingExt, PLUGIN_RPC_CONTEXT, TestingMain } from '../common/plugin-api-rpc.js';
+import { CommandRegistryImpl } from './command-registry.js';
+import { RPCProtocol } from '../common/rpc-protocol.js';
+import { generateUuid } from '@theia/core';
+import * as Convert from './type-converters.js';
+import { TestItemImpl, TestItemCollection } from './test-item.js';
+import { AccumulatingTreeDeltaEmitter, TreeDelta } from '@theia/test/lib/common/tree-delta.js';
 import {
     TestItemDTO, TestOutputDTO, TestExecutionState, TestRunProfileDTO,
     TestRunProfileKind, TestRunRequestDTO, TestStateChangeDTO, TestItemReference, TestMessageArg, TestMessageDTO,
     TestMessageStackFrameDTO
-} from '../common/test-types';
-import * as protocol from '@theia/core/shared/vscode-languageserver-protocol';
-import { ChangeBatcher, observableProperty } from '@theia/test/lib/common/collections';
-import { Location, Position, Range, TestRunRequest, URI } from './types-impl';
-import { MarkdownString } from '../common/plugin-api-rpc-model';
+} from '../common/test-types.js';
+import * as protocol from 'vscode-languageserver-protocol';
+import { ChangeBatcher, observableProperty } from '@theia/test/lib/common/collections.js';
+import { Location, Position, Range, TestRunRequest, URI } from './types-impl.js';
+import { MarkdownString } from '../common/plugin-api-rpc-model.js';
 
 type RefreshHandler = (token: theia.CancellationToken) => void | theia.Thenable<void>;
 type ResolveHandler = (item: theia.TestItem | undefined) => theia.Thenable<void> | void;

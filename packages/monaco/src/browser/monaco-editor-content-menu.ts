@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import { ArrayUtils, CommandMenu, CommandRegistry, CompoundMenuNode, Disposable, Event, MenuModelRegistry, MenuNode } from '@theia/core';
 import { ObservableFromEvent, ObservableUtils } from '@theia/core/lib/common/observable';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { Context } from '@theia/core/lib/browser/context-key-service';
-import { EditorManager, EDITOR_CONTENT_MENU, EditorWidget } from '@theia/editor/lib/browser';
-import { ICodeEditor } from '@theia/monaco-editor-core/esm/vs/editor/browser/editorBrowser';
-import { IContextKeyService } from '@theia/monaco-editor-core/esm/vs/platform/contextkey/common/contextkey';
-import { MonacoContextKeyService } from './monaco-context-key-service';
-import { MonacoEditor } from './monaco-editor';
-import { MonacoEditorOverlayButton } from './monaco-editor-overlay-button';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
+import { Context } from '@theia/core/lib/browser/context-key-service.js';
+import { EditorManager, EDITOR_CONTENT_MENU, EditorWidget } from '@theia/editor/lib/browser/index.js';
+import { ICodeEditor } from '@theia/monaco-editor-core/esm/vs/editor/browser/editorBrowser.js';
+import { IContextKeyService } from '@theia/monaco-editor-core/esm/vs/platform/contextkey/common/contextkey.js';
+import { MonacoContextKeyService } from './monaco-context-key-service.js';
+import { MonacoEditor } from './monaco-editor.js';
+import { MonacoEditorOverlayButton } from './monaco-editor-overlay-button.js';
 
 /**
  * Implements {@link EDITOR_CONTENT_MENU} for {@link MonacoEditor}s.
@@ -59,9 +59,11 @@ export class MonacoEditorContentMenuContribution implements FrontendApplicationC
             accessor => accessor.get(IContextKeyService)
         );
         const context: Context = {
-            getValue: key => contextKeyService.getContextKeyValue(key),
-            onDidChange: Event.map(contextKeyService.onDidChangeContext, event => ({
-                affects: keys => event.affectsSome(keys)
+            getValue: (key: string) => contextKeyService.getContextKeyValue(key),
+            onDidChange: Event.map(contextKeyService.onDidChangeContext, (event) => ({
+                affects: (keys: { has(key: string): boolean }) => {
+                    return event.affectsSome(keys);
+                }
             }))
         };
         const menuNodesObservable = ObservableFromEvent.create(this.menus.onDidChange,

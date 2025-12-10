@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { CompositeTreeNode, ExpandableTreeNode, SelectableTreeNode, TreeNode } from '@theia/core/lib/browser';
+import { CompositeTreeNode, ExpandableTreeNode, SelectableTreeNode, TreeNode } from '@theia/core/lib/browser/index.js';
 
 export const ROOT_ID = 'ResourcePropertiesTree';
 
-export interface ResourcePropertiesRoot extends CompositeTreeNode {
+export type ResourcePropertiesRoot = CompositeTreeNode & {
     children: ResourcePropertiesCategoryNode[];
 }
 export namespace ResourcePropertiesRoot {
@@ -27,7 +27,7 @@ export namespace ResourcePropertiesRoot {
     }
 }
 
-export interface ResourcePropertiesCategoryNode extends ExpandableTreeNode, SelectableTreeNode {
+export type ResourcePropertiesCategoryNode = ExpandableTreeNode & SelectableTreeNode & {
     name: string;
     icon?: string;
     children: ResourcePropertiesItemNode[];
@@ -40,7 +40,7 @@ export namespace ResourcePropertiesCategoryNode {
     }
 }
 
-export interface ResourcePropertiesItemNode extends SelectableTreeNode {
+export type ResourcePropertiesItemNode = SelectableTreeNode & {
     name: string;
     icon?: string;
     parent: ResourcePropertiesCategoryNode;

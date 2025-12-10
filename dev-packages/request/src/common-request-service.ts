@@ -16,11 +16,11 @@
 
 const textDecoder = typeof TextDecoder !== 'undefined' ? new TextDecoder() : undefined;
 
-export interface Headers {
+export type Headers = {
     [header: string]: string;
 }
 
-export interface RequestOptions {
+export type RequestOptions = {
     type?: string;
     url: string;
     user?: string;
@@ -32,7 +32,7 @@ export interface RequestOptions {
     proxyAuthorization?: string;
 }
 
-export interface RequestContext {
+export type RequestContext = {
     url: string;
     res: {
         headers: Headers;
@@ -106,12 +106,12 @@ export namespace RequestContext {
     }
 }
 
-export interface RequestConfiguration {
+export type RequestConfiguration = {
     proxyUrl?: string;
     proxyAuthorization?: string;
     strictSSL?: boolean;
 }
-export interface RequestService {
+export type RequestService = {
     configure(config: RequestConfiguration): Promise<void>;
     request(options: RequestOptions, token?: CancellationToken): Promise<RequestContext>;
     resolveProxy(url: string): Promise<string | undefined>
@@ -121,7 +121,7 @@ export const RequestService = Symbol('RequestService');
 export const BackendRequestService = Symbol('BackendRequestService');
 export const REQUEST_SERVICE_PATH = '/services/request-service';
 
-export interface CancellationToken {
+export type CancellationToken = {
     readonly isCancellationRequested: boolean;
     readonly onCancellationRequested: (listener: () => void) => void;
 }

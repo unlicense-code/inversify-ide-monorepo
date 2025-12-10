@@ -16,28 +16,28 @@
 
 import '../../../src/browser/style/index.css';
 
-import { interfaces, ContainerModule, Container } from '@theia/core/shared/inversify';
+import { interfaces, ContainerModule } from 'inversify';
 import {
     bindViewContribution, FrontendApplicationContribution,
     WidgetFactory, ViewContainer,
     WidgetManager, createTreeContainer
-} from '@theia/core/lib/browser';
-import { TestTree, TestTreeWidget } from './test-tree-widget';
-import { TestViewContribution, TEST_VIEW_CONTAINER_ID, TEST_VIEW_CONTAINER_TITLE_OPTIONS, TEST_VIEW_CONTEXT_MENU } from './test-view-contribution';
-import { TestService, TestContribution, DefaultTestService } from '../test-service';
+} from '@theia/core/lib/browser/index.js';
+import { TestTree, TestTreeWidget } from './test-tree-widget.js';
+import { TestViewContribution, TEST_VIEW_CONTAINER_ID, TEST_VIEW_CONTAINER_TITLE_OPTIONS, TEST_VIEW_CONTEXT_MENU } from './test-view-contribution.js';
+import { TestService, TestContribution, DefaultTestService } from '../test-service.js';
 import { bindContributionProvider } from '@theia/core';
-import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { TestExecutionStateManager } from './test-execution-state-manager';
-import { TestResultWidget } from './test-result-widget';
-import { TestOutputWidget } from './test-output-widget';
-import { TestOutputViewContribution } from './test-output-view-contribution';
-import { TestOutputUIModel } from './test-output-ui-model';
-import { TestRunTree, TestRunTreeWidget } from './test-run-widget';
-import { TestResultViewContribution } from './test-result-view-contribution';
-import { TEST_RUNS_CONTEXT_MENU, TestRunViewContribution } from './test-run-view-contribution';
-import { TestContextKeyService } from './test-context-key-service';
-import { DefaultTestExecutionProgressService, TestExecutionProgressService } from '../test-execution-progress-service';
-import { bindTestPreferences } from '../../common/test-preferences';
+import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { TestExecutionStateManager } from './test-execution-state-manager.js';
+import { TestResultWidget } from './test-result-widget.js';
+import { TestOutputWidget } from './test-output-widget.js';
+import { TestOutputViewContribution } from './test-output-view-contribution.js';
+import { TestOutputUIModel } from './test-output-ui-model.js';
+import { TestRunTree, TestRunTreeWidget } from './test-run-widget.js';
+import { TestResultViewContribution } from './test-result-view-contribution.js';
+import { TEST_RUNS_CONTEXT_MENU, TestRunViewContribution } from './test-run-view-contribution.js';
+import { TestContextKeyService } from './test-context-key-service.js';
+import { DefaultTestExecutionProgressService, TestExecutionProgressService } from '../test-execution-progress-service.js';
+import { bindTestPreferences } from '../../common/test-preferences.js';
 
 export default new ContainerModule(bind => {
     bindTestPreferences(bind);
@@ -110,7 +110,7 @@ export default new ContainerModule(bind => {
     bind(TestExecutionProgressService).to(DefaultTestExecutionProgressService).inSingletonScope();
 });
 
-export function createTestTreeContainer(parent: interfaces.Container): Container {
+export function createTestTreeContainer(parent: interfaces.Container) {
     return createTreeContainer(parent, {
         tree: TestTree,
         props: {
@@ -122,7 +122,7 @@ export function createTestTreeContainer(parent: interfaces.Container): Container
     });
 }
 
-export function createTestRunContainer(parent: interfaces.Container): Container {
+export function createTestRunContainer(parent: interfaces.Container) {
     return createTreeContainer(parent, {
         tree: TestRunTree,
         props: {

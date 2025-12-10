@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { Tool, Resource, Prompt, PromptMessage } from '@modelcontextprotocol/sdk/types';
+import { inject, injectable, named } from 'inversify';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
+import { Tool, Resource, Prompt, PromptMessage } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
-import { MCPFrontendContribution, ToolProvider } from '@theia/ai-mcp-server/lib/browser/mcp-frontend-contribution';
-import { ILogger } from '@theia/core/lib/common/logger';
+import { MCPFrontendContribution, ToolProvider } from '@theia/ai-mcp-server/lib/browser/mcp-frontend-contribution.js';
+import { ILogger } from '@theia/core/lib/common/logger.js';
 
 /**
  * Sample frontend MCP contribution that demonstrates accessing frontend-only services

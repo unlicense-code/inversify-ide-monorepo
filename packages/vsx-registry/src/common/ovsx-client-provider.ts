@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { MaybePromise } from '@theia/core/lib/common';
-import { RequestService } from '@theia/core/shared/@theia/request';
-import type { interfaces } from '@theia/core/shared/inversify';
+import { MaybePromise } from '@theia/core/lib/common/index.js';
+import { RequestService } from '@theia/request';
+import type { interfaces } from 'inversify';
 import { OVSXClient, OVSXHttpClient } from '@theia/ovsx-client';
-import { VSXEnvironment } from './vsx-environment';
+import { VSXEnvironment } from './vsx-environment.js';
 
 export const OVSXUrlResolver = Symbol('OVSXUrlResolver') as symbol & interfaces.Abstract<OVSXUrlResolver>;
 export type OVSXUrlResolver = (value: string) => MaybePromise<string>;

@@ -17,7 +17,7 @@
 import { ExtensionLike, OVSXClient, OVSXClientProvider, VSXExtensionRaw, VSXQueryOptions, VSXQueryResult, VSXSearchEntry, VSXSearchOptions, VSXSearchResult } from './ovsx-types';
 import type { MaybePromise } from './types';
 
-export interface OVSXRouterFilter {
+export type OVSXRouterFilter = {
     filterSearchOptions?(searchOptions?: VSXSearchOptions): MaybePromise<unknown>;
     filterQueryOptions?(queryOptions?: VSXQueryOptions): MaybePromise<unknown>;
     filterExtension?(extension: ExtensionLike): MaybePromise<unknown>;
@@ -44,7 +44,7 @@ export function createFilterFactory(conditionKey: string, factory: (conditionVal
     };
 }
 
-export interface OVSXRouterConfig {
+export type OVSXRouterConfig = {
     /**
      * Registry aliases that will be used for routing.
      */
@@ -61,15 +61,12 @@ export interface OVSXRouterConfig {
     rules?: OVSXRouterRule[]
 }
 
-export interface OVSXRouterRule {
+export type OVSXRouterRule = {
     [condition: string]: unknown
     use?: string | string[] | null
 }
 
-/**
- * @internal
- */
-export interface OVSXRouterParsedRule {
+export type OVSXRouterParsedRule = {
     filters: OVSXRouterFilter[]
     use: string[]
 }

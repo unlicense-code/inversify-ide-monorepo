@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import multer = require('multer');
-import path = require('path');
-import os = require('os');
-import express = require('@theia/core/shared/express');
-import fs = require('@theia/core/shared/fs-extra');
-import { BackendApplicationContribution, FileUri } from '@theia/core/lib/node';
-import { injectable } from '@theia/core/shared/inversify';
-import { HTTP_FILE_UPLOAD_PATH } from '../../common/file-upload';
+import multer from 'multer';
+import path from 'path';
+import os from 'os';
+import express from 'express';
+import fs from 'fs-extra';
+import { BackendApplicationContribution, FileUri } from '@theia/core/lib/node/index.js';
+import { injectable } from 'inversify';
+import { HTTP_FILE_UPLOAD_PATH } from '../../common/file-upload.js';
 
 @injectable()
 export class NodeFileUploadService implements BackendApplicationContribution {
@@ -38,7 +38,7 @@ export class NodeFileUploadService implements BackendApplicationContribution {
             http_path,
             // `multer` handles `multipart/form-data` containing our file to upload.
             multer({ dest }).single('file'),
-            (request, response, next) => this.handleFileUpload(request, response)
+            (request: any, response: any, next: any) => this.handleFileUpload(request, response)
         );
     }
 

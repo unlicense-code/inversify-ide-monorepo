@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,28 +14,28 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { CommandRegistry, Command, MenuModelRegistry, SelectionService, MessageService } from '@theia/core/lib/common';
-import { FrontendApplication, AbstractViewContribution, codicon, open, OpenerService } from '@theia/core/lib/browser';
-import { WidgetManager } from '@theia/core/lib/browser/widget-manager';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { GitDiffWidget, GIT_DIFF } from './git-diff-widget';
-import { GitCommitDetailWidget } from '../history/git-commit-detail-widget';
-import { GitDiffTreeModel } from './git-diff-tree-model';
-import { ScmService } from '@theia/scm/lib/browser/scm-service';
-import { NavigatorContextMenu, FileNavigatorContribution } from '@theia/navigator/lib/browser/navigator-contribution';
-import { UriCommandHandler } from '@theia/core/lib/common/uri-command-handler';
-import { GitQuickOpenService } from '../git-quick-open-service';
-import { DiffUris } from '@theia/core/lib/browser/diff-uris';
-import URI from '@theia/core/lib/common/uri';
-import { GIT_RESOURCE_SCHEME } from '../git-resource';
-import { Git, Repository } from '../../common';
-import { WorkspaceRootUriAwareCommandHandler } from '@theia/workspace/lib/browser/workspace-commands';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { TabBarToolbarAction, TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { Emitter } from '@theia/core/lib/common/event';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { nls } from '@theia/core/lib/common/nls';
+import { CommandRegistry, Command, MenuModelRegistry, SelectionService, MessageService } from '@theia/core/lib/common/index.js';
+import { FrontendApplication, AbstractViewContribution, codicon, open, OpenerService } from '@theia/core/lib/browser/index.js';
+import { WidgetManager } from '@theia/core/lib/browser/widget-manager.js';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { injectable, inject } from 'inversify';
+import { GitDiffWidget, GIT_DIFF } from './git-diff-widget.js';
+import { GitCommitDetailWidget } from '../history/git-commit-detail-widget.js';
+import { GitDiffTreeModel } from './git-diff-tree-model.js';
+import { ScmService } from '@theia/scm/lib/browser/scm-service.js';
+import { NavigatorContextMenu, FileNavigatorContribution } from '@theia/navigator/lib/browser/navigator-contribution.js';
+import { UriCommandHandler } from '@theia/core/lib/common/uri-command-handler.js';
+import { GitQuickOpenService } from '../git-quick-open-service.js';
+import { DiffUris } from '@theia/core/lib/browser/diff-uris.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { GIT_RESOURCE_SCHEME } from '../git-resource.js';
+import { Git, Repository } from '../../common/index.js';
+import { WorkspaceRootUriAwareCommandHandler } from '@theia/workspace/lib/browser/workspace-commands.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { TabBarToolbarAction, TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { Emitter } from '@theia/core/lib/common/event.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 export namespace GitDiffCommands {
     export const OPEN_FILE_DIFF = Command.toLocalizedCommand({

@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { StatusBar } from '@theia/core/lib/browser/status-bar/status-bar';
-import { StatusBarAlignment, StatusBarEntry, FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { PluginDevServer } from '../common/plugin-dev-protocol';
-import { ConnectionStatusService, ConnectionStatus } from '@theia/core/lib/browser/connection-status-service';
-import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
-import { nls } from '@theia/core/lib/common/nls';
-import { WindowTitleService } from '@theia/core/lib/browser/window/window-title-service';
+import { injectable, inject } from 'inversify';
+import { StatusBar } from '@theia/core/lib/browser/status-bar/status-bar.js';
+import { StatusBarAlignment, StatusBarEntry, FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { PluginDevServer } from '../common/plugin-dev-protocol.js';
+import { ConnectionStatusService, ConnectionStatus } from '@theia/core/lib/browser/connection-status-service.js';
+import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { WindowTitleService } from '@theia/core/lib/browser/window/window-title-service.js';
 
 /**
  * Informs the user whether Theia is running with hosted plugin.

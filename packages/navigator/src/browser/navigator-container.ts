@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Container, interfaces } from '@theia/core/shared/inversify';
-import { TreeProps, defaultTreeProps } from '@theia/core/lib/browser';
-import { createFileTreeContainer } from '@theia/filesystem/lib/browser';
-import { FileNavigatorTree } from './navigator-tree';
-import { FileNavigatorModel } from './navigator-model';
-import { FileNavigatorWidget } from './navigator-widget';
-import { NAVIGATOR_CONTEXT_MENU } from './navigator-contribution';
-import { NavigatorDecoratorService } from './navigator-decorator-service';
+import { interfaces } from 'inversify';
+import { TreeProps, defaultTreeProps } from '@theia/core/lib/browser/index.js';
+import { createFileTreeContainer } from '@theia/filesystem/lib/browser/index.js';
+import { FileNavigatorTree } from './navigator-tree.js';
+import { FileNavigatorModel } from './navigator-model.js';
+import { FileNavigatorWidget } from './navigator-widget.js';
+import { NAVIGATOR_CONTEXT_MENU } from './navigator-contribution.js';
+import { NavigatorDecoratorService } from './navigator-decorator-service.js';
 
 export const FILE_NAVIGATOR_PROPS = <TreeProps>{
     ...defaultTreeProps,
@@ -31,7 +31,7 @@ export const FILE_NAVIGATOR_PROPS = <TreeProps>{
     globalSelection: true
 };
 
-export function createFileNavigatorContainer(parent: interfaces.Container): Container {
+export function createFileNavigatorContainer(parent: interfaces.Container): interfaces.Container {
     const child = createFileTreeContainer(parent, {
         tree: FileNavigatorTree,
         model: FileNavigatorModel,

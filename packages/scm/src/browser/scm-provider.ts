@@ -16,10 +16,10 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Disposable, Event } from '@theia/core/lib/common';
-import URI from '@theia/core/lib/common/uri';
+import { Disposable, Event } from '@theia/core/lib/common/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
 
-export interface ScmProvider extends Disposable {
+export type ScmProvider = Disposable & {
     readonly id: string;
     readonly label: string;
     readonly rootUri: string;
@@ -39,7 +39,7 @@ export interface ScmProvider extends Disposable {
 }
 
 export const ScmResourceGroup = Symbol('ScmResourceGroup');
-export interface ScmResourceGroup extends Disposable {
+export type ScmResourceGroup = Disposable & {
     readonly id: string;
     readonly label: string;
     readonly resources: ScmResource[];
@@ -49,7 +49,7 @@ export interface ScmResourceGroup extends Disposable {
     readonly provider: ScmProvider;
 }
 
-export interface ScmResource {
+export type ScmResource = {
     /** The uri of the underlying resource inside the workspace. */
     readonly sourceUri: URI;
     readonly decorations?: ScmResourceDecorations;
@@ -58,7 +58,7 @@ export interface ScmResource {
     readonly group: ScmResourceGroup;
 }
 
-export interface ScmResourceDecorations {
+export type ScmResourceDecorations = {
     icon?: string;
     iconDark?: string;
     tooltip?: string;
@@ -68,7 +68,7 @@ export interface ScmResourceDecorations {
     strikeThrough?: boolean;
 }
 
-export interface ScmCommand {
+export type ScmCommand = {
     title: string;
     tooltip?: string;
     command?: string;
@@ -76,7 +76,7 @@ export interface ScmCommand {
     arguments?: any[];
 }
 
-export interface ScmCommit {
+export type ScmCommit = {
     readonly id: string;  // eg Git sha or Mercurial revision number
     readonly summary: string;
     readonly authorName: string;
@@ -84,7 +84,7 @@ export interface ScmCommit {
     readonly authorDateRelative: string;
 }
 
-export interface ScmAmendSupport {
+export type ScmAmendSupport = {
     getInitialAmendingCommits(amendingHeadCommitId: string, latestCommitId: string | undefined): Promise<ScmCommit[]>
     getMessage(commit: string): Promise<string>;
     reset(commit: string): Promise<void>;

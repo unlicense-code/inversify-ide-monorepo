@@ -14,14 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import type { Tool, Resource, ResourceContents, Prompt, PromptMessage } from '@modelcontextprotocol/sdk/types';
+import type { Tool, Resource, ResourceContents, Prompt, PromptMessage } from '@modelcontextprotocol/sdk/types.js';
 
 export const MCPToolDelegateClient = Symbol('MCPToolDelegateClient');
-/**
- * Client interface for MCP tool operations.
- * This interface is implemented by the frontend and called by the backend.
- */
-export interface MCPToolDelegateClient {
+export type MCPToolDelegateClient = {
     callTool(serverId: string, toolName: string, args: unknown): Promise<unknown>;
     listTools(serverId: string): Promise<Tool[]>;
     listResources(serverId: string): Promise<Resource[]>;
@@ -31,12 +27,7 @@ export interface MCPToolDelegateClient {
 }
 
 export const MCPToolFrontendDelegate = Symbol('MCPToolFrontendDelegate');
-/**
- * Backend delegate interface for MCP tool operations.
- * This interface extends MCPToolDelegateClient with RPC client setup capability.
- * It is implemented by the backend and acts as a proxy to forward calls to the frontend.
- */
-export interface MCPToolFrontendDelegate extends MCPToolDelegateClient {
+export type MCPToolFrontendDelegate = MCPToolDelegateClient & {
     setClient(client: MCPToolDelegateClient): void;
 }
 

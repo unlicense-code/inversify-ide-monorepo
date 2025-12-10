@@ -15,29 +15,29 @@
 // *****************************************************************************
 
 import { DebugProtocol } from '@vscode/debugprotocol';
-import { DebugSessionConnection } from './debug-session-connection';
+import { DebugSessionConnection } from './debug-session-connection.js';
 
 export const DebugContribution = Symbol('DebugContribution');
 
-export interface DebugContribution {
+export type DebugContribution = {
     register(configType: string, connection: DebugSessionConnection): void;
 }
 
 // copied from https://github.com/microsoft/vscode-node-debug2/blob/bcd333ef87642b817ac96d28fde7ab96fee3f6a9/src/nodeDebugInterfaces.d.ts
-export interface LaunchVSCodeRequest extends DebugProtocol.Request {
+export type LaunchVSCodeRequest = DebugProtocol.Request & {
     arguments: LaunchVSCodeArguments;
 }
 
-export interface LaunchVSCodeArguments {
+export type LaunchVSCodeArguments = {
     args: LaunchVSCodeArgument[];
     env?: { [key: string]: string | null; };
 }
 
-export interface LaunchVSCodeArgument {
+export type LaunchVSCodeArgument = {
     prefix?: string;
     path?: string;
 }
 
-export interface LaunchVSCodeResult {
+export type LaunchVSCodeResult = {
     rendererDebugPort?: number;
 }

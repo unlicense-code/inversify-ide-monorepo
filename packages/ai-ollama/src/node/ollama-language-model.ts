@@ -28,7 +28,7 @@ import {
     ImageContent,
     TokenUsageService,
     LanguageModelStatus
-} from '@theia/ai-core';
+} from '@theia/ai-core/lib/common/index.js';
 import { CancellationToken } from '@theia/core';
 import { ChatRequest, Message, Ollama, Options, Tool, ToolCall as OllamaToolCall, ChatResponse } from 'ollama';
 

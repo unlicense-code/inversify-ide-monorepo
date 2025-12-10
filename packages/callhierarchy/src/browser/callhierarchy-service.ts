@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,22 +14,22 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, named, postConstruct } from '@theia/core/shared/inversify';
-import { Position, DocumentUri } from '@theia/core/shared/vscode-languageserver-protocol';
+import { injectable, inject, named, postConstruct } from 'inversify';
+import { Position, DocumentUri } from 'vscode-languageserver-protocol';
 import { CancellationToken } from '@theia/core';
-import URI from '@theia/core/lib/common/uri';
-import { ContributionProvider, Disposable, Emitter, Event } from '@theia/core/lib/common';
-import { CallHierarchyItem, CallHierarchyIncomingCall, CallHierarchyOutgoingCall } from './callhierarchy';
-import { LanguageSelector, score } from '@theia/editor/lib/common/language-selector';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ContributionProvider, Disposable, Emitter, Event } from '@theia/core/lib/common/index.js';
+import { CallHierarchyItem, CallHierarchyIncomingCall, CallHierarchyOutgoingCall } from './callhierarchy.js';
+import { LanguageSelector, score } from '@theia/editor/lib/common/language-selector.js';
 
 export const CallHierarchyService = Symbol('CallHierarchyService');
 
-export interface CallHierarchySession {
+export type CallHierarchySession = {
     items: CallHierarchyItem[];
     dispose(): void;
 }
 
-export interface CallHierarchyService {
+export type CallHierarchyService = {
 
     readonly selector: LanguageSelector;
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,13 +17,13 @@
 import { expect } from 'chai';
 import * as assert from 'assert';
 import * as path from 'path';
-import { FileSearchServiceImpl } from './file-search-service-impl';
-import { FileUri } from '@theia/core/lib/node';
-import { Container, ContainerModule } from '@theia/core/shared/inversify';
+import { FileSearchServiceImpl } from './file-search-service-impl.js';
+import { FileUri } from '@theia/core/lib/node/index.js';
+import { Container, ContainerModule } from 'inversify';
 import { CancellationTokenSource } from '@theia/core';
-import { bindLogger } from '@theia/core/lib/node/logger-backend-module';
-import URI from '@theia/core/lib/common/uri';
-import { FileSearchService } from '../common/file-search-service';
+import { bindLogger } from '@theia/core/lib/node/logger-backend-module.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { FileSearchService } from '../common/file-search-service.js';
 import { RawProcessFactory } from '@theia/process/lib/node';
 
 const testContainer = new Container();

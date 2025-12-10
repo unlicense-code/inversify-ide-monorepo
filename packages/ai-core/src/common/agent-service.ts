@@ -13,18 +13,15 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { inject, injectable, optional, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, optional, postConstruct } from 'inversify';
 import { Emitter, Event } from '@theia/core';
-import { Agent } from './agent';
-import { AISettingsService } from './settings-service';
-import { PromptService } from './prompt-service';
+import { Agent } from './agent.js';
+import { AISettingsService } from './settings-service.js';
+import { PromptService } from './prompt-service.js';
 
 export const AgentService = Symbol('AgentService');
 
-/**
- * Service to access the list of known Agents.
- */
-export interface AgentService {
+export type AgentService = {
     /**
      * Retrieves a list of all available agents, i.e. agents which are not disabled
      */

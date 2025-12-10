@@ -15,36 +15,25 @@
 // *****************************************************************************
 
 import { PluginManager } from '@theia/plugin-ext';
-import { RPCProtocol } from '@theia/plugin-ext/lib/common/rpc-protocol';
+import { RPCProtocol } from '@theia/plugin-ext/lib/common/rpc-protocol.js';
+import type { ExtPluginApi as BaseExtPluginApi } from '@theia/plugin-ext/lib/common/plugin-ext-api-contribution.js';
 
+// Re-export everything from @theia/plugin-ext
 export * from '@theia/plugin-ext';
 
-declare module '@theia/plugin-ext' {
-    /**
-     * Plugin API extension description.
-     * This interface describes scripts for all three plugin runtimes: frontend (WebWorker), backend (NodeJs), and headless (NodeJs).
-     */
-    interface ExtPluginApi extends ExtPluginHeadlessApi {
-        // Note that the frontendInitPath and backendInitPath properties are included by
-        // Typescript interface merge from the @theia/plugin-ext::ExtPluginApi interface.
-    }
-}
+// Extend ExtPluginApi type with headless support
+export type ExtPluginApi = BaseExtPluginApi & {
+    headlessInitPath?: string;
+};
 
-/**
- * Provider for headless extension API description.
- */
-export interface ExtPluginHeadlessApiProvider {
+export type ExtPluginHeadlessApiProvider = {
     /**
      * Provide API description.
      */
     provideApi(): ExtPluginHeadlessApi;
 }
 
-/**
- * Headless Plugin API extension description.
- * This interface describes a script for the headless (NodeJs) runtime outside of the scope of frontend connections.
- */
-export interface ExtPluginHeadlessApi {
+export type ExtPluginHeadlessApi = {
     /**
      * Path to the script which should be loaded to provide api, module should export `provideApi` function with
      * [ExtPluginApiBackendInitializationFn](#ExtPluginApiBackendInitializationFn) signature
@@ -52,9 +41,6 @@ export interface ExtPluginHeadlessApi {
     headlessInitPath?: string;
 }
 
-/**
- * Signature of the extension API initialization function for APIs contributed to headless plugins.
- */
-export interface ExtPluginApiHeadlessInitializationFn {
+export type ExtPluginApiHeadlessInitializationFn = {
     (rpc: RPCProtocol, pluginManager: PluginManager): void;
 }

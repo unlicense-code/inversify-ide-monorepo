@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { CompositeTreeNode, TreeModelImpl, TreeNode } from '@theia/core/lib/browser';
-import { CallHierarchyTree, ItemNode } from './callhierarchy-tree';
-import { CallHierarchyServiceProvider, CallHierarchySession } from '../callhierarchy-service';
-import { Position } from '@theia/core/shared/vscode-languageserver-protocol';
-import URI from '@theia/core/lib/common/uri';
-import { CancellationTokenSource } from '@theia/core/lib/common/cancellation';
+import { injectable, inject } from 'inversify';
+import { CompositeTreeNode, TreeModelImpl, TreeNode } from '@theia/core/lib/browser/index.js';
+import { CallHierarchyTree, ItemNode } from './callhierarchy-tree.js';
+import { CallHierarchyServiceProvider, CallHierarchySession } from '../callhierarchy-service.js';
+import { Position } from 'vscode-languageserver-protocol';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { CancellationTokenSource } from '@theia/core/lib/common/cancellation.js';
 
 @injectable()
 export class CallHierarchyTreeModel extends TreeModelImpl {
@@ -28,7 +28,7 @@ export class CallHierarchyTreeModel extends TreeModelImpl {
     protected _languageId: string | undefined;
     protected currentSession?: CallHierarchySession;
 
-    @inject(CallHierarchyTree) protected override readonly tree: CallHierarchyTree;
+    @inject(CallHierarchyTree) protected declare readonly tree: CallHierarchyTree;
     @inject(CallHierarchyServiceProvider) protected readonly callHierarchyServiceProvider: CallHierarchyServiceProvider;
 
     getTree(): CallHierarchyTree {

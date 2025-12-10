@@ -45,7 +45,7 @@ function exposeModule(modulePackage: { dir: string, name?: string }, resourcePat
 
 /**
  * Expose bundled modules on window.theia.moduleName namespace, e.g.
- * window['theia']['@theia/core/lib/common/uri'].
+ * window['theia']['@theia/core/lib/common/uri.js'].
  * Such syntax can be used by external code, for instance, for testing.
  */
 // TODO: webpack@5.36.2 is missing a `LoaderContext` interface so we'll use any in the meantime

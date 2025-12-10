@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -22,8 +22,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { URI } from '@theia/core';
-import { Severity } from '@theia/core/lib/common/severity';
-import { Diagnostic } from '@theia/core/shared/vscode-languageserver-protocol';
+import { Severity } from '@theia/core/lib/common/severity.js';
+import { Diagnostic } from 'vscode-languageserver-protocol';
 
 export enum ApplyToKind {
     allDocuments,
@@ -66,12 +66,12 @@ export namespace FileLocationKind {
     }
 }
 
-export interface WatchingPattern {
+export type WatchingPattern = {
     regexp: string;
     file?: number;
 }
 
-export interface WatchingMatcher {
+export type WatchingMatcher = {
     // If set to true the background monitor is in active mode when the task starts.
     // This is equals of issuing a line that matches the beginPattern
     activeOnStart: boolean;
@@ -109,7 +109,7 @@ export namespace ProblemLocationKind {
     }
 }
 
-export interface ProblemMatcher {
+export type ProblemMatcher = {
     deprecated?: boolean;
 
     owner: string;
@@ -123,7 +123,7 @@ export interface ProblemMatcher {
     uriProvider?: (path: string) => URI;
 }
 
-export interface NamedProblemMatcher extends ProblemMatcher {
+export type NamedProblemMatcher = ProblemMatcher & {
     name: string;
     label: string;
 }
@@ -134,7 +134,7 @@ export namespace ProblemMatcher {
     }
 }
 
-export interface ProblemPattern {
+export type ProblemPattern = {
     name?: string;
 
     regexp: string;
@@ -152,7 +152,7 @@ export interface ProblemPattern {
     loop?: boolean;
 }
 
-export interface NamedProblemPattern extends ProblemPattern {
+export type NamedProblemPattern = ProblemPattern & {
     name: string;
 }
 
@@ -176,12 +176,12 @@ export namespace ProblemPattern {
     }
 }
 
-export interface ProblemMatch {
+export type ProblemMatch = {
     resource?: URI;
     description: ProblemMatcher;
 }
 
-export interface ProblemMatchData extends ProblemMatch {
+export type ProblemMatchData = ProblemMatch & {
     marker: Diagnostic;
 }
 export namespace ProblemMatchData {
@@ -190,7 +190,7 @@ export namespace ProblemMatchData {
     }
 }
 
-export interface WatchingMatcherContribution {
+export type WatchingMatcherContribution = {
     // If set to true the background monitor is in active mode when the task starts.
     // This is equals of issuing a line that matches the beginPattern
     activeOnStart?: boolean;
@@ -198,7 +198,7 @@ export interface WatchingMatcherContribution {
     endsPattern: string | WatchingPattern;
 }
 
-export interface ProblemMatcherContribution {
+export type ProblemMatcherContribution = {
     base?: string;
     name?: string;
     label: string;
@@ -214,7 +214,7 @@ export interface ProblemMatcherContribution {
     background?: WatchingMatcherContribution;
 }
 
-export interface ProblemPatternContribution {
+export type ProblemPatternContribution = {
     name?: string;
     regexp: string;
 

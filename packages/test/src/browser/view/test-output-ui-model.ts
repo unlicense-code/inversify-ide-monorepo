@@ -14,28 +14,28 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { TestController, TestFailure, TestOutputItem, TestRun, TestService, TestState, TestStateChangedEvent } from '../test-service';
+import { inject, injectable, postConstruct } from 'inversify';
+import { TestController, TestFailure, TestOutputItem, TestRun, TestService, TestState, TestStateChangedEvent } from '../test-service.js';
 import { Disposable, Emitter, Event } from '@theia/core';
-import { TestContextKeyService } from './test-context-key-service';
+import { TestContextKeyService } from './test-context-key-service.js';
 
-export interface ActiveRunEvent {
+export type ActiveRunEvent = {
     controller: TestController;
     activeRun: TestRun | undefined
 }
 
-export interface TestOutputSource {
+export type TestOutputSource = {
     readonly output: readonly TestOutputItem[];
     onDidAddTestOutput: Event<TestOutputItem[]>;
 }
 
-export interface ActiveTestStateChangedEvent {
+export type ActiveTestStateChangedEvent = {
     controller: TestController;
     testRun: TestRun;
     statedDelta: TestStateChangedEvent[];
 }
 
-interface ActiveTestRunInfo {
+type ActiveTestRunInfo = {
     run: TestRun;
     toDispose: Disposable;
 }

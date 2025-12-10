@@ -1,6 +1,7 @@
 {
   "name": "@theia/plugin-ext-vscode",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - Plugin Extension for VsCode",
   "dependencies": {
     "@theia/callhierarchy": "1.66.0",

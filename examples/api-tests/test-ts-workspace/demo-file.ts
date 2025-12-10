@@ -1,5 +1,5 @@
 
-interface DemoInterface {
+type DemoInterface = {
     stringField: string;
     numberField: number;
     doSomething(): number;

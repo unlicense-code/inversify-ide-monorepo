@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "private": true,
   "name": "@theia/api-samples",
   "version": "1.66.0",

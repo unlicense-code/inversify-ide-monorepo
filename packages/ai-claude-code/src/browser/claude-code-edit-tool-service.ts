@@ -14,24 +14,24 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { MutableChatRequestModel } from '@theia/ai-chat';
-import { ChangeSetFileElement, ChangeSetFileElementFactory } from '@theia/ai-chat/lib/browser/change-set-file-element';
-import { ChangeSetElement } from '@theia/ai-chat/lib/common/change-set';
-import { ContentReplacerV1Impl, Replacement } from '@theia/core/lib/common/content-replacer';
-import { URI } from '@theia/core/lib/common/uri';
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { FileEditBackupService } from './claude-code-file-edit-backup-service';
+import { MutableChatRequestModel } from '@theia/ai-chat/lib/common/index.js';
+import { ChangeSetFileElement, ChangeSetFileElementFactory } from '@theia/ai-chat/lib/browser/change-set-file-element.js';
+import { ChangeSetElement } from '@theia/ai-chat/lib/common/change-set.js';
+import { ContentReplacerV1Impl, Replacement } from '@theia/core/lib/common/content-replacer.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { inject, injectable, named } from 'inversify';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { FileEditBackupService } from './claude-code-file-edit-backup-service.js';
 import { ILogger, nls } from '@theia/core';
 
-export interface EditToolInput {
+export type EditToolInput = {
     file_path: string;
     old_string: string;
     new_string: string;
 }
 
-export interface MultiEditToolInput {
+export type MultiEditToolInput = {
     file_path: string;
     edits: Array<{
         old_string: string;
@@ -39,31 +39,24 @@ export interface MultiEditToolInput {
     }>;
 }
 
-export interface WriteToolInput {
+export type WriteToolInput = {
     file_path: string;
     content: string;
 }
 
-export interface ToolUseBlock {
+export type ToolUseBlock = {
     name: string;
     input: EditToolInput | MultiEditToolInput | WriteToolInput;
 }
 
-export interface EditToolContext {
+export type EditToolContext = {
     sessionId: string | undefined;
     isEditMode: boolean;
 }
 
 export const ClaudeCodeEditToolService = Symbol('ClaudeCodeEditToolService');
 
-/**
- * Service for handling edit tool operations.
- *
- * Invoked by the ClaudeCodeChatAgent on each finished edit tool request.
- * This can be used to track and manage file edits made by the agent, e.g.
- * to propagate them to ChangeSets (see ClaudeCodeEditToolServiceImpl below).
- */
-export interface ClaudeCodeEditToolService {
+export type ClaudeCodeEditToolService = {
     handleEditTool(toolUse: ToolUseBlock, request: MutableChatRequestModel, context: EditToolContext): Promise<void>;
 }
 

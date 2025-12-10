@@ -16,7 +16,7 @@
 
 import { injectable } from 'inversify';
 
-export interface MimeAssociation {
+export type MimeAssociation = {
     readonly id: string;
     readonly filepattern: string;
 }

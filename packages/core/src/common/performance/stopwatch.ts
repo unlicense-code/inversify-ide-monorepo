@@ -17,18 +17,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { inject, injectable, unmanaged } from 'inversify';
-import { ILogger, LogLevel } from '../logger';
-import { MaybePromise } from '../types';
-import { Measurement, MeasurementOptions, MeasurementResult } from './measurement';
-import { Emitter, Event } from '../event';
+import { ILogger, LogLevel } from '../logger.js';
+import { MaybePromise } from '../types.js';
+import { Measurement, MeasurementOptions, MeasurementResult } from './measurement.js';
+import { Emitter, Event } from '../event.js';
 
 /** The default log level for measurements that are not otherwise configured with a default. */
 const DEFAULT_LOG_LEVEL = LogLevel.INFO;
 
-/**
- * Configuration of the log messages written by a {@link Measurement}.
- */
-interface LogOptions extends MeasurementOptions {
+type LogOptions = MeasurementOptions & {
     /** A function that computes the current time, in millis, since the start of the application. */
     now: () => number;
 

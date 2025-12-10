@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ApplicationShell, FrontendApplication } from '@theia/core/lib/browser';
-import { injectable, interfaces } from '@theia/core/shared/inversify';
-import { DefaultContentHoverWidgetPatcher } from '@theia/monaco/lib/browser/default-content-hover-widget-patcher';
-import { ApplicationShellWithToolbarOverride } from './application-shell-with-toolbar-override';
+import { ApplicationShell, FrontendApplication } from '@theia/core/lib/browser/index.js';
+import { injectable, interfaces } from 'inversify';
+import { DefaultContentHoverWidgetPatcher } from '@theia/monaco/lib/browser/default-content-hover-widget-patcher.js';
+import { ApplicationShellWithToolbarOverride } from './application-shell-with-toolbar-override.js';
 
 @injectable()
 export class ToolbarContentHoverWidgetPatcher extends DefaultContentHoverWidgetPatcher {

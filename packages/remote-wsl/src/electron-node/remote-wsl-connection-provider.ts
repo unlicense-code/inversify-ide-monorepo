@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2025 TypeFox and others.
+// Copyright (C) 2025 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { RemoteWslConnectionProvider, WslDistribution, WslConnectionOptions, WslConnectionResult } from '../electron-common/remote-wsl-connection-provider';
-import { RemoteConnectionService } from '@theia/remote/lib/electron-node/remote-connection-service';
-import { RemoteSetupService } from '@theia/remote/lib/electron-node/setup/remote-setup-service';
+import { inject, injectable } from 'inversify';
+import { RemoteWslConnectionProvider, WslDistribution, WslConnectionOptions, WslConnectionResult } from '../electron-common/remote-wsl-connection-provider.js';
+import { RemoteConnectionService } from '@theia/remote/lib/electron-node/remote-connection-service.js';
+import { RemoteSetupService } from '@theia/remote/lib/electron-node/setup/remote-setup-service.js';
 import { exec } from 'child_process';
 import { MessageService, generateUuid } from '@theia/core';
-import { RemoteWslConnection } from './remote-wsl-connection';
+import { RemoteWslConnection } from './remote-wsl-connection.js';
 
 @injectable()
 export class RemoteWslConnectionProviderImpl implements RemoteWslConnectionProvider {

@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2022 TypeFox and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import { MaybePromise } from '../../common/types';
+import { MaybePromise } from '../../common/types.js';
 import { RequestConfiguration, RequestService } from '@theia/request';
 import { Argv, Arguments } from 'yargs';
-import { CliContribution } from '../cli';
+import { CliContribution } from '../cli.js';
 
 export const ProxyUrl = 'proxy-url';
 export const ProxyAuthorization = 'proxy-authorization';

@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
+import { ContainerModule } from 'inversify';
 import { ConnectionHandler, PreferenceContribution, RpcConnectionHandler } from '@theia/core';
-import { ScanOSSService, SCANOSS_SERVICE_PATH } from '../common';
-import { ScanOSSServiceImpl } from './scanoss-service-impl';
-import { ScanOSSPreferencesSchema } from '../common/scanoss-preferences';
+import { ScanOSSService, SCANOSS_SERVICE_PATH } from '../common/index.js';
+import { ScanOSSServiceImpl } from './scanoss-service-impl.js';
+import { ScanOSSPreferencesSchema } from '../common/scanoss-preferences.js';
 
 export default new ContainerModule(bind => {
     bind(PreferenceContribution).toConstantValue({ schema: ScanOSSPreferencesSchema });

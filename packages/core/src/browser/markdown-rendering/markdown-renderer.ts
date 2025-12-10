@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,22 +14,22 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as DOMPurify from 'dompurify';
+import DOMPurify from 'dompurify';
 import { injectable, inject, postConstruct } from 'inversify';
-import * as markdownit from 'markdown-it';
+import markdownit from 'markdown-it';
 import * as markdownitemoji from 'markdown-it-emoji';
-import { MarkdownString } from '../../common/markdown-rendering/markdown-string';
-import { Disposable, DisposableGroup } from '../../common';
-import { LabelParser } from '../label-parser';
-import { codicon } from '../widgets';
+import { MarkdownString } from '../../common/markdown-rendering/markdown-string.js';
+import { Disposable, DisposableGroup } from '../../common/index.js';
+import { LabelParser } from '../label-parser.js';
+import { codicon } from '../widgets/index.js';
 
 // #region Copied from Copied from https://github.com/microsoft/vscode/blob/7d9b1c37f8e5ae3772782ba3b09d827eb3fdd833/src/vs/base/browser/formattedTextRenderer.ts
-export interface ContentActionHandler {
+export type ContentActionHandler = {
     callback: (content: string, event?: MouseEvent | KeyboardEvent) => void;
     readonly disposables: DisposableGroup;
 }
 
-export interface FormattedTextRenderOptions {
+export type FormattedTextRenderOptions = {
     readonly className?: string;
     readonly inline?: boolean;
     readonly actionHandler?: ContentActionHandler;
@@ -40,11 +40,11 @@ export interface FormattedTextRenderOptions {
 
 // #region Copied from Copied from https://github.com/microsoft/vscode/blob/7d9b1c37f8e5ae3772782ba3b09d827eb3fdd833/src/vs/base/browser/markdownRenderer.ts
 
-export interface MarkdownRenderResult extends Disposable {
+export type MarkdownRenderResult = Disposable & {
     element: HTMLElement;
 }
 
-export interface MarkdownRenderOptions extends FormattedTextRenderOptions {
+export type MarkdownRenderOptions = FormattedTextRenderOptions & {
     readonly codeBlockRenderer?: (languageId: string, value: string) => Promise<HTMLElement>;
     readonly asyncRenderCallback?: () => void;
 }
@@ -53,13 +53,13 @@ export interface MarkdownRenderOptions extends FormattedTextRenderOptions {
 
 /** Use this directly if you aren't worried about circular dependencies in the Shell */
 export const MarkdownRenderer = Symbol('MarkdownRenderer');
-export interface MarkdownRenderer {
+export type MarkdownRenderer = {
     render(markdown: MarkdownString | undefined, options?: MarkdownRenderOptions): MarkdownRenderResult;
 }
 
 /** Use this to avoid circular dependencies in the Shell */
 export const MarkdownRendererFactory = Symbol('MarkdownRendererFactory');
-export interface MarkdownRendererFactory {
+export type MarkdownRendererFactory = {
     (): MarkdownRenderer;
 }
 

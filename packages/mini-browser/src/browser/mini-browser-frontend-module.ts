@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,21 +16,21 @@
 
 import '../../src/browser/style/index.css';
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { OpenHandler } from '@theia/core/lib/browser/opener-service';
-import { WidgetFactory } from '@theia/core/lib/browser/widget-manager';
-import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider';
-import { WebSocketConnectionProvider } from '@theia/core/lib/browser/messaging/ws-connection-provider';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser/frontend-application-contribution';
-import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { CommandContribution } from '@theia/core/lib/common/command';
-import { MenuContribution } from '@theia/core/lib/common/menu';
-import { NavigatableWidgetOptions } from '@theia/core/lib/browser/navigatable';
-import { MiniBrowserOpenHandler } from './mini-browser-open-handler';
-import { MiniBrowserService, MiniBrowserServicePath } from '../common/mini-browser-service';
-import { MiniBrowser, MiniBrowserOptions } from './mini-browser';
-import { MiniBrowserProps, MiniBrowserContentFactory, MiniBrowserContent } from './mini-browser-content';
+import { ContainerModule } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { OpenHandler } from '@theia/core/lib/browser/opener-service.js';
+import { WidgetFactory } from '@theia/core/lib/browser/widget-manager.js';
+import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider.js';
+import { WebSocketConnectionProvider } from '@theia/core/lib/browser/messaging/ws-connection-provider.js';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser/frontend-application-contribution.js';
+import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { CommandContribution } from '@theia/core/lib/common/command.js';
+import { MenuContribution } from '@theia/core';
+import { NavigatableWidgetOptions } from '@theia/core/lib/browser/navigatable.js';
+import { MiniBrowserOpenHandler } from './mini-browser-open-handler.js';
+import { MiniBrowserService, MiniBrowserServicePath } from '../common/mini-browser-service.js';
+import { MiniBrowser, MiniBrowserOptions } from './mini-browser.js';
+import { MiniBrowserProps, MiniBrowserContentFactory, MiniBrowserContent } from './mini-browser-content.js';
 import {
     LocationMapperService,
     FileLocationMapper,
@@ -38,8 +38,8 @@ import {
     HttpsLocationMapper,
     LocationMapper,
     LocationWithoutSchemeMapper,
-} from './location-mapper-service';
-import { MiniBrowserFrontendSecurityWarnings } from './mini-browser-frontend-security-warnings';
+} from './location-mapper-service.js';
+import { MiniBrowserFrontendSecurityWarnings } from './mini-browser-frontend-security-warnings.js';
 
 export default new ContainerModule(bind => {
     bind(MiniBrowserContent).toSelf();

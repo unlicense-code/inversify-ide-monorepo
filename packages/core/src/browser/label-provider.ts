@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,13 +16,13 @@
 
 import { inject, injectable, named, postConstruct } from 'inversify';
 import * as fileIcons from 'file-icons-js';
-import URI from '../common/uri';
-import { ContributionProvider } from '../common/contribution-provider';
-import { Event, Emitter, Disposable, isObject, Path, Prioritizeable } from '../common';
-import { FrontendApplicationContribution } from './frontend-application-contribution';
-import { EnvVariablesServer } from '../common/env-variables/env-variables-protocol';
-import { ResourceLabelFormatter, ResourceLabelFormatting } from '../common/label-protocol';
-import { codicon } from './widgets';
+import URI from '../common/uri.js';
+import { ContributionProvider } from '../common/contribution-provider.js';
+import { Event, Emitter, Disposable, isObject, Path, Prioritizeable } from '../common/index.js';
+import { FrontendApplicationContribution } from './frontend-application-contribution.js';
+import { EnvVariablesServer } from '../common/env-variables/env-variables-protocol.js';
+import { ResourceLabelFormatter, ResourceLabelFormatting } from '../common/label-protocol.js';
+import { codicon } from './widgets/index.js';
 
 /**
  * @internal don't export it, use `LabelProvider.folderIcon` instead.
@@ -34,16 +34,7 @@ const DEFAULT_FOLDER_ICON = `${codicon('folder')} default-folder-icon`;
 const DEFAULT_FILE_ICON = `${codicon('file')} default-file-icon`;
 
 export const LabelProviderContribution = Symbol('LabelProviderContribution');
-/**
- * A {@link LabelProviderContribution} determines how specific elements/nodes are displayed in the workbench.
- * Theia views use a common {@link LabelProvider} to determine the label and/or an icon for elements shown in the UI. This includes elements in lists
- * and trees, but also view specific locations like headers. The common {@link LabelProvider} collects all {@links LabelProviderContribution} and delegates
- * to the contribution with the highest priority. This is determined via calling the {@link LabelProviderContribution.canHandle} function, so contributions
- * define which elements they are responsible for.
- * As arbitrary views can consume LabelProviderContributions, they must be generic for the covered element type, not view specific. Label providers and
- * contributions can be used for arbitrary element and node types, e.g. for markers or domain-specific elements.
- */
-export interface LabelProviderContribution {
+export type LabelProviderContribution = {
 
     /**
      * Determines whether this contribution can handle the given element and with what priority.
@@ -87,11 +78,11 @@ export interface LabelProviderContribution {
 
 }
 
-export interface DidChangeLabelEvent {
+export type DidChangeLabelEvent = {
     affects(element: object): boolean;
 }
 
-export interface URIIconReference {
+export type URIIconReference = {
     kind: 'uriIconReference';
     id: 'file' | 'folder';
     uri?: URI

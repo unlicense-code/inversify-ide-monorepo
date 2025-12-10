@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,26 +14,26 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { KeybindingRegistry, OpenerService, QuickAccessRegistry } from '@theia/core/lib/browser';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
-import { findMatches, QuickInputService, QuickPickItem, QuickPicks } from '@theia/core/lib/browser/quick-input/quick-input-service';
-import { CancellationToken, nls, PreferenceService, QuickPickSeparator } from '@theia/core/lib/common';
-import { MessageService } from '@theia/core/lib/common/message-service';
-import URI from '@theia/core/lib/common/uri';
-import * as fuzzy from '@theia/core/shared/fuzzy';
-import { inject, injectable, optional } from '@theia/core/shared/inversify';
-import { Position, Range } from '@theia/editor/lib/browser';
-import { NavigationLocationService } from '@theia/editor/lib/browser/navigation/navigation-location-service';
-import { FileSystemPreferences } from '@theia/filesystem/lib/common';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { FileSearchService, WHITESPACE_QUERY_SEPARATOR } from '../common/file-search-service';
+import { KeybindingRegistry, OpenerService, QuickAccessRegistry } from '@theia/core/lib/browser/index.js';
+import { LabelProvider } from '@theia/core/lib/browser/label-provider.js';
+import { findMatches, QuickInputService, QuickPickItem, QuickPicks } from '@theia/core/lib/browser/quick-input/quick-input-service.js';
+import { CancellationToken, nls, PreferenceService, QuickPickSeparator } from '@theia/core/lib/common/index.js';
+import { MessageService } from '@theia/core/lib/common/message-service.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import * as fuzzy from 'fuzzy';
+import { inject, injectable, optional } from 'inversify';
+import { Position, Range } from '@theia/editor/lib/browser/index.js';
+import { NavigationLocationService } from '@theia/editor/lib/browser/navigation/navigation-location-service.js';
+import { FileSystemPreferences } from '@theia/filesystem/lib/common/index.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { FileSearchService, WHITESPACE_QUERY_SEPARATOR } from '../common/file-search-service.js';
 
-export interface FilterAndRange {
+export type FilterAndRange = {
     filter: string;
     range?: Range;
 }
 
-export interface QuickFileSelectOptions {
+export type QuickFileSelectOptions = {
     /** Whether to hide .gitignored (and other ignored) files. */
     hideIgnoredFiles?: boolean;
     /** Executed when the item is selected. */
@@ -150,7 +150,7 @@ export class QuickFileSelectService {
             };
 
             return this.fileSearchService.find(fileFilter, {
-                rootUris: roots.map(r => r.resource.toString()),
+                rootUris: roots.map((r: { resource: { toString: () => string } }) => r.resource.toString()),
                 fuzzyMatch: true,
                 limit: 200,
                 useGitIgnore: options.hideIgnoredFiles,
@@ -213,7 +213,7 @@ export class QuickFileSelectService {
     }
 
     private toItem(lookFor: string, uriOrString: URI | string, onSelect?: ((item: FileQuickPickItem) => void) | undefined): FileQuickPickItem {
-        const uri = uriOrString instanceof URI ? uriOrString : new URI(uriOrString);
+        const uri = typeof uriOrString === 'string' ? new URI(uriOrString) : uriOrString;
         const label = this.labelProvider.getName(uri);
         const description = this.getItemDescription(uri);
         const iconClasses = this.getItemIconClasses(uri);
@@ -235,7 +235,7 @@ export class QuickFileSelectService {
     }
 
     private getItemIconClasses(uri: URI): string[] | undefined {
-        const icon = this.labelProvider.getIcon(uri).split(' ').filter(v => v.length > 0);
+        const icon = this.labelProvider.getIcon(uri).split(' ').filter((v: string) => v.length > 0);
         if (icon.length > 0) {
             icon.push('file-icon');
         }

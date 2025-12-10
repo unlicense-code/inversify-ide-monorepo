@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-/**
- * Starting with vscode 1.73.0, language pack bundles have changed their shape to accommodate the new `l10n` API.
- * They are now a record of { [englishValue]: translation }
- */
-export interface LanguagePackBundle {
+export type LanguagePackBundle = {
     contents: Record<string, string>
     uri: string
 }
@@ -27,7 +23,7 @@ export const languagePackServicePath = '/services/languagePackService';
 
 export const LanguagePackService = Symbol('LanguagePackService');
 
-export interface LanguagePackService {
+export type LanguagePackService = {
     storeBundle(pluginId: string, locale: string, bundle: LanguagePackBundle): void;
     deleteBundle(pluginId: string, locale?: string): void;
     getBundle(pluginId: string, locale: string): Promise<LanguagePackBundle | undefined>;

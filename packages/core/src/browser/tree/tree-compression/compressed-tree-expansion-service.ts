@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { injectable, inject } from 'inversify';
-import { CompressionToggle, TreeCompressionService } from './tree-compression-service';
-import { ExpandableTreeNode, TreeExpansionServiceImpl } from '../tree-expansion';
+import { CompressionToggle, TreeCompressionService } from './tree-compression-service.js';
+import { ExpandableTreeNode, TreeExpansionServiceImpl } from '../tree-expansion.js';
 
 @injectable()
 export class CompressedExpansionService extends TreeExpansionServiceImpl {

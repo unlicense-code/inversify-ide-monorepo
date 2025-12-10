@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,21 +14,21 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import type { OS } from '../../common/os';
-import type { MaybePromise } from '../../common/types';
+import type { OS } from '../../common/os.js';
+import type { MaybePromise } from '../../common/types.js';
 
-export interface RemotePlatform {
+export type RemotePlatform = {
     os: OS.Type
     arch: string
 }
 
-export interface RemoteCliContext {
+export type RemoteCliContext = {
     platform: RemotePlatform;
     directory: string;
 }
 
 export const RemoteCliContribution = Symbol('RemoteCliContribution');
 
-export interface RemoteCliContribution {
+export type RemoteCliContribution = {
     enhanceArgs(context: RemoteCliContext): MaybePromise<string[]>;
 }

@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { AbstractTextToModelParsingChatAgent, SystemMessageDescription } from '@theia/ai-chat/lib/common/chat-agents';
-import { AIVariableContext, LanguageModelRequirement } from '@theia/ai-core';
+import { inject, injectable } from 'inversify';
+import { AbstractTextToModelParsingChatAgent, SystemMessageDescription } from '@theia/ai-chat/lib/common/chat-agents.js';
+import { AIVariableContext, LanguageModelRequirement } from '@theia/ai-core/lib/common/index.js';
 import {
     MutableChatRequestModel,
     ChatResponseContent,
@@ -24,7 +24,7 @@ import {
     CustomCallback,
     HorizontalLayoutChatResponseContentImpl,
     MarkdownChatResponseContentImpl,
-} from '@theia/ai-chat/lib/common/chat-model';
+} from '@theia/ai-chat/lib/common/chat-model.js';
 import {
     CommandRegistry,
     MessageService,
@@ -32,9 +32,9 @@ import {
     nls,
 } from '@theia/core';
 
-import { commandTemplate } from './command-prompt-template';
+import { commandTemplate } from './command-prompt-template.js';
 
-interface ParsedCommand {
+type ParsedCommand = {
     type: 'theia-command' | 'custom-handler' | 'no-command'
     commandId: string;
     arguments?: string[];

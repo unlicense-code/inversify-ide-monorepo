@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 RedHat and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { Event, Emitter } from '@theia/core/lib/common/event';
-import { Tree } from '@theia/core/lib/browser/tree/tree';
-import { DepthFirstTreeIterator } from '@theia/core/lib/browser/tree/tree-iterator';
-import { TreeDecorator, TreeDecoration } from '@theia/core/lib/browser/tree/tree-decorator';
-import { MonacoOutlineSymbolInformationNode } from './monaco-outline-contribution';
+import { injectable } from 'inversify';
+import { Event, Emitter } from '@theia/core/lib/common/event.js';
+import { Tree } from '@theia/core/lib/browser/tree/tree.js';
+import { DepthFirstTreeIterator } from '@theia/core/lib/browser/tree/tree-iterator.js';
+import { TreeDecorator, TreeDecoration } from '@theia/core/lib/browser/tree/tree-decorator.js';
+import { MonacoOutlineSymbolInformationNode } from './monaco-outline-contribution.js';
 
 @injectable()
 export class MonacoOutlineDecorator implements TreeDecorator {
@@ -44,7 +44,8 @@ export class MonacoOutlineDecorator implements TreeDecorator {
 
         for (const treeNode of new DepthFirstTreeIterator(tree.root)) {
             if (MonacoOutlineSymbolInformationNode.is(treeNode) && treeNode.detail) {
-                result.set(treeNode.id, this.toDecoration(treeNode));
+                const node = treeNode as MonacoOutlineSymbolInformationNode;
+                result.set(node.id, this.toDecoration(node));
             }
         }
 

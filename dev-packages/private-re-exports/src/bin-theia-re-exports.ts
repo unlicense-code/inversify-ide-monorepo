@@ -108,7 +108,7 @@ yargs
     )
     .parse();
 
-interface ReExportsView {
+type ReExportsView = {
     reExportsDirectories: Array<{
         directory: string
         packages: Array<{

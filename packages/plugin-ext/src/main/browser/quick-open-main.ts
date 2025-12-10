@@ -16,8 +16,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { InputBoxOptions } from '@theia/plugin';
-import { interfaces } from '@theia/core/shared/inversify';
-import { RPCProtocol } from '../../common/rpc-protocol';
+import { interfaces } from 'inversify';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
 import {
     QuickOpenExt,
     QuickOpenMain,
@@ -27,7 +27,7 @@ import {
     TransferQuickInput,
     TransferQuickInputButton,
     TransferQuickPickOptions
-} from '../../common/plugin-api-rpc';
+} from '../../common/plugin-api-rpc.js';
 import {
     InputOptions,
     QuickInput,
@@ -37,16 +37,16 @@ import {
     QuickPickItem,
     QuickPickItemOrSeparator,
     codiconArray
-} from '@theia/core/lib/browser';
-import { DisposableCollection, Disposable } from '@theia/core/lib/common/disposable';
-import { CancellationToken } from '@theia/core/lib/common/cancellation';
-import { MonacoQuickInputService } from '@theia/monaco/lib/browser/monaco-quick-input-service';
-import { QuickInputButtons } from '../../plugin/types-impl';
-import { ThemeIcon } from '@theia/monaco-editor-core/esm/vs/base/common/themables';
-import { PluginSharedStyle } from './plugin-shared-style';
+} from '@theia/core/lib/browser/index.js';
+import { DisposableCollection, Disposable } from '@theia/core/lib/common/disposable.js';
+import { CancellationToken } from '@theia/core';
+import { MonacoQuickInputService } from '@theia/monaco/lib/browser/monaco-quick-input-service.js';
+import { QuickInputButtons } from '../../plugin/types-impl.js';
+import { ThemeIcon } from '@theia/monaco-editor-core/esm/vs/base/common/themables.js';
+import { PluginSharedStyle } from './plugin-shared-style.js';
 import { QuickPickSeparator } from '@theia/core';
 
-export interface QuickInputSession {
+export type QuickInputSession = {
     input: QuickInput;
     handlesToItems: Map<number, QuickPickItemOrSeparator>;
 }

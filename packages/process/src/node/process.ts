@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,25 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, unmanaged } from '@theia/core/shared/inversify';
-import { ILogger, Emitter, Event, isObject } from '@theia/core/lib/common';
-import { FileUri } from '@theia/core/lib/node';
+import { injectable, unmanaged } from 'inversify';
+import { ILogger, Emitter, Event, isObject } from '@theia/core/lib/common/index.js';
+import { FileUri } from '@theia/core/lib/node/index.js';
 import { isOSX, isWindows } from '@theia/core';
 import { Readable, Writable } from 'stream';
 import { exec } from 'child_process';
 import * as fs from 'fs';
-import { IProcessStartEvent, IProcessExitEvent, ProcessErrorEvent, ProcessType, ManagedProcessManager, ManagedProcess } from '../common/process-manager-types';
+import { IProcessStartEvent, IProcessExitEvent, ProcessErrorEvent, ProcessType, ManagedProcessManager, ManagedProcess } from '../common/process-manager-types.js';
 export { IProcessStartEvent, IProcessExitEvent, ProcessErrorEvent, ProcessType };
 
-/**
- * Options to spawn a new process (`spawn`).
- *
- * For more information please refer to the spawn function of Node's
- * child_process module:
- *
- *   https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options
- */
-export interface ProcessOptions {
+export type ProcessOptions = {
     readonly command: string,
     args?: string[],
     options?: {
@@ -41,15 +33,7 @@ export interface ProcessOptions {
     }
 }
 
-/**
- * Options to fork a new process using the current Node interpreter (`fork`).
- *
- * For more information please refer to the fork function of Node's
- * child_process module:
- *
- *   https://nodejs.org/api/child_process.html#child_process_child_process_fork_modulepath_args_options
- */
-export interface ForkOptions {
+export type ForkOptions = {
     readonly modulePath: string,
     args?: string[],
     options?: object

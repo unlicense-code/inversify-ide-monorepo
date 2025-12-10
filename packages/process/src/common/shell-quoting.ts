@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -54,10 +54,7 @@ export const enum ShellQuoting {
     Weak = 'weak'
 }
 
-/**
- * A string that will be quoted depending on the used shell.
- */
-export interface ShellQuotedString {
+export type ShellQuotedString = {
     /**
      * The actual string value.
      */
@@ -71,10 +68,7 @@ export interface ShellQuotedString {
 
 // #endregion vscode
 
-/**
- * Functions that provide shell quoting capabilities.
- */
-export interface ShellQuotingFunctions {
+export type ShellQuotingFunctions = {
 
     characters: {
         /** Characters that require quotes, white space is always implied. */

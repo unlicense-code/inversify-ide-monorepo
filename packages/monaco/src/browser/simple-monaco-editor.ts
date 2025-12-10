@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,19 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { EditorServiceOverrides, MonacoEditor, MonacoEditorServices } from './monaco-editor';
-import { CodeEditorWidget, ICodeEditorWidgetOptions } from '@theia/monaco-editor-core/esm/vs/editor/browser/widget/codeEditor/codeEditorWidget';
-import { IInstantiationService } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/instantiation';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { ServiceCollection } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/serviceCollection';
+import { EditorServiceOverrides, MonacoEditor, MonacoEditorServices } from './monaco-editor.js';
+import { CodeEditorWidget, ICodeEditorWidgetOptions } from '@theia/monaco-editor-core/esm/vs/editor/browser/widget/codeEditor/codeEditorWidget.js';
+import { IInstantiationService } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/instantiation.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { ServiceCollection } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/serviceCollection.js';
 import { Disposable, DisposableCollection, Emitter, Event, TextDocumentContentChangeDelta, URI } from '@theia/core';
-import { MonacoEditorModel } from './monaco-editor-model';
-import { Dimension, EditorMouseEvent, MouseTarget, Position, TextDocumentChangeEvent } from '@theia/editor/lib/browser';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/index.js';
+import { MonacoEditorModel } from './monaco-editor-model.js';
+import { Dimension, EditorMouseEvent, MouseTarget, Position, TextDocumentChangeEvent } from '@theia/editor/lib/browser/index.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { ElementExt } from '@theia/core/shared/@lumino/domutils';
-import { Selection } from '@theia/editor/lib/browser/editor';
-import { SelectionDirection } from '@theia/monaco-editor-core/esm/vs/editor/common/core/selection';
-import { ShowLightbulbIconMode } from '@theia/monaco-editor-core/esm/vs/editor/common/config/editorOptions';
+import { ElementExt } from '@lumino/domutils';
+import { Selection } from '@theia/editor/lib/browser/index.js';
+import { SelectionDirection } from '@theia/monaco-editor-core/esm/vs/editor/common/core/selection.js';
+import { ShowLightbulbIconMode } from '@theia/monaco-editor-core/esm/vs/editor/common/config/editorOptions.js';
 
 export class SimpleMonacoEditor extends MonacoEditorServices implements Disposable {
 
@@ -38,11 +39,15 @@ export class SimpleMonacoEditor extends MonacoEditorServices implements Disposab
     protected readonly onDocumentContentChangedEmitter = new Emitter<TextDocumentChangeEvent>();
     readonly onDocumentContentChanged = this.onDocumentContentChangedEmitter.event;
     protected readonly onMouseDownEmitter = new Emitter<EditorMouseEvent>();
-    readonly onDidChangeReadOnly = this.document.onDidChangeReadOnly;
+    get onDidChangeReadOnly(): Event<boolean | MarkdownString> {
+        return this.document.onDidChangeReadOnly;
+    }
     protected readonly onLanguageChangedEmitter = new Emitter<string>();
     readonly onLanguageChanged = this.onLanguageChangedEmitter.event;
     protected readonly onScrollChangedEmitter = new Emitter<void>();
-    readonly onEncodingChanged = this.document.onDidChangeEncoding;
+    get onEncodingChanged(): Event<string> {
+        return this.document.onDidChangeEncoding;
+    }
     protected readonly onResizeEmitter = new Emitter<Dimension | null>();
     readonly onDidResize = this.onResizeEmitter.event;
     get onDispose(): Event<void> {
@@ -81,11 +86,14 @@ export class SimpleMonacoEditor extends MonacoEditorServices implements Disposab
     }
 
     onSelectionChanged(listener: (range: Selection) => void): Disposable {
-        return this.editor.onDidChangeCursorSelection(event =>
+        return this.editor.onDidChangeCursorSelection((event) => {
+            const range = this.m2p.asRange(event.selection);
+            const direction = event.selection.getDirection();
             listener({
-                ...this.m2p.asRange(event.selection),
-                direction: event.selection.getDirection() === SelectionDirection.LTR ? 'ltr' : 'rtl'
-            }));
+                ...range,
+                direction: direction === SelectionDirection.LTR ? 'ltr' : 'rtl'
+            });
+        });
     }
 
     protected create(options?: MonacoEditor.IOptions, override?: EditorServiceOverrides, widgetOptions?: ICodeEditorWidgetOptions): Disposable {
@@ -114,22 +122,24 @@ export class SimpleMonacoEditor extends MonacoEditorServices implements Disposab
     }
 
     protected addHandlers(codeEditor: CodeEditorWidget): void {
-        this.toDispose.push(codeEditor.onDidChangeModelLanguage(e =>
+        this.toDispose.push(codeEditor.onDidChangeModelLanguage((e: monaco.editor.IModelLanguageChangedEvent) =>
             this.fireLanguageChanged(e.newLanguage)
         ));
         this.toDispose.push(codeEditor.onDidChangeConfiguration(() => this.refresh()));
         this.toDispose.push(codeEditor.onDidChangeModel(() => this.refresh()));
-        this.toDispose.push(codeEditor.onDidChangeModelContent(e => {
+        this.toDispose.push(codeEditor.onDidChangeModelContent((e: monaco.editor.IModelContentChangedEvent) => {
             this.refresh();
             this.onDocumentContentChangedEmitter.fire({ document: this.document, contentChanges: e.changes.map(this.mapModelContentChange.bind(this)) });
         }));
-        this.toDispose.push(codeEditor.onMouseDown(e => {
+        this.toDispose.push(codeEditor.onMouseDown((e) => {
             const { element, position, range } = e.target;
+            const mouseTarget = e.target as unknown as MouseTarget;
+            const mousePosition = this.m2p.asPosition(undefined, e.target.mouseColumn);
             this.onMouseDownEmitter.fire({
                 target: {
-                    ...(e.target as unknown as MouseTarget),
+                    ...mouseTarget,
                     element: element || undefined,
-                    mouseColumn: this.m2p.asPosition(undefined, e.target.mouseColumn).character,
+                    mouseColumn: mousePosition?.character ?? 0,
                     range: range && this.m2p.asRange(range) || undefined,
                     position: position && this.m2p.asPosition(position.lineNumber, position.column) || undefined,
                     detail: undefined
@@ -137,7 +147,7 @@ export class SimpleMonacoEditor extends MonacoEditorServices implements Disposab
                 event: e.event.browserEvent
             });
         }));
-        this.toDispose.push(codeEditor.onDidScrollChange(e => {
+        this.toDispose.push(codeEditor.onDidScrollChange(() => {
             this.onScrollChangedEmitter.fire(undefined);
         }));
         this.toDispose.push(this.onDidChangeReadOnly(readOnly => {

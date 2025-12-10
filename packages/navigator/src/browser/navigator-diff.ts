@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { SelectionService, UriSelection } from '@theia/core/lib/common';
-import { OpenerService, open } from '@theia/core/lib/browser/opener-service';
-import { MessageService } from '@theia/core/lib/common/message-service';
-import { Command } from '@theia/core/lib/common/command';
-import { DiffUris } from '@theia/core/lib/browser/diff-uris';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileOperationError, FileOperationResult } from '@theia/filesystem/lib/common/files';
+import { inject, injectable } from 'inversify';
+import type { URI as URIType } from '@theia/core/lib/common/uri.js';
+import { SelectionService, UriSelection } from '@theia/core/lib/common/index.js';
+import { OpenerService, open } from '@theia/core/lib/browser/opener-service.js';
+import { MessageService } from '@theia/core/lib/common/message-service.js';
+import { Command } from '@theia/core/lib/common/command.js';
+import { DiffUris } from '@theia/core/lib/browser/diff-uris.js';
+import { FileService } from '@theia/filesystem/lib/browser/index.js';
+import { FileOperationError, FileOperationResult } from '@theia/filesystem/lib/common/index.js';
 
 export namespace NavigatorDiffCommands {
     const COMPARE_CATEGORY = 'Compare';
@@ -56,11 +56,11 @@ export class NavigatorDiff {
     ) {
     }
 
-    protected _firstCompareFile: URI | undefined = undefined;
-    protected get firstCompareFile(): URI | undefined {
+    protected _firstCompareFile: URIType | undefined = undefined;
+    protected get firstCompareFile(): URIType | undefined {
         return this._firstCompareFile;
     }
-    protected set firstCompareFile(uri: URI | undefined) {
+    protected set firstCompareFile(uri: URIType | undefined) {
         this._firstCompareFile = uri;
         this._isFirstFileSelected = true;
     }
@@ -70,7 +70,7 @@ export class NavigatorDiff {
         return this._isFirstFileSelected;
     }
 
-    protected async isDirectory(uri: URI): Promise<boolean> {
+    protected async isDirectory(uri: URIType): Promise<boolean> {
         try {
             const stat = await this.fileService.resolve(uri);
             return stat.isDirectory;
@@ -83,7 +83,7 @@ export class NavigatorDiff {
         return false;
     }
 
-    protected async getURISelection(): Promise<URI | undefined> {
+    protected async getURISelection(): Promise<URIType | undefined> {
         const uri = UriSelection.getUri(this.selectionService.selection);
         if (!uri) {
             return undefined;
@@ -128,7 +128,7 @@ export class NavigatorDiff {
         }
         const diffUri = DiffUris.encode(this.firstCompareFile, uriSelected);
 
-        open(this.openerService, diffUri).catch(e => {
+        open(this.openerService, diffUri).catch((e: Error) => {
             this.notifications.error(e.message);
         });
         return true;

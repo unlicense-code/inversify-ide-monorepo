@@ -18,7 +18,7 @@ export const OpenAiLanguageModelsManager = Symbol('OpenAiLanguageModelsManager')
 
 export const OPENAI_PROVIDER_ID = 'openai';
 
-export interface OpenAiModelDescription {
+export type OpenAiModelDescription = {
     /**
      * The identifier of the model which will be shown in the UI.
      */
@@ -69,7 +69,7 @@ export interface OpenAiModelDescription {
      */
     useResponseApi?: boolean;
 }
-export interface OpenAiLanguageModelsManager {
+export type OpenAiLanguageModelsManager = {
     apiKey: string | undefined;
     setApiKey(key: string | undefined): void;
     setApiVersion(version: string | undefined): void;

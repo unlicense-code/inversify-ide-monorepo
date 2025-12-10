@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { URI, isObject, MaybeArray } from '../common';
-import { Widget, BaseWidget } from './widgets';
+import { URI, isObject, MaybeArray } from '../common/index.js';
+import { Widget, BaseWidget } from './widgets/index.js';
 
-/**
- * `Navigatable` provides an access to an URI of an underlying instance of `Resource`.
- */
-export interface Navigatable {
+export type Navigatable = {
     /**
      * Return an underlying resource URI.
      */
@@ -69,7 +66,7 @@ export namespace NavigatableWidget {
     }
 }
 
-export interface NavigatableWidgetOptions {
+export type NavigatableWidgetOptions = {
     kind: 'navigatable';
     uri: string;
     counter?: number;

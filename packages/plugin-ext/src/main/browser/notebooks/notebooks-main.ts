@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,22 +15,22 @@
 // *****************************************************************************
 
 import { CancellationToken, DisposableCollection, Emitter, URI } from '@theia/core';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
 import { CellEditType, NotebookCellModelResource, NotebookData, NotebookModelResource, TransientOptions } from '@theia/notebook/lib/common';
 import { NotebookService, NotebookWorkspaceEdit } from '@theia/notebook/lib/browser';
 import { Disposable } from '@theia/plugin';
-import { CommandRegistryMain, MAIN_RPC_CONTEXT, NotebooksExt, NotebooksMain, WorkspaceEditDto, WorkspaceNotebookCellEditDto } from '../../../common';
-import { RPCProtocol } from '../../../common/rpc-protocol';
-import { NotebookDto } from './notebook-dto';
-import { HostedPluginSupport } from '../../../hosted/browser/hosted-plugin';
-import { NotebookModel } from '@theia/notebook/lib/browser/view-model/notebook-model';
-import { NotebookCellModel } from '@theia/notebook/lib/browser/view-model/notebook-cell-model';
-import { interfaces } from '@theia/core/shared/inversify';
+import { CommandRegistryMain, MAIN_RPC_CONTEXT, NotebooksExt, NotebooksMain, WorkspaceEditDto, WorkspaceNotebookCellEditDto } from '../../../common/index.js';
+import { RPCProtocol } from '../../../common/rpc-protocol.js';
+import { NotebookDto } from './notebook-dto.js';
+import { HostedPluginSupport } from '../../../hosted/browser/hosted-plugin.js';
+import { NotebookModel } from '@theia/notebook/lib/browser/view-model/notebook-model.js';
+import { NotebookCellModel } from '@theia/notebook/lib/browser/view-model/notebook-cell-model.js';
+import { interfaces } from 'inversify';
 import {
     NotebookCellStatusBarItemProvider,
     NotebookCellStatusBarItemList,
     NotebookCellStatusBarService
-} from '@theia/notebook/lib/browser/service/notebook-cell-status-bar-service';
+} from '@theia/notebook/lib/browser/service/notebook-cell-status-bar-service.js';
 
 export class NotebooksMainImpl implements NotebooksMain {
 

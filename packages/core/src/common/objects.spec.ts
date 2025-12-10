@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { expect } from 'chai';
-import { deepClone, deepFreeze, isEmpty, notEmpty } from './objects';
+import { deepClone, deepFreeze, isEmpty, notEmpty } from './objects.js';
 
 describe('Objects', () => {
 

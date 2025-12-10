@@ -17,8 +17,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { inject, injectable } from 'inversify';
-import { Measurement, MeasurementOptions } from './measurement';
-import { Stopwatch } from './stopwatch';
+import { Measurement, MeasurementOptions } from './measurement.js';
+import { Stopwatch } from './stopwatch.js';
 
 export const BackendStopwatch = Symbol('BackendStopwatch');
 
@@ -30,12 +30,7 @@ export type RemoteMeasurement = number;
 
 export const BackendStopwatchOptions = Symbol('BackendStopwatchOptions');
 
-/**
- * A service that exposes the back-end's {@link Stopwatch} to clients
- * via the remote API. If you do not need this service then bind or re-bind
- * the {@link NullBackendStopwatch} implementation to this service interface.
- */
-export interface BackendStopwatch {
+export type BackendStopwatch = {
 
     /**
      * Create a {@link Measurement} that will compute the time that elapsed on the back-end when logged.

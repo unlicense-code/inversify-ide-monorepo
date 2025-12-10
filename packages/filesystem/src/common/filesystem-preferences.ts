@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { createPreferenceProxy, PreferenceProxy } from '@theia/core/lib/common/preferences/preference-proxy';
-import { PreferenceScope } from '@theia/core/lib/common/preferences/preference-scope';
-import { PreferenceService } from '@theia/core/lib/common/preferences/preference-service';
-import { SUPPORTED_ENCODINGS } from '@theia/core/lib/common/supported-encodings';
-import { nls } from '@theia/core/lib/common/nls';
-import { PreferenceContribution, PreferenceSchema } from '@theia/core/lib/common/preferences/preference-schema';
+import { interfaces } from 'inversify';
+import { createPreferenceProxy, PreferenceProxy, PreferenceScope, PreferenceService, PreferenceContribution, PreferenceSchema } from '@theia/core/lib/common/preferences/index.js';
+import { SUPPORTED_ENCODINGS } from '@theia/core/lib/common/supported-encodings.js';
+import { nls } from '@theia/core';
 
 // See https://github.com/Microsoft/vscode/issues/30180
 export const WIN32_MAX_FILE_SIZE_MB = 300; // 300 MB
@@ -112,7 +109,7 @@ export const filesystemPreferenceSchema: PreferenceSchema = {
     }
 };
 
-export interface FileSystemConfiguration {
+export type FileSystemConfiguration = {
     'files.watcherExclude': { [globPattern: string]: boolean }
     'files.exclude': { [key: string]: boolean }
     'files.enableTrash': boolean

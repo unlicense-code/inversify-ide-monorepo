@@ -16,12 +16,12 @@
 
 import { expect } from 'chai';
 import { URI } from '@theia/core';
-import { Position } from '@theia/core/shared/vscode-languageserver-protocol';
-import { ILogger } from '@theia/core/lib/common';
+import { Position } from 'vscode-languageserver-protocol';
+import { ILogger } from '@theia/core/lib/common/index.js';
 import {
     ChatContentDeserializerRegistryImpl,
     DefaultChatContentDeserializerContribution
-} from './chat-content-deserializer';
+} from './chat-content-deserializer.js';
 import {
     CodeChatResponseContentImpl,
     ErrorChatResponseContentImpl,
@@ -33,7 +33,7 @@ import {
     TextChatResponseContentImpl,
     ThinkingChatResponseContentImpl,
     ToolCallChatResponseContentImpl
-} from './chat-model';
+} from './chat-model.js';
 
 class MockLogger {
     error(): void { }

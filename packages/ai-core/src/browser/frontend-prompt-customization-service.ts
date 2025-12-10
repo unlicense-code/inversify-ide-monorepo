@@ -15,17 +15,17 @@
 // *****************************************************************************
 
 import { DisposableCollection, URI, Event, Emitter, nls } from '@theia/core';
-import { OpenerService } from '@theia/core/lib/browser';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { PromptFragmentCustomizationService, CustomAgentDescription, CustomizedPromptFragment, CommandPromptFragmentMetadata } from '../common';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileChangesEvent } from '@theia/filesystem/lib/common/files';
-import { AICorePreferences, PREFERENCE_NAME_PROMPT_TEMPLATES } from '../common/ai-core-preferences';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
+import { OpenerService } from '@theia/core/lib/browser/index.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import { PromptFragmentCustomizationService, CustomAgentDescription, CustomizedPromptFragment, CommandPromptFragmentMetadata } from '../common/index.js';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { FileChangesEvent } from '@theia/filesystem/lib/common/files.js';
+import { AICorePreferences, PREFERENCE_NAME_PROMPT_TEMPLATES } from '../common/ai-core-preferences.js';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
 import { dump, load } from 'js-yaml';
-import { PROMPT_TEMPLATE_EXTENSION } from './prompttemplate-contribution';
-import { parseTemplateWithMetadata, ParsedTemplate } from './prompttemplate-parser';
+import { PROMPT_TEMPLATE_EXTENSION } from './prompttemplate-contribution.js';
+import { parseTemplateWithMetadata, ParsedTemplate } from './prompttemplate-parser.js';
 
 /**
  * Default template entry for creating custom agents
@@ -65,10 +65,7 @@ export function getCustomizationSourceString(origin: CustomizationSource): strin
     }
 }
 
-/**
- * Interface defining properties that can be updated in the customization service
- */
-export interface PromptFragmentCustomizationProperties {
+export type PromptFragmentCustomizationProperties = {
     /** Array of directory paths to load templates from */
     directoryPaths?: string[];
 
@@ -79,11 +76,7 @@ export interface PromptFragmentCustomizationProperties {
     extensions?: string[];
 }
 
-/**
- * Internal representation of a fragment entry in the customization service
- * Extends TemplateMetadata to include command-related properties
- */
-interface PromptFragmentCustomization extends CommandPromptFragmentMetadata {
+type PromptFragmentCustomization = CommandPromptFragmentMetadata & {
     /** The template content */
     template: string;
 
@@ -103,10 +96,7 @@ interface PromptFragmentCustomization extends CommandPromptFragmentMetadata {
     customizationId: string;
 }
 
-/**
- * Information about a template file being watched for changes
- */
-interface WatchedFileInfo {
+type WatchedFileInfo = {
     /** The URI of the watched file */
     uri: URI;
 

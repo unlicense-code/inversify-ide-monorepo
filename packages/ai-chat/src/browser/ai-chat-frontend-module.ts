@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Agent, AgentService, AIVariableContribution, bindToolProvider } from '@theia/ai-core/lib/common';
+import { Agent, AgentService, AIVariableContribution, bindToolProvider } from '@theia/ai-core/lib/common/index.js';
 import { bindContributionProvider, CommandContribution, PreferenceContribution } from '@theia/core';
-import { FrontendApplicationContribution, LabelProviderContribution } from '@theia/core/lib/browser';
-import { ContainerModule } from '@theia/core/shared/inversify';
+import { FrontendApplicationContribution, LabelProviderContribution } from '@theia/core/lib/browser/index.js';
+import { ContainerModule } from 'inversify';
 import {
     ChatAgent,
     ChatAgentService,
@@ -29,50 +29,50 @@ import {
     PinChatAgent,
     ChatServiceFactory,
     ChatAgentServiceFactory
-} from '../common';
-import { ChatAgentsVariableContribution } from '../common/chat-agents-variable-contribution';
-import { CustomChatAgent } from '../common/custom-chat-agent';
-import { DefaultResponseContentFactory, DefaultResponseContentMatcherProvider, ResponseContentMatcherProvider } from '../common/response-content-matcher';
-import { aiChatPreferences } from '../common/ai-chat-preferences';
-import { ChangeSetElementArgs, ChangeSetFileElement, ChangeSetFileElementFactory } from './change-set-file-element';
-import { AICustomAgentsFrontendApplicationContribution } from './custom-agent-frontend-application-contribution';
-import { FrontendChatServiceImpl } from './frontend-chat-service';
-import { CustomAgentFactory } from './custom-agent-factory';
-import { ChatToolRequestService } from '../common/chat-tool-request-service';
-import { FrontendChatToolRequestService } from './chat-tool-request-service';
-import { ChangeSetFileService } from './change-set-file-service';
-import { ContextVariableLabelProvider } from './context-variable-label-provider';
-import { ContextFileVariableLabelProvider } from './context-file-variable-label-provider';
-import { FileChatVariableContribution } from './file-chat-variable-contribution';
-import { ContextSummaryVariableContribution } from '../common/context-summary-variable';
-import { ContextDetailsVariableContribution } from '../common/context-details-variable';
-import { ChangeSetVariableContribution } from './change-set-variable';
-import { ChatSessionNamingAgent, ChatSessionNamingService } from '../common/chat-session-naming-service';
-import { ChangeSetDecorator, ChangeSetDecoratorService } from './change-set-decorator-service';
-import { ChatSessionSummaryAgent } from '../common/chat-session-summary-agent';
-import { TaskContextVariableContribution } from './task-context-variable-contribution';
-import { TaskContextVariableLabelProvider } from './task-context-variable-label-provider';
-import { TaskContextService, TaskContextStorageService } from './task-context-service';
-import { InMemoryTaskContextStorage } from './task-context-storage-service';
-import { AIChatFrontendContribution } from './ai-chat-frontend-contribution';
-import { ImageContextVariableContribution } from './image-context-variable-contribution';
-import { AgentDelegationTool } from './agent-delegation-tool';
-import { ToolConfirmationManager } from './chat-tool-preference-bindings';
-import { bindChatToolPreferences } from '../common/chat-tool-preferences';
-import { ChatSessionStore } from '../common/chat-session-store';
-import { ChatSessionStoreImpl } from './chat-session-store-impl';
+} from '../common/index.js';
+import { ChatAgentsVariableContribution } from '../common/chat-agents-variable-contribution.js';
+import { CustomChatAgent } from '../common/custom-chat-agent.js';
+import { DefaultResponseContentFactory, DefaultResponseContentMatcherProvider, ResponseContentMatcherProvider } from '../common/response-content-matcher.js';
+import { aiChatPreferences } from '../common/ai-chat-preferences.js';
+import { ChangeSetElementArgs, ChangeSetFileElement, ChangeSetFileElementFactory } from './change-set-file-element.js';
+import { AICustomAgentsFrontendApplicationContribution } from './custom-agent-frontend-application-contribution.js';
+import { FrontendChatServiceImpl } from './frontend-chat-service.js';
+import { CustomAgentFactory } from './custom-agent-factory.js';
+import { ChatToolRequestService } from '../common/chat-tool-request-service.js';
+import { FrontendChatToolRequestService } from './chat-tool-request-service.js';
+import { ChangeSetFileService } from './change-set-file-service.js';
+import { ContextVariableLabelProvider } from './context-variable-label-provider.js';
+import { ContextFileVariableLabelProvider } from './context-file-variable-label-provider.js';
+import { FileChatVariableContribution } from './file-chat-variable-contribution.js';
+import { ContextSummaryVariableContribution } from '../common/context-summary-variable.js';
+import { ContextDetailsVariableContribution } from '../common/context-details-variable.js';
+import { ChangeSetVariableContribution } from './change-set-variable.js';
+import { ChatSessionNamingAgent, ChatSessionNamingService } from '../common/chat-session-naming-service.js';
+import { ChangeSetDecorator, ChangeSetDecoratorService } from './change-set-decorator-service.js';
+import { ChatSessionSummaryAgent } from '../common/chat-session-summary-agent.js';
+import { TaskContextVariableContribution } from './task-context-variable-contribution.js';
+import { TaskContextVariableLabelProvider } from './task-context-variable-label-provider.js';
+import { TaskContextService, TaskContextStorageService } from './task-context-service.js';
+import { InMemoryTaskContextStorage } from './task-context-storage-service.js';
+import { AIChatFrontendContribution } from './ai-chat-frontend-contribution.js';
+import { ImageContextVariableContribution } from './image-context-variable-contribution.js';
+import { AgentDelegationTool } from './agent-delegation-tool.js';
+import { ToolConfirmationManager } from './chat-tool-preference-bindings.js';
+import { bindChatToolPreferences } from '../common/chat-tool-preferences.js';
+import { ChatSessionStore } from '../common/chat-session-store.js';
+import { ChatSessionStoreImpl } from './chat-session-store-impl.js';
 import {
     ChatContentDeserializerContribution,
     ChatContentDeserializerRegistry,
     ChatContentDeserializerRegistryImpl,
     DefaultChatContentDeserializerContribution
-} from '../common/chat-content-deserializer';
+} from '../common/chat-content-deserializer.js';
 import {
     ChangeSetElementDeserializerContribution,
     ChangeSetElementDeserializerRegistry,
     ChangeSetElementDeserializerRegistryImpl
-} from '../common/change-set-element-deserializer';
-import { ChangeSetFileElementDeserializerContribution } from './change-set-file-element-deserializer';
+} from '../common/change-set-element-deserializer.js';
+import { ChangeSetFileElementDeserializerContribution } from './change-set-file-element-deserializer.js';
 
 export default new ContainerModule(bind => {
     bindContributionProvider(bind, ChatAgent);

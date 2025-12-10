@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,10 @@
 // *****************************************************************************
 
 import { RpcProxy } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { RemoteFileSystemProvider, RemoteFileSystemServer } from '@theia/filesystem/lib/common/remote-file-system-provider';
+import { inject, injectable } from 'inversify';
+import { RemoteFileSystemProvider, RemoteFileSystemServer 
+    
+} from '@theia/filesystem/lib/common/remote-file-system-provider.js';
 
 export const LocalEnvVariablesServer = Symbol('LocalEnviromentVariableServer');
 export const LocalRemoteFileSytemServer = Symbol('LocalRemoteFileSytemServer');
@@ -27,5 +29,5 @@ export const LocalRemoteFileSytemServer = Symbol('LocalRemoteFileSytemServer');
 @injectable()
 export class LocalRemoteFileSystemProvider extends RemoteFileSystemProvider {
     @inject(LocalRemoteFileSytemServer)
-    protected override readonly server: RpcProxy<RemoteFileSystemServer>;
+    protected override readonly server: RpcProxy<RemoteFileSystemServer> = undefined!;
 }

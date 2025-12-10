@@ -19,20 +19,20 @@ import {
     PreferenceServiceImpl,
     PreferenceScope,
     PreferenceProviderProvider
-} from '@theia/core/lib/common/preferences';
-import { interfaces } from '@theia/core/shared/inversify';
+} from '@theia/core/lib/common/index.js';
+import { interfaces } from 'inversify';
 import {
     MAIN_RPC_CONTEXT,
     PreferenceRegistryExt,
     PreferenceRegistryMain,
     PreferenceData,
     PreferenceChangeExt,
-} from '../../common/plugin-api-rpc';
-import { RPCProtocol } from '../../common/rpc-protocol';
-import { ConfigurationTarget } from '../../plugin/types-impl';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { FileStat } from '@theia/filesystem/lib/common/files';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
+} from '../../common/plugin-api-rpc.js';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
+import { ConfigurationTarget } from '../../plugin/types-impl.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { FileStat } from '@theia/filesystem/lib/common/files.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
 
 export function getPreferences(preferenceProviderProvider: PreferenceProviderProvider, rootFolders: FileStat[]): PreferenceData {
     const folders = rootFolders.map(root => root.resource.toString());

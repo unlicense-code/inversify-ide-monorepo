@@ -20,16 +20,16 @@ import {
     TasksMain,
     TaskDto,
     TaskExecutionDto
-} from '../../common/plugin-api-rpc';
+} from '../../common/plugin-api-rpc.js';
 import * as theia from '@theia/plugin';
-import * as converter from '../type-converters';
-import { CustomExecution, Disposable } from '../types-impl';
-import { RPCProtocol } from '../../common/rpc-protocol';
-import { TaskProviderAdapter } from './task-provider';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import { TerminalServiceExtImpl } from '../terminal-ext';
-import { UUID } from '@theia/core/shared/@lumino/coreutils';
-import { CancellationToken } from '@theia/core/lib/common/cancellation';
+import * as converter from '../type-converters.js';
+import { CustomExecution, Disposable } from '../types-impl.js';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
+import { TaskProviderAdapter } from './task-provider.js';
+import { Emitter, Event } from '@theia/core';
+import { TerminalServiceExtImpl } from '../terminal-ext.js';
+import { UUID } from '@lumino/coreutils';
+import { CancellationToken } from '@theia/core';
 
 type ExecutionCallback = (resolvedDefinition: theia.TaskDefinition) => Thenable<theia.Pseudoterminal>;
 export class TasksExtImpl implements TasksExt {

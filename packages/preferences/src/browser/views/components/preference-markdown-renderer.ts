@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { PreferenceTreeModel } from '../../preference-tree-model';
-import { PreferenceTreeLabelProvider } from '../../util/preference-tree-label-provider';
-import * as markdownit from '@theia/core/shared/markdown-it';
-import * as markdownitemoji from '@theia/core/shared/markdown-it-emoji';
+import { inject, injectable } from 'inversify';
+import { PreferenceTreeModel } from '../../preference-tree-model.js';
+import { PreferenceTreeLabelProvider } from '../../util/preference-tree-label-provider.js';
+import markdownit from 'markdown-it';
+import * as markdownitemoji from 'markdown-it-emoji';
 import { CommandRegistry } from '@theia/core';
 
 @injectable()

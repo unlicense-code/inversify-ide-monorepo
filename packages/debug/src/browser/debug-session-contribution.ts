@@ -14,35 +14,31 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, named, postConstruct } from '@theia/core/shared/inversify';
-import { MessageClient } from '@theia/core/lib/common';
-import { LabelProvider } from '@theia/core/lib/browser';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
-import { DebugSession } from './debug-session';
-import { BreakpointManager } from './breakpoint/breakpoint-manager';
-import { DebugConfigurationSessionOptions, DebugSessionOptions } from './debug-session-options';
-import { OutputChannelManager, OutputChannel } from '@theia/output/lib/browser/output-channel';
-import { DebugPreferences } from '../common/debug-preferences';
-import { DebugSessionConnection } from './debug-session-connection';
-import { DebugChannel, DebugAdapterPath, ForwardingDebugChannel } from '../common/debug-service';
-import { ContributionProvider } from '@theia/core/lib/common/contribution-provider';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { DebugContribution } from './debug-contribution';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { RemoteConnectionProvider, ServiceConnectionProvider } from '@theia/core/lib/browser/messaging/service-connection-provider';
-import { TestService } from '@theia/test/lib/browser/test-service';
-import { DebugSessionManager } from './debug-session-manager';
+import { injectable, inject, named, postConstruct } from 'inversify';
+import { MessageClient } from '@theia/core/lib/common/index.js';
+import { LabelProvider } from '@theia/core/lib/browser/index.js';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service.js';
+import { DebugSession } from './debug-session.js';
+import { BreakpointManager } from './breakpoint/breakpoint-manager.js';
+import { DebugConfigurationSessionOptions, DebugSessionOptions } from './debug-session-options.js';
+import { OutputChannelManager, OutputChannel } from '@theia/output/lib/browser/output-channel.js';
+import { DebugPreferences } from '../common/debug-preferences.js';
+import { DebugSessionConnection } from './debug-session-connection.js';
+import { DebugChannel, DebugAdapterPath, ForwardingDebugChannel } from '../common/debug-service.js';
+import { ContributionProvider } from '@theia/core/lib/common/contribution-provider.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { DebugContribution } from './debug-contribution.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { RemoteConnectionProvider, ServiceConnectionProvider } from '@theia/core/lib/browser/messaging/service-connection-provider.js';
+import { TestService } from '@theia/test/lib/browser/test-service.js';
+import { DebugSessionManager } from './debug-session-manager.js';
 
 /**
  * DebugSessionContribution symbol for DI.
  */
 export const DebugSessionContribution = Symbol('DebugSessionContribution');
-/**
- * The [debug session](#DebugSession) contribution.
- * Can be used to instantiate a specific debug sessions.
- */
-export interface DebugSessionContribution {
+export type DebugSessionContribution = {
     /**
      * The debug type.
      */
@@ -57,10 +53,7 @@ export interface DebugSessionContribution {
  * DebugSessionContributionRegistry symbol for DI.
  */
 export const DebugSessionContributionRegistry = Symbol('DebugSessionContributionRegistry');
-/**
- * Debug session contribution registry.
- */
-export interface DebugSessionContributionRegistry {
+export type DebugSessionContributionRegistry = {
     get(debugType: string): DebugSessionContribution | undefined;
 }
 
@@ -88,10 +81,7 @@ export class DebugSessionContributionRegistryImpl implements DebugSessionContrib
  */
 export const DebugSessionFactory = Symbol('DebugSessionFactory');
 
-/**
- * The [debug session](#DebugSession) factory.
- */
-export interface DebugSessionFactory {
+export type DebugSessionFactory = {
     get(manager: DebugSessionManager, sessionId: string, options: DebugSessionOptions, parentSession?: DebugSession): DebugSession;
 }
 

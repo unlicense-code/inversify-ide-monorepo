@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2025 TypeFox and others.
+// Copyright (C) 2025 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { Widget, DockLayout } from '@theia/core/lib/browser';
-import { SplitEditorContribution } from '@theia/editor/lib/browser/split-editor-contribution';
-import { NotebookEditorWidget } from './notebook-editor-widget';
-import { NotebookOpenHandler } from './notebook-open-handler';
+import { inject, injectable } from 'inversify';
+import { Widget, DockLayout } from '@theia/core/lib/browser/index.js';
+import { SplitEditorContribution } from '@theia/editor/lib/browser/split-editor-contribution.js';
+import { NotebookEditorWidget } from './notebook-editor-widget.js';
+import { NotebookOpenHandler } from './notebook-open-handler.js';
 
 /**
  * Implementation of SplitEditorContribution for notebook editors (NotebookEditorWidget).

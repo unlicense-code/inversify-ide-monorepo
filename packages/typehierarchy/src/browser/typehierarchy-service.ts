@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,21 +15,21 @@
 // *****************************************************************************
 
 import { CancellationToken } from '@theia/core';
-import { ContributionProvider, Disposable, Emitter, Event } from '@theia/core/lib/common';
-import URI from '@theia/core/lib/common/uri';
-import { inject, injectable, named, postConstruct } from '@theia/core/shared/inversify';
-import { DocumentUri, Position } from '@theia/core/shared/vscode-languageserver-protocol';
-import { LanguageSelector, score } from '@theia/editor/lib/common/language-selector';
-import { TypeHierarchyItem } from './typehierarchy';
+import { ContributionProvider, Disposable, Emitter, Event } from '@theia/core/lib/common/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { inject, injectable, named, postConstruct } from 'inversify';
+import { DocumentUri, Position } from 'vscode-languageserver-protocol';
+import { LanguageSelector, score } from '@theia/editor/lib/common/language-selector.js';
+import { TypeHierarchyItem } from './typehierarchy.js';
 
 export const TypeHierarchyService = Symbol('TypeHierarchyService');
 
-export interface TypeHierarchySession {
+export type TypeHierarchySession = {
     items: TypeHierarchyItem[];
     dispose(): void;
 }
 
-export interface TypeHierarchyService {
+export type TypeHierarchyService = {
 
     readonly selector: LanguageSelector;
 

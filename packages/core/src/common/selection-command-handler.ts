@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CommandHandler } from './command';
-import { SelectionService } from '../common/selection-service';
+import { CommandHandler } from './command.js';
+import { SelectionService } from '../common/selection-service.js';
 
 export class SelectionCommandHandler<S extends Object> implements CommandHandler {
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -23,22 +23,22 @@
 /* eslint-disable @typescript-eslint/tslint/config */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { URI } from '@theia/core/shared/vscode-uri';
-import { interfaces } from '@theia/core/shared/inversify';
-import CoreURI from '@theia/core/lib/common/uri';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { Event, Emitter } from '@theia/core/lib/common/event';
-import { MAIN_RPC_CONTEXT, FileSystemMain, FileSystemExt, IFileChangeDto } from '../../common/plugin-api-rpc';
-import { RPCProtocol } from '../../common/rpc-protocol';
-import { UriComponents } from '../../common/uri-components';
+import { URI } from 'vscode-uri';
+import { interfaces } from 'inversify';
+import CoreURI from '@theia/core/lib/common/uri.js';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { Event, Emitter } from '@theia/core';
+import { MAIN_RPC_CONTEXT, FileSystemMain, FileSystemExt, IFileChangeDto } from '../../common/plugin-api-rpc.js';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
+import { UriComponents } from '../../common/uri-components.js';
 import {
     FileSystemProviderCapabilities, Stat, FileType, FileSystemProviderErrorCode, FileOverwriteOptions, FileDeleteOptions, FileOpenOptions, FileWriteOptions, WatchOptions,
     FileSystemProviderWithFileReadWriteCapability, FileSystemProviderWithOpenReadWriteCloseCapability, FileSystemProviderWithFileFolderCopyCapability,
     FileStat, FileChange, FileOperationError, FileOperationResult, ReadOnlyMessageFileSystemProvider
-} from '@theia/filesystem/lib/common/files';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { MarkdownString } from '../../common/plugin-api-rpc-model';
+} from '@theia/filesystem/lib/common/files.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { MarkdownString } from '../../common/plugin-api-rpc-model.js';
 
 type IDisposable = Disposable;
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { UUID } from '@theia/core/shared/@lumino/coreutils';
-import { Marker } from '@theia/markers/lib/common/marker';
-import { DebugProtocol } from '@vscode/debugprotocol/lib/debugProtocol';
-import { isObject, isString, URI } from '@theia/core/lib/common';
+import { UUID } from '@lumino/coreutils';
+import { Marker } from '@theia/markers/lib/common/marker.js';
+import { DebugProtocol } from '@vscode/debugprotocol/lib/debugProtocol.js';
+import { isObject, isString, URI } from '@theia/core/lib/common/index.js';
 
 export const BREAKPOINT_KIND = 'breakpoint';
 
-export interface BaseBreakpoint {
+export type BaseBreakpoint = {
     id: string;
     enabled: boolean;
 }
 
-export interface SourceBreakpoint extends BaseBreakpoint {
+export type SourceBreakpoint = BaseBreakpoint & {
     uri: string;
     raw: DebugProtocol.SourceBreakpoint;
 }
@@ -44,7 +44,7 @@ export namespace SourceBreakpoint {
     }
 }
 
-export interface BreakpointMarker extends Marker<SourceBreakpoint> {
+export type BreakpointMarker = Marker<SourceBreakpoint> & {
     kind: 'breakpoint'
 }
 export namespace BreakpointMarker {
@@ -53,7 +53,7 @@ export namespace BreakpointMarker {
     }
 }
 
-export interface ExceptionBreakpoint {
+export type ExceptionBreakpoint = {
     enabled: boolean;
     condition?: string;
     raw: DebugProtocol.ExceptionBreakpointsFilter;
@@ -71,7 +71,7 @@ export namespace ExceptionBreakpoint {
     }
 }
 
-export interface FunctionBreakpoint extends BaseBreakpoint {
+export type FunctionBreakpoint = BaseBreakpoint & {
     raw: DebugProtocol.FunctionBreakpoint;
 }
 export namespace FunctionBreakpoint {
@@ -87,7 +87,7 @@ export namespace FunctionBreakpoint {
     }
 }
 
-export interface InstructionBreakpoint extends BaseBreakpoint, DebugProtocol.InstructionBreakpoint { }
+export type InstructionBreakpoint = BaseBreakpoint & DebugProtocol.InstructionBreakpoint & { }
 
 export namespace InstructionBreakpoint {
     export function create(raw: DebugProtocol.InstructionBreakpoint, existing?: InstructionBreakpoint): InstructionBreakpoint {
@@ -105,13 +105,13 @@ export namespace InstructionBreakpoint {
 
 export type DataBreakpointInfo = DebugProtocol.DataBreakpointInfoResponse['body'];
 
-export interface DataBreakpointAddressSource {
+export type DataBreakpointAddressSource = {
     type: DataBreakpointSourceType.Address;
     address: string;
     bytes: number;
 }
 
-export interface DataBreakpointVariableSource {
+export type DataBreakpointVariableSource = {
     type: DataBreakpointSourceType.Variable;
     variable: string;
 }
@@ -123,7 +123,7 @@ export const enum DataBreakpointSourceType {
 
 export type DataBreakpointSource = | DataBreakpointAddressSource | DataBreakpointVariableSource;
 
-export interface DataBreakpoint extends BaseBreakpoint {
+export type DataBreakpoint = BaseBreakpoint & {
     raw: DebugProtocol.DataBreakpoint;
     info: DataBreakpointInfo;
     source: DataBreakpointSource;

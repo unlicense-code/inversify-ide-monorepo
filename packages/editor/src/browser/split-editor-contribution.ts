@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2025 TypeFox and others.
+// Copyright (C) 2025 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,20 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Widget, DockLayout } from '@theia/core/lib/browser';
+import { Widget, DockLayout } from '@theia/core/lib/browser/index.js';
 
 /**
  * Symbol used to bind SplitEditorContribution implementations.
  */
 export const SplitEditorContribution = Symbol('SplitEditorContribution');
 
-/**
- * A contribution interface for handling split operations on different editor types.
- * Implementations should handle specific editor widget types (e.g., text editors, notebook editors).
- *
- * @template W the specific widget type this contribution handles
- */
-export interface SplitEditorContribution<W extends Widget = Widget> {
+export type SplitEditorContribution<W extends Widget = Widget> = {
     /**
      * Determines whether this contribution can handle the split operation for the given widget.
      * @param widget the widget to check

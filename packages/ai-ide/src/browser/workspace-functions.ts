@@ -13,26 +13,27 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { ToolProvider, ToolRequest } from '@theia/ai-core';
+import { ToolProvider, ToolRequest } from '@theia/ai-core/lib/common/index.js';
 import { CancellationToken, Disposable, PreferenceService, URI, Path } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileStat } from '@theia/filesystem/lib/common/files';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { inject, injectable } from 'inversify';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { FileStat } from '@theia/filesystem/lib/common/files.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
 import {
     FILE_CONTENT_FUNCTION_ID, GET_FILE_DIAGNOSTICS_ID,
     GET_WORKSPACE_DIRECTORY_STRUCTURE_FUNCTION_ID,
     GET_WORKSPACE_FILE_LIST_FUNCTION_ID, FIND_FILES_BY_PATTERN_FUNCTION_ID
-} from '../common/workspace-functions';
-import ignore from 'ignore';
+} from '../common/workspace-functions.js';
+import ignoreDefault from 'ignore';
+const ignore = ignoreDefault.default || ignoreDefault;
 import { Minimatch } from 'minimatch';
-import { OpenerService, open } from '@theia/core/lib/browser';
-import { CONSIDER_GITIGNORE_PREF, USER_EXCLUDE_PATTERN_PREF } from '../common/workspace-preferences';
-import { MonacoWorkspace } from '@theia/monaco/lib/browser/monaco-workspace';
-import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service';
+import { OpenerService, open } from '@theia/core/lib/browser/index.js';
+import { CONSIDER_GITIGNORE_PREF, USER_EXCLUDE_PATTERN_PREF } from '../common/workspace-preferences.js';
+import { MonacoWorkspace } from '@theia/monaco/lib/browser/monaco-workspace.js';
+import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service.js';
 import { ProblemManager } from '@theia/markers/lib/browser';
-import { MutableChatRequestModel } from '@theia/ai-chat';
-import { DiagnosticSeverity, Range } from '@theia/core/shared/vscode-languageserver-protocol';
+import { MutableChatRequestModel } from '@theia/ai-chat/lib/common/index.js';
+import { DiagnosticSeverity, Range } from 'vscode-languageserver-protocol';
 
 @injectable()
 export class WorkspaceFunctionScope {

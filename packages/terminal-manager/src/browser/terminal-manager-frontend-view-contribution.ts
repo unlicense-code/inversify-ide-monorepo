@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable } from 'inversify';
 import {
     AbstractViewContribution,
     codicon,
@@ -22,14 +22,14 @@ import {
     KeybindingRegistry,
     MAXIMIZED_CLASS,
     Widget,
-} from '@theia/core/lib/browser';
+} from '@theia/core/lib/browser/index.js';
 import { CommandRegistry, Event, MenuModelRegistry } from '@theia/core';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { BOTTOM_AREA_ID } from '@theia/core/lib/browser/shell/theia-dock-panel';
-import { TerminalManagerCommands, TerminalManagerTreeTypes, TERMINAL_MANAGER_TREE_CONTEXT_MENU } from './terminal-manager-types';
-import { TerminalManagerWidget } from './terminal-manager-widget';
-import { TerminalManagerTreeWidget } from './terminal-manager-tree-widget';
-import { ConfirmDialog, Dialog } from '@theia/core/lib/browser/dialogs';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { BOTTOM_AREA_ID } from '@theia/core/lib/browser/shell/theia-dock-panel.js';
+import { TerminalManagerCommands, TerminalManagerTreeTypes, TERMINAL_MANAGER_TREE_CONTEXT_MENU } from './terminal-manager-types.js';
+import { TerminalManagerWidget } from './terminal-manager-widget.js';
+import { TerminalManagerTreeWidget } from './terminal-manager-tree-widget.js';
+import { ConfirmDialog, Dialog } from '@theia/core/lib/browser/dialogs.js';
 
 @injectable()
 export class TerminalManagerFrontendViewContribution extends AbstractViewContribution<TerminalManagerWidget>

@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { HostedPluginLogViewer } from './hosted-plugin-log-viewer';
-import { HostedPluginManagerClient } from './hosted-plugin-manager-client';
-import { HostedPluginInformer } from './hosted-plugin-informer';
-import { bindHostedPluginPreferences } from '../common/hosted-plugin-preferences';
-import { HostedPluginController } from './hosted-plugin-controller';
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { FrontendApplicationContribution, WebSocketConnectionProvider } from '@theia/core/lib/browser';
-import { HostedPluginFrontendContribution } from './hosted-plugin-frontend-contribution';
-import { CommandContribution } from '@theia/core/lib/common/command';
-import { PluginDevServer, pluginDevServicePath } from '../common/plugin-dev-protocol';
-import { DebugContribution } from '@theia/debug/lib/browser/debug-contribution';
+import { HostedPluginLogViewer } from './hosted-plugin-log-viewer.js';
+import { HostedPluginManagerClient } from './hosted-plugin-manager-client.js';
+import { HostedPluginInformer } from './hosted-plugin-informer.js';
+import { bindHostedPluginPreferences } from '../common/hosted-plugin-preferences.js';
+import { HostedPluginController } from './hosted-plugin-controller.js';
+import { ContainerModule } from 'inversify';
+import { FrontendApplicationContribution, WebSocketConnectionProvider } from '@theia/core/lib/browser/index.js';
+import { HostedPluginFrontendContribution } from './hosted-plugin-frontend-contribution.js';
+import { CommandContribution } from '@theia/core/lib/common/command.js';
+import { PluginDevServer, pluginDevServicePath } from '../common/plugin-dev-protocol.js';
+import { DebugContribution } from '@theia/debug/lib/browser/debug-contribution.js';
 
 export default new ContainerModule((bind, unbind, isBound, rebind) => {
     bindHostedPluginPreferences(bind);

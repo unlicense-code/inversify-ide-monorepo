@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
+import { injectable, inject } from 'inversify';
 import {
     ArrayUtils, CommandRegistry, MenuModelRegistry, nls, PreferenceContribution,
     PreferenceDataProperty, PreferenceSchemaService, PreferenceService
-} from '@theia/core/lib/common';
-import { CommonCommands, CommonMenus, AbstractViewContribution, FrontendApplicationContribution, FrontendApplication } from '@theia/core/lib/browser';
-import { EditorManager } from '@theia/editor/lib/browser/editor-manager';
-import { GettingStartedWidget } from './getting-started-widget';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
-import { PreviewContribution } from '@theia/preview/lib/browser/preview-contribution';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+} from '@theia/core/lib/common/index.js';
+import { CommonCommands, CommonMenus, AbstractViewContribution, FrontendApplicationContribution, FrontendApplication } from '@theia/core/lib/browser/index.js';
+import { EditorManager } from '@theia/editor/lib/browser/editor-manager.js';
+import { GettingStartedWidget } from './getting-started-widget.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state.js';
+import { PreviewContribution } from '@theia/preview/lib/browser/preview-contribution.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 
 /**
  * Triggers opening the `GettingStartedWidget`.

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { RpcServer } from '@theia/core/lib/common/messaging/proxy-factory';
+import { RpcServer } from '@theia/core/lib/common/messaging/proxy-factory.js';
 import { Disposable } from '@theia/core';
 
-export interface TerminalProcessInfo {
+export type TerminalProcessInfo = {
     executable: string
     arguments: string[]
 }
 
-export interface IBaseTerminalServerOptions { }
+export type IBaseTerminalServerOptions = { }
 
-export interface IBaseTerminalServer extends RpcServer<IBaseTerminalClient> {
+export type IBaseTerminalServer = RpcServer<IBaseTerminalClient> & {
     create(IBaseTerminalServerOptions: object): Promise<number>;
     getProcessId(id: number): Promise<number>;
     getProcessInfo(id: number): Promise<TerminalProcessInfo>;
@@ -41,7 +41,7 @@ export namespace IBaseTerminalServer {
     }
 }
 
-export interface IBaseTerminalExitEvent {
+export type IBaseTerminalExitEvent = {
     terminalId: number;
 
     // Either code and reason will be set or signal.
@@ -60,13 +60,13 @@ export enum TerminalExitReason {
     Extension = 4,
 }
 
-export interface IBaseTerminalErrorEvent {
+export type IBaseTerminalErrorEvent = {
     terminalId: number;
     error: Error;
     attached?: boolean;
 }
 
-export interface IBaseTerminalClient {
+export type IBaseTerminalClient = {
     onTerminalExitChanged(event: IBaseTerminalExitEvent): void;
     onTerminalError(event: IBaseTerminalErrorEvent): void;
     updateTerminalEnvVariables(): void;

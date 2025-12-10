@@ -15,14 +15,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { TestContribution, TestItem, TestRunProfileKind, TestService } from '@theia/test/lib/browser/test-service';
+import { TestContribution, TestItem, TestRunProfileKind, TestService } from '@theia/test/lib/browser/test-service.js';
 import { CommandContribution, CommandRegistry, Path, URI } from '@theia/core';
-import { inject, injectable, interfaces } from '@theia/core/shared/inversify';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileSearchService } from '@theia/file-search/lib/common/file-search-service';
-import { FileStatWithMetadata } from '@theia/filesystem/lib/common/files';
-import { TestControllerImpl, TestItemImpl, TestRunImpl } from './test-controller';
+import { inject, injectable, interfaces } from 'inversify';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { FileSearchService } from '@theia/file-search/lib/common/file-search-service.js';
+import { FileStatWithMetadata } from '@theia/filesystem/lib/common/files.js';
+import { TestControllerImpl, TestItemImpl, TestRunImpl } from './test-controller.js';
 
 const testController = new TestControllerImpl('SampleTestController', 'Sample Test Controller');
 testController.onItemsChanged(e => {

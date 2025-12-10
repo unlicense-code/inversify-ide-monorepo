@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,19 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces, Container, injectable } from '@theia/core/shared/inversify';
-import { MenuPath } from '@theia/core';
-import { TreeProps } from '@theia/core/lib/browser/tree';
-import { SourceTreeWidget, TreeElementNode } from '@theia/core/lib/browser/source-tree';
-import { ConsoleItem } from './console-session';
-import { Severity } from '@theia/core/lib/common/severity';
+import { interfaces, injectable } from 'inversify';
+import { MenuPath } from '@theia/core/lib/common/index.js';
+import { TreeProps } from '@theia/core/lib/browser/tree/index.js';
+import { TreeElementNode } from '@theia/core/lib/browser/source-tree/source-tree.js';
+import { SourceTreeWidget } from '@theia/core/lib/browser/source-tree/source-tree-widget.js';
+import { ConsoleItem } from './console-session.js';
+import { Severity } from '@theia/core/lib/common/severity.js';
 
 @injectable()
 export class ConsoleContentWidget extends SourceTreeWidget {
 
     static CONTEXT_MENU: MenuPath = ['console-context-menu'];
 
-    static override createContainer(parent: interfaces.Container, props?: Partial<TreeProps>): Container {
+    static override createContainer(parent: interfaces.Container, props?: Partial<TreeProps>): interfaces.Container {
         const child = SourceTreeWidget.createContainer(parent, {
             contextMenuPath: ConsoleContentWidget.CONTEXT_MENU,
             viewProps: {

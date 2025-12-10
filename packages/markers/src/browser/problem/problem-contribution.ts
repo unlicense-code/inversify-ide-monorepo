@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import debounce = require('@theia/core/shared/lodash.debounce');
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { FrontendApplication, FrontendApplicationContribution, CompositeTreeNode, SelectableTreeNode, Widget, codicon } from '@theia/core/lib/browser';
-import { StatusBar, StatusBarAlignment } from '@theia/core/lib/browser/status-bar/status-bar';
-import { AbstractViewContribution } from '@theia/core/lib/browser/shell/view-contribution';
-import { PROBLEM_KIND, ProblemMarker } from '../../common/problem-marker';
-import { ProblemManager, ProblemStat } from './problem-manager';
-import { ProblemWidget, PROBLEMS_WIDGET_ID } from './problem-widget';
-import { MenuPath, MenuModelRegistry } from '@theia/core/lib/common/menu';
-import { Command, CommandRegistry } from '@theia/core/lib/common/command';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { SelectionService } from '@theia/core/lib/common/selection-service';
-import { ProblemSelection } from './problem-selection';
-import { nls } from '@theia/core/lib/common/nls';
+import debounce from 'lodash/debounce.js';
+import { injectable, inject } from 'inversify';
+import { FrontendApplication, FrontendApplicationContribution, CompositeTreeNode, SelectableTreeNode, Widget, codicon } from '@theia/core/lib/browser/index.js';
+import { StatusBar, StatusBarAlignment } from '@theia/core/lib/browser/status-bar/status-bar.js';
+import { AbstractViewContribution } from '@theia/core/lib/browser/shell/view-contribution.js';
+import { PROBLEM_KIND, ProblemMarker } from '../../common/problem-marker.js';
+import { ProblemManager, ProblemStat } from './problem-manager.js';
+import { ProblemWidget, PROBLEMS_WIDGET_ID } from './problem-widget.js';
+import { MenuPath, MenuModelRegistry } from '@theia/core';
+import { Command, CommandRegistry } from '@theia/core/lib/common/command.js';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { SelectionService } from '@theia/core/lib/common/selection-service.js';
+import { ProblemSelection } from './problem-selection.js';
+import { nls } from '@theia/core/lib/common/nls.js';
 
 export const PROBLEMS_CONTEXT_MENU: MenuPath = [PROBLEM_KIND];
 
@@ -132,16 +132,16 @@ export class ProblemContribution extends AbstractViewContribution<ProblemWidget>
             execute: () => this.collapseAllProblems()
         });
         commands.registerCommand(ProblemsCommands.COLLAPSE_ALL_TOOLBAR, {
-            isEnabled: widget => this.withWidget(widget, () => true),
-            isVisible: widget => this.withWidget(widget, () => true),
-            execute: widget => this.withWidget(widget, () => this.collapseAllProblems())
+            isEnabled: (widget: Widget | undefined) => this.withWidget(widget, () => true),
+            isVisible: (widget: Widget | undefined) => this.withWidget(widget, () => true),
+            execute: (widget: Widget | undefined) => this.withWidget(widget, () => this.collapseAllProblems())
         });
         commands.registerCommand(ProblemsCommands.COPY,
             new ProblemSelection.CommandHandler(this.selectionService, {
                 multi: false,
                 isEnabled: () => true,
                 isVisible: () => true,
-                execute: selection => this.copy(selection)
+                execute: (selection: ProblemSelection) => this.copy(selection)
             })
         );
         commands.registerCommand(ProblemsCommands.COPY_MESSAGE,
@@ -149,13 +149,13 @@ export class ProblemContribution extends AbstractViewContribution<ProblemWidget>
                 multi: false,
                 isEnabled: () => true,
                 isVisible: () => true,
-                execute: selection => this.copyMessage(selection)
+                execute: (selection: ProblemSelection) => this.copyMessage(selection)
             })
         );
         commands.registerCommand(ProblemsCommands.CLEAR_ALL, {
-            isEnabled: widget => this.withWidget(widget, () => true),
-            isVisible: widget => this.withWidget(widget, () => true),
-            execute: widget => this.withWidget(widget, () => this.problemManager.cleanAllMarkers())
+            isEnabled: (widget: Widget | undefined) => this.withWidget(widget, () => true),
+            isVisible: (widget: Widget | undefined) => this.withWidget(widget, () => true),
+            execute: (widget: Widget | undefined) => this.withWidget(widget, () => this.problemManager.cleanAllMarkers())
         });
     }
 

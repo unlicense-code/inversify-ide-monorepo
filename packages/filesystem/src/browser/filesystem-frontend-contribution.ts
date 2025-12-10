@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -27,22 +27,22 @@ import {
     StatefulWidget,
     WidgetManager,
     open
-} from '@theia/core/lib/browser';
-import { MimeService } from '@theia/core/lib/browser/mime-service';
-import { TreeWidgetSelection } from '@theia/core/lib/browser/tree/tree-widget-selection';
-import { Emitter, MaybePromise, SelectionService, isCancelled } from '@theia/core/lib/common';
-import { Command, CommandContribution, CommandRegistry } from '@theia/core/lib/common/command';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import URI from '@theia/core/lib/common/uri';
-import { environment } from '@theia/core/shared/@theia/application-package/lib/environment';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { UserWorkingDirectoryProvider } from '@theia/core/lib/browser/user-working-directory-provider';
-import { FileChangeType, FileChangesEvent, FileOperation } from '../common/files';
-import { FileDialogService, SaveFileDialogProps } from './file-dialog';
-import { FileSelection } from './file-selection';
-import { FileService, UserFileOperationEvent } from './file-service';
-import { FileSystemPreferences } from '../common/filesystem-preferences';
-import { FileUploadService } from '../common/upload/file-upload';
+} from '@theia/core/lib/browser/index.js';
+import { MimeService } from '@theia/core/lib/browser/mime-service.js';
+import { TreeWidgetSelection } from '@theia/core/lib/browser/tree/tree-widget-selection.js';
+import { Emitter, MaybePromise, SelectionService, isCancelled } from '@theia/core/lib/common/index.js';
+import { Command, CommandContribution, CommandRegistry } from '@theia/core';
+import { Deferred } from '@theia/core';
+import { URI } from '@theia/core';
+import { environment } from '@theia/application-package';
+import { inject, injectable } from 'inversify';
+import { UserWorkingDirectoryProvider } from '@theia/core/lib/browser/user-working-directory-provider.js';
+import { FileChangeType, FileChangesEvent, FileOperation } from '../common/files.js';
+import { FileDialogService, SaveFileDialogProps } from './file-dialog/index.js';
+import { FileSelection } from './file-selection.js';
+import { FileService, UserFileOperationEvent } from './file-service.js';
+import { FileSystemPreferences } from '../common/filesystem-preferences.js';
+import { FileUploadService } from '../common/upload/file-upload.js';
 
 export namespace FileSystemCommands {
 
@@ -54,7 +54,7 @@ export namespace FileSystemCommands {
 
 }
 
-export interface NavigatableWidgetMoveSnapshot {
+export type NavigatableWidgetMoveSnapshot = {
     dirty?: object,
     view?: object
 }
@@ -133,7 +133,7 @@ export class FileSystemFrontendContribution implements FrontendApplicationContri
 
     onStart?(app: FrontendApplication): MaybePromise<void> {
         this.updateAssociations();
-        this.preferences.onPreferenceChanged(e => {
+        this.preferences.onPreferenceChanged((e: { preferenceName: string }) => {
             if (e.preferenceName === 'files.associations') {
                 this.updateAssociations();
             }

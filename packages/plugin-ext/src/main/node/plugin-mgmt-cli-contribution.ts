@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { Argv, Arguments } from '@theia/core/shared/yargs';
-import { CliContribution } from '@theia/core/lib/node/cli';
-import { PluginDeployerHandlerImpl } from '../../hosted/node/plugin-deployer-handler-impl';
-import { PluginType } from '../../common';
+import { inject, injectable } from 'inversify';
+import { Argv, Arguments } from 'yargs';
+import { CliContribution } from '@theia/core/lib/node/cli.js';
+import { PluginDeployerHandlerImpl } from '../../hosted/node/plugin-deployer-handler-impl.js';
+import { PluginType } from '../../common/index.js';
 
 @injectable()
 export class PluginMgmtCliContribution implements CliContribution {

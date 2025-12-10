@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { DirtyDiffDecorator } from './dirty-diff-decorator';
-import { DirtyDiffNavigator } from './dirty-diff-navigator';
-import { DirtyDiffWidget, DirtyDiffWidgetFactory, DirtyDiffWidgetProps } from './dirty-diff-widget';
+import { interfaces } from 'inversify';
+import { DirtyDiffDecorator } from './dirty-diff-decorator.js';
+import { DirtyDiffNavigator } from './dirty-diff-navigator.js';
+import { DirtyDiffWidget, DirtyDiffWidgetFactory, DirtyDiffWidgetProps } from './dirty-diff-widget.js';
 
 import '../../../src/browser/style/dirty-diff.css';
 

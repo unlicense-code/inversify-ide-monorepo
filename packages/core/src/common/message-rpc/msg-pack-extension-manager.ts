@@ -58,7 +58,7 @@ export class MsgPackExtensionManager {
     }
 }
 
-export interface MsgPackExtension {
+export type MsgPackExtension = {
     class: Function,
     tag: number,
     serialize(instance: unknown): unknown,

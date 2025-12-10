@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,18 +14,21 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import './keymaps-monaco-contribution';
+import './keymaps-monaco-contribution.js';
 import '../../src/browser/style/index.css';
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { KeymapsService } from './keymaps-service';
-import { KeymapsFrontendContribution } from './keymaps-frontend-contribution';
-import { CommandContribution, MenuContribution } from '@theia/core/lib/common';
-import { KeybindingContribution } from '@theia/core/lib/browser/keybinding';
-import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { noopWidgetStatusBarContribution, WidgetFactory, WidgetStatusBarContribution } from '@theia/core/lib/browser';
-import { KeybindingWidget } from './keybindings-widget';
-import { KeybindingSchemaUpdater } from './keybinding-schema-updater';
-import { JsonSchemaContribution } from '@theia/core/lib/browser/json-schema-store';
+import { ContainerModule } from 'inversify';
+import { KeymapsService } from './keymaps-service.js';
+import { KeymapsFrontendContribution } from './keymaps-frontend-contribution.js';
+import { CommandContribution, MenuContribution } from '@theia/core/lib/common/index.js';
+import { KeybindingContribution } from '@theia/core/lib/browser/keybinding.js';
+import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import {
+    noopWidgetStatusBarContribution, WidgetFactory, WidgetStatusBarContribution
+
+} from '@theia/core/lib/browser/index.js';
+import { KeybindingWidget } from './keybindings-widget.js';
+import { KeybindingSchemaUpdater } from './keybinding-schema-updater.js';
+import { JsonSchemaContribution } from '@theia/core/lib/browser/json-schema-store.js';
 
 export default new ContainerModule(bind => {
     bind(KeymapsService).toSelf().inSingletonScope();

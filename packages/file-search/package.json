@@ -1,6 +1,7 @@
 {
   "name": "@theia/file-search",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - File Search Extension",
   "dependencies": {
     "@theia/core": "1.66.0",

@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
+import { injectable, inject } from 'inversify';
 import { VariableResolverService } from '@theia/variable-resolver/lib/browser';
-import { TaskResolver } from '../task-contribution';
-import { TaskConfiguration } from '../../common/task-protocol';
-import { ProcessTaskConfiguration } from '../../common/process/task-protocol';
-import { TaskDefinitionRegistry } from '../task-definition-registry';
-import URI from '@theia/core/lib/common/uri';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { TaskResolver } from '../task-contribution.js';
+import { TaskConfiguration } from '../../common/task-protocol.js';
+import { ProcessTaskConfiguration } from '../../common/process/task-protocol.js';
+import { TaskDefinitionRegistry } from '../task-definition-registry.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
 
 @injectable()
 export class ProcessTaskResolver implements TaskResolver {

@@ -20,17 +20,17 @@ import {
     ChatResponseContent,
     MutableChatRequestModel,
     SerializableChatResponseContentData,
-} from '@theia/ai-chat';
+} from '@theia/ai-chat/lib/common/index.js';
 import {
     ChatContentDeserializerContribution,
     ChatContentDeserializerRegistry
-} from '@theia/ai-chat/lib/common/chat-content-deserializer';
-import { ChatResponsePartRenderer } from '@theia/ai-chat-ui/lib/browser/chat-response-part-renderer';
+} from '@theia/ai-chat/lib/common/chat-content-deserializer.js';
+import { ChatResponsePartRenderer } from '@theia/ai-chat-ui/lib/browser/chat-response-part-renderer.js';
 import { ResponseNode } from '@theia/ai-chat-ui/lib/browser/chat-tree-view';
-import { Agent } from '@theia/ai-core';
-import { injectable, interfaces } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { ReactNode } from '@theia/core/shared/react';
+import { Agent } from '@theia/ai-core/lib/common/index.js';
+import { injectable, interfaces } from 'inversify';
+import * as React from 'react';
+import { ReactNode } from 'react';
 
 export function bindCustomResponseContentRendererContribution(bind: interfaces.Bind): void {
     bind(CustomResponseContentRendererAgent).toSelf().inSingletonScope();
@@ -47,21 +47,13 @@ export function bindCustomResponseContentRendererContribution(bind: interfaces.B
 // SERIALIZABLE CUSTOM CONTENT
 // =============================================================================
 
-/**
- * Data interface for serializable custom content.
- * This is shared between the implementation and the deserializer.
- */
-export interface CustomSerializableContentData {
+export type CustomSerializableContentData = {
     title: string;
     items: string[];
     timestamp: number;
 }
 
-/**
- * Serializable custom content type.
- * This can be persisted and restored from storage.
- */
-export interface CustomSerializableContent extends ChatResponseContent {
+export type CustomSerializableContent = ChatResponseContent & {
     kind: 'customSerializable';
     title: string;
     items: string[];
@@ -164,10 +156,7 @@ export class CustomSerializableContentRenderer implements ChatResponsePartRender
 // NON-SERIALIZABLE CUSTOM CONTENT
 // =============================================================================
 
-/**
- * Non-serializable custom content type.
- */
-export interface CustomNonSerializableContent extends ChatResponseContent {
+export type CustomNonSerializableContent = ChatResponseContent & {
     kind: 'customNonSerializable';
     message: string;
     onClick: () => void;  // Functions cannot be serialized!

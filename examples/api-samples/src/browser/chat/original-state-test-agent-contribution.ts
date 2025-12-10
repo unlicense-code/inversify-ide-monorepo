@@ -20,13 +20,13 @@ import {
     MutableChatRequestModel,
     MarkdownChatResponseContentImpl,
     SystemMessageDescription
-} from '@theia/ai-chat';
-import { ChangeSetFileElementFactory } from '@theia/ai-chat/lib/browser/change-set-file-element';
-import { Agent, LanguageModelRequirement } from '@theia/ai-core';
-import { inject, injectable, interfaces } from '@theia/core/shared/inversify';
-import { wait } from '@theia/core/lib/common/promise-util';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+} from '@theia/ai-chat/lib/common/index.js';
+import { ChangeSetFileElementFactory } from '@theia/ai-chat/lib/browser/change-set-file-element.js';
+import { Agent, LanguageModelRequirement } from '@theia/ai-core/lib/common/index.js';
+import { inject, injectable, interfaces } from 'inversify';
+import { wait } from '@theia/core/lib/common/promise-util.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
 
 export function bindOriginalStateTestAgentContribution(bind: interfaces.Bind): void {
     bind(OriginalStateTestAgent).toSelf().inSingletonScope();

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -25,10 +25,10 @@
 /* eslint-disable @typescript-eslint/tslint/config */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { DisposableCollection, Disposable } from './disposable';
-import { BinaryBuffer } from './buffer';
+import { DisposableCollection, Disposable } from './disposable.js';
+import { BinaryBuffer } from './buffer.js';
 
-export interface ReadableStreamEvents<T> {
+export type ReadableStreamEvents<T> = {
 
     /**
      * The 'data' event is emitted whenever the stream is
@@ -49,11 +49,7 @@ export interface ReadableStreamEvents<T> {
     on(event: 'end', callback: () => void): void;
 }
 
-/**
- * A interface that emulates the API shape of a node.js readable
- * stream for use in desktop and web environments.
- */
-export interface ReadableStream<T> extends ReadableStreamEvents<T> {
+export type ReadableStream<T> = ReadableStreamEvents<T> & {
 
     /**
      * Stops emitting any events until resume() is called.
@@ -76,11 +72,7 @@ export interface ReadableStream<T> extends ReadableStreamEvents<T> {
     removeListener(event: string, callback: Function): void;
 }
 
-/**
- * A interface that emulates the API shape of a node.js readable
- * for use in desktop and web environments.
- */
-export interface Readable<T> {
+export type Readable<T> = {
 
     /**
      * Read data from the underlying source. Will return
@@ -114,11 +106,7 @@ export namespace Readable {
     }
 }
 
-/**
- * A interface that emulates the API shape of a node.js writeable
- * stream for use in desktop and web environments.
- */
-export interface WriteableStream<T> extends ReadableStream<T> {
+export type WriteableStream<T> = ReadableStream<T> & {
 
     /**
      * Writing data to the stream will trigger the on('data')
@@ -151,13 +139,7 @@ export interface WriteableStream<T> extends ReadableStream<T> {
     end(result?: T | Error): void;
 }
 
-/**
- * A stream that has a buffer already read. Returns the original stream
- * that was read as well as the chunks that got read.
- *
- * The `ended` flag indicates if the stream has been fully consumed.
- */
-export interface ReadableBufferedStream<T> {
+export type ReadableBufferedStream<T> = {
 
     /**
      * The original stream that is being read.
@@ -188,19 +170,19 @@ export function isReadableBufferedStream<T>(obj: unknown): obj is ReadableBuffer
     return candidate && isReadableStream(candidate.stream) && Array.isArray(candidate.buffer) && typeof candidate.ended === 'boolean';
 }
 
-export interface Reducer<T> {
+export type Reducer<T> = {
     (data: T[]): T;
 }
 
-export interface DataTransformer<Original, Transformed> {
+export type DataTransformer<Original, Transformed> = {
     (data: Original): Transformed;
 }
 
-export interface ErrorTransformer {
+export type ErrorTransformer = {
     (error: Error): Error;
 }
 
-export interface ITransformer<Original, Transformed> {
+export type ITransformer<Original, Transformed> = {
     data: DataTransformer<Original, Transformed>;
     error?: ErrorTransformer;
 }
@@ -209,7 +191,7 @@ export function newWriteableStream<T>(reducer: Reducer<T>, options?: WriteableSt
     return new WriteableStreamImpl<T>(reducer, options);
 }
 
-export interface WriteableStreamOptions {
+export type WriteableStreamOptions = {
 
     /**
      * The number of objects to buffer before WriteableStream#write()

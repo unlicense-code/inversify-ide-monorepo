@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import URI from '@theia/core/lib/common/uri';
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { WorkspaceUtils } from './workspace-utils';
-import { WorkspaceService } from './workspace-service';
-import { UriCommandHandler } from '@theia/core/lib/common/uri-command-handler';
-import { FileSystemUtils } from '@theia/filesystem/lib/common/filesystem-utils';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { injectable, inject } from 'inversify';
+import { WorkspaceUtils } from './workspace-utils.js';
+import { WorkspaceService } from './workspace-service.js';
+import { UriCommandHandler } from '@theia/core/lib/common/uri-command-handler.js';
+import { FileSystemUtils } from '@theia/filesystem/lib/common/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/index.js';
 
 @injectable()
 export class WorkspaceDuplicateHandler implements UriCommandHandler<URI[]> {

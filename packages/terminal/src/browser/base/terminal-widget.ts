@@ -15,20 +15,20 @@
 // *****************************************************************************
 
 import { Event, ViewColumn } from '@theia/core';
-import { BaseWidget } from '@theia/core/lib/browser';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/markdown-string';
-import { ThemeIcon } from '@theia/core/lib/common/theme';
-import { CommandLineOptions } from '@theia/process/lib/common/shell-command-builder';
-import { TerminalSearchWidget } from '../search/terminal-search-widget';
-import { TerminalProcessInfo, TerminalExitReason } from '../../common/base-terminal-protocol';
-import URI from '@theia/core/lib/common/uri';
+import { BaseWidget } from '@theia/core/lib/browser/index.js';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/markdown-string.js';
+import { ThemeIcon } from '@theia/core/lib/common/theme.js';
+import { CommandLineOptions } from '@theia/process/lib/common/shell-command-builder.js';
+import { TerminalSearchWidget } from '../search/terminal-search-widget.js';
+import { TerminalProcessInfo, TerminalExitReason } from '../../common/base-terminal-protocol.js';
+import { URI } from '@theia/core/lib/common/uri.js';
 
-export interface TerminalDimensions {
+export type TerminalDimensions = {
     cols: number;
     rows: number;
 }
 
-export interface TerminalExitStatus {
+export type TerminalExitStatus = {
     readonly code: number | undefined;
     readonly reason: TerminalExitReason;
 }
@@ -40,16 +40,16 @@ export enum TerminalLocation {
     Editor = 2
 }
 
-export interface TerminalEditorLocation {
+export type TerminalEditorLocation = {
     readonly viewColumn: ViewColumn;
     readonly preserveFocus?: boolean;
 }
 
-export interface TerminalSplitLocation {
+export type TerminalSplitLocation = {
     readonly parentTerminal: string;
 }
 
-export interface TerminalBuffer {
+export type TerminalBuffer = {
     readonly length: number;
     /**
      * @param start zero based index of the first line to return
@@ -187,7 +187,7 @@ export abstract class TerminalWidget extends BaseWidget {
  * Terminal widget options.
  */
 export const TerminalWidgetOptions = Symbol('TerminalWidgetOptions');
-export interface TerminalWidgetOptions {
+export type TerminalWidgetOptions = {
 
     /**
      * Human readable terminal representation on the UI.

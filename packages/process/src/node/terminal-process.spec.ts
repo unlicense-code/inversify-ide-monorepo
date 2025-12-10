@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,10 +16,10 @@
 import * as chai from 'chai';
 import * as process from 'process';
 import * as stream from 'stream';
-import { createProcessTestContainer } from './test/process-test-container';
-import { TerminalProcessFactory } from './terminal-process';
-import { IProcessExitEvent, ProcessErrorEvent } from './process';
-import { isWindows } from '@theia/core/lib/common/os';
+import { createProcessTestContainer } from './test/process-test-container.js';
+import { TerminalProcessFactory } from './terminal-process.js';
+import { IProcessExitEvent, ProcessErrorEvent } from './process.js';
+import { isWindows } from '@theia/core/lib/common/os.js';
 
 /**
  * Globals

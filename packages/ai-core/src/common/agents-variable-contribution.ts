@@ -13,10 +13,10 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { AIVariable, AIVariableContext, AIVariableContribution, AIVariableResolutionRequest, AIVariableResolver, AIVariableService, ResolvedAIVariable } from './variable-service';
+import { inject, injectable } from 'inversify';
+import { AIVariable, AIVariableContext, AIVariableContribution, AIVariableResolutionRequest, AIVariableResolver, AIVariableService, ResolvedAIVariable } from './variable-service.js';
 import { MaybePromise, nls } from '@theia/core';
-import { AgentService } from './agent-service';
+import { AgentService } from './agent-service.js';
 
 export const AGENTS_VARIABLE: AIVariable = {
     id: 'agents',
@@ -24,11 +24,11 @@ export const AGENTS_VARIABLE: AIVariable = {
     description: nls.localize('theia/ai/core/agentsVariable/description', 'Returns the list of agents available in the system')
 };
 
-export interface ResolvedAgentsVariable extends ResolvedAIVariable {
+export type ResolvedAgentsVariable = ResolvedAIVariable & {
     agents: AgentDescriptor[];
 }
 
-export interface AgentDescriptor {
+export type AgentDescriptor = {
     id: string;
     name: string;
     description: string;

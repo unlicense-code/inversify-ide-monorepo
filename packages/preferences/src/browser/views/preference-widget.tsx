@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { postConstruct, injectable, inject } from '@theia/core/shared/inversify';
-import { Panel, Widget, Message, StatefulWidget, codicon } from '@theia/core/lib/browser';
-import { PreferencesEditorState, PreferencesEditorWidget } from './preference-editor-widget';
-import { PreferencesTreeWidget } from './preference-tree-widget';
-import { PreferencesSearchbarState, PreferencesSearchbarWidget } from './preference-searchbar-widget';
-import { PreferencesScopeTabBar, PreferencesScopeTabBarState } from './preference-scope-tabbar-widget';
-import { Preference } from '../util/preference-types';
-import URI from '@theia/core/lib/common/uri';
-import { nls } from '@theia/core/lib/common/nls';
+import { postConstruct, injectable, inject } from 'inversify';
+import { Panel, Widget, Message, StatefulWidget, codicon } from '@theia/core/lib/browser/index.js';
+import { PreferencesEditorState, PreferencesEditorWidget } from './preference-editor-widget.js';
+import { PreferencesTreeWidget } from './preference-tree-widget.js';
+import { PreferencesSearchbarState, PreferencesSearchbarWidget } from './preference-searchbar-widget.js';
+import { PreferencesScopeTabBar, PreferencesScopeTabBarState } from './preference-scope-tabbar-widget.js';
+import { Preference } from '../util/preference-types.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 import { PreferenceScope } from '@theia/core';
 
-interface PreferencesWidgetState {
+type PreferencesWidgetState = {
     scopeTabBarState: PreferencesScopeTabBarState,
     editorState: PreferencesEditorState,
     searchbarWidgetState: PreferencesSearchbarState,

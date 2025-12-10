@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017-2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
+import { injectable, inject, postConstruct } from 'inversify';
 import {
     TreeWidget,
     TreeNode,
@@ -26,19 +26,16 @@ import {
     TreeModel,
     ExpandableTreeNode,
     codicon
-} from '@theia/core/lib/browser';
-import { OutlineViewTreeModel } from './outline-view-tree-model';
-import { Message } from '@theia/core/shared/@lumino/messaging';
-import { Emitter, Event, isObject, Mutable, UriSelection } from '@theia/core';
-import * as React from '@theia/core/shared/react';
-import { Range } from '@theia/core/shared/vscode-languageserver-protocol';
-import URI from '@theia/core/lib/common/uri';
-import { nls } from '@theia/core/lib/common/nls';
+} from '@theia/core/lib/browser/index.js';
+import { OutlineViewTreeModel } from './outline-view-tree-model.js';
+import { Message } from '@lumino/messaging';
+import { Emitter, Event, isObject, Mutable, UriSelection } from '@theia/core/lib/common/index.js';
+import * as React from 'react';
+import { Range } from 'vscode-languageserver-protocol';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
-/**
- * Representation of an outline symbol information node.
- */
-export interface OutlineSymbolInformationNode extends CompositeTreeNode, SelectableTreeNode, ExpandableTreeNode {
+export type OutlineSymbolInformationNode = CompositeTreeNode & SelectableTreeNode & ExpandableTreeNode & {
     /**
      * The `iconClass` for the given tree node.
      */

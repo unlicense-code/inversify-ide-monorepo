@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,24 +14,24 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Widget } from '@theia/core/shared/@lumino/widgets';
-import { injectable, inject, optional } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { MaybePromise } from '@theia/core/lib/common/types';
-import { codicon, QuickInputService } from '@theia/core/lib/browser';
-import { ApplicationShell } from '@theia/core/lib/browser/shell';
-import { Command, CommandContribution, CommandRegistry } from '@theia/core/lib/common/command';
-import { MenuContribution, MenuModelRegistry } from '@theia/core/lib/common/menu';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { NavigatableWidget, NavigatableWidgetOpenHandler } from '@theia/core/lib/browser/navigatable';
-import { open, OpenerService } from '@theia/core/lib/browser/opener-service';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser/frontend-application-contribution';
-import { WidgetOpenerOptions } from '@theia/core/lib/browser/widget-open-handler';
-import { MiniBrowserService } from '../common/mini-browser-service';
-import { MiniBrowser, MiniBrowserProps } from './mini-browser';
-import { LocationMapperService } from './location-mapper-service';
-import { nls } from '@theia/core/lib/common/nls';
+import { Widget } from '@lumino/widgets';
+import { injectable, inject, optional } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { MaybePromise } from '@theia/core/lib/common/types.js';
+import { codicon, QuickInputService } from '@theia/core/lib/browser/index.js';
+import { ApplicationShell } from '@theia/core/lib/browser/shell/index.js';
+import { Command, CommandContribution, CommandRegistry } from '@theia/core/lib/common/command.js';
+import { MenuContribution, MenuModelRegistry } from '@theia/core';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { NavigatableWidget, NavigatableWidgetOpenHandler } from '@theia/core/lib/browser/navigatable.js';
+import { open, OpenerService } from '@theia/core/lib/browser/opener-service.js';
+import { LabelProvider } from '@theia/core/lib/browser/label-provider.js';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser/frontend-application-contribution.js';
+import { WidgetOpenerOptions } from '@theia/core/lib/browser/widget-open-handler.js';
+import { MiniBrowserService } from '../common/mini-browser-service.js';
+import { MiniBrowser, MiniBrowserProps } from './mini-browser.js';
+import { LocationMapperService } from './location-mapper-service.js';
+import { nls } from '@theia/core/lib/common/nls.js';
 
 export namespace MiniBrowserCommands {
 
@@ -54,10 +54,7 @@ export namespace MiniBrowserCommands {
     });
 }
 
-/**
- * Further options for opening a new `Mini Browser` widget.
- */
-export interface MiniBrowserOpenerOptions extends WidgetOpenerOptions, MiniBrowserProps {
+export type MiniBrowserOpenerOptions = WidgetOpenerOptions & MiniBrowserProps & {
     /**
      * Controls how the mini-browser widget should be opened.
      * - `source`: editable source.
@@ -196,14 +193,14 @@ export class MiniBrowserOpenHandler extends NavigatableWidgetOpenHandler<MiniBro
 
     registerCommands(commands: CommandRegistry): void {
         commands.registerCommand(MiniBrowserCommands.PREVIEW, {
-            execute: widget => this.preview(widget),
-            isEnabled: widget => this.canPreviewWidget(widget),
-            isVisible: widget => this.canPreviewWidget(widget)
+            execute: (widget: unknown) => this.preview(widget as Widget | undefined),
+            isEnabled: (widget: unknown) => this.canPreviewWidget(widget as Widget | undefined),
+            isVisible: (widget: unknown) => this.canPreviewWidget(widget as Widget | undefined)
         });
         commands.registerCommand(MiniBrowserCommands.OPEN_SOURCE, {
-            execute: widget => this.openSource(widget),
-            isEnabled: widget => !!this.getSourceUri(widget),
-            isVisible: widget => !!this.getSourceUri(widget)
+            execute: (widget: unknown) => this.openSource(widget as Widget | undefined),
+            isEnabled: (widget: unknown) => !!this.getSourceUri(widget as Widget | undefined),
+            isVisible: (widget: unknown) => !!this.getSourceUri(widget as Widget | undefined)
         });
         commands.registerCommand(MiniBrowserCommands.OPEN_URL, {
             execute: (arg?: string) => this.openUrl(arg)

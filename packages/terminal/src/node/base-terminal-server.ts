@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import { ILogger, DisposableCollection } from '@theia/core/lib/common';
+import { inject, injectable, named } from 'inversify';
+import { ILogger, DisposableCollection } from '@theia/core/lib/common/index.js';
 import {
     IBaseTerminalServer,
     IBaseTerminalServerOptions,
     IBaseTerminalClient,
     TerminalProcessInfo,
     TerminalExitReason
-} from '../common/base-terminal-protocol';
-import { TerminalProcess, ProcessManager, TaskTerminalProcess } from '@theia/process/lib/node';
-import { ShellProcess } from './shell-process';
+} from '../common/base-terminal-protocol.js';
+import { TerminalProcess, ProcessManager, TaskTerminalProcess } from '@theia/process/lib/node/index.js';
+import { ShellProcess } from './shell-process.js';
 
 @injectable()
 export abstract class BaseTerminalServer implements IBaseTerminalServer {

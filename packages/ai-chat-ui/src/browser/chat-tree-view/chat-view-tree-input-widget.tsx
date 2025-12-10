@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, optional, postConstruct } from '@theia/core/shared/inversify';
-import { AIChatInputWidget, type AIChatInputConfiguration } from '../chat-input-widget';
-import type { EditableRequestNode } from './chat-view-tree-widget';
+import { inject, injectable, optional, postConstruct } from 'inversify';
+import { AIChatInputWidget, type AIChatInputConfiguration } from '../chat-input-widget.js';
+import type { EditableRequestNode } from './chat-view-tree-widget.js';
 import { URI } from '@theia/core';
-import { CHAT_VIEW_LANGUAGE_EXTENSION } from '../chat-view-language-contribution';
-import type { ChatRequestModel, EditableChatRequestModel, ChatHierarchyBranch } from '@theia/ai-chat';
-import type { AIVariableResolutionRequest } from '@theia/ai-core';
-import { Key } from '@theia/core/lib/browser';
+import { CHAT_VIEW_LANGUAGE_EXTENSION } from '../chat-view-language-contribution.js';
+import type { ChatRequestModel, EditableChatRequestModel, ChatHierarchyBranch } from '@theia/ai-chat/lib/common/index.js';
+import type { AIVariableResolutionRequest } from '@theia/ai-core/lib/common/index.js';
+import { Key } from '@theia/core/lib/browser/index.js';
 
 export const AIChatTreeInputConfiguration = Symbol('AIChatTreeInputConfiguration');
-export interface AIChatTreeInputConfiguration extends AIChatInputConfiguration { }
+export type AIChatTreeInputConfiguration = AIChatInputConfiguration & { }
 
 export const AIChatTreeInputArgs = Symbol('AIChatTreeInputArgs');
-export interface AIChatTreeInputArgs {
+export type AIChatTreeInputArgs = {
     node: EditableRequestNode;
     /**
      * The branch of the chat tree for this request node (used by the input widget for state tracking).
@@ -51,7 +51,7 @@ export class AIChatTreeInputWidget extends AIChatInputWidget {
     protected readonly args: AIChatTreeInputArgs;
 
     @inject(AIChatTreeInputConfiguration) @optional()
-    protected override readonly configuration: AIChatTreeInputConfiguration | undefined;
+    protected declare readonly configuration: AIChatTreeInputConfiguration | undefined;
 
     get requestNode(): EditableRequestNode {
         return this.args.node;

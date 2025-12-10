@@ -14,21 +14,21 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, optional } from '@theia/core/shared/inversify';
+import { injectable, inject, optional } from 'inversify';
 import {
     DiffUris, TreeWidget, TreeProps, ContextMenuRenderer, TreeNode, TreeModel,
     CompositeTreeNode, NodeProps, QuickViewService
-} from '@theia/core/lib/browser';
-import * as React from '@theia/core/shared/react';
-import { BulkEditInfoNode, BulkEditNode } from './bulk-edit-tree';
-import { BulkEditTreeModel } from './bulk-edit-tree-model';
-import { FileResourceResolver } from '@theia/filesystem/lib/browser';
-import URI from '@theia/core/lib/common/uri';
-import { EditorWidget, EditorManager, EditorOpenerOptions } from '@theia/editor/lib/browser';
-import { MEMORY_TEXT } from '@theia/core/lib/common';
-import { Disposable } from '@theia/core/lib/common/disposable';
-import { nls } from '@theia/core/lib/common/nls';
-import { ResourceEdit, ResourceFileEdit, ResourceTextEdit } from '@theia/monaco-editor-core/esm/vs/editor/browser/services/bulkEditService';
+} from '@theia/core/lib/browser/index.js';
+import * as React from 'react';
+import { BulkEditInfoNode, BulkEditNode } from './bulk-edit-tree.js';
+import { BulkEditTreeModel } from './bulk-edit-tree-model.js';
+import { FileResourceResolver } from '@theia/filesystem/lib/browser/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { EditorWidget, EditorManager, EditorOpenerOptions } from '@theia/editor/lib/browser/index.js';
+import { MEMORY_TEXT } from '@theia/core/lib/common/index.js';
+import { Disposable } from '@theia/core/lib/common/disposable.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { ResourceEdit, ResourceFileEdit, ResourceTextEdit } from '@theia/monaco-editor-core/esm/vs/editor/browser/services/bulkEditService.js';
 
 export const BULK_EDIT_TREE_WIDGET_ID = 'bulkedit';
 export const BULK_EDIT_WIDGET_NAME = nls.localizeByDefault('Refactor Preview');

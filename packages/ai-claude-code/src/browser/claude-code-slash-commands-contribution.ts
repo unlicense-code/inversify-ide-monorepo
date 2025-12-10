@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { PromptService } from '@theia/ai-core/lib/common/prompt-service';
+import { PromptService } from '@theia/ai-core/lib/common/prompt-service.js';
 import { DisposableCollection, ILogger, nls, URI } from '@theia/core';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileChangeType } from '@theia/filesystem/lib/common/files';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { CLAUDE_CHAT_AGENT_ID } from './claude-code-chat-agent';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
+import { inject, injectable, named } from 'inversify';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { FileChangeType } from '@theia/filesystem/lib/common/files.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { CLAUDE_CHAT_AGENT_ID } from './claude-code-chat-agent.js';
 
 const CLAUDE_COMMANDS = '.claude/commands';
 const COMMAND_FRAGMENT_PREFIX = 'claude-code-slash-';
 const DYNAMIC_COMMAND_PREFIX = 'claude-code-dynamic-';
 
-interface StaticSlashCommand {
+type StaticSlashCommand = {
     name: string;
     description: string;
 }

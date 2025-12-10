@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import * as assert from 'assert';
-import { TreeNode, CompositeTreeNode } from './tree';
-import { TreeModel } from './tree-model';
-import { MockTreeModel } from './test/mock-tree-model';
+import { TreeNode, CompositeTreeNode } from './tree.js';
+import { TreeModel } from './tree-model.js';
+import { MockTreeModel } from './test/mock-tree-model.js';
 import { expect } from 'chai';
-import { createTreeTestContainer } from './test/tree-test-container';
+import { createTreeTestContainer } from './test/tree-test-container.js';
 
 describe('Tree', () => {
 

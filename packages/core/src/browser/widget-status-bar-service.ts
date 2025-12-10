@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,15 +15,15 @@
 // *****************************************************************************
 
 import { inject, injectable, named } from 'inversify';
-import { Widget } from './widgets';
-import { StatusBar } from './status-bar';
-import { FrontendApplicationContribution } from './frontend-application-contribution';
-import { ContributionProvider } from '../common';
-import { FrontendApplication } from './frontend-application';
+import { Widget } from './widgets/index.js';
+import { StatusBar } from './status-bar/index.js';
+import { FrontendApplicationContribution } from './frontend-application-contribution.js';
+import { ContributionProvider } from '../common/index.js';
+import { FrontendApplication } from './frontend-application.js';
 
 export const WidgetStatusBarContribution = Symbol('WidgetStatusBarContribution');
 
-export interface WidgetStatusBarContribution<T extends Widget> {
+export type WidgetStatusBarContribution<T extends Widget> = {
     canHandle(widget: Widget): widget is T;
     activate(statusBar: StatusBar, widget: T): void;
     deactivate(statusBar: StatusBar): void;

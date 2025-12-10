@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { BackendApplicationServer } from '@theia/core/lib/node';
-import express = require('@theia/core/shared/express');
+import { injectable } from 'inversify';
+import { BackendApplicationServer } from '@theia/core/lib/node/index.js';
+import express = require('express');
 
 @injectable()
 export class SampleBackendApplicationServer implements BackendApplicationServer {

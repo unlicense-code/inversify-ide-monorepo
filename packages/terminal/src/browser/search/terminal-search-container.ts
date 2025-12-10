@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { TerminalSearchWidget, TerminalSearchWidgetFactory } from './terminal-search-widget';
+import { interfaces } from 'inversify';
+import { TerminalSearchWidget, TerminalSearchWidgetFactory } from './terminal-search-widget.js';
 import { Terminal } from 'xterm';
 
 export function createTerminalSearchFactory(container: interfaces.Container): TerminalSearchWidgetFactory {

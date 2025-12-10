@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Range } from '@theia/core/shared/vscode-languageserver-protocol';
+import { Range } from 'vscode-languageserver-protocol';
 
-export interface EditorDecoration {
+export type EditorDecoration = {
     /**
      * range to which this decoration instance is applied.
      */
@@ -27,7 +27,7 @@ export interface EditorDecoration {
     options: EditorDecorationOptions
 }
 
-export interface EditorDecorationOptions {
+export type EditorDecorationOptions = {
     /**
      * behavior of decorations when typing/editing near their edges.
      */
@@ -96,7 +96,7 @@ export interface EditorDecorationOptions {
     showIfCollapsed?: boolean;
 }
 
-export interface DecorationOptions {
+export type DecorationOptions = {
     /**
      * color of the decoration in the overview ruler.
      * use `rgba` values to play well with other decorations.
@@ -114,11 +114,11 @@ export enum MinimapPosition {
     Gutter = 2
 }
 
-export interface DecorationMinimapOptions extends DecorationOptions {
+export type DecorationMinimapOptions = DecorationOptions & {
     position: MinimapPosition;
 }
 
-export interface DecorationOverviewRulerOptions extends DecorationOptions {
+export type DecorationOverviewRulerOptions = DecorationOptions & {
     /**
      * position in the overview ruler.
      */

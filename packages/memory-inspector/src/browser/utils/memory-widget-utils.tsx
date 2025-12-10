@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2021 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import Long from 'long';
-import { VariableRange, VariableDecoration } from './memory-widget-variable-utils';
+import { VariableRange, VariableDecoration } from './memory-widget-variable-utils.js';
 
 export namespace Constants {
     export const DEBOUNCE_TIME = 200;
@@ -110,14 +110,14 @@ export namespace Interfaces {
 }
 
 export const MemoryWidgetOptions = Symbol('MemoryWidgetOptions');
-export interface MemoryWidgetOptions {
+export type MemoryWidgetOptions = {
     identifier: string | number;
     displayId?: string | number;
     dynamic?: boolean;
 }
 
 export const MemoryDiffWidgetData = Symbol('MemoryDiffWidgetData');
-export interface MemoryDiffWidgetData extends MemoryWidgetOptions {
+export type MemoryDiffWidgetData = MemoryWidgetOptions & {
     beforeAddress: Long;
     beforeBytes: Interfaces.LabeledUint8Array;
     beforeVariables: VariableRange[];

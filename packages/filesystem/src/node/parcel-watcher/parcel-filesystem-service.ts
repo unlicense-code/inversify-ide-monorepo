@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017-2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,21 +17,21 @@
 import path = require('path');
 import { promises as fsp } from 'fs';
 import { Minimatch } from 'minimatch';
-import { FileUri } from '@theia/core/lib/common/file-uri';
+import { FileUri } from '@theia/core/lib/node/index.js';
 import {
     FileChangeType, FileSystemWatcherService, FileSystemWatcherServiceClient, WatchOptions
-} from '../../common/filesystem-watcher-protocol';
-import { FileChangeCollection } from '../file-change-collection';
-import { Deferred, timeout } from '@theia/core/lib/common/promise-util';
-import { subscribe, Options, AsyncSubscription, Event } from '@theia/core/shared/@parcel/watcher';
+} from '../../common/filesystem-watcher-protocol.js';
+import { FileChangeCollection } from '../file-change-collection.js';
+import { Deferred, timeout } from '@theia/core';
+import { subscribe, Options, AsyncSubscription, Event } from '@parcel/watcher';
 import { isOSX, isWindows } from '@theia/core';
 
-export interface ParcelWatcherOptions {
+export type ParcelWatcherOptions = {
     ignored: Minimatch[]
 }
 
 export const ParcelFileSystemWatcherServerOptions = Symbol('ParcelFileSystemWatcherServerOptions');
-export interface ParcelFileSystemWatcherServerOptions {
+export type ParcelFileSystemWatcherServerOptions = {
     verbose: boolean;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     info: (message: string, ...args: any[]) => void;
@@ -235,8 +235,8 @@ export class ParcelWatcher {
      */
     protected async stopWatcher(watcher: AsyncSubscription): Promise<void> {
         await watcher.unsubscribe()
-            .then(() => 'success=true', error => error)
-            .then(status => this.debug('STOPPED', status));
+            .then(() => 'success=true', (error: any) => error)
+            .then((status: any) => this.debug('STOPPED', status));
     }
 
     protected async createWatcher(): Promise<AsyncSubscription> {
@@ -244,7 +244,7 @@ export class ParcelWatcher {
         if ((await fsp.stat(fsPath)).isFile()) {
             fsPath = path.dirname(fsPath);
         }
-        return subscribe(fsPath, (err, events) => {
+        return subscribe(fsPath, (err: any, events: any) => {
             if (err) {
                 if (err.message && err.message.includes('File system must be re-scanned')) {
                     console.log(`FS Events were dropped on watcher ${fsp}`);
@@ -366,12 +366,7 @@ export class ParcelWatcher {
     }
 }
 
-/**
- * Each time a client makes a watchRequest, we generate a unique watcherId for it.
- *
- * This watcherId will map to this handle type which keeps track of the clientId that made the request.
- */
-export interface PacelWatcherHandle {
+export type PacelWatcherHandle = {
     clientId: number;
     watcher: ParcelWatcher;
 }

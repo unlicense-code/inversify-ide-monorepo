@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,14 +15,14 @@
 // *****************************************************************************
 
 import * as chai from 'chai';
-import { SelectionService } from './selection-service';
-import { MaybeArray } from './types';
-import URI from './uri';
-import { UriAwareCommandHandler, UriCommandHandler } from './uri-command-handler';
+import { SelectionService } from './selection-service.js';
+import { MaybeArray } from './types.js';
+import URI from './uri.js';
+import { UriAwareCommandHandler, UriCommandHandler } from './uri-command-handler.js';
 
 const expect = chai.expect;
 
-interface CommandHandlerMock extends UriCommandHandler<MaybeArray<URI>> {
+type CommandHandlerMock = UriCommandHandler<MaybeArray<URI>> & {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     lastCall: any[];
 }

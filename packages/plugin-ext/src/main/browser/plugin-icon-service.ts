@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Endpoint } from '@theia/core/lib/browser';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { URI } from '@theia/core/shared/vscode-uri';
-import { MonacoIconRegistry } from '@theia/monaco/lib/browser/monaco-icon-registry';
+import { Endpoint } from '@theia/core/lib/browser/index.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { inject, injectable } from 'inversify';
+import { URI } from 'vscode-uri';
+import { MonacoIconRegistry } from '@theia/monaco/lib/browser/monaco-icon-registry.js';
 import * as path from 'path';
-import { IconContribution, DeployedPlugin, IconDefinition } from '../../common/plugin-protocol';
+import { IconContribution, DeployedPlugin, IconDefinition } from '../../common/plugin-protocol.js';
 
 @injectable()
 export class PluginIconService implements Disposable {

@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 import { AbstractStreamParsingChatAgent, ChatRequestModel, ChatService, ChatSession, MutableChatModel, MutableChatRequestModel } from '@theia/ai-chat/lib/common';
-import { LanguageModelRequirement } from '@theia/ai-core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { architectSystemVariants } from '../common/architect-prompt-template';
+import { LanguageModelRequirement } from '@theia/ai-core/lib/common/index.js';
+import { inject, injectable } from 'inversify';
+import { architectSystemVariants } from '../common/architect-prompt-template.js';
 import { nls } from '@theia/core';
 import { MarkdownStringImpl } from '@theia/core/lib/common/markdown-rendering';
-import { AI_SUMMARIZE_SESSION_AS_TASK_FOR_CODER, AI_UPDATE_TASK_CONTEXT_COMMAND } from '../common/summarize-session-commands';
+import { AI_SUMMARIZE_SESSION_AS_TASK_FOR_CODER, AI_UPDATE_TASK_CONTEXT_COMMAND } from '../common/summarize-session-commands.js';
 
 @injectable()
 export class ArchitectAgent extends AbstractStreamParsingChatAgent {

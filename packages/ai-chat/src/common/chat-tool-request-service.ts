@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ToolRequest } from '@theia/ai-core';
-import { injectable } from '@theia/core/shared/inversify';
-import { MutableChatRequestModel } from './chat-model';
+import { ToolRequest } from '@theia/ai-core/lib/common/index.js';
+import { injectable } from 'inversify';
+import { MutableChatRequestModel } from './chat-model.js';
 
-export interface ChatToolRequest extends ToolRequest {
+export type ChatToolRequest = ToolRequest & {
     handler(arg_string: string, context: MutableChatRequestModel): ReturnType<ToolRequest['handler']>;
     handler(arg_string: string, ctx?: unknown): ReturnType<ToolRequest['handler']>;
 }

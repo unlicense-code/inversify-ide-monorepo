@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,9 +16,9 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { UserPreferenceProvider, UserPreferenceProviderFactory } from '../common/user-preference-provider';
+import { inject, injectable, postConstruct } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { UserPreferenceProvider, UserPreferenceProviderFactory } from '../common/user-preference-provider.js';
 import { PreferenceProviderImpl, PreferenceConfigurations, PreferenceResolveResult, PreferenceUtils } from '@theia/core';
 
 export const UserStorageLocationProvider = Symbol('UserStorageLocationProvider');

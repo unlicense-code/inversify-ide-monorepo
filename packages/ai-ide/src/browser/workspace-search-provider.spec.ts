@@ -16,14 +16,14 @@
 
 import { expect } from 'chai';
 import { CancellationTokenSource, PreferenceService } from '@theia/core';
-import { WorkspaceSearchProvider } from './workspace-search-provider';
-import { MutableChatRequestModel, MutableChatResponseModel } from '@theia/ai-chat';
-import { Container } from '@theia/core/shared/inversify';
-import { SearchInWorkspaceService, SearchInWorkspaceCallbacks } from '@theia/search-in-workspace/lib/browser/search-in-workspace-service';
-import { WorkspaceFunctionScope } from './workspace-functions';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { URI } from '@theia/core/lib/common/uri';
-import { SearchInWorkspaceOptions } from '@theia/search-in-workspace/lib/common/search-in-workspace-interface';
+import { WorkspaceSearchProvider } from './workspace-search-provider.js';
+import { MutableChatRequestModel, MutableChatResponseModel } from '@theia/ai-chat/lib/common/index.js';
+import { Container } from 'inversify';
+import { SearchInWorkspaceService, SearchInWorkspaceCallbacks } from '@theia/search-in-workspace/lib/browser/search-in-workspace-service.js';
+import { WorkspaceFunctionScope } from './workspace-functions.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { SearchInWorkspaceOptions } from '@theia/search-in-workspace/lib/common/search-in-workspace-interface.js';
 
 describe('Workspace Search Provider Cancellation Tests', () => {
     let cancellationTokenSource: CancellationTokenSource;

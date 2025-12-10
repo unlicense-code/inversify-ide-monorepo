@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, optional, postConstruct } from '@theia/core/shared/inversify';
-import { Command, CommandContribution, CommandHandler, CommandRegistry } from '@theia/core/lib/common/command';
-import { DebugSessionManager } from './debug-session-manager';
-import { DebugConfigurationManager } from './debug-configuration-manager';
-import { DebugCommands } from './debug-frontend-application-contribution';
-import { DebugSessionOptions } from './debug-session-options';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
-import URI from '@theia/core/lib/common/uri';
-import { QuickAccessContribution, QuickAccessProvider, QuickAccessRegistry, QuickInputService, StatusBar, StatusBarAlignment } from '@theia/core/lib/browser';
-import { DebugPreferences } from '../common/debug-preferences';
-import { filterItems, QuickPickItemOrSeparator, QuickPicks } from '@theia/core/lib/browser/quick-input/quick-input-service';
-import { CancellationToken, nls } from '@theia/core/lib/common';
+import { inject, injectable, optional, postConstruct } from 'inversify';
+import { Command, CommandContribution, CommandHandler, CommandRegistry } from '@theia/core/lib/common/command.js';
+import { DebugSessionManager } from './debug-session-manager.js';
+import { DebugConfigurationManager } from './debug-configuration-manager.js';
+import { DebugCommands } from './debug-frontend-application-contribution.js';
+import { DebugSessionOptions } from './debug-session-options.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { LabelProvider } from '@theia/core/lib/browser/label-provider.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { QuickAccessContribution, QuickAccessProvider, QuickAccessRegistry, QuickInputService, StatusBar, StatusBarAlignment } from '@theia/core/lib/browser/index.js';
+import { DebugPreferences } from '../common/debug-preferences.js';
+import { filterItems, QuickPickItemOrSeparator, QuickPicks } from '@theia/core/lib/browser/quick-input/quick-input-service.js';
+import { CancellationToken, nls } from '@theia/core/lib/common/index.js';
 
 @injectable()
 export class DebugPrefixConfiguration implements CommandContribution, CommandHandler, QuickAccessContribution, QuickAccessProvider {

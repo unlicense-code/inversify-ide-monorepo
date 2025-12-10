@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Agent } from '@theia/ai-core/lib/common';
+import { Agent } from '@theia/ai-core/lib/common/index.js';
 import { CommandContribution, MenuContribution } from '@theia/core';
-import { KeybindingContribution } from '@theia/core/lib/browser';
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { AiTerminalAgent } from './ai-terminal-agent';
-import { AiTerminalCommandContribution } from './ai-terminal-contribution';
+import { KeybindingContribution } from '@theia/core/lib/browser/index.js';
+import { ContainerModule } from 'inversify';
+import { AiTerminalAgent } from './ai-terminal-agent.js';
+import { AiTerminalCommandContribution } from './ai-terminal-contribution.js';
 
 import '../../src/browser/style/ai-terminal.css';
 

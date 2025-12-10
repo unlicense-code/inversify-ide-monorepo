@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,13 +18,13 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { UriComponents, URI } from '@theia/core/lib/common/uri';
+import { UriComponents, URI } from '@theia/core/lib/common/uri.js';
 import { CellRange } from '@theia/notebook/lib/common';
 import { NotebookEditorWidget, NotebookService } from '@theia/notebook/lib/browser';
-import { MAIN_RPC_CONTEXT, NotebookDocumentShowOptions, NotebookEditorRevealType, NotebookEditorsExt, NotebookEditorsMain } from '../../../common';
-import { RPCProtocol } from '../../../common/rpc-protocol';
-import { interfaces } from '@theia/core/shared/inversify';
-import { NotebookOpenHandler } from '@theia/notebook/lib/browser/notebook-open-handler';
+import { MAIN_RPC_CONTEXT, NotebookDocumentShowOptions, NotebookEditorRevealType, NotebookEditorsExt, NotebookEditorsMain } from '../../../common/index.js';
+import { RPCProtocol } from '../../../common/rpc-protocol.js';
+import { interfaces } from 'inversify';
+import { NotebookOpenHandler } from '@theia/notebook/lib/browser/notebook-open-handler.js';
 
 export class NotebookEditorsMainImpl implements NotebookEditorsMain {
 

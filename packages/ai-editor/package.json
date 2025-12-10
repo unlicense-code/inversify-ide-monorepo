@@ -1,6 +1,7 @@
 {
   "name": "@theia/ai-editor",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - AI Editor",
   "dependencies": {
     "@theia/core": "1.66.0",

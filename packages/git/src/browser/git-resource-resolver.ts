@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { Git, Repository } from '../common';
+import { injectable, inject } from 'inversify';
+import { Git, Repository } from '../common/index.js';
 import { Resource, ResourceResolver } from '@theia/core';
-import URI from '@theia/core/lib/common/uri';
-import { GitRepositoryProvider } from './git-repository-provider';
-import { GIT_RESOURCE_SCHEME, GitResource } from './git-resource';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { GitRepositoryProvider } from './git-repository-provider.js';
+import { GIT_RESOURCE_SCHEME, GitResource } from './git-resource.js';
 
 @injectable()
 export class GitResourceResolver implements ResourceResolver {

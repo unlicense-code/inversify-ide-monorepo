@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { ElectronIpcConnectionProvider } from '@theia/core/lib/electron-browser/messaging/electron-ipc-connection-source';
-import { CommandContribution, MenuContribution } from '@theia/core/lib/common';
-import { SampleUpdater, SampleUpdaterPath, SampleUpdaterClient } from '../../common/updater/sample-updater';
-import { SampleUpdaterFrontendContribution, ElectronMenuUpdater, SampleUpdaterClientImpl } from './sample-updater-frontend-contribution';
+import { ContainerModule } from 'inversify';
+import { ElectronIpcConnectionProvider } from '@theia/core/lib/electron-browser/messaging/electron-ipc-connection-source.js';
+import { CommandContribution, MenuContribution } from '@theia/core/lib/common/index.js';
+import { SampleUpdater, SampleUpdaterPath, SampleUpdaterClient } from '../../common/updater/sample-updater.js';
+import { SampleUpdaterFrontendContribution, ElectronMenuUpdater, SampleUpdaterClientImpl } from './sample-updater-frontend-contribution.js';
 
 export default new ContainerModule(bind => {
     bind(ElectronMenuUpdater).toSelf().inSingletonScope();

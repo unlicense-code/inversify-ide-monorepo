@@ -18,20 +18,20 @@ import { CancellationToken } from '@theia/core';
 import {
     LanguageModelMetaData, LanguageModelParsedResponse, LanguageModelRequest, LanguageModelStreamResponsePart,
     LanguageModelTextResponse, ToolCallResult
-} from './language-model';
+} from './language-model.js';
 
 export const LanguageModelDelegateClient = Symbol('LanguageModelDelegateClient');
-export interface LanguageModelDelegateClient {
+export type LanguageModelDelegateClient = {
     toolCall(requestId: string, toolId: string, args_string: string): Promise<ToolCallResult>;
     send(id: string, token: LanguageModelStreamResponsePart | undefined): void;
     error(id: string, error: Error): void;
 }
 export const LanguageModelRegistryFrontendDelegate = Symbol('LanguageModelRegistryFrontendDelegate');
-export interface LanguageModelRegistryFrontendDelegate {
+export type LanguageModelRegistryFrontendDelegate = {
     getLanguageModelDescriptions(): Promise<LanguageModelMetaData[]>;
 }
 
-export interface LanguageModelStreamResponseDelegate {
+export type LanguageModelStreamResponseDelegate = {
     streamId: string;
 }
 export const isLanguageModelStreamResponseDelegate = (obj: unknown): obj is LanguageModelStreamResponseDelegate =>
@@ -40,7 +40,7 @@ export const isLanguageModelStreamResponseDelegate = (obj: unknown): obj is Lang
 export type LanguageModelResponseDelegate = LanguageModelTextResponse | LanguageModelParsedResponse | LanguageModelStreamResponseDelegate;
 
 export const LanguageModelFrontendDelegate = Symbol('LanguageModelFrontendDelegate');
-export interface LanguageModelFrontendDelegate {
+export type LanguageModelFrontendDelegate = {
     cancel(requestId: string): void;
     request(modelId: string, request: LanguageModelRequest, requestId: string, cancellationToken?: CancellationToken): Promise<LanguageModelResponseDelegate>;
 }

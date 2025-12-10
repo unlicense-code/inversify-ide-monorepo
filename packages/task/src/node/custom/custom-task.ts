@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, named } from '@theia/core/shared/inversify';
+import { injectable, inject, named } from 'inversify';
 import { ILogger, MaybePromise } from '@theia/core/lib/common/';
-import { Task, TaskOptions } from '../task';
-import { TaskManager } from '../task-manager';
-import { TaskInfo } from '../../common/task-protocol';
+import { Task, TaskOptions } from '../task.js';
+import { TaskManager } from '../task-manager.js';
+import { TaskInfo } from '../../common/task-protocol.js';
 import { Process } from '@theia/process/lib/node';
 
 export const TaskCustomOptions = Symbol('TaskCustomOptions');
-export interface TaskCustomOptions extends TaskOptions {
+export type TaskCustomOptions = TaskOptions & {
     process: Process
 }
 

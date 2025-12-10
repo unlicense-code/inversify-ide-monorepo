@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
+import { injectable, inject } from 'inversify';
 import { Command, CommandContribution, CommandRegistry, MenuContribution, MenuModelRegistry, CommandHandler } from '@theia/core';
-import { FrontendApplicationContribution, KeybindingContribution, KeybindingRegistry, CommonCommands } from '@theia/core/lib/browser';
-import { ConsoleManager } from './console-manager';
-import { ConsoleWidget } from './console-widget';
-import { ConsoleContentWidget } from './console-content-widget';
-import { nls } from '@theia/core/lib/common/nls';
+import { FrontendApplicationContribution, KeybindingContribution, KeybindingRegistry, CommonCommands } from '@theia/core/lib/browser/index.js';
+import { ConsoleManager } from './console-manager.js';
+import { ConsoleWidget } from './console-widget.js';
+import { ConsoleContentWidget } from './console-content-widget.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 export namespace ConsoleCommands {
     export const SELECT_ALL: Command = {

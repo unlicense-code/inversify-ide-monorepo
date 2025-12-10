@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 const disableJSDOM = enableJSDOM();
 FrontendApplicationConfigProvider.set({});
 
-import { Container } from '@theia/core/shared/inversify';
-import { type FileStat } from '@theia/filesystem/lib/common/files';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
+import { Container } from 'inversify';
+import { type FileStat } from '@theia/filesystem/lib/common/files.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
 import { expect } from 'chai';
-import { DebugSessionConfigurationLabelProvider } from './debug-session-configuration-label-provider';
+import { DebugSessionConfigurationLabelProvider } from './debug-session-configuration-label-provider.js';
 
 disableJSDOM();
 

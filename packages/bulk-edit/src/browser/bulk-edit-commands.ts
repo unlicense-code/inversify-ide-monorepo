@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { codicon } from '@theia/core/lib/browser';
-import { Command } from '@theia/core/lib/common';
+import { codicon } from '@theia/core/lib/browser/index.js';
+import { Command } from '@theia/core/lib/common/index.js';
 
 export namespace BulkEditCommands {
     export const TOGGLE_VIEW: Command = {

@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { DebugExt } from '../../../common/plugin-api-rpc';
-import { DebugConfiguration } from '@theia/debug/lib/common/debug-configuration';
-import { MaybePromise } from '@theia/core/lib/common/types';
-import { DebuggerDescription } from '@theia/debug/lib/common/debug-service';
-import { HostedPluginSupport } from '../../../hosted/browser/hosted-plugin';
+import { DebugExt } from '../../../common/plugin-api-rpc.js';
+import { DebugConfiguration } from '@theia/debug/lib/common/debug-configuration.js';
+import { MaybePromise } from '@theia/core/lib/common/types.js';
+import { DebuggerDescription } from '@theia/debug/lib/common/debug-service.js';
+import { HostedPluginSupport } from '../../../hosted/browser/hosted-plugin.js';
 
 /**
  * Plugin [DebugAdapterContribution](#DebugAdapterContribution).

@@ -16,38 +16,38 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import * as React from '@theia/core/shared/react';
-import { LabelProvider } from '@theia/core/lib/browser';
+import * as React from 'react';
+import { LabelProvider } from '@theia/core/lib/browser/index.js';
 import { DebugProtocol } from '@vscode/debugprotocol';
-import { Emitter, Event, DisposableCollection, Disposable, MessageClient, MessageType, Mutable, ContributionProvider } from '@theia/core/lib/common';
-import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { CompositeTreeElement } from '@theia/core/lib/browser/source-tree';
-import { DebugSessionConnection, DebugRequestTypes, DebugEventTypes } from './debug-session-connection';
-import { DebugThread, StoppedDetails, DebugThreadData } from './model/debug-thread';
-import { DebugScope, DebugVariable } from './console/debug-console-items';
-import { DebugStackFrame } from './model/debug-stack-frame';
-import { DebugSource } from './model/debug-source';
-import { DebugBreakpoint, DebugBreakpointOptions } from './model/debug-breakpoint';
-import { DebugSourceBreakpoint } from './model/debug-source-breakpoint';
+import { Emitter, Event, DisposableCollection, Disposable, MessageClient, MessageType, Mutable, ContributionProvider } from '@theia/core/lib/common/index.js';
+import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service.js';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { CompositeTreeElement } from '@theia/core/lib/browser/source-tree/tree-source.js';
+import { DebugSessionConnection, DebugRequestTypes, DebugEventTypes } from './debug-session-connection.js';
+import { DebugThread, StoppedDetails, DebugThreadData } from './model/debug-thread.js';
+import { DebugScope, DebugVariable } from './console/debug-console-items.js';
+import { DebugStackFrame } from './model/debug-stack-frame.js';
+import { DebugSource } from './model/debug-source.js';
+import { DebugBreakpoint, DebugBreakpointOptions } from './model/debug-breakpoint.js';
+import { DebugSourceBreakpoint } from './model/debug-source-breakpoint.js';
 import debounce = require('p-debounce');
-import URI from '@theia/core/lib/common/uri';
-import { BreakpointManager } from './breakpoint/breakpoint-manager';
-import { DebugConfigurationSessionOptions, InternalDebugSessionOptions, TestRunReference } from './debug-session-options';
-import { DebugConfiguration, DebugConsoleMode } from '../common/debug-common';
-import { SourceBreakpoint, ExceptionBreakpoint } from './breakpoint/breakpoint-marker';
-import { TerminalWidgetOptions, TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget';
-import { DebugFunctionBreakpoint } from './model/debug-function-breakpoint';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { DebugContribution } from './debug-contribution';
-import { Deferred, waitForEvent } from '@theia/core/lib/common/promise-util';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { DebugInstructionBreakpoint } from './model/debug-instruction-breakpoint';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { BreakpointManager } from './breakpoint/breakpoint-manager.js';
+import { DebugConfigurationSessionOptions, InternalDebugSessionOptions, TestRunReference } from './debug-session-options.js';
+import { DebugConfiguration, DebugConsoleMode } from '../common/debug-common.js';
+import { SourceBreakpoint, ExceptionBreakpoint } from './breakpoint/breakpoint-marker.js';
+import { TerminalWidgetOptions, TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget.js';
+import { DebugFunctionBreakpoint } from './model/debug-function-breakpoint.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { DebugContribution } from './debug-contribution.js';
+import { Deferred, waitForEvent } from '@theia/core/lib/common/promise-util.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { DebugInstructionBreakpoint } from './model/debug-instruction-breakpoint.js';
 import { nls } from '@theia/core';
-import { TestService, TestServices } from '@theia/test/lib/browser/test-service';
-import { DebugSessionManager } from './debug-session-manager';
-import { DebugDataBreakpoint } from './model/debug-data-breakpoint';
-import { DebugPreferences } from '../common/debug-preferences';
+import { TestService, TestServices } from '@theia/test/lib/browser/test-service.js';
+import { DebugSessionManager } from './debug-session-manager.js';
+import { DebugDataBreakpoint } from './model/debug-data-breakpoint.js';
+import { DebugPreferences } from '../common/debug-preferences.js';
 
 export enum DebugState {
     Inactive,

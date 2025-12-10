@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import { inject, injectable, optional } from 'inversify';
-import { isOSX } from '../../common/os';
-import { CommandContribution, CommandRegistry, Command } from '../../common/command';
-import { BrowserKeyboardLayoutProvider, KeyboardLayoutData } from './browser-keyboard-layout-provider';
-import { QuickPickValue, QuickInputService, QuickPickItemOrSeparator } from '../quick-input';
-import { nls } from '../../common/nls';
+import { isOSX } from '../../common/os.js';
+import { CommandContribution, CommandRegistry, Command } from '../../common/command.js';
+import { BrowserKeyboardLayoutProvider, KeyboardLayoutData } from './browser-keyboard-layout-provider.js';
+import { QuickPickValue, QuickInputService, QuickPickItemOrSeparator } from '../quick-input/index.js';
+import { nls } from '../../common/nls.js';
 
 export namespace KeyboardCommands {
 

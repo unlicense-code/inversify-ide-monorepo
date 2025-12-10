@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { MaybeArray, UNTITLED_SCHEME, nls } from '@theia/core/lib/common';
-import { LabelProvider } from '@theia/core/lib/browser';
-import { FileStat } from '../../common/files';
-import { DirNode } from '../file-tree';
-import { OpenFileDialogFactory, OpenFileDialogProps, SaveFileDialogFactory, SaveFileDialogProps } from './file-dialog';
-import { FileService } from '../file-service';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
-import { UserWorkingDirectoryProvider } from '@theia/core/lib/browser/user-working-directory-provider';
+import { injectable, inject } from 'inversify';
+import { URI } from '@theia/core';
+import { MaybeArray, UNTITLED_SCHEME, nls } from '@theia/core';
+import { LabelProvider } from '@theia/core/lib/browser/index.js';
+import { FileStat } from '../../common/files.js';
+import { DirNode } from '../file-tree/index.js';
+import { OpenFileDialogFactory, OpenFileDialogProps, SaveFileDialogFactory, SaveFileDialogProps } from './file-dialog.js';
+import { FileService } from '../file-service.js';
+import { EnvVariablesServer } from '@theia/core';
+import { UserWorkingDirectoryProvider } from '@theia/core/lib/browser/index.js';
 
 export const FileDialogService = Symbol('FileDialogService');
-export interface FileDialogService {
+export type FileDialogService = {
 
     showOpenDialog(props: OpenFileDialogProps & { canSelectMany: true }, folder?: FileStat): Promise<MaybeArray<URI> | undefined>;
     showOpenDialog(props: OpenFileDialogProps, folder?: FileStat): Promise<URI | undefined>;

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 Typefox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,6 +17,6 @@
 export const CliPreferences = Symbol('CliPreferences');
 export const CliPreferencesPath = '/services/cli-preferences';
 
-export interface CliPreferences {
+export type CliPreferences = {
     getPreferences(): Promise<[string, unknown][]>;
 }

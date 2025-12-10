@@ -16,28 +16,28 @@
 
 // Define common interfaces that multiple classes can use
 
-export interface MetricsMap {
+export type MetricsMap = {
     [extensionID: string]: MethodToAnalytics
 }
 
-export interface MethodToAnalytics {
+export type MethodToAnalytics = {
     [methodID: string]: AnalyticsFromRequests;
 }
 
-export interface AnalyticsFromRequests {
+export type AnalyticsFromRequests = {
     totalRequests: number;
     successfulResponses: number;
     sumOfTimeForSuccess: number;
     sumOfTimeForFailure: number;
 }
 
-export interface DataFromRequest {
+export type DataFromRequest = {
     pluginID: string;
     errorContentsOrMethod: string;
     timeTaken: number;
 }
 
-export interface MetricOutput {
+export type MetricOutput = {
     header: string;
     createMetricOutput(pluginID: string, method: string, requestAnalytics: AnalyticsFromRequests): string;
 }

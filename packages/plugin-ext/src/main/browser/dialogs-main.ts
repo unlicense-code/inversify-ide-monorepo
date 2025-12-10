@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { RPCProtocol } from '../../common/rpc-protocol';
-import { OpenDialogOptionsMain, SaveDialogOptionsMain, DialogsMain, UploadDialogOptionsMain } from '../../common/plugin-api-rpc';
-import { OpenFileDialogProps, SaveFileDialogProps, FileDialogService } from '@theia/filesystem/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import URI from '@theia/core/lib/common/uri';
-import { FileUploadService } from '@theia/filesystem/lib/common/upload/file-upload';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileStat } from '@theia/filesystem/lib/common/files';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
+import { interfaces } from 'inversify';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
+import { OpenDialogOptionsMain, SaveDialogOptionsMain, DialogsMain, UploadDialogOptionsMain } from '../../common/plugin-api-rpc.js';
+import { OpenFileDialogProps, SaveFileDialogProps, FileDialogService } from '@theia/filesystem/lib/browser/index.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { FileUploadService } from '@theia/filesystem/lib/common/upload/file-upload.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { FileStat } from '@theia/filesystem/lib/common/files.js';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
 import { nls } from '@theia/core';
 
 export class DialogsMainImpl implements DialogsMain {

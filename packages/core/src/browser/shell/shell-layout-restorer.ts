@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,23 +16,20 @@
 
 import { injectable, inject, named } from 'inversify';
 import { Widget } from '@lumino/widgets';
-import { FrontendApplication } from '../frontend-application';
-import { WidgetManager, WidgetConstructionOptions } from '../widget-manager';
-import { StorageService } from '../storage-service';
-import { ILogger } from '../../common/logger';
-import { CommandContribution, CommandRegistry, Command } from '../../common/command';
-import { ThemeService } from '../theming';
-import { ContributionProvider } from '../../common/contribution-provider';
-import { ApplicationShell, applicationShellLayoutVersion, ApplicationShellLayoutVersion } from './application-shell';
-import { CommonCommands } from '../common-commands';
-import { WindowService } from '../window/window-service';
-import { StopReason } from '../../common/frontend-application-state';
-import { isFunction, isObject, MaybePromise } from '../../common';
+import { FrontendApplication } from '../frontend-application.js';
+import { WidgetManager, WidgetConstructionOptions } from '../widget-manager.js';
+import { StorageService } from '../storage-service.js';
+import { ILogger } from '../../common/logger.js';
+import { CommandContribution, CommandRegistry, Command } from '../../common/command.js';
+import { ThemeService } from '../theming.js';
+import { ContributionProvider } from '../../common/contribution-provider.js';
+import { ApplicationShell, applicationShellLayoutVersion, ApplicationShellLayoutVersion } from './application-shell.js';
+import { CommonCommands } from '../common-commands.js';
+import { WindowService } from '../window/window-service.js';
+import { StopReason } from '../../common/frontend-application-state.js';
+import { isFunction, isObject, MaybePromise } from '../../common/index.js';
 
-/**
- * A contract for widgets that want to store and restore their inner state, between sessions.
- */
-export interface StatefulWidget {
+export type StatefulWidget = {
 
     /**
      * Called on unload to store the inner state. Returns 'undefined' if the widget cannot be stored.
@@ -51,12 +48,12 @@ export namespace StatefulWidget {
     }
 }
 
-export interface WidgetDescription {
+export type WidgetDescription = {
     constructionOptions: WidgetConstructionOptions,
     innerWidgetState?: string | object
 }
 
-export interface ApplicationShellLayoutMigrationContext {
+export type ApplicationShellLayoutMigrationContext = {
     /**
      * A resolved version of a current layout.
      */
@@ -71,7 +68,7 @@ export interface ApplicationShellLayoutMigrationContext {
     parent?: Widget
 }
 
-export interface ApplicationShellLayoutMigrationError extends Error {
+export type ApplicationShellLayoutMigrationError = Error & {
     code: 'ApplicationShellLayoutMigrationError'
 }
 export namespace ApplicationShellLayoutMigrationError {
@@ -87,7 +84,7 @@ export namespace ApplicationShellLayoutMigrationError {
 }
 
 export const ApplicationShellLayoutMigration = Symbol('ApplicationShellLayoutMigration');
-export interface ApplicationShellLayoutMigration {
+export type ApplicationShellLayoutMigration = {
     /**
      * A target migration version.
      */
@@ -112,11 +109,7 @@ export interface ApplicationShellLayoutMigration {
 }
 
 export const ShellLayoutTransformer = Symbol('ShellLayoutTransformer');
-/**
- * This contribution point allows arbitrary modifications to the shell layout
- * data when it is restored.
- */
-export interface ShellLayoutTransformer {
+export type ShellLayoutTransformer = {
     /**
      * Modifies the shell layout data before it is restored.
      * @param layoutData

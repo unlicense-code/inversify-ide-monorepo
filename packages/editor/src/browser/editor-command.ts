@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,15 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, optional, postConstruct } from '@theia/core/shared/inversify';
-import { CommonCommands, LabelProvider, ApplicationShell, QuickInputService, QuickPickValue, SaveableService } from '@theia/core/lib/browser';
-import { EditorManager } from './editor-manager';
-import { CommandContribution, CommandRegistry, Command, ResourceProvider, MessageService, nls } from '@theia/core';
-import { LanguageService } from '@theia/core/lib/browser/language-service';
-import { SUPPORTED_ENCODINGS } from '@theia/core/lib/common/supported-encodings';
-import { EncodingMode } from './editor';
-import { EditorLanguageQuickPickService } from './editor-language-quick-pick-service';
-import { PreferenceService } from '@theia/core/lib/common/preferences';
+import { inject, injectable, optional, postConstruct } from 'inversify';
+import { CommonCommands, LabelProvider, ApplicationShell, QuickInputService, QuickPickValue, SaveableService } from '@theia/core/lib/browser/index.js';
+import { EditorManager } from './editor-manager.js';
+import { CommandContribution, CommandRegistry, Command, 
+    ResourceProvider, MessageService, nls } from '@theia/core/lib/common/index.js';
+import { LanguageService } from '@theia/core/lib/browser/language-service.js';
+import { SUPPORTED_ENCODINGS } from '@theia/core/lib/common/supported-encodings.js';
+import { EncodingMode } from './editor.js';
+import { EditorLanguageQuickPickService } from './editor-language-quick-pick-service.js';
+import { PreferenceService } from '@theia/core/lib/common/index.js';
 
 export namespace EditorCommands {
 
@@ -246,7 +247,7 @@ export class EditorCommandContribution implements CommandContribution {
             this.saveResourceService.autoSave = this.preferencesService.get(EditorCommandContribution.AUTOSAVE_PREFERENCE) ?? 'off';
             this.saveResourceService.autoSaveDelay = this.preferencesService.get(EditorCommandContribution.AUTOSAVE_DELAY_PREFERENCE) ?? 1000;
         });
-        this.preferencesService.onPreferenceChanged(e => {
+        this.preferencesService.onPreferenceChanged((e: any) => {
             if (e.preferenceName === EditorCommandContribution.AUTOSAVE_PREFERENCE) {
                 this.saveResourceService.autoSave = this.preferencesService.get(EditorCommandContribution.AUTOSAVE_PREFERENCE) ?? 'off';
             } else if (e.preferenceName === EditorCommandContribution.AUTOSAVE_DELAY_PREFERENCE) {

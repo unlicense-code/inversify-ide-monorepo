@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { ILogger, generateUuid, nls } from '@theia/core';
-import { inject, injectable, named } from '@theia/core/shared/inversify';
+import { inject, injectable, named } from 'inversify';
 import { execSync } from 'child_process';
 import { existsSync, realpathSync } from 'fs';
 import * as fs from 'fs/promises';
@@ -26,9 +26,9 @@ import {
     ClaudeCodeService,
     ToolApprovalRequestMessage,
     ToolApprovalResponseMessage
-} from '../common/claude-code-service';
+} from '../common/claude-code-service.js';
 
-interface ToolApprovalResult {
+type ToolApprovalResult = {
     behavior: 'allow' | 'deny';
     message?: string;
     updatedInput?: unknown;

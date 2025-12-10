@@ -13,10 +13,10 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  */
-import { MutableChatRequestModel, ChatResponseContent } from './chat-model';
-import { CodeContentMatcher, MarkdownContentFactory, ResponseContentFactory, ResponseContentMatcher } from './response-content-matcher';
+import { MutableChatRequestModel, ChatResponseContent } from './chat-model.js';
+import { CodeContentMatcher, MarkdownContentFactory, ResponseContentFactory, ResponseContentMatcher } from './response-content-matcher.js';
 
-interface Match {
+type Match = {
     matcher: ResponseContentMatcher;
     index: number;
     content: string;

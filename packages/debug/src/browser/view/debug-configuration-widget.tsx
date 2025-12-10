@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,21 +14,21 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ReactWidget, QuickInputService } from '@theia/core/lib/browser';
-import { CommandRegistry, Disposable, DisposableCollection, MessageService } from '@theia/core/lib/common';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { DebugConsoleContribution } from '../console/debug-console-contribution';
-import { DebugConfigurationManager } from '../debug-configuration-manager';
-import { DebugCommands } from '../debug-frontend-application-contribution';
-import { DebugSessionManager } from '../debug-session-manager';
-import { DebugAction } from './debug-action';
-import { DebugConfigurationSelect } from './debug-configuration-select';
-import { DebugViewModel } from './debug-view-model';
-import { nls } from '@theia/core/lib/common/nls';
-import { DebugSessionOptions } from '../debug-session-options';
-import { DebugSessionConfigurationLabelProvider } from '../debug-session-configuration-label-provider';
+import { ReactWidget, QuickInputService } from '@theia/core/lib/browser/index.js';
+import { CommandRegistry, Disposable, DisposableCollection, MessageService } from '@theia/core/lib/common/index.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import * as React from 'react';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { DebugConsoleContribution } from '../console/debug-console-contribution.js';
+import { DebugConfigurationManager } from '../debug-configuration-manager.js';
+import { DebugCommands } from '../debug-frontend-application-contribution.js';
+import { DebugSessionManager } from '../debug-session-manager.js';
+import { DebugAction } from './debug-action.js';
+import { DebugConfigurationSelect } from './debug-configuration-select.js';
+import { DebugViewModel } from './debug-view-model.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { DebugSessionOptions } from '../debug-session-options.js';
+import { DebugSessionConfigurationLabelProvider } from '../debug-session-configuration-label-provider.js';
 
 @injectable()
 export class DebugConfigurationWidget extends ReactWidget {

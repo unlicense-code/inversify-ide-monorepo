@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 export const GitCommitDetailWidgetOptions = Symbol('GitCommitDetailWidgetOptions');
-export interface GitCommitDetailWidgetOptions {
+export type GitCommitDetailWidgetOptions = {
     rootUri: string;
     commitSha: string;
     commitMessage: string;

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { Diagnostic, DiagnosticSeverity } from '@theia/core/shared/vscode-languageserver-protocol';
-import URI from '@theia/core/lib/common/uri';
-import { Event, Emitter } from '@theia/core/lib/common/event';
-import { Tree, TreeNode } from '@theia/core/lib/browser/tree/tree';
-import { DepthFirstTreeIterator } from '@theia/core/lib/browser/tree/tree-iterator';
-import { TreeDecorator, TreeDecoration } from '@theia/core/lib/browser/tree/tree-decorator';
-import { FileStatNode } from '@theia/filesystem/lib/browser';
-import { Marker } from '../../common/marker';
-import { ProblemManager } from './problem-manager';
-import { ProblemPreferences } from '../../common/problem-preferences';
-import { ProblemUtils } from './problem-utils';
-import { LabelProvider } from '@theia/core/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { inject, injectable, postConstruct } from 'inversify';
+import { Diagnostic, DiagnosticSeverity } from 'vscode-languageserver-protocol';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Event, Emitter } from '@theia/core/lib/common/event.js';
+import { Tree, TreeNode } from '@theia/core/lib/browser/tree/tree.js';
+import { DepthFirstTreeIterator } from '@theia/core/lib/browser/tree/tree-iterator.js';
+import { TreeDecorator, TreeDecoration } from '@theia/core/lib/browser/tree/tree-decorator.js';
+import { FileStatNode } from '@theia/filesystem/lib/browser/index.js';
+import { Marker } from '../../common/marker.js';
+import { ProblemManager } from './problem-manager.js';
+import { ProblemPreferences } from '../../common/problem-preferences.js';
+import { ProblemUtils } from './problem-utils.js';
+import { LabelProvider } from '@theia/core/lib/browser/index.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
 
 /**
  * @deprecated since 1.25.0

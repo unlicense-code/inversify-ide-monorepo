@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,9 +18,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as React from '@theia/core/shared/react';
-import { inject, injectable, interfaces } from '@theia/core/shared/inversify';
-import { generateUuid } from '@theia/core/lib/common/uuid';
+import * as React from 'react';
+import { inject, injectable, interfaces } from 'inversify';
+import { generateUuid } from '@theia/core';
 import {
     NotebookRendererMessagingService, CellOutputWebview, NotebookRendererRegistry,
     NotebookEditorWidgetService, NotebookKernelService, NotebookEditorWidget,
@@ -28,23 +28,23 @@ import {
     NotebookCellOutputsSplice,
     NotebookContentChangedEvent
 } from '@theia/notebook/lib/browser';
-import { WebviewWidget } from '../../webview/webview';
-import { Message, WidgetManager } from '@theia/core/lib/browser';
-import { outputWebviewPreload, PreloadContext } from './output-webview-internal';
-import { WorkspaceTrustService } from '@theia/workspace/lib/browser';
+import { WebviewWidget } from '../../webview/webview.js';
+import { Message, WidgetManager } from '@theia/core/lib/browser/index.js';
+import { outputWebviewPreload, PreloadContext } from './output-webview-internal.js';
+import { WorkspaceTrustService } from '@theia/workspace/lib/browser/index.js';
 import {
     CellOutputChange, CellsChangedMessage, CellsMoved, CellsSpliced,
     ChangePreferredMimetypeMessage, FromWebviewMessage, Output, OutputChangedMessage
-} from './webview-communication';
+} from './webview-communication.js';
 import { Disposable, DisposableCollection, Emitter, QuickPickService, nls } from '@theia/core';
-import { NotebookModel } from '@theia/notebook/lib/browser/view-model/notebook-model';
-import { NotebookOptionsService, NotebookOutputOptions } from '@theia/notebook/lib/browser/service/notebook-options';
-import { NotebookCellModel } from '@theia/notebook/lib/browser/view-model/notebook-cell-model';
+import { NotebookModel } from '@theia/notebook/lib/browser/view-model/notebook-model.js';
+import { NotebookOptionsService, NotebookOutputOptions } from '@theia/notebook/lib/browser/service/notebook-options.js';
+import { NotebookCellModel } from '@theia/notebook/lib/browser/view-model/notebook-cell-model.js';
 import { CellOutput, NotebookCellsChangeType } from '@theia/notebook/lib/common';
-import { NotebookCellOutputModel } from '@theia/notebook/lib/browser/view-model/notebook-cell-output-model';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { NOTEBOOK_OUTPUT_FOCUSED } from '@theia/notebook/lib/browser/contributions/notebook-context-keys';
+import { NotebookCellOutputModel } from '@theia/notebook/lib/browser/view-model/notebook-cell-output-model.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { NOTEBOOK_OUTPUT_FOCUSED } from '@theia/notebook/lib/browser/contributions/notebook-context-keys.js';
 
 export const AdditionalNotebookCellOutputCss = Symbol('AdditionalNotebookCellOutputCss');
 
@@ -196,7 +196,7 @@ tbody th {
 }
 `;
 
-interface CellOutputUpdate extends NotebookCellOutputsSplice {
+type CellOutputUpdate = NotebookCellOutputsSplice & {
     cellHandle: number
 }
 

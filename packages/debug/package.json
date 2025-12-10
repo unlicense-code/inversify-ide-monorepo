@@ -1,6 +1,7 @@
 {
   "name": "@theia/debug",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - Debug Extension",
   "dependencies": {
     "@theia/console": "1.66.0",

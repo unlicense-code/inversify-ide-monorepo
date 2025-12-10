@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
+import { interfaces } from 'inversify';
 import {
     createPreferenceProxy,
     PreferenceContribution,
     PreferenceProxy,
     PreferenceSchema,
     PreferenceService,
-} from '@theia/core/lib/common/preferences';
+} from '@theia/core/lib/common/index.js';
 import { nls } from '@theia/core';
 
 export const VsxExtensionsPreferenceSchema: PreferenceSchema = {
@@ -34,7 +34,7 @@ export const VsxExtensionsPreferenceSchema: PreferenceSchema = {
     }
 };
 
-export interface VsxExtensionsConfiguration {
+export type VsxExtensionsConfiguration = {
     'extensions.onlyShowVerifiedExtensions': boolean;
 }
 

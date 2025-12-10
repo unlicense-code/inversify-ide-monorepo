@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { TabBar, Widget, Title } from '@theia/core/shared/@lumino/widgets';
-import { Message, ContextMenuRenderer, LabelProvider, StatefulWidget, codicon } from '@theia/core/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import URI from '@theia/core/lib/common/uri';
-import { FileStat } from '@theia/filesystem/lib/common/files';
-import { PreferenceScopeCommandManager } from '../util/preference-scope-command-manager';
-import { Preference, PreferenceMenus } from '../util/preference-types';
-import { CommandRegistry, DisposableCollection, Emitter, MenuModelRegistry, PreferenceScope } from '@theia/core/lib/common';
-import { nls } from '@theia/core/lib/common/nls';
+import { inject, injectable, postConstruct } from 'inversify';
+import { TabBar, Widget, Title } from '@lumino/widgets';
+import { Message, ContextMenuRenderer, LabelProvider, StatefulWidget, codicon } from '@theia/core/lib/browser/index.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { FileStat } from '@theia/filesystem/lib/common/files.js';
+import { PreferenceScopeCommandManager } from '../util/preference-scope-command-manager.js';
+import { Preference, PreferenceMenus } from '../util/preference-types.js';
+import { CommandRegistry, DisposableCollection, Emitter, MenuModelRegistry, PreferenceScope } from '@theia/core/lib/common/index.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 const USER_TAB_LABEL = nls.localizeByDefault('User');
 const USER_TAB_INDEX = PreferenceScope['User'];
@@ -43,7 +43,7 @@ const UNSELECTED_FOLDER_DROPDOWN_CLASSNAME = `${PREFERENCE_TAB_CLASSNAME} ${GENE
 const SELECTED_FOLDER_DROPDOWN_CLASSNAME = `${PREFERENCE_TAB_CLASSNAME} ${GENERAL_FOLDER_TAB_CLASSNAME} ${LABELED_FOLDER_TAB_CLASSNAME} ${FOLDER_DROPDOWN_CLASSNAME}`;
 const SHADOW_CLASSNAME = 'with-shadow';
 
-export interface PreferencesScopeTabBarState {
+export type PreferencesScopeTabBarState = {
     scopeDetails: Preference.SelectedScopeDetails;
 }
 

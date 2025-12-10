@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,35 +14,35 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { BackendApplicationContribution, CliContribution } from '@theia/core/lib/node';
-import { RemoteConnectionService } from './remote-connection-service';
-import { RemoteProxyServerProvider } from './remote-proxy-server-provider';
-import { RemoteConnectionSocketProvider } from './remote-connection-socket-provider';
-import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module';
-import { RemoteSSHConnectionProvider, RemoteSSHConnectionProviderPath } from '../electron-common/remote-ssh-connection-provider';
-import { RemoteSSHConnectionProviderImpl } from './ssh/remote-ssh-connection-provider';
-import { SSHIdentityFileCollector } from './ssh/ssh-identity-file-collector';
-import { RemoteCopyService } from './setup/remote-copy-service';
-import { RemoteSetupService } from './setup/remote-setup-service';
-import { RemoteNativeDependencyService } from './setup/remote-native-dependency-service';
-import { BackendRemoteServiceImpl } from './backend-remote-service-impl';
-import { BackendRemoteService } from '@theia/core/lib/node/remote/backend-remote-service';
-import { RemoteNodeSetupService } from './setup/remote-node-setup-service';
-import { RemotePosixScriptStrategy, RemoteSetupScriptService, RemoteWindowsScriptStrategy } from './setup/remote-setup-script-service';
-import { RemoteStatusService, RemoteStatusServicePath } from '../electron-common/remote-status-service';
-import { RemoteStatusServiceImpl } from './remote-status-service';
+import { ContainerModule } from 'inversify';
+import { BackendApplicationContribution, CliContribution } from '@theia/core/lib/node/index.js';
+import { RemoteConnectionService } from './remote-connection-service.js';
+import { RemoteProxyServerProvider } from './remote-proxy-server-provider.js';
+import { RemoteConnectionSocketProvider } from './remote-connection-socket-provider.js';
+import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module.js';
+import { RemoteSSHConnectionProvider, RemoteSSHConnectionProviderPath } from '../electron-common/remote-ssh-connection-provider.js';
+import { RemoteSSHConnectionProviderImpl } from './ssh/remote-ssh-connection-provider.js';
+import { SSHIdentityFileCollector } from './ssh/ssh-identity-file-collector.js';
+import { RemoteCopyService } from './setup/remote-copy-service.js';
+import { RemoteSetupService } from './setup/remote-setup-service.js';
+import { RemoteNativeDependencyService } from './setup/remote-native-dependency-service.js';
+import { BackendRemoteServiceImpl } from './backend-remote-service-impl.js';
+import { BackendRemoteService } from '@theia/core/lib/node/remote/backend-remote-service.js';
+import { RemoteNodeSetupService } from './setup/remote-node-setup-service.js';
+import { RemotePosixScriptStrategy, RemoteSetupScriptService, RemoteWindowsScriptStrategy } from './setup/remote-setup-script-service.js';
+import { RemoteStatusService, RemoteStatusServicePath } from '../electron-common/remote-status-service.js';
+import { RemoteStatusServiceImpl } from './remote-status-service.js';
 import { ConnectionHandler, RpcConnectionHandler, bindContributionProvider } from '@theia/core';
-import { RemoteCopyRegistryImpl } from './setup/remote-copy-contribution';
-import { RemoteCopyContribution } from '@theia/core/lib/node/remote/remote-copy-contribution';
-import { MainCopyContribution } from './setup/main-copy-contribution';
-import { RemoteNativeDependencyContribution } from './setup/remote-native-dependency-contribution';
-import { AppNativeDependencyContribution } from './setup/app-native-dependency-contribution';
-import { RemotePortForwardingProviderImpl } from './remote-port-forwarding-provider';
-import { RemotePortForwardingProvider, RemoteRemotePortForwardingProviderPath } from '../electron-common/remote-port-forwarding-provider';
-import { bindRemotePreferences } from '../electron-common/remote-preferences';
+import { RemoteCopyRegistryImpl } from './setup/remote-copy-contribution.js';
+import { RemoteCopyContribution } from '@theia/core/lib/node/remote/remote-copy-contribution.js';
+import { MainCopyContribution } from './setup/main-copy-contribution.js';
+import { RemoteNativeDependencyContribution } from './setup/remote-native-dependency-contribution.js';
+import { AppNativeDependencyContribution } from './setup/app-native-dependency-contribution.js';
+import { RemotePortForwardingProviderImpl } from './remote-port-forwarding-provider.js';
+import { RemotePortForwardingProvider, RemoteRemotePortForwardingProviderPath } from '../electron-common/remote-port-forwarding-provider.js';
+import { bindRemotePreferences } from '../electron-common/remote-preferences.js';
 
-export const remoteConnectionModule = ConnectionContainerModule.create(({ bind, bindBackendService }) => {
+export const remoteConnectionModule = ConnectionContainerModule.create(({ bind, bindBackendService }: { bind: any; bindBackendService: any }) => {
     bind(RemoteSSHConnectionProviderImpl).toSelf().inSingletonScope();
     bind(RemoteSSHConnectionProvider).toService(RemoteSSHConnectionProviderImpl);
     bindBackendService(RemoteSSHConnectionProviderPath, RemoteSSHConnectionProvider);

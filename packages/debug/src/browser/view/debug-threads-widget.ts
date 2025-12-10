@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct, interfaces, Container } from '@theia/core/shared/inversify';
+import { injectable, inject, postConstruct, interfaces } from 'inversify';
 import { MenuPath } from '@theia/core';
-import { TreeNode, NodeProps, SelectableTreeNode } from '@theia/core/lib/browser';
-import { SourceTreeWidget, TreeElementNode } from '@theia/core/lib/browser/source-tree';
-import { DebugThreadsSource } from './debug-threads-source';
-import { DebugSession } from '../debug-session';
-import { DebugThread } from '../model/debug-thread';
-import { DebugViewModel } from '../view/debug-view-model';
-import { DebugCallStackItemTypeKey } from '../debug-call-stack-item-type-key';
-import { nls } from '@theia/core/lib/common/nls';
+import { TreeNode, NodeProps, SelectableTreeNode } from '@theia/core/lib/browser/index.js';
+import { SourceTreeWidget } from '@theia/core/lib/browser/source-tree/source-tree-widget.js';
+import { TreeElementNode } from '@theia/core/lib/browser/source-tree/source-tree.js';
+import { DebugThreadsSource } from './debug-threads-source.js';
+import { DebugSession } from '../debug-session.js';
+import { DebugThread } from '../model/debug-thread.js';
+import { DebugViewModel } from '../view/debug-view-model.js';
+import { DebugCallStackItemTypeKey } from '../debug-call-stack-item-type-key.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 @injectable()
 export class DebugThreadsWidget extends SourceTreeWidget {
@@ -33,7 +34,7 @@ export class DebugThreadsWidget extends SourceTreeWidget {
     static TERMINATE_MENU = [...DebugThreadsWidget.CONTEXT_MENU, 'b_terminate'];
     static OPEN_MENU = [...DebugThreadsWidget.CONTEXT_MENU, 'c_open'];
     static FACTORY_ID = 'debug:threads';
-    static override createContainer(parent: interfaces.Container): Container {
+    static override createContainer(parent: interfaces.Container): interfaces.Container {
         const child = SourceTreeWidget.createContainer(parent, {
             contextMenuPath: DebugThreadsWidget.CONTEXT_MENU,
             virtualized: false,

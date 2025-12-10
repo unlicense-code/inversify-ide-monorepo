@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { CommandContribution } from '@theia/core';
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { MCPCommandContribution } from './mcp-command-contribution';
-import { PreferenceContribution } from '@theia/core/lib/common';
-import { McpServersPreferenceSchema } from '@theia/ai-mcp/lib/common/mcp-preferences';
+import { ContainerModule } from 'inversify';
+import { MCPCommandContribution } from './mcp-command-contribution.js';
+import { PreferenceContribution } from '@theia/core/lib/common/index.js';
+import { McpServersPreferenceSchema } from '@theia/ai-mcp/lib/common/mcp-preferences.js';
 
 export default new ContainerModule(bind => {
     bind(PreferenceContribution).toConstantValue({ schema: McpServersPreferenceSchema });

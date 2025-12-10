@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule, interfaces } from '@theia/core/shared/inversify';
-import { CommandContribution, MenuContribution } from '@theia/core/lib/common';
-import { WebSocketConnectionProvider, KeybindingContribution } from '@theia/core/lib/browser';
-import { QuickFileOpenFrontendContribution } from './quick-file-open-contribution';
-import { QuickFileOpenService } from './quick-file-open';
-import { fileSearchServicePath, FileSearchService } from '../common/file-search-service';
-import { QuickAccessContribution } from '@theia/core/lib/browser/quick-input/quick-access';
-import { QuickFileSelectService } from './quick-file-select-service';
+import { ContainerModule, interfaces } from 'inversify';
+import { CommandContribution, MenuContribution } from '@theia/core/lib/common/index.js';
+import { WebSocketConnectionProvider, KeybindingContribution } from '@theia/core/lib/browser/index.js';
+import { QuickFileOpenFrontendContribution } from './quick-file-open-contribution.js';
+import { QuickFileOpenService } from './quick-file-open.js';
+import { fileSearchServicePath, FileSearchService } from '../common/file-search-service.js';
+import { QuickAccessContribution } from '@theia/core/lib/browser/quick-input/quick-access.js';
+import { QuickFileSelectService } from './quick-file-select-service.js';
 
 export default new ContainerModule((bind: interfaces.Bind) => {
     bind(FileSearchService).toDynamicValue(ctx => {

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2025 TypeFox and others.
+// Copyright (C) 2025 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,26 +14,26 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-export interface WslDistribution {
+export type WslDistribution = {
     name: string;
     default: boolean;
     version: string;
 }
 
-export interface WslConnectionOptions {
+export type WslConnectionOptions = {
     nodeDownloadTemplate: string;
     distribution: string;
     workspacePath?: string;
 }
 
-export interface WslConnectionResult {
+export type WslConnectionResult = {
     port: number;
 }
 
 export const RemoteWslConnectionProviderPath = '/remote/wsl';
 
 export const RemoteWslConnectionProvider = Symbol('RemoteWslConnectionProvider');
-export interface RemoteWslConnectionProvider {
+export type RemoteWslConnectionProvider = {
     getWslDistributions(): Promise<WslDistribution[]>;
     connectToWsl(options: WslConnectionOptions): Promise<WslConnectionResult>;
 }

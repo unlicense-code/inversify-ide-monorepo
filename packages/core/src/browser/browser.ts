@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,7 +18,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Disposable, environment, isOSX } from '../common';
+import { Disposable, environment, isOSX } from '../common/index.js';
 
 const userAgent = typeof navigator !== 'undefined' ? navigator.userAgent : '';
 
@@ -106,7 +106,7 @@ export function parseCssTime(time: string | null, defaultValue?: number): number
     return defaultValue;
 }
 
-interface ElementScroll {
+type ElementScroll = {
     left: number
     top: number
     maxLeft: number

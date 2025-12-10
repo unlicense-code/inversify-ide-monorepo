@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { EditorManager, EditorOpenerOptions, EditorWidget } from '@theia/editor/lib/browser';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { EditorPreviewPreferences } from '../common/editor-preview-preferences';
-import { MaybePromise } from '@theia/core/lib/common';
-import URI from '@theia/core/lib/common/uri';
-import { EditorPreviewWidgetFactory, EditorPreviewOptions } from './editor-preview-widget-factory';
-import { EditorPreviewWidget } from './editor-preview-widget';
-import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
-import { WidgetOpenerOptions } from '@theia/core/lib/browser';
+import { EditorManager, EditorOpenerOptions, EditorWidget } from '@theia/editor/lib/browser/index.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import { EditorPreviewPreferences } from '../common/editor-preview-preferences.js';
+import { MaybePromise } from '@theia/core/lib/common/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { EditorPreviewWidgetFactory, EditorPreviewOptions } from './editor-preview-widget-factory.js';
+import { EditorPreviewWidget } from './editor-preview-widget.js';
+import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state.js';
+import { WidgetOpenerOptions } from '@theia/core/lib/browser/index.js';
 
 @injectable()
 export class EditorPreviewManager extends EditorManager {

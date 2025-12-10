@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Event, Emitter, nls } from '@theia/core/lib/common';
-import { Decoration, DecorationsService } from '@theia/core/lib/browser/decorations-service';
-import { TreeNode, TreeDecoration, TreeDecorator, Tree, TopDownTreeIterator } from '@theia/core/lib/browser';
-import { MaybePromise } from '@theia/core/lib/common/types';
-import { ColorRegistry } from '@theia/core/lib/browser/color-registry';
-import { FileStatNode } from './file-tree';
+import { injectable, inject, postConstruct } from 'inversify';
+import { URI } from '@theia/core';
+import { Event, Emitter, nls } from '@theia/core';
+import { Decoration, DecorationsService, ColorRegistry } from '@theia/core/lib/browser/index.js';
+import { TreeNode, TreeDecoration, TreeDecorator, Tree, TopDownTreeIterator } from '@theia/core/lib/browser/index.js';
+import { MaybePromise } from '@theia/core';
+import { FileStatNode } from './file-tree.js';
 
 @injectable()
 export class FileTreeDecoratorAdapter implements TreeDecorator {

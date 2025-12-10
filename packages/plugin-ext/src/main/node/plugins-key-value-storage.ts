@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { FileSystemLocking } from '@theia/core/lib/node';
-import * as fs from '@theia/core/shared/fs-extra';
+import { injectable, inject, postConstruct } from 'inversify';
+import { FileSystemLocking } from '@theia/core/lib/node/index.js';
+import * as fs from 'fs-extra';
 import * as path from 'path';
-import { FileUri } from '@theia/core/lib/common/file-uri';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
-import { PluginPaths } from './paths/const';
-import { PluginPathsService } from '../common/plugin-paths-protocol';
-import { KeysToAnyValues, KeysToKeysToAnyValue } from '../../common/types';
-import { PluginStorageKind } from '../../common';
+import { FileUri } from '@theia/core/lib/common/file-uri.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
+import { PluginPaths } from './paths/const.js';
+import { PluginPathsService } from '../common/plugin-paths-protocol.js';
+import { KeysToAnyValues, KeysToKeysToAnyValue } from '../../common/types.js';
+import { PluginStorageKind } from '../../common/index.js';
 
-export interface Store {
+export type Store = {
     fsPath: string
     values: KeysToKeysToAnyValue
 }

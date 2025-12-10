@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,9 +16,9 @@
 
 import * as cp from 'child_process';
 import * as path from 'path';
-import { injectable } from '@theia/core/shared/inversify';
-import { FileUri } from '@theia/core/lib/common/file-uri';
-import { ExternalTerminalService, ExternalTerminalConfiguration } from '../common/external-terminal';
+import { injectable } from 'inversify';
+import { FileUri } from '@theia/core/lib/common/file-uri.js';
+import { ExternalTerminalService, ExternalTerminalConfiguration } from '../common/external-terminal.js';
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.

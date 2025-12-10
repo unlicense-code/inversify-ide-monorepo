@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, postConstruct } from 'inversify';
 import {
     TreeWidget,
     CompositeTreeNode,
@@ -32,31 +32,31 @@ import {
     TREE_NODE_INFO_CLASS,
     codicon,
     TopDownTreeIterator
-} from '@theia/core/lib/browser';
+} from '@theia/core/lib/browser/index.js';
 import { CancellationTokenSource, Emitter, EOL, Event, ProgressService } from '@theia/core';
 import {
     EditorManager, EditorDecoration, TrackedRangeStickiness, OverviewRulerLane,
     EditorWidget, EditorOpenerOptions, FindMatch, Position
-} from '@theia/editor/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { FileResourceResolver } from '@theia/filesystem/lib/browser';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { SearchInWorkspaceResult, SearchInWorkspaceOptions, SearchMatch } from '../common/search-in-workspace-interface';
-import { SearchInWorkspaceService } from './search-in-workspace-service';
-import { MEMORY_TEXT } from '@theia/core/lib/common';
-import URI from '@theia/core/lib/common/uri';
-import * as React from '@theia/core/shared/react';
-import { SearchInWorkspacePreferences } from '../common/search-in-workspace-preferences';
-import { ColorRegistry } from '@theia/core/lib/browser/color-registry';
+} from '@theia/editor/lib/browser/index.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { FileResourceResolver } from '@theia/filesystem/lib/browser/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { SearchInWorkspaceResult, SearchInWorkspaceOptions, SearchMatch } from '../common/search-in-workspace-interface.js';
+import { SearchInWorkspaceService } from './search-in-workspace-service.js';
+import { MEMORY_TEXT } from '@theia/core/lib/common/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import * as React from 'react';
+import { SearchInWorkspacePreferences } from '../common/search-in-workspace-preferences.js';
+import { ColorRegistry } from '@theia/core/lib/browser/color-registry.js';
 import { minimatch, type MinimatchOptions } from 'minimatch';
-import { DisposableCollection } from '@theia/core/lib/common/disposable';
-import debounce = require('@theia/core/shared/lodash.debounce');
-import { nls } from '@theia/core/lib/common/nls';
-import { FileSystemPreferences } from '@theia/filesystem/lib/common';
+import { DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import debounce from  'lodash/debounce.js'
+import { nls } from '@theia/core/lib/common/nls.js';
+import { FileSystemPreferences } from '@theia/filesystem/lib/common/index.js';
 
 const ROOT_ID = 'ResultTree';
 
-export interface SearchInWorkspaceRoot extends CompositeTreeNode {
+export type SearchInWorkspaceRoot = CompositeTreeNode & {
     children: SearchInWorkspaceRootFolderNode[];
 }
 export namespace SearchInWorkspaceRoot {
@@ -64,7 +64,7 @@ export namespace SearchInWorkspaceRoot {
         return CompositeTreeNode.is(node) && node.id === ROOT_ID;
     }
 }
-export interface SearchInWorkspaceRootFolderNode extends ExpandableTreeNode, SelectableTreeNode { // root folder node
+export type SearchInWorkspaceRootFolderNode = ExpandableTreeNode & SelectableTreeNode & { // root folder node
     name?: undefined
     icon?: undefined
     children: SearchInWorkspaceFileNode[];
@@ -79,7 +79,7 @@ export namespace SearchInWorkspaceRootFolderNode {
     }
 }
 
-export interface SearchInWorkspaceFileNode extends ExpandableTreeNode, SelectableTreeNode { // file node
+export type SearchInWorkspaceFileNode = ExpandableTreeNode & SelectableTreeNode & { // file node
     name?: undefined
     icon?: undefined
     children: SearchInWorkspaceResultLineNode[];
@@ -94,7 +94,7 @@ export namespace SearchInWorkspaceFileNode {
     }
 }
 
-export interface SearchInWorkspaceResultLineNode extends SelectableTreeNode, SearchInWorkspaceResult, SearchMatch { // line node
+export type SearchInWorkspaceResultLineNode = SelectableTreeNode & SearchInWorkspaceResult & SearchMatch & { // line node
     parent: SearchInWorkspaceFileNode
 }
 export namespace SearchInWorkspaceResultLineNode {
@@ -163,7 +163,10 @@ export class SearchInWorkspaceResultTreeWidget extends TreeWidget {
             children: []
         } as SearchInWorkspaceRoot;
 
-        this.toDispose.push(model.onSelectionChanged(nodes => {
+        this.toDispose.push(model.onSelectionChanged((nodes: ReadonlyArray<TreeNode> | undefined) => {
+            if (!nodes || nodes.length === 0) {
+                return;
+            }
             const node = nodes[0];
             if (SearchInWorkspaceResultLineNode.is(node)) {
                 this.doOpen(node, true, true);
@@ -204,9 +207,9 @@ export class SearchInWorkspaceResultTreeWidget extends TreeWidget {
             this.update();
         }));
 
-        this.toDispose.push(this.fileService.onDidFilesChange(event => {
+        this.toDispose.push(this.fileService.onDidFilesChange((event: { gotDeleted(): boolean; getDeleted(): Array<{ resource: URI }> }) => {
             if (event.gotDeleted()) {
-                event.getDeleted().forEach(deletedFile => {
+                event.getDeleted().forEach((deletedFile: { resource: URI }) => {
                     const fileNodes = this.getFileNodesByUri(deletedFile.resource);
                     fileNodes.forEach(node => this.removeFileNode(node));
                 });
@@ -312,7 +315,7 @@ export class SearchInWorkspaceResultTreeWidget extends TreeWidget {
             } else if (SearchInWorkspaceResultLineNode.is(prevNode)) {
                 foundSelectedNode = true;
                 this.selectExpandOpenResultNode(prevNode);
-            } else if (prevNode.id === 'ResultTree') {
+            } else if (CompositeTreeNode.is(prevNode) && prevNode.id === 'ResultTree') {
                 return this.selectLastResult();
             } else {
                 this.model.selectPrev();
@@ -556,14 +559,14 @@ export class SearchInWorkspaceResultTreeWidget extends TreeWidget {
             rootFolderNode = this.createRootFolderNode(result.root);
             tree.set(result.root, rootFolderNode);
         }
-        let fileNode = rootFolderNode.children.find(f => f.fileUri === result.fileUri);
+        let fileNode = rootFolderNode.children.find((f: SearchInWorkspaceFileNode) => f.fileUri === result.fileUri) as SearchInWorkspaceFileNode | undefined;
         if (!fileNode) {
             fileNode = this.createFileNode(result.root, path, result.fileUri, rootFolderNode);
             rootFolderNode.children.push(fileNode);
         }
         for (const match of result.matches) {
             const line = this.createResultLineNode(result, match, fileNode);
-            if (fileNode.children.findIndex(lineNode => lineNode.id === line.id) < 0) {
+            if (fileNode.children.findIndex((lineNode: SearchInWorkspaceResultLineNode) => lineNode.id === line.id) < 0) {
                 fileNode.children.push(line);
             }
         }
@@ -932,9 +935,9 @@ export class SearchInWorkspaceResultTreeWidget extends TreeWidget {
 
     protected updateRightResults(node: SearchInWorkspaceResultLineNode): void {
         const fileNode = node.parent;
-        const rightPositionedNodes = fileNode.children.filter(rl => rl.line === node.line && rl.character > node.character);
+        const rightPositionedNodes = fileNode.children.filter((rl: SearchInWorkspaceResultLineNode) => rl.line === node.line && rl.character > node.character);
         const diff = this._replaceTerm.length - this.searchTerm.length;
-        rightPositionedNodes.forEach(r => r.character += diff);
+        rightPositionedNodes.forEach((r: SearchInWorkspaceResultLineNode) => r.character += diff);
     }
 
     /**
@@ -1032,7 +1035,7 @@ export class SearchInWorkspaceResultTreeWidget extends TreeWidget {
 
     private removeResultLineNode(node: SearchInWorkspaceResultLineNode): void {
         const fileNode = node.parent;
-        const index = fileNode.children.findIndex(n => n.fileUri === node.fileUri && n.line === node.line && n.character === node.character);
+        const index = fileNode.children.findIndex((n: SearchInWorkspaceResultLineNode) => n.fileUri === node.fileUri && n.line === node.line && n.character === node.character);
         if (index > -1) {
             fileNode.children.splice(index, 1);
             if (this.getResultCount(fileNode) === 0) {
@@ -1228,7 +1231,7 @@ export class SearchInWorkspaceResultTreeWidget extends TreeWidget {
     protected createEditorDecorations(resultNode: SearchInWorkspaceFileNode | undefined): EditorDecoration[] {
         const decorations: EditorDecoration[] = [];
         if (resultNode) {
-            resultNode.children.forEach(res => {
+            resultNode.children.forEach((res: SearchInWorkspaceResultLineNode) => {
                 decorations.push({
                     range: {
                         start: {
@@ -1291,7 +1294,8 @@ export class SearchInWorkspaceResultTreeWidget extends TreeWidget {
             return this.labelProvider.getLongName(node.uri);
         }
         if (SearchInWorkspaceResultLineNode.is(node)) {
-            return `  ${node.line}:${node.character}: ${node.lineText}`;
+            const lineNode = node as SearchInWorkspaceResultLineNode;
+            return `  ${lineNode.line}:${lineNode.character}: ${lineNode.lineText}`;
         }
         return '';
     }

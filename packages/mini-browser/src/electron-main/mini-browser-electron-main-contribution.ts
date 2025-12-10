@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ElectronMainApplication, ElectronMainApplicationContribution } from '@theia/core/lib/electron-main/electron-main-application';
-import { ElectronSecurityTokenService } from '@theia/core/lib/electron-main/electron-security-token-service';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { MiniBrowserEndpoint } from '../common/mini-browser-endpoint';
+import { ElectronMainApplication, ElectronMainApplicationContribution } from '@theia/core/lib/electron-main/electron-main-application.js';
+import { ElectronSecurityTokenService } from '@theia/core/lib/electron-main/electron-security-token-service.js';
+import { inject, injectable } from 'inversify';
+import { MiniBrowserEndpoint } from '../common/mini-browser-endpoint.js';
 
 /**
  * Since the mini-browser might serve content from a new origin,

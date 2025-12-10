@@ -18,7 +18,7 @@ import {
     AIVariable,
     AIVariableResolutionRequest,
     ResolvedAIContextVariable
-} from '@theia/ai-core';
+} from '@theia/ai-core/lib/common/index.js';
 import { nls } from '@theia/core';
 
 export const IMAGE_CONTEXT_VARIABLE: AIVariable = {
@@ -50,14 +50,14 @@ export const IMAGE_CONTEXT_VARIABLE: AIVariable = {
     ]
 };
 
-export interface ImageContextVariable {
+export type ImageContextVariable = {
     name?: string;
     wsRelativePath?: string;
     data: string;
     mimeType: string;
 }
 
-export interface ImageContextVariableRequest extends AIVariableResolutionRequest {
+export type ImageContextVariableRequest = AIVariableResolutionRequest & {
     variable: typeof IMAGE_CONTEXT_VARIABLE;
     arg: string;
 }

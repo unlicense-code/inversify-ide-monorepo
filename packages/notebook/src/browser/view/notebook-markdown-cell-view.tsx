@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,25 +14,25 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { MarkdownRenderer } from '@theia/core/lib/browser/markdown-rendering/markdown-renderer';
-import { MarkdownStringImpl } from '@theia/core/lib/common/markdown-rendering/markdown-string';
-import { NotebookModel } from '../view-model/notebook-model';
-import { CellRenderer, observeCellHeight } from './notebook-cell-list-view';
-import { NotebookCellModel } from '../view-model/notebook-cell-model';
-import { CellEditor } from './notebook-cell-editor';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { MonacoEditorServices } from '@theia/monaco/lib/browser/monaco-editor';
+import * as React from 'react';
+import { MarkdownRenderer } from '@theia/core/lib/browser/markdown-rendering/markdown-renderer.js';
+import { MarkdownStringImpl } from '@theia/core/lib/common/markdown-rendering/markdown-string.js';
+import { NotebookModel } from '../view-model/notebook-model.js';
+import { CellRenderer, observeCellHeight } from './notebook-cell-list-view.js';
+import { NotebookCellModel } from '../view-model/notebook-cell-model.js';
+import { CellEditor } from './notebook-cell-editor.js';
+import { inject, injectable } from 'inversify';
+import { MonacoEditorServices } from '@theia/monaco/lib/browser/monaco-editor.js';
 import { CommandRegistry, nls } from '@theia/core';
-import { NotebookContextManager } from '../service/notebook-context-manager';
-import { NotebookOptionsService } from '../service/notebook-options';
-import { NotebookCodeCellStatus } from './notebook-code-cell-view';
-import { NotebookEditorFindMatch, NotebookEditorFindMatchOptions } from './notebook-find-widget';
-import * as mark from 'advanced-mark.js';
-import { NotebookCellEditorService } from '../service/notebook-cell-editor-service';
-import { NotebookCellStatusBarService } from '../service/notebook-cell-status-bar-service';
-import { LabelParser } from '@theia/core/lib/browser/label-parser';
-import { NotebookViewModel } from '../view-model/notebook-view-model';
+import { NotebookContextManager } from '../service/notebook-context-manager.js';
+import { NotebookOptionsService } from '../service/notebook-options.js';
+import { NotebookCodeCellStatus } from './notebook-code-cell-view.js';
+import { NotebookEditorFindMatch, NotebookEditorFindMatchOptions } from './notebook-find-widget.js';
+import mark from 'advanced-mark.js';
+import { NotebookCellEditorService } from '../service/notebook-cell-editor-service.js';
+import { NotebookCellStatusBarService } from '../service/notebook-cell-status-bar-service.js';
+import { LabelParser } from '@theia/core/lib/browser/label-parser.js';
+import { NotebookViewModel } from '../view-model/notebook-view-model.js';
 
 @injectable()
 export class NotebookMarkdownCellRenderer implements CellRenderer {
@@ -93,7 +93,7 @@ export class NotebookMarkdownCellRenderer implements CellRenderer {
     }
 }
 
-interface MarkdownCellProps {
+type MarkdownCellProps = {
     markdownRenderer: MarkdownRenderer;
     monacoServices: MonacoEditorServices;
 
@@ -136,7 +136,7 @@ function MarkdownCell({
 
     React.useEffect(() => {
         if (!editMode) {
-            const instance = new mark(markdownContent);
+            const instance = new (mark as any)(markdownContent);
             cell.onMarkdownFind = options => {
                 instance.unmark();
                 if (empty) {

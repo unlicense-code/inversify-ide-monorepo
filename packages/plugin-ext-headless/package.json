@@ -1,6 +1,7 @@
 {
   "name": "@theia/plugin-ext-headless",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - Headless (Backend-only) Plugin Extension",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",

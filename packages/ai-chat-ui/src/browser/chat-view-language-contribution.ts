@@ -13,18 +13,18 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { ChatAgentService } from '@theia/ai-chat';
-import { AIVariableService } from '@theia/ai-core/lib/common';
-import { PromptText } from '@theia/ai-core/lib/common/prompt-text';
-import { PromptService, BasePromptFragment } from '@theia/ai-core/lib/common/prompt-service';
-import { ToolInvocationRegistry } from '@theia/ai-core/lib/common/tool-invocation-registry';
+import { ChatAgentService } from '@theia/ai-chat/lib/common/index.js';
+import { AIVariableService } from '@theia/ai-core/lib/common/index.js';
+import { PromptText } from '@theia/ai-core/lib/common/prompt-text.js';
+import { PromptService, BasePromptFragment } from '@theia/ai-core/lib/common/prompt-service.js';
+import { ToolInvocationRegistry } from '@theia/ai-core/lib/common/tool-invocation-registry.js';
 import { MaybePromise, nls } from '@theia/core';
-import { FrontendApplication, FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { FrontendApplication, FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { inject, injectable } from 'inversify';
 import * as monaco from '@theia/monaco-editor-core';
-import { ProviderResult } from '@theia/monaco-editor-core/esm/vs/editor/common/languages';
-import { AIChatFrontendContribution, VARIABLE_ADD_CONTEXT_COMMAND } from '@theia/ai-chat/lib/browser/ai-chat-frontend-contribution';
+import { ProviderResult } from '@theia/monaco-editor-core/esm/vs/editor/common/languages.js';
+import { AIChatFrontendContribution, VARIABLE_ADD_CONTEXT_COMMAND } from '@theia/ai-chat/lib/browser/ai-chat-frontend-contribution.js';
 
 export const CHAT_VIEW_LANGUAGE_ID = 'theia-ai-chat-view-language';
 export const SETTINGS_LANGUAGE_ID = 'theia-ai-chat-settings-language';
@@ -33,7 +33,7 @@ export const CHAT_VIEW_LANGUAGE_EXTENSION = 'aichatviewlanguage';
 const VARIABLE_RESOLUTION_CONTEXT = { context: 'chat-input-autocomplete' };
 const VARIABLE_ARGUMENT_PICKER_COMMAND = 'trigger-variable-argument-picker';
 
-interface CompletionSource<T> {
+type CompletionSource<T> = {
     triggerCharacter: string;
     getItems: () => T[];
     kind: monaco.languages.CompletionItemKind;

@@ -13,14 +13,11 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import * as React from '@theia/core/shared/react';
-import { injectable } from '@theia/core/shared/inversify';
-import { AIConfigurationBaseWidget } from './ai-configuration-base-widget';
+import * as React from 'react';
+import { injectable } from 'inversify';
+import { AIConfigurationBaseWidget } from './ai-configuration-base-widget.js';
 
-/**
- * Column definition for table configuration widgets.
- */
-export interface TableColumn<T> {
+export type TableColumn<T> = {
     id: string;
     label: string;
     className?: string;

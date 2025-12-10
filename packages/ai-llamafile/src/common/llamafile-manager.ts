@@ -15,15 +15,15 @@
 // *****************************************************************************
 export const LlamafileManager = Symbol('LlamafileManager');
 
-export const LlamafileManagerPath = '/services/llamafilemanager';
+export const LlamafileManagerPath = '/services/llamafilemanager.js';
 
-export interface LlamafileModelDescription {
+export type LlamafileModelDescription = {
     name: string;
     uri: string;
     port: number;
 }
 
-export interface LlamafileManager {
+export type LlamafileManager = {
     startServer(name: string): Promise<void>;
     stopServer(name: string): void;
     getStartedLlamafiles(): Promise<string[]>;
@@ -31,7 +31,7 @@ export interface LlamafileManager {
     addLanguageModels(llamaFiles: LlamafileModelDescription[]): Promise<void>;
     removeLanguageModels(modelIds: string[]): void;
 }
-export interface LlamafileServerManagerClient {
+export type LlamafileServerManagerClient = {
     log(llamafileName: string, message: string): void;
     error(llamafileName: string, message: string): void;
 }

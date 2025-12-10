@@ -16,21 +16,21 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { inject, injectable, optional } from '@theia/core/shared/inversify';
+import { inject, injectable, optional } from 'inversify';
 import { MenuPath, CommandRegistry, Disposable, DisposableCollection, nls, CommandMenu, AcceleratorSource, ContextExpressionMatcher } from '@theia/core';
-import { MenuModelRegistry } from '@theia/core/lib/common';
-import { TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { DeployedPlugin, IconUrl, Menu } from '../../../common';
-import { ScmWidget } from '@theia/scm/lib/browser/scm-widget';
-import { KeybindingRegistry, QuickCommandService, codicon } from '@theia/core/lib/browser';
+import { MenuModelRegistry } from '@theia/core/lib/common/index.js';
+import { TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { DeployedPlugin, IconUrl, Menu } from '../../../common/index.js';
+import { ScmWidget } from '@theia/scm/lib/browser/scm-widget.js';
+import { KeybindingRegistry, QuickCommandService, codicon } from '@theia/core/lib/browser/index.js';
 import {
     CodeEditorWidgetUtil, codeToTheiaMappings, ContributionPoint,
     PLUGIN_EDITOR_TITLE_MENU, PLUGIN_EDITOR_TITLE_RUN_MENU, PLUGIN_SCM_TITLE_MENU, PLUGIN_VIEW_TITLE_MENU
-} from './vscode-theia-menu-mappings';
-import { PluginMenuCommandAdapter } from './plugin-menu-command-adapter';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { PluginSharedStyle } from '../plugin-shared-style';
-import { ThemeIcon } from '@theia/monaco-editor-core/esm/vs/base/common/themables';
+} from './vscode-theia-menu-mappings.js';
+import { PluginMenuCommandAdapter } from './plugin-menu-command-adapter.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { PluginSharedStyle } from '../plugin-shared-style.js';
+import { ThemeIcon } from '@theia/monaco-editor-core/esm/vs/base/common/themables.js';
 
 @injectable()
 export class MenusContributionPointHandler {

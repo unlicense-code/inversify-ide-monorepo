@@ -15,13 +15,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { URI } from '@theia/core/shared/vscode-uri';
+import { URI } from 'vscode-uri';
 import * as theia from '@theia/plugin';
-import { DocumentsExtImpl } from '../documents';
-import { Hover } from '../../common/plugin-api-rpc-model';
-import * as Converter from '../type-converters';
-import { Range } from '../types-impl';
-import { Position } from '../../common/plugin-api-rpc';
+import { DocumentsExtImpl } from '../documents.js';
+import { Hover } from '../../common/plugin-api-rpc-model.js';
+import * as Converter from '../type-converters.js';
+import { Range } from '../types-impl.js';
+import { Position } from '../../common/plugin-api-rpc.js';
 
 export class HoverAdapter {
 

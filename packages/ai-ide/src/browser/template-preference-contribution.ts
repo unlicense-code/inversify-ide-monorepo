@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { DefaultPromptFragmentCustomizationService, PromptFragmentCustomizationProperties } from '@theia/ai-core/lib/browser/frontend-prompt-customization-service';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
+import { inject, injectable } from 'inversify';
+import { DefaultPromptFragmentCustomizationService, PromptFragmentCustomizationProperties } from '@theia/ai-core/lib/browser/frontend-prompt-customization-service.js';
 import {
     PROMPT_TEMPLATE_WORKSPACE_DIRECTORIES_PREF,
     PROMPT_TEMPLATE_ADDITIONAL_EXTENSIONS_PREF,
     PROMPT_TEMPLATE_WORKSPACE_FILES_PREF
-} from '../common/workspace-preferences';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+} from '../common/workspace-preferences.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
 import { Path, PreferenceService } from '@theia/core';
 
 @injectable()

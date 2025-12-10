@@ -13,14 +13,14 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { interfaces } from '@theia/core/shared/inversify';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import * as types from '../../plugin/types-impl';
-import { StatusBarMessageRegistryMain, StatusBarMessageRegistryExt, MAIN_RPC_CONTEXT } from '../../common/plugin-api-rpc';
-import { StatusBar, StatusBarAlignment, StatusBarEntry } from '@theia/core/lib/browser/status-bar/status-bar';
-import { ColorRegistry } from '@theia/core/lib/browser/color-registry';
+import { interfaces } from 'inversify';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import * as types from '../../plugin/types-impl.js';
+import { StatusBarMessageRegistryMain, StatusBarMessageRegistryExt, MAIN_RPC_CONTEXT } from '../../common/plugin-api-rpc.js';
+import { StatusBar, StatusBarAlignment, StatusBarEntry } from '@theia/core/lib/browser/status-bar/status-bar.js';
+import { ColorRegistry } from '@theia/core/lib/browser/color-registry.js';
 import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
-import { RPCProtocol } from '../../common/rpc-protocol';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
 import { CancellationToken } from '@theia/core';
 
 export class StatusBarMessageRegistryMainImpl implements StatusBarMessageRegistryMain, Disposable {

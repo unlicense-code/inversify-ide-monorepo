@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,15 +15,15 @@
 // *****************************************************************************
 
 import { inject, injectable } from 'inversify';
-import { Disposable } from '../common/disposable';
-import { nls } from '../common/nls';
-import { MaybePromise } from '../common/types';
-import { URI } from '../common/uri';
-import { QuickInputService, QuickPickItem, QuickPickItemOrSeparator } from './quick-input';
-import { getDefaultHandler } from './opener-service';
-import { PreferenceService, PreferenceScope } from '../common';
+import { Disposable } from '../common/disposable.js';
+import { nls } from '../common/nls.js';
+import { MaybePromise } from '../common/types.js';
+import { URI } from '../common/uri.js';
+import { QuickInputService, QuickPickItem, QuickPickItemOrSeparator } from './quick-input/index.js';
+import { getDefaultHandler } from './opener-service.js';
+import { PreferenceService, PreferenceScope } from '../common/index.js';
 
-export interface OpenWithHandler {
+export type OpenWithHandler = {
     /**
      * A unique id of this handler.
      */
@@ -61,7 +61,7 @@ export interface OpenWithHandler {
     open(uri: URI): MaybePromise<object | undefined>;
 }
 
-export interface OpenWithQuickPickItem extends QuickPickItem {
+export type OpenWithQuickPickItem = QuickPickItem & {
     handler: OpenWithHandler;
 }
 

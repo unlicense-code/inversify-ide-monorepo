@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces, Container } from '@theia/core/shared/inversify';
-import { CompressedExpansionService, CompressionToggle, createTreeContainer, TreeCompressionService, TreeContainerProps } from '@theia/core/lib/browser';
-import { FileTree } from './file-tree';
-import { FileTreeModel } from './file-tree-model';
-import { FileTreeWidget } from './file-tree-widget';
+import { interfaces } from 'inversify';
+import { CompressedExpansionService, CompressionToggle, createTreeContainer, TreeCompressionService, TreeContainerProps } from '@theia/core/lib/browser/index.js';
+import { FileTree } from './file-tree.js';
+import { FileTreeModel } from './file-tree-model.js';
+import { FileTreeWidget } from './file-tree-widget.js';
 
 const fileTreeDefaults: Partial<TreeContainerProps> = {
     tree: FileTree,
@@ -27,7 +27,7 @@ const fileTreeDefaults: Partial<TreeContainerProps> = {
     expansionService: CompressedExpansionService,
 };
 
-export function createFileTreeContainer(parent: interfaces.Container, overrides?: Partial<TreeContainerProps>): Container {
+export function createFileTreeContainer(parent: interfaces.Container, overrides?: Partial<TreeContainerProps>) {
     const child = createTreeContainer(parent, { ...fileTreeDefaults, ...overrides });
     child.bind(CompressionToggle).toConstantValue({ compress: false });
     child.bind(TreeCompressionService).toSelf().inSingletonScope();

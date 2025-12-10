@@ -18,12 +18,9 @@ import {
     LanguageModelResponse,
     LanguageModelStreamResponse,
     LanguageModelStreamResponsePart,
-} from './language-model';
+} from './language-model.js';
 
-/**
- * A session tracking raw exchanges with language models, organized into exchange units.
- */
-export interface LanguageModelSession {
+export type LanguageModelSession = {
     /**
      * Identifier of this Language Model Session. Corresponds to Chat session ids
      */
@@ -34,10 +31,7 @@ export interface LanguageModelSession {
     exchanges: LanguageModelExchange[];
 }
 
-/**
- * An exchange unit representing a logical operation which may involve multiple model requests.
- */
-export interface LanguageModelExchange {
+export type LanguageModelExchange = {
     /**
      * Identifier of the exchange unit.
      */
@@ -55,10 +49,7 @@ export interface LanguageModelExchange {
     }
 }
 
-/**
- * Alternative to the LanguageModelStreamResponse, suited for inspection
- */
-export interface LanguageModelMonitoredStreamResponse {
+export type LanguageModelMonitoredStreamResponse = {
     parts: LanguageModelStreamResponsePart[];
 }
 
@@ -67,10 +58,7 @@ export interface LanguageModelMonitoredStreamResponse {
  */
 export type LanguageModelExchangeRequestResponse = Exclude<LanguageModelResponse, LanguageModelStreamResponse> | LanguageModelMonitoredStreamResponse;
 
-/**
- * Represents a request to a language model within an exchange unit, capturing the request and its response.
- */
-export interface LanguageModelExchangeRequest {
+export type LanguageModelExchangeRequest = {
     /**
      * Identifier of the request. Might share the id with the parent exchange if there's only one request.
      */

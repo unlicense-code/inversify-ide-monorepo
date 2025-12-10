@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { ILanguageService } from '@theia/monaco-editor-core/esm/vs/editor/common/languages/language';
+import { inject, injectable, postConstruct } from 'inversify';
+import { ILanguageService } from '@theia/monaco-editor-core/esm/vs/editor/common/languages/language.js';
 import { MarkdownRenderer as CodeMarkdownRenderer, IMarkdownRendererOptions }
-    from '@theia/monaco-editor-core/esm/vs/editor/browser/widget/markdownRenderer/browser/markdownRenderer';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
+    from '@theia/monaco-editor-core/esm/vs/editor/browser/widget/markdownRenderer/browser/markdownRenderer.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { OpenerService, WidgetOpenerOptions, open } from '@theia/core/lib/browser';
-import { IOpenerService, OpenExternalOptions, OpenInternalOptions } from '@theia/monaco-editor-core/esm/vs/platform/opener/common/opener';
-import { HttpOpenHandlerOptions } from '@theia/core/lib/browser/http-open-handler';
-import { URI } from '@theia/core/lib/common/uri';
-import { MarkdownRenderer, MarkdownRenderOptions, MarkdownRenderResult } from '@theia/core/lib/browser/markdown-rendering/markdown-renderer';
-import { MarkedOptions, MarkdownRenderOptions as MonacoMarkdownRenderOptions } from '@theia/monaco-editor-core/esm/vs/base/browser/markdownRenderer';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
-import { DisposableStore } from '@theia/monaco-editor-core/esm/vs/base/common/lifecycle';
+import { OpenerService, WidgetOpenerOptions, open } from '@theia/core/lib/browser/index.js';
+import { IOpenerService, OpenExternalOptions, OpenInternalOptions } from '@theia/monaco-editor-core/esm/vs/platform/opener/common/opener.js';
+import { HttpOpenHandlerOptions } from '@theia/core/lib/browser/http-open-handler.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { MarkdownRenderer, MarkdownRenderOptions, MarkdownRenderResult } from '@theia/core/lib/browser/markdown-rendering/markdown-renderer.js';
+import { MarkedOptions, MarkdownRenderOptions as MonacoMarkdownRenderOptions } from '@theia/monaco-editor-core/esm/vs/base/browser/markdownRenderer.js';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/index.js';
+import { DisposableStore } from '@theia/monaco-editor-core/esm/vs/base/common/lifecycle.js';
 import { DisposableCollection, DisposableGroup, PreferenceService } from '@theia/core';
 
 @injectable()
@@ -48,7 +48,7 @@ export class MonacoMarkdownRenderer implements MarkdownRenderer {
         }
         const monacoActionHandler: MonacoMarkdownRenderOptions['actionHandler'] = {
             disposables: this.toDisposableStore(options.actionHandler.disposables),
-            callback: (content, e) => options.actionHandler!.callback(content, e?.browserEvent)
+            callback: (content: string, e?: { browserEvent?: MouseEvent | KeyboardEvent }) => options.actionHandler!.callback(content, e?.browserEvent)
         };
         return { ...options, actionHandler: monacoActionHandler };
     }
@@ -70,7 +70,7 @@ export class MonacoMarkdownRenderer implements MarkdownRenderer {
         const languages = StandaloneServices.get(ILanguageService);
         const openerService = StandaloneServices.get(IOpenerService);
         openerService.registerOpener({
-            open: (u, options) => this.interceptOpen(u, options)
+            open: (resource: string | monaco.Uri, options?: OpenInternalOptions | OpenExternalOptions) => this.interceptOpen(resource, options)
         });
         const that = this;
         const prefs = new class implements IMarkdownRendererOptions {

@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import { ProgressMessage } from '../chat-progress-message';
-import { ChatViewTreeWidget, ResponseNode } from './chat-view-tree-widget';
-import * as React from '@theia/core/shared/react';
+import { inject, injectable, named } from 'inversify';
+import { ProgressMessage } from '../chat-progress-message.js';
+import { ChatViewTreeWidget, ResponseNode } from './chat-view-tree-widget.js';
+import * as React from 'react';
 import { ContributionProvider } from '@theia/core';
-import { ChatResponsePartRenderer } from '../chat-response-part-renderer';
-import { ChatNodeToolbarActionContribution } from '../chat-node-toolbar-action-contribution';
-import { ChatResponseContent } from '@theia/ai-chat';
-import { ContextMenuRenderer, TreeNode } from '@theia/core/lib/browser';
-import { nls } from '@theia/core/lib/common/nls';
+import { ChatResponsePartRenderer } from '../chat-response-part-renderer.js';
+import { ChatNodeToolbarActionContribution } from '../chat-node-toolbar-action-contribution.js';
+import { ChatResponseContent } from '@theia/ai-chat/lib/common/index.js';
+import { ContextMenuRenderer, TreeNode } from '@theia/core/lib/browser/index.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 /**
  * Subset of the ChatViewTreeWidget used to render ResponseNodes for delegated prompts.

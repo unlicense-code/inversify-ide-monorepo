@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,15 +15,15 @@
 // *****************************************************************************
 
 import { MenuModelRegistry, CommandRegistry, SelectionService } from '@theia/core';
-import { AbstractViewContribution } from '@theia/core/lib/browser';
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { NavigatorContextMenu } from '@theia/navigator/lib/browser/navigator-contribution';
-import { UriCommandHandler, UriAwareCommandHandler } from '@theia/core/lib/common/uri-command-handler';
-import URI from '@theia/core/lib/common/uri';
-import { ScmHistoryWidget } from './scm-history-widget';
-import { ScmService } from '@theia/scm/lib/browser/scm-service';
-import { EDITOR_CONTEXT_MENU_SCM } from '../scm-extra-contribution';
-import { SCM_HISTORY_ID, SCM_HISTORY_LABEL, ScmHistoryCommands, SCM_HISTORY_TOGGLE_KEYBINDING, ScmHistoryOpenViewArguments } from './scm-history-constants';
+import { AbstractViewContribution } from '@theia/core/lib/browser/index.js';
+import { injectable, inject } from 'inversify';
+import { NavigatorContextMenu } from '@theia/navigator/lib/browser/navigator-contribution.js';
+import { UriCommandHandler, UriAwareCommandHandler } from '@theia/core';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ScmHistoryWidget } from './scm-history-widget.js';
+import { ScmService } from '@theia/scm/lib/browser/scm-service.js';
+import { EDITOR_CONTEXT_MENU_SCM } from '../scm-extra-contribution.js';
+import { SCM_HISTORY_ID, SCM_HISTORY_LABEL, ScmHistoryCommands, SCM_HISTORY_TOGGLE_KEYBINDING, ScmHistoryOpenViewArguments } from './scm-history-constants.js';
 export { SCM_HISTORY_ID, SCM_HISTORY_LABEL, ScmHistoryCommands, SCM_HISTORY_TOGGLE_KEYBINDING, ScmHistoryOpenViewArguments };
 
 @injectable()

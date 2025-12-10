@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { Message } from '@theia/core/shared/@lumino/messaging';
-import URI from '@theia/core/lib/common/uri';
-import { CommandService } from '@theia/core/lib/common';
-import { Key, TreeModel, ContextMenuRenderer, ExpandableTreeNode, TreeProps, TreeNode } from '@theia/core/lib/browser';
-import { DirNode, FileStatNodeData } from '@theia/filesystem/lib/browser';
-import { WorkspaceService, WorkspaceCommands } from '@theia/workspace/lib/browser';
-import { WorkspaceNode, WorkspaceRootNode } from './navigator-tree';
-import { FileNavigatorModel } from './navigator-model';
+import { injectable, inject, postConstruct } from 'inversify';
+import { Message } from '@lumino/messaging';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { CommandService } from '@theia/core/lib/common/index.js';
+import { Key, TreeModel, ContextMenuRenderer, ExpandableTreeNode, CompositeTreeNode, TreeProps, TreeNode } from '@theia/core/lib/browser/index.js';
+import { DirNode, FileStatNodeData } from '@theia/filesystem/lib/browser/index.js';
+import { WorkspaceService, WorkspaceCommands } from '@theia/workspace/lib/browser/index.js';
+import { WorkspaceNode, WorkspaceRootNode } from './navigator-tree.js';
+import { FileNavigatorModel } from './navigator-model.js';
 import { isOSX, environment } from '@theia/core';
-import * as React from '@theia/core/shared/react';
-import { NavigatorContextKeyService } from './navigator-context-key-service';
-import { nls } from '@theia/core/lib/common/nls';
-import { AbstractNavigatorTreeWidget } from './abstract-navigator-tree-widget';
+import * as React from 'react';
+import { NavigatorContextKeyService } from './navigator-context-key-service.js';
+import { nls } from '@theia/core/lib/common/nls.js';
+import { AbstractNavigatorTreeWidget } from './abstract-navigator-tree-widget.js';
 
 export const FILE_NAVIGATOR_ID = 'files';
 export const LABEL = nls.localizeByDefault('No Folder Opened');
@@ -62,8 +62,8 @@ export class FileNavigatorWidget extends AbstractNavigatorTreeWidget {
             this.model.onSelectionChanged(() =>
                 this.updateSelectionContextKeys()
             ),
-            this.model.onExpansionChanged(node => {
-                if (node.expanded && node.children.length === 1) {
+            this.model.onExpansionChanged((node: TreeNode) => {
+                if (ExpandableTreeNode.is(node) && node.expanded && CompositeTreeNode.is(node) && node.children.length === 1) {
                     const child = node.children[0];
                     if (ExpandableTreeNode.is(child) && !child.expanded) {
                         this.model.expandNode(child);
@@ -117,8 +117,8 @@ export class FileNavigatorWidget extends AbstractNavigatorTreeWidget {
 
     protected override onAfterAttach(msg: Message): void {
         super.onAfterAttach(msg);
-        this.addClipboardListener(this.node, 'copy', e => this.handleCopy(e));
-        this.addClipboardListener(this.node, 'paste', e => this.handlePaste(e));
+        this.addClipboardListener(this.node, 'copy', (e: ClipboardEvent) => this.handleCopy(e));
+        this.addClipboardListener(this.node, 'paste', (e: ClipboardEvent) => this.handlePaste(e));
     }
 
     protected handleCopy(event: ClipboardEvent): void {
@@ -188,7 +188,7 @@ export class FileNavigatorWidget extends AbstractNavigatorTreeWidget {
     }
 
     protected isEmptyMultiRootWorkspace(model: TreeModel): boolean {
-        return WorkspaceNode.is(model.root) && model.root.children.length === 0;
+        return WorkspaceNode.is(model.root) && model.root && 'children' in model.root && model.root.children.length === 0;
     }
 
     protected override tapNode(node?: TreeNode): void {

@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2021 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,24 +14,24 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { Key, KeyCode } from '@theia/core/lib/browser';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { ThemeType } from '@theia/core/lib/common/theme';
-import { LENGTH_FIELD_ID, LOCATION_OFFSET_FIELD_ID, MemoryOptionsWidget } from '../memory-widget/memory-options-widget';
-import { MWInput } from '../utils/memory-widget-components';
-import { Interfaces, MemoryDiffWidgetData, Utils } from '../utils/memory-widget-utils';
-import { DiffLabels } from './memory-diff-widget-types';
-import { nls } from '@theia/core/lib/common/nls';
+import { Key, KeyCode } from '@theia/core/lib/browser/index.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import * as React from 'react';
+import { ThemeType } from '@theia/core/lib/common/theme.js';
+import { LENGTH_FIELD_ID, LOCATION_OFFSET_FIELD_ID, MemoryOptionsWidget } from '../memory-widget/memory-options-widget.js';
+import { MWInput } from '../utils/memory-widget-components.js';
+import { Interfaces, MemoryDiffWidgetData, Utils } from '../utils/memory-widget-utils.js';
+import { DiffLabels } from './memory-diff-widget-types.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
-export interface DiffMemoryOptions extends Interfaces.MemoryOptions {
+export type DiffMemoryOptions = Interfaces.MemoryOptions & {
     beforeOffset: number;
     afterOffset: number;
 }
 
 @injectable()
 export class MemoryDiffOptionsWidget extends MemoryOptionsWidget {
-    @inject(MemoryDiffWidgetData) protected override memoryWidgetOptions: MemoryDiffWidgetData;
+    @inject(MemoryDiffWidgetData) protected declare memoryWidgetOptions: MemoryDiffWidgetData;
 
     protected themeType: ThemeType;
 

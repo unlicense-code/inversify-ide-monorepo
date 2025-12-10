@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,15 +15,12 @@
 // *****************************************************************************
 
 import { injectable, inject, postConstruct } from 'inversify';
-import { Emitter, Event, Disposable } from '../../common';
-import { CompositeTreeNode, TreeNode, Tree } from './tree';
+import { Emitter, Event, Disposable } from '../../common/index.js';
+import { CompositeTreeNode, TreeNode, Tree } from './tree.js';
 
 export const TreeExpansionService = Symbol('TreeExpansionService');
 
-/**
- * The tree expandable service.
- */
-export interface TreeExpansionService extends Disposable {
+export type TreeExpansionService = Disposable & {
     /**
      * Emit when the node is expanded or collapsed.
      */
@@ -54,10 +51,7 @@ export interface TreeExpansionService extends Disposable {
     toggleNodeExpansion(node: Readonly<ExpandableTreeNode>): Promise<void>;
 }
 
-/**
- * The expandable tree node.
- */
-export interface ExpandableTreeNode extends CompositeTreeNode {
+export type ExpandableTreeNode = CompositeTreeNode & {
     /**
      * Test whether this tree node is expanded.
      */

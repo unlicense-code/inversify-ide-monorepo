@@ -17,15 +17,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { DebugProtocol } from '@vscode/debugprotocol';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
 import { Event, Emitter, DisposableCollection, Disposable, MaybePromise } from '@theia/core';
-import { OutputChannel } from '@theia/output/lib/browser/output-channel';
+import { OutputChannel } from '@theia/output/lib/browser/output-channel.js';
 
-import { DebugChannel } from '../common/debug-service';
+import { DebugChannel } from '../common/debug-service.js';
 
 export type DebugRequestHandler = (request: DebugProtocol.Request) => MaybePromise<any>;
 
-export interface DebugRequestTypes {
+export type DebugRequestTypes = {
     'attach': [DebugProtocol.AttachRequestArguments, DebugProtocol.AttachResponse]
     'breakpointLocations': [DebugProtocol.BreakpointLocationsArguments, DebugProtocol.BreakpointLocationsResponse]
     'cancel': [DebugProtocol.CancelArguments, DebugProtocol.CancelResponse]
@@ -70,7 +70,7 @@ export interface DebugRequestTypes {
     'writeMemory': [DebugProtocol.WriteMemoryArguments, DebugProtocol.WriteMemoryResponse]
 }
 
-export interface DebugEventTypes {
+export type DebugEventTypes = {
     'breakpoint': DebugProtocol.BreakpointEvent
     'capabilities': DebugProtocol.CapabilitiesEvent
     'continued': DebugProtocol.ContinuedEvent

@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ToolProvider, ToolRequest } from '@theia/ai-core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { DebugConfigurationManager } from '@theia/debug/lib/browser/debug-configuration-manager';
-import { DebugSessionManager } from '@theia/debug/lib/browser/debug-session-manager';
-import { DebugSessionOptions } from '@theia/debug/lib/browser/debug-session-options';
-import { DebugSession } from '@theia/debug/lib/browser/debug-session';
-import { MutableChatRequestModel } from '@theia/ai-chat';
+import { ToolProvider, ToolRequest } from '@theia/ai-core/lib/common/index.js';
+import { inject, injectable } from 'inversify';
+import { DebugConfigurationManager } from '@theia/debug/lib/browser/debug-configuration-manager.js';
+import { DebugSessionManager } from '@theia/debug/lib/browser/debug-session-manager.js';
+import { DebugSessionOptions } from '@theia/debug/lib/browser/debug-session-options.js';
+import { DebugSession } from '@theia/debug/lib/browser/debug-session.js';
+import { MutableChatRequestModel } from '@theia/ai-chat/lib/common/index.js';
 import { CancellationToken } from '@theia/core';
 import {
     LIST_LAUNCH_CONFIGURATIONS_FUNCTION_ID,
     RUN_LAUNCH_CONFIGURATION_FUNCTION_ID,
     STOP_LAUNCH_CONFIGURATION_FUNCTION_ID
-} from '../common/workspace-functions';
+} from '../common/workspace-functions.js';
 
 @injectable()
 export class LaunchListProvider implements ToolProvider {

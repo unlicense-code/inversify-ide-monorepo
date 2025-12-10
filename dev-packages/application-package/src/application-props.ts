@@ -21,10 +21,7 @@ export type RequiredRecursive<T> = {
     [K in keyof T]-?: T[K] extends object ? RequiredRecursive<T[K]> : T[K]
 };
 
-/**
- * Base configuration for the Theia application.
- */
-export interface ApplicationConfig {
+export type ApplicationConfig = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     readonly [key: string]: any;
 }
@@ -236,7 +233,7 @@ export namespace GeneratorConfig {
     }
 }
 
-export interface NpmRegistryProps {
+export type NpmRegistryProps = {
 
     /**
      * Defaults to `false`.
@@ -256,10 +253,7 @@ export namespace NpmRegistryProps {
     };
 }
 
-/**
- * Representation of all backend and frontend related Theia extension and application properties.
- */
-export interface ApplicationProps extends NpmRegistryProps {
+export type ApplicationProps = NpmRegistryProps & {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     readonly [key: string]: any;

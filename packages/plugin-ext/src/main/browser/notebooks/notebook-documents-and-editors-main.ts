@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,21 +19,21 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Disposable, DisposableCollection } from '@theia/core';
-import { interfaces } from '@theia/core/shared/inversify';
-import { UriComponents } from '@theia/core/lib/common/uri';
+import { interfaces } from 'inversify';
+import { UriComponents } from '@theia/core/lib/common/uri.js';
 import { NotebookEditorWidget, NotebookService, NotebookEditorWidgetService, NotebookCellEditorService } from '@theia/notebook/lib/browser';
-import { NotebookModel } from '@theia/notebook/lib/browser/view-model/notebook-model';
-import { MAIN_RPC_CONTEXT, NotebookDocumentsAndEditorsDelta, NotebookDocumentsAndEditorsMain, NotebookEditorAddData, NotebookModelAddedData, NotebooksExt } from '../../../common';
-import { RPCProtocol } from '../../../common/rpc-protocol';
-import { NotebookDto } from './notebook-dto';
-import { WidgetManager } from '@theia/core/lib/browser';
-import { NotebookEditorsMainImpl } from './notebook-editors-main';
-import { NotebookDocumentsMainImpl } from './notebook-documents-main';
-import { diffMaps, diffSets } from '../../../common/collections';
+import { NotebookModel } from '@theia/notebook/lib/browser/view-model/notebook-model.js';
+import { MAIN_RPC_CONTEXT, NotebookDocumentsAndEditorsDelta, NotebookDocumentsAndEditorsMain, NotebookEditorAddData, NotebookModelAddedData, NotebooksExt } from '../../../common/index.js';
+import { RPCProtocol } from '../../../common/rpc-protocol.js';
+import { NotebookDto } from './notebook-dto.js';
+import { WidgetManager } from '@theia/core/lib/browser/index.js';
+import { NotebookEditorsMainImpl } from './notebook-editors-main.js';
+import { NotebookDocumentsMainImpl } from './notebook-documents-main.js';
+import { diffMaps, diffSets } from '../../../common/collections.js';
 import { Mutex } from 'async-mutex';
-import { TabsMainImpl } from '../tabs/tabs-main';
+import { TabsMainImpl } from '../tabs/tabs-main.js';
 
-interface NotebookAndEditorDelta {
+type NotebookAndEditorDelta = {
     removedDocuments: UriComponents[];
     addedDocuments: NotebookModel[];
     removedEditors: string[];

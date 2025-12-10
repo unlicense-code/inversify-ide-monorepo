@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 RedHat and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,7 +16,7 @@
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { injectable } from 'inversify';
-import { ClipboardService } from '../browser/clipboard-service';
+import { ClipboardService } from '../browser/clipboard-service.js';
 
 @injectable()
 export class ElectronClipboardService implements ClipboardService {

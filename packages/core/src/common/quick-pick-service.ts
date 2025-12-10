@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import * as fuzzy from 'fuzzy';
-import { Event } from './event';
-import { KeySequence } from './keys';
-import { CancellationToken } from './cancellation';
+import { Event } from './event.js';
+import { KeySequence } from './keys.js';
+import { CancellationToken } from './cancellation.js';
 
 export const quickPickServicePath = '/services/quickPick';
 export const QuickPickService = Symbol('QuickPickService');
-export interface QuickPickService {
+export type QuickPickService = {
     show<T extends QuickPickItem>(items: Array<T | QuickPickSeparator>, options?: QuickPickOptions<T>): Promise<T | undefined>;
     setItems<T extends QuickPickItem>(items: Array<T>): void;
     hide(): void
@@ -33,17 +33,17 @@ export interface QuickPickService {
     readonly onDidTriggerButton: Event<QuickInputButtonHandle>;
 }
 
-export interface Match {
+export type Match = {
     start: number;
     end: number;
 }
-export interface QuickPickItemHighlights {
+export type QuickPickItemHighlights = {
     label?: Match[];
     description?: Match[];
     detail?: Match[];
 }
 
-export interface QuickPickItem {
+export type QuickPickItem = {
     type?: 'item';
     id?: string;
     label: string;
@@ -59,7 +59,7 @@ export interface QuickPickItem {
     execute?: () => void;
 }
 
-export interface QuickPickSeparator {
+export type QuickPickSeparator = {
     type: 'separator';
     label?: string;
 }
@@ -74,11 +74,6 @@ export namespace QuickPickItem {
     }
 }
 
-export interface QuickPickSeparator {
-    type: 'separator';
-    label?: string;
-}
-
 export namespace QuickPickSeparator {
     export function is(item: QuickPickItemOrSeparator): item is QuickPickSeparator {
         return item.type === 'separator';
@@ -87,11 +82,11 @@ export namespace QuickPickSeparator {
 
 export type QuickPicks = (QuickPickSeparator | QuickPickItem)[];
 
-export interface QuickPickValue<V> extends QuickPickItem {
+export type QuickPickValue<V> = QuickPickItem & {
     value: V
 }
 
-export interface QuickInputButton {
+export type QuickInputButton = {
     iconClass?: string;
     tooltip?: string;
     /**
@@ -100,7 +95,7 @@ export interface QuickInputButton {
     alwaysVisible?: boolean;
 }
 
-export interface QuickInputButtonHandle extends QuickInputButton {
+export type QuickInputButtonHandle = QuickInputButton & {
     handle: number; // index of where the button is in buttons array if QuickInputButton or -1 if QuickInputButtons.Back
 }
 
@@ -119,7 +114,7 @@ export enum QuickInputHideReason {
     Other = 3,
 }
 
-export interface QuickInput {
+export type QuickInput = {
     readonly onDidHide: Event<{ reason: QuickInputHideReason }>;
     readonly onDispose: Event<void>;
     title: string | undefined;
@@ -135,7 +130,7 @@ export interface QuickInput {
     dispose(): void;
 }
 
-export interface InputBox extends QuickInput {
+export type InputBox = QuickInput & {
     value: string | undefined;
     valueSelection: Readonly<[number, number]> | undefined;
     placeholder: string | undefined;
@@ -148,7 +143,7 @@ export interface InputBox extends QuickInput {
     validationMessage: string | undefined;
 }
 
-export interface QuickPick<T extends QuickPickItemOrSeparator> extends QuickInput {
+export type QuickPick<T extends QuickPickItemOrSeparator> = QuickInput & {
     value: string;
     placeholder: string | undefined;
     items: ReadonlyArray<T | QuickPickSeparator>;
@@ -167,7 +162,7 @@ export interface QuickPick<T extends QuickPickItemOrSeparator> extends QuickInpu
     readonly onDidChangeSelection: Event<T[]>;
 }
 
-export interface PickOptions<T extends QuickPickItem> {
+export type PickOptions<T extends QuickPickItem> = {
     title?: string;
     placeHolder?: string;
     matchOnDescription?: boolean;
@@ -181,7 +176,7 @@ export interface PickOptions<T extends QuickPickItem> {
     onDidFocus?: (entry: T) => void;
 }
 
-export interface InputOptions {
+export type InputOptions = {
     title?: string;
     value?: string;
     valueSelection?: [number, number];
@@ -192,16 +187,16 @@ export interface InputOptions {
     validateInput?(input: string): Promise<string | { content: string; severity: number; } | null | undefined> | undefined;
 }
 
-export interface QuickPickItemButtonEvent<T extends QuickPickItemOrSeparator> {
+export type QuickPickItemButtonEvent<T extends QuickPickItemOrSeparator> = {
     button: QuickInputButton;
     item: T;
 }
 
-export interface QuickPickItemButtonContext<T extends QuickPickItemOrSeparator> extends QuickPickItemButtonEvent<T> {
+export type QuickPickItemButtonContext<T extends QuickPickItemOrSeparator> = QuickPickItemButtonEvent<T> & {
     removeItem(): void;
 }
 
-export interface QuickPickOptions<T extends QuickPickItemOrSeparator> {
+export type QuickPickOptions<T extends QuickPickItemOrSeparator> = {
     busy?: boolean;
     enabled?: boolean;
     title?: string;
@@ -245,7 +240,7 @@ export interface QuickPickOptions<T extends QuickPickItemOrSeparator> {
 
 export const quickInputServicePath = '/services/quickInput';
 export const QuickInputService = Symbol('QuickInputService');
-export interface QuickInputService {
+export type QuickInputService = {
     readonly backButton: QuickInputButton;
     readonly onShow: Event<void>;
     readonly onHide: Event<void>;

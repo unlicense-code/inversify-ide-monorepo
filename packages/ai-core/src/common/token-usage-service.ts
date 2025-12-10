@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { TokenUsageServiceClient } from './protocol';
+import { TokenUsageServiceClient } from './protocol.js';
 
 export const TokenUsageService = Symbol('TokenUsageService');
 
-export interface TokenUsage {
+export type TokenUsage = {
     /** The input token count */
     inputTokens: number;
     /** The output token count */
@@ -35,7 +35,7 @@ export interface TokenUsage {
     requestId: string;
 }
 
-export interface TokenUsageParams {
+export type TokenUsageParams = {
     /** The input token count */
     inputTokens: number;
     /** The output token count */
@@ -48,7 +48,7 @@ export interface TokenUsageParams {
     requestId: string;
 }
 
-export interface TokenUsageService {
+export type TokenUsageService = {
     /**
      * Records token usage for a model interaction.
      *

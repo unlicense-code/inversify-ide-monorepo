@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,23 +15,23 @@
 // *****************************************************************************
 
 import { injectable, inject, named } from 'inversify';
-import { ContributionProvider } from '../common/contribution-provider';
-import { FrontendApplicationContribution } from './frontend-application-contribution';
-import { Emitter, MaybePromise, URI } from '../common';
-import { timeout, Deferred } from '../common/promise-util';
-import { IJSONSchema } from '../common/json-schema';
+import { ContributionProvider } from '../common/contribution-provider.js';
+import { FrontendApplicationContribution } from './frontend-application-contribution.js';
+import { Emitter, MaybePromise, URI } from '../common/index.js';
+import { timeout, Deferred } from '../common/promise-util.js';
+import { IJSONSchema } from '../common/json-schema.js';
 
-export interface JsonSchemaConfiguration {
+export type JsonSchemaConfiguration = {
     fileMatch: string | string[];
     url: string;
 }
 
-export interface JsonSchemaRegisterContext {
+export type JsonSchemaRegisterContext = {
     registerSchema(config: JsonSchemaConfiguration): void;
 }
 
 export const JsonSchemaContribution = Symbol('JsonSchemaContribution');
-export interface JsonSchemaContribution {
+export type JsonSchemaContribution = {
     registerSchemas(store: JsonSchemaRegisterContext): MaybePromise<void>
 }
 

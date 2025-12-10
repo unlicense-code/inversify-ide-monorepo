@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import { Command, CommandContribution, CommandRegistry, ContributionProvider, nls, QuickInputService, QuickPickInput } from '@theia/core';
-import { FrontendApplicationContribution, StatusBar, StatusBarAlignment, StatusBarEntry } from '@theia/core/lib/browser';
-import { inject, injectable, named, optional } from '@theia/core/shared/inversify';
-import { RemoteStatus, RemoteStatusService } from '../electron-common/remote-status-service';
-import { RemoteRegistry, RemoteRegistryContribution } from './remote-registry-contribution';
-import { RemoteService } from './remote-service';
-import { WindowService } from '@theia/core/lib/browser/window/window-service';
-import { getLocalPort, getCurrentPort } from '@theia/core/lib/electron-browser/messaging/electron-local-ws-connection-source';
+import { FrontendApplicationContribution, StatusBar, StatusBarAlignment, StatusBarEntry } from '@theia/core/lib/browser/index.js';
+import { inject, injectable, named, optional } from 'inversify';
+import { RemoteStatus, RemoteStatusService } from '../electron-common/remote-status-service.js';
+import { RemoteRegistry, RemoteRegistryContribution } from './remote-registry-contribution.js';
+import { RemoteService } from './remote-service.js';
+import { WindowService } from '@theia/core/lib/browser/window/window-service.js';
+import { getLocalPort, getCurrentPort } from '@theia/core/lib/electron-browser/messaging/electron-local-ws-connection-source.js';
 
 export namespace RemoteCommands {
     export const REMOTE_SELECT: Command = {

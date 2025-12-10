@@ -13,10 +13,10 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 
-import { Event, Emitter } from '@theia/core/lib/common/event';
+import { Event, Emitter } from '@theia/core';
 import { cloneAndChange } from '@theia/core';
-import { mixin } from '../common/types';
-import { TelemetryTrustedValue, TelemetryLoggerOptions } from './types-impl';
+import { mixin } from '../common/types.js';
+import { TelemetryTrustedValue, TelemetryLoggerOptions } from './types-impl.js';
 
 export class TelemetryExtImpl {
 
@@ -134,7 +134,7 @@ export class TelemetryLogger {
     }
 }
 
-interface TelemetrySender {
+type TelemetrySender = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     sendEventData(eventName: string, data?: Record<string, any>): void;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

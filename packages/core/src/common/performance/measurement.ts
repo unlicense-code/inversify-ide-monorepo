@@ -16,13 +16,9 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { LogLevel } from '../logger';
+import { LogLevel } from '../logger.js';
 
-/**
- * A `Measurement` counts the time elapsed between its creation when the {@link Stopwatch}
- * is {@link Stopwatch.start started} and when it is {@link stop stopped}.
- */
-export interface Measurement {
+export type Measurement = {
     /**
      * Compute the elapsed time, in milliseconds, if not already done (only has effect on the first invocation).
      * A `NaN` result indicates that the watch was stopped but failed to make a measurement.
@@ -80,10 +76,7 @@ export interface Measurement {
     error(detail: string, ...optionalArgs: any[]): void;
 }
 
-/**
- * Optional configuration of a {@link Measurement} specified at the time of its creation.
- */
-export interface MeasurementOptions {
+export type MeasurementOptions = {
     /**
      * A specific context of the application in which an activity was measured.
      * Results in logs being emitted with a "[<context>]" qualified at the head.
@@ -109,10 +102,7 @@ export interface MeasurementOptions {
     storeResults?: boolean
 }
 
-/**
- * Captures the result of a {@link Measurement} in a serializable format.
- */
-export interface MeasurementResult {
+export type MeasurementResult = {
     /** The measurement name. This may show up in the performance measurement framework appropriate to the application context. */
     name: string;
 

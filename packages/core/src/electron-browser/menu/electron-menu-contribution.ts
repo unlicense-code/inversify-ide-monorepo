@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,22 +18,28 @@ import { inject, injectable, postConstruct } from 'inversify';
 import {
     Command, CommandContribution, CommandRegistry, isOSX, isWindows, MenuModelRegistry,
     MenuContribution, Disposable, nls, PreferenceScope, PreferenceService
-} from '../../common';
+} from '../../common/index.js';
 import {
-    codicon, ConfirmDialog, KeybindingContribution, KeybindingRegistry, Widget,
-    FrontendApplication, FrontendApplicationContribution, CommonMenus, CommonCommands, Dialog, Message, ApplicationShell, animationFrame,
-} from '../../browser';
-import { ElectronMainMenuFactory } from './electron-main-menu-factory';
-import { FrontendApplicationStateService, FrontendApplicationState } from '../../browser/frontend-application-state';
-import { FrontendApplicationConfigProvider } from '../../browser/frontend-application-config-provider';
-import { ZoomLevel } from '../../electron-common/electron-window-preferences';
-import { BrowserMenuBarContribution } from '../../browser/menu/browser-menu-plugin';
-import { WindowService } from '../../browser/window/window-service';
-import { WindowTitleService } from '../../browser/window/window-title-service';
+    ConfirmDialog, KeybindingContribution, KeybindingRegistry, 
+    FrontendApplication, FrontendApplicationContribution, CommonMenus, CommonCommands, Dialog,  animationFrame,
+} from '../../browser/index.js';
+import { Widget } from '../../browser/widgets/widget.js';
+import { codicon } from '../../browser/widgets/widget.js';
+import { ApplicationShell } from '../../browser/shell/application-shell.js';
+import { Message } from '../../browser/widgets/widget.js';
+
+
+import { ElectronMainMenuFactory } from './electron-main-menu-factory.js';
+import { FrontendApplicationStateService, FrontendApplicationState } from '../../browser/frontend-application-state.js';
+import { FrontendApplicationConfigProvider } from '../../browser/frontend-application-config-provider.js';
+import { ZoomLevel } from '../../electron-common/electron-window-preferences.js';
+import { BrowserMenuBarContribution } from '../../browser/menu/browser-menu-plugin.js';
+import { WindowService } from '../../browser/window/window-service.js';
+import { WindowTitleService } from '../../browser/window/window-title-service.js';
 
 import '../../../src/electron-browser/menu/electron-menu-style.css';
-import { ThemeService } from '../../browser/theming';
-import { getThemeMode, ThemeChangeEvent } from '../../common/theme';
+import { ThemeService } from '../../browser/theming.js';
+import { getThemeMode, ThemeChangeEvent } from '../../common/theme.js';
 
 export namespace ElectronCommands {
     export const TOGGLE_DEVELOPER_TOOLS = Command.toDefaultLocalizedCommand({

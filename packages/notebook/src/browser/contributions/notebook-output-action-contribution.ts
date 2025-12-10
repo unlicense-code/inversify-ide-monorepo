@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import { Command, CommandContribution, CommandRegistry } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { NotebookEditorWidgetService } from '../service/notebook-editor-widget-service';
-import { CellOutput, CellUri } from '../../common';
-import { NotebookCellModel } from '../view-model/notebook-cell-model';
-import { EditorManager } from '@theia/editor/lib/browser';
+import { inject, injectable } from 'inversify';
+import { NotebookEditorWidgetService } from '../service/notebook-editor-widget-service.js';
+import { CellOutput, CellUri } from '../../common/index.js';
+import { NotebookCellModel } from '../view-model/notebook-cell-model.js';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
 
 export namespace NotebookOutputCommands {
     export const ENABLE_SCROLLING: Command = {

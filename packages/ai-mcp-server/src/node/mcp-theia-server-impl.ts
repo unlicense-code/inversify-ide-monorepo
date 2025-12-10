@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application';
+import { injectable, inject } from 'inversify';
+import { ILogger } from '@theia/core/lib/common/logger.js';
+import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application.js';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { generateUuid } from '@theia/core';
 
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
-import * as express from '@theia/core/shared/express';
+import * as express from 'express';
 import { randomUUID } from 'crypto';
-import { MCPTheiaServer } from './mcp-theia-server';
-import { MCPBackendContributionManager } from './mcp-backend-contribution-manager';
-import { MCPFrontendContributionManager } from './mcp-frontend-contribution-manager';
+import { MCPTheiaServer } from './mcp-theia-server.js';
+import { MCPBackendContributionManager } from './mcp-backend-contribution-manager.js';
+import { MCPFrontendContributionManager } from './mcp-frontend-contribution-manager.js';
 
 @injectable()
 export class MCPTheiaServerImpl implements MCPTheiaServer, BackendApplicationContribution {

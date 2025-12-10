@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { MetricsContribution } from '@theia/metrics/lib/node/metrics-contribution';
-import { PluginMetricsContribution } from './plugin-metrics';
-import { PluginMetrics, metricsJsonRpcPath } from '../common/metrics-protocol';
-import { PluginMetricsImpl } from './plugin-metrics-impl';
-import { ConnectionHandler } from '@theia/core/lib/common/messaging/handler';
+import { MetricsContribution } from '@theia/metrics/lib/node/metrics-contribution.js';
+import { PluginMetricsContribution } from './plugin-metrics.js';
+import { PluginMetrics, metricsJsonRpcPath } from '../common/metrics-protocol.js';
+import { PluginMetricsImpl } from './plugin-metrics-impl.js';
+import { ConnectionHandler } from '@theia/core/lib/common/messaging/handler.js';
 import { RpcConnectionHandler } from '@theia/core';
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { PluginMetricsContributor } from './metrics-contributor';
-import { PluginMetricTimeSum } from './metric-output/plugin-metrics-time-sum';
-import { PluginMetricTimeCount } from './metric-output/plugin-metrics-time-count';
-import { PluginMetricStringGenerator } from './metric-string-generator';
+import { ContainerModule } from 'inversify';
+import { PluginMetricsContributor } from './metrics-contributor.js';
+import { PluginMetricTimeSum } from './metric-output/plugin-metrics-time-sum.js';
+import { PluginMetricTimeCount } from './metric-output/plugin-metrics-time-count.js';
+import { PluginMetricStringGenerator } from './metric-string-generator.js';
 
 export default new ContainerModule((bind, unbind, isBound, rebind) => {
     bind(PluginMetricTimeSum).toSelf().inSingletonScope();

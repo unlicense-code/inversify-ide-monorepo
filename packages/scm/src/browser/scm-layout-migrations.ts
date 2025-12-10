@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { ApplicationShellLayoutMigration, WidgetDescription, ApplicationShellLayoutMigrationContext } from '@theia/core/lib/browser/shell/shell-layout-restorer';
-import { SCM_VIEW_CONTAINER_TITLE_OPTIONS, SCM_VIEW_CONTAINER_ID, SCM_WIDGET_FACTORY_ID } from './scm-contribution';
+import { injectable } from 'inversify';
+import { ApplicationShellLayoutMigration, WidgetDescription, ApplicationShellLayoutMigrationContext } from '@theia/core/lib/browser/shell/shell-layout-restorer.js';
+import { SCM_VIEW_CONTAINER_TITLE_OPTIONS, SCM_VIEW_CONTAINER_ID, SCM_WIDGET_FACTORY_ID } from './scm-contribution.js';
 
 @injectable()
 export class ScmLayoutVersion3Migration implements ApplicationShellLayoutMigration {

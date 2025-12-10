@@ -13,8 +13,8 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { bindTestPreferences } from '../common/test-preferences';
+import { ContainerModule } from 'inversify';
+import { bindTestPreferences } from '../common/test-preferences.js';
 
 // *****************************************************************************
 export default new ContainerModule(bind => {

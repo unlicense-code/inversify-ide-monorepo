@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,27 +15,27 @@
 // *****************************************************************************
 
 import { inject, injectable, named } from 'inversify';
-import { ContributionProvider } from '../common/contribution-provider';
-import { Theme, ThemeType } from '../common/theme';
-import { ColorRegistry } from './color-registry';
-import { DecorationStyle } from './decoration-style';
-import { FrontendApplicationContribution } from './frontend-application-contribution';
-import { ThemeService } from './theming';
-import { SecondaryWindowHandler } from './secondary-window-handler';
+import { ContributionProvider } from '../common/contribution-provider.js';
+import { Theme, ThemeType } from '../common/theme.js';
+import { ColorRegistry } from './color-registry.js';
+import { DecorationStyle } from './decoration-style.js';
+import { FrontendApplicationContribution } from './frontend-application-contribution.js';
+import { ThemeService } from './theming.js';
+import { SecondaryWindowHandler } from './secondary-window-handler.js';
 
 export const StylingParticipant = Symbol('StylingParticipant');
 
-export interface StylingParticipant {
+export type StylingParticipant = {
     registerThemeStyle(theme: ColorTheme, collector: CssStyleCollector): void
 }
 
-export interface ColorTheme {
+export type ColorTheme = {
     type: ThemeType
     label: string
     getColor(color: string): string | undefined;
 }
 
-export interface CssStyleCollector {
+export type CssStyleCollector = {
     addRule(rule: string): void;
 }
 

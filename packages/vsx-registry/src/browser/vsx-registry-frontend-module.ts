@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,33 +16,33 @@
 
 import '../../src/browser/style/index.css';
 
-import { ContainerModule } from '@theia/core/shared/inversify';
+import { ContainerModule } from 'inversify';
 import {
     WidgetFactory, bindViewContribution, FrontendApplicationContribution, ViewContainerIdentifier, OpenHandler, WidgetManager, WebSocketConnectionProvider,
     WidgetStatusBarContribution,
     noopWidgetStatusBarContribution
-} from '@theia/core/lib/browser';
-import { VSXExtensionsViewContainer } from './vsx-extensions-view-container';
-import { VSXExtensionsContribution } from './vsx-extensions-contribution';
-import { VSXExtensionsSearchBar } from './vsx-extensions-search-bar';
-import { VSXExtensionsModel } from './vsx-extensions-model';
-import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution';
-import { VSXExtensionsWidget, VSXExtensionsWidgetOptions } from './vsx-extensions-widget';
-import { VSXExtensionFactory, VSXExtension, VSXExtensionOptions } from './vsx-extension';
-import { VSXExtensionEditor } from './vsx-extension-editor';
-import { VSXExtensionEditorManager } from './vsx-extension-editor-manager';
-import { VSXExtensionsSourceOptions } from './vsx-extensions-source';
-import { VSXExtensionsSearchModel } from './vsx-extensions-search-model';
-import { bindExtensionPreferences } from '../common/recommended-extensions-preference-contribution';
-import { bindPreferenceProviderOverrides } from './recommended-extensions/preference-provider-overrides';
-import { bindVsxExtensionsPreferences } from './vsx-extensions-preferences';
-import { VSXEnvironment, VSX_ENVIRONMENT_PATH } from '../common/vsx-environment';
-import { LanguageQuickPickService } from '@theia/core/lib/browser/i18n/language-quick-pick-service';
-import { VSXLanguageQuickPickService } from './vsx-language-quick-pick-service';
-import { VsxExtensionArgumentProcessor } from './vsx-extension-argument-processor';
-import { ArgumentProcessorContribution } from '@theia/plugin-ext/lib/main/browser/command-registry-main';
-import { ExtensionSchemaContribution } from './recommended-extensions/recommended-extensions-json-schema';
-import { JsonSchemaContribution } from '@theia/core/lib/browser/json-schema-store';
+} from '@theia/core/lib/browser/index.js';
+import { VSXExtensionsViewContainer } from './vsx-extensions-view-container.js';
+import { VSXExtensionsContribution } from './vsx-extensions-contribution.js';
+import { VSXExtensionsSearchBar } from './vsx-extensions-search-bar.js';
+import { VSXExtensionsModel } from './vsx-extensions-model.js';
+import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution.js';
+import { VSXExtensionsWidget, VSXExtensionsWidgetOptions } from './vsx-extensions-widget.js';
+import { VSXExtensionFactory, VSXExtension, VSXExtensionOptions } from './vsx-extension.js';
+import { VSXExtensionEditor } from './vsx-extension-editor.js';
+import { VSXExtensionEditorManager } from './vsx-extension-editor-manager.js';
+import { VSXExtensionsSourceOptions } from './vsx-extensions-source.js';
+import { VSXExtensionsSearchModel } from './vsx-extensions-search-model.js';
+import { bindExtensionPreferences } from '../common/recommended-extensions-preference-contribution.js';
+import { bindPreferenceProviderOverrides } from './recommended-extensions/preference-provider-overrides.js';
+import { bindVsxExtensionsPreferences } from './vsx-extensions-preferences.js';
+import { VSXEnvironment, VSX_ENVIRONMENT_PATH } from '../common/vsx-environment.js';
+import { LanguageQuickPickService } from '@theia/core/lib/browser/i18n/language-quick-pick-service.js';
+import { VSXLanguageQuickPickService } from './vsx-language-quick-pick-service.js';
+import { VsxExtensionArgumentProcessor } from './vsx-extension-argument-processor.js';
+import { ArgumentProcessorContribution } from '@theia/plugin-ext/lib/main/browser/command-registry-main.js';
+import { ExtensionSchemaContribution } from './recommended-extensions/recommended-extensions-json-schema.js';
+import { JsonSchemaContribution } from '@theia/core/lib/browser/json-schema-store.js';
 
 export default new ContainerModule((bind, unbind, isBound, rebind) => {
     bind(VSXEnvironment)

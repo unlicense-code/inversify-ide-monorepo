@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import { interfaces } from 'inversify';
-import { Filter } from './filter';
+import { Filter } from './filter.js';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ContributionType = interfaces.ServiceIdentifier<any>;
 
 export const ContributionFilterRegistry = Symbol('ContributionFilterRegistry');
-export interface ContributionFilterRegistry {
+export type ContributionFilterRegistry = {
 
     /**
      * Add filters to be applied for every type of contribution.
@@ -44,10 +44,7 @@ export interface ContributionFilterRegistry {
 }
 
 export const FilterContribution = Symbol('FilterContribution');
-/**
- * Register filters to remove contributions.
- */
-export interface FilterContribution {
+export type FilterContribution = {
     /**
      * Use the registry to register your contribution filters.
      * * Note that filtering contributions based on their class (constructor) name is discouraged.

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { DisposableCollection, Disposable } from '@theia/core/lib/common/disposable';
-import URI from '@theia/core/lib/common/uri';
-import { UriSelection } from '@theia/core/lib/common/selection';
-import { isCancelled } from '@theia/core/lib/common/cancellation';
-import { ContextMenuRenderer, NodeProps, TreeProps, TreeNode, CompositeTreeNode, CompressedTreeWidget, CompressedNodeProps } from '@theia/core/lib/browser';
-import { DirNode, FileStatNode, FileStatNodeData } from './file-tree';
-import { FileTreeModel } from './file-tree-model';
-import { IconThemeService } from '@theia/core/lib/browser/icon-theme-service';
-import { ApplicationShell } from '@theia/core/lib/browser/shell';
-import { FileStat, FileType } from '../../common/files';
+import * as React from 'react';
+import { injectable, inject } from 'inversify';
+import { DisposableCollection, Disposable  } from '@theia/core';
+import { URI } from '@theia/core';
+import { UriSelection } from '@theia/core';
+import { isCancelled  } from '@theia/core';
+import { ContextMenuRenderer, NodeProps, TreeProps, TreeNode, CompositeTreeNode, CompressedTreeWidget, CompressedNodeProps } from '@theia/core/lib/browser/index.js';
+import { DirNode, FileStatNode, FileStatNodeData } from './file-tree.js';
+import { FileTreeModel } from './file-tree-model.js';
+import { IconThemeService } from '@theia/core/lib/browser/index.js';
+import { ApplicationShell } from '@theia/core/lib/browser/index.js';
+import { FileStat, FileType } from '../../common/files.js';
 import { isOSX } from '@theia/core';
-import { FileUploadService } from '../../common/upload/file-upload';
+import { FileUploadService } from '../../common/upload/file-upload.js';
 
 export const FILE_TREE_CLASS = 'theia-FileTree';
 export const FILE_STAT_NODE_CLASS = 'theia-FileStatNode';

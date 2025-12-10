@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { Event, Emitter } from '@theia/core/lib/common';
-import URI from '@theia/core/lib/common/uri';
-import { Marker } from '../common/marker';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileChangesEvent, FileChangeType } from '@theia/filesystem/lib/common/files';
+import { injectable, inject, postConstruct } from 'inversify';
+import { Event, Emitter } from '@theia/core/lib/common/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Marker } from '../common/marker.js';
+import { FileService } from '@theia/filesystem/lib/browser/index.js';
+import { FileChangesEvent, FileChangeType } from '@theia/filesystem/lib/common/index.js';
 
 /*
  * argument to the `findMarkers` method.
  */
-export interface SearchFilter<D> {
+export type SearchFilter<D> = {
     uri?: URI,
     owner?: string,
     dataFilter?: (data: D) => boolean
@@ -98,12 +98,12 @@ export class MarkerCollection<T> {
 
 }
 
-export interface Uri2MarkerEntry {
+export type Uri2MarkerEntry = {
     uri: string
     markers: Owner2MarkerEntry[]
 }
 
-export interface Owner2MarkerEntry {
+export type Owner2MarkerEntry = {
     owner: string
     markerData: object[];
 }
@@ -121,7 +121,7 @@ export abstract class MarkerManager<D extends object> {
 
     @postConstruct()
     protected init(): void {
-        this.fileService.onDidFilesChange(event => {
+        this.fileService.onDidFilesChange((event: FileChangesEvent) => {
             if (event.gotDeleted()) {
                 this.cleanMarkers(event);
             }

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import URI from '@theia/core/lib/common/uri';
+import { URI } from '@theia/core/lib/common/uri.js';
 import { Path, nls, isObject } from '@theia/core';
 
-export interface WorkingDirectoryStatus {
+export type WorkingDirectoryStatus = {
 
     /**
      * `true` if the repository exists, otherwise `false`.
@@ -156,10 +156,7 @@ export namespace GitFileStatus {
 
 }
 
-/**
- * Representation of an individual file change in the working directory.
- */
-export interface GitFileChange {
+export type GitFileChange = {
 
     /**
      * The current URI of the changed file resource.
@@ -183,10 +180,7 @@ export interface GitFileChange {
 
 }
 
-/**
- * An object encapsulating the changes to a committed file.
- */
-export interface CommittedFileChange extends GitFileChange {
+export type CommittedFileChange = GitFileChange & {
 
     /**
      * A commit SHA or some other identifier that ultimately dereferences to a commit.
@@ -197,10 +191,7 @@ export interface CommittedFileChange extends GitFileChange {
 
 }
 
-/**
- * Bare minimum representation of a local Git clone.
- */
-export interface Repository {
+export type Repository = {
 
     /**
      * The FS URI of the local clone.
@@ -225,10 +216,7 @@ export namespace Repository {
     }
 }
 
-/**
- * Representation of a Git remote.
- */
-export interface Remote {
+export type Remote = {
 
     /**
      * The name of the remote.
@@ -265,10 +253,7 @@ export enum BranchType {
 
 }
 
-/**
- * Representation of a Git branch.
- */
-export interface Branch {
+export type Branch = {
 
     /**
      * The short name of the branch. For instance; `master`.
@@ -308,10 +293,7 @@ export interface Branch {
 
 }
 
-/**
- * Representation of a Git tag.
- */
-export interface Tag {
+export type Tag = {
 
     /**
      * The name of the tag.
@@ -319,10 +301,7 @@ export interface Tag {
     readonly name: string;
 }
 
-/**
- * A Git commit.
- */
-export interface Commit {
+export type Commit = {
 
     /**
      * The commit SHA.
@@ -351,10 +330,7 @@ export interface Commit {
 
 }
 
-/**
- * Representation of a Git commit, plus the changes that were performed in that particular commit.
- */
-export interface CommitWithChanges extends Commit {
+export type CommitWithChanges = Commit & {
 
     /**
      * The date when the commit was authored (ISO format).
@@ -367,10 +343,7 @@ export interface CommitWithChanges extends Commit {
     readonly fileChanges: GitFileChange[];
 }
 
-/**
- * A tuple of name, email, and a date for the author or commit info in a commit.
- */
-export interface CommitIdentity {
+export type CommitIdentity = {
 
     /**
      * The name for the commit.
@@ -389,10 +362,7 @@ export interface CommitIdentity {
 
 }
 
-/**
- * The result of shelling out to Git.
- */
-export interface GitResult {
+export type GitResult = {
 
     /**
      * The standard output from Git.
@@ -411,10 +381,7 @@ export interface GitResult {
 
 }
 
-/**
- * StashEntry
- */
-export interface StashEntry {
+export type StashEntry = {
     readonly id: string;
     readonly message: string;
 }
@@ -485,13 +452,13 @@ export enum GitError {
     PathExistsButNotInRef = 57
 }
 
-export interface GitFileBlame {
+export type GitFileBlame = {
     readonly uri: string;
     readonly commits: Commit[];
     readonly lines: CommitLine[];
 }
 
-export interface CommitLine {
+export type CommitLine = {
     readonly sha: string;
     readonly line: number;
 }

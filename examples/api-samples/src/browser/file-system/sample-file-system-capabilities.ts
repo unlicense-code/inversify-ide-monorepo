@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { CommandContribution, CommandRegistry } from '@theia/core';
-import { inject, injectable, interfaces } from '@theia/core/shared/inversify';
-import { RemoteFileSystemProvider } from '@theia/filesystem/lib/common/remote-file-system-provider';
-import { FileSystemProviderCapabilities } from '@theia/filesystem/lib/common/files';
+import { inject, injectable, interfaces } from 'inversify';
+import { RemoteFileSystemProvider } from '@theia/filesystem/lib/common/remote-file-system-provider.js';
+import { FileSystemProviderCapabilities } from '@theia/filesystem/lib/common/files.js';
 import { MarkdownStringImpl } from '@theia/core/lib/common/markdown-rendering';
 
 @injectable()

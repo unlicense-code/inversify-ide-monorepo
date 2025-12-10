@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { AIVariable } from '@theia/ai-core/lib/common/variable-service';
+import { AIVariable } from '@theia/ai-core/lib/common/variable-service.js';
 import { nls } from '@theia/core';
 
 export const FILE: AIVariable = {

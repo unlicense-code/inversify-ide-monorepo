@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2021 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,19 +14,19 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { Key, KeyCode } from '@theia/core/lib/browser';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { injectable } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
+import { Key, KeyCode } from '@theia/core/lib/browser/index.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { injectable } from 'inversify';
+import * as React from 'react';
 import Long from 'long';
 import { DebugProtocol } from '@vscode/debugprotocol';
-import { hexStrToUnsignedLong } from '../../common/util';
-import { MemoryOptionsWidget } from '../memory-widget/memory-options-widget';
-import { MemoryTable, MemoryTableWidget } from '../memory-widget/memory-table-widget';
-import { MemoryWidget } from '../memory-widget/memory-widget';
-import { EasilyMappedObject } from '../utils/memory-hover-renderer';
-import { Constants, Interfaces } from '../utils/memory-widget-utils';
-import { nls } from '@theia/core/lib/common/nls';
+import { hexStrToUnsignedLong } from '../../common/util.js';
+import { MemoryOptionsWidget } from '../memory-widget/memory-options-widget.js';
+import { MemoryTable, MemoryTableWidget } from '../memory-widget/memory-table-widget.js';
+import { MemoryWidget } from '../memory-widget/memory-widget.js';
+import { EasilyMappedObject } from '../utils/memory-hover-renderer.js';
+import { Constants, Interfaces } from '../utils/memory-widget-utils.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 export type EditableMemoryWidget = MemoryWidget<MemoryOptionsWidget, MemoryEditableTableWidget>;
 export namespace EditableMemoryWidget {
@@ -36,7 +36,7 @@ export namespace EditableMemoryWidget {
 @injectable()
 export class MemoryEditableTableWidget extends MemoryTableWidget {
     protected pendingMemoryEdits = new Map<string, string>();
-    protected override previousBytes: Interfaces.LabeledUint8Array | undefined;
+    protected declare previousBytes: Interfaces.LabeledUint8Array | undefined;
     protected memoryEditsCompleted = new Deferred<void>();
     protected highlightedField: Long = Long.fromInt(-1);
     protected writeErrorInfo: { location: string, error: string } | undefined;

@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { ProcessTaskContribution } from './process-task-contribution';
-import { ProcessTaskResolver } from './process-task-resolver';
-import { TaskContribution } from '../task-contribution';
+import { interfaces } from 'inversify';
+import { ProcessTaskContribution } from './process-task-contribution.js';
+import { ProcessTaskResolver } from './process-task-resolver.js';
+import { TaskContribution } from '../task-contribution.js';
 
 export function bindProcessTaskModule(bind: interfaces.Bind): void {
 

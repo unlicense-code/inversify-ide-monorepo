@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,15 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { URI, MaybePromise, Disposable, PreferenceService } from '@theia/core';
-import { NavigatableWidgetOpenHandler, WidgetOpenerOptions, getDefaultHandler, defaultHandlerPriority } from '@theia/core/lib/browser';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { NotebookFileSelector, NotebookTypeDescriptor } from '../common/notebook-protocol';
-import { NotebookEditorWidget } from './notebook-editor-widget';
-import { match } from '@theia/core/lib/common/glob';
-import { NotebookEditorWidgetOptions } from './notebook-editor-widget-factory';
+import { URI, MaybePromise, Disposable, PreferenceService } from '@theia/core/lib/common/index.js';
+import { NavigatableWidgetOpenHandler, WidgetOpenerOptions, getDefaultHandler, defaultHandlerPriority 
+    
+} from '@theia/core/lib/browser/index.js';
+import { inject, injectable } from 'inversify';
+import { NotebookFileSelector, NotebookTypeDescriptor } from '../common/notebook-protocol.js';
+import { NotebookEditorWidget } from './notebook-editor-widget.js';
+import { match } from '@theia/core/lib/common/glob.js';
+import { NotebookEditorWidgetOptions } from './notebook-editor-widget-factory.js';
 
-export interface NotebookWidgetOpenerOptions extends WidgetOpenerOptions {
+export type NotebookWidgetOpenerOptions = WidgetOpenerOptions & {
     notebookType?: string;
     counter?: number;
 }

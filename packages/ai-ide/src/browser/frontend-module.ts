@@ -16,12 +16,12 @@
 
 import '../../src/browser/style/index.css';
 
-import { ContainerModule } from '@theia/core/shared/inversify';
+import { ContainerModule } from 'inversify';
 import { ChatAgent, DefaultChatAgentId, FallbackChatAgentId } from '@theia/ai-chat/lib/common';
-import { Agent, AIVariableContribution, bindToolProvider } from '@theia/ai-core/lib/common';
-import { ArchitectAgent } from './architect-agent';
-import { CoderAgent } from './coder-agent';
-import { SummarizeSessionCommandContribution } from './summarize-session-command-contribution';
+import { Agent, AIVariableContribution, bindToolProvider } from '@theia/ai-core/lib/common/index.js';
+import { ArchitectAgent } from './architect-agent.js';
+import { CoderAgent } from './coder-agent.js';
+import { SummarizeSessionCommandContribution } from './summarize-session-command-contribution.js';
 import {
     FileContentFunction,
     FileDiagnosticProvider,
@@ -29,22 +29,22 @@ import {
     GetWorkspaceDirectoryStructure,
     GetWorkspaceFileList,
     WorkspaceFunctionScope
-} from './workspace-functions';
-import { WorkspaceSearchProvider } from './workspace-search-provider';
+} from './workspace-functions.js';
+import { WorkspaceSearchProvider } from './workspace-search-provider.js';
 import {
     FrontendApplicationContribution,
     WidgetFactory,
     bindViewContribution,
     RemoteConnectionProvider,
     ServiceConnectionProvider
-} from '@theia/core/lib/browser';
-import { TaskListProvider, TaskRunnerProvider } from './workspace-task-provider';
+} from '@theia/core/lib/browser/index.js';
+import { TaskListProvider, TaskRunnerProvider } from './workspace-task-provider.js';
 import {
     LaunchListProvider,
     LaunchRunnerProvider,
     LaunchStopProvider,
-} from './workspace-launch-provider';
-import { WorkspacePreferencesSchema } from '../common/workspace-preferences';
+} from './workspace-launch-provider.js';
+import { WorkspacePreferencesSchema } from '../common/workspace-preferences.js';
 import {
     ClearFileChanges,
     GetProposedFileState,
@@ -59,56 +59,56 @@ import {
     FileChangeSetTitleProvider,
     DefaultFileChangeSetTitleProvider,
     ReplaceContentInFileFunctionHelperV2
-} from './file-changeset-functions';
-import { OrchestratorChatAgent, OrchestratorChatAgentId } from '../common/orchestrator-chat-agent';
-import { UniversalChatAgent, UniversalChatAgentId } from '../common/universal-chat-agent';
-import { AppTesterChatAgent } from './app-tester-chat-agent';
-import { GitHubChatAgent } from './github-chat-agent';
-import { CommandChatAgent } from '../common/command-chat-agents';
-import { ListChatContext, ResolveChatContext, AddFileToChatContext } from './context-functions';
-import { AIAgentConfigurationWidget } from './ai-configuration/agent-configuration-widget';
-import { AIConfigurationSelectionService } from './ai-configuration/ai-configuration-service';
-import { AIAgentConfigurationViewContribution } from './ai-configuration/ai-configuration-view-contribution';
-import { AIConfigurationContainerWidget } from './ai-configuration/ai-configuration-widget';
-import { AIVariableConfigurationWidget } from './ai-configuration/variable-configuration-widget';
-import { ContextFilesVariableContribution } from '../common/context-files-variable';
-import { AIToolsConfigurationWidget } from './ai-configuration/tools-configuration-widget';
-import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { TemplatePreferenceContribution } from './template-preference-contribution';
-import { AIMCPConfigurationWidget } from './ai-configuration/mcp-configuration-widget';
+} from './file-changeset-functions.js';
+import { OrchestratorChatAgent, OrchestratorChatAgentId } from '../common/orchestrator-chat-agent.js';
+import { UniversalChatAgent, UniversalChatAgentId } from '../common/universal-chat-agent.js';
+import { AppTesterChatAgent } from './app-tester-chat-agent.js';
+import { GitHubChatAgent } from './github-chat-agent.js';
+import { CommandChatAgent } from '../common/command-chat-agents.js';
+import { ListChatContext, ResolveChatContext, AddFileToChatContext } from './context-functions.js';
+import { AIAgentConfigurationWidget } from './ai-configuration/agent-configuration-widget.js';
+import { AIConfigurationSelectionService } from './ai-configuration/ai-configuration-service.js';
+import { AIAgentConfigurationViewContribution } from './ai-configuration/ai-configuration-view-contribution.js';
+import { AIConfigurationContainerWidget } from './ai-configuration/ai-configuration-widget.js';
+import { AIVariableConfigurationWidget } from './ai-configuration/variable-configuration-widget.js';
+import { ContextFilesVariableContribution } from '../common/context-files-variable.js';
+import { AIToolsConfigurationWidget } from './ai-configuration/tools-configuration-widget.js';
+import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { TemplatePreferenceContribution } from './template-preference-contribution.js';
+import { AIMCPConfigurationWidget } from './ai-configuration/mcp-configuration-widget.js';
 import { ChatWelcomeMessageProvider } from '@theia/ai-chat-ui/lib/browser/chat-tree-view';
-import { IdeChatWelcomeMessageProvider } from './ide-chat-welcome-message-provider';
-import { AITokenUsageConfigurationWidget } from './ai-configuration/token-usage-configuration-widget';
-import { TaskContextSummaryVariableContribution } from './task-background-summary-variable';
-import { GitHubRepoVariableContribution } from './github-repo-variable-contribution';
-import { TaskContextFileStorageService } from './task-context-file-storage-service';
-import { TaskContextStorageService } from '@theia/ai-chat/lib/browser/task-context-service';
+import { IdeChatWelcomeMessageProvider } from './ide-chat-welcome-message-provider.js';
+import { AITokenUsageConfigurationWidget } from './ai-configuration/token-usage-configuration-widget.js';
+import { TaskContextSummaryVariableContribution } from './task-background-summary-variable.js';
+import { GitHubRepoVariableContribution } from './github-repo-variable-contribution.js';
+import { TaskContextFileStorageService } from './task-context-file-storage-service.js';
+import { TaskContextStorageService } from '@theia/ai-chat/lib/browser/task-context-service.js';
 import { CommandContribution, PreferenceContribution } from '@theia/core';
-import { AIPromptFragmentsConfigurationWidget } from './ai-configuration/prompt-fragments-configuration-widget';
-import { BrowserAutomation, browserAutomationPath } from '../common/browser-automation-protocol';
-import { GitHubRepoService, githubRepoServicePath } from '../common/github-repo-protocol';
-import { CloseBrowserProvider, IsBrowserRunningProvider, LaunchBrowserProvider, QueryDomProvider } from './app-tester-chat-functions';
-import { ModelAliasesConfigurationWidget } from './ai-configuration/model-aliases-configuration-widget';
-import { aiIdePreferenceSchema } from '../common/ai-ide-preferences';
+import { AIPromptFragmentsConfigurationWidget } from './ai-configuration/prompt-fragments-configuration-widget.js';
+import { BrowserAutomation, browserAutomationPath } from '../common/browser-automation-protocol.js';
+import { GitHubRepoService, githubRepoServicePath } from '../common/github-repo-protocol.js';
+import { CloseBrowserProvider, IsBrowserRunningProvider, LaunchBrowserProvider, QueryDomProvider } from './app-tester-chat-functions.js';
+import { ModelAliasesConfigurationWidget } from './ai-configuration/model-aliases-configuration-widget.js';
+import { aiIdePreferenceSchema } from '../common/ai-ide-preferences.js';
 import { AIActivationService } from '@theia/ai-core/lib/browser';
-import { AIIdeActivationServiceImpl } from './ai-ide-activation-service';
-import { AiConfigurationPreferences } from '../common/ai-configuration-preferences';
-import { TaskContextAgent } from './task-context-agent';
-import { ProjectInfoAgent } from './project-info-agent';
-import { SuggestTerminalCommand } from './ai-terminal-functions';
-import { ContextFileValidationService } from '@theia/ai-chat/lib/browser/context-file-validation-service';
-import { ContextFileValidationServiceImpl } from './context-file-validation-service-impl';
-import { RememberCommandContribution } from './remember-command-contribution';
-import { FixGitHubTicketCommandContribution } from './implement-gh-ticket-command-contribution';
-import { AnalyzesGhTicketCommandContribution } from './analyze-gh-ticket-command-contribution';
-import { AddressGhReviewCommandContribution } from './address-pr-review-command-contribution';
+import { AIIdeActivationServiceImpl } from './ai-ide-activation-service.js';
+import { AiConfigurationPreferences } from '../common/ai-configuration-preferences.js';
+import { TaskContextAgent } from './task-context-agent.js';
+import { ProjectInfoAgent } from './project-info-agent.js';
+import { SuggestTerminalCommand } from './ai-terminal-functions.js';
+import { ContextFileValidationService } from '@theia/ai-chat/lib/browser/context-file-validation-service.js';
+import { ContextFileValidationServiceImpl } from './context-file-validation-service-impl.js';
+import { RememberCommandContribution } from './remember-command-contribution.js';
+import { FixGitHubTicketCommandContribution } from './implement-gh-ticket-command-contribution.js';
+import { AnalyzesGhTicketCommandContribution } from './analyze-gh-ticket-command-contribution.js';
+import { AddressGhReviewCommandContribution } from './address-pr-review-command-contribution.js';
 
 export default new ContainerModule((bind, _unbind, _isBound, rebind) => {
     bind(PreferenceContribution).toConstantValue({ schema: aiIdePreferenceSchema });
     bind(PreferenceContribution).toConstantValue({ schema: WorkspacePreferencesSchema });
 
     bind(AIIdeActivationServiceImpl).toSelf().inSingletonScope();
-    // rebinds the default implementation of '@theia/ai-core'
+    // rebinds the default implementation of '@theia/ai-core/lib/common/index.js'
     rebind(AIActivationService).toService(AIIdeActivationServiceImpl);
 
     bind(ArchitectAgent).toSelf().inSingletonScope();

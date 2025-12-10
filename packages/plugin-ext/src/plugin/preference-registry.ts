@@ -16,25 +16,25 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import { isOSX, isWindows } from '@theia/core/lib/common/os';
-import { URI } from '@theia/core/shared/vscode-uri';
-import { ResourceMap } from '@theia/monaco-editor-core/esm/vs/base/common/map';
-import { IConfigurationOverrides } from '@theia/monaco-editor-core/esm/vs/platform/configuration/common/configuration';
-import { Configuration, ConfigurationModel, ConfigurationModelParser } from '@theia/monaco-editor-core/esm/vs/platform/configuration/common/configurationModels';
-import { Workspace, WorkspaceFolder } from '@theia/monaco-editor-core/esm/vs/platform/workspace/common/workspace';
+import { inject, injectable, postConstruct } from 'inversify';
+import { Emitter, Event } from '@theia/core';
+import { isOSX, isWindows } from '@theia/core/lib/common/os.js';
+import { URI } from 'vscode-uri';
+import { ResourceMap } from '@theia/monaco-editor-core/esm/vs/base/common/map.js';
+import { IConfigurationOverrides } from '@theia/monaco-editor-core/esm/vs/platform/configuration/common/configuration.js';
+import { Configuration, ConfigurationModel, ConfigurationModelParser } from '@theia/monaco-editor-core/esm/vs/platform/configuration/common/configurationModels.js';
+import { Workspace, WorkspaceFolder } from '@theia/monaco-editor-core/esm/vs/platform/workspace/common/workspace.js';
 import * as theia from '@theia/plugin';
-import { generateUuid } from '@theia/core/lib/common/uuid';
+import { generateUuid } from '@theia/core';
 import {
     PLUGIN_RPC_CONTEXT, PreferenceChangeExt, PreferenceData, PreferenceRegistryExt,
     PreferenceRegistryMain
-} from '../common/plugin-api-rpc';
-import { RPCProtocol } from '../common/rpc-protocol';
-import { isObject, mixin } from '../common/types';
-import { WorkspaceExtImpl } from './workspace';
+} from '../common/plugin-api-rpc.js';
+import { RPCProtocol } from '../common/rpc-protocol.js';
+import { isObject, mixin } from '../common/types.js';
+import { WorkspaceExtImpl } from './workspace.js';
 import cloneDeep = require('lodash.clonedeep');
-import { ILogService, LogLevel } from '@theia/monaco-editor-core/esm/vs/platform/log/common/log';
+import { ILogService, LogLevel } from '@theia/monaco-editor-core/esm/vs/platform/log/common/log.js';
 
 const injectionRe = /\b__proto__\b|\bconstructor\.prototype\b/;
 
@@ -51,7 +51,7 @@ export enum PreferenceScope {
     Folder,
 }
 
-interface ConfigurationInspect<T> {
+type ConfigurationInspect<T> = {
     key: string;
     defaultValue?: T;
     globalValue?: T;

@@ -19,7 +19,7 @@
 import * as puppeteer from 'puppeteer-core';
 const collectFiles: (options: TestFileOptions) => { files: string[] } = require('mocha/lib/cli/collect-files');
 
-export interface TestFileOptions {
+export type TestFileOptions = {
     ignore: string[]
     extension: string[]
     file: string[]
@@ -28,7 +28,7 @@ export interface TestFileOptions {
     spec: string[]
 }
 
-export interface TestPageOptions {
+export type TestPageOptions = {
     files?: Partial<TestFileOptions>
     newPage: () => Promise<puppeteer.Page>
     matchAppUrl?: (url: string) => boolean
@@ -81,7 +81,7 @@ export default async function newTestPage(options: TestPageOptions): Promise<pup
         }
         console.log('loading mocha...');
         // replace console.log by theia logger for mocha
-        await page.waitForFunction(() => !!(window as any)['theia']?.['@theia/core/lib/common/logger']?.logger, {
+        await page.waitForFunction(() => !!(window as any)['theia']?.['@theia/core/lib/common/logger.js']?.logger, {
             timeout: 30 * 1000
         });
         await page.addScriptTag({ path: require.resolve('mocha/mocha.js') });
@@ -90,7 +90,7 @@ export default async function newTestPage(options: TestPageOptions): Promise<pup
         console.log('loading Theia...');
         await page.evaluate(() => {
             const { FrontendApplicationStateService } = (window as any)['theia']['@theia/core/lib/browser/frontend-application-state'];
-            const { PreferenceService } = (window as any)['theia']['@theia/core/lib/common/preferences/preference-service'];
+            const { PreferenceService } = (window as any)['theia']['@theia/core/lib/common/preferences/preference-service.js'];
             const { WorkspaceService } = (window as any)['theia']['@theia/workspace/lib/browser/workspace-service'];
 
             const container = (window as any)['theia'].container;

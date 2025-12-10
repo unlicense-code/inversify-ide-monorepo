@@ -18,9 +18,9 @@ import {
     LanguageModelExchange,
     LanguageModelMonitoredStreamResponse,
     LanguageModelExchangeRequestResponse
-} from '@theia/ai-core/lib/common/language-model-interaction-model';
+} from '@theia/ai-core/lib/common/language-model-interaction-model.js';
 import { nls } from '@theia/core';
-import * as React from '@theia/core/shared/react';
+import * as React from 'react';
 
 const getTextFromResponse = (response: LanguageModelExchangeRequestResponse): string => {
     // Handle monitored stream response
@@ -73,7 +73,7 @@ const formatTimestamp = (timestamp: number | undefined): string =>
         second: '2-digit'
     }) : 'N/A';
 
-export interface ExchangeCardProps {
+export type ExchangeCardProps = {
     exchange: LanguageModelExchange;
     selectedAgentId?: string;
     compactView?: boolean;
@@ -82,10 +82,13 @@ export interface ExchangeCardProps {
 
 export const ExchangeCard: React.FC<ExchangeCardProps> = ({ exchange, selectedAgentId, compactView = true, renderNewlines = false }) => {
 
-    const earliestTimestamp = exchange.requests.reduce((earliest, req) => {
-        const timestamp = req.metadata.timestamp as number || 0;
-        return timestamp && (!earliest || timestamp < earliest) ? timestamp : earliest;
-    }, 0);
+    const earliestTimestamp = exchange.requests.reduce((earliest: number | undefined, req: any) => {
+        const timestamp = req.metadata.timestamp as number | undefined;
+        if (timestamp) {
+            return !earliest || timestamp < earliest ? timestamp : earliest;
+        }
+        return earliest;
+    }, undefined as number | undefined);
 
     return (
         <div className="theia-card exchange-card"
@@ -103,7 +106,7 @@ export const ExchangeCard: React.FC<ExchangeCardProps> = ({ exchange, selectedAg
             </div>
             <div className='theia-card-content'>
                 <div className='requests-container'>
-                    {exchange.requests.map((request, index) => (
+                    {exchange.requests.map((request: any, index: number) => (
                         <RequestCard
                             key={request.id}
                             request={request}
@@ -117,7 +120,7 @@ export const ExchangeCard: React.FC<ExchangeCardProps> = ({ exchange, selectedAg
                 </div>
             </div>
             <div className='theia-card-meta'>
-                {earliestTimestamp > 0 && (
+                {earliestTimestamp !== undefined && earliestTimestamp > 0 && (
                     <span className='theia-card-timestamp'>
                         {nls.localize('theia/ai/history/exchange-card/timestamp', 'Started')}: {formatTimestamp(earliestTimestamp)}
                     </span>
@@ -127,7 +130,7 @@ export const ExchangeCard: React.FC<ExchangeCardProps> = ({ exchange, selectedAg
     );
 };
 
-interface RequestCardProps {
+type RequestCardProps = {
     request: LanguageModelExchangeRequest;
     index: number;
     totalRequests: number;
@@ -175,7 +178,7 @@ const RequestCard: React.FC<RequestCardProps> = ({ request, index, totalRequests
             );
         } else if (isStreamResponse) {
             const streamResponse = request.response as LanguageModelMonitoredStreamResponse;
-            return streamResponse.parts.map((part, i) => (
+            return streamResponse.parts.map((part: any, i: number) => (
                 <div key={`part-${i}`} className="stream-part">
                     <pre className={`formatted-json ${renderNewlines ? 'render-newlines' : ''}`}>
                         {renderNewlines ? renderTextWithNewlines(JSON.stringify(part, undefined, 2)) : JSON.stringify(part, undefined, 2)}

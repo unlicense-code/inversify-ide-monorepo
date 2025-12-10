@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2025 TypeFox and others.
+// Copyright (C) 2025 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // ****************************************************************************
 import { URI } from '@theia/core';
-import * as fs from '@theia/core/shared/fs-extra';
-import { WorkspaceHandlerContribution } from '@theia/workspace/lib/node/default-workspace-server';
+import * as fs from 'fs-extra';
+import { WorkspaceHandlerContribution } from '@theia/workspace/lib/node/default-workspace-server.js';
 
 export class WslWorkspaceHandler implements WorkspaceHandlerContribution {
     canHandle(uri: URI): boolean {

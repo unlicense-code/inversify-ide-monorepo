@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { ContainerModule } from 'inversify';
-import { WsRequestValidatorContribution } from '../ws-request-validators';
-import { BackendApplicationHosts } from './backend-application-hosts';
-import { WsOriginValidator } from './ws-origin-validator';
+import { WsRequestValidatorContribution } from '../ws-request-validators.js';
+import { BackendApplicationHosts } from './backend-application-hosts.js';
+import { WsOriginValidator } from './ws-origin-validator.js';
 
 export default new ContainerModule(bind => {
     bind(BackendApplicationHosts).toSelf().inSingletonScope();

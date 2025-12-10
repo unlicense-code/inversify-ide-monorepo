@@ -13,12 +13,12 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 
-import { Channel } from '../../common/message-rpc/';
-import { MessagingService } from './messaging-service';
+import { Channel } from '../../common/message-rpc//index.js';
+import { MessagingService } from './messaging-service.js';
 
 export const FrontendConnectionService = Symbol('FrontendConnectionService');
 
-export interface FrontendConnectionService {
+export type FrontendConnectionService = {
     registerConnectionHandler(path: string, callback: (params: MessagingService.PathParams, mainChannel: Channel) => void): void;
 }
 

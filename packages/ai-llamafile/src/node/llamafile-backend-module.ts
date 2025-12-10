@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { LlamafileManagerImpl } from './llamafile-manager-impl';
-import { LlamafileManager, LlamafileServerManagerClient, LlamafileManagerPath } from '../common/llamafile-manager';
+import { ContainerModule } from 'inversify';
+import { LlamafileManagerImpl } from './llamafile-manager-impl.js';
+import { LlamafileManager, LlamafileServerManagerClient, LlamafileManagerPath } from '../common/llamafile-manager.js';
 import { ConnectionHandler, RpcConnectionHandler } from '@theia/core';
-import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module';
-import { bindAILlamafilePreferences } from '../common/llamafile-preferences';
+import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module.js';
+import { bindAILlamafilePreferences } from '../common/llamafile-preferences.js';
 
 // We use a connection module to handle AI services separately for each frontend.
 const llamafileConnectionModule = ConnectionContainerModule.create(({ bind, bindBackendService, bindFrontendService }) => {

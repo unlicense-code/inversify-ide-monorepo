@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -22,10 +22,10 @@ import {
     NotebookCellsChangeLanguageEvent,
     NotebookCellsChangeMetadataEvent,
     NotebookCellsChangeType, NotebookCellTextModelSplice, NotebookDocumentMetadata
-} from '../common';
-import { NotebookCell } from './view-model/notebook-cell-model';
+} from '../common/index.js';
+import { NotebookCell } from './view-model/notebook-cell-model.js';
 
-export interface NotebookTextModelChangedEvent {
+export type NotebookTextModelChangedEvent = {
     readonly rawEvents: NotebookContentChangedEvent[];
     // readonly versionId: number;
     readonly synchronous?: boolean;
@@ -37,26 +37,22 @@ export type NotebookContentChangedEvent = (NotebookCellsInitializeEvent<Notebook
     NotebookCellsChangeLanguageEvent | NotebookCellsChangeMetadataEvent |
     NotebookCellsChangeInternalMetadataEvent | NotebookDocumentUnknownChangeEvent); // & { transient: boolean };
 
-export interface NotebookCellsInitializeEvent<T> {
+export type NotebookCellsInitializeEvent<T> = {
     readonly kind: NotebookCellsChangeType.Initialize;
     readonly changes: NotebookCellTextModelSplice<T>[];
 }
 
-export interface NotebookDocumentChangeMetadataEvent {
+export type NotebookDocumentChangeMetadataEvent = {
     readonly kind: NotebookCellsChangeType.ChangeDocumentMetadata;
     readonly metadata: NotebookDocumentMetadata;
 }
 
-export interface NotebookCellsModelChangedEvent<T> {
+export type NotebookCellsModelChangedEvent<T> = {
     readonly kind: NotebookCellsChangeType.ModelChange;
     readonly changes: NotebookCellTextModelSplice<T>[];
 }
 
-export interface NotebookModelWillAddRemoveEvent {
-    readonly rawEvent: NotebookCellsModelChangedEvent<CellData>;
-};
-
-export interface NotebookCellsModelMoveEvent<T> {
+export type NotebookCellsModelMoveEvent<T> = {
     readonly kind: NotebookCellsChangeType.Move;
     readonly index: number;
     readonly length: number;
@@ -64,14 +60,14 @@ export interface NotebookCellsModelMoveEvent<T> {
     readonly cells: T[];
 }
 
-export interface NotebookOutputChangedEvent {
+export type NotebookOutputChangedEvent = {
     readonly kind: NotebookCellsChangeType.Output;
     readonly index: number;
     readonly outputs: CellOutput[];
     readonly append: boolean;
 }
 
-export interface NotebookOutputItemChangedEvent {
+export type NotebookOutputItemChangedEvent = {
     readonly kind: NotebookCellsChangeType.OutputItem;
     readonly index: number;
     readonly outputId: string;
@@ -79,7 +75,7 @@ export interface NotebookOutputItemChangedEvent {
     readonly append: boolean;
 }
 
-export interface NotebookDocumentUnknownChangeEvent {
+export type NotebookDocumentUnknownChangeEvent = {
     readonly kind: NotebookCellsChangeType.Unknown;
 }
 
@@ -88,13 +84,13 @@ export enum SelectionStateType {
     Index = 1
 }
 
-export interface SelectionHandleState {
+export type SelectionHandleState = {
     kind: SelectionStateType.Handle;
     primary: number | null;
     selections: number[];
 }
 
-export interface SelectionIndexState {
+export type SelectionIndexState = {
     kind: SelectionStateType.Index;
     focus: CellRange;
     selections: CellRange[];
@@ -102,13 +98,13 @@ export interface SelectionIndexState {
 
 export type SelectionState = SelectionHandleState | SelectionIndexState;
 
-export interface NotebookModelWillAddRemoveEvent {
+export type NotebookModelWillAddRemoveEvent = {
     readonly newCellIds?: number[];
     readonly rawEvent: NotebookCellsModelChangedEvent<CellData>;
     readonly externalEvent?: boolean;
 };
 
-export interface CellOutputEdit {
+export type CellOutputEdit = {
     editType: CellEditType.Output;
     index: number;
     outputs: CellOutput[];
@@ -116,7 +112,7 @@ export interface CellOutputEdit {
     append?: boolean;
 }
 
-export interface CellOutputEditByHandle {
+export type CellOutputEditByHandle = {
     editType: CellEditType.Output;
     handle: number;
     outputs: CellOutput[];
@@ -124,39 +120,39 @@ export interface CellOutputEditByHandle {
     append?: boolean;
 }
 
-export interface CellOutputItemEdit {
+export type CellOutputItemEdit = {
     editType: CellEditType.OutputItems;
     items: CellOutputItem[];
     outputId: string;
     append?: boolean;
 }
 
-export interface CellLanguageEdit {
+export type CellLanguageEdit = {
     editType: CellEditType.CellLanguage;
     index: number;
     language: string;
 }
 
-export interface DocumentMetadataEdit {
+export type DocumentMetadataEdit = {
     editType: CellEditType.DocumentMetadata;
     metadata: NotebookDocumentMetadata;
 }
 
-export interface CellMoveEdit {
+export type CellMoveEdit = {
     editType: CellEditType.Move;
     index: number;
     length: number;
     newIdx: number;
 }
 
-export interface CellReplaceEdit {
+export type CellReplaceEdit = {
     editType: CellEditType.Replace;
     index: number;
     count: number;
     cells: CellData[];
 }
 
-export interface CellPartialMetadataEdit {
+export type CellPartialMetadataEdit = {
     editType: CellEditType.PartialMetadata;
     index: number;
     metadata: NullablePartialNotebookCellMetadata;
@@ -174,7 +170,7 @@ export type NullablePartialNotebookCellMetadata = {
     [Key in keyof Partial<NotebookCellMetadata>]: NotebookCellMetadata[Key] | null
 };
 
-export interface CellPartialInternalMetadataEditByHandle {
+export type CellPartialInternalMetadataEditByHandle = {
     editType: CellEditType.PartialInternalMetadata;
     handle: number;
     internalMetadata: NullablePartialNotebookCellInternalMetadata;

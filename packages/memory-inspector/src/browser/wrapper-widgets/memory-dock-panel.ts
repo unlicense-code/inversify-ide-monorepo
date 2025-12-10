@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2019 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,9 +14,9 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { DockPanelRendererFactory } from '@theia/core/lib/browser';
-import { TheiaDockPanel } from '@theia/core/lib/browser/shell/theia-dock-panel';
-import { interfaces } from '@theia/core/shared/inversify';
+import { DockPanelRendererFactory } from '@theia/core/lib/browser/index.js';
+import { TheiaDockPanel } from '@theia/core/lib/browser/shell/theia-dock-panel.js';
+import { interfaces } from 'inversify';
 
 export class MemoryDockPanel extends TheiaDockPanel {
     override toggleMaximized(): void { /* don't */ }

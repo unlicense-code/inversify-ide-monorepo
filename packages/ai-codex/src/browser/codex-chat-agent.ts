@@ -22,12 +22,12 @@ import {
     MutableChatRequestModel,
     ThinkingChatResponseContentImpl,
     ToolCallChatResponseContent,
-} from '@theia/ai-chat';
-import { TokenUsageService } from '@theia/ai-core';
-import { PromptText } from '@theia/ai-core/lib/common/prompt-text';
+} from '@theia/ai-chat/lib/common/index.js';
+import { TokenUsageService } from '@theia/ai-core/lib/common/index.js';
+import { PromptText } from '@theia/ai-core/lib/common/prompt-text.js';
 import { generateUuid, nls } from '@theia/core';
-import { URI } from '@theia/core/lib/common/uri';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { inject, injectable } from 'inversify';
 import type {
     ItemStartedEvent,
     ItemUpdatedEvent,
@@ -43,11 +43,11 @@ import type {
     Usage,
     TodoListItem
 } from '@openai/codex-sdk';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { ChangeSetFileElementFactory } from '@theia/ai-chat/lib/browser/change-set-file-element';
-import { CodexToolCallChatResponseContent } from './codex-tool-call-content';
-import { CodexFrontendService } from './codex-frontend-service';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { ChangeSetFileElementFactory } from '@theia/ai-chat/lib/browser/change-set-file-element.js';
+import { CodexToolCallChatResponseContent } from './codex-tool-call-content.js';
+import { CodexFrontendService } from './codex-frontend-service.js';
 
 export const CODEX_CHAT_AGENT_ID = 'Codex';
 export const CODEX_INPUT_TOKENS_KEY = 'codexInputTokens';

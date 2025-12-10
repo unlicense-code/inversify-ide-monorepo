@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import { inject, injectable } from 'inversify';
-import { Command, CommandContribution, CommandRegistry, environment } from '../common';
-import { WindowService } from './window/window-service';
-import { KeybindingContribution, KeybindingRegistry } from './keybinding';
-import { MenuContribution, MenuModelRegistry } from '../common/menu';
-import { CommonMenus } from './common-menus';
+import { Command, CommandContribution, CommandRegistry, environment } from '../common/index.js';
+import { WindowService } from './window/window-service.js';
+import { KeybindingContribution, KeybindingRegistry } from './keybinding.js';
+import { MenuContribution, MenuModelRegistry } from '../common/menu/index.js';
+import { CommonMenus } from './common-menus.js';
 
 export namespace WindowCommands {
 

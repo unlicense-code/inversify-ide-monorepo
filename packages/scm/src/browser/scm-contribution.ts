@@ -13,8 +13,8 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { Emitter } from '@theia/core/lib/common/event';
+import { inject, injectable, postConstruct } from 'inversify';
+import { Emitter } from '@theia/core/lib/common/event.js';
 import {
     AbstractViewContribution,
     FrontendApplicationContribution, LabelProvider,
@@ -27,25 +27,25 @@ import {
     StylingParticipant,
     ColorTheme,
     CssStyleCollector
-} from '@theia/core/lib/browser';
-import { TabBarToolbarContribution, TabBarToolbarRegistry, TabBarToolbarAction } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { CommandRegistry, Command, Disposable, DisposableCollection, CommandService, MenuModelRegistry } from '@theia/core/lib/common';
-import { ContextKeyService, ContextKey } from '@theia/core/lib/browser/context-key-service';
-import { ScmService } from './scm-service';
-import { ScmWidget } from '../browser/scm-widget';
-import URI from '@theia/core/lib/common/uri';
-import { ScmQuickOpenService } from './scm-quick-open-service';
-import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution';
-import { ColorRegistry } from '@theia/core/lib/browser/color-registry';
-import { Color } from '@theia/core/lib/common/color';
-import { ScmColors } from './scm-colors';
-import { ScmCommand } from './scm-provider';
-import { ScmDecorationsService } from '../browser/decorations/scm-decorations-service';
-import { nls } from '@theia/core/lib/common/nls';
-import { isHighContrast } from '@theia/core/lib/common/theme';
-import { EditorMainMenu, EditorWidget } from '@theia/editor/lib/browser';
-import { DirtyDiffNavigator } from './dirty-diff/dirty-diff-navigator';
-import { MonacoDiffEditor } from '@theia/monaco/lib/browser/monaco-diff-editor';
+} from '@theia/core/lib/browser/index.js';
+import { TabBarToolbarContribution, TabBarToolbarRegistry, TabBarToolbarAction } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { CommandRegistry, Command, Disposable, DisposableCollection, CommandService, MenuModelRegistry } from '@theia/core/lib/common/index.js';
+import { ContextKeyService, ContextKey } from '@theia/core/lib/browser/context-key-service.js';
+import { ScmService } from './scm-service.js';
+import { ScmWidget } from '../browser/scm-widget.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ScmQuickOpenService } from './scm-quick-open-service.js';
+import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution.js';
+import { ColorRegistry } from '@theia/core/lib/browser/color-registry.js';
+import { Color } from '@theia/core/lib/common/color.js';
+import { ScmColors } from './scm-colors.js';
+import { ScmCommand } from './scm-provider.js';
+import { ScmDecorationsService } from '../browser/decorations/scm-decorations-service.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { isHighContrast } from '@theia/core/lib/common/theme.js';
+import { EditorMainMenu, EditorWidget } from '@theia/editor/lib/browser/index.js';
+import { DirtyDiffNavigator } from './dirty-diff/dirty-diff-navigator.js';
+import { MonacoDiffEditor } from '@theia/monaco/lib/browser/monaco-diff-editor.js';
 
 export const SCM_WIDGET_FACTORY_ID = ScmWidget.ID;
 export const SCM_VIEW_CONTAINER_ID = 'scm-view-container';

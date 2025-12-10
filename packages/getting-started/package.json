@@ -1,6 +1,7 @@
 {
   "name": "@theia/getting-started",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - GettingStarted Extension",
   "dependencies": {
     "@theia/core": "1.66.0",

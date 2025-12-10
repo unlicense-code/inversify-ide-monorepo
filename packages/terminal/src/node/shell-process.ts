@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,21 +14,21 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, named } from '@theia/core/shared/inversify';
+import { injectable, inject, named } from 'inversify';
 import * as os from 'os';
-import { ILogger } from '@theia/core/lib/common/logger';
+import { ILogger } from '@theia/core/lib/common/logger.js';
 import { TerminalProcess, TerminalProcessOptions, ProcessManager, MultiRingBuffer } from '@theia/process/lib/node';
-import { isWindows, isOSX } from '@theia/core/lib/common';
-import URI from '@theia/core/lib/common/uri';
-import { FileUri } from '@theia/core/lib/common/file-uri';
-import { EnvironmentUtils } from '@theia/core/lib/node/environment-utils';
-import { parseArgs } from '@theia/process/lib/node/utils';
+import { isWindows, isOSX } from '@theia/core/lib/common/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { FileUri } from '@theia/core/lib/common/file-uri.js';
+import { EnvironmentUtils } from '@theia/core/lib/node/environment-utils.js';
+import { parseArgs } from '@theia/process/lib/node/utils.js';
 
 export const ShellProcessFactory = Symbol('ShellProcessFactory');
 export type ShellProcessFactory = (options: ShellProcessOptions) => ShellProcess;
 
 export const ShellProcessOptions = Symbol('ShellProcessOptions');
-export interface ShellProcessOptions {
+export type ShellProcessOptions = {
     shell?: string,
     args?: string[] | string,
     rootURI?: string,

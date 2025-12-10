@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model';
-import { MonacoEditorFactory } from '@theia/monaco/lib/browser/monaco-editor-provider';
-import { MonacoContextMenuService } from '@theia/monaco/lib/browser/monaco-context-menu';
-import { EditorServiceOverrides, MonacoEditor, MonacoEditorServices } from '@theia/monaco/lib/browser/monaco-editor';
-import { OutputUri } from '../common/output-uri';
-import { OutputContextMenuService } from './output-context-menu';
-import { IContextMenuService } from '@theia/monaco-editor-core/esm/vs/platform/contextview/browser/contextView';
+import { inject, injectable } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model.js';
+import { MonacoEditorFactory } from '@theia/monaco/lib/browser/monaco-editor-provider.js';
+import { MonacoContextMenuService } from '@theia/monaco/lib/browser/monaco-context-menu.js';
+import { EditorServiceOverrides, MonacoEditor, MonacoEditorServices } from '@theia/monaco/lib/browser/monaco-editor.js';
+import { OutputUri } from '../common/output-uri.js';
+import { OutputContextMenuService } from './output-context-menu.js';
+import { IContextMenuService } from '@theia/monaco-editor-core/esm/vs/platform/contextview/browser/contextView.js';
 
 @injectable()
 export class OutputEditorFactory implements MonacoEditorFactory {

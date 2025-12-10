@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, postConstruct } from '@theia/core/shared/inversify';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
+import { injectable, postConstruct } from 'inversify';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
 
 /**
  * Provides an additional environment object when executing every single Git command.
  */
 export const GitEnvProvider = Symbol('GitEnvProvider');
-export interface GitEnvProvider extends Disposable {
+export type GitEnvProvider = Disposable & {
 
     /**
      * The additional environment object that will be set before executing every single Git command.

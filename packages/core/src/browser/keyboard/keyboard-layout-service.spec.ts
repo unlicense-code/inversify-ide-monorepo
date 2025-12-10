@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import { Container, injectable } from 'inversify';
-import { Emitter, Event } from '../../common/event';
-import { KeyCode } from './keys';
-import { KeyboardLayoutService } from './keyboard-layout-service';
-import { KeyboardLayoutProvider, NativeKeyboardLayout, KeyboardLayoutChangeNotifier } from '../../common/keyboard/keyboard-layout-provider';
-import * as os from '../../common/os';
+import { Emitter, Event } from '../../common/event.js';
+import { KeyCode } from './keys.js';
+import { KeyboardLayoutService } from './keyboard-layout-service.js';
+import { KeyboardLayoutProvider, NativeKeyboardLayout, KeyboardLayoutChangeNotifier } from '../../common/keyboard/keyboard-layout-provider.js';
+import * as os from '../../common/os.js';
 import * as chai from 'chai';
 import * as sinon from 'sinon';
 

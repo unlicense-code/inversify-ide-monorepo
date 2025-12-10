@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
+import { injectable, inject } from 'inversify';
 import { DisposableCollection } from '@theia/core';
-import { Message } from '@theia/core/shared/@lumino/messaging';
-import * as React from '@theia/core/shared/react';
+import { Message } from '@lumino/messaging';
+import * as React from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
-import { ScmInput, ScmInputIssueType } from './scm-input';
+import { ScmInput, ScmInputIssueType } from './scm-input.js';
 import {
     ContextMenuRenderer, ReactWidget, KeybindingRegistry, StatefulWidget
-} from '@theia/core/lib/browser';
-import { ScmService } from './scm-service';
+} from '@theia/core/lib/browser/index.js';
+import { ScmService } from './scm-service.js';
 
 @injectable()
 export class ScmCommitWidget extends ReactWidget implements StatefulWidget {

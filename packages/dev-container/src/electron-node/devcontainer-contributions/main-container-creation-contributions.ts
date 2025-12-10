@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 Typefox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 import * as Docker from 'dockerode';
-import { inject, injectable, interfaces } from '@theia/core/shared/inversify';
-import { ContainerCreationContribution } from '../docker-container-service';
-import { DevContainerConfiguration, DockerfileContainer, ImageContainer, NonComposeContainerBase } from '../devcontainer-file';
-import { Path } from '@theia/core';
-import { ContainerOutputProvider } from '../../electron-common/container-output-provider';
-import * as fs from '@theia/core/shared/fs-extra';
-import { RemotePortForwardingProvider } from '@theia/remote/lib/electron-common/remote-port-forwarding-provider';
-import { RemoteDockerContainerConnection } from '../remote-container-connection-provider';
+import { inject, injectable, interfaces } from 'inversify';
+import { ContainerCreationContribution } from '../docker-container-service.js';
+import { DevContainerConfiguration, DockerfileContainer, ImageContainer,
+     NonComposeContainerBase } from '../devcontainer-file.js';
+import { Path } from '@theia/core/lib/common/path.js';
+import { ContainerOutputProvider } from '../../electron-common/container-output-provider.js';
+import fs from 'fs-extra';
+import { RemotePortForwardingProvider } from '@theia/remote/lib/electron-common/remote-port-forwarding-provider.js';
+import { RemoteDockerContainerConnection } from '../remote-container-connection-provider.js';
 
 export function registerContainerCreationContributions(bind: interfaces.Bind): void {
     bind(ContainerCreationContribution).to(ImageFileContribution).inSingletonScope();

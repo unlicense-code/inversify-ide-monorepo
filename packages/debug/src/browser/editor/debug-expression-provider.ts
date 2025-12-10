@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,13 +18,13 @@
  *  Licensed under the MIT License. See https://github.com/Microsoft/vscode/blob/master/LICENSE.txt for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable } from 'inversify';
 import { ArrayUtils } from '@theia/core';
 import * as monaco from '@theia/monaco-editor-core';
-import { CancellationToken } from '@theia/monaco-editor-core/esm/vs/base/common/cancellation';
-import { ILanguageFeaturesService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/languageFeatures';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { DebugEditor } from './debug-editor';
+import { CancellationToken } from '@theia/monaco-editor-core/esm/vs/base/common/cancellation.js';
+import { ILanguageFeaturesService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/languageFeatures.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { DebugEditor } from './debug-editor.js';
 
 /**
  * TODO: introduce a new request to LSP to look up an expression range: https://github.com/Microsoft/language-server-protocol/issues/462
@@ -44,7 +44,7 @@ export class DebugExpressionProvider {
             const registeredProviders = pluginExpressionProvider.ordered(textEditorModel);
             const position = new monaco.Position(selection.startLineNumber, selection.startColumn);
 
-            const promises = registeredProviders.map(support =>
+            const promises = registeredProviders.map((support: any) =>
                 Promise.resolve(support.provideEvaluatableExpression(textEditorModel, position, CancellationToken.None))
             );
 

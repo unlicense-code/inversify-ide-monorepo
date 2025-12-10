@@ -1,6 +1,6 @@
 
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,14 +17,14 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import { IRawTheme } from 'vscode-textmate';
 import * as monaco from '@theia/monaco-editor-core';
-import { IStandaloneThemeService } from '@theia/monaco-editor-core/esm/vs/editor/standalone/common/standaloneTheme';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { StandaloneThemeService } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneThemeService';
-import { Color } from '@theia/monaco-editor-core/esm/vs/base/common/color';
-import { MixStandaloneTheme, TextmateRegistryFactory, ThemeMix } from './monaco-theme-types';
+import { IStandaloneThemeService } from '@theia/monaco-editor-core/esm/vs/editor/standalone/common/standaloneTheme.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { StandaloneThemeService } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneThemeService.js';
+import { Color } from '@theia/monaco-editor-core/esm/vs/base/common/color.js';
+import { MixStandaloneTheme, TextmateRegistryFactory, ThemeMix } from './monaco-theme-types.js';
 
 @injectable()
 export class MonacoThemeRegistry {

@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable } from 'inversify';
 import { ArrayUtils } from '@theia/core';
-import { LineRangeMapping } from '../model/range-mapping';
+import { LineRangeMapping } from '../model/range-mapping.js';
 
-export interface DiffSpacers {
+export type DiffSpacers = {
     /**
      * An array representing spacers in the original side of the diff.
      * Indices are line numbers in the original document, and values are the height in lines of the spacer directly above the given line.
@@ -41,7 +41,7 @@ export interface DiffSpacers {
 
 export type ModifiedSideSpacers = Omit<DiffSpacers, 'originalSpacers'>;
 
-export interface CombinedMultiDiffSpacers {
+export type CombinedMultiDiffSpacers = {
     originalSpacers: number[];
     modifiedSides: ModifiedSideSpacers[];
 }

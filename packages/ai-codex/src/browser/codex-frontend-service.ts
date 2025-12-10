@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import { CancellationToken, generateUuid, PreferenceService } from '@theia/core';
-import { FileUri } from '@theia/core/lib/common/file-uri';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { API_KEY_PREF } from '@theia/ai-openai/lib/common/openai-preferences';
+import { FileUri } from '@theia/core/lib/node/index.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { API_KEY_PREF } from '@theia/ai-openai/lib/common/openai-preferences.js';
 import type { ThreadEvent } from '@openai/codex-sdk';
 import {
     CodexClient,
@@ -26,7 +26,7 @@ import {
     CodexService,
     CodexBackendRequest,
     CODEX_API_KEY_PREF
-} from '../common';
+} from '../common/index.js';
 
 @injectable()
 export class CodexClientImpl implements CodexClient {
@@ -64,7 +64,7 @@ export class CodexClientImpl implements CodexClient {
     }
 }
 
-interface StreamState {
+type StreamState = {
     id: string;
     tokens: (ThreadEvent | undefined)[];
     isComplete: boolean;

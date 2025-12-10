@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -20,11 +20,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Emitter } from '@theia/core';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { ApplicationShell } from '@theia/core/lib/browser';
-import { NotebookEditorWidget } from '../notebook-editor-widget';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { NOTEBOOK_EDITOR_FOCUSED } from '../contributions/notebook-context-keys';
+import { inject, injectable, postConstruct } from 'inversify';
+import { ApplicationShell } from '@theia/core/lib/browser/index.js';
+import { NotebookEditorWidget } from '../notebook-editor-widget.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { NOTEBOOK_EDITOR_FOCUSED } from '../contributions/notebook-context-keys.js';
 
 @injectable()
 export class NotebookEditorWidgetService {

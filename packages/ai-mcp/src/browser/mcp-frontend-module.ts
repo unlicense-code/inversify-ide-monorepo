@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { FrontendApplicationContribution, RemoteConnectionProvider, ServiceConnectionProvider } from '@theia/core/lib/browser';
+import { ContainerModule } from 'inversify';
+import { FrontendApplicationContribution, RemoteConnectionProvider, ServiceConnectionProvider } from '@theia/core/lib/browser/index.js';
 import {
     MCPFrontendService,
     MCPServerManager,
     MCPServerManagerPath,
     MCPFrontendNotificationService
-} from '../common/mcp-server-manager';
-import { McpFrontendApplicationContribution } from './mcp-frontend-application-contribution';
-import { MCPFrontendServiceImpl } from './mcp-frontend-service';
-import { MCPFrontendNotificationServiceImpl } from './mcp-frontend-notification-service';
-import { MCPServerManagerServerClientImpl } from './mcp-server-manager-server-client';
-import { MCPServerManagerServer, MCPServerManagerServerClient, MCPServerManagerServerPath } from '../common/mcp-protocol';
+} from '../common/mcp-server-manager.js';
+import { McpFrontendApplicationContribution } from './mcp-frontend-application-contribution.js';
+import { MCPFrontendServiceImpl } from './mcp-frontend-service.js';
+import { MCPFrontendNotificationServiceImpl } from './mcp-frontend-notification-service.js';
+import { MCPServerManagerServerClientImpl } from './mcp-server-manager-server-client.js';
+import { MCPServerManagerServer, MCPServerManagerServerClient, MCPServerManagerServerPath } from '../common/mcp-protocol.js';
 
 export default new ContainerModule(bind => {
     bind(FrontendApplicationContribution).to(McpFrontendApplicationContribution).inSingletonScope();

@@ -14,28 +14,34 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { bindContributionProvider } from '@theia/core/lib/common';
-import { ContainerModule } from '@theia/core/shared/inversify';
+import { bindContributionProvider } from '@theia/core/lib/common/index.js';
+import { ContainerModule } from 'inversify';
 import {
     DebugPath,
     DebugService
-} from '../common/debug-service';
+} from '../common/debug-service.js';
 import {
     LaunchBasedDebugAdapterFactory,
     DebugAdapterSessionFactoryImpl
-} from './debug-adapter-factory';
-import { MessagingService } from '@theia/core/lib/node/messaging/messaging-service';
-import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module';
+} from './debug-adapter-factory.js';
+import { MessagingService 
+
+} from '@theia/core/lib/node/messaging/messaging-service.js';
+import { ConnectionContainerModule 
+
+} from '@theia/core/lib/node/messaging/connection-container-module.js';
 import {
     DebugAdapterContribution,
     DebugAdapterSessionFactory,
     DebugAdapterFactory
-} from '../common/debug-model';
-import { DebugServiceImpl } from './debug-service-impl';
-import { DebugAdapterContributionRegistry } from '../common/debug-adapter-contribution-registry';
-import { DebugAdapterSessionManager } from './debug-adapter-session-manager';
-import { bindDebugPreferences } from '../common/debug-preferences';
-import { bindLaunchPreferences } from '../common/launch-preferences';
+} from '../common/debug-model.js';
+import { DebugServiceImpl } from './debug-service-impl.js';
+import { DebugAdapterContributionRegistry 
+    
+} from '../common/debug-adapter-contribution-registry.js';
+import { DebugAdapterSessionManager } from './debug-adapter-session-manager.js';
+import { bindDebugPreferences } from '../common/debug-preferences.js';
+import { bindLaunchPreferences } from '../common/launch-preferences.js';
 
 const debugConnectionModule = ConnectionContainerModule.create(({ bind, bindBackendService }) => {
     bindContributionProvider(bind, DebugAdapterContribution);

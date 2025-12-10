@@ -14,22 +14,22 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Path } from '@theia/core/lib/common/path';
-import { MessageService, Command, Emitter, Event } from '@theia/core/lib/common';
-import { LabelProvider, isNative, AbstractDialog } from '@theia/core/lib/browser';
-import { WindowService } from '@theia/core/lib/browser/window/window-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { FileDialogService } from '@theia/filesystem/lib/browser';
-import { PluginDebugConfiguration, PluginDevServer } from '../common/plugin-dev-protocol';
-import { LaunchVSCodeArgument, LaunchVSCodeRequest, LaunchVSCodeResult } from '@theia/debug/lib/browser/debug-contribution';
-import { DebugSessionManager } from '@theia/debug/lib/browser/debug-session-manager';
-import { HostedPluginPreferences } from '../common/hosted-plugin-preferences';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
-import { DebugSessionConnection } from '@theia/debug/lib/browser/debug-session-connection';
-import { nls } from '@theia/core/lib/common/nls';
+import { injectable, inject, postConstruct } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Path } from '@theia/core/lib/common/path.js';
+import { MessageService, Command, Emitter, Event } from '@theia/core/lib/common/index.js';
+import { LabelProvider, isNative, AbstractDialog } from '@theia/core/lib/browser/index.js';
+import { WindowService } from '@theia/core/lib/browser/window/window-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { FileDialogService } from '@theia/filesystem/lib/browser/index.js';
+import { PluginDebugConfiguration, PluginDevServer } from '../common/plugin-dev-protocol.js';
+import { LaunchVSCodeArgument, LaunchVSCodeRequest, LaunchVSCodeResult } from '@theia/debug/lib/browser/debug-contribution.js';
+import { DebugSessionManager } from '@theia/debug/lib/browser/debug-session-manager.js';
+import { HostedPluginPreferences } from '../common/hosted-plugin-preferences.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
+import { DebugSessionConnection } from '@theia/debug/lib/browser/debug-session-connection.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 /**
  * Commands to control Hosted plugin instances.
@@ -79,7 +79,7 @@ export enum HostedInstanceState {
     FAILED = 'failed'
 }
 
-export interface HostedInstanceData {
+export type HostedInstanceData = {
     state: HostedInstanceState;
     pluginLocation: URI;
 }

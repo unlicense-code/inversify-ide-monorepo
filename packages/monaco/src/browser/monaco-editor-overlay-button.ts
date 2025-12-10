@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Disposable, DisposableCollection, Emitter } from '@theia/core';
-import { DISABLED_CLASS, onDomEvent } from '@theia/core/lib/browser';
+import { Disposable, DisposableCollection, Emitter } from '@theia/core/lib/common/index.js';
+import { DISABLED_CLASS, onDomEvent } from '@theia/core/lib/browser/index.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { MonacoEditor } from './monaco-editor';
+import { MonacoEditor } from './monaco-editor.js';
 
 export class MonacoEditorOverlayButton implements Disposable {
 

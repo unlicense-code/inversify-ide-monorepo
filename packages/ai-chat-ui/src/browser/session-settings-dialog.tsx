@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import { InMemoryResources, URI, nls } from '@theia/core';
-import { AbstractDialog } from '@theia/core/lib/browser/dialogs';
+import { AbstractDialog } from '@theia/core/lib/browser/dialogs.js';
 
-import { Message } from '@theia/core/lib/browser';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
-import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider';
+import { Message } from '@theia/core/lib/browser/index.js';
+import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor.js';
+import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider.js';
 
-export interface SessionSettingsDialogProps {
+export type SessionSettingsDialogProps = {
     initialSettings: { [key: string]: unknown } | undefined;
 }
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,15 +19,12 @@
  *--------------------------------------------------------------------------------------------*/
 // based on https://github.com/microsoft/vscode/blob/04c36be045a94fee58e5f8992d3e3fd980294a84/src/vs/platform/files/common/files.ts
 
-import URI from '@theia/core/lib/common/uri';
-import { Event } from '@theia/core/lib/common/event';
-import { Disposable as IDisposable } from '@theia/core/lib/common/disposable';
-import { BinaryBuffer, BinaryBufferReadableStream } from '@theia/core/lib/common/buffer';
-import type { TextDocumentContentChangeEvent } from '@theia/core/shared/vscode-languageserver-protocol';
-import { ReadableStreamEvents } from '@theia/core/lib/common/stream';
-import { CancellationToken } from '@theia/core/lib/common/cancellation';
-import { isObject } from '@theia/core/lib/common';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
+import {
+    BinaryBuffer, BinaryBufferReadableStream, URI, Event, Disposable as IDisposable,
+    ReadableStreamEvents, CancellationToken, isObject, MarkdownString
+} from '@theia/core';
+import type { TextDocumentContentChangeEvent } from 'vscode-languageserver-protocol';
+
 
 export const enum FileOperation {
     CREATE,
@@ -61,7 +58,7 @@ export const enum FileChangeType {
 /**
  * Identifies a single change in a file.
  */
-export interface FileChange {
+export type FileChange = {
 
     /**
      * The type of change that occurred to the file.
@@ -72,7 +69,7 @@ export interface FileChange {
      * The unified resource identifier of the file that changed.
      */
     readonly resource: URI;
-}
+};
 
 export class FileChangesEvent {
 
@@ -155,7 +152,7 @@ export class FileChangesEvent {
     }
 }
 
-export interface BaseStat {
+export type BaseStat = {
 
     /**
      * The unified resource identifier of this file or folder.
@@ -209,17 +206,14 @@ export namespace BaseStat {
     }
 }
 
-export interface BaseStatWithMetadata extends BaseStat {
+export type BaseStatWithMetadata = BaseStat & {
     mtime: number;
     ctime: number;
     etag: string;
     size: number;
 }
 
-/**
- * A file resource with meta information.
- */
-export interface FileStat extends BaseStat {
+export type FileStat = BaseStat & {
 
     /**
      * The resource is a file.
@@ -299,7 +293,7 @@ export namespace FileStat {
     }
 }
 
-export interface FileStatWithMetadata extends FileStat, BaseStatWithMetadata {
+export type FileStatWithMetadata = FileStat & BaseStatWithMetadata & {
     mtime: number;
     ctime: number;
     etag: string;
@@ -307,16 +301,16 @@ export interface FileStatWithMetadata extends FileStat, BaseStatWithMetadata {
     children?: FileStatWithMetadata[];
 }
 
-export interface ResolveFileResult {
+export type ResolveFileResult = {
     stat?: FileStat;
     success: boolean;
 }
 
-export interface ResolveFileResultWithMetadata extends ResolveFileResult {
+export type ResolveFileResultWithMetadata = ResolveFileResult & {
     stat?: FileStatWithMetadata;
 }
 
-export interface FileContent extends BaseStatWithMetadata {
+export type FileContent = BaseStatWithMetadata & {
 
     /**
      * The content of a file as buffer.
@@ -324,7 +318,7 @@ export interface FileContent extends BaseStatWithMetadata {
     value: BinaryBuffer;
 }
 
-export interface FileStreamContent extends BaseStatWithMetadata {
+export type FileStreamContent = BaseStatWithMetadata & {
 
     /**
      * The content of a file as stream.
@@ -332,7 +326,7 @@ export interface FileStreamContent extends BaseStatWithMetadata {
     value: BinaryBufferReadableStream;
 }
 
-export interface WriteFileOptions {
+export type WriteFileOptions = {
 
     /**
      * The last known modification time of the file. This can be used to prevent dirty writes.
@@ -345,7 +339,7 @@ export interface WriteFileOptions {
     readonly etag?: string;
 }
 
-export interface ReadFileOptions extends FileReadStreamOptions {
+export type ReadFileOptions = FileReadStreamOptions & {
 
     /**
      * The optional etag parameter allows to return early from resolving the resource if
@@ -356,20 +350,7 @@ export interface ReadFileOptions extends FileReadStreamOptions {
     readonly etag?: string;
 }
 
-export interface WriteFileOptions {
-
-    /**
-     * The last known modification time of the file. This can be used to prevent dirty writes.
-     */
-    readonly mtime?: number;
-
-    /**
-     * The etag of the file. This can be used to prevent dirty writes.
-     */
-    readonly etag?: string;
-}
-
-export interface ResolveFileOptions {
+export type ResolveFileOptions = {
 
     /**
      * Automatically continue resolving children of a directory until the provided resources
@@ -389,11 +370,11 @@ export interface ResolveFileOptions {
     readonly resolveMetadata?: boolean;
 }
 
-export interface ResolveMetadataFileOptions extends ResolveFileOptions {
+export type ResolveMetadataFileOptions = ResolveFileOptions & {
     readonly resolveMetadata: true;
 }
 
-export interface FileOperationOptions {
+export type FileOperationOptions = {
     /**
      * Indicates that a user action triggered the opening, e.g.
      * via mouse or keyboard use. Default is true.
@@ -401,13 +382,13 @@ export interface FileOperationOptions {
     fromUserGesture?: boolean
 }
 
-export interface MoveFileOptions extends FileOperationOptions, Partial<FileOverwriteOptions> {
+export type MoveFileOptions = FileOperationOptions & Partial<FileOverwriteOptions> & {
 }
 
-export interface CopyFileOptions extends FileOperationOptions, Partial<FileOverwriteOptions> {
+export type CopyFileOptions = FileOperationOptions & Partial<FileOverwriteOptions> & {
 }
 
-export interface CreateFileOptions extends FileOperationOptions, Partial<FileOverwriteOptions> {
+export type CreateFileOptions = FileOperationOptions & Partial<FileOverwriteOptions> & {
 }
 
 export class FileOperationError extends Error {
@@ -432,7 +413,7 @@ export const enum FileOperationResult {
     FILE_OTHER_ERROR
 }
 
-export interface FileOverwriteOptions {
+export type FileOverwriteOptions = {
     /**
      * Overwrite the file to create if it already exists on disk. Otherwise
      * an error will be thrown (FILE_MODIFIED_SINCE).
@@ -440,7 +421,7 @@ export interface FileOverwriteOptions {
     overwrite: boolean;
 }
 
-export interface FileReadStreamOptions {
+export type FileReadStreamOptions = {
 
     /**
      * Is an integer specifying where to begin reading from in the file. If position is undefined,
@@ -463,25 +444,25 @@ export interface FileReadStreamOptions {
     };
 }
 
-export interface FileUpdateOptions {
+export type FileUpdateOptions = {
     readEncoding: string;
     writeEncoding: string;
     overwriteEncoding: boolean;
 }
-export interface FileUpdateResult extends Stat {
+export type FileUpdateResult = Stat & {
     encoding: string;
 }
 
-export interface FileWriteOptions {
+export type FileWriteOptions = {
     overwrite: boolean;
     create: boolean;
 }
 
-export interface FileOpenOptions {
+export type FileOpenOptions = {
     create: boolean;
 }
 
-export interface FileDeleteOptions {
+export type FileDeleteOptions = {
     recursive: boolean;
     useTrash: boolean;
 }
@@ -501,7 +482,7 @@ export enum FilePermission {
     Readonly = 1
 }
 
-export interface Stat {
+export type Stat = {
     type: FileType;
 
     /**
@@ -519,7 +500,7 @@ export interface Stat {
     permissions?: FilePermission;
 }
 
-export interface WatchOptions {
+export type WatchOptions = {
     recursive: boolean;
     excludes: string[];
 }
@@ -577,13 +558,7 @@ export function ensureFileSystemProviderError(error?: Error): Error {
 }
 
 export const FileSystemProvider = Symbol('FileSystemProvider');
-/**
- * A {@link FileSystemProvider} provides the capabilities to read, write, discover, and to manage files and folders
- * of the underlying (potentially virtual) file system. {@link FileSystemProvider}s can be used to serve files from both the
- * local disk as well as remote locations like ftp-servers, REST-services etc. A {@link FileSystemProvider} is registered for a certain
- * scheme and can handle all resources whose uri does conform to that scheme.
- */
-export interface FileSystemProvider {
+export type FileSystemProvider = {
 
     /** The {@link FileSystemProviderCapabilities} for this provider. */
     readonly capabilities: FileSystemProviderCapabilities;
@@ -711,11 +686,7 @@ export interface FileSystemProvider {
     updateFile?(resource: URI, changes: TextDocumentContentChangeEvent[], opts: FileUpdateOptions): Promise<FileUpdateResult>;
 }
 
-/**
- * Subtype of {@link FileSystemProvider} that ensures that the optional functions needed for providers, that should be
- * able access files, are implemented.
- */
-export interface FileSystemProviderWithAccessCapability extends FileSystemProvider {
+export type FileSystemProviderWithAccessCapability = FileSystemProvider & {
     /**
      * Tests a user's permissions for the file or directory specified by URI.
      * @param resource The `URI` of the file that should be tested.
@@ -747,11 +718,7 @@ export function hasAccessCapability(provider: FileSystemProvider): provider is F
     return !!(provider.capabilities & FileSystemProviderCapabilities.Access);
 }
 
-/**
- * Subtype of {@link FileSystemProvider} that ensures that the optional functions needed, for providers that should be
- * able to update (text) files, are implemented.
- */
-export interface FileSystemProviderWithUpdateCapability extends FileSystemProvider {
+export type FileSystemProviderWithUpdateCapability = FileSystemProvider & {
     /**
      * Update the content of the given (text) file according to the given text document changes.
      * @param resource `URI` of the resource to update.
@@ -767,7 +734,7 @@ export function hasUpdateCapability(provider: FileSystemProvider): provider is F
     return !!(provider.capabilities & FileSystemProviderCapabilities.Update);
 }
 
-export interface ReadOnlyMessageFileSystemProvider {
+export type ReadOnlyMessageFileSystemProvider = {
     readOnlyMessage: MarkdownString | undefined;
     readonly onDidChangeReadOnlyMessage: Event<MarkdownString | undefined>;
 }
@@ -779,11 +746,7 @@ export namespace ReadOnlyMessageFileSystemProvider {
     }
 }
 
-/**
- * Subtype of {@link FileSystemProvider} that ensures that the optional functions, needed for providers
- * that should be able to read & write files, are implemented.
- */
-export interface FileSystemProviderWithFileReadWriteCapability extends FileSystemProvider {
+export type FileSystemProviderWithFileReadWriteCapability = FileSystemProvider & {
     /**
      * Read the contents of the given file as stream.
      * @param resource The `URI` of the file.
@@ -805,11 +768,7 @@ export function hasReadWriteCapability(provider: FileSystemProvider): provider i
     return !!(provider.capabilities & FileSystemProviderCapabilities.FileReadWrite);
 }
 
-/**
- * Subtype of {@link FileSystemProvider} that ensures that the optional functions, needed for providers that should be able to copy
- * file folders, are implemented.
- */
-export interface FileSystemProviderWithFileFolderCopyCapability extends FileSystemProvider {
+export type FileSystemProviderWithFileFolderCopyCapability = FileSystemProvider & {
     /**
      * Copy files or folders.
      * @param from `URI` of the existing file or folder.
@@ -823,11 +782,7 @@ export function hasFileFolderCopyCapability(provider: FileSystemProvider): provi
     return !!(provider.capabilities & FileSystemProviderCapabilities.FileFolderCopy);
 }
 
-/**
- * Subtype of {@link FileSystemProvider} that ensures that the optional functions, needed for providers that should be able to open,read, write
- * or close files, are implemented.
- */
-export interface FileSystemProviderWithOpenReadWriteCloseCapability extends FileSystemProvider {
+export type FileSystemProviderWithOpenReadWriteCloseCapability = FileSystemProvider & {
     /**
      * Open the give file.
      * @param resource The `URI` of the file to open.
@@ -871,11 +826,7 @@ export function hasOpenReadWriteCloseCapability(provider: FileSystemProvider): p
     return !!(provider.capabilities & FileSystemProviderCapabilities.FileOpenReadWriteClose);
 }
 
-/**
- * Subtype of {@link FileSystemProvider} that ensures that the optional functions, needed for providers that should be able to read
- * files as streams, are implemented.
- */
-export interface FileSystemProviderWithFileReadStreamCapability extends FileSystemProvider {
+export type FileSystemProviderWithFileReadStreamCapability = FileSystemProvider & {
     /**
      * Read the contents of the given file as stream.
      * @param resource The `URI` of the file.

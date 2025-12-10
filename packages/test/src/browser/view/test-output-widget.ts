@@ -16,13 +16,13 @@
 import { Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 
-import { BaseWidget, Message, Widget, codicon, isFirefox } from '@theia/core/lib/browser';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
+import { BaseWidget, Message, Widget, codicon, isFirefox } from '@theia/core/lib/browser/index.js';
+import { inject, injectable, postConstruct } from 'inversify';
 import { Disposable, DisposableCollection } from '@theia/core';
-import { TerminalPreferences } from '@theia/terminal/lib/common/terminal-preferences';
-import { TerminalThemeService } from '@theia/terminal/lib/browser/terminal-theme-service';
-import { TestOutputSource, TestOutputUIModel } from './test-output-ui-model';
-import debounce = require('p-debounce');
+import { TerminalPreferences } from '@theia/terminal/lib/common/terminal-preferences.js';
+import { TerminalThemeService } from '@theia/terminal/lib/browser/terminal-theme-service.js';
+import { TestOutputSource, TestOutputUIModel } from './test-output-ui-model.js';
+import debounce from 'p-debounce';
 
 @injectable()
 export class TestOutputWidget extends BaseWidget {

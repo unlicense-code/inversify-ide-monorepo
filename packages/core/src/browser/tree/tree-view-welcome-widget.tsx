@@ -24,17 +24,17 @@
 import React = require('react');
 import { inject, injectable } from 'inversify';
 import { URI as CodeUri } from 'vscode-uri';
-import { CommandRegistry, DisposableCollection } from '../../common';
-import URI from '../../common/uri';
-import { ContextKeyService } from '../context-key-service';
-import { LabelIcon, LabelParser } from '../label-parser';
-import { OpenerService, open } from '../opener-service';
-import { codicon } from '../widgets';
-import { WindowService } from '../window/window-service';
-import { TreeModel } from './tree-model';
-import { TreeWidget } from './tree-widget';
+import { CommandRegistry, DisposableCollection } from '../../common/index.js';
+import { URI } from '../../common/uri.js';
+import { ContextKeyService } from '../context-key-service.js';
+import { LabelIcon, LabelParser } from '../label-parser.js';
+import { OpenerService, open } from '../opener-service.js';
+import { codicon } from '../widgets/widget.js';
+import { WindowService } from '../window/window-service.js';
+import { TreeModel } from './tree-model.js';
+import { TreeWidget } from './tree-widget.js';
 
-export interface ViewWelcome {
+export type ViewWelcome = {
     readonly view: string;
     readonly content: string;
     readonly when?: string;
@@ -42,12 +42,12 @@ export interface ViewWelcome {
     readonly order: number;
 }
 
-export interface IItem {
+export type IItem = {
     readonly welcomeInfo: ViewWelcome;
     visible: boolean;
 }
 
-export interface ILink {
+export type ILink = {
     readonly label: string;
     readonly href: string;
     readonly title?: string;

@@ -14,24 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContributionProvider } from '@theia/core/lib/common/contribution-provider';
-import { Tool, Resource, Prompt, PromptMessage } from '@modelcontextprotocol/sdk/types';
+import { ContributionProvider } from '@theia/core/lib/common/contribution-provider.js';
+import { Tool, Resource, Prompt, PromptMessage } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
 
 export const MCPFrontendContribution = Symbol('MCPFrontendContribution');
 
-/**
- * Tool provider interface for frontend contributions
- */
-export interface ToolProvider {
+export type ToolProvider = {
     handler: (args: unknown) => Promise<unknown>;
     inputSchema: z.ZodSchema;
 }
 
-/**
- * Contribution interface for extending the MCP server with frontend-only tools, resources, and prompts
- */
-export interface MCPFrontendContribution {
+export type MCPFrontendContribution = {
     /**
      * Get tools provided by this contribution
      */
@@ -64,4 +58,4 @@ export interface MCPFrontendContribution {
 }
 
 export const MCPFrontendContributionProvider = Symbol('MCPFrontendContributionProvider');
-export interface MCPFrontendContributionProvider extends ContributionProvider<MCPFrontendContribution> { }
+export type MCPFrontendContributionProvider = ContributionProvider<MCPFrontendContribution> & { }

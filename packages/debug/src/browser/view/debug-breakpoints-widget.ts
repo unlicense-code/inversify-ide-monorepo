@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct, interfaces, Container } from '@theia/core/shared/inversify';
-import { MenuPath } from '@theia/core/lib/common';
-import { TreeNode, NodeProps } from '@theia/core/lib/browser';
-import { SourceTreeWidget } from '@theia/core/lib/browser/source-tree';
-import { DebugBreakpointsSource } from './debug-breakpoints-source';
-import { BreakpointManager } from '../breakpoint/breakpoint-manager';
-import { DebugViewModel } from './debug-view-model';
-import { nls } from '@theia/core/lib/common/nls';
+import { injectable, inject, postConstruct, interfaces } from 'inversify';
+import { MenuPath } from '@theia/core/lib/common/index.js';
+import { TreeNode, NodeProps } from '@theia/core/lib/browser/index.js';
+import { SourceTreeWidget } from '@theia/core/lib/browser/source-tree/source-tree-widget.js';
+import { DebugBreakpointsSource } from './debug-breakpoints-source.js';
+import { BreakpointManager } from '../breakpoint/breakpoint-manager.js';
+import { DebugViewModel } from './debug-view-model.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 @injectable()
 export class DebugBreakpointsWidget extends SourceTreeWidget {
@@ -31,7 +31,7 @@ export class DebugBreakpointsWidget extends SourceTreeWidget {
     static REMOVE_MENU = [...DebugBreakpointsWidget.CONTEXT_MENU, 'b_remove'];
     static ENABLE_MENU = [...DebugBreakpointsWidget.CONTEXT_MENU, 'c_enable'];
     static FACTORY_ID = 'debug:breakpoints';
-    static override createContainer(parent: interfaces.Container): Container {
+    static override createContainer(parent: interfaces.Container): interfaces.Container {
         const child = SourceTreeWidget.createContainer(parent, {
             contextMenuPath: DebugBreakpointsWidget.CONTEXT_MENU,
             virtualized: false,

@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import * as React from 'react';
-import { MarkdownRenderer, MarkdownRenderResult } from './markdown-renderer';
-import { MarkdownString, MarkdownStringImpl } from '../../common/markdown-rendering/markdown-string';
-import { nls } from '../../common/nls';
-import { FormatType } from '../../common/i18n/localization';
+import { MarkdownRenderer, MarkdownRenderResult } from './markdown-renderer.js';
+import { MarkdownString, MarkdownStringImpl } from '../../common/markdown-rendering/markdown-string.js';
+import { nls } from '../../common/nls.js';
+import { FormatType } from '../../common/i18n/localization.js';
 
-export interface MarkdownProps {
+export type MarkdownProps = {
     /**
      * The markdown content to render. Can be a string, a MarkdownString, or undefined.
      * If undefined or empty, an empty div will be rendered.
@@ -197,7 +197,7 @@ export function useMarkdown(
     return containerRef;
 }
 
-export interface LocalizedMarkdownProps extends MarkdownProps {
+export type LocalizedMarkdownProps = MarkdownProps & {
     /**
      * The localization key for the markdown content.
      */

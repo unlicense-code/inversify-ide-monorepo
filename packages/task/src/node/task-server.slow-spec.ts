@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017-2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,20 +16,20 @@
 
 // tslint:disable-next-line:no-implicit-dependencies
 import 'reflect-metadata';
-import { createTaskTestContainer } from './test/task-test-container';
-import { BackendApplication } from '@theia/core/lib/node/backend-application';
-import { TaskExitedEvent, TaskInfo, TaskServer, TaskWatcher, TaskConfiguration } from '../common';
-import { ProcessType, ProcessTaskConfiguration } from '../common/process/task-protocol';
+import { createTaskTestContainer } from './test/task-test-container.js';
+import { BackendApplication } from '@theia/core/lib/node/backend-application.js';
+import { TaskExitedEvent, TaskInfo, TaskServer, TaskWatcher, TaskConfiguration } from '../common/index.js';
+import { ProcessType, ProcessTaskConfiguration } from '../common/process/task-protocol.js';
 import * as http from 'http';
 import * as https from 'https';
-import { isWindows, isOSX } from '@theia/core/lib/common/os';
-import { FileUri } from '@theia/core/lib/node';
-import { terminalsPath } from '@theia/terminal/lib/common/terminal-protocol';
-import { TestWebSocketChannelSetup } from '@theia/core/lib/node/messaging/test/test-web-socket-channel';
+import { isWindows, isOSX } from '@theia/core/lib/common/os.js';
+import { FileUri } from '@theia/core/lib/node/index.js';
+import { terminalsPath } from '@theia/terminal/lib/common/terminal-protocol.js';
+import { TestWebSocketChannelSetup } from '@theia/core/lib/node/messaging/test/test-web-socket-channel.js';
 import { expect } from 'chai';
-import URI from '@theia/core/lib/common/uri';
-import { StringBufferingStream } from '@theia/terminal/lib/node/buffering-stream';
-import { BackendApplicationConfigProvider } from '@theia/core/lib/node/backend-application-config-provider';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { StringBufferingStream } from '@theia/terminal/lib/node/buffering-stream.js';
+import { BackendApplicationConfigProvider } from '@theia/core/lib/node/backend-application-config-provider.js';
 
 // test scripts that we bundle with tasks
 const commandShortRunning = './task';

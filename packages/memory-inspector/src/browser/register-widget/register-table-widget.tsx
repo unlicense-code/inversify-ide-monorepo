@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2021 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,15 +14,15 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { Key, KeyCode } from '@theia/core/lib/browser';
-import { inject } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { DebugVariable } from '@theia/debug/lib/browser/console/debug-console-items';
-import { EMPTY_MEMORY } from '../memory-widget/memory-options-widget';
-import { MemoryTable, MemoryTableWidget } from '../memory-widget/memory-table-widget';
-import { Interfaces } from '../utils/memory-widget-utils';
-import { RegisterReadResult } from '../utils/memory-widget-variable-utils';
-import { RegisterOptions, RegisterOptionsWidget } from './register-options-widget';
+import { Key, KeyCode } from '@theia/core/lib/browser/index.js';
+import { inject } from 'inversify';
+import * as React from 'react';
+import { DebugVariable } from '@theia/debug/lib/browser/console/debug-console-items.js';
+import { EMPTY_MEMORY } from '../memory-widget/memory-options-widget.js';
+import { MemoryTable, MemoryTableWidget } from '../memory-widget/memory-table-widget.js';
+import { Interfaces } from '../utils/memory-widget-utils.js';
+import { RegisterReadResult } from '../utils/memory-widget-variable-utils.js';
+import { RegisterOptions, RegisterOptionsWidget } from './register-options-widget.js';
 
 export namespace RegisterTable {
 
@@ -61,12 +61,12 @@ export class RegisterTableWidget extends MemoryTableWidget {
     static override CONTEXT_MENU = ['register.view.context.menu'];
     static override ID = 'register-table-widget';
 
-    @inject(RegisterOptionsWidget) override readonly optionsWidget: RegisterOptionsWidget;
+    @inject(RegisterOptionsWidget) declare readonly optionsWidget: RegisterOptionsWidget;
 
     protected readonly registerNotSaved = '<not saved>';
     protected registers: RegisterReadResult;
     protected previousRegisters: RegisterReadResult | undefined;
-    protected override options: RegisterOptions;
+    protected declare options: RegisterOptions;
     protected override memory: Interfaces.WidgetMemoryState = { ...EMPTY_MEMORY, variables: [] };
 
     protected override async doInit(): Promise<void> {

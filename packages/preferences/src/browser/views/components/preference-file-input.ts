@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { isObject } from '@theia/core/lib/common';
-import { nls } from '@theia/core/lib/common/nls';
-import { inject, injectable, interfaces } from '@theia/core/shared/inversify';
-import { OpenFileDialogProps } from '@theia/filesystem/lib/browser';
-import { FileDialogService } from '@theia/filesystem/lib/browser/file-dialog/file-dialog-service';
-import { WorkspaceCommands } from '@theia/workspace/lib/browser';
-import { Preference } from '../../util/preference-types';
-import { PreferenceNodeRenderer } from './preference-node-renderer';
-import { PreferenceLeafNodeRendererContribution } from './preference-node-renderer-creator';
-import { PreferenceStringInputRenderer } from './preference-string-input';
+import { isObject } from '@theia/core/lib/common/index.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { inject, injectable, interfaces } from 'inversify';
+import { OpenFileDialogProps } from '@theia/filesystem/lib/browser/index.js';
+import { FileDialogService } from '@theia/filesystem/lib/browser/file-dialog/file-dialog-service.js';
+import { WorkspaceCommands } from '@theia/workspace/lib/browser/index.js';
+import { Preference } from '../../util/preference-types.js';
+import { PreferenceNodeRenderer } from './preference-node-renderer.js';
+import { PreferenceLeafNodeRendererContribution } from './preference-node-renderer-creator.js';
+import { PreferenceStringInputRenderer } from './preference-string-input.js';
 
-export interface FileNodeTypeDetails {
+export type FileNodeTypeDetails = {
     isFilepath: true;
     selectionProps?: Partial<OpenFileDialogProps>;
 }

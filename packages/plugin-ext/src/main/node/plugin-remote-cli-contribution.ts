@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { MaybePromise } from '@theia/core';
-import { RemoteCliContext, RemoteCliContribution } from '@theia/core/lib/node/remote/remote-cli-contribution';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { PluginCliContribution } from './plugin-cli-contribution';
+import { RemoteCliContext, RemoteCliContribution } from '@theia/core/lib/node/remote/remote-cli-contribution.js';
+import { inject, injectable } from 'inversify';
+import { PluginCliContribution } from './plugin-cli-contribution.js';
 
 @injectable()
 export class PluginRemoteCliContribution implements RemoteCliContribution {

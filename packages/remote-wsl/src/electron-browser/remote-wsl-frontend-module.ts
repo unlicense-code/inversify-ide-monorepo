@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2025 TypeFox and others.
+// Copyright (C) 2025 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { RemoteRegistryContribution } from '@theia/remote/lib/electron-browser/remote-registry-contribution';
-import { RemoteWslConnectionProvider, RemoteWslConnectionProviderPath } from '../electron-common/remote-wsl-connection-provider';
-import { WslConnectionContribution } from './wsl-connection-contribution';
-import { ServiceConnectionProvider } from '@theia/core/lib/browser/messaging/service-connection-provider';
-import { WorkspaceOpenHandlerContribution } from '@theia/workspace/lib/browser/workspace-service';
+import { ContainerModule } from 'inversify';
+import { RemoteRegistryContribution } from '@theia/remote/lib/electron-browser/remote-registry-contribution.js';
+import { RemoteWslConnectionProvider, RemoteWslConnectionProviderPath } from '../electron-common/remote-wsl-connection-provider.js';
+import { WslConnectionContribution } from './wsl-connection-contribution.js';
+import { ServiceConnectionProvider } from '@theia/core/lib/browser/messaging/service-connection-provider.js';
+import { WorkspaceOpenHandlerContribution } from '@theia/workspace/lib/browser/workspace-service.js';
 
 export default new ContainerModule(bind => {
     bind(WslConnectionContribution).toSelf().inSingletonScope();

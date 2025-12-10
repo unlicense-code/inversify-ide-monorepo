@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-export * from './application-shell';
-export * from './shell-layout-restorer';
-export * from './side-panel-handler';
-export * from './sidebar-menu-widget';
-export * from './split-panels';
-export * from './tab-bars';
-export * from './view-contribution';
-export * from './theia-split-panel';
+export * from './application-shell.js';
+export * from './shell-layout-restorer.js';
+export * from './side-panel-handler.js';
+export * from './sidebar-menu-widget.js';
+export * from './split-panels.js';
+export * from './tab-bars.js';
+export * from './tab-bar-toolbar/index.js';
+export * from './view-contribution.js';
+export * from './theia-split-panel.js';

@@ -16,10 +16,7 @@
 
 // Custom message protocol between `HostedPluginProcess` and its `PluginHost` child process.
 
-/**
- * Sent to initiate termination of the counterpart process.
- */
-export interface ProcessTerminateMessage {
+export type ProcessTerminateMessage = {
     type: typeof ProcessTerminateMessage.TYPE,
     stopTimeout?: number
 }
@@ -32,10 +29,7 @@ export namespace ProcessTerminateMessage {
     }
 }
 
-/**
- * Sent to inform the counter part process that the process termination has been completed.
- */
-export interface ProcessTerminatedMessage {
+export type ProcessTerminatedMessage = {
     type: typeof ProcessTerminateMessage.TYPE,
 }
 

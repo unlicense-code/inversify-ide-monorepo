@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,12 +17,12 @@
 import * as temp from 'temp';
 import * as chai from 'chai';
 import * as cp from 'child_process';
-import * as fs from '@theia/core/shared/fs-extra';
+import * as fs from 'fs-extra';
 import * as assert from 'assert';
-import URI from '@theia/core/lib/common/uri';
-import { FileUri } from '@theia/core/lib/node';
-import { ParcelFileSystemWatcherService } from './parcel-filesystem-service';
-import { DidFilesChangedParams, FileChange, FileChangeType } from '../../common/filesystem-watcher-protocol';
+import { URI } from '@theia/core';
+import { FileUri } from '@theia/core/lib/node/index.js';
+import { ParcelFileSystemWatcherService } from './parcel-filesystem-service.js';
+import { DidFilesChangedParams, FileChange, FileChangeType } from '../../common/filesystem-watcher-protocol.js';
 
 const expect = chai.expect;
 const track = temp.track();

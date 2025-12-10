@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { CompositeTreeNode } from '@theia/core/lib/browser/tree/tree';
-import { MarkerInfoNode } from '../marker-tree';
-import URI from '@theia/core/lib/common/uri';
-import { Marker } from '../../common/marker';
-import { Diagnostic, DiagnosticSeverity } from '@theia/core/shared/vscode-languageserver-protocol';
-import { ProblemUtils } from './problem-utils';
+import { CompositeTreeNode } from '@theia/core/lib/browser/tree/tree.js';
+import { MarkerInfoNode } from '../marker-tree.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Marker } from '../../common/marker.js';
+import { Diagnostic, DiagnosticSeverity } from 'vscode-languageserver-protocol';
+import { ProblemUtils } from './problem-utils.js';
 
 export namespace ProblemCompositeTreeNode {
 

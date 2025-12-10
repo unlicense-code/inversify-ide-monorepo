@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ChatAgentLocation, ChatService } from '@theia/ai-chat/lib/common';
+import { ChatAgentLocation, ChatService } from '@theia/ai-chat/lib/common/index.js';
 import { CommandContribution, CommandRegistry, CommandService } from '@theia/core';
-import { TaskContextStorageService, TaskContextService } from '@theia/ai-chat/lib/browser/task-context-service';
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { AI_SUMMARIZE_SESSION_AS_TASK_FOR_CODER, AI_UPDATE_TASK_CONTEXT_COMMAND } from '../common/summarize-session-commands';
-import { CoderAgent } from './coder-agent';
-import { TASK_CONTEXT_VARIABLE } from '@theia/ai-chat/lib/browser/task-context-variable';
-import { TASK_CONTEXT_CREATE_PROMPT_ID, TASK_CONTEXT_UPDATE_PROMPT_ID } from '../common/task-context-prompt-template';
-import { FILE_VARIABLE } from '@theia/ai-core/lib/browser/file-variable-contribution';
-import { AIVariableResolutionRequest } from '@theia/ai-core';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { TaskContextStorageService, TaskContextService } from '@theia/ai-chat/lib/browser/task-context-service.js';
+import { injectable, inject } from 'inversify';
+import { AI_SUMMARIZE_SESSION_AS_TASK_FOR_CODER, AI_UPDATE_TASK_CONTEXT_COMMAND } from '../common/summarize-session-commands.js';
+import { CoderAgent } from './coder-agent.js';
+import { TASK_CONTEXT_VARIABLE } from '@theia/ai-chat/lib/browser/task-context-variable.js';
+import { TASK_CONTEXT_CREATE_PROMPT_ID, TASK_CONTEXT_UPDATE_PROMPT_ID } from '../common/task-context-prompt-template.js';
+import { FILE_VARIABLE } from '@theia/ai-core/lib/browser/file-variable-contribution.js';
+import { AIVariableResolutionRequest } from '@theia/ai-core/lib/common/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
 import { AICommandHandlerFactory } from '@theia/ai-core/lib/browser';
 
 @injectable()

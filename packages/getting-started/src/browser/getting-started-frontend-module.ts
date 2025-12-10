@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { GettingStartedContribution } from './getting-started-contribution';
-import { ContainerModule, interfaces } from '@theia/core/shared/inversify';
-import { GettingStartedWidget } from './getting-started-widget';
-import { WidgetFactory, FrontendApplicationContribution, bindViewContribution, noopWidgetStatusBarContribution, WidgetStatusBarContribution } from '@theia/core/lib/browser';
-import { bindGettingStartedPreferences } from '../common/getting-started-preferences';
+import { GettingStartedContribution } from './getting-started-contribution.js';
+import { ContainerModule, interfaces } from 'inversify';
+import { GettingStartedWidget } from './getting-started-widget.js';
+import { WidgetFactory, FrontendApplicationContribution, bindViewContribution, noopWidgetStatusBarContribution, WidgetStatusBarContribution } from '@theia/core/lib/browser/index.js';
+import { bindGettingStartedPreferences } from '../common/getting-started-preferences.js';
 import '../../src/browser/style/index.css';
 
 export default new ContainerModule((bind: interfaces.Bind) => {

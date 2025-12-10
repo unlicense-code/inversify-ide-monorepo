@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,27 +14,24 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import React = require('@theia/core/shared/react');
-import debounce = require('@theia/core/shared/lodash.debounce');
-import * as fuzzy from '@theia/core/shared/fuzzy';
-import { injectable, inject, postConstruct, unmanaged } from '@theia/core/shared/inversify';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import { CommandRegistry, Command } from '@theia/core/lib/common/command';
-import { Keybinding } from '@theia/core/lib/common/keybinding';
-import { ReactWidget } from '@theia/core/lib/browser/widgets/react-widget';
+import * as React from 'react';
+import debounce from 'lodash/debounce.js'
+import * as fuzzy from 'fuzzy';
+import { injectable, inject, postConstruct, unmanaged } from 'inversify';
+import { Emitter, Event } from '@theia/core/lib/common/event.js';
+import { CommandRegistry, Command } from '@theia/core/lib/common/command.js';
+import { Keybinding } from '@theia/core/lib/common/keybinding.js';
+import { ReactWidget } from '@theia/core/lib/browser/widgets/react-widget.js';
 import {
     KeybindingRegistry, SingleTextInputDialog, KeySequence, ConfirmDialog, Message, KeybindingScope,
     SingleTextInputDialogProps, Key, ScopedKeybinding, codicon, StatefulWidget, Widget, ContextMenuRenderer, SELECTED_CLASS
-} from '@theia/core/lib/browser';
-import { KeymapsService } from './keymaps-service';
-import { AlertMessage } from '@theia/core/lib/browser/widgets/alert-message';
+} from '@theia/core/lib/browser/index.js';
+import { KeymapsService } from './keymaps-service.js';
+import { AlertMessage } from '@theia/core/lib/browser/widgets/alert-message.js';
 import { DisposableCollection, isOSX, isObject } from '@theia/core';
-import { nls } from '@theia/core/lib/common/nls';
+import { nls } from '@theia/core/lib/common/nls.js'
 
-/**
- * Representation of a keybinding item for the view.
- */
-export interface KeybindingItem {
+export type KeybindingItem = {
     command: Command
     keybinding?: ScopedKeybinding
     /** human-readable labels can contain highlighting */
@@ -61,21 +58,18 @@ export namespace KeybindingItem {
     }
 }
 
-export interface RenderableLabel {
+export type RenderableLabel = {
     readonly value: string;
     segments?: RenderableStringSegment[];
 }
 
-export interface RenderableStringSegment {
+export type RenderableStringSegment = {
     value: string;
     match: boolean;
     key?: boolean;
 }
 
-/**
- * Representation of an individual table cell.
- */
-export interface CellData {
+export type CellData = {
     /**
      * The cell value.
      */

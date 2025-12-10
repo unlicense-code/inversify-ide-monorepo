@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -20,7 +20,7 @@ export const workspacePath = '/services/workspace';
  * The JSON-RPC workspace interface.
  */
 export const WorkspaceServer = Symbol('WorkspaceServer');
-export interface WorkspaceServer {
+export type WorkspaceServer = {
 
     /**
      * Returns with a promise that resolves to the most recently used workspace folder URI as a string.

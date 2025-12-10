@@ -22,13 +22,13 @@ import {
     LanguageModelRequirement,
     PromptService,
     UserRequest
-} from '@theia/ai-core/lib/common';
-import { LanguageModelService } from '@theia/ai-core/lib/browser';
+} from '@theia/ai-core/lib/common/index.js';
+import { LanguageModelService } from '@theia/ai-core/lib/browser/index.js';
 import { generateUuid, ILogger, nls } from '@theia/core';
-import { terminalPrompts } from './ai-terminal-prompt-template';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { terminalPrompts } from './ai-terminal-prompt-template.js';
+import { inject, injectable } from 'inversify';
 import { z } from 'zod';
-import zodToJsonSchema from 'zod-to-json-schema';
+import { zodToJsonSchema } from 'zod-to-json-schema';
 
 const Commands = z.object({
     commands: z.array(z.string()),

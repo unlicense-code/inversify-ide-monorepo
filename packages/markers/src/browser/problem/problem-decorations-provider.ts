@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Decoration, DecorationsProvider, DecorationsService } from '@theia/core/lib/browser/decorations-service';
-import { ProblemManager } from './problem-manager';
-import { ProblemUtils } from './problem-utils';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
+import { inject, injectable, postConstruct } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Decoration, DecorationsProvider, DecorationsService } from '@theia/core/lib/browser/decorations-service.js';
+import { ProblemManager } from './problem-manager.js';
+import { ProblemUtils } from './problem-utils.js';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
 import { CancellationToken, Emitter, Event, nls } from '@theia/core';
-import debounce = require('@theia/core/shared/lodash.debounce');
+import debounce from  'lodash/debounce.js'
 
 @injectable()
 export class ProblemDecorationsProvider implements DecorationsProvider {

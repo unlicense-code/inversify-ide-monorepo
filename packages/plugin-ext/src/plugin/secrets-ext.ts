@@ -20,20 +20,20 @@
  *--------------------------------------------------------------------------------------------*/
 // code copied and modified from https://github.com/microsoft/vscode/blob/1.55.2/src/vs/workbench/api/common/extHostSecrets.ts
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { Plugin, PLUGIN_RPC_CONTEXT, SecretsExt, SecretsMain } from '../common/plugin-api-rpc';
-import { RPCProtocol } from '../common/rpc-protocol';
-import { Event, Emitter } from '@theia/core/lib/common/event';
+import { inject, injectable } from 'inversify';
+import { Plugin, PLUGIN_RPC_CONTEXT, SecretsExt, SecretsMain } from '../common/plugin-api-rpc.js';
+import { RPCProtocol } from '../common/rpc-protocol.js';
+import { Event, Emitter } from '@theia/core';
 import { Disposable, DisposableGroup } from '@theia/core';
 import * as theia from '@theia/plugin';
 
-export interface PasswordChange {
+export type PasswordChange = {
     extensionId: string;
     key: string;
 }
 
 export const InternalSecretsExt = Symbol('InternalSecretsExt');
-export interface InternalSecretsExt extends SecretsExt {
+export type InternalSecretsExt = SecretsExt & {
     keys(extensionId: string): Promise<string[]>;
 
     get(extensionId: string, key: string): Promise<string | undefined>;

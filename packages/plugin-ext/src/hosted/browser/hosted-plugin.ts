@@ -21,57 +21,57 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { generateUuid } from '@theia/core/lib/common/uuid';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { PluginWorker } from './plugin-worker';
-import { getPluginId, DeployedPlugin, HostedPluginServer } from '../../common/plugin-protocol';
-import { HostedPluginWatcher } from './hosted-plugin-watcher';
-import { ExtensionKind, MAIN_RPC_CONTEXT, PluginManagerExt, UIKind } from '../../common/plugin-api-rpc';
-import { setUpPluginApi } from '../../main/browser/main-context';
-import { RPCProtocol, RPCProtocolImpl } from '../../common/rpc-protocol';
+import { generateUuid } from '@theia/core/lib/common/uuid.js';
+import { injectable, inject, postConstruct } from 'inversify';
+import { PluginWorker } from './plugin-worker.js';
+import { getPluginId, DeployedPlugin, HostedPluginServer } from '../../common/plugin-protocol.js';
+import { HostedPluginWatcher } from './hosted-plugin-watcher.js';
+import { ExtensionKind, MAIN_RPC_CONTEXT, PluginManagerExt, UIKind } from '../../common/plugin-api-rpc.js';
+import { setUpPluginApi } from '../../main/browser/main-context.js';
+import { RPCProtocol, RPCProtocolImpl } from '../../common/rpc-protocol.js';
 import {
     Disposable, DisposableCollection, isCancelled,
     CommandRegistry, WillExecuteCommandEvent,
     CancellationTokenSource, ProgressService, nls,
     RpcProxy
 } from '@theia/core';
-import { PreferenceServiceImpl, PreferenceProviderProvider } from '@theia/core/lib/common/preferences';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { PluginContributionHandler } from '../../main/browser/plugin-contribution-handler';
-import { getQueryParameters } from '../../main/browser/env-main';
-import { getPreferences } from '../../main/browser/preference-registry-main';
-import { Deferred, waitForEvent } from '@theia/core/lib/common/promise-util';
-import { DebugSessionManager } from '@theia/debug/lib/browser/debug-session-manager';
-import { DebugConfigurationManager } from '@theia/debug/lib/browser/debug-configuration-manager';
-import { Event, WaitUntilEvent } from '@theia/core/lib/common/event';
-import { FileSearchService } from '@theia/file-search/lib/common/file-search-service';
-import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
-import { PluginViewRegistry } from '../../main/browser/view/plugin-view-registry';
-import { WillResolveTaskProvider, TaskProviderRegistry, TaskResolverRegistry } from '@theia/task/lib/browser/task-contribution';
-import { TaskDefinitionRegistry } from '@theia/task/lib/browser/task-definition-registry';
-import { WebviewEnvironment } from '../../main/browser/webview/webview-environment';
-import { WebviewWidget } from '../../main/browser/webview/webview';
-import { WidgetManager } from '@theia/core/lib/browser/widget-manager';
-import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
-import URI from '@theia/core/lib/common/uri';
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
-import { environment } from '@theia/core/shared/@theia/application-package/lib/environment';
-import { JsonSchemaStore } from '@theia/core/lib/browser/json-schema-store';
-import { FileService, FileSystemProviderActivationEvent } from '@theia/filesystem/lib/browser/file-service';
-import { PluginCustomEditorRegistry } from '../../main/browser/custom-editors/plugin-custom-editor-registry';
-import { CustomEditorWidget } from '../../main/browser/custom-editors/custom-editor-widget';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { ILanguageService } from '@theia/monaco-editor-core/esm/vs/editor/common/languages/language';
-import { LanguageService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/languageService';
-import { Uint8ArrayReadBuffer, Uint8ArrayWriteBuffer } from '@theia/core/lib/common/message-rpc/uint8-array-message-buffer';
-import { BasicChannel } from '@theia/core/lib/common/message-rpc/channel';
-import { NotebookTypeRegistry, NotebookService, NotebookRendererMessagingService } from '@theia/notebook/lib/browser';
-import { ApplicationServer } from '@theia/core/lib/common/application-protocol';
+import { PreferenceServiceImpl, PreferenceProviderProvider } from '@theia/core/lib/common/index.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { PluginContributionHandler } from '../../main/browser/plugin-contribution-handler.js';
+import { getQueryParameters } from '../../main/browser/env-main.js';
+import { getPreferences } from '../../main/browser/preference-registry-main.js';
+import { Deferred, waitForEvent } from '@theia/core/lib/common/promise-util.js';
+import { DebugSessionManager } from '@theia/debug/lib/browser/debug-session-manager.js';
+import { DebugConfigurationManager } from '@theia/debug/lib/browser/debug-configuration-manager.js';
+import { Event, WaitUntilEvent } from '@theia/core/lib/common/event.js';
+import { FileSearchService } from '@theia/file-search/lib/common/file-search-service.js';
+import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state.js';
+import { PluginViewRegistry } from '../../main/browser/view/plugin-view-registry.js';
+import { WillResolveTaskProvider, TaskProviderRegistry, TaskResolverRegistry } from '@theia/task/lib/browser/task-contribution.js';
+import { TaskDefinitionRegistry } from '@theia/task/lib/browser/task-definition-registry.js';
+import { WebviewEnvironment } from '../../main/browser/webview/webview-environment.js';
+import { WebviewWidget } from '../../main/browser/webview/webview.js';
+import { WidgetManager } from '@theia/core/lib/browser/widget-manager.js';
+import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
+import { environment } from '@theia/application-package';
+import { JsonSchemaStore } from '@theia/core/lib/browser/json-schema-store.js';
+import { FileService, FileSystemProviderActivationEvent } from '@theia/filesystem/lib/browser/file-service.js';
+import { PluginCustomEditorRegistry } from '../../main/browser/custom-editors/plugin-custom-editor-registry.js';
+import { CustomEditorWidget } from '../../main/browser/custom-editors/custom-editor-widget.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { ILanguageService } from '@theia/monaco-editor-core/esm/vs/editor/common/languages/language.js';
+import { LanguageService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/languageService.js';
+import { Uint8ArrayReadBuffer, Uint8ArrayWriteBuffer } from '@theia/core/lib/common/message-rpc/uint8-array-message-buffer.js';
+import { BasicChannel } from '@theia/core/lib/common/message-rpc/channel.js';
+import { NotebookTypeRegistry, NotebookService, NotebookRendererMessagingService } from '@theia/notebook/lib/browser/index.js';
+import { ApplicationServer } from '@theia/core/lib/common/application-protocol.js';
 import {
     AbstractHostedPluginSupport, PluginContributions, PluginHost,
     ALL_ACTIVATION_EVENT, isConnectionScopedBackendPlugin
-} from '../common/hosted-plugin';
-import { isRemote } from '@theia/core/lib/browser/browser';
+} from '../common/hosted-plugin.js';
+import { isRemote } from '@theia/core/lib/browser/browser.js';
 
 export type DebugActivationEvent = 'onDebugResolve' | 'onDebugInitialConfigurations' | 'onDebugAdapterProtocolTracker' | 'onDebugDynamicConfigurations';
 

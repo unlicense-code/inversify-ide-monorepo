@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, postConstruct, inject, interfaces, Container } from '@theia/core/shared/inversify';
+import { injectable, postConstruct, inject, interfaces, Container } from 'inversify';
 import {
     BaseWidget, PanelLayout, Message, ApplicationShell, Widget, StatefulWidget, ViewContainer, codicon
-} from '@theia/core/lib/browser';
-import { DebugSessionWidget } from './debug-session-widget';
-import { DebugConfigurationWidget } from './debug-configuration-widget';
-import { DebugViewModel } from './debug-view-model';
-import { DebugSessionManager } from '../debug-session-manager';
-import { ProgressBarFactory } from '@theia/core/lib/browser/progress-bar-factory';
-import { nls } from '@theia/core/lib/common/nls';
+} from '@theia/core/lib/browser/index.js';
+import { DebugSessionWidget } from './debug-session-widget.js';
+import { DebugConfigurationWidget } from './debug-configuration-widget.js';
+import { DebugViewModel } from './debug-view-model.js';
+import { DebugSessionManager } from '../debug-session-manager.js';
+import { ProgressBarFactory } from '@theia/core/lib/browser/progress-bar-factory.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 @injectable()
 export class DebugWidget extends BaseWidget implements StatefulWidget, ApplicationShell.TrackableWidgetProvider {

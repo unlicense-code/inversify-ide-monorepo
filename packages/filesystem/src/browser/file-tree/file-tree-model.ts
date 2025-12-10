@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { CompositeTreeNode, TreeNode, ConfirmDialog, CompressedTreeModel, Dialog } from '@theia/core/lib/browser';
-import { FileStatNode, DirNode, FileNode } from './file-tree';
-import { LocationService } from '../location';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
-import { FileService } from '../file-service';
-import { FileOperationError, FileOperationResult, FileChangesEvent, FileChangeType, FileChange } from '../../common/files';
-import { MessageService } from '@theia/core/lib/common/message-service';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
-import { FileSystemUtils } from '../../common';
+import { injectable, inject, postConstruct } from 'inversify';
+import { URI } from '@theia/core';
+import { CompositeTreeNode, TreeNode, ConfirmDialog, CompressedTreeModel, Dialog } from '@theia/core/lib/browser/index.js';
+import { FileStatNode, DirNode, FileNode } from './file-tree.js';
+import { LocationService } from '../location/index.js';
+import { LabelProvider } from '@theia/core/lib/browser/index.js';
+import { FileService } from '../file-service.js';
+import { FileOperationError, FileOperationResult, FileChangesEvent, FileChangeType, FileChange } from '../../common/files.js';
+import { MessageService } from '@theia/core';
+import { EnvVariablesServer  } from '@theia/core';
+import { FileSystemUtils } from '../../common/index.js';
 import { nls } from '@theia/core';
 
 @injectable()

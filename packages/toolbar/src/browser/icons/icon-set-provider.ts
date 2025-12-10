@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, postConstruct } from '@theia/core/shared/inversify';
-import { IconSet } from '../toolbar-interfaces';
-import { fontAwesomeMapping } from './font-awesome-icons';
-import { codiconsMapping } from './codicons';
+import { injectable, postConstruct } from 'inversify';
+import { IconSet } from '../toolbar-interfaces.js';
+import { fontAwesomeMapping } from './font-awesome-icons.js';
+import { codiconsMapping } from './codicons.js';
 
 /**
  * Provider for icon set information including:

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,12 +15,18 @@
 // *****************************************************************************
 
 import { Command, MessageService, nls, QuickInputService, QuickPickInput } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { VariableResolverService } from '@theia/variable-resolver/lib/browser';
-import { RemoteSSHConnectionProvider } from '../electron-common/remote-ssh-connection-provider';
-import { AbstractRemoteRegistryContribution, RemoteRegistry } from './remote-registry-contribution';
-import { RemotePreferences } from '../electron-common/remote-preferences';
-import SSHConfig, { Directive } from 'ssh-config';
+import { inject, injectable } from 'inversify';
+import { VariableResolverService 
+
+} from '@theia/variable-resolver/lib/browser/index.js';
+import { RemoteSSHConnectionProvider 
+    
+} from '../electron-common/remote-ssh-connection-provider.js';
+import { AbstractRemoteRegistryContribution, RemoteRegistry 
+
+} from './remote-registry-contribution.js';
+import { RemotePreferences } from '../electron-common/remote-preferences.js';
+import { Directive } from 'ssh-config';
 
 export namespace RemoteSSHCommands {
     export const CONNECT: Command = Command.toLocalizedCommand({
@@ -93,7 +99,7 @@ export class RemoteSSHContribution extends AbstractRemoteRegistryContribution {
             }
             if (record.param.toLowerCase() === 'host' && !wildcardCheck.test(record.value)) {
                 const rec: Record<string, string | string[]> = ((record.config)
-                    .filter((entry): entry is Directive => entry.type === SSHConfig.DIRECTIVE))
+                    .filter((entry): entry is Directive => 'param' in entry && 'value' in entry && !('config' in entry)))
                     .reduce(
                         (pv, item) => ({ ...pv, [item.param.toLowerCase()]: item.value }), { 'host': record.value }
                     );

@@ -17,29 +17,29 @@ import {
     ChangeSet, ChangeSetElement, ChatAgent, ChatChangeEvent, ChatHierarchyBranch,
     ChatModel, ChatRequestModel, ChatService, ChatSuggestion, EditableChatRequestModel,
     ChatRequestParser, ChatMode
-} from '@theia/ai-chat';
-import { ChangeSetDecoratorService } from '@theia/ai-chat/lib/browser/change-set-decorator-service';
-import { ImageContextVariable } from '@theia/ai-chat/lib/common/image-context-variable';
-import { AIVariableResolutionRequest } from '@theia/ai-core';
-import { AgentCompletionNotificationService, FrontendVariableService, AIActivationService } from '@theia/ai-core/lib/browser';
+} from '@theia/ai-chat/lib/common/index.js';
+import { ChangeSetDecoratorService } from '@theia/ai-chat/lib/browser/change-set-decorator-service.js';
+import { ImageContextVariable } from '@theia/ai-chat/lib/common/image-context-variable.js';
+import { AIVariableResolutionRequest } from '@theia/ai-core/lib/common/index.js';
+import { AgentCompletionNotificationService, FrontendVariableService, AIActivationService } from '@theia/ai-core/lib/browser/index.js';
 import { DisposableCollection, Emitter, InMemoryResources, URI, nls, Disposable } from '@theia/core';
-import { ContextMenuRenderer, LabelProvider, Message, OpenerService, ReactWidget } from '@theia/core/lib/browser';
-import { ContextKey, ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { inject, injectable, optional, postConstruct } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
+import { ContextMenuRenderer, LabelProvider, Message, OpenerService, ReactWidget } from '@theia/core/lib/browser/index.js';
+import { ContextKey, ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { inject, injectable, optional, postConstruct } from 'inversify';
+import * as React from 'react';
 import { IMouseEvent, Range } from '@theia/monaco-editor-core';
-import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider';
-import { SimpleMonacoEditor } from '@theia/monaco/lib/browser/simple-monaco-editor';
-import { ChangeSetActionRenderer, ChangeSetActionService } from './change-set-actions/change-set-action-service';
-import { ChatInputAgentSuggestions } from './chat-input-agent-suggestions';
-import { CHAT_VIEW_LANGUAGE_EXTENSION } from './chat-view-language-contribution';
-import { ContextVariablePicker } from './context-variable-picker';
-import { TASK_CONTEXT_VARIABLE } from '@theia/ai-chat/lib/browser/task-context-variable';
-import { IModelDeltaDecoration } from '@theia/monaco-editor-core/esm/vs/editor/common/model';
-import { EditorOption } from '@theia/monaco-editor-core/esm/vs/editor/common/config/editorOptions';
-import { ChatInputHistoryService, ChatInputNavigationState } from './chat-input-history';
-import { ContextFileValidationService, FileValidationResult, FileValidationState } from '@theia/ai-chat/lib/browser/context-file-validation-service';
+import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider.js';
+import { SimpleMonacoEditor } from '@theia/monaco/lib/browser/simple-monaco-editor.js';
+import { ChangeSetActionRenderer, ChangeSetActionService } from './change-set-actions/change-set-action-service.js';
+import { ChatInputAgentSuggestions } from './chat-input-agent-suggestions.js';
+import { CHAT_VIEW_LANGUAGE_EXTENSION } from './chat-view-language-contribution.js';
+import { ContextVariablePicker } from './context-variable-picker.js';
+import { TASK_CONTEXT_VARIABLE } from '@theia/ai-chat/lib/browser/task-context-variable.js';
+import { IModelDeltaDecoration } from '@theia/monaco-editor-core/esm/vs/editor/common/model.js';
+import { EditorOption } from '@theia/monaco-editor-core/esm/vs/editor/common/config/editorOptions.js';
+import { ChatInputHistoryService, ChatInputNavigationState } from './chat-input-history.js';
+import { ContextFileValidationService, FileValidationResult, FileValidationState } from '@theia/ai-chat/lib/browser/context-file-validation-service.js';
 
 type Query = (query: string, mode?: string) => Promise<void>;
 type Unpin = () => void;
@@ -49,7 +49,7 @@ type DeleteChangeSetElement = (requestModel: ChatRequestModel, index: number) =>
 type OpenContextElement = (request: AIVariableResolutionRequest) => unknown;
 
 export const AIChatInputConfiguration = Symbol('AIChatInputConfiguration');
-export interface AIChatInputConfiguration {
+export type AIChatInputConfiguration = {
     showContext?: boolean;
     showPinnedAgent?: boolean;
     showChangeSet?: boolean;
@@ -637,7 +637,7 @@ export class AIChatInputWidget extends ReactWidget {
     }
 }
 
-interface ChatInputProperties {
+type ChatInputProperties = {
     branch?: ChatHierarchyBranch;
     onCancel: (requestModel: ChatRequestModel) => void;
     onQuery: (query: string, mode?: string) => void;
@@ -1113,7 +1113,7 @@ const ChatInput: React.FunctionComponent<ChatInputProperties> = (props: ChatInpu
     );
 };
 
-interface ChatInputOptionsProps {
+type ChatInputOptionsProps = {
     leftOptions: Option[];
     rightOptions: Option[];
     isEnabled?: boolean;
@@ -1169,7 +1169,7 @@ const ChatInputOptions: React.FunctionComponent<ChatInputOptionsProps> = ({
     </div>
 );
 
-interface ChatModeSelectorProps {
+type ChatModeSelectorProps = {
     modes: ChatMode[];
     currentMode?: string;
     onModeChange: (mode: string) => void;
@@ -1215,7 +1215,7 @@ const buildChangeSetUI = (
     }) : undefined;
 };
 
-interface ChangeSetUIElement {
+type ChangeSetUIElement = {
     name: string;
     uri: string;
     iconClass: string;
@@ -1229,7 +1229,7 @@ interface ChangeSetUIElement {
     delete: () => void;
 }
 
-interface ChangeSetUI {
+type ChangeSetUI = {
     changeSet: ChangeSet;
     title: string;
     deleteChangeSet: () => void;
@@ -1313,7 +1313,7 @@ const ChangeSetElement: React.FC<ChangeSetUIElement> = element => (
     </li>
 );
 
-interface Option {
+type Option = {
     title: string;
     handler: () => void;
     className: string;
@@ -1368,7 +1368,7 @@ function buildContextUI(
     };
 }
 
-interface ChatContextUI {
+type ChatContextUI = {
     context: {
         variable: AIVariableResolutionRequest,
         name: string;

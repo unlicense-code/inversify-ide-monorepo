@@ -28,12 +28,12 @@ import {
     ToolCallResult,
     ToolResultMessage,
     ToolUseMessage
-} from '@theia/ai-core';
+} from '@theia/ai-core/lib/common/index.js';
 import { ArrayUtils, CancellationToken, CancellationTokenSource, Command, Disposable, DisposableCollection, Emitter, Event, generateUuid, URI } from '@theia/core';
 import { MarkdownString, MarkdownStringImpl } from '@theia/core/lib/common/markdown-rendering';
-import { Position } from '@theia/core/shared/vscode-languageserver-protocol';
-import { ChangeSet, ChangeSetElement, ChangeSetImpl, ChatUpdateChangeSetEvent } from './change-set';
-import { ChatAgentLocation } from './chat-agents';
+import { Position } from 'vscode-languageserver-protocol';
+import { ChangeSet, ChangeSetElement, ChangeSetImpl, ChatUpdateChangeSetEvent } from './change-set.js';
+import { ChatAgentLocation } from './chat-agents.js';
 import {
     SerializedChatModel,
     SerializableChatRequestData,
@@ -43,9 +43,9 @@ import {
     SerializableHierarchyBranch,
     SerializableHierarchyBranchItem,
     SerializableChangeSetElement
-} from './chat-model-serialization';
-import { ParsedChatRequest } from './parsed-chat-request';
-import debounce = require('@theia/core/shared/lodash.debounce');
+} from './chat-model-serialization.js';
+import { ParsedChatRequest } from './parsed-chat-request.js';
+import debounce from 'lodash/debounce.js'
 export { ChangeSet, ChangeSetElement, ChangeSetImpl };
 
 /**********************
@@ -67,58 +67,58 @@ export type ChatChangeEvent =
     | ChatResponseChangedEvent
     | ChatChangeHierarchyBranchEvent;
 
-export interface ChatAddRequestEvent {
+export type ChatAddRequestEvent = {
     kind: 'addRequest';
     request: ChatRequestModel;
 }
 
-export interface ChatEditRequestEvent {
+export type ChatEditRequestEvent = {
     kind: 'enableEdit';
     request: EditableChatRequestModel;
     branch: ChatHierarchyBranch<ChatRequestModel>;
 }
 
-export interface ChatEditCancelEvent {
+export type ChatEditCancelEvent = {
     kind: 'cancelEdit';
     request: EditableChatRequestModel;
     branch: ChatHierarchyBranch<ChatRequestModel>;
 }
 
-export interface ChatEditSubmitEvent {
+export type ChatEditSubmitEvent = {
     kind: 'submitEdit';
     request: EditableChatRequestModel;
     branch: ChatHierarchyBranch<ChatRequestModel>;
     newRequest: ChatRequest;
 }
 
-export interface ChatChangeHierarchyBranchEvent {
+export type ChatChangeHierarchyBranchEvent = {
     kind: 'changeHierarchyBranch';
     branch: ChatHierarchyBranch<ChatRequestModel>;
 }
 
-export interface ChatAddResponseEvent {
+export type ChatAddResponseEvent = {
     kind: 'addResponse';
     response: ChatResponseModel;
 }
 
-export interface ChatAddVariableEvent {
+export type ChatAddVariableEvent = {
     kind: 'addVariable';
 }
 
-export interface ChatRemoveVariableEvent {
+export type ChatRemoveVariableEvent = {
     kind: 'removeVariable';
 }
 
-export interface ChatSetVariablesEvent {
+export type ChatSetVariablesEvent = {
     kind: 'setVariables';
 }
 
-export interface ChatSuggestionsChangedEvent {
+export type ChatSuggestionsChangedEvent = {
     kind: 'suggestionsChanged';
     suggestions: ChatSuggestion[];
 }
 
-export interface ChatResponseChangedEvent {
+export type ChatResponseChangedEvent = {
     kind: 'responseChanged';
 }
 
@@ -130,22 +130,14 @@ export namespace ChatChangeEvent {
 
 export type ChatRequestRemovalReason = 'removal' | 'resend' | 'adoption';
 
-export interface ChatRemoveRequestEvent {
+export type ChatRemoveRequestEvent = {
     kind: 'removeRequest';
     requestId: string;
     responseId?: string;
     reason: ChatRequestRemovalReason;
 }
 
-/**
- * A model that contains information about a chat request that may branch off.
- *
- * The hierarchy of requests is represented by a tree structure.
- * - The root of the tree is the initial request
- * - Within each branch, the requests are stored in a list. Those requests are the alternatives to the original request.
- *   Each of those items can have a next branch, which is the next request in the hierarchy.
- */
-export interface ChatRequestHierarchy<TRequest extends ChatRequestModel = ChatRequestModel> extends Disposable {
+export type ChatRequestHierarchy<TRequest extends ChatRequestModel = ChatRequestModel> = Disposable & {
     readonly branch: ChatHierarchyBranch<TRequest>
 
     onDidChange: Event<ChangeActiveBranchEvent<TRequest>>;
@@ -160,17 +152,12 @@ export interface ChatRequestHierarchy<TRequest extends ChatRequestModel = ChatRe
     toSerializable(): SerializableHierarchy;
 }
 
-export interface ChangeActiveBranchEvent<TRequest extends ChatRequestModel = ChatRequestModel> {
+export type ChangeActiveBranchEvent<TRequest extends ChatRequestModel = ChatRequestModel> = {
     branch: ChatHierarchyBranch<TRequest>,
     item: ChatHierarchyBranchItem<TRequest>
 }
 
-/**
- * A branch of the chat request hierarchy.
- * It contains a list of items, each representing a request.
- * Those items can have a next branch, which is the next request in the hierarchy.
- */
-export interface ChatHierarchyBranch<TRequest extends ChatRequestModel = ChatRequestModel> extends Disposable {
+export type ChatHierarchyBranch<TRequest extends ChatRequestModel = ChatRequestModel> = Disposable & {
     readonly id: string;
     readonly hierarchy: ChatRequestHierarchy<TRequest>;
     readonly previous?: ChatHierarchyBranch<TRequest>;
@@ -193,12 +180,12 @@ export interface ChatHierarchyBranch<TRequest extends ChatRequestModel = ChatReq
     succeedingBranches(): ChatHierarchyBranch<TRequest>[];
 }
 
-export interface ChatHierarchyBranchItem<TRequest extends ChatRequestModel = ChatRequestModel> {
+export type ChatHierarchyBranchItem<TRequest extends ChatRequestModel = ChatRequestModel> = {
     readonly element: TRequest;
     readonly next?: ChatHierarchyBranch<TRequest>;
 }
 
-export interface ChatModel {
+export type ChatModel = {
     readonly onDidChange: Event<ChatChangeEvent>;
     readonly id: string;
     readonly location: ChatAgentLocation;
@@ -212,7 +199,7 @@ export interface ChatModel {
     toSerializable(): SerializedChatModel;
 }
 
-export interface ChatSuggestionCallback {
+export type ChatSuggestionCallback = {
     kind: 'callback',
     callback: () => unknown;
     content: string | MarkdownString;
@@ -230,7 +217,7 @@ export namespace ChatSuggestionCallback {
 
 export type ChatSuggestion = | string | MarkdownString | ChatSuggestionCallback;
 
-export interface ChatContextManager {
+export type ChatContextManager = {
     onDidChange: Event<ChatAddVariableEvent | ChatRemoveVariableEvent | ChatSetVariablesEvent>;
     getVariables(): readonly AIVariableResolutionRequest[]
     addVariables(...variables: AIVariableResolutionRequest[]): void;
@@ -238,12 +225,12 @@ export interface ChatContextManager {
     clear(): void;
 }
 
-export interface ChangeSetDecoration {
+export type ChangeSetDecoration = {
     readonly priority?: number;
     readonly additionalInfoSuffixIcon?: string[];
 }
 
-export interface ChatRequest {
+export type ChatRequest = {
     readonly text: string;
     readonly displayText?: string;
     /**
@@ -256,11 +243,11 @@ export interface ChatRequest {
     readonly modeId?: string;
 }
 
-export interface ChatContext {
+export type ChatContext = {
     variables: ResolvedAIContextVariable[];
 }
 
-export interface ChatRequestModel {
+export type ChatRequestModel = {
     readonly id: string;
     readonly session: ChatModel;
     readonly request: ChatRequest;
@@ -298,7 +285,7 @@ export namespace ChatRequestModel {
     }
 }
 
-export interface EditableChatRequestModel extends ChatRequestModel {
+export type EditableChatRequestModel = ChatRequestModel & {
     readonly isEditing: boolean;
     editContextManager: ChatContextManagerImpl;
     enableEdit(): void;
@@ -321,7 +308,7 @@ export namespace EditableChatRequestModel {
     }
 }
 
-export interface ChatProgressMessage {
+export type ChatProgressMessage = {
     kind: 'progressMessage';
     id: string;
     status: 'inProgress' | 'completed' | 'failed';
@@ -329,7 +316,7 @@ export interface ChatProgressMessage {
     content: string;
 }
 
-export interface ChatResponseContent {
+export type ChatResponseContent = {
     kind: string;
     /**
      * Represents the content as a string. Returns `undefined` if the content
@@ -374,35 +361,30 @@ export namespace ChatResponseContent {
     }
 }
 
-/**
- * Data interfaces for chat response content serialization.
- * These define the structure of the data property in SerializableChatResponseContentData.
- */
-
-export interface TextContentData {
+export type TextContentData = {
     content: string;
 }
 
-export interface ThinkingContentData {
+export type ThinkingContentData = {
     content: string;
     signature: string;
 }
 
-export interface MarkdownContentData {
+export type MarkdownContentData = {
     content: string;
 }
 
-export interface InformationalContentData {
+export type InformationalContentData = {
     content: string;
 }
 
-export interface CodeContentData {
+export type CodeContentData = {
     code: string;
     language?: string;
     location?: Location;
 }
 
-export interface ToolCallContentData {
+export type ToolCallContentData = {
     id?: string;
     name?: string;
     arguments?: string;
@@ -410,66 +392,59 @@ export interface ToolCallContentData {
     result?: ToolCallResult;
 }
 
-export interface CommandContentData {
+export type CommandContentData = {
     commandId?: string;
     commandLabel?: string;
     arguments?: unknown[];
 }
 
-export interface HorizontalLayoutContentData {
+export type HorizontalLayoutContentData = {
     content: SerializableChatResponseContentData[];
 }
 
-export interface ProgressContentData {
+export type ProgressContentData = {
     message: string;
 }
 
-export interface ErrorContentData {
+export type ErrorContentData = {
     message: string;
     stack?: string;
 }
 
-/**
- * Restored questions display the question, options, and any previously selected answer,
- * but do not allow new selections.
- */
-export interface QuestionContentData {
+export type QuestionContentData = {
     question: string;
     options: { text: string; value?: string }[];
     selectedOption?: { text: string; value?: string };
 }
 
-export interface TextChatResponseContent
-    extends Required<ChatResponseContent> {
+export type TextChatResponseContent = Required<ChatResponseContent> & {
     kind: 'text';
     content: string;
 }
 
-export interface ErrorChatResponseContent extends ChatResponseContent {
+export type ErrorChatResponseContent = ChatResponseContent & {
     kind: 'error';
     error: Error;
 }
 
-export interface MarkdownChatResponseContent
-    extends Required<ChatResponseContent> {
+export type MarkdownChatResponseContent = Required<ChatResponseContent> & {
     kind: 'markdownContent';
     content: MarkdownString;
 }
 
-export interface CodeChatResponseContent
-    extends ChatResponseContent {
+export type CodeChatResponseContent = ChatResponseContent & {
     kind: 'code';
     code: string;
     language?: string;
     location?: Location;
 }
 
-export interface HorizontalLayoutChatResponseContent extends ChatResponseContent {
+export type HorizontalLayoutChatResponseContent = ChatResponseContent & {
     kind: 'horizontal';
     content: ChatResponseContent[];
 }
 
-export interface ToolCallChatResponseContent extends Required<ChatResponseContent> {
+export type ToolCallChatResponseContent = Required<ChatResponseContent> & {
     kind: 'toolCall';
     id?: string;
     name?: string;
@@ -482,20 +457,18 @@ export interface ToolCallChatResponseContent extends Required<ChatResponseConten
     cancelConfirmation(reason?: unknown): void;
 }
 
-export interface ThinkingChatResponseContent
-    extends Required<ChatResponseContent> {
+export type ThinkingChatResponseContent = Required<ChatResponseContent> & {
     kind: 'thinking';
     content: string;
     signature: string;
 }
 
-export interface ProgressChatResponseContent
-    extends Required<ChatResponseContent> {
+export type ProgressChatResponseContent = Required<ChatResponseContent> & {
     kind: 'progress';
     message: string;
 }
 
-export interface Location {
+export type Location = {
     uri: URI;
     position: Position;
 }
@@ -507,27 +480,19 @@ export namespace Location {
     }
 }
 
-export interface CustomCallback {
+export type CustomCallback = {
     label: string;
     callback: () => Promise<void>;
 }
 
-/**
- * A command chat response content represents a command that is offered to the user for execution.
- * It either refers to an already registered Theia command or provides a custom callback.
- * If both are given, the custom callback will be preferred.
- */
-export interface CommandChatResponseContent extends ChatResponseContent {
+export type CommandChatResponseContent = ChatResponseContent & {
     kind: 'command';
     command?: Command;
     customCallback?: CustomCallback;
     arguments?: unknown[];
 }
 
-/**
- * An informational chat response content represents a message that is purely informational and should not be included in the overall representation of the response.
- */
-export interface InformationalChatResponseContent extends ChatResponseContent {
+export type InformationalChatResponseContent = ChatResponseContent & {
     kind: 'informational';
     content: MarkdownString;
 }
@@ -646,7 +611,7 @@ export type QuestionResponseHandler = (
     selectedOption: { text: string, value?: string },
 ) => void;
 
-export interface QuestionResponseContent extends ChatResponseContent {
+export type QuestionResponseContent = ChatResponseContent & {
     kind: 'question';
     question: string;
     options: { text: string, value?: string }[];
@@ -682,16 +647,13 @@ export namespace QuestionResponseContent {
     }
 }
 
-export interface ChatResponse {
+export type ChatResponse = {
     readonly content: ChatResponseContent[];
     asString(): string;
     asDisplayString(): string;
 }
 
-/**
- * The ChatResponseModel wraps the actual ChatResponse with additional information like the current state, progress messages, a unique id etc.
- */
-export interface ChatResponseModel {
+export type ChatResponseModel = {
     /**
      * Use this to be notified for any change in the response model
      */
@@ -2567,11 +2529,7 @@ export class ProgressChatResponseContentImpl implements ProgressChatResponseCont
     }
 }
 
-/**
- * Fallback content for unknown content types.
- * Used when a deserializer is not available (e.g., content from removed extension).
- */
-export interface UnknownChatResponseContent extends ChatResponseContent {
+export type UnknownChatResponseContent = ChatResponseContent & {
     kind: 'unknown';
     originalKind: string;
     fallbackMessage?: string;

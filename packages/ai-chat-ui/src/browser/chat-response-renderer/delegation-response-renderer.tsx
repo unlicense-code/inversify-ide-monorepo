@@ -13,14 +13,14 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { ChatRequestInvocation, ChatResponseContent, ChatResponseModel } from '@theia/ai-chat';
-import { ChatResponsePartRenderer } from '../chat-response-part-renderer';
-import * as React from '@theia/core/shared/react';
-import { DelegationResponseContent, isDelegationResponseContent } from '@theia/ai-chat/lib/browser/delegation-response-content';
-import { ResponseNode } from '../chat-tree-view';
-import { CompositeTreeNode } from '@theia/core/lib/browser';
-import { SubChatWidgetFactory } from '../chat-tree-view/sub-chat-widget';
+import { inject, injectable } from 'inversify';
+import { ChatRequestInvocation, ChatResponseContent, ChatResponseModel } from '@theia/ai-chat/lib/common/index.js';
+import { ChatResponsePartRenderer } from '../chat-response-part-renderer.js';
+import * as React from 'react';
+import { DelegationResponseContent, isDelegationResponseContent } from '@theia/ai-chat/lib/browser/delegation-response-content.js';
+import { ResponseNode } from '../chat-tree-view/index.js';
+import { CompositeTreeNode } from '@theia/core/lib/browser/index.js';
+import { SubChatWidgetFactory } from '../chat-tree-view/sub-chat-widget.js';
 import { DisposableCollection, nls } from '@theia/core';
 
 @injectable()
@@ -49,7 +49,7 @@ export class DelegationResponseRenderer implements ChatResponsePartRenderer<Dele
     }
 }
 
-interface DelegatedChatProps {
+type DelegatedChatProps = {
     response: ChatRequestInvocation;
     agentId: string;
     prompt: string;
@@ -57,7 +57,7 @@ interface DelegatedChatProps {
     subChatWidgetFactory: SubChatWidgetFactory;
 }
 
-interface DelegatedChatState {
+type DelegatedChatState = {
     node?: ResponseNode;
 }
 

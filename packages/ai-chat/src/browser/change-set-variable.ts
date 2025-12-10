@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { MaybePromise, nls } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { AIVariable, ResolvedAIVariable, AIVariableContribution, AIVariableResolver, AIVariableService, AIVariableResolutionRequest, AIVariableContext } from '@theia/ai-core';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { CHANGE_SET_SUMMARY_VARIABLE_ID, ChatSessionContext } from '../common';
+import { inject, injectable } from 'inversify';
+import { AIVariable, ResolvedAIVariable, AIVariableContribution, AIVariableResolver, AIVariableService, AIVariableResolutionRequest, AIVariableContext } from '@theia/ai-core/lib/common/index.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { CHANGE_SET_SUMMARY_VARIABLE_ID, ChatSessionContext } from '../common/index.js';
 
 export const CHANGE_SET_SUMMARY_VARIABLE: AIVariable = {
     id: CHANGE_SET_SUMMARY_VARIABLE_ID,

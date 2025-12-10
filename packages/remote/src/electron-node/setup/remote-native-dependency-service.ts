@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import { ContributionProvider, THEIA_VERSION } from '@theia/core';
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import { RequestContext, RequestService, RequestOptions } from '@theia/core/shared/@theia/request';
-import * as decompress from 'decompress';
+import { inject, injectable, named } from 'inversify';
+import { RequestContext, RequestService, RequestOptions } from '@theia/request';
+import decompress from 'decompress';
 import * as path from 'path';
 import * as fs from 'fs/promises';
-import { DependencyDownload, DirectoryDependencyDownload, RemoteNativeDependencyContribution } from './remote-native-dependency-contribution';
-import { RemotePlatform } from '@theia/core/lib/node/remote/remote-cli-contribution';
+import { DependencyDownload, DirectoryDependencyDownload, RemoteNativeDependencyContribution } from './remote-native-dependency-contribution.js';
+import { RemotePlatform } from '@theia/core/lib/node/remote/remote-cli-contribution.js';
 
 const decompressTar = require('decompress-tar');
 const decompressTargz = require('decompress-targz');
@@ -34,7 +34,7 @@ export const DEFAULT_HTTP_OPTIONS = {
     },
 };
 
-export interface NativeDependencyFile {
+export type NativeDependencyFile = {
     path: string;
     target: string;
     mode?: number;
@@ -91,7 +91,7 @@ export class RemoteNativeDependencyService {
                 plugins.push(decompressUnzip());
             }
             const files = await decompress(archiveBuffer, directory, { plugins });
-            const result: NativeDependencyFile[] = await Promise.all(files.map(async file => {
+            const result: NativeDependencyFile[] = await Promise.all(files.map(async (file: { path: string; mode?: number }) => {
                 const localPath = path.join(directory, file.path);
                 return {
                     path: localPath,

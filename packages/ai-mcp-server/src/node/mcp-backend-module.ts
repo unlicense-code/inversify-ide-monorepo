@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application';
-import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module';
+import { ContainerModule } from 'inversify';
+import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application.js';
+import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module.js';
 import { ConnectionHandler, RpcConnectionHandler, bindContributionProvider, generateUuid } from '@theia/core';
 import {
     MCPTheiaServer,
     MCPBackendContribution
-} from './mcp-theia-server';
-import { MCPToolFrontendDelegate, MCPToolDelegateClient, mcpToolDelegatePath } from '../common/mcp-tool-delegate';
-import { MCPTheiaServerImpl } from './mcp-theia-server-impl';
-import { MCPBackendContributionManager } from './mcp-backend-contribution-manager';
-import { MCPFrontendContributionManager } from './mcp-frontend-contribution-manager';
-import { MCPToolFrontendDelegateImpl } from './mcp-tool-frontend-delegate';
+} from './mcp-theia-server.js';
+import { MCPToolFrontendDelegate, MCPToolDelegateClient, mcpToolDelegatePath } from '../common/mcp-tool-delegate.js';
+import { MCPTheiaServerImpl } from './mcp-theia-server-impl.js';
+import { MCPBackendContributionManager } from './mcp-backend-contribution-manager.js';
+import { MCPFrontendContributionManager } from './mcp-frontend-contribution-manager.js';
+import { MCPToolFrontendDelegateImpl } from './mcp-tool-frontend-delegate.js';
 
 const mcpConnectionModule = ConnectionContainerModule.create(({ bind }) => {
     bind(MCPToolFrontendDelegateImpl).toSelf().inSingletonScope();

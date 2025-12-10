@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -22,9 +22,9 @@
 /* eslint-disable no-null/no-null */
 /* eslint-disable @typescript-eslint/no-shadow */
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
+import { injectable, inject, postConstruct } from 'inversify';
 import { basename, dirname, normalize, join } from 'path';
-import { generateUuid } from '@theia/core/lib/common/uuid';
+import { generateUuid } from '@theia/core';
 import * as os from 'os';
 import * as fs from 'fs';
 import {
@@ -33,13 +33,13 @@ import {
     rmdir, unlink, rename, futimes, truncate
 } from 'fs';
 import { promisify } from 'util';
-import URI from '@theia/core/lib/common/uri';
-import { Path } from '@theia/core/lib/common/path';
-import { FileUri } from '@theia/core/lib/common/file-uri';
-import { Event, Emitter } from '@theia/core/lib/common/event';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { OS, isWindows } from '@theia/core/lib/common/os';
-import { retry } from '@theia/core/lib/common/promise-util';
+import { URI } from '@theia/core';
+import { Path } from '@theia/core';
+import { FileUri } from '@theia/core/lib/node/index.js';
+import { Event, Emitter } from '@theia/core';
+import { Disposable, DisposableCollection } from '@theia/core';
+import { OS, isWindows } from '@theia/core';
+import { retry } from '@theia/core';
 import {
     FileSystemProviderWithFileReadWriteCapability, FileSystemProviderWithOpenReadWriteCloseCapability, FileSystemProviderWithFileFolderCopyCapability,
     FileSystemProviderCapabilities,
@@ -55,16 +55,16 @@ import {
     FileChange,
     WatchOptions,
     FileUpdateOptions, FileUpdateResult, FileReadStreamOptions, FilePermission
-} from '../common/files';
-import { FileSystemWatcherServer } from '../common/filesystem-watcher-protocol';
-import trash = require('trash');
-import { TextDocumentContentChangeEvent } from '@theia/core/shared/vscode-languageserver-protocol';
+} from '../common/files.js';
+import { FileSystemWatcherServer } from '../common/filesystem-watcher-protocol.js';
+import trash from 'trash';
+import { TextDocumentContentChangeEvent } from 'vscode-languageserver-protocol';
 import { TextDocument } from 'vscode-languageserver-textdocument';
-import { EncodingService } from '@theia/core/lib/common/encoding-service';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
-import { ReadableStreamEvents, newWriteableStream } from '@theia/core/lib/common/stream';
-import { CancellationToken } from '@theia/core/lib/common/cancellation';
-import { readFileIntoStream } from '../common/io';
+import { EncodingService } from '@theia/core';
+import { BinaryBuffer } from '@theia/core';
+import { ReadableStreamEvents, newWriteableStream } from '@theia/core';
+import { CancellationToken } from '@theia/core';
+import { readFileIntoStream } from '../common/io.js';
 import { Mode } from 'stat-mode';
 
 export namespace DiskFileSystemProvider {
@@ -268,9 +268,9 @@ export class DiskFileSystemProvider implements Disposable,
     }
 
     readFileStream(resource: URI, opts: FileReadStreamOptions, token: CancellationToken): ReadableStreamEvents<Uint8Array> {
-        const stream = newWriteableStream<Uint8Array>(data => BinaryBuffer.concat(data.map(data => BinaryBuffer.wrap(data))).buffer);
+        const stream = newWriteableStream<Uint8Array>((data: Uint8Array[]) => BinaryBuffer.concat(data.map((chunk: Uint8Array) => BinaryBuffer.wrap(chunk))).buffer);
 
-        readFileIntoStream(this, resource, stream, data => data.buffer, {
+        readFileIntoStream(this, resource, stream, (data: BinaryBuffer) => data.buffer, {
             ...opts,
             bufferSize: this.BUFFER_SIZE
         }, token);
@@ -850,7 +850,7 @@ export class DiskFileSystemProvider implements Disposable,
             const newContent = TextDocument.update(TextDocument.create('', '', 1, decoded), changes, 2).getText();
             const encoding = await this.encodingService.toResourceEncoding(opts.writeEncoding, {
                 overwriteEncoding: opts.overwriteEncoding,
-                read: async length => {
+                read: async (length: number) => {
                     const fd = await this.open(resource, { create: false });
                     try {
                         const data = new Uint8Array(length);

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { PreloadContribution } from './preloader';
-import { DEFAULT_BACKGROUND_COLOR_STORAGE_KEY } from '../frontend-application-config-provider';
+import { PreloadContribution } from './preloader.js';
+import { DEFAULT_BACKGROUND_COLOR_STORAGE_KEY } from '../frontend-application-config-provider.js';
 import { injectable } from 'inversify';
-import { DefaultTheme } from '@theia/application-package/lib/application-props';
+import { DefaultTheme } from '@theia/application-package/lib/application-props.js';
 
 @injectable()
 export class ThemePreloadContribution implements PreloadContribution {

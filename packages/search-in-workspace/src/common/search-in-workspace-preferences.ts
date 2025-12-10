@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { nls } from '@theia/core/lib/common/nls';
-import { PreferenceProxy, PreferenceScope, PreferenceService, createPreferenceProxy } from '@theia/core/lib/common/preferences';
-import { interfaces } from '@theia/core/shared/inversify';
-import { PreferenceContribution, PreferenceSchema } from '@theia/core/lib/common/preferences/preference-schema';
+import { nls } from '@theia/core/lib/common/nls.js';
+import { PreferenceProxy, PreferenceScope, PreferenceService, createPreferenceProxy } from '@theia/core/lib/common/index.js';
+import { interfaces } from 'inversify';
+import { PreferenceContribution, PreferenceSchema } from '@theia/core/lib/common/preferences/preference-schema.js';
 
 export const searchInWorkspacePreferencesSchema: PreferenceSchema = {
     scope: PreferenceScope.Folder,

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,32 +14,32 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct, named } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { WorkspaceServer, UntitledWorkspaceService, WorkspaceFileService } from '../common';
-import { WindowService } from '@theia/core/lib/browser/window/window-service';
-import { DEFAULT_WINDOW_HASH } from '@theia/core/lib/common/window';
+import { injectable, inject, postConstruct, named } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { WorkspaceServer, UntitledWorkspaceService, WorkspaceFileService } from '../common/index.js';
+import { WindowService } from '@theia/core/lib/browser/window/window-service.js';
+import { DEFAULT_WINDOW_HASH } from '@theia/core/lib/common/window.js';
 import {
     FrontendApplicationContribution, LabelProvider
-} from '@theia/core/lib/browser';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
+} from '@theia/core/lib/browser/index.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
 import { ILogger, Disposable, DisposableCollection, Emitter, Event, MaybePromise, MessageService, nls, ContributionProvider } from '@theia/core';
-import { WorkspacePreferences } from '../common/workspace-preferences';
+import { WorkspacePreferences } from '../common/workspace-preferences.js';
 import * as jsoncparser from 'jsonc-parser';
-import * as Ajv from '@theia/core/shared/ajv';
-import { FileStat, BaseStat } from '@theia/filesystem/lib/common/files';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { WindowTitleService } from '@theia/core/lib/browser/window/window-title-service';
-import { FileSystemPreferences } from '@theia/filesystem/lib/common';
-import { workspaceSchema, WorkspaceSchemaUpdater } from './workspace-schema-updater';
-import { IJSONSchema } from '@theia/core/lib/common/json-schema';
-import { StopReason } from '@theia/core/lib/common/frontend-application-state';
-import { PreferenceSchemaService, PreferenceScope, PreferenceService } from '@theia/core/lib/common/preferences';
+import Ajv from 'ajv';
+import { FileStat, BaseStat, FileChangesEvent } from '@theia/filesystem/lib/common/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/index.js';
+import { WindowTitleService } from '@theia/core/lib/browser/window/window-title-service.js';
+import { FileSystemPreferences } from '@theia/filesystem/lib/common/index.js';
+import { workspaceSchema, WorkspaceSchemaUpdater } from './workspace-schema-updater.js';
+import { IJSONSchema } from '@theia/core/lib/common/json-schema.js';
+import { StopReason } from '@theia/core/lib/common/frontend-application-state.js';
+import { PreferenceSchemaService, PreferenceScope, PreferenceService } from '@theia/core/lib/common/index.js';
 
 export const WorkspaceOpenHandlerContribution = Symbol('WorkspaceOpenHandlerContribution');
 
-export interface WorkspaceOpenHandlerContribution {
+export type WorkspaceOpenHandlerContribution = {
     canHandle(uri: URI): MaybePromise<boolean>;
     openWorkspace(uri: URI, options?: WorkspaceInput): MaybePromise<void>;
     getWorkspaceLabel?(uri: URI): MaybePromise<string | undefined>;
@@ -119,7 +119,7 @@ export class WorkspaceService implements FrontendApplicationContribution, Worksp
         const wsStat = await this.toFileStat(wsUriString);
         await this.setWorkspace(wsStat);
 
-        this.fileService.onDidFilesChange(event => {
+        this.fileService.onDidFilesChange((event: FileChangesEvent) => {
             if (this._workspace && this._workspace.isFile && event.contains(this._workspace.resource)) {
                 this.updateWorkspace();
             }
@@ -459,7 +459,7 @@ export class WorkspaceService implements FrontendApplicationContribution, Worksp
         const configDirURI = new URI(await this.envVariableServer.getConfigDirUri());
         return this.untitledWorkspaceService.getUntitledWorkspaceUri(
             configDirURI,
-            uri => this.fileService.exists(uri).then(exists => !exists),
+            uri => this.fileService.exists(uri).then((exists: boolean) => !exists),
             () => this.messageService.warn(nls.localize(
                 'theia/workspace/untitled-cleanup',
                 'There appear to be many untitled workspace files. Please check {0} and remove any unused files.',
@@ -737,7 +737,7 @@ export class WorkspaceService implements FrontendApplicationContribution, Worksp
     }
 }
 
-export interface WorkspaceInput {
+export type WorkspaceInput = {
 
     /**
      * Tests whether the same window should be used or a new one has to be opened after setting the workspace root. By default it is `false`.
@@ -746,7 +746,7 @@ export interface WorkspaceInput {
 
 }
 
-export interface WorkspaceData {
+export type WorkspaceData = {
     folders: Array<{ path: string, name?: string }>;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: { [id: string]: any };

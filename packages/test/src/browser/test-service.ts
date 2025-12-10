@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { CancellationToken, ContributionProvider, Disposable, Emitter, Event, QuickPickService, isObject, nls } from '@theia/core/lib/common';
-import { CancellationTokenSource, Location, Range, Position, DocumentUri } from '@theia/core/shared/vscode-languageserver-protocol';
-import { CollectionDelta, TreeDelta } from '../common/tree-delta';
+import { CancellationToken, ContributionProvider, Disposable, Emitter, Event, QuickPickService, isObject, nls } from '@theia/core/lib/common/index.js';
+import { CancellationTokenSource, Location, Range, Position, DocumentUri } from 'vscode-languageserver-protocol';
+import { CollectionDelta, TreeDelta } from '../common/tree-delta.js';
 import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
-import URI from '@theia/core/lib/common/uri';
-import { inject, injectable, named, postConstruct } from '@theia/core/shared/inversify';
-import { groupBy } from '../common/collections';
-import { codiconArray } from '@theia/core/lib/browser';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { inject, injectable, named, postConstruct } from 'inversify';
+import { groupBy } from '../common/collections.js';
+import { codiconArray } from '@theia/core/lib/browser/index.js';
 
 export enum TestRunProfileKind {
     Run = 1,
@@ -29,7 +29,7 @@ export enum TestRunProfileKind {
     Coverage = 3
 }
 
-export interface TestRunProfile {
+export type TestRunProfile = {
     readonly kind: TestRunProfileKind;
     readonly label: string,
     isDefault: boolean;
@@ -39,7 +39,7 @@ export interface TestRunProfile {
     configure(): void;
 }
 
-export interface TestOutputItem {
+export type TestOutputItem = {
     readonly output: string;
     readonly location?: Location;
 }
@@ -53,7 +53,7 @@ export enum TestExecutionState {
     Errored = 6
 }
 
-export interface TestMessage {
+export type TestMessage = {
     readonly expected?: string;
     readonly actual?: string;
     readonly location?: Location;
@@ -62,7 +62,7 @@ export interface TestMessage {
     readonly stackTrace?: TestMessageStackFrame[];
 }
 
-export interface TestMessageStackFrame {
+export type TestMessageStackFrame = {
     readonly label: string,
     readonly uri?: DocumentUri,
     readonly position?: Position,
@@ -74,11 +74,11 @@ export namespace TestMessage {
     }
 }
 
-export interface TestState {
+export type TestState = {
     readonly state: TestExecutionState;
 }
 
-export interface TestFailure extends TestState {
+export type TestFailure = TestState & {
     readonly state: TestExecutionState.Failed | TestExecutionState.Errored;
     readonly messages: TestMessage[];
     readonly duration?: number;
@@ -90,18 +90,18 @@ export namespace TestFailure {
     }
 }
 
-export interface TestSuccess extends TestState {
+export type TestSuccess = TestState & {
     readonly state: TestExecutionState.Passed;
     readonly duration?: number;
 }
 
-export interface TestStateChangedEvent {
+export type TestStateChangedEvent = {
     test: TestItem;
     oldState: TestState | undefined;
     newState: TestState | undefined;
 }
 
-export interface TestRun {
+export type TestRun = {
     cancel(): void;
     readonly id: string;
     readonly name: string;
@@ -136,7 +136,7 @@ export namespace TestRun {
     }
 }
 
-export interface TestItem {
+export type TestItem = {
     readonly id: string;
     readonly label: string;
     readonly range?: Range;
@@ -167,7 +167,7 @@ export namespace TestItem {
     }
 }
 
-export interface TestController {
+export type TestController = {
     readonly id: string;
     readonly label: string;
     readonly tests: readonly TestItem[];
@@ -182,7 +182,7 @@ export interface TestController {
     clearRuns(): void;
 }
 
-export interface TestService {
+export type TestService = {
     clearResults(): void;
     configureProfile(): void;
     selectDefaultProfile(): void;
@@ -215,7 +215,7 @@ export namespace TestServices {
 
 export const TestContribution = Symbol('TestContribution');
 
-export interface TestContribution {
+export type TestContribution = {
     registerTestControllers(service: TestService): void;
 }
 

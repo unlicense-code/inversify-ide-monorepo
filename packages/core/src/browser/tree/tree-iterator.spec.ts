@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { expect } from 'chai';
-import { notEmpty } from '../../common/objects';
-import { MockTreeModel } from './test/mock-tree-model';
-import { TreeModel } from './tree-model';
-import { DepthFirstTreeIterator, BreadthFirstTreeIterator, BottomUpTreeIterator, TopDownTreeIterator, Iterators } from './tree-iterator';
-import { createTreeTestContainer } from './test/tree-test-container';
-import { ExpandableTreeNode } from './tree-expansion';
+import { notEmpty } from '../../common/objects.js';
+import { MockTreeModel } from './test/mock-tree-model.js';
+import { TreeModel } from './tree-model.js';
+import { DepthFirstTreeIterator, BreadthFirstTreeIterator, BottomUpTreeIterator, TopDownTreeIterator, Iterators } from './tree-iterator.js';
+import { createTreeTestContainer } from './test/tree-test-container.js';
+import { ExpandableTreeNode } from './tree-expansion.js';
 
 describe('tree-iterator', () => {
 

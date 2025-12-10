@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import * as jsdiff from 'diff';
-import { ContentLinesArrayLike } from './content-lines';
-import { Position, Range, uinteger } from '@theia/core/shared/vscode-languageserver-protocol';
+import { ContentLinesArrayLike } from './content-lines.js';
+import { Position, Range, uinteger } from 'vscode-languageserver-protocol';
 
 export class DiffComputer {
 
@@ -107,18 +107,18 @@ function toLineRange({ value }: DiffResult): LineRange {
     return LineRange.create(start, end + 1);
 }
 
-export interface DiffResult {
+export type DiffResult = {
     value: [number, number];
     count?: number;
     added?: boolean;
     removed?: boolean;
 }
 
-export interface DirtyDiff {
+export type DirtyDiff = {
     readonly changes: readonly Change[];
 }
 
-export interface Change {
+export type Change = {
     readonly previousRange: LineRange;
     readonly currentRange: LineRange;
 }
@@ -135,7 +135,7 @@ export namespace Change {
     }
 }
 
-export interface LineRange {
+export type LineRange = {
     readonly start: number;
     readonly end: number;
 }

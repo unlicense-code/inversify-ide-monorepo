@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { nls } from '@theia/core';
-import { inject } from '@theia/core/shared/inversify';
-import { AbstractDialog, Dialog, DialogProps, Message } from '@theia/core/lib/browser';
+import { inject } from 'inversify';
+import { AbstractDialog, Dialog, DialogProps, Message } from '@theia/core/lib/browser/index.js';
 
 export class UntitledWorkspaceExitDialog extends AbstractDialog<UntitledWorkspaceExitDialog.Options> {
     protected readonly dontSaveButton: HTMLButtonElement;

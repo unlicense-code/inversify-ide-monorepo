@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { injectable, interfaces, decorate, unmanaged, inject } from 'inversify';
-import { RpcProxyFactory, RpcProxy } from '../../common';
-import { RemoteConnectionProvider, ServiceConnectionProvider } from './service-connection-provider';
+import { RpcProxyFactory, RpcProxy } from '../../common/index.js';
+import { RemoteConnectionProvider, ServiceConnectionProvider } from './service-connection-provider.js';
 
 decorate(injectable(), RpcProxyFactory);
 decorate(unmanaged(), RpcProxyFactory, 0);

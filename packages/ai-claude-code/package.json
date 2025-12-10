@@ -1,6 +1,7 @@
 {
   "name": "@theia/ai-claude-code",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - Claude Code Integration",
   "dependencies": {
     "@theia/ai-core": "1.66.0",

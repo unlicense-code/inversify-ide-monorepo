@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import { PluginDeployerParticipant, PluginDeployerStartContext } from '@theia/plugin-ext';
-import { VsxCli } from './vsx-cli';
-import { VSXExtensionUri } from '../common';
+import { VsxCli } from './vsx-cli.js';
+import { VSXExtensionUri } from '../common/index.js';
 import * as fs from 'fs';
-import { FileUri } from '@theia/core/lib/node';
+import { FileUri } from '@theia/core/lib/node/index.js';
 import * as path from 'path';
 
 @injectable()

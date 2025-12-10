@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as assert from 'assert';
+import assert from 'assert';
 import { Container } from 'inversify';
-import { createTreeContainer, isTreeServices } from './tree-container';
-import { TreeSearch } from './tree-search';
-import { defaultTreeProps, TreeProps } from './tree-widget';
+import { createTreeContainer, isTreeServices } from './tree-container.js';
+import { TreeSearch } from './tree-search.js';
+import { defaultTreeProps, TreeProps } from './tree-widget.js';
 
 describe('TreeContainer', () => {
     describe('IsTreeServices should accurately distinguish TreeProps from TreeContainerProps', () => {

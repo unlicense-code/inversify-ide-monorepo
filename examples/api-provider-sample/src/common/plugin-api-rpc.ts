@@ -13,8 +13,8 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { createProxyIdentifier } from '@theia/plugin-ext/lib/common/rpc-protocol';
-import type { greeting } from '../gotd';
+import { createProxyIdentifier } from '@theia/plugin-ext/lib/common/rpc-protocol.js';
+import type { greeting } from '../gotd.js';
 import { Event } from '@theia/core';
 
 export enum GreetingKind {
@@ -29,7 +29,7 @@ export interface GreeterData {
 };
 
 export const GreetingMain = Symbol('GreetingMain');
-export interface GreetingMain {
+export type GreetingMain = {
     $getMessage(greeterId: string): Promise<string>;
 
     $createGreeter(): Promise<GreeterData>;
@@ -39,7 +39,7 @@ export interface GreetingMain {
 }
 
 export const GreetingExt = Symbol('GreetingExt');
-export interface GreetingExt {
+export type GreetingExt = {
 
     //
     // External protocol

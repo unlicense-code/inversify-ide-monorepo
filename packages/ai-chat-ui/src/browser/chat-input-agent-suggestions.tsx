@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { DeclaredEventsEventListenerObject, useMarkdownRendering } from './chat-response-renderer/markdown-part-renderer';
-import { OpenerService } from '@theia/core/lib/browser';
-import { ChatSuggestion, ChatSuggestionCallback } from '@theia/ai-chat';
+import * as React from 'react';
+import { DeclaredEventsEventListenerObject, useMarkdownRendering } from './chat-response-renderer/markdown-part-renderer.js';
+import { OpenerService } from '@theia/core/lib/browser/index.js';
+import { ChatSuggestion, ChatSuggestionCallback } from '@theia/ai-chat/lib/common/index.js';
 import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
 
-interface ChatInputAgentSuggestionsProps {
+type ChatInputAgentSuggestionsProps = {
     suggestions: readonly ChatSuggestion[];
     opener: OpenerService;
 }
@@ -49,7 +49,7 @@ export const ChatInputAgentSuggestions: React.FC<ChatInputAgentSuggestionsProps>
     </div>
 );
 
-interface ChatInputAgestSuggestionProps {
+type ChatInputAgestSuggestionProps = {
     suggestion: ChatSuggestion;
     opener: OpenerService;
     handler?: DeclaredEventsEventListenerObject;

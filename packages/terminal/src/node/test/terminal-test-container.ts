@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -13,14 +13,16 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { Container } from '@theia/core/shared/inversify';
-import { bindLogger } from '@theia/core/lib/node/logger-backend-module';
-import { backendApplicationModule } from '@theia/core/lib/node/backend-application-module';
-import processBackendModule from '@theia/process/lib/node/process-backend-module';
-import { messagingBackendModule } from '@theia/core/lib/node/messaging/messaging-backend-module';
-import terminalBackendModule from '../terminal-backend-module';
-import { ApplicationPackage } from '@theia/core/shared/@theia/application-package';
-import { ProcessUtils } from '@theia/core/lib/node/process-utils';
+import { Container, ContainerModule } from 'inversify';
+import { bindLogger } from '@theia/core/lib/node/logger-backend-module.js';
+import { backendApplicationModule } from '@theia/core/lib/node/backend-application-module.js';
+import * as processBackendModuleNS from '@theia/process/lib/node/process-backend-module.js';
+import { messagingBackendModule } from '@theia/core/lib/node/messaging/messaging-backend-module.js';
+import terminalBackendModule from '../terminal-backend-module.js';
+import { ApplicationPackage } from '@theia/application-package';
+import { ProcessUtils } from '@theia/core/lib/node/process-utils.js';
+
+const processBackendModule = processBackendModuleNS.default as unknown as ContainerModule;
 
 export function createTerminalTestContainer(): Container {
     const container = new Container();
@@ -33,7 +35,7 @@ export function createTerminalTestContainer(): Container {
 
     bindLogger(container.bind.bind(container));
     container.load(messagingBackendModule);
-    container.load(processBackendModule);
+    container.load(processBackendModule as ContainerModule);
     container.load(terminalBackendModule);
     return container;
 }

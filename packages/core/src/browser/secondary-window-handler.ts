@@ -16,13 +16,13 @@
 
 import debounce = require('lodash.debounce');
 import { inject, injectable } from 'inversify';
-import { BoxLayout, ExtractableWidget, TabBar, Widget } from './widgets';
-import { MessageService } from '../common/message-service';
-import { ApplicationShell, DockPanelRenderer, MAIN_AREA_CLASS, MAIN_BOTTOM_AREA_CLASS } from './shell/application-shell';
-import { Emitter } from '../common/event';
-import { isSecondaryWindow, SecondaryWindowRootWidget, SecondaryWindowService } from './window/secondary-window-service';
-import { KeybindingRegistry } from './keybinding';
-import { MAIN_AREA_ID, TheiaDockPanel } from './shell/theia-dock-panel';
+import { BoxLayout, ExtractableWidget, TabBar, Widget } from './widgets/index.js';
+import { MessageService } from '../common/message-service.js';
+import { ApplicationShell, DockPanelRenderer, MAIN_AREA_CLASS, MAIN_BOTTOM_AREA_CLASS } from './shell/application-shell.js';
+import { Emitter } from '../common/event.js';
+import { isSecondaryWindow, SecondaryWindowRootWidget, SecondaryWindowService } from './window/secondary-window-service.js';
+import { KeybindingRegistry } from './keybinding.js';
+import { MAIN_AREA_ID, TheiaDockPanel } from './shell/theia-dock-panel.js';
 
 /** Widgets to be contained inside a DockPanel in the secondary window. */
 class SecondaryWindowDockPanelWidget extends SecondaryWindowRootWidget {

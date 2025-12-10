@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import URI from '@theia/core/lib/common/uri';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { DebugConfiguration } from '../common/debug-common';
-import { DebugCompound } from '../common/debug-compound';
-import { isObject, PreferenceService } from '@theia/core/lib/common';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Emitter, Event } from '@theia/core';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { DebugConfiguration } from '../common/debug-common.js';
+import { DebugCompound } from '../common/debug-compound.js';
+import { isObject, PreferenceService } from '@theia/core/lib/common/index.js';
 
 export class DebugConfigurationModel implements Disposable {
 

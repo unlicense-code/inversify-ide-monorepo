@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,31 +14,29 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { SelectionService } from '@theia/core/lib/common/selection-service';
-import { Command, CommandContribution, CommandRegistry } from '@theia/core/lib/common/command';
-import { MenuContribution, MenuModelRegistry } from '@theia/core/lib/common/menu';
-import { CommonMenus } from '@theia/core/lib/browser/common-menus';
-import { FileDialogService } from '@theia/filesystem/lib/browser';
-import { SingleTextInputDialog, ConfirmDialog, Dialog } from '@theia/core/lib/browser/dialogs';
-import { OpenerService, OpenHandler, open, FrontendApplication, LabelProvider, CommonCommands } from '@theia/core/lib/browser';
-import { UriCommandHandler, UriAwareCommandHandler } from '@theia/core/lib/common/uri-command-handler';
-import { WorkspaceService } from './workspace-service';
-import { MessageService } from '@theia/core/lib/common/message-service';
-import { WorkspacePreferences } from '../common/workspace-preferences';
-import { WorkspaceDeleteHandler } from './workspace-delete-handler';
-import { WorkspaceDuplicateHandler } from './workspace-duplicate-handler';
-import { FileSystemUtils } from '@theia/filesystem/lib/common';
-import { WorkspaceCompareHandler } from './workspace-compare-handler';
-import { FileDownloadCommands } from '@theia/filesystem/lib/browser/download/file-download-command-contribution';
-import { FileSystemCommands } from '@theia/filesystem/lib/browser/filesystem-frontend-contribution';
-import { WorkspaceInputDialog } from './workspace-input-dialog';
-import { Emitter, EOL, Event, OS } from '@theia/core/lib/common';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileStat } from '@theia/filesystem/lib/common/files';
-import { nls } from '@theia/core/lib/common/nls';
-import { ClipboardService } from '@theia/core/lib/browser/clipboard-service';
+import { inject, injectable } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { SelectionService } from '@theia/core/lib/common/selection-service.js';
+import { Command, CommandContribution, CommandRegistry } from '@theia/core/lib/common/command.js';
+import { MenuContribution, MenuModelRegistry } from '@theia/core';
+import { CommonMenus } from '@theia/core/lib/browser/common-menus.js';
+import { FileDialogService } from '@theia/filesystem/lib/browser/index.js';
+import { SingleTextInputDialog, ConfirmDialog, Dialog } from '@theia/core/lib/browser/dialogs.js';
+import { OpenerService, OpenHandler, open, FrontendApplication, LabelProvider, CommonCommands } from '@theia/core/lib/browser/index.js';
+import { UriCommandHandler, UriAwareCommandHandler } from '@theia/core/lib/common/uri-command-handler.js';
+import { WorkspaceService } from './workspace-service.js';
+import { MessageService } from '@theia/core/lib/common/message-service.js';
+import { WorkspacePreferences } from '../common/workspace-preferences.js';
+import { WorkspaceDeleteHandler } from './workspace-delete-handler.js';
+import { WorkspaceDuplicateHandler } from './workspace-duplicate-handler.js';
+import { FileSystemUtils } from '@theia/filesystem/lib/common/index.js';
+import { WorkspaceCompareHandler } from './workspace-compare-handler.js';
+import { FileDownloadCommands, FileSystemCommands, FileService } from '@theia/filesystem/lib/browser/index.js';
+import { FileStat } from '@theia/filesystem/lib/common/index.js';
+import { WorkspaceInputDialog } from './workspace-input-dialog.js';
+import { Emitter, EOL, Event, OS } from '@theia/core/lib/common/index.js';
+import { nls } from '@theia/core/lib/common/nls.js';
+import { ClipboardService } from '@theia/core/lib/browser/clipboard-service.js';
 
 const validFilename: (arg: string) => boolean = require('valid-filename');
 
@@ -183,7 +181,7 @@ export class EditMenuContribution implements MenuContribution {
 
 }
 
-export interface DidCreateNewResourceEvent {
+export type DidCreateNewResourceEvent = {
     uri: URI
     parent: URI
 }
@@ -226,7 +224,7 @@ export class WorkspaceCommandContribution implements CommandContribution {
 
     registerCommands(registry: CommandRegistry): void {
         registry.registerCommand(WorkspaceCommands.NEW_FILE, this.newWorkspaceRootUriAwareCommandHandler({
-            execute: uri => this.getDirectory(uri).then(parent => {
+            execute: (uri: URI) => this.getDirectory(uri).then(parent => {
                 if (parent) {
                     const parentUri = parent.resource;
                     const { fileName, fileExtension } = this.getDefaultFileConfig();
@@ -254,7 +252,7 @@ export class WorkspaceCommandContribution implements CommandContribution {
             })
         }));
         registry.registerCommand(WorkspaceCommands.NEW_FOLDER, this.newWorkspaceRootUriAwareCommandHandler({
-            execute: uri => this.getDirectory(uri).then(parent => {
+            execute: (uri: URI) => this.getDirectory(uri).then(parent => {
                 if (parent) {
                     const parentUri = parent.resource;
                     const targetUri = parentUri.resolve('Untitled');
@@ -278,9 +276,9 @@ export class WorkspaceCommandContribution implements CommandContribution {
             })
         }));
         registry.registerCommand(WorkspaceCommands.FILE_RENAME, this.newMultiUriAwareCommandHandler({
-            isEnabled: uris => uris.some(uri => !this.isWorkspaceRoot(uri)) && uris.length === 1,
-            isVisible: uris => uris.some(uri => !this.isWorkspaceRoot(uri)) && uris.length === 1,
-            execute: async uris => {
+            isEnabled: (uris: URI[]) => uris.some((uri: URI) => !this.isWorkspaceRoot(uri)) && uris.length === 1,
+            isVisible: (uris: URI[]) => uris.some((uri: URI) => !this.isWorkspaceRoot(uri)) && uris.length === 1,
+            execute: async (uris: URI[]) => {
                 const uri = uris[0]; /* Since there is only one item in the array. */
                 const parent = await this.getParent(uri);
                 if (parent) {
@@ -293,7 +291,7 @@ export class WorkspaceCommandContribution implements CommandContribution {
                             start: 0,
                             end: uri.path.name.length
                         },
-                        validate: async (newName, mode) => {
+                        validate: async (newName: string, mode: string) => {
                             if (oldName === newName && mode === 'preview') {
                                 return false;
                             }
@@ -313,9 +311,9 @@ export class WorkspaceCommandContribution implements CommandContribution {
         registry.registerCommand(WorkspaceCommands.FILE_DELETE, this.newMultiUriAwareCommandHandler(this.deleteHandler));
         registry.registerCommand(WorkspaceCommands.FILE_COMPARE, this.newMultiUriAwareCommandHandler(this.compareHandler));
         registry.registerCommand(WorkspaceCommands.COPY_RELATIVE_FILE_PATH, UriAwareCommandHandler.MultiSelect(this.selectionService, {
-            isEnabled: uris => !!uris.length,
-            isVisible: uris => !!uris.length,
-            execute: async uris => {
+            isEnabled: (uris: URI[]) => !!uris.length,
+            isVisible: (uris: URI[]) => !!uris.length,
+            execute: async (uris: URI[]) => {
                 const lineDelimiter = EOL;
                 const text = uris.map((uri: URI) => {
                     const workspaceRoot = this.workspaceService.getWorkspaceRootUri(uri);
@@ -350,9 +348,9 @@ export class WorkspaceCommandContribution implements CommandContribution {
             }
         });
         registry.registerCommand(WorkspaceCommands.REMOVE_FOLDER, this.newMultiUriAwareCommandHandler({
-            execute: uris => this.removeFolderFromWorkspace(uris),
+            execute: (uris: URI[]) => this.removeFolderFromWorkspace(uris),
             isEnabled: () => this.workspaceService.isMultiRootWorkspaceOpened,
-            isVisible: uris => this.areWorkspaceRoots(uris) && this.workspaceService.saved
+            isVisible: (uris: URI[]) => this.areWorkspaceRoots(uris) && this.workspaceService.saved
         }));
     }
 

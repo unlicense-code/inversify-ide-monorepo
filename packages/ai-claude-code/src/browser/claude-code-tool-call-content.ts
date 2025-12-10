@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { ToolCallChatResponseContentImpl } from '@theia/ai-chat/lib/common';
-import { ToolCallResult } from '@theia/ai-core';
+import { ToolCallResult } from '@theia/ai-core/lib/common/index.js';
 
 export class ClaudeCodeToolCallChatResponseContent extends ToolCallChatResponseContentImpl {
     static readonly type = 'claude-code-tool-call';

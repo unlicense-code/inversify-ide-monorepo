@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,21 +14,21 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { EditorManager, EditorWidget, TextEditor, TextEditorDocument, TextDocumentChangeEvent } from '@theia/editor/lib/browser';
-import URI from '@theia/core/lib/common/uri';
+import { inject, injectable, postConstruct } from 'inversify';
+import { EditorManager, EditorWidget, TextEditor, TextEditorDocument, TextDocumentChangeEvent } from '@theia/editor/lib/browser/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
 import { Emitter, Event, Disposable, DisposableCollection } from '@theia/core';
-import { ContentLines } from '@theia/scm/lib/browser/dirty-diff/content-lines';
-import { DirtyDiffUpdate } from '@theia/scm/lib/browser/dirty-diff/dirty-diff-decorator';
-import { DiffComputer, DirtyDiff } from '@theia/scm/lib/browser/dirty-diff/diff-computer';
-import { GitPreferences, GitConfiguration } from '../../common/git-preferences';
-import { PreferenceChangeEvent } from '@theia/core/lib/common';
-import { GIT_RESOURCE_SCHEME } from '../git-resource';
-import { GitResourceResolver } from '../git-resource-resolver';
-import { WorkingDirectoryStatus, GitFileStatus, GitFileChange, Repository, Git, GitStatusChangeEvent } from '../../common';
-import { GitRepositoryTracker } from '../git-repository-tracker';
+import { ContentLines } from '@theia/scm/lib/browser/dirty-diff/content-lines.js';
+import { DirtyDiffUpdate } from '@theia/scm/lib/browser/dirty-diff/dirty-diff-decorator.js';
+import { DiffComputer, DirtyDiff } from '@theia/scm/lib/browser/dirty-diff/diff-computer.js';
+import { GitPreferences, GitConfiguration } from '../../common/git-preferences.js';
+import { PreferenceChangeEvent } from '@theia/core/lib/common/index.js';
+import { GIT_RESOURCE_SCHEME } from '../git-resource.js';
+import { GitResourceResolver } from '../git-resource-resolver.js';
+import { WorkingDirectoryStatus, GitFileStatus, GitFileChange, Repository, Git, GitStatusChangeEvent } from '../../common/index.js';
+import { GitRepositoryTracker } from '../git-repository-tracker.js';
 
-import throttle = require('@theia/core/shared/lodash.throttle');
+import throttle from 'lodash/throttle.js';
 
 @injectable()
 export class DirtyDiffManager {

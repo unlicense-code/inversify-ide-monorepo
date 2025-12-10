@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { SingleTextInputDialog } from '@theia/core/lib/browser/dialogs';
-import { ExpressionItem, DebugSessionProvider } from '../console/debug-console-items';
+import * as React from 'react';
+import { SingleTextInputDialog } from '@theia/core/lib/browser/dialogs.js';
+import { ExpressionItem, DebugSessionProvider } from '../console/debug-console-items.js';
 import { DebugProtocol } from '@vscode/debugprotocol';
-import { codicon, TREE_NODE_SEGMENT_GROW_CLASS } from '@theia/core/lib/browser';
+import { codicon, TREE_NODE_SEGMENT_GROW_CLASS } from '@theia/core/lib/browser/index.js';
 import { nls } from '@theia/core';
 
 export class DebugWatchExpression extends ExpressionItem {
 
-    override readonly id: number;
     protected isError: boolean;
     protected isNotAvailable: boolean;
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -21,24 +21,24 @@
 import {
     CellExecuteUpdateDto, NotebookKernelDto, NotebookKernelsExt, NotebookKernelsMain,
     NotebookKernelSourceActionDto, NotebookOutputDto, PluginModel, PLUGIN_RPC_CONTEXT
-} from '../../common';
-import { RPCProtocol } from '../../common/rpc-protocol';
-import { UriComponents } from '../../common/uri-components';
+} from '../../common/index.js';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
+import { UriComponents } from '../../common/uri-components.js';
 import { CancellationTokenSource, Disposable, DisposableCollection, Emitter } from '@theia/core';
-import { Cell } from './notebook-document';
-import { NotebooksExtImpl } from './notebooks';
-import { NotebookCellOutputConverter, NotebookCellOutputItem, NotebookKernelSourceAction } from '../type-converters';
-import { timeout, Deferred } from '@theia/core/lib/common/promise-util';
-import { CellExecutionUpdateType, NotebookCellExecutionState } from '@theia/notebook/lib/common';
-import { CommandRegistryImpl } from '../command-registry';
-import { NotebookCellOutput, NotebookRendererScript, URI } from '../types-impl';
-import { toUriComponents } from '../../main/browser/hierarchy/hierarchy-types-converters';
+import { Cell } from './notebook-document.js';
+import { NotebooksExtImpl } from './notebooks.js';
+import { NotebookCellOutputConverter, NotebookCellOutputItem, NotebookKernelSourceAction } from '../type-converters.js';
+import { timeout, Deferred } from '@theia/core/lib/common/promise-util.js';
+import { CellExecutionUpdateType, NotebookCellExecutionState } from '@theia/notebook/lib/common/index.js';
+import { CommandRegistryImpl } from '../command-registry.js';
+import { NotebookCellOutput, NotebookRendererScript, URI } from '../types-impl.js';
+import { toUriComponents } from '../../main/browser/hierarchy/hierarchy-types-converters.js';
 import type * as theia from '@theia/plugin';
-import { WebviewsExtImpl } from '../webviews';
-import { WorkspaceExtImpl } from '../workspace';
-import { PluginLogger } from '../logger';
+import { WebviewsExtImpl } from '../webviews.js';
+import { WorkspaceExtImpl } from '../workspace.js';
+import { PluginLogger } from '../logger.js';
 
-interface KernelData {
+type KernelData = {
     extensionId: string;
     controller: theia.NotebookController;
     onDidChangeSelection: Emitter<{ selected: boolean; notebook: theia.NotebookDocument }>;

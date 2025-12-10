@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 Typefox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { AbstractRemoteRegistryContribution, RemoteRegistry } from '@theia/remote/lib/electron-browser/remote-registry-contribution';
-import { DevContainerFile, LastContainerInfo, RemoteContainerConnectionProvider } from '../electron-common/remote-container-connection-provider';
-import { WorkspaceStorageService } from '@theia/workspace/lib/browser/workspace-storage-service';
+import { inject, injectable } from 'inversify';
+import { AbstractRemoteRegistryContribution, RemoteRegistry } from '@theia/remote/lib/electron-browser/remote-registry-contribution.js';
+import { DevContainerFile, LastContainerInfo, RemoteContainerConnectionProvider } from '../electron-common/remote-container-connection-provider.js';
+import { WorkspaceStorageService } from '@theia/workspace/lib/browser/workspace-storage-service.js';
 import { Command, MaybePromise, MessageService, nls, QuickInputService, URI } from '@theia/core';
-import { WorkspaceInput, WorkspaceOpenHandlerContribution, WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { ContainerOutputProvider } from './container-output-provider';
-import { WorkspaceServer } from '@theia/workspace/lib/common';
-import { DEV_CONTAINER_PATH_QUERY, DEV_CONTAINER_WORKSPACE_SCHEME } from '../electron-common/dev-container-workspaces';
-import { RemotePreferences } from '@theia/remote/lib/electron-common/remote-preferences';
+import { WorkspaceInput, WorkspaceOpenHandlerContribution, WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
+import { ContainerOutputProvider } from './container-output-provider.js';
+import { WorkspaceServer } from '@theia/workspace/lib/common/index.js';
+import { DEV_CONTAINER_PATH_QUERY, DEV_CONTAINER_WORKSPACE_SCHEME } from '../electron-common/dev-container-workspaces.js';
+import { RemotePreferences } from '@theia/remote/lib/electron-common/remote-preferences.js';
 
 export namespace RemoteContainerCommands {
     export const REOPEN_IN_CONTAINER = Command.toLocalizedCommand({

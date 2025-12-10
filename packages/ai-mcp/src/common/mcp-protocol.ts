@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { MCPServerDescription } from './mcp-server-manager';
+import { MCPServerDescription } from './mcp-server-manager.js';
 
 /**
  * MCPServerDescriptionRCP is a version of MCPServerDescription that can be sent over RCP.
@@ -28,16 +28,13 @@ export type MCPServerDescriptionRCP = Omit<MCPServerDescription, 'resolve'> & {
 export const MCPServerManagerServer = Symbol('MCPServerManagerServer');
 export const MCPServerManagerServerPath = '/services/mcpservermanagerserver';
 
-/**
- * The MCPServerManagerServer handles the RCP specialties of adding server descriptions from the frontend
- */
-export interface MCPServerManagerServer {
+export type MCPServerManagerServer = {
     addOrUpdateServer(description: MCPServerDescriptionRCP): Promise<void>;
     setClient(client: MCPServerManagerServerClient): void
 }
 
 export const MCPServerManagerServerClient = Symbol('MCPServerManagerServerClient');
-export interface MCPServerManagerServerClient {
+export type MCPServerManagerServerClient = {
     /**
      * Adds a server description to the client. If the description contains a resolve function,
      * a unique resolveId is generated and only the name and resolve function are stored.

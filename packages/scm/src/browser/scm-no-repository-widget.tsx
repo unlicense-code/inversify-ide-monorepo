@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { ReactWidget } from '@theia/core/lib/browser';
-import { AlertMessage } from '@theia/core/lib/browser/widgets/alert-message';
-import { nls } from '@theia/core/lib/common/nls';
+import { injectable } from 'inversify';
+import * as React from 'react';
+import { ReactWidget } from '@theia/core/lib/browser/index.js';
+import { AlertMessage } from '@theia/core/lib/browser/widgets/alert-message.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 @injectable()
 export class ScmNoRepositoryWidget extends ReactWidget {

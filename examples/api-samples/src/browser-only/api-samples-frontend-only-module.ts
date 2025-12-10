@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule, interfaces } from '@theia/core/shared/inversify';
-import { bindOPFSInitialization } from './filesystem/example-filesystem-initialization';
+import { ContainerModule, interfaces } from 'inversify';
+import { bindOPFSInitialization } from './filesystem/example-filesystem-initialization.js';
 
 export default new ContainerModule((
     bind: interfaces.Bind,

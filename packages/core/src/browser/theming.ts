@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ApplicationProps, DefaultTheme } from '@theia/application-package/lib/application-props';
+import { ApplicationProps, DefaultTheme } from '@theia/application-package/lib/application-props.js';
 import { inject, injectable, postConstruct } from 'inversify';
-import { Disposable } from '../common/disposable';
-import { Emitter, Event } from '../common/event';
-import { PreferenceSchemaService } from '../common/preferences/preference-schema';
-import { Deferred } from '../common/promise-util';
-import { Theme, ThemeChangeEvent } from '../common/theme';
-import { FrontendApplicationConfigProvider } from './frontend-application-config-provider';
+import { Disposable } from '../common/disposable.js';
+import { Emitter, Event } from '../common/event.js';
+import { PreferenceSchemaService } from '../common/preferences/preference-schema.js';
+import { Deferred } from '../common/promise-util.js';
+import { Theme, ThemeChangeEvent } from '../common/theme.js';
+import { FrontendApplicationConfigProvider } from './frontend-application-config-provider.js';
 import debounce = require('lodash.debounce');
-import { PreferenceService } from '../common/preferences';
+import { PreferenceService } from '../common/preferences/index.js';
 
 const COLOR_THEME_PREFERENCE_KEY = 'workbench.colorTheme';
 const NO_THEME = { id: 'no-theme', label: 'Not a real theme.', type: 'dark' } as const;

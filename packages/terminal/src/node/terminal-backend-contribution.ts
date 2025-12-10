@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, named } from '@theia/core/shared/inversify';
-import { ILogger } from '@theia/core/lib/common';
+import { injectable, inject, named } from 'inversify';
+import { ILogger, Channel } from '@theia/core/lib/common/index.js';
 import { TerminalProcess, ProcessManager } from '@theia/process/lib/node';
-import { terminalsPath } from '../common/terminal-protocol';
-import { MessagingService } from '@theia/core/lib/node/messaging/messaging-service';
-import { StringBufferingStream } from './buffering-stream';
+import { terminalsPath } from '../common/terminal-protocol.js';
+import { MessagingService } from '@theia/core/lib/node/messaging/messaging-service.js';
+import { StringBufferingStream } from './buffering-stream.js';
 
 @injectable()
 export class TerminalBackendContribution implements MessagingService.Contribution {
@@ -32,23 +32,22 @@ export class TerminalBackendContribution implements MessagingService.Contributio
     protected readonly logger: ILogger;
 
     configure(service: MessagingService): void {
-        service.registerChannelHandler(`${terminalsPath}/:id`, (params: { id: string }, channel) => {
+        service.registerChannelHandler(`${terminalsPath}/:id`, (params: { id: string }, channel: Channel) => {
             const id = parseInt(params.id, 10);
             const termProcess = this.processManager.get(id);
             if (termProcess instanceof TerminalProcess) {
                 const output = termProcess.createOutputStream();
                 // Create a RPC connection to the terminal process
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                channel.onMessage(e => {
+                channel.onMessage((e: () => { readString(): string }) => {
                     termProcess.write(e().readString());
                 });
 
                 const buffer = new StringBufferingStream();
-                buffer.onData(chunk => {
+                buffer.onData((chunk: string) => {
                     channel.getWriteBuffer().writeString(chunk).commit();
                 });
-                output.on('data', chunk => {
-                    buffer.push(chunk);
+                output.on('data', (chunk: Buffer) => {
+                    buffer.push(this.decoder.decode(chunk));
                 });
                 channel.onClose(() => {
                     buffer.dispose();

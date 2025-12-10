@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { nls } from '@theia/core';
-import { AbstractViewContribution } from '@theia/core/lib/browser';
-import { injectable } from '@theia/core/shared/inversify';
-import { PortForwardingWidget, PORT_FORWARDING_WIDGET_ID } from './port-forwarding-widget';
+import { AbstractViewContribution } from '@theia/core/lib/browser/index.js';
+import { injectable } from 'inversify';
+import { PortForwardingWidget, PORT_FORWARDING_WIDGET_ID } from './port-forwarding-widget.js';
 
 @injectable()
 export class PortForwardingContribution extends AbstractViewContribution<PortForwardingWidget> {

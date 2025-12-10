@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { KeybindingRegistry, QuickPickItem, QuickPickSeparator } from '@theia/core/lib/browser';
-import { QuickAccessProviderDescriptor, QuickAccessRegistry } from '@theia/core/lib/browser/quick-input/quick-access';
-import { CancellationToken, Disposable } from '@theia/core/lib/common';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { MonacoQuickPickItem } from './monaco-quick-input-service';
+import { KeybindingRegistry, QuickPickItem, QuickPickSeparator } from '@theia/core/lib/browser/index.js';
+import { QuickAccessProviderDescriptor, QuickAccessRegistry } from '@theia/core/lib/browser/quick-input/quick-access.js';
+import { CancellationToken, Disposable } from '@theia/core/lib/common/index.js';
+import { inject, injectable } from 'inversify';
+import { MonacoQuickPickItem } from './monaco-quick-input-service.js';
 import {
     IPickerQuickAccessProviderOptions, PickerQuickAccessProvider, Picks, Pick, IPickerQuickAccessItem
-} from '@theia/monaco-editor-core/esm/vs/platform/quickinput/browser/pickerQuickAccess';
+} from '@theia/monaco-editor-core/esm/vs/platform/quickinput/browser/pickerQuickAccess.js';
 import {
     Extensions,
     IQuickAccessProvider,
@@ -29,11 +29,11 @@ import {
     IQuickAccessProviderHelp,
     IQuickAccessRegistry,
     QuickAccessRegistry as VSCodeQuickAccessRegistry,
-} from '@theia/monaco-editor-core/esm/vs/platform/quickinput/common/quickAccess';
-import { IQuickPickItem, IQuickPickItemWithResource } from '@theia/monaco-editor-core/esm/vs/platform/quickinput/common/quickInput';
-import { Registry } from '@theia/monaco-editor-core/esm/vs/platform/registry/common/platform';
+} from '@theia/monaco-editor-core/esm/vs/platform/quickinput/common/quickAccess.js';
+import { IQuickPickItem, IQuickPickItemWithResource } from '@theia/monaco-editor-core/esm/vs/platform/quickinput/common/quickInput.js';
+import { Registry } from '@theia/monaco-editor-core/esm/vs/platform/registry/common/platform.js';
 
-interface IAnythingQuickPickItem extends IPickerQuickAccessItem, IQuickPickItemWithResource { }
+type IAnythingQuickPickItem = IPickerQuickAccessItem & IQuickPickItemWithResource & { }
 
 abstract class MonacoPickerAccessProvider extends PickerQuickAccessProvider<IQuickPickItem> {
     constructor(prefix: string, options?: IPickerQuickAccessProviderOptions<IQuickPickItem>) {
@@ -80,7 +80,7 @@ export class MonacoQuickAccessRegistry implements QuickAccessRegistry {
                     super(descriptor.prefix);
                 }
 
-                protected override async _getPicks(filter: string, disposables: unknown, token: CancellationToken): Promise<Picks<IQuickPickItem>> {
+                protected async _getPicks(filter: string, disposables: unknown, token: CancellationToken): Promise<Picks<IQuickPickItem>> {
                     const result = await Promise.resolve(descriptor.getInstance().getPicks(filter, token));
                     return result.map(toMonacoPick);
                 }
@@ -97,8 +97,8 @@ export class MonacoQuickAccessRegistry implements QuickAccessRegistry {
 
     getQuickAccessProviders(): QuickAccessProviderDescriptor[] {
         return this.monacoRegistry.getQuickAccessProviders()
-            .filter(provider => provider instanceof TheiaQuickAccessDescriptor)
-            .map(provider => (provider as TheiaQuickAccessDescriptor).theiaDescriptor);
+            .filter((provider: IQuickAccessProviderDescriptor) => provider instanceof TheiaQuickAccessDescriptor)
+            .map((provider: IQuickAccessProviderDescriptor) => (provider as TheiaQuickAccessDescriptor).theiaDescriptor);
     }
     getQuickAccessProvider(prefix: string): QuickAccessProviderDescriptor | undefined {
         const monacoDescriptor = this.monacoRegistry.getQuickAccessProvider(prefix);

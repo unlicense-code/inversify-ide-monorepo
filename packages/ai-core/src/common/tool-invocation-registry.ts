@@ -14,16 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, named, postConstruct, interfaces } from '@theia/core/shared/inversify';
-import { ToolRequest } from './language-model';
+import { inject, injectable, named, postConstruct, interfaces } from 'inversify';
+import { ToolRequest } from './language-model.js';
 import { ContributionProvider, Emitter, Event } from '@theia/core';
 
 export const ToolInvocationRegistry = Symbol('ToolInvocationRegistry');
 
-/**
- * Registry for all the function calls available to Agents.
- */
-export interface ToolInvocationRegistry {
+export type ToolInvocationRegistry = {
     /**
      * Registers a tool into the registry.
      *
@@ -70,7 +67,7 @@ export interface ToolInvocationRegistry {
 }
 
 export const ToolProvider = Symbol('ToolProvider');
-export interface ToolProvider {
+export type ToolProvider = {
     getTool(): ToolRequest;
 }
 

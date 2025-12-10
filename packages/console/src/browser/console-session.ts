@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { MaybePromise } from '@theia/core/lib/common/types';
-import { TreeSource, TreeElement, CompositeTreeElement } from '@theia/core/lib/browser/source-tree';
-import { Emitter } from '@theia/core/lib/common/event';
-import { Severity } from '@theia/core/lib/common/severity';
+import { injectable } from 'inversify';
+import { MaybePromise } from '@theia/core/lib/common/types.js';
+import { TreeElement, CompositeTreeElement, TreeSource } from '@theia/core/lib/browser/source-tree/index.js';
+import { Emitter } from '@theia/core/lib/common/event.js';
+import { Severity } from '@theia/core/lib/common/severity.js';
 
-export interface ConsoleItem extends TreeElement {
+export type ConsoleItem = TreeElement & {
     readonly severity?: Severity;
 }
 export namespace ConsoleItem {
@@ -30,7 +30,7 @@ export namespace ConsoleItem {
     export const logClassName = 'theia-console-log';
 }
 
-export interface CompositeConsoleItem extends ConsoleItem, CompositeTreeElement {
+export type CompositeConsoleItem = ConsoleItem & CompositeTreeElement & {
     getElements(): MaybePromise<IterableIterator<ConsoleItem>>
 }
 
@@ -39,7 +39,7 @@ export abstract class ConsoleSession extends TreeSource {
     protected selectedSeverity?: Severity;
     protected readonly selectionEmitter: Emitter<void> = new Emitter<void>();
     readonly onSelectionChange = this.selectionEmitter.event;
-    override id: string;
+    declare id: string;
 
     get severity(): Severity | undefined {
         return this.selectedSeverity;

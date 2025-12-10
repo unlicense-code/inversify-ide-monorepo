@@ -13,10 +13,10 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { WorkspaceServer } from '../common/workspace-protocol';
+import { inject, injectable } from 'inversify';
+import { WorkspaceServer } from '../common/workspace-protocol.js';
 import { ILogger, isStringArray } from '@theia/core';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
+import { FileService } from '@theia/filesystem/lib/browser/index.js';
 
 export const RECENT_WORKSPACES_LOCAL_STORAGE_KEY = 'workspaces';
 

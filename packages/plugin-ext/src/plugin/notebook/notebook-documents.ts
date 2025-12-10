@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -20,10 +20,10 @@
 
 import * as theia from '@theia/plugin';
 import { Emitter } from '@theia/core';
-import { UriComponents } from '../../common/uri-components';
-import { NotebookCellsChangedEventDto, NotebookDocumentsExt } from '../../common';
-import { NotebooksExtImpl } from './notebooks';
-import { URI } from '../types-impl';
+import { UriComponents } from '../../common/uri-components.js';
+import { NotebookCellsChangedEventDto, NotebookDocumentsExt } from '../../common/index.js';
+import { NotebooksExtImpl } from './notebooks.js';
+import { URI } from '../types-impl.js';
 
 export type NotebookDocumentMetadata = Record<string, unknown>;
 

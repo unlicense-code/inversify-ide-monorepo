@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
+import { injectable, inject, postConstruct } from 'inversify';
 import { Emitter, Event, nls } from '@theia/core';
-import { LanguageModelAlias, LanguageModelAliasRegistry } from '../common/language-model-alias';
-import { PreferenceScope, PreferenceService } from '@theia/core/lib/common';
-import { LANGUAGE_MODEL_ALIASES_PREFERENCE } from '../common/ai-core-preferences';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { LanguageModelAlias, LanguageModelAliasRegistry } from '../common/language-model-alias.js';
+import { PreferenceScope, PreferenceService } from '@theia/core/lib/common/index.js';
+import { LANGUAGE_MODEL_ALIASES_PREFERENCE } from '../common/ai-core-preferences.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
 
 @injectable()
 export class DefaultLanguageModelAliasRegistry implements LanguageModelAliasRegistry {

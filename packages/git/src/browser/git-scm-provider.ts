@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,29 +14,41 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { open, OpenerService } from '@theia/core/lib/browser';
-import { DiffUris } from '@theia/core/lib/browser/diff-uris';
+import { injectable, inject, postConstruct } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { open, OpenerService } from '@theia/core/lib/browser/index.js';
+import { DiffUris } from '@theia/core/lib/browser/diff-uris.js';
 import { Emitter } from '@theia/core';
-import { DisposableCollection } from '@theia/core/lib/common/disposable';
-import { CommandService } from '@theia/core/lib/common/command';
-import { ConfirmDialog } from '@theia/core/lib/browser/dialogs';
-import { EditorOpenerOptions, EditorManager } from '@theia/editor/lib/browser/editor-manager';
-import { WorkspaceCommands } from '@theia/workspace/lib/browser';
-import { Repository, Git, CommitWithChanges, GitFileChange, WorkingDirectoryStatus, GitFileStatus } from '../common';
-import { GIT_RESOURCE_SCHEME } from './git-resource';
-import { GitErrorHandler } from './git-error-handler';
-import { EditorWidget } from '@theia/editor/lib/browser';
-import { ScmProvider, ScmCommand, ScmResourceGroup, ScmAmendSupport, ScmCommit } from '@theia/scm/lib/browser/scm-provider';
-import { ScmHistoryCommit, ScmFileChange } from '@theia/scm-extra/lib/browser/scm-file-change-node';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
-import { GitCommitDetailWidgetOptions } from './history/git-commit-detail-widget-options';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { ScmInput } from '@theia/scm/lib/browser/scm-input';
-import { MergeEditorOpenerOptions, MergeEditorSideWidgetState, MergeEditorUri } from '@theia/scm/lib/browser/merge-editor/merge-editor';
-import { nls } from '@theia/core/lib/common/nls';
-import { GitPreferences } from '../common/git-preferences';
+import { DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { CommandService } from '@theia/core/lib/common/command.js';
+import { ConfirmDialog } from '@theia/core/lib/browser/dialogs.js';
+import {
+    EditorOpenerOptions, EditorManager
+
+} from '@theia/editor/lib/browser/editor-manager.js';
+import { WorkspaceCommands } from '@theia/workspace/lib/browser/index.js';
+import { Repository, Git, CommitWithChanges, GitFileChange, WorkingDirectoryStatus, GitFileStatus } from '../common/index.js';
+import { GIT_RESOURCE_SCHEME } from './git-resource.js';
+import { GitErrorHandler } from './git-error-handler.js';
+import { EditorWidget } from '@theia/editor/lib/browser/index.js';
+import {
+    ScmProvider, ScmCommand, ScmResourceGroup, ScmAmendSupport, ScmCommit
+
+} from '@theia/scm/lib/browser/scm-provider.js';
+import {
+    ScmHistoryCommit, ScmFileChange
+
+} from '@theia/scm-extra/lib/browser/scm-file-change-node.js';
+import { LabelProvider } from '@theia/core/lib/browser/label-provider.js';
+import { GitCommitDetailWidgetOptions } from './history/git-commit-detail-widget-options.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { ScmInput } from '@theia/scm/lib/browser/scm-input.js';
+import {
+    MergeEditorOpenerOptions, MergeEditorSideWidgetState,
+    MergeEditorUri
+} from '@theia/scm/lib/browser/merge-editor/merge-editor.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { GitPreferences } from '../common/git-preferences.js';
 
 @injectable()
 export class GitScmProviderOptions {
@@ -622,7 +634,7 @@ export class GitAmendSupport implements ScmAmendSupport {
     }
 }
 
-export interface GitScmCommit extends ScmHistoryCommit {
+export type GitScmCommit = ScmHistoryCommit & {
     scmProvider: GitScmProvider;
     gitFileChanges: GitScmFileChange[];
 }

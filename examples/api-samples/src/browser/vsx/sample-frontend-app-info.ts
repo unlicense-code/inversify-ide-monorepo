@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Endpoint } from '@theia/core/lib/browser';
-import { injectable, interfaces } from '@theia/core/shared/inversify';
-import { SampleAppInfo } from '../../common/vsx/sample-app-info';
+import { Endpoint } from '@theia/core/lib/browser/index.js';
+import { injectable, interfaces } from 'inversify';
+import { SampleAppInfo } from '../../common/vsx/sample-app-info.js';
 
 @injectable()
 export class SampleFrontendAppInfo implements SampleAppInfo {

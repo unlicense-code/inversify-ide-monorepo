@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,7 +19,7 @@ import type { OVSXRouterConfig } from '@theia/ovsx-client';
 export const VSX_ENVIRONMENT_PATH = '/services/vsx-environment';
 
 export const VSXEnvironment = Symbol('VSXEnvironment');
-export interface VSXEnvironment {
+export type VSXEnvironment = {
     getRateLimit(): Promise<number>;
     getRegistryUri(): Promise<string>;
     getRegistryApiUri(): Promise<string>;

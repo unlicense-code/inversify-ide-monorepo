@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
+import { interfaces } from 'inversify';
 import {
     createPreferenceProxy,
     PreferenceProxy,
@@ -24,10 +24,10 @@ import {
     PreferenceContribution,
     PreferenceProxyFactory,
     PreferenceSchema,
-} from '@theia/core/lib/common/preferences';
-import { nls } from '@theia/core/lib/common/nls';
+} from '@theia/core';
+import { nls } from '@theia/core/lib/common/nls.js'
 import { environment } from '@theia/core';
-import { editorGeneratedPreferenceProperties, GeneratedEditorPreferences } from './editor-generated-preference-schema';
+import { editorGeneratedPreferenceProperties, GeneratedEditorPreferences } from './editor-generated-preference-schema.js';
 
 /* eslint-disable max-len,no-null/no-null */
 // #region src/vs/workbench/contrib/codeActions/browser/codeActionsContribution.ts
@@ -59,7 +59,7 @@ const codeActionsContributionSchema: PreferenceSchema['properties'] = {
     }
 };
 
-interface CodeActionsContributionProperties {
+type CodeActionsContributionProperties = {
     'editor.codeActionsOnSave': string[] | ({ 'source.fixAll': boolean } & Record<string, boolean>)
 }
 
@@ -134,7 +134,7 @@ const fileContributionSchema: PreferenceSchema['properties'] = {
     }
 };
 
-interface FileContributionEditorPreferences {
+type FileContributionEditorPreferences = {
     'editor.formatOnSave': boolean;
     'editor.formatOnSaveMode': 'file' | 'modifications' | 'modificationsIfAvailable';
     'files.eol': '\n' | '\r\n' | 'auto';
@@ -153,7 +153,7 @@ const formatActionsMultipleSchema: PreferenceSchema['properties'] = {
         default: null,
     }
 };
-interface FormatActionsMultipleProperties {
+type FormatActionsMultipleProperties = {
     'editor.defaultFormatter': string | null;
 }
 // #endregion
@@ -173,7 +173,7 @@ const theiaEditorSchema: PreferenceSchema['properties'] = {
     },
 };
 
-interface TheiaEditorProperties {
+type TheiaEditorProperties = {
     'editor.formatOnSaveTimeout': number;
     'editor.history.persistClosedEditors': boolean;
 }
@@ -194,11 +194,7 @@ export const editorPreferenceSchema: PreferenceSchema = {
     properties: combinedProperties,
 };
 
-export interface EditorConfiguration extends GeneratedEditorPreferences,
-    CodeActionsContributionProperties,
-    FileContributionEditorPreferences,
-    FormatActionsMultipleProperties,
-    TheiaEditorProperties { }
+export type EditorConfiguration = GeneratedEditorPreferences & CodeActionsContributionProperties & FileContributionEditorPreferences & FormatActionsMultipleProperties & TheiaEditorProperties & { }
 
 export type EndOfLinePreference = '\n' | '\r\n' | 'auto';
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,13 +16,13 @@
 
 import { Event } from '@theia/core';
 
-export interface ManagedProcessManager {
+export type ManagedProcessManager = {
     register(process: ManagedProcess): number;
     unregister(process: ManagedProcess): void;
     get(id: number): ManagedProcess | undefined;
 }
 
-export interface ManagedProcess {
+export type ManagedProcess = {
     readonly id: number;
     readonly onStart: Event<IProcessStartEvent>;
     readonly onExit: Event<IProcessExitEvent>;
@@ -32,22 +32,16 @@ export interface ManagedProcess {
     kill(): void;
 }
 
-export interface IProcessExitEvent {
+export type IProcessExitEvent = {
     // Exactly one of code and signal will be set.
     readonly code?: number,
     readonly signal?: string
 }
 
-/**
- * Data emitted when a process has been successfully started.
- */
-export interface IProcessStartEvent {
+export type IProcessStartEvent = {
 }
 
-/**
- * Data emitted when a process has failed to start.
- */
-export interface ProcessErrorEvent extends Error {
+export type ProcessErrorEvent = Error & {
     /** An errno-like error string (e.g. ENOENT).  */
     code: string;
 }

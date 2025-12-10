@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { VercelAiPreferencesSchema } from '../common/vercel-ai-preferences';
-import { FrontendApplicationContribution, RemoteConnectionProvider, ServiceConnectionProvider } from '@theia/core/lib/browser';
-import { VercelAiFrontendApplicationContribution } from './vercel-ai-frontend-application-contribution';
-import { VERCEL_AI_LANGUAGE_MODELS_MANAGER_PATH, VercelAiLanguageModelsManager } from '../common';
+import { ContainerModule } from 'inversify';
+import { VercelAiPreferencesSchema } from '../common/vercel-ai-preferences.js';
+import { FrontendApplicationContribution, RemoteConnectionProvider, ServiceConnectionProvider } from '@theia/core/lib/browser/index.js';
+import { VercelAiFrontendApplicationContribution } from './vercel-ai-frontend-application-contribution.js';
+import { VERCEL_AI_LANGUAGE_MODELS_MANAGER_PATH, VercelAiLanguageModelsManager } from '../common/index.js';
 import { PreferenceContribution } from '@theia/core';
 
 export default new ContainerModule(bind => {

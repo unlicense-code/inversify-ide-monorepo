@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,10 +19,10 @@ import {
     Layout,
     MAXIMIZED_CLASS,
     TheiaSplitPanel,
-} from '@theia/core/lib/browser';
-import { inject, injectable, interfaces, postConstruct } from '@theia/core/shared/inversify';
-import { Toolbar, ToolbarFactory } from './toolbar-interfaces';
-import { ToolbarPreferences, TOOLBAR_ENABLE_PREFERENCE_ID } from '../common/toolbar-preference-contribution';
+} from '@theia/core/lib/browser/index.js';
+import { inject, injectable, interfaces, postConstruct } from 'inversify';
+import { Toolbar, ToolbarFactory } from './toolbar-interfaces.js';
+import { ToolbarPreferences, TOOLBAR_ENABLE_PREFERENCE_ID } from '../common/toolbar-preference-contribution.js';
 import { PreferenceService } from '@theia/core';
 
 @injectable()

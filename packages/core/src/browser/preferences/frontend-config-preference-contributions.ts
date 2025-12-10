@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { injectable } from 'inversify';
-import { PreferenceContribution, PreferenceSchema, PreferenceSchemaService } from '../../common/preferences/preference-schema';
-import { FrontendApplicationConfigProvider } from '../frontend-application-config-provider';
-import { FrontendApplicationPreferenceConfig } from './preference-contribution';
-import { PreferenceLanguageOverrideService } from '../../common/preferences/preference-language-override-service';
-import { PreferenceScope } from '../../common/preferences';
-import { DefaultTheme } from '@theia/application-package/lib/application-props';
+import { PreferenceContribution, PreferenceSchema, PreferenceSchemaService } from '../../common/preferences/preference-schema.js';
+import { FrontendApplicationConfigProvider } from '../frontend-application-config-provider.js';
+import { FrontendApplicationPreferenceConfig } from './preference-contribution.js';
+import { PreferenceLanguageOverrideService } from '../../common/preferences/preference-language-override-service.js';
+import { PreferenceScope } from '../../common/preferences/index.js';
+import { DefaultTheme } from '@theia/application-package/lib/application-props.js';
 
 @injectable()
 export class FrontendConfigPreferenceContribution implements PreferenceContribution {

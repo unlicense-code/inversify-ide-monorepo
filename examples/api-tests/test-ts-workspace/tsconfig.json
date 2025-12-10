@@ -14,15 +14,17 @@
     "emitDecoratorMetadata": true,
     "downlevelIteration": true,
     "resolveJsonModule": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "target": "ES2017",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ESNext",
     "jsx": "react",
     "lib": [
-      "ES2017",
-      "ES2020.Promise",
-      "dom"
+      "ESNext",
+      "DOM",
+      "DOM.AsyncIterable"
     ],
-    "sourceMap": true
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   }
 }

@@ -1,6 +1,7 @@
 {
   "name": "@theia/api-tests",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia API tests",
   "dependencies": {
     "@theia/core": "1.66.0"

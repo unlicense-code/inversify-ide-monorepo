@@ -20,11 +20,11 @@
  *--------------------------------------------------------------------------------------------*/
 // code copied and modified from https://github.com/microsoft/vscode/blob/1.47.3/src/vs/workbench/api/browser/mainThreadAuthentication.ts
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { AuthenticationExt, AuthenticationMain, MAIN_RPC_CONTEXT } from '../../common/plugin-api-rpc';
-import { RPCProtocol } from '../../common/rpc-protocol';
-import { MessageService } from '@theia/core/lib/common/message-service';
-import { ConfirmDialog, Dialog, StorageService } from '@theia/core/lib/browser';
+import { interfaces } from 'inversify';
+import { AuthenticationExt, AuthenticationMain, MAIN_RPC_CONTEXT } from '../../common/plugin-api-rpc.js';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
+import { MessageService } from '@theia/core/lib/common/message-service.js';
+import { ConfirmDialog, Dialog, StorageService } from '@theia/core/lib/browser/index.js';
 import {
     AuthenticationProvider,
     AuthenticationProviderSessionOptions,
@@ -32,11 +32,11 @@ import {
     AuthenticationSession,
     AuthenticationSessionAccountInformation,
     readAllowedExtensions
-} from '@theia/core/lib/browser/authentication-service';
-import { QuickPickService } from '@theia/core/lib/common/quick-pick-service';
+} from '@theia/core/lib/browser/authentication-service.js';
+import { QuickPickService } from '@theia/core/lib/common/quick-pick-service.js';
 import * as theia from '@theia/plugin';
-import { QuickPickValue } from '@theia/core/lib/browser/quick-input/quick-input-service';
-import { nls } from '@theia/core/lib/common/nls';
+import { QuickPickValue } from '@theia/core/lib/browser/quick-input/quick-input-service.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 import { isObject } from '@theia/core';
 
 export function getAuthenticationProviderActivationEvent(id: string): string { return `onAuthenticationRequest:${id}`; }
@@ -278,7 +278,7 @@ async function addAccountUsage(storageService: StorageService, providerId: strin
     await storageService.setData(accountKey, JSON.stringify(usages));
 }
 
-interface AccountUsage {
+type AccountUsage = {
     extensionId: string;
     extensionName: string;
     lastUsed: number;

@@ -14,33 +14,33 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 let disableJSDOM = enableJSDOM();
 
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 FrontendApplicationConfigProvider.set({});
 
 import { CommandService, Disposable, ILogger, MessageService } from '@theia/core';
-import { LabelProvider, OpenerService } from '@theia/core/lib/browser';
-import { FileUri } from '@theia/core/lib/node';
-import { Container } from '@theia/core/shared/inversify';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { ScmInput } from '@theia/scm/lib/browser/scm-input';
+import { LabelProvider, OpenerService } from '@theia/core/lib/browser/index.js';
+import { FileUri } from '@theia/core/lib/node/index.js';
+import { Container } from 'inversify';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { ScmInput } from '@theia/scm/lib/browser/scm-input.js';
 import { expect } from 'chai';
 import * as fs from 'fs-extra';
 import * as os from 'os';
 import * as path from 'path';
 import { rimraf } from 'rimraf';
 import * as sinon from 'sinon';
-import { Git, GitFileStatus, Repository } from '../common';
-import { DugiteGit } from '../node/dugite-git';
-import { DefaultGitEnvProvider, GitEnvProvider } from '../node/env/git-env-provider';
-import { bindGit } from '../node/git-backend-module';
-import { GitRepositoryWatcher, GitRepositoryWatcherFactory } from '../node/git-repository-watcher';
-import { GitErrorHandler } from './git-error-handler';
-import { GitPreferences } from '../common/git-preferences';
-import { GitScmProvider, GitScmProviderOptions } from './git-scm-provider';
+import { Git, GitFileStatus, Repository } from '../common/index.js';
+import { DugiteGit } from '../node/dugite-git.js';
+import { DefaultGitEnvProvider, GitEnvProvider } from '../node/env/git-env-provider.js';
+import { bindGit } from '../node/git-backend-module.js';
+import { GitRepositoryWatcher, GitRepositoryWatcherFactory } from '../node/git-repository-watcher.js';
+import { GitErrorHandler } from './git-error-handler.js';
+import { GitPreferences } from '../common/git-preferences.js';
+import { GitScmProvider, GitScmProviderOptions } from './git-scm-provider.js';
 
 disableJSDOM();
 

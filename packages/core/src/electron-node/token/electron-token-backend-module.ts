@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { ContainerModule } from 'inversify';
-import { BackendApplicationContribution } from '../../node';
-import { WsRequestValidatorContribution } from '../../node/ws-request-validators';
-import { ElectronTokenBackendContribution } from './electron-token-backend-contribution';
-import { ElectronTokenValidator } from './electron-token-validator';
+import { BackendApplicationContribution } from '../../node/index.js';
+import { WsRequestValidatorContribution } from '../../node/ws-request-validators.js';
+import { ElectronTokenBackendContribution } from './electron-token-backend-contribution.js';
+import { ElectronTokenValidator } from './electron-token-validator.js';
 
 export default new ContainerModule((bind, unbind, isBound, rebind) => {
     bind(ElectronTokenBackendContribution).toSelf().inSingletonScope();

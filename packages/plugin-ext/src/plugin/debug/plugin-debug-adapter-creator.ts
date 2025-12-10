@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import * as theia from '@theia/plugin';
-import { DebugAdapter } from '@theia/debug/lib/common/debug-model';
-import { PluginPackageDebuggersContribution } from '../../common';
-import { DebugAdapterInlineImplementation } from '../types-impl';
-import { InlineDebugAdapter } from '@theia/debug/lib/common/inline-debug-adapter';
+import { DebugAdapter } from '@theia/debug/lib/common/debug-model.js';
+import { PluginPackageDebuggersContribution } from '../../common/index.js';
+import { DebugAdapterInlineImplementation } from '../types-impl.js';
+import { InlineDebugAdapter } from '@theia/debug/lib/common/inline-debug-adapter.js';
 
 export class PluginDebugAdapterCreator {
     public async resolveDebugAdapterExecutable(_pluginPath: string, _debuggerContribution: PluginPackageDebuggersContribution): Promise<theia.DebugAdapterExecutable | undefined> {

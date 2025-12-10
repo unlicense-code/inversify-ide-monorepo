@@ -25,7 +25,7 @@ import { Localization, sortLocalization } from './common';
 
 const globPromise = promisify(glob);
 
-export interface ExtractionOptions {
+export type ExtractionOptions = {
     root?: string
     output?: string
     exclude?: string

@@ -15,15 +15,15 @@
 // *****************************************************************************
 
 import { Event, Emitter, URI, ILogger, DisposableCollection } from '@theia/core';
-import { inject, injectable, optional, postConstruct } from '@theia/core/shared/inversify';
-import { AIVariableArg, AIVariableContext, AIVariableService, createAIResolveVariableCache, ResolvedAIVariable } from './variable-service';
-import { ToolInvocationRegistry } from './tool-invocation-registry';
-import { toolRequestToPromptText } from './language-model-util';
-import { ToolRequest } from './language-model';
-import { matchFunctionsRegEx, matchVariablesRegEx } from './prompt-service-util';
-import { AISettingsService } from './settings-service';
+import { inject, injectable, optional, postConstruct } from 'inversify';
+import { AIVariableArg, AIVariableContext, AIVariableService, createAIResolveVariableCache, ResolvedAIVariable } from './variable-service.js';
+import { ToolInvocationRegistry } from './tool-invocation-registry.js';
+import { toolRequestToPromptText } from './language-model-util.js';
+import { ToolRequest } from './language-model.js';
+import { matchFunctionsRegEx, matchVariablesRegEx } from './prompt-service-util.js';
+import { AISettingsService } from './settings-service.js';
 
-export interface CommandPromptFragmentMetadata {
+export type CommandPromptFragmentMetadata = {
     /** Mark this template as available as a slash command */
     isCommand?: boolean;
 
@@ -40,10 +40,7 @@ export interface CommandPromptFragmentMetadata {
     commandAgents?: string[];
 }
 
-/**
- * Represents a basic prompt fragment with an ID and template content.
- */
-export interface BasePromptFragment extends CommandPromptFragmentMetadata {
+export type BasePromptFragment = CommandPromptFragmentMetadata & {
     /** Unique identifier for this prompt fragment */
     id: string;
 
@@ -51,10 +48,7 @@ export interface BasePromptFragment extends CommandPromptFragmentMetadata {
     template: string;
 }
 
-/**
- * Represents a customized prompt fragment with an assigned customization ID and priority.
- */
-export interface CustomizedPromptFragment extends BasePromptFragment {
+export type CustomizedPromptFragment = BasePromptFragment & {
     /**
      * Unique identifier for this customization
      */
@@ -90,15 +84,9 @@ export function isCustomizedPromptFragment(fragment: PromptFragment): fragment i
     return 'customizationId' in fragment && 'priority' in fragment;
 }
 
-/**
- * Map of prompt fragment IDs to prompt fragments
- */
-export interface PromptMap { [id: string]: PromptFragment }
+export type PromptMap = { [id: string]: PromptFragment }
 
-/**
- * Represents a prompt fragment with all variables and function references resolved
- */
-export interface ResolvedPromptFragment {
+export type ResolvedPromptFragment = {
     /** The fragment ID */
     id: string;
 
@@ -112,10 +100,7 @@ export interface ResolvedPromptFragment {
     variables?: ResolvedAIVariable[];
 }
 
-/**
- * Describes a custom agent with its properties
- */
-export interface CustomAgentDescription {
+export type CustomAgentDescription = {
     /** Unique identifier for this agent */
     id: string;
 
@@ -158,7 +143,7 @@ export namespace CustomAgentDescription {
  * Service responsible for customizing prompt fragments
  */
 export const PromptFragmentCustomizationService = Symbol('PromptFragmentCustomizationService');
-export interface PromptFragmentCustomizationService {
+export type PromptFragmentCustomizationService = {
     /**
      * Event fired when a prompt fragment is changed
      */
@@ -291,7 +276,7 @@ export interface PromptFragmentCustomizationService {
  * Service for managing and resolving prompt fragments
  */
 export const PromptService = Symbol('PromptService');
-export interface PromptService {
+export type PromptService = {
     /**
      * Event fired when the prompts change
      */

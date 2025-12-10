@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,16 +16,15 @@
 
 import * as yargs from 'yargs';
 import { injectable } from 'inversify';
-import { LogLevel } from '../common/logger';
-import { CliContribution } from './cli';
+import { LogLevel } from '../common/logger.js';
+import { CliContribution } from './cli.js';
 import * as fs from 'fs-extra';
 import { AsyncSubscription, subscribe } from '@parcel/watcher';
-import { Event, Emitter } from '../common/event';
+import { Event, Emitter } from '../common/event.js';
 import * as path from 'path';
-import { Disposable, DisposableCollection } from '../common';
+import { Disposable, DisposableCollection } from '../common/index.js';
 
-/** Maps logger names to log levels.  */
-export interface LogLevels {
+export type LogLevels = {
     [key: string]: LogLevel,
 }
 

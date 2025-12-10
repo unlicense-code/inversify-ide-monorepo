@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { MetricOutput, AnalyticsFromRequests } from '../../common/plugin-metrics-types';
-import { injectable } from '@theia/core/shared/inversify';
+import { MetricOutput, AnalyticsFromRequests } from '../../common/plugin-metrics-types.js';
+import { injectable } from 'inversify';
 
 @injectable()
 export class PluginMetricTimeCount implements MetricOutput {

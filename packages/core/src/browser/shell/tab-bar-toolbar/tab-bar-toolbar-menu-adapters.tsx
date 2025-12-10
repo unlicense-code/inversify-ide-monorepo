@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,14 +16,15 @@
 
 import { Widget } from '@lumino/widgets';
 import * as React from 'react';
-import { CommandRegistry, Event } from '../../../common';
-import { NAVIGATION, RenderedToolbarAction } from './tab-bar-toolbar-types';
-import { TabBarToolbar, toAnchor } from './tab-bar-toolbar';
-import { ACTION_ITEM, codicon } from '../../widgets';
-import { ContextMenuRenderer } from '../../context-menu-renderer';
-import { TabBarToolbarItem } from './tab-toolbar-item';
-import { ContextKeyService, ContextMatcher } from '../../context-key-service';
-import { CommandMenu, CompoundMenuNode, ContextExpressionMatcher, Group, MenuModelRegistry, MenuNode, MenuPath, RenderedMenuNode, Submenu } from '../../../common/menu';
+import { CommandRegistry, Event } from '../../../common/index.js';
+import { NAVIGATION, RenderedToolbarAction } from './tab-bar-toolbar-types.js';
+import { TabBarToolbar, toAnchor } from './tab-bar-toolbar.js';
+import { ACTION_ITEM, codicon } from '../../widgets/widget.js';
+import { ContextMenuRenderer } from '../../context-menu-renderer.js';
+import { TabBarToolbarItem } from './tab-toolbar-item.js';
+import { ContextKeyService, ContextMatcher } from '../../context-key-service.js';
+import { CommandMenu, CompoundMenuNode, ContextExpressionMatcher, Group,
+     MenuModelRegistry, MenuNode, MenuPath, RenderedMenuNode, Submenu } from '../../../common/menu/index.js';
 
 export const TOOLBAR_WRAPPER_ID_SUFFIX = '-as-tabbar-toolbar-item';
 

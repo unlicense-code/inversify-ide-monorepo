@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import { ILogger } from '@theia/core';
-import { inject, injectable, named } from '@theia/core/shared/inversify';
+import { inject, injectable, named } from 'inversify';
 import type { Thread } from '@openai/codex-sdk';
 import {
     CodexBackendRequest,
     CodexClient,
     CodexService
-} from '../common/codex-service';
+} from '../common/codex-service.js';
 
 @injectable()
 export class CodexServiceImpl implements CodexService {

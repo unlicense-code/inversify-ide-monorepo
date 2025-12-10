@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,33 +14,33 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { BaseWidget, LabelProvider, Message, OpenerService, Widget } from '@theia/core/lib/browser';
-import { ArrayUtils } from '@theia/core/lib/common/types';
+import { inject, injectable, postConstruct } from 'inversify';
+import { BaseWidget, LabelProvider, Message, OpenerService, Widget } from '@theia/core/lib/browser/index.js';
+import { ArrayUtils } from '@theia/core/lib/common/types.js';
 import { DebugProtocol } from '@vscode/debugprotocol';
-import { InstructionBreakpoint } from '../breakpoint/breakpoint-marker';
-import { BreakpointManager } from '../breakpoint/breakpoint-manager';
-import { DebugSessionManager } from '../debug-session-manager';
+import { InstructionBreakpoint } from '../breakpoint/breakpoint-marker.js';
+import { BreakpointManager } from '../breakpoint/breakpoint-manager.js';
+import { DebugSessionManager } from '../debug-session-manager.js';
 import { Emitter, IDisposable, IRange, Range, Uri } from '@theia/monaco-editor-core';
 import { nls } from '@theia/core';
-import { BareFontInfo } from '@theia/monaco-editor-core/esm/vs/editor/common/config/fontInfo';
-import { WorkbenchTable } from '@theia/monaco-editor-core/esm/vs/platform/list/browser/listService';
-import { DebugState, DebugSession } from '../debug-session';
-import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences';
-import { PixelRatio } from '@theia/monaco-editor-core/esm/vs/base/browser/pixelRatio';
-import { DebugPreferences } from '../../common/debug-preferences';
-import { DebugThread } from '../model/debug-thread';
-import { Event } from '@theia/monaco-editor-core/esm/vs/base/common/event';
-import { DisassembledInstructionEntry } from './disassembly-view-utilities';
-import { DisassemblyViewTableDelegate } from './disassembly-view-table-delegate';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { InstructionRenderer } from './disassembly-view-instruction-renderer';
-import { IInstantiationService } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/instantiation';
-import { BreakpointRenderer } from './disassembly-view-breakpoint-renderer';
-import { AccessibilityProvider } from './disassembly-view-accessibility-provider';
-import { editorBackground } from '@theia/monaco-editor-core/esm/vs/platform/theme/common/colorRegistry';
-import { Dimension } from '@theia/monaco-editor-core/esm/vs/base/browser/dom';
-import { URI } from '@theia/core/lib/common/uri';
+import { BareFontInfo } from '@theia/monaco-editor-core/esm/vs/editor/common/config/fontInfo.js';
+import { WorkbenchTable } from '@theia/monaco-editor-core/esm/vs/platform/list/browser/listService.js';
+import { DebugState, DebugSession } from '../debug-session.js';
+import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences.js';
+import { PixelRatio } from '@theia/monaco-editor-core/esm/vs/base/browser/pixelRatio.js';
+import { DebugPreferences } from '../../common/debug-preferences.js';
+import { DebugThread } from '../model/debug-thread.js';
+import { Event } from '@theia/monaco-editor-core/esm/vs/base/common/event.js';
+import { DisassembledInstructionEntry } from './disassembly-view-utilities.js';
+import { DisassemblyViewTableDelegate } from './disassembly-view-table-delegate.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { InstructionRenderer } from './disassembly-view-instruction-renderer.js';
+import { IInstantiationService } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/instantiation.js';
+import { BreakpointRenderer } from './disassembly-view-breakpoint-renderer.js';
+import { AccessibilityProvider } from './disassembly-view-accessibility-provider.js';
+import { editorBackground } from '@theia/monaco-editor-core/esm/vs/platform/theme/common/colorRegistry.js';
+import { Dimension } from '@theia/monaco-editor-core/esm/vs/base/browser/dom.js';
+import { URI } from '@theia/core/lib/common/uri.js';
 
 // This file is adapted from https://github.com/microsoft/vscode/blob/c061ce5c24fc480342fbc5f23244289d633c56eb/src/vs/workbench/contrib/debug/browser/disassemblyView.ts
 
@@ -134,7 +134,7 @@ export class DisassemblyViewWidget extends BaseWidget {
         this.toDispose.push(instructionRenderer);
         this.getTable(monacoInstantiationService, tableDelegate, instructionRenderer);
         this.reloadDisassembly();
-        this._register(this._disassembledInstructions!.onDidScroll(e => {
+        this._register(this._disassembledInstructions!.onDidScroll((e: any) => {
             if (this._loadingLock) {
                 return;
             }

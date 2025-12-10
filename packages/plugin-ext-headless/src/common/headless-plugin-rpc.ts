@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { createProxyIdentifier } from '@theia/plugin-ext/lib/common/rpc-protocol';
+import { createProxyIdentifier } from '@theia/plugin-ext/lib/common/rpc-protocol.js';
 import { AbstractPluginManagerExt, EnvInit } from '@theia/plugin-ext';
-import { KeysToKeysToAnyValue } from '@theia/plugin-ext/lib/common/types';
+import { KeysToKeysToAnyValue } from '@theia/plugin-ext/lib/common/types.js';
 import {
     MAIN_RPC_CONTEXT, PLUGIN_RPC_CONTEXT
-} from '@theia/plugin-ext/lib/common/plugin-api-rpc';
-import { ExtPluginApi } from './plugin-ext-headless-api-contribution';
+} from '@theia/plugin-ext/lib/common/plugin-api-rpc.js';
+import type { ExtPluginApi } from '../common/plugin-ext-headless-api-contribution.js';
 
 export const HEADLESSPLUGIN_RPC_CONTEXT = {
     MESSAGE_REGISTRY_MAIN: PLUGIN_RPC_CONTEXT.MESSAGE_REGISTRY_MAIN,
@@ -36,11 +36,11 @@ export const HEADLESSMAIN_RPC_CONTEXT = {
 
 export type HeadlessEnvInit = Pick<EnvInit, 'language' | 'shell' | 'appName' | 'appHost'>;
 
-export interface HeadlessPluginManagerInitializeParams {
+export type HeadlessPluginManagerInitializeParams = {
     activationEvents: string[];
     globalState: KeysToKeysToAnyValue;
     env: HeadlessEnvInit;
     extApi?: ExtPluginApi[];
 }
 
-export interface HeadlessPluginManagerExt extends AbstractPluginManagerExt<HeadlessPluginManagerInitializeParams> { }
+export type HeadlessPluginManagerExt = AbstractPluginManagerExt<HeadlessPluginManagerInitializeParams> & { }

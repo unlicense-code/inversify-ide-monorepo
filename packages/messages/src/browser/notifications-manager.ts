@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,26 +14,26 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { MessageClient, MessageType, Message as PlainMessage, ProgressMessage, ProgressUpdate, CancellationToken } from '@theia/core/lib/common';
-import { deepClone } from '@theia/core/lib/common/objects';
-import { Emitter } from '@theia/core';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { injectable, inject, postConstruct } from 'inversify';
+import { MessageClient, MessageType, Message as PlainMessage, ProgressMessage, ProgressUpdate, CancellationToken } from '@theia/core/lib/common/index.js';
+import { deepClone } from '@theia/core/lib/common/objects.js';
+import { Emitter } from '@theia/core/lib/common/index.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
 import { Md5 } from 'ts-md5';
-import throttle = require('@theia/core/shared/lodash.throttle');
-import { NotificationPreferences } from '../common/notification-preferences';
-import { ContextKeyService, ContextKey } from '@theia/core/lib/browser/context-key-service';
-import { OpenerService } from '@theia/core/lib/browser';
-import URI from '@theia/core/lib/common/uri';
-import { NotificationContentRenderer } from './notification-content-renderer';
+import throttle from 'lodash.throttle';
+import { NotificationPreferences } from '../common/notification-preferences.js';
+import { ContextKeyService, ContextKey } from '@theia/core/lib/browser/context-key-service.js';
+import { OpenerService } from '@theia/core/lib/browser/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { NotificationContentRenderer } from './notification-content-renderer.js';
 
-export interface NotificationUpdateEvent {
+export type NotificationUpdateEvent = {
     readonly notifications: Notification[];
     readonly toasts: Notification[];
     readonly visibilityState: Notification.Visibility;
 }
 
-export interface Notification {
+export type Notification = {
     messageId: string;
     message: string;
     source?: string;

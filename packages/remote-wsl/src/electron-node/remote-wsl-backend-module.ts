@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2025 TypeFox and others.
+// Copyright (C) 2025 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { RemoteWslConnectionProviderImpl } from './remote-wsl-connection-provider';
-import { RemoteWslConnectionProvider, RemoteWslConnectionProviderPath } from '../electron-common/remote-wsl-connection-provider';
-import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module';
+import { ContainerModule } from 'inversify';
+import { RemoteWslConnectionProviderImpl } from './remote-wsl-connection-provider.js';
+import { RemoteWslConnectionProvider, RemoteWslConnectionProviderPath } from '../electron-common/remote-wsl-connection-provider.js';
+import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module.js';
 import { ConnectionHandler, RpcConnectionHandler } from '@theia/core';
-import { WslWorkspaceHandler } from './wsl-workspace-handler';
-import { WorkspaceHandlerContribution } from '@theia/workspace/lib/node/default-workspace-server';
+import { WslWorkspaceHandler } from './wsl-workspace-handler.js';
+import { WorkspaceHandlerContribution } from '@theia/workspace/lib/node/index.js';
 
 export const wslRemoteConnectionModule = ConnectionContainerModule.create(({ bind, bindBackendService }) => {
     bind(RemoteWslConnectionProviderImpl).toSelf().inSingletonScope();

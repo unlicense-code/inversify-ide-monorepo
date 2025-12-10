@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,14 +15,14 @@
 // *****************************************************************************
 
 import { expect } from 'chai';
-import * as yargs from 'yargs';
+import yargs from 'yargs';
 import * as temp from 'temp';
 import * as fs from 'fs';
 import { ContainerModule, Container } from 'inversify';
-import { LogLevel } from '../common/logger';
-import { LogLevelCliContribution } from './logger-cli-contribution';
-import * as sinon from 'sinon';
-import { Disposable, DisposableCollection } from '../common';
+import { LogLevel } from '../common/logger.js';
+import { LogLevelCliContribution } from './logger-cli-contribution.js';
+import sinon from 'sinon';
+import { Disposable, DisposableCollection } from '../common/index.js';
 
 // Allow creating temporary files, but remove them when we are done.
 const track = temp.track();
@@ -54,8 +54,9 @@ describe('log-level-cli-contribution', () => {
         container.load(module);
 
         cli = container.get(LogLevelCliContribution);
-        yargs.global([]);
-        cli.configure(yargs);
+        const yargsInstance = yargs([]);
+        yargsInstance.global([]);
+        cli.configure(yargsInstance);
 
         consoleErrorSpy = sinon.spy(console, 'error');
     });

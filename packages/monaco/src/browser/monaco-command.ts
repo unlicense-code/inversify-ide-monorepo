@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,24 +14,24 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, optional } from '@theia/core/shared/inversify';
-import { Position, Location } from '@theia/core/shared/vscode-languageserver-protocol';
-import { URI as CodeURI } from '@theia/core/shared/vscode-uri';
+import { injectable, inject, optional } from 'inversify';
+import { Position, Location } from 'vscode-languageserver-protocol';
+import { URI as CodeURI } from 'vscode-uri';
 import { cloneAndChange, URI } from '@theia/core';
-import { CommandContribution, CommandRegistry, CommandHandler } from '@theia/core/lib/common/command';
-import { CommonCommands, QuickInputService, ApplicationShell } from '@theia/core/lib/browser';
-import { EditorCommands, EditorManager, EditorWidget } from '@theia/editor/lib/browser';
-import { MonacoEditor } from './monaco-editor';
-import { MonacoCommandRegistry, MonacoEditorCommandHandler } from './monaco-command-registry';
-import { ProtocolToMonacoConverter } from './protocol-to-monaco-converter';
-import { nls } from '@theia/core/lib/common/nls';
-import { EditorExtensionsRegistry } from '@theia/monaco-editor-core/esm/vs/editor/browser/editorExtensions';
-import { CommandsRegistry, ICommandService } from '@theia/monaco-editor-core/esm/vs/platform/commands/common/commands';
+import { CommandContribution, CommandRegistry, CommandHandler } from '@theia/core/lib/common/command.js';
+import { CommonCommands, QuickInputService, ApplicationShell } from '@theia/core/lib/browser/index.js';
+import { EditorCommands, EditorManager, EditorWidget } from '@theia/editor/lib/browser/index.js';
+import { MonacoEditor } from './monaco-editor.js';
+import { MonacoCommandRegistry, MonacoEditorCommandHandler } from './monaco-command-registry.js';
+import { ProtocolToMonacoConverter } from './protocol-to-monaco-converter.js';
+import { nls } from '@theia/core/lib/common/nls.js';
+import { EditorExtensionsRegistry } from '@theia/monaco-editor-core/esm/vs/editor/browser/editorExtensions.js';
+import { CommandsRegistry, ICommandService } from '@theia/monaco-editor-core/esm/vs/platform/commands/common/commands.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { EndOfLineSequence } from '@theia/monaco-editor-core/esm/vs/editor/common/model';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { IInstantiationService } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/instantiation';
-import { ICodeEditorService } from '@theia/monaco-editor-core/esm/vs/editor/browser/services/codeEditorService';
+import { EndOfLineSequence } from '@theia/monaco-editor-core/esm/vs/editor/common/model.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { IInstantiationService } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/instantiation.js';
+import { ICodeEditorService } from '@theia/monaco-editor-core/esm/vs/editor/browser/services/codeEditorService.js';
 
 export namespace MonacoCommands {
 

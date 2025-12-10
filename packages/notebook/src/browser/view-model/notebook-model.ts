@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 Typefox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,27 +15,27 @@
 // *****************************************************************************
 
 import { Disposable, Emitter, Event, QueueableEmitter, Resource, URI } from '@theia/core';
-import { Saveable, SaveOptions } from '@theia/core/lib/browser';
+import { Saveable, SaveOptions } from '@theia/core/lib/browser/index.js';
 import {
     CellData, CellEditType, CellUri, NotebookCellInternalMetadata,
     NotebookCellMetadata,
     NotebookCellsChangeType, NotebookCellTextModelSplice, NotebookData,
     NotebookDocumentMetadata,
-} from '../../common';
+} from '../../common/index.js';
 import {
     NotebookContentChangedEvent, NotebookModelWillAddRemoveEvent,
     CellEditOperation, NullablePartialNotebookCellInternalMetadata,
     NullablePartialNotebookCellMetadata
-} from '../notebook-types';
-import { NotebookSerializer } from '../service/notebook-service';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { NotebookCellModel, NotebookCellModelFactory, NotebookCodeEditorFindMatch } from './notebook-cell-model';
-import { inject, injectable, interfaces, postConstruct } from '@theia/core/shared/inversify';
-import { UndoRedoService } from '@theia/editor/lib/browser/undo-redo-service';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
-import type { NotebookModelResolverService } from '../service/notebook-model-resolver-service';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
-import { NotebookEditorFindMatch, NotebookEditorFindMatchOptions } from '../view/notebook-find-widget';
+} from '../notebook-types.js';
+import { NotebookSerializer } from '../service/notebook-service.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { NotebookCellModel, NotebookCellModelFactory, NotebookCodeEditorFindMatch } from './notebook-cell-model.js';
+import { inject, injectable, interfaces, postConstruct } from 'inversify';
+import { UndoRedoService } from '@theia/editor/lib/browser/undo-redo-service.js';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/markdown-string.js';
+import type { NotebookModelResolverService } from '../service/notebook-model-resolver-service.js';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
+import { NotebookEditorFindMatch, NotebookEditorFindMatchOptions } from '../view/notebook-find-widget.js';
 
 export const NotebookModelFactory = Symbol('NotebookModelFactory');
 
@@ -51,7 +51,7 @@ export function createNotebookModelContainer(parent: interfaces.Container, props
 export const NotebookModelResolverServiceProxy = Symbol('NotebookModelResolverServiceProxy');
 
 const NotebookModelProps = Symbol('NotebookModelProps');
-export interface NotebookModelProps {
+export type NotebookModelProps = {
     data: NotebookData;
     resource: Resource;
     viewType: string;

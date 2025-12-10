@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,11 +18,11 @@ import * as cp from 'child_process';
 import { inject, injectable } from 'inversify';
 import * as path from 'path';
 import { createInterface } from 'readline';
-import { Channel, ConnectionErrorHandler, Disposable, DisposableCollection, ILogger } from '../../common';
-import { IPCChannel } from './ipc-channel';
-import { createIpcEnv } from './ipc-protocol';
+import { Channel, ConnectionErrorHandler, Disposable, DisposableCollection, ILogger } from '../../common/index.js';
+import { IPCChannel } from './ipc-channel.js';
+import { createIpcEnv } from './ipc-protocol.js';
 
-export interface ResolvedIPCConnectionOptions {
+export type ResolvedIPCConnectionOptions = {
     readonly serverName: string
     readonly entryPoint: string
     readonly logger: ILogger

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { injectable, inject } from 'inversify';
-import URI from '../common/uri';
-import { OpenHandler } from './opener-service';
-import { WindowService } from './window/window-service';
-import { ExternalUriService } from './external-uri-service';
+import URI from '../common/uri.js';
+import { OpenHandler } from './opener-service.js';
+import { WindowService } from './window/window-service.js';
+import { ExternalUriService } from './external-uri-service.js';
 
-export interface HttpOpenHandlerOptions {
+export type HttpOpenHandlerOptions = {
     openExternal?: boolean
 }
 

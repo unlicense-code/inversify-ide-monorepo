@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,12 +16,12 @@
 import * as chai from 'chai';
 import * as process from 'process';
 import * as stream from 'stream';
-import { createProcessTestContainer } from './test/process-test-container';
-import { RawProcessFactory } from './raw-process';
+import { createProcessTestContainer } from './test/process-test-container.js';
+import { RawProcessFactory } from './raw-process.js';
 import * as temp from 'temp';
 import * as fs from 'fs';
 import * as path from 'path';
-import { IProcessStartEvent, ProcessErrorEvent } from './process';
+import { IProcessStartEvent, ProcessErrorEvent } from './process.js';
 
 /* Allow to create temporary files, but delete them when we're done.  */
 const track = temp.track();

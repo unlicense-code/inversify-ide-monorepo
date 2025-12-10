@@ -14,30 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { MutableChatRequestModel } from '@theia/ai-chat';
-import { ChangeSetFileElement } from '@theia/ai-chat/lib/browser/change-set-file-element';
-import { URI } from '@theia/core/lib/common/uri';
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { CLAUDE_SESSION_ID_KEY } from './claude-code-chat-agent';
+import { MutableChatRequestModel } from '@theia/ai-chat/lib/common/index.js';
+import { ChangeSetFileElement } from '@theia/ai-chat/lib/browser/change-set-file-element.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { inject, injectable, named } from 'inversify';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { CLAUDE_SESSION_ID_KEY } from './claude-code-chat-agent.js';
 import { ILogger } from '@theia/core';
 
 export const FileEditBackupService = Symbol('FileEditBackupService');
 
-/**
- * Service for managing file backup operations during Claude Code edit sessions.
- *
- * This service handles the retrieval of original file content from backup files
- * created by the file backup hooks in ClaudeCodeServiceImpl. The backup hooks
- * run before file modification tools (Write, Edit, MultiEdit) and create backups
- * in the `.claude/.edit-baks/{session_id}/` directory structure.
- *
- * @see packages/ai-claude-code/src/node/claude-code-service-impl.ts#ensureFileBackupHook
- * The coupling with the backup hooks is intentional - this service reads from
- * the same backup location that the hooks write to.
- */
-export interface FileEditBackupService {
+export type FileEditBackupService = {
     /**
      * Retrieves the original content of a file from its backup.
      *

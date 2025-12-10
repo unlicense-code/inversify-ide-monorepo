@@ -14,30 +14,30 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, named, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, named, postConstruct } from 'inversify';
 import { CommandRegistry, Emitter, isOSX, MessageService, nls, QuickInputButton, QuickInputService, QuickPickItem } from '@theia/core';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { Widget } from '@theia/core/lib/browser';
+import { ILogger } from '@theia/core/lib/common/logger.js';
+import { Widget } from '@theia/core/lib/browser/index.js';
 import {
     AI_CHAT_NEW_CHAT_WINDOW_COMMAND,
     AI_CHAT_SHOW_CHATS_COMMAND,
     ChatCommands
-} from './chat-view-commands';
-import { ChatAgent, ChatAgentLocation, ChatService, isActiveSessionChangedEvent } from '@theia/ai-chat';
-import { ChatAgentService } from '@theia/ai-chat/lib/common/chat-agent-service';
-import { EditorManager } from '@theia/editor/lib/browser/editor-manager';
-import { AbstractViewContribution } from '@theia/core/lib/browser/shell/view-contribution';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { ChatViewWidget } from './chat-view-widget';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { SecondaryWindowHandler } from '@theia/core/lib/browser/secondary-window-handler';
+} from './chat-view-commands.js';
+import { ChatAgent, ChatAgentLocation, ChatService, isActiveSessionChangedEvent } from '@theia/ai-chat/lib/common/index.js';
+import { ChatAgentService } from '@theia/ai-chat/lib/common/chat-agent-service.js';
+import { EditorManager } from '@theia/editor/lib/browser/editor-manager.js';
+import { AbstractViewContribution } from '@theia/core/lib/browser/shell/view-contribution.js';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { ChatViewWidget } from './chat-view-widget.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { SecondaryWindowHandler } from '@theia/core/lib/browser/secondary-window-handler.js';
 import { formatDistance } from 'date-fns';
 import * as locales from 'date-fns/locale';
-import { AI_SHOW_SETTINGS_COMMAND, AIActivationService, ENABLE_AI_CONTEXT_KEY } from '@theia/ai-core/lib/browser';
-import { ChatNodeToolbarCommands } from './chat-node-toolbar-action-contribution';
-import { isEditableRequestNode, isResponseNode, type EditableRequestNode, type ResponseNode } from './chat-tree-view';
-import { TASK_CONTEXT_VARIABLE } from '@theia/ai-chat/lib/browser/task-context-variable';
-import { TaskContextService } from '@theia/ai-chat/lib/browser/task-context-service';
+import { AI_SHOW_SETTINGS_COMMAND, AIActivationService, ENABLE_AI_CONTEXT_KEY } from '@theia/ai-core/lib/browser/index.js';
+import { ChatNodeToolbarCommands } from './chat-node-toolbar-action-contribution.js';
+import { isEditableRequestNode, isResponseNode, type EditableRequestNode, type ResponseNode } from './chat-tree-view/index.js';
+import { TASK_CONTEXT_VARIABLE } from '@theia/ai-chat/lib/browser/task-context-variable.js';
+import { TaskContextService } from '@theia/ai-chat/lib/browser/task-context-service.js';
 
 export const AI_CHAT_TOGGLE_COMMAND_ID = 'aiChat:toggle';
 

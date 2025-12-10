@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2021 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
+import { inject, injectable } from 'inversify';
+import * as React from 'react';
 import Long from 'long';
-import { MemoryTable, MemoryTableWidget } from '../memory-widget/memory-table-widget';
-import { MemoryWidget } from '../memory-widget/memory-widget';
-import { EasilyMappedObject } from '../utils/memory-hover-renderer';
-import { Interfaces, MemoryDiffWidgetData } from '../utils/memory-widget-utils';
-import { VariableDecoration, VariableFinder } from '../utils/memory-widget-variable-utils';
-import { DiffMemoryOptions, MemoryDiffOptionsWidget } from './memory-diff-options-widget';
-import { DiffExtraColumnOptions, DiffLabels, DiffRowOptions, RowData } from './memory-diff-widget-types';
+import { MemoryTable, MemoryTableWidget } from '../memory-widget/memory-table-widget.js';
+import { MemoryWidget } from '../memory-widget/memory-widget.js';
+import { EasilyMappedObject } from '../utils/memory-hover-renderer.js';
+import { Interfaces, MemoryDiffWidgetData } from '../utils/memory-widget-utils.js';
+import { VariableDecoration, VariableFinder } from '../utils/memory-widget-variable-utils.js';
+import { DiffMemoryOptions, MemoryDiffOptionsWidget } from './memory-diff-options-widget.js';
+import { DiffExtraColumnOptions, DiffLabels, DiffRowOptions, RowData } from './memory-diff-widget-types.js';
 
 export type MemoryDiffWidget = MemoryWidget<MemoryDiffOptionsWidget, MemoryDiffTableWidget>;
 export namespace MemoryDiffWidget {
@@ -31,12 +31,12 @@ export namespace MemoryDiffWidget {
     export const is = (widget: MemoryWidget): boolean => widget.optionsWidget instanceof MemoryDiffOptionsWidget;
 }
 
-interface DummyCounts {
+type DummyCounts = {
     leading: number;
     trailing: number;
 }
 
-interface OffsetData {
+type OffsetData = {
     before: DummyCounts;
     after: DummyCounts;
 }
@@ -44,13 +44,13 @@ interface OffsetData {
 @injectable()
 export class MemoryDiffTableWidget extends MemoryTableWidget {
     @inject(MemoryDiffWidgetData) protected diffData: MemoryDiffWidgetData;
-    @inject(MemoryDiffOptionsWidget) override readonly optionsWidget: MemoryDiffOptionsWidget;
+    @inject(MemoryDiffOptionsWidget) declare readonly optionsWidget: MemoryDiffOptionsWidget;
 
     protected diffedSpanCounter = 0;
     protected beforeVariableFinder: VariableFinder;
     protected afterVariableFinder: VariableFinder;
     protected isHighContrast = false;
-    protected override options: DiffMemoryOptions;
+    protected declare options: DiffMemoryOptions;
     protected offsetData: OffsetData;
 
     updateDiffData(newDiffData: Partial<MemoryDiffWidgetData>): void {

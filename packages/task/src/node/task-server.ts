@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, named } from '@theia/core/shared/inversify';
+import { inject, injectable, named } from 'inversify';
 import { Disposable, DisposableCollection, ILogger } from '@theia/core/lib/common/';
 import {
     TaskClient,
@@ -25,13 +25,13 @@ import {
     TaskOutputProcessedEvent,
     RunTaskOption,
     BackgroundTaskEndedEvent
-} from '../common';
-import { TaskManager } from './task-manager';
-import { TaskRunnerRegistry } from './task-runner';
-import { Task } from './task';
-import { ProcessTask } from './process/process-task';
-import { ProblemCollector } from './task-problem-collector';
-import { CustomTask } from './custom/custom-task';
+} from '../common/index.js';
+import { TaskManager } from './task-manager.js';
+import { TaskRunnerRegistry } from './task-runner.js';
+import { Task } from './task.js';
+import { ProcessTask } from './process/process-task.js';
+import { ProblemCollector } from './task-problem-collector.js';
+import { CustomTask } from './custom/custom-task.js';
 
 @injectable()
 export class TaskServerImpl implements TaskServer, Disposable {

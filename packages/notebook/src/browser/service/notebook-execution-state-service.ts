@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,23 +19,23 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Disposable, DisposableCollection, Emitter, URI, generateUuid } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { NotebookService } from './notebook-service';
+import { inject, injectable } from 'inversify';
+import { NotebookService } from './notebook-service.js';
 import {
     CellEditType, CellExecuteOutputEdit, CellExecuteOutputItemEdit, CellExecutionUpdateType,
     CellUri, NotebookCellExecutionState, NotebookCellInternalMetadata
-} from '../../common';
-import { CellPartialInternalMetadataEditByHandle, CellEditOperation } from '../notebook-types';
-import { NotebookModel } from '../view-model/notebook-model';
+} from '../../common/index.js';
+import { CellPartialInternalMetadataEditByHandle, CellEditOperation } from '../notebook-types.js';
+import { NotebookModel } from '../view-model/notebook-model.js';
 
 export type CellExecuteUpdate = CellExecuteOutputEdit | CellExecuteOutputItemEdit | CellExecutionStateUpdate;
 
-export interface CellExecutionComplete {
+export type CellExecutionComplete = {
     runEndTime?: number;
     lastRunSuccess?: boolean;
 }
 
-export interface CellExecutionStateUpdate {
+export type CellExecutionStateUpdate = {
     editType: CellExecutionUpdateType.ExecutionState;
     executionOrder?: number;
     runStartTime?: number;
@@ -48,12 +48,12 @@ export enum NotebookExecutionType {
     notebook
 }
 
-export interface NotebookFailStateChangedEvent {
+export type NotebookFailStateChangedEvent = {
     visible: boolean;
     notebook: URI;
 }
 
-export interface FailedCellInfo {
+export type FailedCellInfo = {
     cellHandle: number;
     disposable: Disposable;
     visible: boolean;

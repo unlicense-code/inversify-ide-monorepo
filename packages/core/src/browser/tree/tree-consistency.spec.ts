@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,11 +16,11 @@
 
 import * as assert from 'assert';
 import { injectable } from 'inversify';
-import { createTreeTestContainer } from './test/tree-test-container';
-import { TreeImpl, CompositeTreeNode, TreeNode } from './tree';
-import { TreeModel } from './tree-model';
-import { ExpandableTreeNode } from './tree-expansion';
-import { TreeLabelProvider } from './tree-label-provider';
+import { createTreeTestContainer } from './test/tree-test-container.js';
+import { TreeImpl, CompositeTreeNode, TreeNode } from './tree.js';
+import { TreeModel } from './tree-model.js';
+import { ExpandableTreeNode } from './tree-expansion.js';
+import { TreeLabelProvider } from './tree-label-provider.js';
 
 @injectable()
 class ConsistencyTestTree extends TreeImpl {

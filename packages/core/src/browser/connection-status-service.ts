@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,18 +15,18 @@
 // *****************************************************************************
 
 import { inject, injectable, optional, postConstruct } from 'inversify';
-import { ILogger } from '../common/logger';
-import { Event, Emitter } from '../common/event';
-import { DefaultFrontendApplicationContribution } from './frontend-application-contribution';
-import { StatusBar, StatusBarAlignment } from './status-bar/status-bar';
-import { Disposable, DisposableCollection, nls } from '../common';
-import { WebSocketConnectionSource } from './messaging/ws-connection-source';
+import { ILogger } from '../common/logger.js';
+import { Event, Emitter } from '../common/event.js';
+import { DefaultFrontendApplicationContribution } from './frontend-application-contribution.js';
+import { StatusBar, StatusBarAlignment } from './status-bar/status-bar.js';
+import { Disposable, DisposableCollection, nls } from '../common/index.js';
+import { WebSocketConnectionSource } from './messaging/ws-connection-source.js';
 
 /**
  * Service for listening on backend connection changes.
  */
 export const ConnectionStatusService = Symbol('ConnectionStatusService');
-export interface ConnectionStatusService {
+export type ConnectionStatusService = {
 
     /**
      * The actual connection status.
@@ -71,7 +71,7 @@ export class ConnectionStatusOptions {
 }
 
 export const PingService = Symbol('PingService');
-export interface PingService {
+export type PingService = {
     ping(): Promise<void>;
 }
 

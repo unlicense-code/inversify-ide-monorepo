@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,9 +17,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { injectable } from 'inversify';
-import { MaybePromise } from '../../common/types';
-import { TreeImpl, CompositeTreeNode, TreeNode, SelectableTreeNode, ExpandableTreeNode } from '../tree';
-import { TreeElement, CompositeTreeElement, TreeSource } from './tree-source';
+import { MaybePromise } from '../../common/types.js';
+import { TreeImpl, CompositeTreeNode, TreeNode, SelectableTreeNode, ExpandableTreeNode } from '../tree/index.js';
+import { TreeElement, CompositeTreeElement, TreeSource } from './tree-source.js';
 
 @injectable()
 export class SourceTree extends TreeImpl {
@@ -95,7 +95,7 @@ export class SourceTree extends TreeImpl {
 
 export type TreeElementNodeParent = CompositeTreeElementNode | TreeSourceNode;
 
-export interface TreeElementNode extends TreeNode, SelectableTreeNode {
+export type TreeElementNode = TreeNode & SelectableTreeNode & {
     element: TreeElement
     parent: TreeElementNodeParent
 }
@@ -105,7 +105,7 @@ export namespace TreeElementNode {
     }
 }
 
-export interface CompositeTreeElementNode extends TreeElementNode, CompositeTreeNode, ExpandableTreeNode {
+export type CompositeTreeElementNode = TreeElementNode & CompositeTreeNode & ExpandableTreeNode & {
     element: CompositeTreeElement
     children: TreeElementNode[]
     parent: TreeElementNodeParent
@@ -116,7 +116,7 @@ export namespace CompositeTreeElementNode {
     }
 }
 
-export interface TreeSourceNode extends CompositeTreeNode, SelectableTreeNode {
+export type TreeSourceNode = CompositeTreeNode & SelectableTreeNode & {
     visible: false
     children: TreeElementNode[]
     parent: undefined

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,13 +19,13 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { CancellationToken, Command, Disposable, Emitter, Event, URI } from '@theia/core';
-import { CellStatusbarAlignment } from '../../common';
-import { ThemeColor } from '@theia/core/lib/common/theme';
-import { AccessibilityInformation } from '@theia/core/lib/common/accessibility';
-import { injectable } from '@theia/core/shared/inversify';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
+import { CellStatusbarAlignment } from '../../common/index.js';
+import { ThemeColor } from '@theia/core/lib/common/theme.js';
+import { AccessibilityInformation } from '@theia/core/lib/common/accessibility.js';
+import { injectable } from 'inversify';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/markdown-string.js';
 
-export interface NotebookCellStatusBarItem {
+export type NotebookCellStatusBarItem = {
     readonly alignment: CellStatusbarAlignment;
     readonly priority?: number;
     readonly text: string;
@@ -37,12 +37,12 @@ export interface NotebookCellStatusBarItem {
     readonly opacity?: string;
     readonly onlyShowWhenActive?: boolean;
 }
-export interface NotebookCellStatusBarItemList {
+export type NotebookCellStatusBarItemList = {
     items: NotebookCellStatusBarItem[];
     dispose?(): void;
 }
 
-export interface NotebookCellStatusBarItemProvider {
+export type NotebookCellStatusBarItemProvider = {
     viewType: string;
     onDidChangeStatusBarItems?: Event<void>;
     provideCellStatusBarItems(uri: URI, index: number, token: CancellationToken): Promise<NotebookCellStatusBarItemList | undefined>;

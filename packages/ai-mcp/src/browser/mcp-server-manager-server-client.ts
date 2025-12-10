@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { MCPServerDescription } from '../common';
-import { generateUuid } from '@theia/core/lib/common/uuid';
-import { cleanServerDescription, MCPServerDescriptionRCP, MCPServerManagerServerClient } from '../common/mcp-protocol';
+import { injectable } from 'inversify';
+import { MCPServerDescription } from '../common/index.js';
+import { generateUuid } from '@theia/core/lib/common/index.js';
+import { cleanServerDescription, MCPServerDescriptionRCP, MCPServerManagerServerClient } from '../common/mcp-protocol.js';
 
 type StoredServerInfo = Pick<MCPServerDescription, 'name' | 'resolve'>;
 

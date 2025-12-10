@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,28 +14,28 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
+import { injectable, inject, postConstruct } from 'inversify';
 import {
     ContextMenuRenderer, codicon, OpenerService, open
-} from '@theia/core/lib/browser';
-import { Preference, PreferenceMenus } from '../../util/preference-types';
-import { PreferenceTreeLabelProvider } from '../../util/preference-tree-label-provider';
-import { PreferencesScopeTabBar } from '../preference-scope-tabbar-widget';
-import { Disposable, nls, PreferenceDataProperty, PreferenceInspection, PreferenceScope, PreferenceService, PreferenceUtils } from '@theia/core/lib/common';
-import { JSONValue } from '@theia/core/shared/@lumino/coreutils';
-import debounce = require('@theia/core/shared/lodash.debounce');
-import { PreferenceTreeModel } from '../../preference-tree-model';
-import { PreferencesSearchbarWidget } from '../preference-searchbar-widget';
-import * as DOMPurify from '@theia/core/shared/dompurify';
-import URI from '@theia/core/lib/common/uri';
-import { PreferenceMarkdownRenderer } from './preference-markdown-renderer';
+} from '@theia/core/lib/browser/index.js';
+import { Preference, PreferenceMenus } from '../../util/preference-types.js';
+import { PreferenceTreeLabelProvider } from '../../util/preference-tree-label-provider.js';
+import { PreferencesScopeTabBar } from '../preference-scope-tabbar-widget.js';
+import { Disposable, nls, PreferenceDataProperty, PreferenceInspection, PreferenceScope, PreferenceService, PreferenceUtils } from '@theia/core/lib/common/index.js';
+import { JSONValue } from '@lumino/coreutils';
+import debounce from  'lodash/debounce.js'
+import { PreferenceTreeModel } from '../../preference-tree-model.js';
+import { PreferencesSearchbarWidget } from '../preference-searchbar-widget.js';
+import DOMPurify from 'dompurify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { PreferenceMarkdownRenderer } from './preference-markdown-renderer.js';
 
 export const PreferenceNodeRendererFactory = Symbol('PreferenceNodeRendererFactory');
 export type PreferenceNodeRendererFactory = (node: Preference.TreeNode) => PreferenceNodeRenderer;
 export const HEADER_CLASS = 'settings-section-category-title';
 export const SUBHEADER_CLASS = 'settings-section-subcategory-title';
 
-export interface GeneralPreferenceNodeRenderer extends Disposable {
+export type GeneralPreferenceNodeRenderer = Disposable & {
     node: HTMLElement;
     id: string;
     schema?: PreferenceDataProperty;
@@ -155,7 +155,7 @@ export class PreferenceHeaderRenderer extends PreferenceNodeRenderer {
 export abstract class PreferenceLeafNodeRenderer<ValueType extends JSONValue, InteractableType extends HTMLElement>
     extends PreferenceNodeRenderer
     implements Required<GeneralPreferenceNodeRenderer> {
-    @inject(Preference.Node) protected override readonly preferenceNode: Preference.LeafNode;
+    @inject(Preference.Node) protected declare readonly preferenceNode: Preference.LeafNode;
     @inject(PreferenceService) protected readonly preferenceService: PreferenceService;
     @inject(ContextMenuRenderer) protected readonly menuRenderer: ContextMenuRenderer;
     @inject(PreferencesScopeTabBar) protected readonly scopeTracker: PreferencesScopeTabBar;

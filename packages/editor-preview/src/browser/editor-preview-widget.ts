@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { TabBar, Widget, PINNED_CLASS } from '@theia/core/lib/browser';
-import { EditorWidget, TextEditor } from '@theia/editor/lib/browser';
-import { Disposable, DisposableCollection, Emitter, SelectionService, UNTITLED_SCHEME } from '@theia/core/lib/common';
+import { TabBar, Widget, PINNED_CLASS } from '@theia/core/lib/browser/index.js';
+import { EditorWidget, TextEditor } from '@theia/editor/lib/browser/index.js';
+import { Disposable, DisposableCollection, Emitter, SelectionService, UNTITLED_SCHEME } from '@theia/core/lib/common/index.js';
 
 const PREVIEW_TITLE_CLASS = 'theia-editor-preview-title-unpinned';
 export class EditorPreviewWidget extends EditorWidget {

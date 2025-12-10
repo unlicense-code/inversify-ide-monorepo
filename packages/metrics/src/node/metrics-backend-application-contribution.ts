@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017-2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, named } from '@theia/core/shared/inversify';
+import { injectable, inject, named } from 'inversify';
 import * as http from 'http';
 import * as https from 'https';
-import * as express from '@theia/core/shared/express';
-import { ContributionProvider } from '@theia/core/lib/common';
-import { BackendApplicationContribution } from '@theia/core/lib/node';
-import { MetricsContribution } from './metrics-contribution';
+import * as express from 'express';
+import { ContributionProvider } from '@theia/core/lib/common/index.js';
+import { BackendApplicationContribution } from '@theia/core/lib/node/index.js';
+import { MetricsContribution } from './metrics-contribution.js';
 
 @injectable()
 export class MetricsBackendApplicationContribution implements BackendApplicationContribution {
@@ -32,7 +32,7 @@ export class MetricsBackendApplicationContribution implements BackendApplication
     }
 
     configure(app: express.Application): void {
-        app.get(MetricsBackendApplicationContribution.ENDPOINT, (req, res) => {
+        app.get(MetricsBackendApplicationContribution.ENDPOINT, (req: any, res: any) => {
             const lastMetrics = this.fetchMetricsFromProviders();
             res.send(lastMetrics);
         });

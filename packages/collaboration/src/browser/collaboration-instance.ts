@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,33 +19,36 @@ import * as Y from 'yjs';
 import * as awarenessProtocol from 'y-protocols/awareness';
 
 import { Disposable, DisposableCollection, Emitter, Event, MessageService, URI, nls } from '@theia/core';
-import { Container, inject, injectable, interfaces, postConstruct } from '@theia/core/shared/inversify';
-import { ApplicationShell } from '@theia/core/lib/browser/shell/application-shell';
-import { EditorManager } from '@theia/editor/lib/browser/editor-manager';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service';
-import { CollaborationWorkspaceService } from './collaboration-workspace-service';
+import { Container, inject, injectable, interfaces, postConstruct } from 'inversify';
+import { ApplicationShell } from '@theia/core/lib/browser/shell/application-shell.js';
+import { EditorManager } from '@theia/editor/lib/browser/editor-manager.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service.js';
+import { CollaborationWorkspaceService } from './collaboration-workspace-service.js';
 import { Range as MonacoRange } from '@theia/monaco-editor-core';
-import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { EditorDecoration, EditorWidget, Selection, TextEditorDocument, TrackedRangeStickiness } from '@theia/editor/lib/browser';
-import { DecorationStyle, OpenerService, SaveReason } from '@theia/core/lib/browser';
-import { CollaborationFileSystemProvider, CollaborationURI } from './collaboration-file-system-provider';
-import { Range } from '@theia/core/shared/vscode-languageserver-protocol';
-import { CollaborationColorService } from './collaboration-color-service';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
-import { FileChange, FileChangeType, FileOperation } from '@theia/filesystem/lib/common/files';
+import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model.js';
+import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import {
+    EditorDecoration, EditorWidget, Selection, TextEditorDocument, TrackedRangeStickiness
+
+} from '@theia/editor/lib/browser/index.js';
+import { DecorationStyle, OpenerService, SaveReason } from '@theia/core/lib/browser/index.js';
+import { CollaborationFileSystemProvider, CollaborationURI } from './collaboration-file-system-provider.js';
+import { Range } from 'vscode-languageserver-protocol';
+import { CollaborationColorService } from './collaboration-color-service.js';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
+import { FileChange, FileChangeType, FileOperation } from '@theia/filesystem/lib/common/files.js';
 import { OpenCollaborationYjsProvider } from 'open-collaboration-yjs';
 import { createMutex } from 'lib0/mutex';
-import { CollaborationUtils } from './collaboration-utils';
-import debounce = require('@theia/core/shared/lodash.debounce');
+import { CollaborationUtils } from './collaboration-utils.js';
+import debounce from 'lodash/debounce.js'
 
 export const CollaborationInstanceFactory = Symbol('CollaborationInstanceFactory');
 export type CollaborationInstanceFactory = (connection: CollaborationInstanceOptions) => CollaborationInstance;
 
 export const CollaborationInstanceOptions = Symbol('CollaborationInstanceOptions');
-export interface CollaborationInstanceOptions {
+export type CollaborationInstanceOptions = {
     role: 'host' | 'guest';
     connection: types.ProtocolBroadcastConnection;
 }
@@ -58,7 +61,7 @@ export function createCollaborationInstanceContainer(parent: interfaces.Containe
     return child;
 }
 
-export interface DisposablePeer extends Disposable {
+export type DisposablePeer = Disposable & {
     peer: types.Peer;
 }
 
@@ -632,8 +635,8 @@ export class CollaborationInstance implements Disposable {
                 content: "${peer.name}";
                 background: ${colorString};
                 color: ${this.collaborationColorService.requiresDarkFont(color)
-            ? this.collaborationColorService.dark
-            : this.collaborationColorService.light};
+                ? this.collaborationColorService.dark
+                : this.collaborationColorService.light};
                 z-index: ${(100 + this.colorIndex).toFixed()}
             }`
         );

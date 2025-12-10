@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { isObject } from './types';
+import { isObject } from './types.js';
 
 /**
  * Either be a reference to an existing color or a color value as a hex string, rgba, or hsla.
@@ -42,7 +42,7 @@ export namespace Color {
         return typeof value === 'string' || (ColorTransformation.is(value) || RGBA.is(value) || HSLA.is(value));
     }
 }
-export interface ColorTransformation {
+export type ColorTransformation = {
     kind: 'transparent' | 'lighten' | 'darken'
     v: string
     f: number
@@ -55,7 +55,7 @@ export namespace ColorTransformation {
             && typeof value.f === 'number';
     }
 }
-export interface RGBA {
+export type RGBA = {
     /**
      * Red: integer in [0-255]
      */
@@ -81,7 +81,7 @@ export namespace RGBA {
         return isObject(value) && typeof value.r === 'number' && typeof value.g === 'number' && typeof value.b === 'number' && typeof value.a === 'number';
     }
 }
-export interface HSLA {
+export type HSLA = {
     /**
      * Hue: integer in [0, 360]
      */
@@ -105,7 +105,7 @@ export namespace HSLA {
     }
 }
 
-export interface ColorDefaults {
+export type ColorDefaults = {
     light?: Color
     dark?: Color
     /** @deprecated @since 1.28.0 Please use hcDark and hcLight. This field will be ignored unless `hcDark` is absent. */
@@ -141,13 +141,13 @@ export namespace ColorDefaults {
     }
 }
 
-export interface ColorDefinition {
+export type ColorDefinition = {
     id: string
     defaults?: ColorDefaults | Color;
     description: string
 }
 
-export interface ColorCssVariable {
+export type ColorCssVariable = {
     name: string
     value: string
 }

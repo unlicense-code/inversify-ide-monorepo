@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, named } from '@theia/core/shared/inversify';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { Command, CommandContribution, CommandRegistry, ContributionProvider } from '@theia/core/lib/common';
-import { VariableContribution, VariableRegistry } from './variable';
-import { VariableQuickOpenService } from './variable-quick-open-service';
+import { injectable, inject, named } from 'inversify';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
+import { Command, CommandContribution, CommandRegistry, ContributionProvider } from '@theia/core/lib/common/index.js';
+import { VariableContribution, VariableRegistry } from './variable.js';
+import { VariableQuickOpenService } from './variable-quick-open-service.js';
 
 export const LIST_VARIABLES: Command = Command.toLocalizedCommand({
     id: 'variable.list',

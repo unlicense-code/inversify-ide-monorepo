@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 import { ArrayUtils, CommandMenu, CommandRegistry, DisposableCollection, Group, GroupImpl, MenuModelRegistry, MenuNode, MenuPath, nls } from '@theia/core';
-import * as React from '@theia/core/shared/react';
-import { codicon, ContextMenuRenderer } from '@theia/core/lib/browser';
-import { NotebookCommands, NotebookMenus } from '../contributions/notebook-actions-contribution';
-import { NotebookModel } from '../view-model/notebook-model';
-import { NotebookKernelService } from '../service/notebook-kernel-service';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { NotebookContextManager } from '../service/notebook-context-manager';
+import * as React from 'react';
+import { codicon, ContextMenuRenderer } from '@theia/core/lib/browser/index.js';
+import { NotebookCommands, NotebookMenus } from '../contributions/notebook-actions-contribution.js';
+import { NotebookModel } from '../view-model/notebook-model.js';
+import { NotebookKernelService } from '../service/notebook-kernel-service.js';
+import { inject, injectable } from 'inversify';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { NotebookContextManager } from '../service/notebook-context-manager.js';
 
-export interface NotebookMainToolbarProps {
+export type NotebookMainToolbarProps = {
     notebookModel: NotebookModel
     menuRegistry: MenuModelRegistry;
     notebookKernelService: NotebookKernelService;
@@ -55,7 +55,7 @@ export class NotebookMainToolbarRenderer {
     }
 }
 
-interface NotebookMainToolbarState {
+type NotebookMainToolbarState = {
     selectedKernelLabel?: string;
     numberOfHiddenItems: number;
 }

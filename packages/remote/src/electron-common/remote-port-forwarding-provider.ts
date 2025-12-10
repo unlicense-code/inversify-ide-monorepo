@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,12 +18,12 @@ export const RemoteRemotePortForwardingProviderPath = '/remote/port-forwarding';
 
 export const RemotePortForwardingProvider = Symbol('RemoteSSHConnectionProvider');
 
-export interface ForwardedPort {
+export type ForwardedPort = {
     port: number;
     address?: string;
 }
 
-export interface RemotePortForwardingProvider {
+export type RemotePortForwardingProvider = {
     forwardPort(connectionPort: number, portToForward: ForwardedPort): Promise<void>;
     portRemoved(port: ForwardedPort): Promise<void>;
     getForwardedPorts(): Promise<ForwardedPort[]>

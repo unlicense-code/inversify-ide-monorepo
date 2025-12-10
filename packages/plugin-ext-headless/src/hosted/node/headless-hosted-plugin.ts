@@ -19,24 +19,24 @@
  *--------------------------------------------------------------------------------------------*/
 // some code copied and modified from https://github.com/microsoft/vscode/blob/da5fb7d5b865aa522abc7e82c10b746834b98639/src/vs/workbench/api/node/extHostExtensionService.ts
 
-import { generateUuid } from '@theia/core/lib/common/uuid';
-import { injectable, inject, named } from '@theia/core/shared/inversify';
-import { getPluginId, DeployedPlugin, HostedPluginServer, PluginDeployer } from '@theia/plugin-ext/lib/common/plugin-protocol';
-import { setUpPluginApi } from '../../main/node/main-context';
-import { RPCProtocol, RPCProtocolImpl } from '@theia/plugin-ext/lib/common/rpc-protocol';
+import { generateUuid } from '@theia/core';
+import { injectable, inject, named } from 'inversify';
+import { getPluginId, DeployedPlugin, HostedPluginServer, PluginDeployer } from '@theia/plugin-ext/lib/common/plugin-protocol.js';
+import { setUpPluginApi } from '../../main/node/main-context.js';
+import { RPCProtocol, RPCProtocolImpl } from '@theia/plugin-ext/lib/common/rpc-protocol.js';
 import { ContributionProvider, Disposable, DisposableCollection, nls } from '@theia/core';
-import { environment } from '@theia/core/shared/@theia/application-package/lib/environment';
-import { IPCChannel } from '@theia/core/lib/node';
-import { BackendApplicationConfigProvider } from '@theia/core/lib/node/backend-application-config-provider';
-import { HostedPluginProcess } from '@theia/plugin-ext/lib/hosted/node/hosted-plugin-process';
-import { IShellTerminalServer } from '@theia/terminal/lib/common/shell-terminal-protocol';
-import { HeadlessPluginManagerExt, HEADLESSMAIN_RPC_CONTEXT } from '../../common/headless-plugin-rpc';
-import { AbstractHostedPluginSupport, PluginContributions } from '@theia/plugin-ext/lib/hosted/common/hosted-plugin';
-import { TheiaHeadlessPluginScanner } from './scanners/scanner-theia-headless';
-import { SupportedHeadlessActivationEvents } from '../../common/headless-plugin-protocol';
-import { PluginDeployerImpl } from '@theia/plugin-ext/lib/main/node/plugin-deployer-impl';
+import { environment } from '@theia/application-package';
+import { IPCChannel } from '@theia/core/lib/node/index.js';
+import { BackendApplicationConfigProvider } from '@theia/core/lib/node/backend-application-config-provider.js';
+import { HostedPluginProcess } from '@theia/plugin-ext/lib/hosted/node/hosted-plugin-process.js';
+import { IShellTerminalServer } from '@theia/terminal/lib/common/shell-terminal-protocol.js';
+import { HeadlessPluginManagerExt, HEADLESSMAIN_RPC_CONTEXT } from '../../common/headless-plugin-rpc.js';
+import { AbstractHostedPluginSupport, PluginContributions } from '@theia/plugin-ext/lib/hosted/common/hosted-plugin.js';
+import { TheiaHeadlessPluginScanner } from './scanners/scanner-theia-headless.js';
+import { SupportedHeadlessActivationEvents } from '../../common/headless-plugin-protocol.js';
+import { PluginDeployerImpl } from '@theia/plugin-ext/lib/main/node/plugin-deployer-impl.js';
 
-import URI from '@theia/core/lib/common/uri';
+import { URI } from '@theia/core/lib/common/uri.js';
 import * as fs from 'fs';
 import * as asyncFs from 'fs/promises';
 
@@ -139,7 +139,7 @@ export class HeadlessHostedPluginSupport extends AbstractHostedPluginSupport<Hea
                     appName: BackendApplicationConfigProvider.get().applicationName,
                     appHost: isElectron ? 'desktop' : 'web' // TODO: 'web' could be the embedder's name, e.g. 'github.dev'
                 },
-                extApi
+                extApi: extApi as any
             });
             if (toDisconnect.disposed) {
                 return undefined;

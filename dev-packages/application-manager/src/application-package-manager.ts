@@ -23,6 +23,7 @@ import { WebpackGenerator, FrontendGenerator, BackendGenerator } from './generat
 import { ApplicationProcess } from './application-process';
 import { GeneratorOptions } from './generator/abstract-generator';
 import yargs = require('yargs');
+import { RollupGenerator } from './generator/rollup-generator';
 
 // Declare missing exports from `@types/semver@7`
 declare module 'semver' {
@@ -99,7 +100,7 @@ export class ApplicationPackageManager {
             throw error;
         }
         await Promise.all([
-            new WebpackGenerator(this.pck, options).generate(),
+            new RollupGenerator(this.pck, options).generate(),
             new BackendGenerator(this.pck, options).generate(),
             new FrontendGenerator(this.pck, options).generate(),
         ]);
@@ -113,7 +114,280 @@ export class ApplicationPackageManager {
     async build(args: string[] = [], options: GeneratorOptions = {}): Promise<void> {
         await this.generate(options);
         await this.copy();
-        return this.__process.run('webpack', args);
+        
+        // Use rollup instead of webpack for better memory efficiency
+        const rollupConfigPath = this.pck.path('rollup.config.js');
+        if (await fs.pathExists(rollupConfigPath)) {
+            this.pck.log(`[ApplicationPackageManager] Building rollup configs sequentially to reduce memory usage...`);
+            return this.buildRollupConfigsSequentially(rollupConfigPath, args);
+        } else {
+            // Fallback to webpack if rollup config doesn't exist
+            const webpackConfigPath = this.pck.path('webpack.config.js');
+            if (await fs.pathExists(webpackConfigPath)) {
+                this.pck.log(`[ApplicationPackageManager] Building webpack configs sequentially to reduce memory usage...`);
+                return this.buildWebpackConfigsSequentially(webpackConfigPath, args);
+            } else {
+                throw new Error('No rollup or webpack config found');
+            }
+        }
+    }
+
+    /**
+     * Build rollup configs sequentially instead of all at once to reduce memory usage.
+     * Rollup is more memory-efficient than webpack and prevents out-of-memory errors.
+     */
+    protected async buildRollupConfigsSequentially(rollupConfigPath: string, args: string[]): Promise<void> {
+        // NOTE: NODE_OPTIONS must be set BEFORE Node.js starts (e.g., in package.json scripts or shell)
+        // Setting it here won't change the heap limit of the current process
+        // To use 12GB heap, run: NODE_OPTIONS="--max-old-space-size=12288 --expose-gc" npm run build:browser
+        const currentHeapLimit = this.getCurrentHeapLimit();
+        this.pck.log(`[ApplicationPackageManager] Current heap limit: ${currentHeapLimit} MB`);
+        if (currentHeapLimit < 8000) {
+            this.pck.log(`[ApplicationPackageManager] WARNING: Heap limit is ${currentHeapLimit} MB. Consider running with:`);
+            this.pck.log(`[ApplicationPackageManager]   NODE_OPTIONS="--max-old-space-size=12288 --expose-gc" npm run build:browser`);
+        }
+        
+        // Try to enable GC if available
+        if (!global.gc && process.env.NODE_OPTIONS && process.env.NODE_OPTIONS.includes('expose-gc')) {
+            this.pck.log(`[ApplicationPackageManager] --expose-gc is in NODE_OPTIONS but GC not available. Process may need restart.`);
+        }
+        
+        const rollup = require('rollup');
+        const configs = require(rollupConfigPath);
+        
+        // Handle both array and single config exports
+        const configArray = Array.isArray(configs) ? configs : [configs];
+        
+        this.pck.log(`[ApplicationPackageManager] Found ${configArray.length} rollup config(s) to build`);
+        
+        for (let i = 0; i < configArray.length; i++) {
+            const config = configArray[i];
+            const configName = typeof config.input === 'string' ? config.input : `config-${i + 1}`;
+            this.pck.log(`[ApplicationPackageManager] Building rollup config ${i + 1}/${configArray.length}: ${configName}`);
+            
+            try {
+                // Rollup config structure: { input, output, plugins, ... }
+                const buildStartTime = Date.now();
+                this.pck.log(`[ApplicationPackageManager] Starting rollup.rollup() for config ${i + 1}...`);
+                this.pck.log(`[ApplicationPackageManager] Input: ${config.input}`);
+                this.pck.log(`[ApplicationPackageManager] Plugins: ${config.plugins?.length || 0}`);
+                this.pck.log(`[ApplicationPackageManager] External modules: ${Array.isArray(config.external) ? config.external.length : 'function'}`);
+                
+                // Track GC before build
+                if (global.gc) {
+                    global.gc();
+                }
+                
+                let bundle: any;
+                try {
+                    bundle = await rollup.rollup({
+                        input: config.input,
+                        plugins: this.wrapPluginsWithLogging(config.plugins, i + 1),
+                        external: config.external,
+                        onwarn: config.onwarn,
+                        onLog: (level: string, log: { message: string | string[]; loc: { file: any; line: any; column: any; }; }) => {
+                            if (level === 'warn' || level === 'error') {
+                                this.pck.log(`[Rollup ${i + 1}] ${level.toUpperCase()}: ${log.message || log}`);
+                                if (log.loc) {
+                                    this.pck.log(`[Rollup ${i + 1}]   at ${log.loc.file}:${log.loc.line}:${log.loc.column}`);
+                                }
+                            } else if (level === 'info') {
+                                // Log info messages that might indicate memory usage
+                                if (log.message && (log.message.includes('chunk') || log.message.includes('module'))) {
+                                    this.pck.log(`[Rollup ${i + 1}] INFO: ${log.message}`);
+                                }
+                            }
+                        },
+                        // Add performance hooks
+                        perf: true
+                    });
+                    
+                    // Log bundle information
+                    if (bundle && typeof bundle.getModuleIds === 'function') {
+                        try {
+                            const moduleIds = bundle.getModuleIds();
+                            this.pck.log(`[ApplicationPackageManager] Bundle contains ${moduleIds.length} modules`);
+                            if (moduleIds.length > 0) {
+                                const sampleModules = Array.from(moduleIds).slice(0, 10);
+                                this.pck.log(`[ApplicationPackageManager] Sample modules: ${sampleModules.join(', ')}`);
+                            }
+                        } catch (e) {
+                            // Ignore if getModuleIds not available
+                        }
+                    }
+                } catch (error) {
+                    throw error;
+                }
+                
+                const buildDuration = Date.now() - buildStartTime;
+                this.pck.log(`[ApplicationPackageManager] rollup.rollup() completed in ${buildDuration}ms`);
+                
+                // Handle both single output and array of outputs
+                const outputs = Array.isArray(config.output) ? config.output : [config.output];
+                this.pck.log(`[ApplicationPackageManager] Writing ${outputs.length} output(s) for config ${i + 1}...`);
+                
+                for (let j = 0; j < outputs.length; j++) {
+                    const writeStartTime = Date.now();
+                    const output = outputs[j];
+                    const outputFile = typeof output === 'object' && output.file ? output.file : 
+                                      typeof output === 'object' && output.dir ? output.dir : 
+                                      'unknown';
+                    this.pck.log(`[ApplicationPackageManager] Writing output ${j + 1}/${outputs.length} to ${outputFile}...`);
+                    
+                    // Run GC before writing if available
+                    if (global.gc && j === 0) {
+                        global.gc();
+                    }
+
+                    if (bundle && typeof bundle.write === 'function') {
+                        await bundle.write(output);
+                        const writeDuration = Date.now() - writeStartTime;
+                        this.pck.log(`[ApplicationPackageManager] Output ${j + 1} written in ${writeDuration}ms`);
+                    } else {
+                        throw new Error('Rollup bundle is not defined or does not have a write method');
+                    }
+                    // Check output file size if it exists
+                    try {
+                        const fs = require('fs');
+                        if (fs.existsSync(outputFile)) {
+                            const stats = fs.statSync(outputFile);
+                            const sizeMB = (stats.size / 1024 / 1024).toFixed(2);
+                            this.pck.log(`[ApplicationPackageManager] Output file size: ${sizeMB} MB`);
+                        }
+                    } catch (e) {
+                        // Ignore file size check errors
+                    }
+                }
+                
+                this.pck.log(`[ApplicationPackageManager] Closing bundle for config ${i + 1}...`);
+                await bundle.close();
+                
+                const totalDuration = Date.now() - buildStartTime;
+                this.pck.log(`[ApplicationPackageManager] Rollup config ${i + 1}/${configArray.length} completed successfully in ${totalDuration}ms`);
+            } catch (error) {
+                this.pck.error(`[ApplicationPackageManager] Rollup config ${i + 1}/${configArray.length} failed: ${error instanceof Error ? error.message : String(error)}`);
+                if (error instanceof Error && error.stack) {
+                    this.pck.error(`[ApplicationPackageManager] Stack trace: ${error.stack}`);
+                }
+                throw error;
+            }
+        }
+        
+        this.pck.log(`[ApplicationPackageManager] All rollup configs built successfully`);
+    }
+
+    /**
+     * Get current heap limit in MB
+     */
+    protected getCurrentHeapLimit(): number {
+        try {
+            const v8 = require('v8');
+            const heapStats = v8.getHeapStatistics();
+            return Math.round(heapStats.heap_size_limit / 1024 / 1024);
+        } catch (e) {
+            return 0;
+        }
+    }
+
+
+    /**
+     * Wrap rollup plugins with logging to track what's being processed
+     */
+    protected wrapPluginsWithLogging(plugins: any[], configIndex: number): any[] {
+        return plugins.map((plugin, index) => {
+            if (!plugin || typeof plugin !== 'object') {
+                return plugin;
+            }
+            
+            // Create a wrapper object to avoid mutating the original plugin
+            const wrappedPlugin: any = { ...plugin };
+            
+            // Wrap buildStart hook
+            const originalBuildStart = plugin.buildStart;
+            if (originalBuildStart) {
+                wrappedPlugin.buildStart = async function(options: any) {
+                    if (typeof originalBuildStart === 'function') {
+                        return originalBuildStart.call(this, options);
+                    }
+                };
+            }
+
+            // Wrap resolveId hook
+            const originalResolveId = plugin.resolveId;
+            if (originalResolveId) {
+                wrappedPlugin.resolveId = async function(id: string, importer: string | undefined) {
+                    if (typeof originalResolveId === 'function') {
+                        return originalResolveId.call(this, id, importer);
+                    }
+                };
+            }
+
+            // Wrap load hook
+            const originalLoad = plugin.load;
+            if (originalLoad) {
+                wrappedPlugin.load = async function(id: string) {
+                    const result = typeof originalLoad === 'function' ? await originalLoad.call(this, id) : undefined;
+                    return result;
+                };
+            }
+
+            // Wrap transform hook
+            const originalTransform = plugin.transform;
+            if (originalTransform) {
+                wrappedPlugin.transform = async function(code: string, id: string) {
+                    if (typeof originalTransform === 'function') {
+                        return originalTransform.call(this, code, id);
+                    }
+                };
+            }
+
+            return wrappedPlugin;
+        });
+    }
+
+    /**
+     * Build webpack configs sequentially instead of all at once to reduce memory usage.
+     * This prevents out-of-memory errors when building large applications.
+     */
+    protected async buildWebpackConfigsSequentially(webpackConfigPath: string, args: string[]): Promise<void> {
+        const webpack = require('webpack');
+        const configs = require(webpackConfigPath);
+        
+        // Handle both array and single config exports
+        const configArray = Array.isArray(configs) ? configs : [configs];
+        
+        this.pck.log(`[ApplicationPackageManager] Found ${configArray.length} webpack config(s) to build`);
+        
+        for (let i = 0; i < configArray.length; i++) {
+            const config = configArray[i];
+            const configName = config.name || `config-${i + 1}`;
+            this.pck.log(`[ApplicationPackageManager] Building webpack config ${i + 1}/${configArray.length}: ${configName}`);
+            
+            await new Promise<void>((resolve, reject) => {
+                const compiler = webpack(config);
+                compiler.run((err: Error | null, stats: any) => {
+                    if (err) {
+                        this.pck.error(`[ApplicationPackageManager] Webpack config ${configName} failed: ${err.message}`);
+                        reject(err);
+                        return;
+                    }
+                    if (stats?.hasErrors()) {
+                        const errors = stats.compilation.errors.map((e: any) => e.message || e.toString()).join('\n');
+                        this.pck.error(`[ApplicationPackageManager] Webpack config ${configName} compilation errors:\n${errors}`);
+                        reject(new Error(`Webpack compilation failed for ${configName}`));
+                        return;
+                    }
+                    if (stats?.hasWarnings()) {
+                        const warnings = stats.compilation.warnings.map((w: any) => w.message || w.toString()).join('\n');
+                        this.pck.log(`[ApplicationPackageManager] Webpack config ${configName} warnings:\n${warnings}`);
+                    }
+                    this.pck.log(`[ApplicationPackageManager] Webpack config ${configName} completed successfully`);
+                    resolve();
+                });
+            });
+        }
+        
+        this.pck.log(`[ApplicationPackageManager] All webpack configs built successfully`);
     }
 
     start(args: string[] = []): cp.ChildProcess {

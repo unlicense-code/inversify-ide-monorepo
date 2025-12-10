@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { PluginDeployerResolverContext } from '../../../common/plugin-protocol';
-import { injectable } from '@theia/core/shared/inversify';
-import * as fs from '@theia/core/shared/fs-extra';
+import { PluginDeployerResolverContext } from '../../../common/plugin-protocol.js';
+import { injectable } from 'inversify';
+import * as fs from 'fs-extra';
 import * as path from 'path';
-import { LocalPluginDeployerResolver } from './local-plugin-deployer-resolver';
+import { LocalPluginDeployerResolver } from './local-plugin-deployer-resolver.js';
 
 @injectable()
 export class LocalDirectoryPluginDeployerResolver extends LocalPluginDeployerResolver {

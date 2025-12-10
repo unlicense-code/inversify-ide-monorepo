@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,27 +14,27 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { createRoot, Root } from '@theia/core/shared/react-dom/client';
+import * as React from 'react';
+import { createRoot, Root } from 'react-dom/client';
 import { DebugProtocol } from '@vscode/debugprotocol';
-import { injectable, postConstruct, inject } from '@theia/core/shared/inversify';
+import { injectable, postConstruct, inject } from 'inversify';
 import { Disposable, DisposableCollection, InMemoryResources, nls } from '@theia/core';
-import URI from '@theia/core/lib/common/uri';
-import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider';
-import { MonacoEditorZoneWidget } from '@theia/monaco/lib/browser/monaco-editor-zone-widget';
-import { SimpleMonacoEditor } from '@theia/monaco/lib/browser/simple-monaco-editor';
-import { DebugEditor } from './debug-editor';
-import { DebugSourceBreakpoint } from '../model/debug-source-breakpoint';
-import { Dimension } from '@theia/editor/lib/browser';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider.js';
+import { MonacoEditorZoneWidget } from '@theia/monaco/lib/browser/monaco-editor-zone-widget.js';
+import { SimpleMonacoEditor } from '@theia/monaco/lib/browser/simple-monaco-editor.js';
+import { DebugEditor } from './debug-editor.js';
+import { DebugSourceBreakpoint } from '../model/debug-source-breakpoint.js';
+import { Dimension } from '@theia/editor/lib/browser/index.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { LanguageSelector } from '@theia/monaco-editor-core/esm/vs/editor/common/languageSelector';
-import { provideSuggestionItems, CompletionOptions } from '@theia/monaco-editor-core/esm/vs/editor/contrib/suggest/browser/suggest';
-import { IDecorationOptions } from '@theia/monaco-editor-core/esm/vs/editor/common/editorCommon';
-import { CompletionItemKind, CompletionContext } from '@theia/monaco-editor-core/esm/vs/editor/common/languages';
-import { ILanguageFeaturesService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/languageFeatures';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { TextModel } from '@theia/monaco-editor-core/esm/vs/editor/common/model/textModel';
-import { SelectComponent, SelectOption } from '@theia/core/lib/browser/widgets/select-component';
+import { LanguageSelector } from '@theia/monaco-editor-core/esm/vs/editor/common/languageSelector.js';
+import { provideSuggestionItems, CompletionOptions } from '@theia/monaco-editor-core/esm/vs/editor/contrib/suggest/browser/suggest.js';
+import { IDecorationOptions } from '@theia/monaco-editor-core/esm/vs/editor/common/editorCommon.js';
+import { CompletionItemKind, CompletionContext } from '@theia/monaco-editor-core/esm/vs/editor/common/languages.js';
+import { ILanguageFeaturesService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/languageFeatures.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { TextModel } from '@theia/monaco-editor-core/esm/vs/editor/common/model/textModel.js';
+import { SelectComponent, SelectOption } from '@theia/core/lib/browser/widgets/select-component.js';
 
 export type ShowDebugBreakpointOptions = DebugSourceBreakpoint | {
     position: monaco.Position,

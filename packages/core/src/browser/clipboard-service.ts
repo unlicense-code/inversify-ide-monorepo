@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 RedHat and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { MaybePromise } from '../common/types';
+import { MaybePromise } from '../common/types.js';
 
 export const ClipboardService = Symbol('ClipboardService');
-export interface ClipboardService {
+export type ClipboardService = {
     readText(): MaybePromise<string>;
     writeText(value: string): MaybePromise<void>;
 }

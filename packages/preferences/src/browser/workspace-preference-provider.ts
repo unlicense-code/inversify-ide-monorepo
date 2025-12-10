@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,14 +16,14 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { DisposableCollection } from '@theia/core/lib/common/disposable';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { WorkspaceFilePreferenceProviderFactory, WorkspaceFilePreferenceProvider } from './workspace-file-preference-provider';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { inject, injectable, postConstruct } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
+import { WorkspaceFilePreferenceProviderFactory, WorkspaceFilePreferenceProvider } from './workspace-file-preference-provider.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
 import { Emitter, Event, PreferenceProvider, PreferenceProviderDataChanges, PreferenceProviderProvider, PreferenceScope } from '@theia/core';
-import { JSONObject } from '@theia/core/shared/@lumino/coreutils';
+import { JSONObject } from '@lumino/coreutils';
 
 @injectable()
 export class WorkspacePreferenceProvider implements PreferenceProvider {

@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { LanguageModelRequirement } from '@theia/ai-core';
-import { AbstractStreamParsingChatAgent } from './chat-agents';
-import { injectable } from '@theia/core/shared/inversify';
+import { LanguageModelRequirement } from '@theia/ai-core/lib/common/index.js';
+import { AbstractStreamParsingChatAgent } from './chat-agents.js';
+import { injectable } from 'inversify';
 
 @injectable()
 export class CustomChatAgent extends AbstractStreamParsingChatAgent {

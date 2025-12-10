@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule, interfaces } from '@theia/core/shared/inversify';
-import { WebSocketConnectionProvider } from '@theia/core/lib/browser/messaging/ws-connection-provider';
-import { GitPrompt, GitPromptServer, GitPromptServerProxy, GitPromptServerImpl } from '../../common/git-prompt';
+import { ContainerModule, interfaces } from 'inversify';
+import { WebSocketConnectionProvider } from '@theia/core/lib/browser/index.js';
+import { GitPrompt, GitPromptServer, GitPromptServerProxy, GitPromptServerImpl } from '../../common/git-prompt.js';
 
 export default new ContainerModule(bind => {
     bind(GitPrompt).toSelf();

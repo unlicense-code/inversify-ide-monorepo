@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { inject, injectable, postConstruct } from 'inversify';
-import { LoggerWatcher } from './logger-watcher';
-import { ILoggerServer, LogLevel, ConsoleLogger, rootLoggerName } from './logger-protocol';
+import { LoggerWatcher } from './logger-watcher.js';
+import { ILoggerServer, LogLevel, ConsoleLogger, rootLoggerName } from './logger-protocol.js';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -62,7 +62,7 @@ export const LoggerName = Symbol('LoggerName');
 
 export const ILogger = Symbol('ILogger');
 
-export interface ILogger {
+export type ILogger = {
     /**
      * Set the log level.
      *

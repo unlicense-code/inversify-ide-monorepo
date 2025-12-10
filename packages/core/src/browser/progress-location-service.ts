@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import { injectable } from 'inversify';
-import { CancellationToken } from '../common/cancellation';
-import { ProgressClient } from '../common/progress-service-protocol';
-import { ProgressMessage, ProgressUpdate } from '../common/message-service-protocol';
-import { Deferred } from '../common/promise-util';
-import { Event, Emitter } from '../common/event';
+import { CancellationToken } from '../common/cancellation.js';
+import { ProgressClient } from '../common/progress-service-protocol.js';
+import { ProgressMessage, ProgressUpdate } from '../common/message-service-protocol.js';
+import { Deferred } from '../common/promise-util.js';
+import { Event, Emitter } from '../common/event.js';
 
-export interface LocationProgress {
+export type LocationProgress = {
     show: boolean;
 }
 

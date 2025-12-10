@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2022 TypeFox and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,7 +16,7 @@
 
 import { ContainerModule } from 'inversify';
 import { RequestService } from '@theia/request';
-import { ElectronBackendRequestService } from './electron-backend-request-service';
+import { ElectronBackendRequestService } from './electron-backend-request-service.js';
 
 export default new ContainerModule(bind => {
     bind(RequestService).to(ElectronBackendRequestService).inSingletonScope();

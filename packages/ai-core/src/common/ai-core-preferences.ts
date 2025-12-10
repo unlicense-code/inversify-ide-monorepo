@@ -15,14 +15,14 @@
 // *****************************************************************************
 
 import { nls, PreferenceProxyFactory } from '@theia/core';
-import { PreferenceProxy } from '@theia/core/lib/common';
-import { interfaces } from '@theia/core/shared/inversify';
+import { PreferenceProxy } from '@theia/core/lib/common/index.js';
+import { interfaces } from 'inversify';
 import {
     NOTIFICATION_TYPES,
     NOTIFICATION_TYPE_OFF,
     NotificationType
-} from './notification-types';
-import { PreferenceSchema } from '@theia/core/lib/common/preferences/preference-schema';
+} from './notification-types.js';
+import { PreferenceSchema } from '@theia/core/lib/common/preferences/preference-schema.js';
 
 export const AI_CORE_PREFERENCES_TITLE = '✨ ' + nls.localize('theia/ai/core/prefs/title', 'AI Features [Beta]');
 export const PREFERENCE_NAME_PROMPT_TEMPLATES = 'ai-features.promptTemplates.promptTemplatesFolder';
@@ -164,20 +164,20 @@ export const aiCorePreferenceSchema: PreferenceSchema = {
     }
 };
 
-export interface AICoreConfiguration {
+export type AICoreConfiguration = {
     [PREFERENCE_NAME_PROMPT_TEMPLATES]: string | undefined;
     [PREFERENCE_NAME_REQUEST_SETTINGS]: Array<RequestSetting> | undefined;
     [PREFERENCE_NAME_MAX_RETRIES]: number | undefined;
     [PREFERENCE_NAME_DEFAULT_NOTIFICATION_TYPE]: NotificationType | undefined;
 }
 
-export interface RequestSetting {
+export type RequestSetting = {
     scope?: Scope;
     clientSettings?: { keepToolCalls: boolean; keepThinking: boolean };
     requestSettings?: { [key: string]: unknown };
 }
 
-export interface Scope {
+export type Scope = {
     modelId?: string;
     providerId?: string;
     agentId?: string;

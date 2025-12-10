@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,24 +14,24 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 let disableJSDOM = enableJSDOM();
 
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 FrontendApplicationConfigProvider.set({});
 
-import URI from '@theia/core/lib/common/uri';
+import { URI } from '@theia/core/lib/common/uri.js';
 import { expect } from 'chai';
-import { Container } from '@theia/core/shared/inversify';
-import { Diagnostic, Range, DiagnosticSeverity } from '@theia/core/shared/vscode-languageserver-protocol';
-import { Event } from '@theia/core/lib/common/event';
-import { Marker } from '../../common/marker';
-import { MarkerManager } from '../marker-manager';
-import { MarkerNode, MarkerOptions } from '../marker-tree';
-import { PROBLEM_OPTIONS } from './problem-container';
-import { ProblemManager } from './problem-manager';
-import { ProblemTree } from './problem-tree-model';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
+import { Container } from 'inversify';
+import { Diagnostic, Range, DiagnosticSeverity } from 'vscode-languageserver-protocol';
+import { Event } from '@theia/core/lib/common/event.js';
+import { Marker } from '../../common/marker.js';
+import { MarkerManager } from '../marker-manager.js';
+import { MarkerNode, MarkerOptions } from '../marker-tree.js';
+import { PROBLEM_OPTIONS } from './problem-container.js';
+import { ProblemManager } from './problem-manager.js';
+import { ProblemTree } from './problem-tree-model.js';
+import { FileService } from '@theia/filesystem/lib/browser/index.js';
 
 disableJSDOM();
 

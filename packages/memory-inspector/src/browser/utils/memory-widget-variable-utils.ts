@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2021 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { DebugScope, DebugVariable } from '@theia/debug/lib/browser/console/debug-console-items';
-import { DebugSession } from '@theia/debug/lib/browser/debug-session';
+import { DebugScope, DebugVariable } from '@theia/debug/lib/browser/console/debug-console-items.js';
+import { DebugSession } from '@theia/debug/lib/browser/debug-session.js';
 import Long from 'long';
 
-export interface VariableRange {
+export type VariableRange = {
     name: string;
     address: Long;
     pastTheEndAddress: Long;
@@ -26,13 +26,13 @@ export interface VariableRange {
     value?: string;
 }
 
-export interface VariableDecoration {
+export type VariableDecoration = {
     name: string;
     color: string;
     firstAppearance?: boolean;
 }
 
-export interface RegisterReadResult {
+export type RegisterReadResult = {
     threadId: string | undefined;
     registers: DebugVariable[];
 }

@@ -19,10 +19,10 @@
 *--------------------------------------------------------------------------------------------*/
 // copied and modified from https://github.com/microsoft/vscode/blob/a4a4cf5ace4472bc4f5176396bb290cafa15c518/src/vs/workbench/contrib/webviewView/browser/webviewViewService.ts
 
-import { CancellationToken, Event } from '@theia/core/lib/common';
-import { WebviewWidget } from '../webview/webview';
+import { CancellationToken, Event } from '@theia/core/lib/common/index.js';
+import { WebviewWidget } from '../webview/webview.js';
 
-export interface WebviewView {
+export type WebviewView = {
     title?: string;
     description?: string;
     readonly webview: WebviewWidget;
@@ -34,6 +34,6 @@ export interface WebviewView {
     resolve(): Promise<void>;
 }
 
-export interface WebviewViewResolver {
+export type WebviewViewResolver = {
     resolve(webviewView: WebviewView, cancellation: CancellationToken): Promise<void>;
 }

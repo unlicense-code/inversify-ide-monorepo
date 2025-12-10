@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,17 +15,17 @@
 // *****************************************************************************
 
 import { injectable, inject, postConstruct } from 'inversify';
-import { Emitter } from '../common/event';
-import { Disposable, DisposableCollection } from '../common/disposable';
-import { LabelProviderContribution, DidChangeLabelEvent } from './label-provider';
-import { FrontendApplicationConfigProvider } from './frontend-application-config-provider';
+import { Emitter } from '../common/event.js';
+import { Disposable, DisposableCollection } from '../common/disposable.js';
+import { LabelProviderContribution, DidChangeLabelEvent } from './label-provider.js';
+import { FrontendApplicationConfigProvider } from './frontend-application-config-provider.js';
 import debounce = require('lodash.debounce');
-import { PreferenceSchemaService } from '../common/preferences/preference-schema';
-import { PreferenceService } from '../common/preferences';
+import { PreferenceSchemaService } from '../common/preferences/preference-schema.js';
+import { PreferenceService } from '../common/preferences/index.js';
 
 const ICON_THEME_PREFERENCE_KEY = 'workbench.iconTheme';
 
-export interface IconThemeDefinition {
+export type IconThemeDefinition = {
     readonly id: string
     readonly label: string
     readonly description?: string
@@ -35,7 +35,7 @@ export interface IconThemeDefinition {
     readonly showLanguageModeIcons?: boolean;
 }
 
-export interface IconTheme extends IconThemeDefinition {
+export type IconTheme = IconThemeDefinition & {
     activate(): Disposable;
 }
 

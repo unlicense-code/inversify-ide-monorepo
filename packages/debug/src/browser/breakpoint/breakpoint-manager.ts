@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,16 +15,16 @@
 // *****************************************************************************
 
 import * as deepEqual from 'fast-deep-equal';
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { Emitter } from '@theia/core/lib/common';
-import { StorageService } from '@theia/core/lib/browser';
-import { Marker } from '@theia/markers/lib/common/marker';
-import { MarkerManager } from '@theia/markers/lib/browser/marker-manager';
-import URI from '@theia/core/lib/common/uri';
-import { SourceBreakpoint, BREAKPOINT_KIND, ExceptionBreakpoint, FunctionBreakpoint, BaseBreakpoint, InstructionBreakpoint, DataBreakpoint } from './breakpoint-marker';
+import { injectable, inject } from 'inversify';
+import { Emitter } from '@theia/core/lib/common/index.js';
+import { StorageService } from '@theia/core/lib/browser/index.js';
+import { Marker } from '@theia/markers/lib/common/marker.js';
+import { MarkerManager } from '@theia/markers/lib/browser/marker-manager.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { SourceBreakpoint, BREAKPOINT_KIND, ExceptionBreakpoint, FunctionBreakpoint, BaseBreakpoint, InstructionBreakpoint, DataBreakpoint } from './breakpoint-marker.js';
 import { DebugProtocol } from '@vscode/debugprotocol';
 
-export interface BreakpointsChangeEvent<T extends BaseBreakpoint> {
+export type BreakpointsChangeEvent<T extends BaseBreakpoint> = {
     uri: URI
     added: T[]
     removed: T[]
@@ -84,7 +84,7 @@ export class BreakpointManager extends MarkerManager<SourceBreakpoint> {
                 // We emit all existing markers as 'changed', but we only fire an event if something really did change.
                 // We also fire an event if oldMarker === newMarker, as we cannot actually detect a change in this case
                 // (https://github.com/eclipse-theia/theia/issues/12546).
-                didChangeMarkers ||= !!added.length || oldMarker === newMarker || !deepEqual(oldMarker, newMarker);
+                didChangeMarkers ||= !!added.length || oldMarker === newMarker || !deepEqual.default(oldMarker, newMarker);
                 changed.push(newMarker);
             }
         }

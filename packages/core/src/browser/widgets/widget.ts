@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,11 +19,11 @@
 import { injectable, decorate, unmanaged } from 'inversify';
 import { Title, Widget } from '@lumino/widgets';
 import { Message, MessageLoop } from '@lumino/messaging';
-import { Emitter, Event, Disposable, DisposableCollection, MaybePromise, isObject } from '../../common';
-import { KeyCode, KeysOrKeyCodes } from '../keyboard/keys';
+import { Emitter, Event, Disposable, DisposableCollection, MaybePromise, isObject } from '../../common/index.js';
+import { KeyCode, KeysOrKeyCodes } from '../keyboard/keys.js';
 
 import PerfectScrollbar from 'perfect-scrollbar';
-import { PreviewableWidget } from '../widgets/previewable-widget';
+import { PreviewableWidget } from '../widgets/previewable-widget.js';
 import { Slot } from '@lumino/signaling';
 
 decorate(injectable(), Widget);
@@ -56,7 +56,7 @@ export const SELECTED_CLASS = 'theia-mod-selected';
 export const FOCUS_CLASS = 'theia-mod-focus';
 export const PINNED_CLASS = 'theia-mod-pinned';
 export const LOCKED_CLASS = 'theia-mod-locked';
-export const DEFAULT_SCROLL_OPTIONS: PerfectScrollbar.Options = {
+export const DEFAULT_SCROLL_OPTIONS: any = {
     suppressScrollX: true,
     minScrollbarLength: 35,
 };
@@ -114,8 +114,8 @@ export class BaseWidget extends Widget implements PreviewableWidget {
         this.onDidChangeVisibilityEmitter
     );
     protected readonly toDisposeOnDetach = new DisposableCollection();
-    protected scrollBar?: PerfectScrollbar;
-    protected scrollOptions?: PerfectScrollbar.Options;
+    protected scrollBar?: any;
+    protected scrollOptions?: any;
 
     constructor(@unmanaged() options?: Widget.IOptions) {
         super(options);
@@ -165,7 +165,7 @@ export class BaseWidget extends Widget implements PreviewableWidget {
             (async () => {
                 const container = await this.getScrollContainer();
                 container.style.overflow = 'hidden';
-                this.scrollBar = new PerfectScrollbar(container, this.scrollOptions);
+                this.scrollBar = new (PerfectScrollbar as any)(container, this.scrollOptions);
                 this.disableScrollBarFocus(container);
                 this.toDisposeOnDetach.push(addEventListener(container, <any>'ps-y-reach-end', () => { this.onScrollYReachEndEmitter.fire(undefined); }));
                 this.toDisposeOnDetach.push(addEventListener(container, <any>'ps-scroll-up', () => { this.onScrollUpEmitter.fire(undefined); }));
@@ -268,7 +268,7 @@ export function createIconButton(...classNames: string[]): HTMLSpanElement {
 export type EventListener<K extends keyof HTMLElementEventMap> = (this: HTMLElement, event: HTMLElementEventMap[K]) => any;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type EventHandler<K extends keyof HTMLElementEventMap> = (event: HTMLElementEventMap[K]) => any;
-export interface EventListenerObject<K extends keyof HTMLElementEventMap> {
+export type EventListenerObject<K extends keyof HTMLElementEventMap> = {
     handleEvent(evt: HTMLElementEventMap[K]): void;
 }
 export namespace EventListenerObject {

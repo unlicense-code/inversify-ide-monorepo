@@ -18,12 +18,12 @@ import { Page, PlaywrightWorkerArgs, _electron as electron } from '@playwright/t
 import { TheiaApp } from './theia-app';
 import { TheiaWorkspace } from './theia-workspace';
 
-export interface TheiaAppFactory<T extends TheiaApp> {
+export type TheiaAppFactory<T extends TheiaApp> = {
     new(page: Page, initialWorkspace: TheiaWorkspace, isElectron?: boolean): T;
 }
 
 // TODO this is just a sketch, we need a proper way to configure tests and pass this configuration to the `TheiaAppLoader`:
-export interface TheiaPlaywrightTestConfig {
+export type TheiaPlaywrightTestConfig = {
     useElectron?: {
         /** Path to the Theia Electron app package (absolute or relative to this package). */
         electronAppPath?: string,

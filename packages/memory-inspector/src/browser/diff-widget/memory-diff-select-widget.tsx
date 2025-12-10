@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2021 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,20 +14,20 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { Key, KeyCode, Message, ReactWidget } from '@theia/core/lib/browser';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
+import { Key, KeyCode, Message, ReactWidget } from '@theia/core/lib/browser/index.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import * as React from 'react';
 import Long from 'long';
-import { MemoryWidget } from '../memory-widget/memory-widget';
-import { RegisterWidget } from '../register-widget/register-widget-types';
-import { MWSelect } from '../utils/memory-widget-components';
-import { MemoryWidgetManager } from '../utils/memory-widget-manager';
-import { Interfaces } from '../utils/memory-widget-utils';
-import { VariableRange } from '../utils/memory-widget-variable-utils';
-import { MemoryDiffWidget } from './memory-diff-table-widget';
-import { nls } from '@theia/core/lib/common/nls';
+import { MemoryWidget } from '../memory-widget/memory-widget.js';
+import { RegisterWidget } from '../register-widget/register-widget-types.js';
+import { MWSelect } from '../utils/memory-widget-components.js';
+import { MemoryWidgetManager } from '../utils/memory-widget-manager.js';
+import { Interfaces } from '../utils/memory-widget-utils.js';
+import { VariableRange } from '../utils/memory-widget-variable-utils.js';
+import { MemoryDiffWidget } from './memory-diff-table-widget.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
-export interface DiffMemory {
+export type DiffMemory = {
     beforeAddress: Long;
     beforeBytes: Interfaces.LabeledUint8Array;
     beforeVariables: VariableRange[];
@@ -119,8 +119,8 @@ export class MemoryDiffSelectWidget extends ReactWidget {
     };
 
     protected updateWidgetMap(): void {
-        const widgets = this.memoryWidgetManager.availableWidgets.filter(widget => !MemoryDiffWidget.is(widget) && !RegisterWidget.is(widget));
-        this.labelToWidgetMap = new Map<string, MemoryWidget>(widgets.map((widget): [string, MemoryWidget] => [widget.title.label, widget]));
+        const widgets = this.memoryWidgetManager.availableWidgets.filter((widget: any) => !MemoryDiffWidget.is(widget) && !RegisterWidget.is(widget));
+        this.labelToWidgetMap = new Map<string, MemoryWidget>(widgets.map((widget: any): [string, MemoryWidget] => [widget.title.label, widget]));
         this.update();
     }
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { inject, injectable } from 'inversify';
-import { isObject } from '../types';
-import { IndexedAccess, PreferenceSchemaService } from './preference-schema';
-import { escapeRegExpCharacters } from '../strings';
+import { isObject } from '../types.js';
+import { IndexedAccess, PreferenceSchemaService } from './preference-schema.js';
+import { escapeRegExpCharacters } from '../strings.js';
 import { JSONValue } from '@lumino/coreutils';
 
-export interface OverridePreferenceName {
+export type OverridePreferenceName = {
     preferenceName: string
     overrideIdentifier: string
 }

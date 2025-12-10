@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { Position, Range } from '@theia/core/shared/vscode-languageserver-protocol';
-import { RecursivePartial } from '@theia/core/lib/common/types';
+import { injectable } from 'inversify';
+import { Position, Range } from 'vscode-languageserver-protocol';
+import { RecursivePartial } from '@theia/core/lib/common/types.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { Selection } from '@theia/editor/lib/browser';
+import { Selection } from '@theia/editor/lib/browser/index.js';
 
 export interface MonacoRangeReplace {
     insert: monaco.IRange;

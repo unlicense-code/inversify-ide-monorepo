@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { Command, nls } from '@theia/core';
-import { codicon } from '@theia/core/lib/browser';
+import { codicon } from '@theia/core/lib/browser/index.js';
 
 export namespace NotificationsCommands {
 

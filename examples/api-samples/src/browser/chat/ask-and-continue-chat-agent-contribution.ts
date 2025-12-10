@@ -23,9 +23,9 @@ import {
     QuestionResponseContentImpl,
     unansweredQuestions,
     ProgressChatResponseContentImpl
-} from '@theia/ai-chat';
-import { Agent, LanguageModelMessage, BasePromptFragment } from '@theia/ai-core';
-import { injectable, interfaces, postConstruct } from '@theia/core/shared/inversify';
+} from '@theia/ai-chat/lib/common/index.js';
+import { Agent, LanguageModelMessage, BasePromptFragment } from '@theia/ai-core/lib/common/index.js';
+import { injectable, interfaces, postConstruct } from 'inversify';
 
 export function bindAskAndContinueChatAgentContribution(bind: interfaces.Bind): void {
     bind(AskAndContinueChatAgent).toSelf().inSingletonScope();

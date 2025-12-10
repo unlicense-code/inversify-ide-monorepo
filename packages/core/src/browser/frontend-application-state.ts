@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { injectable, inject } from 'inversify';
-import { Emitter, Event } from '../common/event';
-import { Deferred } from '../common/promise-util';
-import { ILogger } from '../common/logger';
-import { FrontendApplicationState } from '../common/frontend-application-state';
+import { Emitter, Event } from '../common/event.js';
+import { Deferred } from '../common/promise-util.js';
+import { ILogger } from '../common/logger.js';
+import { FrontendApplicationState } from '../common/frontend-application-state.js';
 
 export { FrontendApplicationState };
 

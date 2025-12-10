@@ -14,24 +14,24 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { TreeModelImpl, TreeNode, TreeProps, CompositeTreeNode, SelectableTreeNode, ExpandableTreeNode } from '@theia/core/lib/browser/tree';
-import URI from '@theia/core/lib/common/uri';
-import { ScmProvider, ScmResourceGroup, ScmResource, ScmResourceDecorations } from './scm-provider';
-import { ScmContextKeyService } from './scm-context-key-service';
+import { injectable, inject } from 'inversify';
+import { TreeModelImpl, TreeNode, TreeProps, CompositeTreeNode, SelectableTreeNode, ExpandableTreeNode } from '@theia/core/lib/browser/tree/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ScmProvider, ScmResourceGroup, ScmResource, ScmResourceDecorations } from './scm-provider.js';
+import { ScmContextKeyService } from './scm-context-key-service.js';
 
 export const ScmTreeModelProps = Symbol('ScmTreeModelProps');
-export interface ScmTreeModelProps {
+export type ScmTreeModelProps = {
     defaultExpansion?: 'collapsed' | 'expanded';
     nestingThreshold?: number;
 }
 
-export interface ScmFileChangeRootNode extends CompositeTreeNode {
+export type ScmFileChangeRootNode = CompositeTreeNode & {
     rootUri: string;
     children: ScmFileChangeGroupNode[];
 }
 
-export interface ScmFileChangeGroupNode extends ExpandableTreeNode {
+export type ScmFileChangeGroupNode = ExpandableTreeNode & {
     groupId: string;
     groupLabel: string;
     children: (ScmFileChangeFolderNode | ScmFileChangeNode)[];
@@ -44,7 +44,7 @@ export namespace ScmFileChangeGroupNode {
     }
 }
 
-export interface ScmFileChangeFolderNode extends ExpandableTreeNode, SelectableTreeNode {
+export type ScmFileChangeFolderNode = ExpandableTreeNode & SelectableTreeNode & {
     groupId: string;
     path: string;
     sourceUri: string;
@@ -57,7 +57,7 @@ export namespace ScmFileChangeFolderNode {
     }
 }
 
-export interface ScmFileChangeNode extends SelectableTreeNode {
+export type ScmFileChangeNode = SelectableTreeNode & {
     sourceUri: string;
     decorations?: ScmResourceDecorations;
 }

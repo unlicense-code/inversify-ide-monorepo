@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { Widget } from '@theia/core/lib/browser';
-import { TestResultViewContribution } from './view/test-result-view-contribution';
-import { TestViewContribution } from './view/test-view-contribution';
-import { TestPreferences } from '../common/test-preferences';
+import { inject, injectable } from 'inversify';
+import { Widget } from '@theia/core/lib/browser/index.js';
+import { TestResultViewContribution } from './view/test-result-view-contribution.js';
+import { TestViewContribution } from './view/test-view-contribution.js';
+import { TestPreferences } from '../common/test-preferences.js';
 
-export interface TestExecutionProgressService {
+export type TestExecutionProgressService = {
     onTestRunRequested(preserveFocus: boolean): Promise<void>;
 }
 

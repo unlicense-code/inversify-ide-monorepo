@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,9 +16,9 @@
 
 import * as React from 'react';
 import { injectable, inject } from 'inversify';
-import { Disposable } from '../../common';
-import { Message } from '../widgets';
-import { AbstractDialog, DialogProps } from '../dialogs';
+import { Disposable } from '../../common/disposable.js';
+import { Message } from '../widgets/widget.js';
+import { AbstractDialog, DialogProps } from '../dialogs.js';
 import { createRoot, Root } from 'react-dom/client';
 
 @injectable()

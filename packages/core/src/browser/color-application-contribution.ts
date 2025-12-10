@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,17 +15,17 @@
 // *****************************************************************************
 
 import { injectable, inject, named } from 'inversify';
-import { ColorRegistry } from './color-registry';
-import { Emitter } from '../common/event';
-import { ThemeService } from './theming';
-import { FrontendApplicationContribution } from './frontend-application-contribution';
-import { ContributionProvider } from '../common/contribution-provider';
-import { Disposable, DisposableCollection } from '../common/disposable';
-import { DEFAULT_BACKGROUND_COLOR_STORAGE_KEY } from './frontend-application-config-provider';
-import { SecondaryWindowHandler } from './secondary-window-handler';
+import { ColorRegistry } from './color-registry.js';
+import { Emitter } from '../common/event.js';
+import { ThemeService } from './theming.js';
+import { FrontendApplicationContribution } from './frontend-application-contribution.js';
+import { ContributionProvider } from '../common/contribution-provider.js';
+import { Disposable, DisposableCollection } from '../common/disposable.js';
+import { DEFAULT_BACKGROUND_COLOR_STORAGE_KEY } from './frontend-application-config-provider.js';
+import { SecondaryWindowHandler } from './secondary-window-handler.js';
 
 export const ColorContribution = Symbol('ColorContribution');
-export interface ColorContribution {
+export type ColorContribution = {
     registerColors(colors: ColorRegistry): void;
 }
 

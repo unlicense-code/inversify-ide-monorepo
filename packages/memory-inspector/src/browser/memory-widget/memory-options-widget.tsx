@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2021 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,20 +15,20 @@
  ********************************************************************************/
 
 import { deepFreeze, Disposable, DisposableCollection, Emitter, nls } from '@theia/core';
-import { Key, KeyCode, Message, ReactWidget, StatefulWidget } from '@theia/core/lib/browser';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { DebugSession, DebugState } from '@theia/debug/lib/browser/debug-session';
-import { DebugSessionManager } from '@theia/debug/lib/browser/debug-session-manager';
+import { Key, KeyCode, Message, ReactWidget, StatefulWidget } from '@theia/core/lib/browser/index.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import * as React from 'react';
+import { DebugSession, DebugState } from '@theia/debug/lib/browser/debug-session.js';
+import { DebugSessionManager } from '@theia/debug/lib/browser/debug-session-manager.js';
 import Long from 'long';
-import { MemoryProviderService } from '../memory-provider/memory-provider-service';
-import { Recents } from '../utils/memory-recents';
-import { MWInput, MWInputWithSelect, MWSelect } from '../utils/memory-widget-components';
-import { Constants, Interfaces, MemoryWidgetOptions, Utils } from '../utils/memory-widget-utils';
-import { VariableRange } from '../utils/memory-widget-variable-utils';
-import { MWMultiSelect, SingleSelectItemProps } from '../utils/multi-select-bar';
-import debounce = require('@theia/core/shared/lodash.debounce');
+import { MemoryProviderService } from '../memory-provider/memory-provider-service.js';
+import { Recents } from '../utils/memory-recents.js';
+import { MWInput, MWInputWithSelect, MWSelect } from '../utils/memory-widget-components.js';
+import { Constants, Interfaces, MemoryWidgetOptions, Utils } from '../utils/memory-widget-utils.js';
+import { VariableRange } from '../utils/memory-widget-variable-utils.js';
+import { MWMultiSelect, SingleSelectItemProps } from '../utils/multi-select-bar.js';
+import debounce from  'lodash/debounce.js'
 
 export const EMPTY_MEMORY: Interfaces.MemoryReadResult = deepFreeze({
     bytes: new Uint8Array(),

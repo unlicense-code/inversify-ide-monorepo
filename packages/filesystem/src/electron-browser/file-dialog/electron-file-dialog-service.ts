@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { MaybeArray } from '@theia/core/lib/common/types';
-import { MessageService } from '@theia/core/lib/common/message-service';
-import { FileStat } from '../../common/files';
-import { FileAccess } from '../../common/filesystem';
-import { DefaultFileDialogService, OpenFileDialogProps, SaveFileDialogProps } from '../../browser/file-dialog';
+import { inject, injectable } from 'inversify';
+import { URI } from '@theia/core';
+import { MaybeArray } from '@theia/core';
+import { MessageService } from '@theia/core';
+import { FileStat } from '../../common/files.js';
+import { FileAccess } from '../../common/filesystem.js';
+import { DefaultFileDialogService } from '../../browser/file-dialog/file-dialog-service.js';
+import { OpenFileDialogProps, SaveFileDialogProps } from '../../browser/file-dialog/file-dialog.js';
 //
 // We are OK to use this here because the electron backend and frontend are on the same host.
 // If required, we can move this single service (and its module) to a dedicated Theia extension,
@@ -28,10 +29,10 @@ import { DefaultFileDialogService, OpenFileDialogProps, SaveFileDialogProps } fr
 // solution.
 //
 // eslint-disable-next-line @theia/runtime-import-check
-import { FileUri } from '@theia/core/lib/common/file-uri';
-import { OpenDialogOptions, SaveDialogOptions } from '../../electron-common/electron-api';
+import { FileUri } from '@theia/core/lib/node/index.js';
+import { OpenDialogOptions, SaveDialogOptions } from '../../electron-common/electron-api.js';
 
-import '@theia/core/lib/electron-common/electron-api';
+import '@theia/core/lib/electron-common/electron-api.js';
 
 @injectable()
 export class ElectronFileDialogService extends DefaultFileDialogService {
@@ -44,12 +45,12 @@ export class ElectronFileDialogService extends DefaultFileDialogService {
         if (window.electronTheiaCore.useNativeElements) {
             const rootNode = await this.getRootNode(folder);
             if (rootNode) {
-                const filePaths = await window.electronTheiaFilesystem.showOpenDialog(this.toOpenDialogOptions(rootNode.uri, props));
+                const filePaths = await (window as any).electronTheiaFilesystem.showOpenDialog(this.toOpenDialogOptions(rootNode.uri, props));
                 if (!filePaths || filePaths.length === 0) {
                     return undefined;
                 }
 
-                const uris = filePaths.map(path => FileUri.create(path));
+                const uris = filePaths.map((path: string) => FileUri.create(path));
                 const canAccess = await this.canRead(uris);
                 const result = canAccess ? uris.length === 1 ? uris[0] : uris : undefined;
                 return result;
@@ -60,10 +61,10 @@ export class ElectronFileDialogService extends DefaultFileDialogService {
     }
 
     override async showSaveDialog(props: SaveFileDialogProps, folder?: FileStat): Promise<URI | undefined> {
-        if (window.electronTheiaCore.useNativeElements) {
+        if (window.electronTheiaCore?.useNativeElements) {
             const rootNode = await this.getRootNode(folder);
             if (rootNode) {
-                const filePath = await window.electronTheiaFilesystem.showSaveDialog(this.toSaveDialogOptions(rootNode.uri, props));
+                const filePath = await (window as any).electronTheiaFilesystem.showSaveDialog(this.toSaveDialogOptions(rootNode.uri, props));
 
                 if (!filePath) {
                     return undefined;
@@ -124,7 +125,7 @@ export class ElectronFileDialogService extends DefaultFileDialogService {
             result.filters = [];
             const filters = Object.entries(props.filters);
             for (const [label, extensions] of filters) {
-                result.filters.push({ name: label, extensions: extensions });
+                result.filters.push({ name: label, extensions: extensions as string[] });
             }
 
             if (props.canSelectFiles) {
@@ -155,7 +156,7 @@ export class ElectronFileDialogService extends DefaultFileDialogService {
             result.filters = [];
             const filters = Object.entries(props.filters);
             for (const [label, extensions] of filters) {
-                result.filters.push({ name: label, extensions: extensions });
+                result.filters.push({ name: label, extensions: extensions as string[] });
             }
         }
 

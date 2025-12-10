@@ -16,7 +16,7 @@
 
 /* eslint-disable @theia/localization-check */
 
-import { inject, injectable, unmanaged } from '@theia/core/shared/inversify';
+import { inject, injectable, unmanaged } from 'inversify';
 import {
     AutoClosingPair,
     AutoClosingPairConditional,
@@ -65,22 +65,22 @@ import {
     PluginIconContribution,
     PluginEntryPoint,
     PluginPackageContribution
-} from '../../../common/plugin-protocol';
+} from '../../../common/plugin-protocol.js';
 import { promises as fs, readdirSync } from 'fs';
 import * as path from 'path';
-import { isObject, isStringArray } from '@theia/core/lib/common/types';
-import { GrammarsReader } from './grammars-reader';
-import { CharacterPair } from '../../../common/plugin-api-rpc';
-import { isENOENT } from '../../../common/errors';
+import { isObject, isStringArray } from '@theia/core/lib/common/types.js';
+import { GrammarsReader } from './grammars-reader.js';
+import { CharacterPair } from '../../../common/plugin-api-rpc.js';
+import { isENOENT } from '../../../common/errors.js';
 import * as jsoncparser from 'jsonc-parser';
-import { IJSONSchema } from '@theia/core/lib/common/json-schema';
-import { deepClone } from '@theia/core/lib/common/objects';
-import { PreferenceSchema, PreferenceDataProperty } from '@theia/core/lib/common/preferences/preference-schema';
-import { TaskDefinition } from '@theia/task/lib/common/task-protocol';
-import { ColorDefinition } from '@theia/core/lib/common/color';
-import { CSSIcon } from '@theia/core/lib/common/markdown-rendering/icon-utilities';
-import { PluginUriFactory } from './plugin-uri-factory';
-import { PreferenceScope } from '@theia/core/lib/common/preferences/preference-scope';
+import { IJSONSchema } from '@theia/core/lib/common/json-schema.js';
+import { deepClone } from '@theia/core/lib/common/objects.js';
+import { PreferenceSchema, PreferenceDataProperty } from '@theia/core/lib/common/preferences/preference-schema.js';
+import { TaskDefinition } from '@theia/task/lib/common/task-protocol.js';
+import { ColorDefinition } from '@theia/core/lib/common/color.js';
+import { CSSIcon } from '@theia/core/lib/common/markdown-rendering/icon-utilities.js';
+import { PluginUriFactory } from './plugin-uri-factory.js';
+import { PreferenceScope } from '@theia/core/lib/common/preferences/preference-scope.js';
 
 const colorIdPattern = '^\\w+[.\\w+]*$';
 const iconIdPattern = `^${CSSIcon.iconNameSegment}(-${CSSIcon.iconNameSegment})+$`;
@@ -95,7 +95,7 @@ type PluginPackageWithContributes = PluginPackage & { contributes: PluginPackage
 type ScopeString = 'machine-overridable' | 'window' | 'resource' | 'language-overridable' | 'application' | 'machine';
 
 type EditPresentationTypes = 'multilineText' | 'singleLineText';
-export interface IConfigurationPropertySchema extends IJSONSchema {
+export type IConfigurationPropertySchema = IJSONSchema & {
 
     scope?: ScopeString;
 
@@ -126,12 +126,12 @@ export interface IConfigurationPropertySchema extends IJSONSchema {
 
 }
 
-export interface IExtensionInfo {
+export type IExtensionInfo = {
     id: string;
     displayName?: string;
 }
 
-export interface IConfigurationNode {
+export type IConfigurationNode = {
     title?: string;
     description?: string;
     properties?: Record<string, IConfigurationPropertySchema>;

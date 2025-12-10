@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,27 +14,30 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
+import { injectable, inject, postConstruct } from 'inversify';
 import debounce from 'p-debounce';
-import * as markdownit from '@theia/core/shared/markdown-it';
-import * as DOMPurify from '@theia/core/shared/dompurify';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import { CancellationToken, CancellationTokenSource } from '@theia/core/lib/common/cancellation';
-import { HostedPluginSupport } from '@theia/plugin-ext/lib/hosted/browser/hosted-plugin';
-import { VSXExtension, VSXExtensionFactory } from './vsx-extension';
-import { ProgressService } from '@theia/core/lib/common/progress-service';
-import { VSXExtensionsSearchModel } from './vsx-extensions-search-model';
-import { PreferenceInspection, PreferenceInspectionScope, PreferenceService } from '@theia/core/lib/common/preferences/preference-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { RecommendedExtensions } from '../common/recommended-extensions-preference-contribution';
-import URI from '@theia/core/lib/common/uri';
-import { OVSXClient, VSXAllVersions, VSXExtensionRaw, VSXResponseError, VSXSearchEntry, VSXSearchOptions, VSXTargetPlatform } from '@theia/ovsx-client/lib/ovsx-types';
-import { OVSXClientProvider } from '../common/ovsx-client-provider';
-import { RequestContext, RequestService } from '@theia/core/shared/@theia/request';
+import markdownit from 'markdown-it';
+import DOMPurify from 'dompurify';
+import { Emitter, Event } from '@theia/core/lib/common/event.js';
+import { CancellationToken, CancellationTokenSource } from '@theia/core/lib/common/cancellation.js';
+import { HostedPluginSupport } from '@theia/plugin-ext/lib/hosted/browser/hosted-plugin.js';
+import { VSXExtension, VSXExtensionFactory } from './vsx-extension.js';
+import { ProgressService } from '@theia/core/lib/common/progress-service.js';
+import { VSXExtensionsSearchModel } from './vsx-extensions-search-model.js';
+import { PreferenceInspection, PreferenceInspectionScope, PreferenceService } from '@theia/core/lib/common/preferences/preference-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { RecommendedExtensions } from '../common/recommended-extensions-preference-contribution.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import {
+    OVSXClient, VSXAllVersions, VSXExtensionRaw, VSXResponseError,
+    VSXSearchEntry, VSXSearchOptions, VSXTargetPlatform
+} from '@theia/ovsx-client/lib/ovsx-types.js';
+import { OVSXClientProvider } from '../common/ovsx-client-provider.js';
+import { RequestContext, RequestService } from '@theia/request';
 import { OVSXApiFilterProvider } from '@theia/ovsx-client';
-import { ApplicationServer } from '@theia/core/lib/common/application-protocol';
+import { ApplicationServer } from '@theia/core/lib/common/application-protocol.js';
 import { HostedPluginServer, PluginIdentifiers, PluginType } from '@theia/plugin-ext';
-import { HostedPluginWatcher } from '@theia/plugin-ext/lib/hosted/browser/hosted-plugin-watcher';
+import { HostedPluginWatcher } from '@theia/plugin-ext/lib/hosted/browser/hosted-plugin-watcher.js';
 
 @injectable()
 export class VSXExtensionsModel {

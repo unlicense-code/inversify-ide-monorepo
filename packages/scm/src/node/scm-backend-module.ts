@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { bindScmPreferences } from '../common/scm-preferences';
+import { ContainerModule } from 'inversify';
+import { bindScmPreferences } from '../common/scm-preferences.js';
 export default new ContainerModule(bind => {
     bindScmPreferences(bind);
 });

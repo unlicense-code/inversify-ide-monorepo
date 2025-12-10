@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 
 import { PreferenceContribution } from '@theia/core';
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { ToolbarPreferencesSchema } from '../common/toolbar-preference-contribution';
+import { ContainerModule } from 'inversify';
+import { ToolbarPreferencesSchema } from '../common/toolbar-preference-contribution.js';
 
 // *****************************************************************************
 export default new ContainerModule(bind => {

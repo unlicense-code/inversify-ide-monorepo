@@ -16,17 +16,17 @@
 
 export const browserAutomationPath = '/services/automation/browser';
 export const BrowserAutomation = Symbol('BrowserAutomation');
-export interface BrowserAutomation {
+export type BrowserAutomation = {
     launch(remoteDebuggingPort: number): Promise<LaunchResult | undefined>;
     isRunning(): Promise<boolean>;
     queryDom(selector?: string): Promise<string>;
     close(): Promise<void>;
 }
 
-export interface LaunchResult {
+export type LaunchResult = {
     remoteDebuggingPort: number;
 }
 
 export const BrowserAutomationClient = Symbol('BrowserAutomationClient');
-export interface BrowserAutomationClient {
+export type BrowserAutomationClient = {
 }

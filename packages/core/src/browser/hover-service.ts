@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { inject, injectable } from 'inversify';
-import { Disposable, DisposableCollection, disposableTimeout, isOSX, PreferenceService } from '../common';
-import { MarkdownString } from '../common/markdown-rendering/markdown-string';
-import { animationFrame } from './browser';
-import { MarkdownRenderer, MarkdownRendererFactory } from './markdown-rendering/markdown-renderer';
+import { Disposable, DisposableCollection, disposableTimeout, isOSX, PreferenceService } from '../common/index.js';
+import { MarkdownString } from '../common/markdown-rendering/markdown-string.js';
+import { animationFrame } from './browser.js';
+import { MarkdownRenderer, MarkdownRendererFactory } from './markdown-rendering/markdown-renderer.js';
 
 import '../../src/browser/style/hover-service.css';
 
@@ -51,7 +51,7 @@ export namespace HoverPosition {
     }
 }
 
-export interface HoverRequest {
+export type HoverRequest = {
     content: string | MarkdownString | HTMLElement
     target: HTMLElement
     /**

@@ -13,19 +13,16 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
+import { inject, injectable } from 'inversify';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
 
 export const AIActivationService = Symbol('AIActivationService');
-/**
- * AIActivationService is used to manage the activation state of AI features in Theia.
- */
-export interface AIActivationService {
+export type AIActivationService = {
     isActive: boolean;
     onDidChangeActiveStatus: Event<boolean>;
 }
 import { Emitter, Event } from '@theia/core';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
 
 /**
  * Context key for the AI features. It is set to `true` if the feature is enabled.

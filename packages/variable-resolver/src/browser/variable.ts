@@ -14,15 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable } from 'inversify';
 import { Disposable, DisposableCollection, MaybePromise } from '@theia/core';
-import URI from '@theia/core/lib/common/uri';
-import { CommandIdVariables } from '../common/variable-types';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { CommandIdVariables } from '../common/variable-types.js';
 
-/**
- * Variable can be used inside of strings using ${variableName} syntax.
- */
-export interface Variable {
+export type Variable = {
 
     /**
      * A unique name of this variable.
@@ -50,10 +47,7 @@ export interface Variable {
 }
 
 export const VariableContribution = Symbol('VariableContribution');
-/**
- * The variable contribution should be implemented to register custom variables.
- */
-export interface VariableContribution {
+export type VariableContribution = {
     registerVariables(variables: VariableRegistry): void;
 }
 

@@ -16,24 +16,24 @@
 
 /* eslint-disable no-null/no-null, @typescript-eslint/no-explicit-any */
 
-import * as React from '@theia/core/shared/react';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { isOSX } from '@theia/core/lib/common/os';
-import { DisposableCollection, Disposable } from '@theia/core/lib/common/disposable';
-import { TreeWidget, TreeNode, SelectableTreeNode, TreeModel, TreeProps, NodeProps, TREE_NODE_SEGMENT_CLASS, TREE_NODE_SEGMENT_GROW_CLASS } from '@theia/core/lib/browser/tree';
-import { ScmTreeModel, ScmFileChangeRootNode, ScmFileChangeGroupNode, ScmFileChangeFolderNode, ScmFileChangeNode } from './scm-tree-model';
-import { MenuModelRegistry, CompoundMenuNode, MenuPath, CommandMenu } from '@theia/core/lib/common/menu';
-import { ScmResource } from './scm-provider';
-import { ContextMenuRenderer, LabelProvider, DiffUris, ACTION_ITEM } from '@theia/core/lib/browser';
-import { ScmContextKeyService } from './scm-context-key-service';
-import { EditorWidget, EditorManager, DiffNavigatorProvider } from '@theia/editor/lib/browser';
-import { IconThemeService } from '@theia/core/lib/browser/icon-theme-service';
-import { ColorRegistry } from '@theia/core/lib/browser/color-registry';
-import { Decoration, DecorationsService } from '@theia/core/lib/browser/decorations-service';
-import { FileStat } from '@theia/filesystem/lib/common/files';
-import { ThemeService } from '@theia/core/lib/browser/theming';
-import { CorePreferences } from '@theia/core/lib/common';
+import * as React from 'react';
+import { injectable, inject, postConstruct } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { isOSX } from '@theia/core/lib/common/os.js';
+import { DisposableCollection, Disposable } from '@theia/core/lib/common/disposable.js';
+import { TreeWidget, TreeNode, SelectableTreeNode, TreeModel, TreeProps, NodeProps, TREE_NODE_SEGMENT_CLASS, TREE_NODE_SEGMENT_GROW_CLASS } from '@theia/core/lib/browser/tree/index.js';
+import { ScmTreeModel, ScmFileChangeRootNode, ScmFileChangeGroupNode, ScmFileChangeFolderNode, ScmFileChangeNode } from './scm-tree-model.js';
+import { MenuModelRegistry, CompoundMenuNode, MenuPath } from '@theia/core/lib/common/index.js';
+import { CommandMenu } from '@theia/core';
+import { ScmResource } from './scm-provider.js';
+import { ThemeService } from '@theia/core/lib/browser/theming.js';
+import { CorePreferences } from '@theia/core/lib/common/index.js';
+import { ContextMenuRenderer, LabelProvider, DiffUris, ACTION_ITEM, 
+    IconThemeService, ColorRegistry, Decoration, DecorationsService } from '@theia/core/lib/browser/index.js';
+
+import { ScmContextKeyService } from './scm-context-key-service.js';
+import { EditorWidget, EditorManager, DiffNavigatorProvider } from '@theia/editor/lib/browser/index.js';
+import { FileStat } from '@theia/filesystem/lib/common/files.js';
 
 @injectable()
 export class ScmTreeWidget extends TreeWidget {
@@ -59,7 +59,7 @@ export class ScmTreeWidget extends TreeWidget {
     @inject(ThemeService) protected readonly themeService: ThemeService;
 
     // TODO: Make TreeWidget generic to better type those fields.
-    override readonly model: ScmTreeModel;
+    declare readonly model: ScmTreeModel;
 
     constructor(
         @inject(TreeProps) props: TreeProps,

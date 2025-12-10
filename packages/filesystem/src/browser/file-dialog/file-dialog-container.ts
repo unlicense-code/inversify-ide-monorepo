@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces, Container } from '@theia/core/shared/inversify';
-import { Tree, TreeModel, TreeProps, defaultTreeProps } from '@theia/core/lib/browser';
-import { createFileTreeContainer, FileTreeModel, FileTreeWidget } from '../file-tree';
-import { OpenFileDialog, OpenFileDialogProps, SaveFileDialog, SaveFileDialogProps } from './file-dialog';
-import { FileDialogModel } from './file-dialog-model';
-import { FileDialogWidget } from './file-dialog-widget';
-import { FileDialogTree } from './file-dialog-tree';
+import { interfaces } from 'inversify';
+import { Tree, TreeModel, TreeProps, defaultTreeProps } from '@theia/core/lib/browser/index.js';
+import { createFileTreeContainer, FileTreeModel, FileTreeWidget } from '../file-tree/index.js';
+import { OpenFileDialog, OpenFileDialogProps, SaveFileDialog, SaveFileDialogProps } from './file-dialog.js';
+import { FileDialogModel } from './file-dialog-model.js';
+import { FileDialogWidget } from './file-dialog-widget.js';
+import { FileDialogTree } from './file-dialog-tree.js';
 
-export function createFileDialogContainer(parent: interfaces.Container): Container {
+export function createFileDialogContainer(parent: interfaces.Container) {
     const child = createFileTreeContainer(parent);
 
     child.unbind(FileTreeModel);
@@ -38,7 +38,7 @@ export function createFileDialogContainer(parent: interfaces.Container): Contain
     return child;
 }
 
-export function createOpenFileDialogContainer(parent: interfaces.Container, props: OpenFileDialogProps): Container {
+export function createOpenFileDialogContainer(parent: interfaces.Container, props: OpenFileDialogProps) {
     const container = createFileDialogContainer(parent);
     container.rebind(TreeProps).toConstantValue({
         ...defaultTreeProps,
@@ -52,7 +52,7 @@ export function createOpenFileDialogContainer(parent: interfaces.Container, prop
     return container;
 }
 
-export function createSaveFileDialogContainer(parent: interfaces.Container, props: SaveFileDialogProps): Container {
+export function createSaveFileDialogContainer(parent: interfaces.Container, props: SaveFileDialogProps) {
     const container = createFileDialogContainer(parent);
     container.rebind(TreeProps).toConstantValue({
         ...defaultTreeProps,

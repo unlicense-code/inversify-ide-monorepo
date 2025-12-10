@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as fs from '@theia/core/shared/fs-extra';
+import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as temp from 'temp';
 import { extract } from 'tar-fs';
 import { expect } from 'chai';
-import URI from '@theia/core/lib/common/uri';
-import { MockDirectoryArchiver } from './test/mock-directory-archiver';
-import { FileUri } from '@theia/core/lib/common/file-uri';
+import { URI } from '@theia/core';
+import { MockDirectoryArchiver } from './test/mock-directory-archiver.js';
+import { FileUri } from '@theia/core/lib/node/index.js';
 
 const track = temp.track();
 

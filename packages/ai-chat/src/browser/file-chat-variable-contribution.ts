@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { AIVariableContext, AIVariableResolutionRequest, PromptText } from '@theia/ai-core';
-import { AIVariableCompletionContext, AIVariableDropResult, FrontendVariableContribution, FrontendVariableService } from '@theia/ai-core/lib/browser';
-import { FILE_VARIABLE } from '@theia/ai-core/lib/browser/file-variable-contribution';
+import { AIVariableContext, AIVariableResolutionRequest, PromptText } from '@theia/ai-core/lib/common/index.js';
+import { AIVariableCompletionContext, AIVariableDropResult, FrontendVariableContribution, FrontendVariableService } from '@theia/ai-core/lib/browser/index.js';
+import { FILE_VARIABLE } from '@theia/ai-core/lib/browser/file-variable-contribution.js';
 import { CancellationToken, ILogger, nls, QuickInputService, URI } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import * as monaco from '@theia/monaco-editor-core';
-import { FileQuickPickItem, QuickFileSelectService } from '@theia/file-search/lib/browser/quick-file-select-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { VARIABLE_ADD_CONTEXT_COMMAND } from './ai-chat-frontend-contribution';
-import { IMAGE_CONTEXT_VARIABLE, ImageContextVariable } from '../common/image-context-variable';
-import { ApplicationShell } from '@theia/core/lib/browser';
+import { FileQuickPickItem, QuickFileSelectService } from '@theia/file-search/lib/browser/quick-file-select-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { VARIABLE_ADD_CONTEXT_COMMAND } from './ai-chat-frontend-contribution.js';
+import { IMAGE_CONTEXT_VARIABLE, ImageContextVariable } from '../common/image-context-variable.js';
+import { ApplicationShell } from '@theia/core/lib/browser/index.js';
 
 @injectable()
 export class FileChatVariableContribution implements FrontendVariableContribution {

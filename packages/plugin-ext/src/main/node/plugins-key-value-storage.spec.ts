@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2023 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,19 +16,19 @@
 
 import 'reflect-metadata';
 import { expect } from 'chai';
-import { Container } from '@theia/core/shared/inversify';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
-import { PluginsKeyValueStorage } from './plugins-key-value-storage';
-import { PluginPathsService } from '../common/plugin-paths-protocol';
-import { PluginPathsServiceImpl } from './paths/plugin-paths-service';
-import { PluginCliContribution } from './plugin-cli-contribution';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { MockLogger } from '@theia/core/lib/common/test/mock-logger';
-import { MockEnvVariablesServerImpl } from '@theia/core/lib/browser/test/mock-env-variables-server';
-import { FileSystemLocking, FileUri } from '@theia/core/lib/node';
-import { FileSystemLockingImpl } from '@theia/core/lib/node/filesystem-locking';
-import { WorkspaceFileService } from '@theia/workspace/lib/common';
-import { UntitledWorkspaceService } from '@theia/workspace/lib/common/untitled-workspace-service';
+import { Container } from 'inversify';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
+import { PluginsKeyValueStorage } from './plugins-key-value-storage.js';
+import { PluginPathsService } from '../common/plugin-paths-protocol.js';
+import { PluginPathsServiceImpl } from './paths/plugin-paths-service.js';
+import { PluginCliContribution } from './plugin-cli-contribution.js';
+import { ILogger } from '@theia/core/lib/common/logger.js';
+import { MockLogger } from '@theia/core/lib/common/test/mock-logger.js';
+import { MockEnvVariablesServerImpl } from '@theia/core/lib/browser/test/mock-env-variables-server.js';
+import { FileSystemLocking, FileUri } from '@theia/core/lib/node/index.js';
+import { FileSystemLockingImpl } from '@theia/core/lib/node/filesystem-locking.js';
+import { WorkspaceFileService } from '@theia/workspace/lib/common/index.js';
+import { UntitledWorkspaceService } from '@theia/workspace/lib/common/untitled-workspace-service.js';
 import * as temp from 'temp';
 
 const GlobalStorageKind = undefined;

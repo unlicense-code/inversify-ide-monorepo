@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,17 +19,17 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { CancellationToken, Disposable, Emitter, Event, URI } from '@theia/core';
-import { UriComponents } from '@theia/core/lib/common/uri';
-import { LanguageService } from '@theia/core/lib/browser/language-service';
-import { CellExecuteUpdateDto, CellExecutionCompleteDto, MAIN_RPC_CONTEXT, NotebookKernelDto, NotebookKernelsExt, NotebookKernelsMain } from '../../../common';
-import { RPCProtocol } from '../../../common/rpc-protocol';
+import { UriComponents } from '@theia/core/lib/common/uri.js';
+import { LanguageService } from '@theia/core/lib/browser/language-service.js';
+import { CellExecuteUpdateDto, CellExecutionCompleteDto, MAIN_RPC_CONTEXT, NotebookKernelDto, NotebookKernelsExt, NotebookKernelsMain } from '../../../common/index.js';
+import { RPCProtocol } from '../../../common/rpc-protocol.js';
 import {
     CellExecution, NotebookEditorWidgetService, NotebookExecutionStateService,
     NotebookKernelChangeEvent, NotebookKernelService, NotebookService, NotebookKernel as NotebookKernelServiceKernel
 } from '@theia/notebook/lib/browser';
-import { interfaces } from '@theia/core/shared/inversify';
+import { interfaces } from 'inversify';
 import { NotebookKernelSourceAction } from '@theia/notebook/lib/common';
-import { NotebookDto } from './notebook-dto';
+import { NotebookDto } from './notebook-dto.js';
 
 abstract class NotebookKernel implements NotebookKernelServiceKernel {
     private readonly onDidChangeEmitter = new Emitter<NotebookKernelChangeEvent>();
@@ -107,7 +107,7 @@ abstract class NotebookKernel implements NotebookKernelServiceKernel {
     abstract cancelNotebookCellExecution(uri: URI, cellHandles: number[]): Promise<void>;
 }
 
-export interface KernelSourceActionProvider {
+export type KernelSourceActionProvider = {
     readonly viewType: string;
     onDidChangeSourceActions?: Event<void>;
     provideKernelSourceActions(): Promise<NotebookKernelSourceAction[]>;

@@ -19,7 +19,7 @@ import { MeasurementResult } from '@theia/core';
 export const measurementNotificationServicePath = '/services/measurement-notification';
 
 export const MeasurementNotificationService = Symbol('MeasurementNotificationService');
-export interface MeasurementNotificationService {
+export type MeasurementNotificationService = {
     /**
      * Notify the backend when a fronted stopwatch provides a new measurement.
      * @param frontendId The unique id associated with the frontend that sends the notification

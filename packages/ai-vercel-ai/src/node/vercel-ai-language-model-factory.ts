@@ -17,12 +17,12 @@
 import { createAnthropic } from '@ai-sdk/anthropic';
 import { createOpenAI } from '@ai-sdk/openai';
 import { LanguageModelV1 } from '@ai-sdk/provider';
-import { injectable } from '@theia/core/shared/inversify';
-import { VercelAiModelDescription } from '../common';
+import { injectable } from 'inversify';
+import { VercelAiModelDescription } from '../common/index.js';
 
 export type VercelAiProvider = 'openai' | 'anthropic';
 
-export interface VercelAiProviderConfig {
+export type VercelAiProviderConfig = {
     provider: VercelAiProvider;
     apiKey?: string;
     baseURL?: string;

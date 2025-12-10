@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,23 +15,23 @@
 // *****************************************************************************
 
 import type { IKeyboardLayoutInfo, IKeyboardMapping } from 'native-keymap';
-import { Event } from '../event';
+import { Event } from '../event.js';
 
 export const keyboardPath = '/services/keyboard';
 
 export const KeyboardLayoutProvider = Symbol('KeyboardLayoutProvider');
 
-export interface KeyboardLayoutProvider {
+export type KeyboardLayoutProvider = {
     getNativeLayout(): Promise<NativeKeyboardLayout>;
 }
 
 export const KeyboardLayoutChangeNotifier = Symbol('KeyboardLayoutChangeNotifier');
 
-export interface KeyboardLayoutChangeNotifier {
+export type KeyboardLayoutChangeNotifier = {
     onDidChangeNativeLayout: Event<NativeKeyboardLayout>;
 }
 
-export interface KeyValidationInput {
+export type KeyValidationInput = {
     code: string;
     character: string;
     shiftKey?: boolean;
@@ -41,11 +41,11 @@ export interface KeyValidationInput {
 
 export const KeyValidator = Symbol('KeyValidator');
 
-export interface KeyValidator {
+export type KeyValidator = {
     validateKey(input: KeyValidationInput): void;
 }
 
-export interface NativeKeyboardLayout {
+export type NativeKeyboardLayout = {
     info: IKeyboardLayoutInfo;
     mapping: IKeyboardMapping;
 }

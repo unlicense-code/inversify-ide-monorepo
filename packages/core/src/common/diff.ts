@@ -15,42 +15,40 @@
 // *****************************************************************************
 
 import { Range } from 'vscode-languageserver-protocol';
-import { CancellationToken } from './cancellation';
-import URI from './uri';
+import { CancellationToken } from './cancellation.js';
+import URI from './uri.js';
 
-/** Represents a textual diff. */
-export interface Diff {
+export type Diff = {
     readonly changes: readonly DetailedLineRangeMapping[];
 }
 
-export interface DetailedLineRangeMapping extends LineRangeMapping {
+export type DetailedLineRangeMapping = LineRangeMapping & {
     readonly innerChanges?: readonly RangeMapping[];
 }
 
-export interface LineRangeMapping {
+export type LineRangeMapping = {
     readonly left: LineRange;
     readonly right: LineRange;
 }
 
-/** Represents a range of whole lines of text. */
-export interface LineRange {
+export type LineRange = {
     /** A zero-based number of the start line. */
     readonly start: number;
     /** A zero-based number of the end line, exclusive. */
     readonly end: number;
 }
 
-export interface RangeMapping {
+export type RangeMapping = {
     readonly left: Range;
     readonly right: Range;
 }
 
 export const DiffComputer = Symbol('DiffComputer');
 
-export interface DiffComputer {
+export type DiffComputer = {
     computeDiff(left: URI, right: URI, options?: DiffComputerOptions): Promise<Diff | undefined>;
 }
 
-export interface DiffComputerOptions {
+export type DiffComputerOptions = {
     readonly cancellationToken?: CancellationToken;
 }

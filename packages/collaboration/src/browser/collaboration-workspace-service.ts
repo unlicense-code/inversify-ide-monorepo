@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { nls } from '@theia/core';
-import { injectable } from '@theia/core/shared/inversify';
-import { Disposable } from '@theia/core/shared/vscode-languageserver-protocol';
-import { FileStat } from '@theia/filesystem/lib/common/files';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { injectable } from 'inversify';
+import { Disposable } from 'vscode-languageserver-protocol';
+import { FileStat } from '@theia/filesystem/lib/common/files.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
 import { Workspace, ProtocolBroadcastConnection } from 'open-collaboration-protocol';
-import { CollaborationURI } from './collaboration-file-system-provider';
+import { CollaborationURI } from './collaboration-file-system-provider.js';
 
 @injectable()
 export class CollaborationWorkspaceService extends WorkspaceService {

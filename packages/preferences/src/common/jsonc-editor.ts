@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import * as jsoncparser from 'jsonc-parser';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { JSONValue } from '@theia/core/shared/@lumino/coreutils';
+import { inject, injectable } from 'inversify';
+import { JSONValue } from '@lumino/coreutils';
 import { isWindows, PreferenceService } from '@theia/core';
 
 @injectable()

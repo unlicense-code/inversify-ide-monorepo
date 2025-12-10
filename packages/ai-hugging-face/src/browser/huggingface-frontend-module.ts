@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { HuggingFacePreferencesSchema } from '../common/huggingface-preferences';
-import { FrontendApplicationContribution, RemoteConnectionProvider, ServiceConnectionProvider } from '@theia/core/lib/browser';
-import { HuggingFaceFrontendApplicationContribution } from './huggingface-frontend-application-contribution';
-import { HUGGINGFACE_LANGUAGE_MODELS_MANAGER_PATH, HuggingFaceLanguageModelsManager } from '../common';
+import { ContainerModule } from 'inversify';
+import { HuggingFacePreferencesSchema } from '../common/huggingface-preferences.js';
+import { FrontendApplicationContribution, RemoteConnectionProvider, ServiceConnectionProvider } from '@theia/core/lib/browser/index.js';
+import { HuggingFaceFrontendApplicationContribution } from './huggingface-frontend-application-contribution.js';
+import { HUGGINGFACE_LANGUAGE_MODELS_MANAGER_PATH, HuggingFaceLanguageModelsManager } from '../common/index.js';
 import { PreferenceContribution } from '@theia/core';
 
 export default new ContainerModule(bind => {

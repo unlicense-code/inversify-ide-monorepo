@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import { Command, CommandContribution, CommandRegistry, DisposableCollection, generateUuid, InMemoryResources, MessageService, nls, QuickInputService, URI } from '@theia/core';
-import { ApplicationShell, open, OpenerService } from '@theia/core/lib/browser';
-import { ClipboardService } from '@theia/core/lib/browser/clipboard-service';
-import { LanguageService } from '@theia/core/lib/browser/language-service';
-import { MergeEditor, MergeEditorOpenerOptions, MergeEditorUri } from './merge-editor';
+import { ApplicationShell, open, OpenerService } from '@theia/core/lib/browser/index.js';
+import { ClipboardService } from '@theia/core/lib/browser/clipboard-service.js';
+import { LanguageService } from '@theia/core/lib/browser/language-service.js';
+import { MergeEditor, MergeEditorOpenerOptions, MergeEditorUri } from './merge-editor.js';
 
 export namespace MergeEditorDevCommands {
     export const MERGE_EDITOR_DEV_CATEGORY = 'Merge Editor (Dev)';
@@ -145,7 +145,7 @@ export class MergeEditorDevContribution implements CommandContribution {
     }
 }
 
-export interface MergeEditorContents {
+export type MergeEditorContents = {
     base: string;
     input1: string;
     input2: string;

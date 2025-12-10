@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,7 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-export * from './location';
-export * from './file-tree';
-export * from './file-dialog';
-export * from './file-resource';
+export * from './location/index.js';
+export * from './file-tree/index.js';
+export * from './file-dialog/index.js';
+export { FileDialogService } from './file-dialog/file-dialog-service.js';
+export * from './file-resource.js';
+export * from './file-service.js';
+export * from './file-selection.js';
+export * from './filesystem-frontend-contribution.js';
+export * from './filesystem-saveable-service.js';
+export * from './breadcrumbs/filepath-breadcrumb.js';
+export * from './breadcrumbs/filepath-breadcrumbs-contribution.js';
+export * from './download/file-download-command-contribution.js';

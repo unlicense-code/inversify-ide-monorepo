@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,17 +16,17 @@
 
 import * as path from 'path';
 import * as semver from 'semver';
-import * as fs from '@theia/core/shared/fs-extra';
-import { injectable, inject } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { PluginDeployerHandler, PluginDeployerResolver, PluginDeployerResolverContext, PluginDeployOptions, PluginIdentifiers } from '@theia/plugin-ext/lib/common/plugin-protocol';
-import { FileUri } from '@theia/core/lib/node';
-import { VSCodeExtensionUri } from '@theia/plugin-ext-vscode/lib/common/plugin-vscode-uri';
-import { OVSXClientProvider } from '../common/ovsx-client-provider';
+import * as fs from 'fs-extra';
+import { injectable, inject } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { PluginDeployerHandler, PluginDeployerResolver, PluginDeployerResolverContext, PluginDeployOptions, PluginIdentifiers } from '@theia/plugin-ext/lib/common/plugin-protocol.js';
+import { FileUri } from '@theia/core/lib/node/index.js';
+import { VSCodeExtensionUri } from '@theia/plugin-ext-vscode/lib/common/plugin-vscode-uri.js';
+import { OVSXClientProvider } from '../common/ovsx-client-provider.js';
 import { OVSXApiFilterProvider, VSXExtensionRaw, VSXTargetPlatform } from '@theia/ovsx-client';
-import { RequestService } from '@theia/core/shared/@theia/request';
-import { PluginVSCodeEnvironment } from '@theia/plugin-ext-vscode/lib/common/plugin-vscode-environment';
-import { PluginUninstallationManager } from '@theia/plugin-ext/lib/main/node/plugin-uninstallation-manager';
+import { RequestService } from '@theia/request';
+import { PluginVSCodeEnvironment } from '@theia/plugin-ext-vscode/lib/common/plugin-vscode-environment.js';
+import { PluginUninstallationManager } from '@theia/plugin-ext/lib/main/node/plugin-uninstallation-manager.js';
 
 @injectable()
 export class VSXExtensionResolver implements PluginDeployerResolver {

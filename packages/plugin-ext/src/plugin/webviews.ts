@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { generateUuid, hashValue } from '@theia/core/lib/common/uuid';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { Plugin, WebviewsExt, WebviewPanelViewState, WebviewsMain, PLUGIN_RPC_CONTEXT, WebviewInitData, /* WebviewsMain, PLUGIN_RPC_CONTEXT  */ } from '../common/plugin-api-rpc';
+import { generateUuid, hashValue } from '@theia/core';
+import { inject, injectable, postConstruct } from 'inversify';
+import { Plugin, WebviewsExt, WebviewPanelViewState, WebviewsMain, PLUGIN_RPC_CONTEXT, WebviewInitData, /* WebviewsMain, PLUGIN_RPC_CONTEXT  */ } from '../common/plugin-api-rpc.js';
 import * as theia from '@theia/plugin';
-import { RPCProtocol } from '../common/rpc-protocol';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import { fromViewColumn, toViewColumn, toWebviewPanelShowOptions } from './type-converters';
-import { Disposable, WebviewPanelTargetArea, URI } from './types-impl';
-import { WorkspaceExtImpl } from './workspace';
-import { PluginIconPath } from './plugin-icon-path';
-import { PluginModel, PluginPackage } from '../common';
+import { RPCProtocol } from '../common/rpc-protocol.js';
+import { Emitter, Event } from '@theia/core';
+import { fromViewColumn, toViewColumn, toWebviewPanelShowOptions } from './type-converters.js';
+import { Disposable, WebviewPanelTargetArea, URI } from './types-impl.js';
+import { WorkspaceExtImpl } from './workspace.js';
+import { PluginIconPath } from './plugin-icon-path.js';
+import { PluginModel, PluginPackage } from '../common/index.js';
 
 @injectable()
 export class WebviewsExtImpl implements WebviewsExt {

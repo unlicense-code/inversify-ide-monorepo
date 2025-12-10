@@ -1,6 +1,7 @@
 {
   "name": "@theia/ai-scanoss",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - SCANOSS AI Integration",
   "dependencies": {
     "@theia/ai-chat": "1.66.0",

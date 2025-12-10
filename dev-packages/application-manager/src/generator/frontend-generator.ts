@@ -72,10 +72,10 @@ export class FrontendGenerator extends AbstractGenerator {
     protected compileIndexJs(frontendModules: Map<string, string>, frontendPreloadModules: Map<string, string>): string {
         return `\
 // @ts-check
-require('reflect-metadata');
-const { Container } = require('@theia/core/shared/inversify');
-const { ServiceRegistry } = require('@theia/core/lib/common/service-registry');
-const { FrontendApplicationConfigProvider } = require('@theia/core/lib/browser/frontend-application-config-provider');
+import 'reflect-metadata';
+import { Container } from 'inversify';
+import { ServiceRegistry } from '@theia/core/lib/common/service-registry';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 
 FrontendApplicationConfigProvider.set(${this.prettyStringify(this.pck.props.frontend.config)});
 
@@ -127,14 +127,14 @@ function load(container, registry, jsModule) {
 async function preload(container, registry) {
     try {
 ${Array.from(frontendPreloadModules.values(), jsModulePath => `\
-        await load(container, registry, ${this.importOrRequire()}('${jsModulePath}'));`).join(EOL)}
-        const { Preloader } = require('@theia/core/lib/browser/preload/preloader');
+        await load(container, registry, import('${jsModulePath}'));`).join(EOL)}
+        const { Preloader } = await import('@theia/core/lib/browser/preload/preloader');
         // Try registry first, fallback to container
         let preloader;
         try {
-            preloader = registry.get(require('@theia/core/lib/browser/preload/preloader').Preloader);
+            preloader = registry.get(Preloader);
         } catch {
-            preloader = container.get(require('@theia/core/lib/browser/preload/preloader').Preloader);
+            preloader = container.get(Preloader);
         }
         await preloader.initialize();
     } catch (reason) {
@@ -168,21 +168,21 @@ module.exports = (async () => {
     const { MonacoInit } = require('@theia/monaco/lib/browser/monaco-init');
     `)};
 
-    const { FrontendApplication } = require('@theia/core/lib/browser');
+    const { FrontendApplication } = require('@theia/core/lib/browser/index.js');
     const { frontendApplicationModule } = require('@theia/core/lib/browser/frontend-application-module');    
     const { loggerFrontendModule } = require('@theia/core/lib/browser/logger-frontend-module');
 
     container.load(frontendApplicationModule);
-    ${this.pck.ifBrowserOnly(`const { frontendOnlyApplicationModule } = require('@theia/core/lib/browser-only/frontend-only-application-module');
+    ${this.pck.ifBrowserOnly(`const { frontendOnlyApplicationModule } = await import('@theia/core/lib/browser-only/frontend-only-application-module');
     container.load(frontendOnlyApplicationModule);`)}
     
     container.load(loggerFrontendModule);
-    ${this.ifBrowserOnly(`const { loggerFrontendOnlyModule } = require('@theia/core/lib/browser-only/logger-frontend-only-module');
+    ${this.ifBrowserOnly(`const { loggerFrontendOnlyModule } = await import('@theia/core/lib/browser-only/logger-frontend-only-module');
     container.load(loggerFrontendOnlyModule);`)}
 
     try {
 ${Array.from(frontendModules.values(), jsModulePath => `\
-        await load(container, registry, ${this.importOrRequire()}('${jsModulePath}'));`).join(EOL)}
+        await load(container, registry, import('${jsModulePath}'));`).join(EOL)}
         ${this.ifMonaco(() => `
         MonacoInit.init(container);
         `)};
@@ -208,9 +208,7 @@ ${Array.from(frontendModules.values(), jsModulePath => `\
 `;
     }
 
-    protected importOrRequire(): string {
-        return this.options.mode !== 'production' ? 'import' : 'require';
-    }
+    // Removed importOrRequire() - we now always use ESM imports
 
     /** HTML for secondary windows that contain an extracted widget. */
     protected compileSecondaryWindowHtml(): string {
@@ -252,15 +250,16 @@ ${Array.from(frontendModules.values(), jsModulePath => `\
     protected compileSecondaryIndexJs(secondaryWindowModules: Map<string, string>): string {
         return `\
 // @ts-check
-require('reflect-metadata');
-const { Container } = require('@theia/core/shared/inversify');
+import 'reflect-metadata';
+import { Container } from 'inversify';
 
-module.exports = Promise.resolve().then(() => {
-    const { frontendApplicationModule } = require('@theia/core/lib/browser/frontend-application-module');
+export default Promise.resolve().then(async () => {
+    const { frontendApplicationModule } = await import('@theia/core/lib/browser/frontend-application-module');
     const container = new Container();
     container.load(frontendApplicationModule);
 ${Array.from(secondaryWindowModules.values(), jsModulePath => `\
-    container.load(require('${jsModulePath}').default);`).join(EOL)}
+    const module = await import('${jsModulePath}');
+    container.load(module.default);`).join(EOL)}
 });
 `;
     }
@@ -268,7 +267,9 @@ ${Array.from(secondaryWindowModules.values(), jsModulePath => `\
     compilePreloadJs(): string {
         return `\
 // @ts-check
-${Array.from(this.pck.preloadModules.values(), path => `require('${path}').preload();`).join(EOL)}
+(async () => {
+${Array.from(this.pck.preloadModules.values(), path => `    (await import('${path}')).preload();`).join(EOL)}
+})();
 `;
     }
 }

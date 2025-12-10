@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
+import { ContainerModule } from 'inversify';
 import { bindContributionProvider } from '@theia/core';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
 import {
     RemoteConnectionProvider,
     ServiceConnectionProvider,
-} from '@theia/core/lib/browser/messaging/service-connection-provider';
-import { MCPToolFrontendDelegate, MCPToolDelegateClient, mcpToolDelegatePath } from '../common/mcp-tool-delegate';
-import { MCPFrontendBootstrap } from './mcp-frontend-bootstrap';
-import { MCPFrontendContribution } from './mcp-frontend-contribution';
-import { MCPToolDelegateClientImpl } from './mcp-tool-delegate-client';
+} from '@theia/core/lib/browser/messaging/service-connection-provider.js';
+import { MCPToolFrontendDelegate, MCPToolDelegateClient, mcpToolDelegatePath } from '../common/mcp-tool-delegate.js';
+import { MCPFrontendBootstrap } from './mcp-frontend-bootstrap.js';
+import { MCPFrontendContribution } from './mcp-frontend-contribution.js';
+import { MCPToolDelegateClientImpl } from './mcp-tool-delegate-client.js';
 
 export default new ContainerModule(bind => {
     bind(MCPFrontendBootstrap).toSelf().inSingletonScope();

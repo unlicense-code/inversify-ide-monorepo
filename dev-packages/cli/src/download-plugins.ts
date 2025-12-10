@@ -18,7 +18,7 @@
 
 import { OVSXApiFilterImpl, OVSXClient, VSXTargetPlatform } from '@theia/ovsx-client';
 import * as chalk from 'chalk';
-import * as decompress from 'decompress';
+import decompress from 'decompress';
 import { promises as fs } from 'fs';
 import * as path from 'path';
 import * as temp from 'temp';
@@ -29,10 +29,7 @@ import escapeStringRegexp = require('escape-string-regexp');
 
 temp.track();
 
-/**
- * Available options when downloading.
- */
-export interface DownloadPluginsOptions {
+export type DownloadPluginsOptions = {
     /**
      * Determines if a plugin should be unpacked.
      * Defaults to `false`.
@@ -57,7 +54,7 @@ export interface DownloadPluginsOptions {
     parallel?: boolean;
 }
 
-interface PluginDownload {
+type PluginDownload = {
     id: string,
     downloadUrl: string,
     version?: string | undefined

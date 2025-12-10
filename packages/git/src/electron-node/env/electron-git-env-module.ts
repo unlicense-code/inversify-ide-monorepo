@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { GitEnvProvider } from '../../node/env/git-env-provider';
-import { Askpass } from '../askpass/askpass';
-import { ElectronGitEnvProvider } from './electron-git-env-provider';
+import { ContainerModule } from 'inversify';
+import { GitEnvProvider } from '../../node/env/git-env-provider.js';
+import { Askpass } from '../askpass/askpass.js';
+import { ElectronGitEnvProvider } from './electron-git-env-provider.js';
 
 export default new ContainerModule(bind => {
     bind(ElectronGitEnvProvider).toSelf().inSingletonScope();

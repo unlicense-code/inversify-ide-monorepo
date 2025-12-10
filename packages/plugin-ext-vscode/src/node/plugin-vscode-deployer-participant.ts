@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import * as fs from '@theia/core/shared/fs-extra';
-import { FileUri } from '@theia/core/lib/node';
-import { PluginVSCodeEnvironment } from '../common/plugin-vscode-environment';
-import { PluginDeployerParticipant, PluginDeployerStartContext } from '@theia/plugin-ext/lib/common/plugin-protocol';
-import { LocalVSIXFilePluginDeployerResolver } from './local-vsix-file-plugin-deployer-resolver';
+import { injectable, inject } from 'inversify';
+import * as fs from 'fs-extra';
+import { FileUri } from '@theia/core/lib/node/index.js';
+import { PluginVSCodeEnvironment } from '../common/plugin-vscode-environment.js';
+import { PluginDeployerParticipant, PluginDeployerStartContext } from '@theia/plugin-ext/lib/common/plugin-protocol.js';
+import { LocalVSIXFilePluginDeployerResolver } from './local-vsix-file-plugin-deployer-resolver.js';
 
 @injectable()
 export class PluginVSCodeDeployerParticipant implements PluginDeployerParticipant {

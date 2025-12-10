@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { CommandRegistry, CommandContribution, Command } from '@theia/core/lib/common';
-import { OpenUriCommandHandler } from './commands';
-import URI from '@theia/core/lib/common/uri';
-import { TreeViewWidget } from './view/tree-view-widget';
-import { CompositeTreeNode, Widget, codicon } from '@theia/core/lib/browser';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { PluginViewWidget } from './view/plugin-view-widget';
+import { injectable, inject } from 'inversify';
+import { CommandRegistry, CommandContribution, Command } from '@theia/core/lib/common/index.js';
+import { OpenUriCommandHandler } from './commands.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { TreeViewWidget } from './view/tree-view-widget.js';
+import { CompositeTreeNode, Widget, codicon } from '@theia/core/lib/browser/index.js';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { PluginViewWidget } from './view/plugin-view-widget.js';
 
 @injectable()
 export class PluginApiFrontendContribution implements CommandContribution, TabBarToolbarContribution {

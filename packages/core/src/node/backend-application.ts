@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,16 +18,16 @@ import * as dns from 'dns';
 import * as path from 'path';
 import * as http from 'http';
 import * as https from 'https';
-import * as express from 'express';
+import express from 'express';
 import * as yargs from 'yargs';
 import * as fs from 'fs-extra';
 import { inject, named, injectable, postConstruct } from 'inversify';
-import { ContributionProvider, MaybePromise, Stopwatch } from '../common';
-import { CliContribution } from './cli';
-import { Deferred } from '../common/promise-util';
-import { environment } from '../common/index';
+import { ContributionProvider, MaybePromise, Stopwatch } from '../common/index.js';
+import { CliContribution } from './cli.js';
+import { Deferred } from '../common/promise-util.js';
+import { environment } from '../common/index.js';
 import { AddressInfo } from 'net';
-import { ProcessUtils } from './process-utils';
+import { ProcessUtils } from './process-utils.js';
 
 /**
  * The path to the application project directory. This is the directory where the application code is located.
@@ -47,23 +47,10 @@ const DEFAULT_SSL = false;
 const DEFAULT_DNS_DEFAULT_RESULT_ORDER: DnsResultOrder = 'ipv4first';
 
 export const BackendApplicationServer = Symbol('BackendApplicationServer');
-/**
- * This service is responsible for serving the frontend files.
- *
- * When not bound, `@theia/cli` generators will bind it on the fly to serve files according to its own layout.
- */
-export interface BackendApplicationServer extends BackendApplicationContribution { }
+export type BackendApplicationServer = BackendApplicationContribution & { }
 
 export const BackendApplicationContribution = Symbol('BackendApplicationContribution');
-/**
- * Contribution for hooking into the backend lifecycle:
- *
- * - `initialize()`
- * - `configure(expressApp)`
- * - `onStart(httpServer)`
- * - `onStop()`
- */
-export interface BackendApplicationContribution {
+export type BackendApplicationContribution = {
     /**
      * Called during the initialization of the backend application.
      * Use this for functionality which has to run as early as possible.

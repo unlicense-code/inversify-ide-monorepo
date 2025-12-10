@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import { ILogger } from '@theia/core/lib/common/logger';
+import { inject, injectable, named } from 'inversify';
+import { ILogger } from '@theia/core/lib/common/logger.js';
 import {
     ITerminalServer,
     ITerminalServerOptions
-} from '../common/terminal-protocol';
-import { BaseTerminalServer } from './base-terminal-server';
+} from '../common/terminal-protocol.js';
+import { BaseTerminalServer } from './base-terminal-server.js';
 import { TerminalProcessFactory, ProcessManager } from '@theia/process/lib/node';
 
 @injectable()

@@ -17,7 +17,7 @@
 export const HUGGINGFACE_LANGUAGE_MODELS_MANAGER_PATH = '/services/huggingface/language-model-manager';
 export const HuggingFaceLanguageModelsManager = Symbol('HuggingFaceLanguageModelsManager');
 
-export interface HuggingFaceModelDescription {
+export type HuggingFaceModelDescription = {
     /**
      * The identifier of the model which will be shown in the UI.
      */
@@ -28,7 +28,7 @@ export interface HuggingFaceModelDescription {
     model: string;
 }
 
-export interface HuggingFaceLanguageModelsManager {
+export type HuggingFaceLanguageModelsManager = {
     apiKey: string | undefined;
     setApiKey(key: string | undefined): void;
     createOrUpdateLanguageModels(...models: HuggingFaceModelDescription[]): Promise<void>;

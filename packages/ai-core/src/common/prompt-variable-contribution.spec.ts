@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 
 let disableJSDOM = enableJSDOM();
 
@@ -24,10 +24,10 @@ import { expect } from 'chai';
 import * as sinon from 'sinon';
 import { Container } from 'inversify';
 import { CommandService, ILogger, Logger } from '@theia/core';
-import { PromptVariableContribution, PROMPT_VARIABLE } from './prompt-variable-contribution';
-import { PromptService, PromptServiceImpl } from './prompt-service';
-import { DefaultAIVariableService, AIVariableService } from './variable-service';
-import { MockLogger } from '@theia/core/lib/common/test/mock-logger';
+import { PromptVariableContribution, PROMPT_VARIABLE } from './prompt-variable-contribution.js';
+import { PromptService, PromptServiceImpl } from './prompt-service.js';
+import { DefaultAIVariableService, AIVariableService } from './variable-service.js';
+import { MockLogger } from '@theia/core/lib/common/test/mock-logger.js';
 
 disableJSDOM();
 

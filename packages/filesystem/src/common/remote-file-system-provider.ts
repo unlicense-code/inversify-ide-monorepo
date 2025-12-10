@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,30 +14,30 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Emitter } from '@theia/core/lib/common/event';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
+import { injectable, inject, postConstruct } from 'inversify';
+import { URI } from '@theia/core';
+import { Emitter } from '@theia/core';
+import { Disposable, DisposableCollection } from '@theia/core';
+import { BinaryBuffer } from '@theia/core';
 import {
     FileWriteOptions, FileOpenOptions, FileChangeType,
     FileSystemProviderCapabilities, FileChange, Stat, FileOverwriteOptions, WatchOptions, FileType, FileSystemProvider, FileDeleteOptions,
     hasOpenReadWriteCloseCapability, hasFileFolderCopyCapability, hasReadWriteCapability, hasAccessCapability,
     FileSystemProviderError, FileSystemProviderErrorCode, FileUpdateOptions, hasUpdateCapability, FileUpdateResult, FileReadStreamOptions, hasFileReadStreamCapability,
     ReadOnlyMessageFileSystemProvider
-} from './files';
-import { RpcServer, RpcProxy, RpcProxyFactory } from '@theia/core/lib/common/messaging/proxy-factory';
-import { ApplicationError } from '@theia/core/lib/common/application-error';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import type { TextDocumentContentChangeEvent } from '@theia/core/shared/vscode-languageserver-protocol';
-import { newWriteableStream, ReadableStreamEvents } from '@theia/core/lib/common/stream';
-import { CancellationToken, cancelled } from '@theia/core/lib/common/cancellation';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
+} from './files.js';
+import { RpcServer, RpcProxy, RpcProxyFactory } from '@theia/core/lib/common/messaging/proxy-factory.js';
+import { ApplicationError } from '@theia/core/lib/common/application-error.js';
+import { Deferred } from '@theia/core';
+import type { TextDocumentContentChangeEvent } from 'vscode-languageserver-protocol';
+import { newWriteableStream, ReadableStreamEvents } from '@theia/core';
+import { CancellationToken, cancelled } from '@theia/core';
+import { MarkdownString } from '@theia/core';
 
 export const remoteFileSystemPath = '/services/remote-filesystem';
 
 export const RemoteFileSystemServer = Symbol('RemoteFileSystemServer');
-export interface RemoteFileSystemServer extends RpcServer<RemoteFileSystemClient> {
+export type RemoteFileSystemServer = RpcServer<RemoteFileSystemClient> & {
     getCapabilities(): Promise<FileSystemProviderCapabilities>
     stat(resource: string): Promise<Stat>;
     getReadOnlyMessage(): Promise<MarkdownString | undefined>;
@@ -60,16 +60,16 @@ export interface RemoteFileSystemServer extends RpcServer<RemoteFileSystemClient
     updateFile(resource: string, changes: TextDocumentContentChangeEvent[], opts: FileUpdateOptions): Promise<FileUpdateResult>;
 }
 
-export interface RemoteFileChange {
+export type RemoteFileChange = {
     readonly type: FileChangeType;
     readonly resource: string;
 }
 
-export interface RemoteFileStreamError extends Error {
+export type RemoteFileStreamError = Error & {
     code?: FileSystemProviderErrorCode
 }
 
-export interface RemoteFileSystemClient {
+export type RemoteFileSystemClient = {
     notifyDidChangeFile(event: { changes: RemoteFileChange[] }): void;
     notifyFileWatchError(): void;
     notifyDidChangeCapabilities(capabilities: FileSystemProviderCapabilities): void;
@@ -172,24 +172,24 @@ export class RemoteFileSystemProvider implements Required<FileSystemProvider>, D
 
     @postConstruct()
     protected init(): void {
-        this.server.getCapabilities().then(capabilities => {
+        this.server.getCapabilities().then((capabilities: FileSystemProviderCapabilities) => {
             this._capabilities = capabilities;
             this.readyDeferred.resolve();
         }, this.readyDeferred.reject);
-        this.server.getReadOnlyMessage().then(readOnlyMessage => {
+        this.server.getReadOnlyMessage().then((readOnlyMessage: MarkdownString | undefined) => {
             this._readOnlyMessage = readOnlyMessage;
         });
         this.server.setClient({
-            notifyDidChangeFile: ({ changes }) => {
-                this.onDidChangeFileEmitter.fire(changes.map(event => ({ resource: new URI(event.resource), type: event.type })));
+            notifyDidChangeFile: ({ changes }: { changes: Array<{ resource: string; type: FileChangeType }> }) => {
+                this.onDidChangeFileEmitter.fire(changes.map((event: { resource: string; type: FileChangeType }) => ({ resource: new URI(event.resource), type: event.type })));
             },
             notifyFileWatchError: () => {
                 this.onFileWatchErrorEmitter.fire();
             },
-            notifyDidChangeCapabilities: capabilities => this.setCapabilities(capabilities),
-            notifyDidChangeReadOnlyMessage: readOnlyMessage => this.setReadOnlyMessage(readOnlyMessage),
-            onFileStreamData: (handle, data) => this.onFileStreamDataEmitter.fire([handle, data]),
-            onFileStreamEnd: (handle, error) => this.onFileStreamEndEmitter.fire([handle, error])
+            notifyDidChangeCapabilities: (capabilities: FileSystemProviderCapabilities) => this.setCapabilities(capabilities),
+            notifyDidChangeReadOnlyMessage: (readOnlyMessage: MarkdownString | undefined) => this.setReadOnlyMessage(readOnlyMessage),
+            onFileStreamData: (handle: number, data: Uint8Array) => this.onFileStreamDataEmitter.fire([handle, data]),
+            onFileStreamEnd: (handle: number, error: Error | undefined) => this.onFileStreamEndEmitter.fire([handle, error])
         });
         const onInitialized = this.server.onDidOpenConnection(() => {
             // skip reconnection on the first connection
@@ -282,7 +282,7 @@ export class RemoteFileSystemProvider implements Required<FileSystemProvider>, D
             if (token.isCancellationRequested) {
                 stream.end(cancelled());
             }
-        }, error => stream.end(error));
+        }, (error: Error) => stream.end(error));
         return stream;
     }
 

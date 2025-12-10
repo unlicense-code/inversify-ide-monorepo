@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { createTerminalTestContainer } from './test/terminal-test-container';
-import { BackendApplication } from '@theia/core/lib/node/backend-application';
-import { IShellTerminalServer } from '../common/shell-terminal-protocol';
+import { createTerminalTestContainer } from './test/terminal-test-container.js';
+import { BackendApplication } from '@theia/core/lib/node/backend-application.js';
+import { IShellTerminalServer } from '../common/shell-terminal-protocol.js';
 import * as http from 'http';
 import * as https from 'https';
-import { terminalsPath } from '../common/terminal-protocol';
-import { TestWebSocketChannelSetup } from '@theia/core/lib/node/messaging/test/test-web-socket-channel';
+import { terminalsPath } from '../common/terminal-protocol.js';
+import { TestWebSocketChannelSetup } from '@theia/core/lib/node/messaging/test/test-web-socket-channel.js';
 
 describe('Terminal Backend Contribution', function (): void {
 
@@ -30,7 +30,7 @@ describe('Terminal Backend Contribution', function (): void {
 
     beforeEach(async () => {
         const container = createTerminalTestContainer();
-        const application = container.get(BackendApplication);
+        const application = container.get<BackendApplication>(BackendApplication);
         shellTerminalServer = container.get(IShellTerminalServer);
         server = await application.start(3000, 'localhost');
     });
@@ -48,9 +48,9 @@ describe('Terminal Backend Contribution', function (): void {
             const path = `${terminalsPath}/${terminalId}`;
             const { connectionProvider } = new TestWebSocketChannelSetup({ server, path });
 
-            connectionProvider.listen(path, (path2, channel) => {
+            connectionProvider.listen(path, (path2: string, channel: any) => {
                 channel.onError(reject);
-                channel.onClose(event => reject(new Error(`channel is closed with '${event.code}' code and '${event.reason}' reason}`)));
+                channel.onClose((event: { code: number; reason: string }) => reject(new Error(`channel is closed with '${event.code}' code and '${event.reason}' reason}`)));
                 if (path2 === path) {
                     resolve();
                     channel.close();

@@ -20,12 +20,12 @@
 // copied and modified from https://github.com/microsoft/vscode/blob/1.96.3/src/vs/workbench/contrib/mergeEditor/browser/model/modifiedBaseRange.ts
 
 import { ArrayUtils } from '@theia/core';
-import { uinteger, Position, Range } from '@theia/core/shared/vscode-languageserver-protocol';
-import { TextEditorDocument } from '@theia/editor/lib/browser/editor';
-import { DetailedLineRangeMapping, MappingAlignment } from './range-mapping';
-import { LineRange } from './line-range';
-import { LineRangeEdit, RangeEdit } from './range-editing';
-import { PositionUtils, RangeUtils } from './range-utils';
+import { uinteger, Position, Range } from 'vscode-languageserver-protocol';
+import { TextEditorDocument } from '@theia/editor/lib/browser/editor.js';
+import { DetailedLineRangeMapping, MappingAlignment } from './range-mapping.js';
+import { LineRange } from './line-range.js';
+import { LineRangeEdit, RangeEdit } from './range-editing.js';
+import { PositionUtils, RangeUtils } from './range-utils.js';
 
 /**
  * Describes modifications in side 1 and side 2 for a specific range in base.
@@ -54,9 +54,9 @@ export class MergeRange {
         );
     }
 
-    readonly side1CombinedChange = DetailedLineRangeMapping.join(this.side1Changes);
-    readonly side2CombinedChange = DetailedLineRangeMapping.join(this.side2Changes);
-    readonly isEqualChange = ArrayUtils.equals(this.side1Changes, this.side2Changes, (a, b) => a.getLineEdit().equals(b.getLineEdit()));
+    readonly side1CombinedChange: DetailedLineRangeMapping | undefined;
+    readonly side2CombinedChange: DetailedLineRangeMapping | undefined;
+    readonly isEqualChange: boolean;
 
     constructor(
         readonly baseRange: LineRange,
@@ -71,6 +71,9 @@ export class MergeRange {
         if (side1Changes.length === 0 && side2Changes.length === 0) {
             throw new Error('At least one change is expected');
         }
+        this.side1CombinedChange = DetailedLineRangeMapping.join(this.side1Changes);
+        this.side2CombinedChange = DetailedLineRangeMapping.join(this.side2Changes);
+        this.isEqualChange = ArrayUtils.equals(this.side1Changes, this.side2Changes, (a, b) => a.getLineEdit().equals(b.getLineEdit()));
     }
 
     getModifiedRange(side: MergeSide): LineRange {

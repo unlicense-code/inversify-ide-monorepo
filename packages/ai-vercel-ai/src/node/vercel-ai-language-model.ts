@@ -28,7 +28,7 @@ import {
     TokenUsageService,
     ToolCall,
     UserRequest,
-} from '@theia/ai-core';
+} from '@theia/ai-core/lib/common/index.js';
 import { CancellationToken, Disposable, ILogger } from '@theia/core';
 import {
     CoreMessage,
@@ -45,9 +45,9 @@ import {
     ToolResultPart,
     ToolSet
 } from 'ai';
-import { VercelAiLanguageModelFactory, VercelAiProviderConfig } from './vercel-ai-language-model-factory';
+import { VercelAiLanguageModelFactory, VercelAiProviderConfig } from './vercel-ai-language-model-factory.js';
 
-interface VercelCancellationToken extends Disposable {
+type VercelCancellationToken = Disposable & {
     signal: AbortSignal;
     cancellationToken: CancellationToken;
     isCancellationRequested: boolean;
@@ -64,11 +64,11 @@ type StreamPart = ToolResultPart | {
     signature?: string;
 };
 
-interface VercelAiStream extends AsyncIterable<TextStreamPart<ToolSet>> {
+type VercelAiStream = AsyncIterable<TextStreamPart<ToolSet>> & {
     cancel: () => void;
 }
 
-interface StreamContext {
+type StreamContext = {
     logger: ILogger;
     cancellationToken?: VercelCancellationToken;
 }

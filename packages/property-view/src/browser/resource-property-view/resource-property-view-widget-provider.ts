@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Navigatable } from '@theia/core/lib/browser';
-import { FileSelection } from '@theia/filesystem/lib/browser/file-selection';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { DefaultPropertyViewWidgetProvider } from '../property-view-widget-provider';
-import { ResourcePropertyViewTreeWidget } from './resource-property-view-tree-widget';
+import { Navigatable } from '@theia/core/lib/browser/index.js';
+import { FileSelection } from '@theia/filesystem/lib/browser/index.js';
+import { inject, injectable } from 'inversify';
+import { DefaultPropertyViewWidgetProvider } from '../property-view-widget-provider.js';
+import { ResourcePropertyViewTreeWidget } from './resource-property-view-tree-widget.js';
 
 /**
  * Provides the {@link ResourcePropertyViewTreeWidget} for

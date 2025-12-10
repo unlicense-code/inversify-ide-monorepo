@@ -21,18 +21,18 @@
 // code copied and modified from https://github.com/microsoft/vscode/blob/1.47.3/src/vs/workbench/services/authentication/browser/authenticationService.ts
 
 import { injectable, inject, postConstruct } from 'inversify';
-import { Emitter, Event } from '../common/event';
-import { StorageService } from '../browser/storage-service';
-import { Disposable, DisposableCollection } from '../common/disposable';
-import { ACCOUNTS_MENU, ACCOUNTS_SUBMENU, MenuModelRegistry } from '../common/menu';
-import { Command, CommandRegistry } from '../common/command';
-import { nls } from '../common/nls';
+import { Emitter, Event } from '../common/event.js';
+import { StorageService } from '../browser/storage-service.js';
+import { Disposable, DisposableCollection } from '../common/disposable.js';
+import { ACCOUNTS_MENU, ACCOUNTS_SUBMENU, MenuModelRegistry } from '../common/menu/index.js';
+import { Command, CommandRegistry } from '../common/command.js';
+import { nls } from '../common/nls.js';
 
-export interface AuthenticationSessionAccountInformation {
+export type AuthenticationSessionAccountInformation = {
     readonly id: string;
     readonly label: string;
 }
-export interface AuthenticationProviderSessionOptions {
+export type AuthenticationProviderSessionOptions = {
     /**
      * The account that is being asked about. If this is passed in, the provider should
      * attempt to return the sessions that are only related to this account.
@@ -40,7 +40,7 @@ export interface AuthenticationProviderSessionOptions {
     account?: AuthenticationSessionAccountInformation;
 }
 
-export interface AuthenticationSession {
+export type AuthenticationSession = {
     id: string;
     accessToken: string;
     idToken?: string;
@@ -48,12 +48,12 @@ export interface AuthenticationSession {
     scopes: ReadonlyArray<string>;
 }
 
-export interface AuthenticationProviderInformation {
+export type AuthenticationProviderInformation = {
     id: string;
     label: string;
 }
 
-export interface AuthenticationWwwAuthenticateRequest {
+export type AuthenticationWwwAuthenticateRequest = {
     readonly wwwAuthenticate: string;
     readonly fallbackScopes?: readonly string[];
 }
@@ -65,8 +65,7 @@ export function isAuthenticationWwwAuthenticateRequest(obj: unknown): obj is Aut
         && (typeof obj.wwwAuthenticate === 'string'));
 }
 
-/** Should match the definition from the theia/vscode types */
-export interface AuthenticationProviderAuthenticationSessionsChangeEvent {
+export type AuthenticationProviderAuthenticationSessionsChangeEvent = {
     readonly added: readonly AuthenticationSession[] | undefined;
     readonly removed: readonly AuthenticationSession[] | undefined;
     readonly changed: readonly AuthenticationSession[] | undefined;
@@ -75,24 +74,16 @@ export interface AuthenticationProviderAuthenticationSessionsChangeEvent {
 // OAuth2 spec prohibits space in a scope, so use that to join them.
 const SCOPESLIST_SEPARATOR = ' ';
 
-export interface SessionRequest {
+export type SessionRequest = {
     disposables: Disposable[];
     requestingExtensionIds: string[];
 }
 
-export interface SessionRequestInfo {
+export type SessionRequestInfo = {
     [scopes: string]: SessionRequest;
 }
 
-/**
- * Our authentication provider should at least contain the following information:
- * - The signature of authentication providers from vscode
- * - Registration information about the provider (id, label)
- * - Provider options (supportsMultipleAccounts)
- *
- * Additionally, we provide the possibility to sign out of a specific account name.
- */
-export interface AuthenticationProvider {
+export type AuthenticationProvider = {
     id: string;
 
     label: string;
@@ -141,7 +132,7 @@ export interface AuthenticationProvider {
 }
 export const AuthenticationService = Symbol('AuthenticationService');
 
-export interface AuthenticationService {
+export type AuthenticationService = {
     isAuthenticationProviderRegistered(id: string): boolean;
     getProviderIds(): string[];
     registerAuthenticationProvider(id: string, provider: AuthenticationProvider): void;
@@ -171,7 +162,7 @@ export interface AuthenticationService {
     signOutOfAccount(providerId: string, accountName: string): Promise<void>;
 }
 
-export interface SessionChangeEvent {
+export type SessionChangeEvent = {
     providerId: string,
     label: string,
     event: AuthenticationProviderAuthenticationSessionsChangeEvent
@@ -495,7 +486,7 @@ export class AuthenticationServiceImpl implements AuthenticationService {
     }
 }
 
-export interface AllowedExtension {
+export type AllowedExtension = {
     id: string;
     name: string;
 }

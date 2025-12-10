@@ -244,7 +244,7 @@ by un-commenting:
 ```js
 /**
  * Expose bundled modules on window.theia.moduleName namespace, e.g.
- * window['theia']['@theia/core/lib/common/uri'].
+ * window['theia']['@theia/core/lib/common/uri.js'].
  * Such syntax can be used by external code, for instance, for testing.
 config.module.rules.push({
     test: /\.js$/,

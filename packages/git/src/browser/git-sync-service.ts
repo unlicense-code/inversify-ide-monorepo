@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, optional } from '@theia/core/shared/inversify';
+import { injectable, inject, optional } from 'inversify';
 import { MessageService, Emitter, Event } from '@theia/core';
-import { ConfirmDialog, QuickInputService } from '@theia/core/lib/browser';
-import { GitRepositoryTracker } from './git-repository-tracker';
-import { Git, Repository, WorkingDirectoryStatus } from '../common';
-import { GitErrorHandler } from './git-error-handler';
+import { ConfirmDialog, QuickInputService } from '@theia/core/lib/browser/index.js';
+import { GitRepositoryTracker } from './git-repository-tracker.js';
+import { Git, Repository, WorkingDirectoryStatus } from '../common/index.js';
+import { GitErrorHandler } from './git-error-handler.js';
 
 @injectable()
 export class GitSyncService {

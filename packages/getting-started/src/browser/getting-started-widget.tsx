@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { codicon, CommonCommands, Key, KeyCode, LabelProvider, LocalizedMarkdown, Message, ReactWidget } from '@theia/core/lib/browser';
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
-import { WindowService } from '@theia/core/lib/browser/window/window-service';
-import { CommandRegistry, environment, isOSX, Path, PreferenceService } from '@theia/core/lib/common';
-import { ApplicationInfo, ApplicationServer } from '@theia/core/lib/common/application-protocol';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
-import { nls } from '@theia/core/lib/common/nls';
-import URI from '@theia/core/lib/common/uri';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
+import { codicon, CommonCommands, Key, KeyCode, LabelProvider, LocalizedMarkdown, Message, ReactWidget } from '@theia/core/lib/browser/index.js';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
+import { WindowService } from '@theia/core/lib/browser/window/window-service.js';
+import { CommandRegistry, environment, isOSX, Path, PreferenceService } from '@theia/core/lib/common/index.js';
+import { ApplicationInfo, ApplicationServer } from '@theia/core/lib/common/application-protocol.js';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { URI } from '@theia/core/lib/common/uri.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import * as React from 'react';
 import { KeymapsCommands } from '@theia/keymaps/lib/browser';
-import { WorkspaceCommands, WorkspaceService } from '@theia/workspace/lib/browser';
-import { MarkdownRenderer } from '@theia/core/lib/browser/markdown-rendering/markdown-renderer';
+import { WorkspaceCommands, WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { MarkdownRenderer } from '@theia/core/lib/browser/markdown-rendering/markdown-renderer.js';
 
 /**
  * Default implementation of the `GettingStartedWidget`.
@@ -129,7 +129,7 @@ export class GettingStartedWidget extends ReactWidget {
         this.home = new URI(await this.environments.getHomeDirUri()).path.toString();
 
         const extensions = await this.appServer.getExtensionsInfos();
-        this.aiIsIncluded = extensions.find(ext => ext.name === '@theia/ai-core') !== undefined;
+        this.aiIsIncluded = extensions.find(ext => ext.name === '@theia/ai-core/lib/common/index.js') !== undefined;
         this.update();
     }
 
@@ -610,7 +610,7 @@ Check out [the Theia AI documentation]({2})!
     }
 }
 
-export interface PreferencesProps {
+export type PreferencesProps = {
     preferenceService: PreferenceService;
 }
 

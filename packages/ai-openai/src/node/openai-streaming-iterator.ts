@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { LanguageModelStreamResponsePart, TokenUsageService, TokenUsageParams, ToolCallResult, ToolCallTextResult } from '@theia/ai-core';
+import { LanguageModelStreamResponsePart, TokenUsageService, TokenUsageParams, ToolCallResult, ToolCallTextResult } from '@theia/ai-core/lib/common/index.js';
 import { CancellationError, CancellationToken, Disposable, DisposableCollection } from '@theia/core';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
 import { ChatCompletionStream, ChatCompletionStreamEvents } from 'openai/lib/ChatCompletionStream';
 import { ChatCompletionContentPartText } from 'openai/resources';
 

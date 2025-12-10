@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { Emitter, Event } from '@theia/core';
-import { ChangeBatcher } from './collections';
+import { ChangeBatcher } from './collections.js';
 
-export interface CollectionDelta<K, T> {
+export type CollectionDelta<K, T> = {
     added?: T[];
     removed?: K[];
 }
@@ -26,14 +26,14 @@ export enum DeltaKind {
     NONE, ADDED, REMOVED, CHANGED
 }
 
-export interface TreeDelta<K, T> {
+export type TreeDelta<K, T> = {
     path: K[];
     type: DeltaKind;
     value?: Partial<T>;
     childDeltas?: TreeDelta<K, T>[];
 }
 
-export interface TreeDeltaBuilder<K, T> {
+export type TreeDeltaBuilder<K, T> = {
     reportAdded(path: K[], added: T): void;
     reportRemoved(path: K[]): void;
     reportChanged(path: K[], change: Partial<T>): void;

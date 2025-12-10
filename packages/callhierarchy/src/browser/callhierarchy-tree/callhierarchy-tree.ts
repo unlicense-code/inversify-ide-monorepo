@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { TreeNode, CompositeTreeNode, SelectableTreeNode, ExpandableTreeNode, TreeImpl } from '@theia/core/lib/browser';
-import { CallHierarchyItem, CallHierarchyIncomingCall } from '../callhierarchy';
-import { CallHierarchyService } from '../callhierarchy-service';
+import { injectable } from 'inversify';
+import { TreeNode, CompositeTreeNode, SelectableTreeNode, ExpandableTreeNode, TreeImpl } from '@theia/core/lib/browser/index.js';
+import { CallHierarchyItem, CallHierarchyIncomingCall } from '../callhierarchy.js';
+import { CallHierarchyService } from '../callhierarchy-service.js';
 import { Md5 } from 'ts-md5';
-import { CancellationTokenSource } from '@theia/core/lib/common/cancellation';
+import { CancellationTokenSource } from '@theia/core/lib/common/cancellation.js';
 
 @injectable()
 export class CallHierarchyTree extends TreeImpl {
@@ -67,7 +67,7 @@ export class CallHierarchyTree extends TreeImpl {
     }
 }
 
-export interface ItemNode extends SelectableTreeNode, ExpandableTreeNode {
+export type ItemNode = SelectableTreeNode & ExpandableTreeNode & {
     definition: CallHierarchyItem;
 }
 
@@ -89,7 +89,7 @@ export namespace ItemNode {
     }
 }
 
-export interface CallerNode extends SelectableTreeNode, ExpandableTreeNode {
+export type CallerNode = SelectableTreeNode & ExpandableTreeNode & {
     caller: CallHierarchyIncomingCall;
 }
 

@@ -22,10 +22,7 @@ export const OVSXApiFilterProvider = Symbol('OVSXApiFilterProvider');
 export type OVSXApiFilterProvider = () => Promise<OVSXApiFilter>;
 
 export const OVSXApiFilter = Symbol('OVSXApiFilter');
-/**
- * Filter various data types based on a pre-defined supported VS Code API version.
- */
-export interface OVSXApiFilter {
+export type OVSXApiFilter = {
     supportedApiVersion: string;
     findLatestCompatibleExtension(query: VSXQueryOptions): Promise<VSXExtensionRaw | undefined>;
     /**

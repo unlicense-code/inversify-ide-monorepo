@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -21,14 +21,14 @@
  * copied from
  * https://github.com/microsoft/vscode/blob/0a34756cae4fc67739e60c708b04637089f8bb0d/src/vs/workbench/services/configurationResolver/common/configurationResolver.ts#L41-L63
  */
-export interface VariablePromptStringInput {
+export type VariablePromptStringInput = {
     id: string;
     type: 'promptString';
     description: string;
     default?: string;
 }
 
-export interface VariablePickStringInput {
+export type VariablePickStringInput = {
     id: string;
     type: 'pickString';
     description: string;
@@ -36,7 +36,7 @@ export interface VariablePickStringInput {
     default?: string;
 }
 
-export interface VariableCommandInput {
+export type VariableCommandInput = {
     id: string;
     type: 'command';
     command: string;

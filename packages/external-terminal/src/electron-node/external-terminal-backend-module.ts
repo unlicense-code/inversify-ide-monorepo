@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule, interfaces } from '@theia/core/shared/inversify';
-import { ConnectionHandler, RpcConnectionHandler } from '@theia/core/lib/common';
-import { isWindows, isOSX } from '@theia/core/lib/common/os';
-import { ExternalTerminalService, externalTerminalServicePath } from '../common/external-terminal';
-import { MacExternalTerminalService } from './mac-external-terminal-service';
-import { LinuxExternalTerminalService } from './linux-external-terminal-service';
-import { WindowsExternalTerminalService } from './windows-external-terminal-service';
+import { ContainerModule, interfaces } from 'inversify';
+import { ConnectionHandler, RpcConnectionHandler } from '@theia/core/lib/common/index.js';
+import { isWindows, isOSX } from '@theia/core/lib/common/os.js';
+import { ExternalTerminalService, externalTerminalServicePath } from '../common/external-terminal.js';
+import { MacExternalTerminalService } from './mac-external-terminal-service.js';
+import { LinuxExternalTerminalService } from './linux-external-terminal-service.js';
+import { WindowsExternalTerminalService } from './windows-external-terminal-service.js';
 
 export function bindExternalTerminalService(bind: interfaces.Bind): void {
     const serviceProvider: interfaces.ServiceIdentifier<ExternalTerminalService> =

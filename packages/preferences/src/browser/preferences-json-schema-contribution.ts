@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { JsonSchemaRegisterContext, JsonSchemaContribution, JsonSchemaDataStore } from '@theia/core/lib/browser/json-schema-store';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { inject, injectable } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { JsonSchemaRegisterContext, JsonSchemaContribution, JsonSchemaDataStore } from '@theia/core/lib/browser/json-schema-store.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
 import { PreferenceSchemaService, PreferenceConfigurations, PreferenceScope } from '@theia/core';
 import { UserStorageUri } from '@theia/userstorage/lib/browser';
-import debounce = require('@theia/core/shared/lodash.debounce');
+import debounce from  'lodash/debounce.js'
 
 const PREFERENCE_URI_PREFIX = 'vscode://schemas/settings/';
 const DEBOUNCED_UPDATE_DELAY = 200;

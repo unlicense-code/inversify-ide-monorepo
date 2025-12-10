@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,14 +19,14 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as jsoncparser from 'jsonc-parser';
-import { injectable, inject } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileOperationError } from '@theia/filesystem/lib/common/files';
+import { injectable, inject } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { FileOperationError } from '@theia/filesystem/lib/common/files.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { SnippetParser } from '@theia/monaco-editor-core/esm/vs/editor/contrib/snippet/browser/snippetParser';
-import { isObject } from '@theia/core/lib/common';
+import { SnippetParser } from '@theia/monaco-editor-core/esm/vs/editor/contrib/snippet/browser/snippetParser.js';
+import { isObject } from '@theia/core/lib/common/index.js';
 
 @injectable()
 export class MonacoSnippetSuggestProvider implements monaco.languages.CompletionItemProvider {
@@ -235,15 +235,15 @@ export class MonacoSnippetSuggestProvider implements monaco.languages.Completion
 
 }
 
-export interface SnippetLoadOptions {
+export type SnippetLoadOptions = {
     language?: string | string[]
     source: string
 }
 
-export interface JsonSerializedSnippets {
+export type JsonSerializedSnippets = {
     [name: string]: JsonSerializedSnippet | { [name: string]: JsonSerializedSnippet };
 }
-export interface JsonSerializedSnippet {
+export type JsonSerializedSnippet = {
     isFileTemplate?: boolean;
     body: string | string[];
     scope?: string;
@@ -256,7 +256,7 @@ export namespace JsonSerializedSnippet {
     }
 }
 
-export interface Snippet {
+export type Snippet = {
     readonly isFileTemplate: boolean
     readonly scopes: string[]
     readonly name: string

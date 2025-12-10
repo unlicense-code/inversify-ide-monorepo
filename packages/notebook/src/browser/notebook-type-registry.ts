@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { Disposable, DisposableCollection } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { OpenWithService } from '@theia/core/lib/browser';
-import { NotebookTypeDescriptor } from '../common/notebook-protocol';
-import { NotebookOpenHandler } from './notebook-open-handler';
+import { inject, injectable } from 'inversify';
+import { OpenWithService } from '@theia/core/lib/browser/index.js';
+import { NotebookTypeDescriptor } from '../common/notebook-protocol.js';
+import { NotebookOpenHandler } from './notebook-open-handler.js';
 
 @injectable()
 export class NotebookTypeRegistry {

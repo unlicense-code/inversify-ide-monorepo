@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -13,13 +13,13 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { injectable, inject, named } from '@theia/core/shared/inversify';
-import { Emitter, Event } from '@theia/core/lib/common';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { BackendApplicationContribution } from '@theia/core/lib/node';
-import { ManagedProcessManager, ManagedProcess } from '../common/process-manager-types';
-import { MAX_SAFE_INTEGER } from '@theia/core/lib/common/numbers';
-import { Process } from './process';
+import { injectable, inject, named } from 'inversify';
+import { Emitter, Event } from '@theia/core/lib/common/index.js';
+import { ILogger } from '@theia/core/lib/common/logger.js';
+import { BackendApplicationContribution } from '@theia/core/lib/node/index.js';
+import { ManagedProcessManager, ManagedProcess } from '../common/process-manager-types.js';
+import { MAX_SAFE_INTEGER } from '@theia/core/lib/common/numbers.js';
+import { Process } from './process.js';
 
 @injectable()
 export class ProcessManager implements ManagedProcessManager, BackendApplicationContribution {

@@ -16,20 +16,14 @@
 
 export const CLAUDE_CODE_SERVICE_PATH = '/services/claude-code';
 
-/**
- * Message sent from backend to frontend requesting user approval for tool usage.
- */
-export interface ToolApprovalRequestMessage {
+export type ToolApprovalRequestMessage = {
     type: 'tool-approval-request';
     toolName: string;
     toolInput: unknown;
     requestId: string;
 }
 
-/**
- * Message sent from frontend to backend with user approval decision.
- */
-export interface ToolApprovalResponseMessage {
+export type ToolApprovalResponseMessage = {
     type: 'tool-approval-response';
     requestId: string;
     approved: boolean;
@@ -53,18 +47,18 @@ export namespace ToolApprovalResponseMessage {
 
 export type StreamMessage = SDKMessage | ToolApprovalRequestMessage;
 
-export interface ClaudeCodeRequest {
+export type ClaudeCodeRequest = {
     prompt: string;
     options?: Partial<ClaudeCodeOptions>;
 }
 
-export interface ClaudeCodeBackendRequest extends ClaudeCodeRequest {
+export type ClaudeCodeBackendRequest = ClaudeCodeRequest & {
     apiKey?: string;
     claudeCodePath?: string;
 }
 
 export const ClaudeCodeClient = Symbol('ClaudeCodeClient');
-export interface ClaudeCodeClient {
+export type ClaudeCodeClient = {
     /**
      * @param token `undefined` signals end of stream.
      */
@@ -73,7 +67,7 @@ export interface ClaudeCodeClient {
 }
 
 export const ClaudeCodeService = Symbol('ClaudeCodeService');
-export interface ClaudeCodeService {
+export type ClaudeCodeService = {
     /**
      * Send a request to Claude Code.
      * @param request request parameters
@@ -97,21 +91,21 @@ export interface ClaudeCodeService {
 // Types that match @anthropic-ai/claude-agent-sdk interfaces
 export type PermissionMode = 'default' | 'acceptEdits' | 'bypassPermissions' | 'plan';
 
-export interface NonNullableUsage {
+export type NonNullableUsage = {
     input_tokens: number;
     output_tokens: number;
     cache_creation_input_tokens?: number;
     cache_read_input_tokens?: number;
 }
 
-export interface Usage {
+export type Usage = {
     input_tokens?: number;
     output_tokens?: number;
     cache_creation_input_tokens?: number;
     cache_read_input_tokens?: number;
 }
 
-export interface SDKMessageBase {
+export type SDKMessageBase = {
     uuid: string;
     session_id: string;
 }
@@ -125,37 +119,37 @@ export type SDKUserMessage = SDKMessageBase & {
     parent_tool_use_id: string | null;
 };
 
-export interface TextBlock {
+export type TextBlock = {
     type: 'text';
     text: string;
 }
 
-export interface ToolUseContentBlock {
+export type ToolUseContentBlock = {
     type: 'tool_use' | 'server_tool_use';
     id: string;
     name: string;
     input: Record<string, unknown>;
 }
 
-export interface ToolResultBlock {
+export type ToolResultBlock = {
     type: 'tool_result';
     tool_use_id: string;
     content: unknown;
     is_error?: boolean;
 }
 
-export interface ThinkingBlock {
+export type ThinkingBlock = {
     type: 'thinking';
     thinking: string;
     signature?: string;
 }
 
-export interface RedactedThinkingBlock {
+export type RedactedThinkingBlock = {
     type: 'redacted_thinking';
     data: string;
 }
 
-export interface WebSearchToolResultBlock {
+export type WebSearchToolResultBlock = {
     type: 'web_search_tool_result';
     tool_use_id: string;
     content: Array<{
@@ -216,7 +210,7 @@ export type SDKSystemMessage = SDKMessageBase & {
 
 export type SDKMessage = SDKAssistantMessage | SDKUserMessage | SDKResultMessage | SDKSystemMessage;
 
-export interface ClaudeCodeOptions {
+export type ClaudeCodeOptions = {
     cwd?: string;
     abortController?: AbortController;
     additionalDirectories?: string[];
@@ -249,23 +243,23 @@ export interface ClaudeCodeOptions {
 }
 
 // Tool input interfaces
-export interface TaskInput {
+export type TaskInput = {
     description: string;
     prompt: string;
 }
 
-export interface EditInput {
+export type EditInput = {
     file_path: string;
     old_string: string;
     new_string: string;
 }
 
-export interface MultiEditInput {
+export type MultiEditInput = {
     file_path: string;
     edits: Array<{ old_string: string; new_string: string }>;
 }
 
-export interface WriteInput {
+export type WriteInput = {
     file_path: string;
     content: string;
 }

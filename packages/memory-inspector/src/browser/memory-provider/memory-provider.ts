@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2019 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,23 +14,16 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { DebugVariable } from '@theia/debug/lib/browser/console/debug-console-items';
-import { DebugSession } from '@theia/debug/lib/browser/debug-session';
+import { inject, injectable } from 'inversify';
+import { DebugVariable } from '@theia/debug/lib/browser/console/debug-console-items.js';
+import { DebugSession } from '@theia/debug/lib/browser/debug-session.js';
 import { DebugProtocol } from '@vscode/debugprotocol';
-import { Interfaces } from '../utils/memory-widget-utils';
-import { VariableRange } from '../utils/memory-widget-variable-utils';
+import { Interfaces } from '../utils/memory-widget-utils.js';
+import { VariableRange } from '../utils/memory-widget-variable-utils.js';
 import Long from 'long';
 
 export const MemoryProvider = Symbol('MemoryProvider');
-/**
- * Representation of a memory provider. It is only necessary to implement a new Memory Provider if the behavior of the Debug Adapter for a given session type
- * deviates from the Debug Adapter Protocol. Otherwise, the DefaultMemoryProvider should handle standard DAP requests and responses.
- *
- * Specific peculiarities that might require special handling include: restrictions on the formatting of memory location identifiers (only hex numbers, e.g.)
- * or deviations from the DAP in the format of the response to a given request.
- */
-export interface MemoryProvider {
+export type MemoryProvider = {
     /**
      * @param session
      * @return whether the given MemoryProvider can handle memory reading / writing for a session of the type submitted.

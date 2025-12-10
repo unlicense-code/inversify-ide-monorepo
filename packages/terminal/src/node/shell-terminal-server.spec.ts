@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 import * as chai from 'chai';
-import { createTerminalTestContainer } from './test/terminal-test-container';
-import { IShellTerminalServer } from '../common/shell-terminal-protocol';
+import { createTerminalTestContainer } from './test/terminal-test-container.js';
+import { IShellTerminalServer } from '../common/shell-terminal-protocol.js';
 
 /**
  * Globals

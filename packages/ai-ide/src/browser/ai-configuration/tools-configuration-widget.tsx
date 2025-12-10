@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ConfirmDialog } from '@theia/core/lib/browser';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { ToolInvocationRegistry } from '@theia/ai-core';
+import { ConfirmDialog } from '@theia/core/lib/browser/index.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import * as React from 'react';
+import { ToolInvocationRegistry } from '@theia/ai-core/lib/common/index.js';
 import { nls, PreferenceService } from '@theia/core';
-import { ToolConfirmationManager } from '@theia/ai-chat/lib/browser/chat-tool-preference-bindings';
-import { ToolConfirmationMode } from '@theia/ai-chat/lib/common/chat-tool-preferences';
-import { AITableConfigurationWidget, TableColumn } from './base/ai-table-configuration-widget';
+import { ToolConfirmationManager } from '@theia/ai-chat/lib/browser/chat-tool-preference-bindings.js';
+import { ToolConfirmationMode } from '@theia/ai-chat/lib/common/chat-tool-preferences.js';
+import { AITableConfigurationWidget, TableColumn } from './base/ai-table-configuration-widget.js';
 
 const TOOL_OPTIONS: { value: ToolConfirmationMode, label: string, icon: string }[] = [
     { value: ToolConfirmationMode.DISABLED, label: nls.localizeByDefault('Disabled'), icon: 'close' },
@@ -29,7 +29,7 @@ const TOOL_OPTIONS: { value: ToolConfirmationMode, label: string, icon: string }
     { value: ToolConfirmationMode.ALWAYS_ALLOW, label: nls.localize('theia/ai/ide/toolsConfiguration/toolOptions/alwaysAllow/label', 'Always Allow'), icon: 'thumbsup' },
 ];
 
-interface ToolItem {
+type ToolItem = {
     name: string;
 }
 

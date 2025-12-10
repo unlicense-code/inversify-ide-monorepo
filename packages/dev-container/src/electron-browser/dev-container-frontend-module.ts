@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 Typefox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -13,16 +13,16 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { RemoteRegistryContribution } from '@theia/remote/lib/electron-browser/remote-registry-contribution';
-import { RemoteContainerConnectionProvider, RemoteContainerConnectionProviderPath } from '../electron-common/remote-container-connection-provider';
-import { ContainerConnectionContribution } from './container-connection-contribution';
-import { ServiceConnectionProvider } from '@theia/core/lib/browser/messaging/service-connection-provider';
-import { ContainerOutputProvider } from './container-output-provider';
-import { ContainerInfoContribution } from './container-info-contribution';
-import { FrontendApplicationContribution, LabelProviderContribution } from '@theia/core/lib/browser';
-import { WorkspaceOpenHandlerContribution } from '@theia/workspace/lib/browser/workspace-service';
-import { WindowTitleContribution } from '@theia/core/lib/browser/window/window-title-service';
+import { ContainerModule } from 'inversify';
+import { RemoteRegistryContribution } from '@theia/remote/lib/electron-browser/remote-registry-contribution.js';
+import { RemoteContainerConnectionProvider, RemoteContainerConnectionProviderPath } from '../electron-common/remote-container-connection-provider.js';
+import { ContainerConnectionContribution } from './container-connection-contribution.js';
+import { ServiceConnectionProvider } from '@theia/core/lib/browser/messaging/service-connection-provider.js';
+import { ContainerOutputProvider } from './container-output-provider.js';
+import { ContainerInfoContribution } from './container-info-contribution.js';
+import { FrontendApplicationContribution, LabelProviderContribution } from '@theia/core/lib/browser/index.js';
+import { WorkspaceOpenHandlerContribution } from '@theia/workspace/lib/browser/workspace-service.js';
+import { WindowTitleContribution } from '@theia/core/lib/browser/window/window-title-service.js';
 
 export default new ContainerModule(bind => {
     bind(ContainerConnectionContribution).toSelf().inSingletonScope();

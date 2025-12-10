@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,8 +17,8 @@
 import * as os from 'os';
 import * as path from 'path';
 import * as chai from 'chai';
-import { FileUri } from '../common/file-uri';
-import { isWindows } from '../common/os';
+import { FileUri } from '../common/file-uri.js';
+import { isWindows } from '../common/os.js';
 
 const expect = chai.expect;
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { Command, Event, nls } from '@theia/core';
-import { OpenViewArguments } from '@theia/core/lib/browser';
-import { ScmFileChangeNode, ScmHistoryCommit } from '../scm-file-change-node';
+import { OpenViewArguments } from '@theia/core/lib/browser/index.js';
+import { ScmFileChangeNode, ScmHistoryCommit } from '../scm-file-change-node.js';
 
 export const SCM_HISTORY_ID = 'scm-history';
 export const SCM_HISTORY_LABEL = nls.localize('theia/scm/history', 'History');
@@ -33,17 +33,17 @@ export namespace ScmHistoryCommands {
     };
 }
 
-export interface ScmHistoryOpenViewArguments extends OpenViewArguments {
+export type ScmHistoryOpenViewArguments = OpenViewArguments & {
     uri: string | undefined;
 }
 
 export const ScmHistorySupport = Symbol('scm-history-support');
-export interface ScmHistorySupport {
+export type ScmHistorySupport = {
     getCommitHistory(options?: HistoryWidgetOptions): Promise<ScmHistoryCommit[]>;
     readonly onDidChangeHistory: Event<void>;
 }
 
-export interface ScmCommitNode {
+export type ScmCommitNode = {
     commitDetails: ScmHistoryCommit;
     authorAvatar: string;
     fileChangeNodes: ScmFileChangeNode[];
@@ -57,7 +57,7 @@ export namespace ScmCommitNode {
     }
 }
 
-export interface HistoryWidgetOptions {
+export type HistoryWidgetOptions = {
     range?: {
         toRevision?: string;
         fromRevision?: string;

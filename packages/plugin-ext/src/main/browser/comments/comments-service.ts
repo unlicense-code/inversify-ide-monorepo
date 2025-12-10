@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { URI } from '@theia/core/shared/vscode-uri';
-import { Event, Emitter } from '@theia/core/lib/common/event';
+import { injectable } from 'inversify';
+import { URI } from 'vscode-uri';
+import { Event, Emitter } from '@theia/core';
 import {
     Range,
     CommentInfo,
@@ -24,9 +24,9 @@ import {
     CommentThread,
     CommentThreadChangedEvent,
     CommentThreadChangedEventMain
-} from '../../../common/plugin-api-rpc-model';
-import { CommentController } from './comments-main';
-import { CancellationToken } from '@theia/core/lib/common/cancellation';
+} from '../../../common/plugin-api-rpc-model.js';
+import { CommentController } from './comments-main.js';
+import { CancellationToken } from '@theia/core';
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
@@ -34,24 +34,24 @@ import { CancellationToken } from '@theia/core/lib/common/cancellation';
  *--------------------------------------------------------------------------------------------*/
 // some code copied and modified from https://github.com/microsoft/vscode/blob/1.49.3/src/vs/workbench/contrib/comments/browser/commentService.ts
 
-export interface ResourceCommentThreadEvent {
+export type ResourceCommentThreadEvent = {
     resource: URI;
     commentInfos: CommentInfoMain[];
 }
 
-export interface CommentInfoMain extends CommentInfo {
+export type CommentInfoMain = CommentInfo & {
     owner: string;
     label?: string;
 }
 
-export interface WorkspaceCommentThreadsEventMain {
+export type WorkspaceCommentThreadsEventMain = {
     ownerId: string;
     commentThreads: CommentThread[];
 }
 
 export const CommentsService = Symbol('CommentsService');
 
-export interface CommentsService {
+export type CommentsService = {
     readonly onDidSetResourceCommentInfos: Event<ResourceCommentThreadEvent>;
     readonly onDidSetAllCommentThreads: Event<WorkspaceCommentThreadsEventMain>;
     readonly onDidUpdateCommentThreads: Event<CommentThreadChangedEventMain>;

@@ -14,26 +14,26 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject } from '@theia/core/shared/inversify';
-import { isLanguageModelStreamResponse, LanguageModel, LanguageModelRegistry, LanguageModelResponse, LanguageModelStreamResponsePart, UserRequest } from './language-model';
-import { LanguageModelExchangeRequest, LanguageModelSession } from './language-model-interaction-model';
+import { inject } from 'inversify';
+import { isLanguageModelStreamResponse, LanguageModel, LanguageModelRegistry, LanguageModelResponse, LanguageModelStreamResponsePart, UserRequest } from './language-model.js';
+import { LanguageModelExchangeRequest, LanguageModelSession } from './language-model-interaction-model.js';
 import { Emitter } from '@theia/core';
 
-export interface RequestAddedEvent {
+export type RequestAddedEvent = {
     type: 'requestAdded',
     id: string;
 }
-export interface ResponseCompletedEvent {
+export type ResponseCompletedEvent = {
     type: 'responseCompleted',
     requestId: string;
 }
-export interface SessionsClearedEvent {
+export type SessionsClearedEvent = {
     type: 'sessionsCleared'
 }
 export type SessionEvent = RequestAddedEvent | ResponseCompletedEvent | SessionsClearedEvent;
 
 export const LanguageModelService = Symbol('LanguageModelService');
-export interface LanguageModelService {
+export type LanguageModelService = {
     onSessionChanged: Emitter<SessionEvent>['event'];
     /**
      * Collection of all recorded LanguageModelSessions.

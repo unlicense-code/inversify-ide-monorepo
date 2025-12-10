@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '../../../shared/inversify';
-import { Emitter, Event } from '../../common';
-import { Disposable, DisposableCollection } from '../../common/disposable';
-import { Coordinate } from '../context-menu-renderer';
-import { RendererHost } from '../widgets/react-renderer';
-import { Styles } from './breadcrumbs-constants';
+import { inject, injectable, postConstruct } from 'inversify';
+import { Emitter, Event } from '../../common/index.js';
+import { Disposable, DisposableCollection } from '../../common/disposable.js';
+import { Coordinate } from '../context-menu-renderer.js';
+import { RendererHost } from '../widgets/react-renderer.js';
+import { Styles } from './breadcrumbs-constants.js';
 
-export interface BreadcrumbPopupContainerFactory {
+export type BreadcrumbPopupContainerFactory = {
     (parent: HTMLElement, breadcrumbId: string, position: Coordinate): BreadcrumbPopupContainer;
 }
 export const BreadcrumbPopupContainerFactory = Symbol('BreadcrumbPopupContainerFactory');

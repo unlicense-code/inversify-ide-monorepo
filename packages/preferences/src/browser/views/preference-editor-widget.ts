@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,26 +15,30 @@
 // *****************************************************************************
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { postConstruct, injectable, inject } from '@theia/core/shared/inversify';
-import throttle = require('@theia/core/shared/lodash.throttle');
-import * as deepEqual from 'fast-deep-equal';
+import { postConstruct, injectable, inject } from 'inversify';
+import throttle from 'lodash/throttle.js';
+import deepEqual from 'fast-deep-equal';
 import {
     CompositeTreeNode,
     SelectableTreeNode,
     StatefulWidget,
     TopDownTreeIterator,
     ExpandableTreeNode,
-} from '@theia/core/lib/browser';
-import { Disposable, DisposableCollection, PreferenceProviderDataChanges, PreferenceProviderProvider, PreferenceSchemaService, PreferenceService, unreachable } from '@theia/core';
-import { BaseWidget, DEFAULT_SCROLL_OPTIONS } from '@theia/core/lib/browser/widgets/widget';
-import { PreferenceTreeModel, PreferenceFilterChangeEvent, PreferenceFilterChangeSource } from '../preference-tree-model';
-import { PreferenceNodeRendererFactory, GeneralPreferenceNodeRenderer } from './components/preference-node-renderer';
-import { Preference } from '../util/preference-types';
-import { PreferencesScopeTabBar } from './preference-scope-tabbar-widget';
-import { PreferenceNodeRendererCreatorRegistry } from './components/preference-node-renderer-creator';
-import { COMMONLY_USED_SECTION_PREFIX } from '../util/preference-layout';
+} from '@theia/core/lib/browser/index.js';
+import { Disposable, DisposableCollection, PreferenceProviderDataChanges,
+     PreferenceProviderProvider, PreferenceSchemaService, PreferenceService, unreachable } from '@theia/core';
+import { BaseWidget, DEFAULT_SCROLL_OPTIONS } from '@theia/core/lib/browser/widgets/widget.js';
+import { PreferenceTreeModel, PreferenceFilterChangeEvent,
+     PreferenceFilterChangeSource } from '../preference-tree-model.js';
+import { PreferenceNodeRendererFactory, GeneralPreferenceNodeRenderer 
 
-export interface PreferencesEditorState {
+} from './components/preference-node-renderer.js';
+import { Preference } from '../util/preference-types.js';
+import { PreferencesScopeTabBar } from './preference-scope-tabbar-widget.js';
+import { PreferenceNodeRendererCreatorRegistry } from './components/preference-node-renderer-creator.js';
+import { COMMONLY_USED_SECTION_PREFIX } from '../util/preference-layout.js';
+
+export type PreferencesEditorState = {
     firstVisibleChildID: string,
 }
 
@@ -82,7 +86,7 @@ export class PreferencesEditorWidget extends BaseWidget implements StatefulWidge
         this.toDispose.pushAll([
             this.subscribeToPreferenceProviderChanges(),
             this.model.onFilterChanged(e => this.handleDisplayChange(e)),
-            this.model.onSelectionChanged(e => this.handleSelectionChange(e)),
+            this.model.onSelectionChanged(e => this.handleSelectionChange(e ?? [])),
         ]);
         this.createContainers();
         await this.preferenceService.ready;

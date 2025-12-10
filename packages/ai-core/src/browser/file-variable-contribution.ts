@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { nls, Path, URI } from '@theia/core';
-import { OpenerService, codiconArray, open } from '@theia/core/lib/browser';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
+import { OpenerService, codiconArray, open } from '@theia/core/lib/browser/index.js';
+import { inject, injectable } from 'inversify';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
 import {
     AIVariable,
     AIVariableContext,
@@ -27,8 +27,8 @@ import {
     AIVariableResolutionRequest,
     AIVariableResolver,
     ResolvedAIContextVariable,
-} from '../common/variable-service';
-import { FrontendVariableService } from './frontend-variable-service';
+} from '../common/variable-service.js';
+import { FrontendVariableService } from './frontend-variable-service.js';
 
 export namespace FileVariableArgs {
     export const uri = 'uri';

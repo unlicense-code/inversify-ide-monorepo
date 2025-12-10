@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { nls, SelectionService } from '@theia/core/lib/common';
-import { NavigatableWidgetOptions, WidgetFactory, LabelProvider } from '@theia/core/lib/browser';
-import { EditorWidget } from './editor-widget';
-import { TextEditorProvider } from './editor';
+import { injectable, inject } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { nls, SelectionService } from '@theia/core/lib/common/index.js';
+import { NavigatableWidgetOptions, WidgetFactory, LabelProvider } from '@theia/core/lib/browser/index.js';
+import { EditorWidget } from './editor-widget.js';
+import { TextEditorProvider } from './editor.js';
 
 @injectable()
 export class EditorWidgetFactory implements WidgetFactory {

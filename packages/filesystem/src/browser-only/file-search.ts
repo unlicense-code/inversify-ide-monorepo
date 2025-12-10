@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2025 Maksim Kachurin and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,9 +15,10 @@
 // *****************************************************************************
 
 import { minimatch, type MinimatchOptions } from 'minimatch';
-import ignore from 'ignore';
+import ignoreDefault from 'ignore';
+const ignore = ignoreDefault.default || ignoreDefault;
 
-import type URI from '@theia/core/lib/common/uri';
+import type { URI } from '@theia/core';
 
 /**
  * Normalizes glob patterns to be consistent with ripgrep behavior.

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { nls } from '@theia/core';
-import { DeflatedToolbarTree, ToolbarAlignment } from './toolbar-interfaces';
+import { DeflatedToolbarTree, ToolbarAlignment } from './toolbar-interfaces.js';
 
 // This file specifies the default layout of the toolbar. This binding should be overridden for extenders.
 // Both Toolbar Command Items and Toolbar Contributions can be specified here.

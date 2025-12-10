@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
+import * as React from 'react';
 import { CancellationTokenSource, Emitter, Event, MessageType, nls } from '@theia/core';
-import { DebugProtocol } from '@vscode/debugprotocol/lib/debugProtocol';
-import { TreeElement } from '@theia/core/lib/browser/source-tree';
-import { DebugStackFrame } from './debug-stack-frame';
-import { DebugSession } from '../debug-session';
+import { DebugProtocol } from '@vscode/debugprotocol/lib/debugProtocol.js';
+import { TreeElement } from '@theia/core/lib/browser/source-tree/tree-source.js';
+import { DebugStackFrame } from './debug-stack-frame.js';
+import { DebugSession } from '../debug-session.js';
 import * as monaco from '@theia/monaco-editor-core';
-import URI from '@theia/core/lib/common/uri';
+import { URI } from '@theia/core/lib/common/uri.js';
 
 export type StoppedDetails = DebugProtocol.StoppedEvent['body'] & {
     framesErrorMessage?: string
@@ -33,7 +33,7 @@ export class DebugThreadData {
     readonly stoppedDetails: StoppedDetails | undefined;
 }
 
-export interface DebugExceptionInfo {
+export type DebugExceptionInfo = {
     id?: string
     description?: string
     details?: DebugProtocol.ExceptionDetails

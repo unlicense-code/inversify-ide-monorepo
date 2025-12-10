@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,19 +15,19 @@
 // *****************************************************************************
 
 import { interfaces, Container } from 'inversify';
-import { TreeWidget, TreeProps, defaultTreeProps } from './tree-widget';
-import { TreeModelImpl, TreeModel } from './tree-model';
-import { TreeImpl, Tree } from './tree';
-import { TreeSelectionService } from './tree-selection';
-import { TreeSelectionServiceImpl } from './tree-selection-impl';
-import { TreeExpansionService, TreeExpansionServiceImpl } from './tree-expansion';
-import { TreeNavigationService } from './tree-navigation';
-import { TreeDecoratorService, NoopTreeDecoratorService } from './tree-decorator';
-import { TreeSearch } from './tree-search';
-import { FuzzySearch } from './fuzzy-search';
-import { SearchBox, SearchBoxFactory } from './search-box';
-import { SearchBoxDebounce } from './search-box-debounce';
-import { TreeFocusService, TreeFocusServiceImpl } from './tree-focus-service';
+import { TreeWidget, TreeProps, defaultTreeProps } from './tree-widget.js';
+import { TreeModelImpl, TreeModel } from './tree-model.js';
+import { TreeImpl, Tree } from './tree.js';
+import { TreeSelectionService } from './tree-selection.js';
+import { TreeSelectionServiceImpl } from './tree-selection-impl.js';
+import { TreeExpansionService, TreeExpansionServiceImpl } from './tree-expansion.js';
+import { TreeNavigationService } from './tree-navigation.js';
+import { TreeDecoratorService, NoopTreeDecoratorService } from './tree-decorator.js';
+import { TreeSearch } from './tree-search.js';
+import { FuzzySearch } from './fuzzy-search.js';
+import { SearchBox, SearchBoxFactory } from './search-box.js';
+import { SearchBoxDebounce } from './search-box-debounce.js';
+import { TreeFocusService, TreeFocusServiceImpl } from './tree-focus-service.js';
 
 export function isTreeServices(candidate?: Partial<TreeProps> | Partial<TreeContainerProps>): candidate is TreeContainerProps {
     if (candidate) {
@@ -45,13 +45,13 @@ export function isTreeServices(candidate?: Partial<TreeProps> | Partial<TreeCont
     return false;
 }
 
-export function createTreeContainer(parent: interfaces.Container, props?: Partial<TreeContainerProps>): Container;
+export function createTreeContainer(parent: interfaces.Container, props?: Partial<TreeContainerProps>): interfaces.Container;
 /**
  * @deprecated Please use TreeContainerProps instead of TreeProps
  * @since 1.23.0
  */
-export function createTreeContainer(parent: interfaces.Container, props?: Partial<TreeProps>): Container;
-export function createTreeContainer(parent: interfaces.Container, props?: Partial<TreeProps> | Partial<TreeContainerProps>): Container {
+export function createTreeContainer(parent: interfaces.Container, props?: Partial<TreeProps>): interfaces.Container;
+export function createTreeContainer(parent: interfaces.Container, props?: Partial<TreeProps> | Partial<TreeContainerProps>): interfaces.Container {
     const child = new Container({ defaultScope: 'Singleton' });
     child.parent = parent;
     const overrideServices: Partial<TreeContainerProps> = isTreeServices(props) ? props : { props: props as Partial<TreeProps> | undefined };
@@ -87,7 +87,7 @@ function getServiceAndIdentifier<Key extends keyof TreeIdentifiers>(
     };
 }
 
-export interface SearchBoxFactoryFactory {
+export type SearchBoxFactoryFactory = {
     (context: interfaces.Context): SearchBoxFactory;
 }
 
@@ -96,12 +96,12 @@ const defaultSearchBoxFactoryFactory: SearchBoxFactoryFactory = () => options =>
     return new SearchBox(options, debounce);
 };
 
-interface TreeConstants {
+type TreeConstants = {
     searchBoxFactory: SearchBoxFactory,
     props: TreeProps,
 }
 
-interface TreeServices {
+type TreeServices = {
     tree: Tree,
     selectionService: TreeSelectionService,
     expansionService: TreeExpansionService,
@@ -114,12 +114,12 @@ interface TreeServices {
     focusService: TreeFocusService,
 }
 
-interface TreeTypes extends TreeServices, TreeConstants { }
+type TreeTypes = TreeServices & TreeConstants & { }
 
 export type TreeIdentifiers = { [K in keyof TreeTypes]: interfaces.ServiceIdentifier<TreeTypes[K]>; };
 type TreeServiceProviders = { [K in keyof TreeServices]: interfaces.Newable<TreeServices[K]> };
 
-export interface TreeContainerProps extends TreeServiceProviders {
+export type TreeContainerProps = TreeServiceProviders & {
     props: Partial<TreeProps>,
     searchBoxFactory: SearchBoxFactoryFactory;
 }

@@ -22,11 +22,11 @@
 // Some entities copied and modified from https://github.com/Microsoft/vscode/blob/master/src/vs/vscode.d.ts
 // Some entities copied and modified from https://github.com/Microsoft/vscode/blob/master/src/vs/workbench/parts/debug/common/debug.ts
 
-import { DebugConfiguration } from './debug-configuration';
-import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema';
-import { MaybePromise } from '@theia/core/lib/common/types';
+import { DebugConfiguration } from './debug-configuration.js';
+import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema.js';
+import { MaybePromise } from '@theia/core/lib/common/types.js';
 import { Event } from '@theia/core';
-import { DebugChannel } from './debug-service';
+import { DebugChannel } from './debug-service.js';
 
 // FIXME: break down this file to debug adapter and debug adapter contribution (see Theia file naming conventions)
 
@@ -35,12 +35,7 @@ import { DebugChannel } from './debug-service';
  */
 export const DebugAdapterSession = Symbol('DebugAdapterSession');
 
-/**
- * The debug adapter session. The debug adapter session manages the lifecycle of a
- * debug session: the debug session should be discarded if and only if the debug adapter
- * session is stopped.
- */
-export interface DebugAdapterSession {
+export type DebugAdapterSession = {
     id: string;
     parentSession?: DebugAdapterSession;
     start(channel: DebugChannel): Promise<void>
@@ -52,25 +47,16 @@ export interface DebugAdapterSession {
  */
 export const DebugAdapterSessionFactory = Symbol('DebugAdapterSessionFactory');
 
-/**
- * The [debug session](#DebugSession) factory.
- */
-export interface DebugAdapterSessionFactory {
+export type DebugAdapterSessionFactory = {
     get(sessionId: string, debugAdapter: DebugAdapter): DebugAdapterSession;
 }
 
-/**
- * Debug adapter executable for spawning.
- */
-export interface DebugAdapterSpawnExecutable {
+export type DebugAdapterSpawnExecutable = {
     command: string;
     args?: string[];
 }
 
-/**
- * Debug adapter executable for forking.
- */
-export interface DebugAdapterForkExecutable {
+export type DebugAdapterForkExecutable = {
     modulePath: string;
     execArgv?: string[];
     args?: string[];
@@ -88,13 +74,7 @@ export interface DebugAdapterForkExecutable {
  */
 export type DebugAdapterExecutable = DebugAdapterSpawnExecutable | DebugAdapterForkExecutable;
 
-/**
- * Implementers stand for the various types of debug adapters the system can talk to.
- * Creation of debug adapters is not covered in this interface, but handling communication
- * and the end of life is.
- */
-
-export interface DebugAdapter {
+export type DebugAdapter = {
     /**
      * A DAP protocol message has been received from the debug adapter
      */
@@ -125,10 +105,7 @@ export interface DebugAdapter {
  */
 export const DebugAdapterFactory = Symbol('DebugAdapterFactory');
 
-/**
- * Factory to start debug adapter.
- */
-export interface DebugAdapterFactory {
+export type DebugAdapterFactory = {
     start(executable: DebugAdapterExecutable): DebugAdapter;
     connect(debugServerPort: number): DebugAdapter;
 }
@@ -138,10 +115,7 @@ export interface DebugAdapterFactory {
  */
 export const DebugAdapterContribution = Symbol('DebugAdapterContribution');
 
-/**
- * A contribution point for debug adapters.
- */
-export interface DebugAdapterContribution {
+export type DebugAdapterContribution = {
     /**
      * The debug type. Should be a unique value among all debug adapters.
      */

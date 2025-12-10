@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Tree, TreeNode } from './tree';
-import { DepthFirstTreeIterator } from './tree-iterator';
-import { TreeSelection, SelectableTreeNode } from './tree-selection';
+import { Tree, TreeNode } from './tree.js';
+import { DepthFirstTreeIterator } from './tree-iterator.js';
+import { TreeSelection, SelectableTreeNode } from './tree-selection.js';
 
-/**
- * A tree selection that might contain additional information about the tree node that has the focus.
- */
-export interface FocusableTreeSelection extends TreeSelection {
+export type FocusableTreeSelection = TreeSelection & {
 
     /**
      * The tree node that has the focus in the tree selection. In case of a range selection,

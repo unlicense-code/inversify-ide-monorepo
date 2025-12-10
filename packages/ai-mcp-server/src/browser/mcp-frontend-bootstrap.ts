@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import { MaybePromise } from '@theia/core';
-import { FrontendApplication, FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { MCPToolFrontendDelegate } from '../common/mcp-tool-delegate';
+import { FrontendApplication, FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
+import { ILogger } from '@theia/core/lib/common/logger.js';
+import { MCPToolFrontendDelegate } from '../common/mcp-tool-delegate.js';
 
 /**
  * Bootstraps MCP frontend components during application startup.

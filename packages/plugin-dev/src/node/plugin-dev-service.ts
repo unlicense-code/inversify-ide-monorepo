@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { PluginDebugConfiguration, PluginDevServer, PluginDevClient } from '../common/plugin-dev-protocol';
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { HostedInstanceManager } from './hosted-instance-manager';
-import { PluginMetadata } from '@theia/plugin-ext/lib/common/plugin-protocol';
-import URI from '@theia/core/lib/common/uri';
-import { HostedPluginReader } from './hosted-plugin-reader';
-import { HostedPluginsManager } from './hosted-plugins-manager';
-import { HostedPluginSupport } from '@theia/plugin-ext/lib/hosted/node/hosted-plugin';
+import { PluginDebugConfiguration, PluginDevServer, PluginDevClient } from '../common/plugin-dev-protocol.js';
+import { injectable, inject } from 'inversify';
+import { HostedInstanceManager } from './hosted-instance-manager.js';
+import { PluginMetadata } from '@theia/plugin-ext/lib/common/plugin-protocol.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { HostedPluginReader } from './hosted-plugin-reader.js';
+import { HostedPluginsManager } from './hosted-plugins-manager.js';
+import { HostedPluginSupport } from '@theia/plugin-ext/lib/hosted/node/hosted-plugin.js';
 
 @injectable()
 export class PluginDevServerImpl implements PluginDevServer {

@@ -14,26 +14,26 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
+import { injectable, inject, postConstruct } from 'inversify';
 import {
     TreeWidget, TreeModel, TreeProps, CompositeTreeNode, ExpandableTreeNode, TreeNode, TreeImpl, NodeProps,
     TREE_NODE_SEGMENT_CLASS, TREE_NODE_TAIL_CLASS, SelectableTreeNode
-} from '@theia/core/lib/browser/tree';
-import { ACTION_ITEM, ContextMenuRenderer, KeybindingRegistry, codicon } from '@theia/core/lib/browser';
-import { IconThemeService } from '@theia/core/lib/browser/icon-theme-service';
-import { ThemeService } from '@theia/core/lib/browser/theming';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { TestController, TestExecutionState, TestItem, TestService } from '../test-service';
-import * as React from '@theia/core/shared/react';
-import { DeltaKind, TreeDelta } from '../../common/tree-delta';
+} from '@theia/core/lib/browser/index.js';
+import { ACTION_ITEM, ContextMenuRenderer, KeybindingRegistry, codicon } from '@theia/core/lib/browser/index.js';
+import { IconThemeService } from '@theia/core/lib/browser/icon-theme-service.js';
+import { ThemeService } from '@theia/core/lib/browser/theming.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { TestController, TestExecutionState, TestItem, TestService } from '../test-service.js';
+import * as React from 'react';
+import { DeltaKind, TreeDelta } from '../../common/tree-delta.js';
 import { AcceleratorSource, CommandMenu, CommandRegistry, Disposable, DisposableCollection, Event, MenuModelRegistry, nls } from '@theia/core';
-import { TestExecutionStateManager } from './test-execution-state-manager';
-import { TestOutputUIModel } from './test-output-ui-model';
-import { TEST_VIEW_INLINE_MENU } from './test-view-contribution';
+import { TestExecutionStateManager } from './test-execution-state-manager.js';
+import { TestOutputUIModel } from './test-output-ui-model.js';
+import { TEST_VIEW_INLINE_MENU } from './test-view-contribution.js';
 
 const ROOT_ID = 'TestTree';
 
-export interface TestRoot extends CompositeTreeNode {
+export type TestRoot = CompositeTreeNode & {
     children: TestControllerNode[];
 }
 export namespace TestRoot {
@@ -41,7 +41,7 @@ export namespace TestRoot {
         return CompositeTreeNode.is(node) && node.id === ROOT_ID;
     }
 }
-export interface TestControllerNode extends ExpandableTreeNode {
+export type TestControllerNode = ExpandableTreeNode & {
     controller: TestController;
 }
 
@@ -51,7 +51,7 @@ export namespace TestControllerNode {
     }
 }
 
-export interface TestItemNode extends TreeNode {
+export type TestItemNode = TreeNode & {
     controller: TestController;
     testItem: TestItem;
 }

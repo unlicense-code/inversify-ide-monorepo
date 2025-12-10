@@ -13,20 +13,20 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { inject, injectable, named } from '@theia/core/shared/inversify';
+import { inject, injectable, named } from 'inversify';
 import type {
     SearchInWorkspaceClient,
     SearchInWorkspaceOptions,
     SearchInWorkspaceResult,
     SearchInWorkspaceServer,
     SearchMatch
-} from '../common/search-in-workspace-interface';
-import { FileUri } from '@theia/core/lib/common/file-uri';
+} from '../common/search-in-workspace-interface.js';
+import { FileUri } from '@theia/core/lib/common/file-uri.js';
 import { URI, ILogger } from '@theia/core';
-import { FileService, TextFileOperationError, TextFileOperationResult } from '@theia/filesystem/lib/browser/file-service';
-import { normalizeGlob, matchesPattern, createIgnoreMatcher, getIgnorePatterns } from '@theia/filesystem/lib/browser-only/file-search';
-import { escapeRegExpCharacters } from '@theia/core/lib/common/strings';
-import { BinarySize, type FileStatWithMetadata } from '@theia/filesystem/lib/common/files';
+import { FileService, TextFileOperationError, TextFileOperationResult } from '@theia/filesystem/lib/browser/file-service.js';
+import { normalizeGlob, matchesPattern, createIgnoreMatcher, getIgnorePatterns } from '@theia/filesystem/lib/browser-only/file-search.js';
+import { escapeRegExpCharacters } from '@theia/core/lib/common/strings.js';
+import { BinarySize, type FileStatWithMetadata } from '@theia/filesystem/lib/common/files.js';
 
 interface SearchController {
     regex: RegExp;
@@ -189,7 +189,7 @@ export class BrowserSearchInWorkspaceServer implements SearchInWorkspaceServer {
                         if (!options.includeIgnored) {
                             const patterns = await getIgnorePatterns(
                                 current,
-                                uri => this.fs.read(uri).then(content => content.value)
+                                (uri: URI) => this.fs.read(uri).then((content: { value: string }) => content.value)
                             );
 
                             matcher.add(patterns);
@@ -264,7 +264,7 @@ export class BrowserSearchInWorkspaceServer implements SearchInWorkspaceServer {
         const matches: SearchMatch[] = [];
 
         await new Promise<void>((resolve, reject) => {
-            stream.on('data', chunk => {
+            stream.on('data', (chunk: string) => {
                 if (isAborted()) {
                     stream.pause();
                     resolve();
@@ -305,7 +305,7 @@ export class BrowserSearchInWorkspaceServer implements SearchInWorkspaceServer {
                 }
             });
 
-            stream.on('error', err => reject(err));
+            stream.on('error', (err: Error) => reject(err));
 
             stream.on('end', () => {
                 if (leftover.length && matches.length < limit) {

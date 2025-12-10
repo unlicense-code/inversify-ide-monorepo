@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,9 +19,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Emitter } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { Disposable } from '@theia/core/shared/vscode-languageserver-protocol';
-import { NotebookEditorWidgetService } from './notebook-editor-widget-service';
+import { inject, injectable } from 'inversify';
+import { Disposable } from 'vscode-languageserver-protocol';
+import { NotebookEditorWidgetService } from './notebook-editor-widget-service.js';
 
 interface RendererMessage {
     editorId: string;
@@ -29,7 +29,7 @@ interface RendererMessage {
     message: unknown
 };
 
-export interface RendererMessaging extends Disposable {
+export type RendererMessaging = Disposable & {
     /**
      * Method called when a message is received. Should return a boolean
      * indicating whether a renderer received it.

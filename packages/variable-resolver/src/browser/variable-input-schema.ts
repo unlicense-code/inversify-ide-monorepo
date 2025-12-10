@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -27,7 +27,7 @@ const typeDescription = 'The type of user input prompt to use.';
 const descriptionDescription = 'The description is shown when the user is prompted for input.';
 const defaultDescription = 'The default value for the input.';
 
-import { IJSONSchema } from '@theia/core/lib/common/json-schema';
+import { IJSONSchema } from '@theia/core/lib/common/json-schema.js';
 
 export const inputsSchema: IJSONSchema = {
     definitions: {

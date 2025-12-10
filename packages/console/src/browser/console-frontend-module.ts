@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
+import { ContainerModule } from 'inversify';
 import { CommandContribution, MenuContribution } from '@theia/core';
-import { FrontendApplicationContribution, KeybindingContribution } from '@theia/core/lib/browser';
-import { ConsoleContribution } from './console-contribution';
-import { ConsoleManager } from './console-manager';
+import { FrontendApplicationContribution, KeybindingContribution } from '@theia/core/lib/browser/index.js';
+import { ConsoleContribution } from './console-contribution.js';
+import { ConsoleManager } from './console-manager.js';
 
 import '../../src/browser/style/index.css';
 

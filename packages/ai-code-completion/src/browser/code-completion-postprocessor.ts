@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { PreferenceService } from '@theia/core/lib/common';
-import { PREF_AI_INLINE_COMPLETION_STRIP_BACKTICKS } from '../common/ai-code-completion-preference';
+import { inject, injectable } from 'inversify';
+import { PreferenceService } from '@theia/core/lib/common/index.js';
+import { PREF_AI_INLINE_COMPLETION_STRIP_BACKTICKS } from '../common/ai-code-completion-preference.js';
 
-export interface CodeCompletionPostProcessor {
+export type CodeCompletionPostProcessor = {
     postProcess(text: string): string;
 }
 export const CodeCompletionPostProcessor = Symbol('CodeCompletionPostProcessor');

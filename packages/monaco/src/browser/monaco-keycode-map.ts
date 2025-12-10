@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,10 +18,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as browser from '@theia/core/lib/browser';
+import * as browser from '@theia/core/lib/browser/index.js';
 // This is exported as part of the public API, but we use it with private API's so we need to refer to the private version.
-import { KeyCode } from '@theia/monaco-editor-core/esm/vs/base/common/keyCodes';
-import * as MonacoPlatform from '@theia/monaco-editor-core/esm/vs/base/common/platform';
+import { KeyCode } from '@theia/monaco-editor-core/esm/vs/base/common/keyCodes.js';
+import * as MonacoPlatform from '@theia/monaco-editor-core/esm/vs/base/common/platform.js';
 
 export const KEY_CODE_MAP: KeyCode[] = [];
 (function (): void {

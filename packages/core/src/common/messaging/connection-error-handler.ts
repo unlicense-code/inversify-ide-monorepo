@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ILogger } from '../../common';
+import { ILogger } from '../../common/index.js';
 
-export interface ResolvedConnectionErrorHandlerOptions {
+export type ResolvedConnectionErrorHandlerOptions = {
     readonly serverName: string
     readonly logger: ILogger
     /**

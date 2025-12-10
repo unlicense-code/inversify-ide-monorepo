@@ -19,7 +19,7 @@
 *  Licensed under the MIT License. See License.txt in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import { isObject as isObject0 } from '@theia/core/lib/common';
+import { isObject as isObject0 } from '@theia/core/lib/common/index.js';
 
 /**
  * Returns `true` if the parameter has type "object" and not null, an array, a regexp, a date.
@@ -60,14 +60,14 @@ export enum LogType {
     Error
 }
 
-export interface LogPart {
+export type LogPart = {
     data: string;
     type: LogType;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface KeysToAnyValues { [key: string]: any }
-export interface KeysToKeysToAnyValue { [key: string]: KeysToAnyValues }
+export type KeysToAnyValues = { [key: string]: any }
+export type KeysToKeysToAnyValue = { [key: string]: KeysToAnyValues }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /** copied from https://github.com/TypeFox/vscode/blob/70b8db24a37fafc77247de7f7cb5bb0195120ed0/src/vs/workbench/api/common/extHostTypes.ts#L18-L27 */

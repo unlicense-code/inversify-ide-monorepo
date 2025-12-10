@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { ReactNode } from '@theia/core/shared/react';
-import { OpenerService, ReactWidget } from '@theia/core/lib/browser';
+import * as React from 'react';
+import { ReactNode } from 'react';
+import { OpenerService, ReactWidget } from '@theia/core/lib/browser/index.js';
 import { nls, URI } from '@theia/core';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { ForwardedPort, PortForwardingService } from './port-forwarding-service';
-import { ClipboardService } from '@theia/core/lib/browser/clipboard-service';
+import { inject, injectable, postConstruct } from 'inversify';
+import { ForwardedPort, PortForwardingService } from './port-forwarding-service.js';
+import { ClipboardService } from '@theia/core/lib/browser/clipboard-service.js';
 
 export const PORT_FORWARDING_WIDGET_ID = 'port-forwarding-widget';
 
@@ -69,15 +69,15 @@ export class PortForwardingWidget extends ReactWidget {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.portForwardingService.forwardedPorts.map(port => (
-                        <tr key={`${port.address}:${port.localPort}` ?? 'editing'}>
+                    {this.portForwardingService.forwardedPorts.map((port: ForwardedPort) => (
+                        <tr key={`${port.address}:${port.localPort}` || 'editing'}>
                             {this.renderPortColumn(port)}
                             {this.renderAddressColumn(port)}
                             <td></td>
                             <td>{port.origin ? nls.localizeByDefault(port.origin) : ''}</td>
                         </tr>
                     ))}
-                    {!this.portForwardingService.forwardedPorts.some(port => port.editing) && <tr><td>{this.renderForwardPortButton()}</td></tr>}
+                    {!this.portForwardingService.forwardedPorts.some((port: ForwardedPort) => port.editing) && <tr><td>{this.renderForwardPortButton()}</td></tr>}
                 </tbody>
             </table>
         </div>;

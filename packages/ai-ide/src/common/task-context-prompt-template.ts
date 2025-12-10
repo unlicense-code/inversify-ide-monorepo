@@ -8,8 +8,8 @@
 //
 // SPDX-License-Identifier: MIT
 // *****************************************************************************
-import { PromptVariantSet } from '@theia/ai-core/lib/common';
-import { TASK_CONTEXT_SUMMARY_VARIABLE_ID } from './context-variables';
+import { PromptVariantSet } from '@theia/ai-core/lib/common/index.js';
+import { TASK_CONTEXT_SUMMARY_VARIABLE_ID } from './context-variables.js';
 
 export const TASK_CONTEXT_CREATE_PROMPT_ID = 'task-context-create';
 export const TASK_CONTEXT_TEMPLATE_PROMPT_ID = 'task-context-template';

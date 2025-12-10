@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces, ContainerModule } from '@theia/core/shared/inversify';
-import { Plugin, PluginManager, emptyPlugin } from '../../common';
+import { interfaces, ContainerModule } from 'inversify';
+import { Plugin, PluginManager, emptyPlugin } from '../../common/index.js';
 
 export type ApiFactory<T extends object> = (plugin: Plugin) => T;
 

@@ -13,10 +13,10 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { BasicChannel } from '@theia/core/lib/common/message-rpc/channel';
-import { Uint8ArrayReadBuffer, Uint8ArrayWriteBuffer } from '@theia/core/lib/common/message-rpc/uint8-array-message-buffer';
-import { injectable } from '@theia/core/shared/inversify';
-import { RPCProtocol, RPCProtocolImpl } from '../../common/rpc-protocol';
+import { BasicChannel } from '@theia/core/lib/common/message-rpc/channel.js';
+import { Uint8ArrayReadBuffer, Uint8ArrayWriteBuffer } from '@theia/core/lib/common/message-rpc/uint8-array-message-buffer.js';
+import { injectable } from 'inversify';
+import { RPCProtocol, RPCProtocolImpl } from '../../common/rpc-protocol.js';
 
 @injectable()
 export class PluginWorker {
@@ -27,8 +27,6 @@ export class PluginWorker {
 
     constructor() {
         this.worker = new Worker(new URL('./worker/worker-main',
-            // @ts-expect-error (TS1343)
-            // We compile to CommonJS but `import.meta` is still available in the browser
             import.meta.url));
 
         const channel = new BasicChannel(() => {

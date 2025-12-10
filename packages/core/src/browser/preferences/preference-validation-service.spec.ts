@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,15 +15,15 @@
 // *****************************************************************************
 
 import { Container } from 'inversify';
-import { PreferenceValidationService } from './preference-validation-service';
-import * as assert from 'assert';
+import { PreferenceValidationService } from './preference-validation-service.js';
+import assert from 'assert';
 import { JSONValue } from '@lumino/coreutils';
-import { IJSONSchema, JsonType } from '../../common/json-schema';
+import { IJSONSchema, JsonType } from '../../common/json-schema.js';
 import {
     DefaultsPreferenceProvider, Disposable, PreferenceDataProperty, PreferenceProvider,
     PreferenceSchemaService, PreferenceSchemaServiceImpl, PreferenceScope
-} from '../../common';
-import { PreferenceLanguageOverrideService } from '../../common/preferences/preference-language-override-service';
+} from '../../common/index.js';
+import { PreferenceLanguageOverrideService } from '../../common/preferences/preference-language-override-service.js';
 
 /* eslint-disable no-null/no-null */
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Redhat, Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,24 +14,24 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, named } from '@theia/core/shared/inversify';
+import { injectable, inject, named } from 'inversify';
 import { Registry } from 'vscode-textmate';
 import { ILogger, ContributionProvider, DisposableCollection, Disposable } from '@theia/core';
-import { FrontendApplicationContribution, isBasicWasmSupported } from '@theia/core/lib/browser';
-import { ThemeService } from '@theia/core/lib/browser/theming';
-import { LanguageGrammarDefinitionContribution, getEncodedLanguageId } from './textmate-contribution';
-import { createTextmateTokenizer, TokenizerOption } from './textmate-tokenizer';
-import { TextmateRegistry } from './textmate-registry';
-import { MonacoThemeRegistry } from './monaco-theme-registry';
-import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences';
+import { FrontendApplicationContribution, isBasicWasmSupported } from '@theia/core/lib/browser/index.js';
+import { ThemeService } from '@theia/core/lib/browser/theming.js';
+import { LanguageGrammarDefinitionContribution, getEncodedLanguageId } from './textmate-contribution.js';
+import { createTextmateTokenizer, TokenizerOption } from './textmate-tokenizer.js';
+import { TextmateRegistry } from './textmate-registry.js';
+import { MonacoThemeRegistry } from './monaco-theme-registry.js';
+import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { TokenizationRegistry } from '@theia/monaco-editor-core/esm/vs/editor/common/languages';
-import { IStandaloneThemeService } from '@theia/monaco-editor-core/esm/vs/editor/standalone/common/standaloneTheme';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { ILanguageService } from '@theia/monaco-editor-core/esm/vs/editor/common/languages/language';
-import { TokenizationSupportAdapter } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneLanguages';
-import { LanguageService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/languageService';
-import { OnigasmProvider, TextmateRegistryFactory } from './monaco-theme-types';
+import { TokenizationRegistry } from '@theia/monaco-editor-core/esm/vs/editor/common/languages.js';
+import { IStandaloneThemeService } from '@theia/monaco-editor-core/esm/vs/editor/standalone/common/standaloneTheme.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { ILanguageService } from '@theia/monaco-editor-core/esm/vs/editor/common/languages/language.js';
+import { TokenizationSupportAdapter } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneLanguages.js';
+import { LanguageService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/languageService.js';
+import { OnigasmProvider, TextmateRegistryFactory } from './monaco-theme-types.js';
 
 @injectable()
 export class MonacoTextmateService implements FrontendApplicationContribution {

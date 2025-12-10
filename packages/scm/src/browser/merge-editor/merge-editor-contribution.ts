@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import { Command, CommandContribution, CommandRegistry, MenuContribution, MenuModelRegistry, nls } from '@theia/core';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
 import {
     ApplicationShell,
     codicon,
@@ -25,12 +25,12 @@ import {
     KeybindingContribution,
     KeybindingRegistry,
     LabelProvider
-} from '@theia/core/lib/browser';
-import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution';
-import { ColorRegistry } from '@theia/core/lib/browser/color-registry';
-import { Color } from '@theia/core/lib/common/color';
-import { ScmColors } from '../scm-colors';
-import { MergeEditor, MergeEditorSettings } from './merge-editor';
+} from '@theia/core/lib/browser/index.js';
+import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution.js';
+import { ColorRegistry } from '@theia/core/lib/browser/color-registry.js';
+import { Color } from '@theia/core/lib/common/color.js';
+import { ScmColors } from '../scm-colors.js';
+import { MergeEditor, MergeEditorSettings } from './merge-editor.js';
 
 export namespace MergeEditorCommands {
     export const MERGE_EDITOR_CATEGORY = 'Merge Editor';

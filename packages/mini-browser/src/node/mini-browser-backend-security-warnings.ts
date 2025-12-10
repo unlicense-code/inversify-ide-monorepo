@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { BackendApplicationContribution } from '@theia/core/lib/node';
-import { BackendApplicationConfigProvider } from '@theia/core/lib/node/backend-application-config-provider';
-import { injectable } from '@theia/core/shared/inversify';
-import { MiniBrowserEndpoint } from '../common/mini-browser-endpoint';
+import { BackendApplicationContribution } from '@theia/core/lib/node/index.js';
+import { BackendApplicationConfigProvider } from '@theia/core/lib/node/backend-application-config-provider.js';
+import { injectable } from 'inversify';
+import { MiniBrowserEndpoint } from '../common/mini-browser-endpoint.js';
 
 @injectable()
 export class MiniBrowserBackendSecurityWarnings implements BackendApplicationContribution {

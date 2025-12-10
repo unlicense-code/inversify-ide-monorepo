@@ -14,30 +14,30 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { CancellationTokenSource, CancellationToken, checkCancelled, isCancelled } from '@theia/core/lib/common/cancellation';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { MessageService } from '@theia/core/lib/common/message-service';
-import { Progress } from '@theia/core/lib/common/message-service-protocol';
-import throttle = require('@theia/core/shared/lodash.throttle');
+import { injectable, inject, postConstruct } from 'inversify';
+import { URI } from '@theia/core';
+import { CancellationTokenSource, CancellationToken, checkCancelled, isCancelled } from '@theia/core';
+import { Deferred } from '@theia/core/lib/common/index.js';
+import { MessageService } from '@theia/core/lib/common/message-service.js';
+import { Progress } from '@theia/core/lib/common/index.js';
+import throttle from 'lodash.throttle';
 import { Semaphore } from 'async-mutex';
-import { FileService } from '../../browser/file-service';
-import { ConfirmDialog, Dialog } from '@theia/core/lib/browser';
-import { nls } from '@theia/core/lib/common/nls';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import { FileSystemPreferences } from '../../common/filesystem-preferences';
-import { fileToStream } from '@theia/core/lib/common/stream';
+import { FileService } from '../../browser/file-service.js';
+import { ConfirmDialog, Dialog } from '@theia/core/lib/browser/index.js';
+import { nls } from '@theia/core';
+import { Emitter, Event } from '@theia/core/lib/common/index.js';
+import { FileSystemPreferences } from '../../common/filesystem-preferences.js';
+import { fileToStream } from '@theia/core';
 import { minimatch } from 'minimatch';
 
-import type { FileUploadService } from '../../common/upload/file-upload';
+import type { FileUploadService } from '../../common/upload/file-upload.js';
 
-interface UploadState {
+type UploadState = {
     uploaded?: boolean;
     failed?: boolean;
 }
 
-interface UploadFilesParams {
+type UploadFilesParams = {
     source: FileUploadService.Source,
     progress: Progress,
     token: CancellationToken,

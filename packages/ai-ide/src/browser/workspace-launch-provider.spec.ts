@@ -14,24 +14,24 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 let disableJSDOM = enableJSDOM();
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 FrontendApplicationConfigProvider.set({});
 
 import { expect } from 'chai';
-import { Container } from '@theia/core/shared/inversify';
+import { Container } from 'inversify';
 import {
     LaunchListProvider,
     LaunchRunnerProvider,
     LaunchStopProvider,
-} from './workspace-launch-provider';
-import { DebugConfigurationManager } from '@theia/debug/lib/browser/debug-configuration-manager';
-import { DebugSessionManager } from '@theia/debug/lib/browser/debug-session-manager';
-import { DebugSessionOptions } from '@theia/debug/lib/browser/debug-session-options';
-import { DebugConfiguration } from '@theia/debug/lib/common/debug-common';
-import { DebugCompound } from '@theia/debug/lib/common/debug-compound';
-import { DebugSession } from '@theia/debug/lib/browser/debug-session';
+} from './workspace-launch-provider.js';
+import { DebugConfigurationManager } from '@theia/debug/lib/browser/debug-configuration-manager.js';
+import { DebugSessionManager } from '@theia/debug/lib/browser/debug-session-manager.js';
+import { DebugSessionOptions } from '@theia/debug/lib/browser/debug-session-options.js';
+import { DebugConfiguration } from '@theia/debug/lib/common/debug-common.js';
+import { DebugCompound } from '@theia/debug/lib/common/debug-compound.js';
+import { DebugSession } from '@theia/debug/lib/browser/debug-session.js';
 
 disableJSDOM();
 

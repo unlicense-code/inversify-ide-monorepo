@@ -14,32 +14,29 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { RequestOptions, RequestService } from '@theia/core/shared/@theia/request';
-import { inject, injectable, named } from '@theia/core/shared/inversify';
+import { RequestOptions, RequestService } from '@theia/request';
+import { inject, injectable, named } from 'inversify';
 import * as cp from 'child_process';
-import * as fs from '@theia/core/shared/fs-extra';
+import * as fs from 'fs-extra';
 import * as net from 'net';
 import * as path from 'path';
-import URI from '@theia/core/lib/common/uri';
-import { ContributionProvider } from '@theia/core/lib/common/contribution-provider';
-import { HostedPluginUriPostProcessor, HostedPluginUriPostProcessorSymbolName } from './hosted-plugin-uri-postprocessor';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ContributionProvider } from '@theia/core/lib/common/contribution-provider.js';
+import { HostedPluginUriPostProcessor, HostedPluginUriPostProcessorSymbolName } from './hosted-plugin-uri-postprocessor.js';
 import { environment, isWindows } from '@theia/core';
-import { FileUri } from '@theia/core/lib/common/file-uri';
-import { LogType } from '@theia/plugin-ext/lib/common/types';
-import { HostedPluginSupport } from '@theia/plugin-ext/lib/hosted/node/hosted-plugin';
-import { MetadataScanner } from '@theia/plugin-ext/lib/hosted/node/metadata-scanner';
-import { PluginDebugConfiguration } from '../common/plugin-dev-protocol';
-import { HostedPluginProcess } from '@theia/plugin-ext/lib/hosted/node/hosted-plugin-process';
-import { isENOENT } from '@theia/plugin-ext/lib/common/errors';
+import { FileUri } from '@theia/core/lib/common/file-uri.js';
+import { LogType } from '@theia/plugin-ext/lib/common/types.js';
+import { HostedPluginSupport } from '@theia/plugin-ext/lib/hosted/node/hosted-plugin.js';
+import { MetadataScanner } from '@theia/plugin-ext/lib/hosted/node/metadata-scanner.js';
+import { PluginDebugConfiguration } from '../common/plugin-dev-protocol.js';
+import { HostedPluginProcess } from '@theia/plugin-ext/lib/hosted/node/hosted-plugin-process.js';
+import { isENOENT } from '@theia/plugin-ext/lib/common/errors.js';
 
 const DEFAULT_HOSTED_PLUGIN_PORT = 3030;
 
 export const HostedInstanceManager = Symbol('HostedInstanceManager');
 
-/**
- * Is responsible for running and handling separate Theia instance with given plugin.
- */
-export interface HostedInstanceManager {
+export type HostedInstanceManager = {
     /**
      * Checks whether hosted instance is run.
      */

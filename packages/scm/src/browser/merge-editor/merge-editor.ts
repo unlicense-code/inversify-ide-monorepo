@@ -14,21 +14,21 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, postConstruct } from 'inversify';
 import { ArrayUtils, Disposable, DisposableCollection, nls, URI } from '@theia/core';
 import {
     ApplicationShell, BaseWidget, FocusTracker, LabelProvider, Message, Navigatable, NavigatableWidgetOpenHandler, PanelLayout,
     Saveable, SaveableSource, SplitPanel, StatefulWidget, StorageService, Widget, WidgetOpenerOptions
-} from '@theia/core/lib/browser';
+} from '@theia/core/lib/browser/index.js';
 import { Autorun, DerivedObservable, Observable, ObservableUtils, SettableObservable } from '@theia/core/lib/common/observable';
-import { Range } from '@theia/editor/lib/browser';
-import { MergeRange } from './model/merge-range';
-import { MergeEditorModel } from './model/merge-editor-model';
-import { MergeEditorBasePane, MergeEditorPane, MergeEditorResultPane, MergeEditorSide1Pane, MergeEditorSide2Pane, MergeEditorSidePane } from './view/merge-editor-panes';
-import { MergeEditorViewZone, MergeEditorViewZoneComputer } from './view/merge-editor-view-zones';
-import { MergeEditorScrollSync } from './view/merge-editor-scroll-sync';
+import { Range } from '@theia/editor/lib/browser/index.js';
+import { MergeRange } from './model/merge-range.js';
+import { MergeEditorModel } from './model/merge-editor-model.js';
+import { MergeEditorBasePane, MergeEditorPane, MergeEditorResultPane, MergeEditorSide1Pane, MergeEditorSide2Pane, MergeEditorSidePane } from './view/merge-editor-panes/index.js';
+import { MergeEditorViewZone, MergeEditorViewZoneComputer } from './view/merge-editor-view-zones.js';
+import { MergeEditorScrollSync } from './view/merge-editor-scroll-sync.js';
 
-export interface MergeUris {
+export type MergeUris = {
     baseUri: URI;
     side1Uri: URI;
     side2Uri: URI;
@@ -66,7 +66,7 @@ export namespace MergeEditorUri {
 
 export type MergeEditorLayoutKind = 'mixed' | 'columns';
 
-export interface MergeEditorLayoutMode {
+export type MergeEditorLayoutMode = {
     readonly kind: MergeEditorLayoutKind;
     readonly showBase: boolean;
     readonly showBaseAtTop: boolean;
@@ -76,13 +76,13 @@ export namespace MergeEditorLayoutMode {
     export const DEFAULT: MergeEditorLayoutMode = { kind: 'mixed', showBase: true, showBaseAtTop: false };
 }
 
-export interface MergeEditorSideWidgetState {
+export type MergeEditorSideWidgetState = {
     title?: string;
     description?: string;
     detail?: string;
 }
 
-export interface MergeEditorWidgetState {
+export type MergeEditorWidgetState = {
     layoutMode?: MergeEditorLayoutMode;
     side1State?: MergeEditorSideWidgetState;
     side2State?: MergeEditorSideWidgetState;
@@ -612,7 +612,7 @@ export class MergeEditor extends BaseWidget implements StatefulWidget, SaveableS
     }
 }
 
-export interface MergeEditorOpenerOptions extends WidgetOpenerOptions {
+export type MergeEditorOpenerOptions = WidgetOpenerOptions & {
     widgetState?: MergeEditorWidgetState;
 }
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 
 let disableJSDOM = enableJSDOM();
 
 import { expect } from 'chai';
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 FrontendApplicationConfigProvider.set({});
 
-import { Container } from '@theia/core/shared/inversify';
-import { TreeNode } from '@theia/core/lib/browser/tree/tree';
-import { DEFAULT_INFO_ICON, ResourcePropertiesLabelProvider, } from './resource-property-view-label-provider';
-import { LabelProvider, LabelProviderContribution } from '@theia/core/lib/browser/label-provider';
-import { ContributionProvider } from '@theia/core/lib/common';
-import { ResourcePropertiesCategoryNode, ResourcePropertiesItemNode } from './resource-property-view-tree-items';
+import { Container } from 'inversify';
+import { TreeNode } from '@theia/core/lib/browser/tree/tree.js';
+import { DEFAULT_INFO_ICON, ResourcePropertiesLabelProvider, } from './resource-property-view-label-provider.js';
+import { LabelProvider, LabelProviderContribution } from '@theia/core/lib/browser/label-provider.js';
+import { ContributionProvider } from '@theia/core/lib/common/index.js';
+import { ResourcePropertiesCategoryNode, ResourcePropertiesItemNode } from './resource-property-view-tree-items.js';
 
 disableJSDOM();
 

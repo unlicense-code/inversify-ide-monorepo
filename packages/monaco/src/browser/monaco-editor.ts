@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, unmanaged } from '@theia/core/shared/inversify';
-import { ElementExt } from '@theia/core/shared/@lumino/domutils';
-import URI from '@theia/core/lib/common/uri';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { DisposableCollection, Disposable, Emitter, Event, nullToUndefined, MaybeNull } from '@theia/core/lib/common';
+import { injectable, inject, unmanaged } from 'inversify';
+import { ElementExt } from '@lumino/domutils';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { DisposableCollection, Disposable, Emitter, Event, nullToUndefined, MaybeNull } from '@theia/core/lib/common/index.js';
 import {
     Dimension,
     EditorManager,
@@ -37,39 +37,39 @@ import {
     EncodingMode,
     EditorDecorationOptions,
     MouseTargetType
-} from '@theia/editor/lib/browser';
-import { MonacoEditorModel } from './monaco-editor-model';
-import { MonacoToProtocolConverter } from './monaco-to-protocol-converter';
-import { ProtocolToMonacoConverter } from './protocol-to-monaco-converter';
-import { TextEdit } from '@theia/core/shared/vscode-languageserver-protocol';
-import { UTF8 } from '@theia/core/lib/common/encodings';
+} from '@theia/editor/lib/browser/index.js';
+import { MonacoEditorModel } from './monaco-editor-model.js';
+import { MonacoToProtocolConverter } from './monaco-to-protocol-converter.js';
+import { ProtocolToMonacoConverter } from './protocol-to-monaco-converter.js';
+import { TextEdit } from 'vscode-languageserver-protocol';
+import { UTF8 } from '@theia/core/lib/common/encodings.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { ILanguageService } from '@theia/monaco-editor-core/esm/vs/editor/common/languages/language';
-import { IInstantiationService, ServiceIdentifier } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/instantiation';
-import { ICodeEditor, IMouseTargetMargin } from '@theia/monaco-editor-core/esm/vs/editor/browser/editorBrowser';
-import { IStandaloneEditorConstructionOptions, StandaloneCodeEditor, StandaloneEditor } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneCodeEditor';
-import { ServiceCollection } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/serviceCollection';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
-import { ConfigurationChangedEvent, IEditorOptions, ShowLightbulbIconMode } from '@theia/monaco-editor-core/esm/vs/editor/common/config/editorOptions';
-import { ICodeEditorService } from '@theia/monaco-editor-core/esm/vs/editor/browser/services/codeEditorService';
-import { ICommandService } from '@theia/monaco-editor-core/esm/vs/platform/commands/common/commands';
-import { IContextKeyService } from '@theia/monaco-editor-core/esm/vs/platform/contextkey/common/contextkey';
-import { IKeybindingService } from '@theia/monaco-editor-core/esm/vs/platform/keybinding/common/keybinding';
-import { IThemeService } from '@theia/monaco-editor-core/esm/vs/platform/theme/common/themeService';
-import { INotificationService } from '@theia/monaco-editor-core/esm/vs/platform/notification/common/notification';
-import { IAccessibilityService } from '@theia/monaco-editor-core/esm/vs/platform/accessibility/common/accessibility';
-import { ILanguageConfigurationService } from '@theia/monaco-editor-core/esm/vs/editor/common/languages/languageConfigurationRegistry';
-import { ILanguageFeaturesService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/languageFeatures';
-import * as objects from '@theia/monaco-editor-core/esm/vs/base/common/objects';
-import { Selection } from '@theia/editor/lib/browser/editor';
-import { IHoverService, WorkbenchHoverDelegate } from '@theia/monaco-editor-core/esm/vs/platform/hover/browser/hover';
-import { setHoverDelegateFactory } from '@theia/monaco-editor-core/esm/vs/base/browser/ui/hover/hoverDelegateFactory';
-import { MonacoTextModelService } from './monaco-text-model-service';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { ILanguageService } from '@theia/monaco-editor-core/esm/vs/editor/common/languages/language.js';
+import { IInstantiationService, ServiceIdentifier } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/instantiation.js';
+import { ICodeEditor, IMouseTargetMargin } from '@theia/monaco-editor-core/esm/vs/editor/browser/editorBrowser.js';
+import { IStandaloneEditorConstructionOptions, StandaloneCodeEditor, StandaloneEditor } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneCodeEditor.js';
+import { ServiceCollection } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/serviceCollection.js';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/index.js';
+import { ConfigurationChangedEvent, IEditorOptions, ShowLightbulbIconMode } from '@theia/monaco-editor-core/esm/vs/editor/common/config/editorOptions.js';
+import { ICodeEditorService } from '@theia/monaco-editor-core/esm/vs/editor/browser/services/codeEditorService.js';
+import { ICommandService } from '@theia/monaco-editor-core/esm/vs/platform/commands/common/commands.js';
+import { IContextKeyService } from '@theia/monaco-editor-core/esm/vs/platform/contextkey/common/contextkey.js';
+import { IKeybindingService } from '@theia/monaco-editor-core/esm/vs/platform/keybinding/common/keybinding.js';
+import { IThemeService } from '@theia/monaco-editor-core/esm/vs/platform/theme/common/themeService.js';
+import { INotificationService } from '@theia/monaco-editor-core/esm/vs/platform/notification/common/notification.js';
+import { IAccessibilityService } from '@theia/monaco-editor-core/esm/vs/platform/accessibility/common/accessibility.js';
+import { ILanguageConfigurationService } from '@theia/monaco-editor-core/esm/vs/editor/common/languages/languageConfigurationRegistry.js';
+import { ILanguageFeaturesService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/languageFeatures.js';
+import * as objects from '@theia/monaco-editor-core/esm/vs/base/common/objects.js';
+import { Selection } from '@theia/editor/lib/browser/editor.js';
+import { IHoverService, WorkbenchHoverDelegate } from '@theia/monaco-editor-core/esm/vs/platform/hover/browser/hover.js';
+import { setHoverDelegateFactory } from '@theia/monaco-editor-core/esm/vs/base/browser/ui/hover/hoverDelegateFactory.js';
+import { MonacoTextModelService } from './monaco-text-model-service.js';
 
 export type ServicePair<T> = [ServiceIdentifier<T>, T];
 
-export interface EditorServiceOverrides extends Iterable<ServicePair<unknown>> { }
+export type EditorServiceOverrides = Iterable<ServicePair<unknown>> & {}
 
 @injectable()
 export class MonacoEditorServices {
@@ -117,11 +117,15 @@ export class MonacoEditor extends MonacoEditorServices implements TextEditor {
     protected readonly onFocusChangedEmitter = new Emitter<boolean>();
     protected readonly onDocumentContentChangedEmitter = new Emitter<TextDocumentChangeEvent>();
     protected readonly onMouseDownEmitter = new Emitter<EditorMouseEvent>();
-    readonly onDidChangeReadOnly = this.document.onDidChangeReadOnly;
+    get onDidChangeReadOnly(): Event<boolean | MarkdownString> {
+        return this.document.onDidChangeReadOnly;
+    }
     protected readonly onLanguageChangedEmitter = new Emitter<string>();
     readonly onLanguageChanged = this.onLanguageChangedEmitter.event;
     protected readonly onScrollChangedEmitter = new Emitter<void>();
-    readonly onEncodingChanged = this.document.onDidChangeEncoding;
+    get onEncodingChanged(): Event<string> {
+        return this.document.onDidChangeEncoding;
+    }
     protected readonly onResizeEmitter = new Emitter<Dimension | null>();
     readonly onDidResize = this.onResizeEmitter.event;
     protected readonly onShouldDisplayDirtyDiffChangedEmitter = new Emitter<boolean>;

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import URI from '@theia/core/lib/common/uri';
-import { Position, Range, TextDocumentContentChangeDelta } from '../editor';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Position, Range, TextDocumentContentChangeDelta } from '../editor.js';
 export { Position, Range };
 
 export namespace NavigationLocation {
@@ -69,10 +69,7 @@ export namespace NavigationLocation {
 
 }
 
-/**
- * Representation of a navigation location in a text editor.
- */
-export interface NavigationLocation {
+export type NavigationLocation = {
 
     /**
      * The URI of the resource opened in the editor.
@@ -202,10 +199,7 @@ function toUri(arg: URI | { uri: URI } | string): URI {
     return arg.uri;
 }
 
-/**
- * Representation of a closed editor.
- */
-export interface RecentlyClosedEditor {
+export type RecentlyClosedEditor = {
 
     /**
      * The uri of the closed editor.
@@ -250,10 +244,7 @@ export namespace RecentlyClosedEditor {
 
 }
 
-/**
- * Navigation location representing the cursor location change.
- */
-export interface CursorLocation extends NavigationLocation {
+export type CursorLocation = NavigationLocation & {
 
     /**
      * The type is always `cursor`.
@@ -303,10 +294,7 @@ export namespace CursorLocation {
 
 }
 
-/**
- * Representation of a selection location.
- */
-export interface SelectionLocation extends NavigationLocation {
+export type SelectionLocation = NavigationLocation & {
 
     /**
      * The `selection` type.
@@ -358,10 +346,7 @@ export namespace SelectionLocation {
     }
 }
 
-/**
- * Content change location type.
- */
-export interface ContentChangeLocation extends NavigationLocation {
+export type ContentChangeLocation = NavigationLocation & {
 
     /**
      * The type, that is always `content change`.

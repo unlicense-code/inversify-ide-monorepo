@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import * as chai from 'chai';
-import { Container } from '@theia/core/shared/inversify';
-import { cancelled } from '@theia/core/lib/common';
-import { VariableRegistry } from './variable';
-import { VariableResolverService } from './variable-resolver-service';
+import { Container } from 'inversify';
+import { cancelled } from '@theia/core/lib/common/index.js';
+import { VariableRegistry } from './variable.js';
+import { VariableResolverService } from './variable-resolver-service.js';
 
 const expect = chai.expect;
 

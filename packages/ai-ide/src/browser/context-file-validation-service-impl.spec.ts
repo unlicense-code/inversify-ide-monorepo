@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 let disableJSDOM = enableJSDOM();
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 FrontendApplicationConfigProvider.set({});
 
 import { expect } from 'chai';
-import { Container } from '@theia/core/shared/inversify';
+import { Container } from 'inversify';
 import { URI, PreferenceService } from '@theia/core';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { FileStat } from '@theia/filesystem/lib/common/files';
-import { ContextFileValidationService, FileValidationState } from '@theia/ai-chat/lib/browser/context-file-validation-service';
-import { ContextFileValidationServiceImpl } from './context-file-validation-service-impl';
-import { WorkspaceFunctionScope } from './workspace-functions';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
+import { FileStat } from '@theia/filesystem/lib/common/files.js';
+import { ContextFileValidationService, FileValidationState } from '@theia/ai-chat/lib/browser/context-file-validation-service.js';
+import { ContextFileValidationServiceImpl } from './context-file-validation-service-impl.js';
+import { WorkspaceFunctionScope } from './workspace-functions.js';
 
 disableJSDOM();
 

@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { AIVariableContext, AIVariableResolutionRequest, AIVariableResolver, ResolvedAIVariable } from '@theia/ai-core';
+import { AIVariableContext, AIVariableResolutionRequest, AIVariableResolver, ResolvedAIVariable } from '@theia/ai-core/lib/common/index.js';
 import { FrontendVariableContribution, FrontendVariableService } from '@theia/ai-core/lib/browser';
 import { MaybePromise, PreferenceService } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { PREF_AI_INLINE_COMPLETION_MAX_CONTEXT_LINES } from '../common/ai-code-completion-preference';
-import { CodeCompletionVariableContext } from './code-completion-variable-context';
-import { FILE, LANGUAGE, PREFIX, SUFFIX } from './code-completion-variables';
+import { inject, injectable } from 'inversify';
+import { PREF_AI_INLINE_COMPLETION_MAX_CONTEXT_LINES } from '../common/ai-code-completion-preference.js';
+import { CodeCompletionVariableContext } from './code-completion-variable-context.js';
+import { FILE, LANGUAGE, PREFIX, SUFFIX } from './code-completion-variables.js';
 
 @injectable()
 export class CodeCompletionVariableContribution implements FrontendVariableContribution, AIVariableResolver {

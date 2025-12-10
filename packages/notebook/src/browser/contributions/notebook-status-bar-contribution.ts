@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { StatusBar, StatusBarAlignment, Widget, WidgetStatusBarContribution } from '@theia/core/lib/browser';
-import { Disposable } from '@theia/core/lib/common';
-import { NotebookEditorWidget } from '../notebook-editor-widget';
+import { injectable } from 'inversify';
+import { StatusBar, StatusBarAlignment, Widget, WidgetStatusBarContribution } from '@theia/core/lib/browser/index.js';
+import { Disposable } from '@theia/core/lib/common/index.js';
+import { NotebookEditorWidget } from '../notebook-editor-widget.js';
 import { nls } from '@theia/core';
-import { NotebookCommands } from './notebook-actions-contribution';
+import { NotebookCommands } from './notebook-actions-contribution.js';
 
 export const NOTEBOOK_CELL_SELECTION_STATUS_BAR_ID = 'notebook-cell-selection-position';
 

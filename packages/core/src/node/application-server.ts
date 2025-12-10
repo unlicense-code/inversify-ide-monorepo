@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { injectable, inject } from 'inversify';
-import { ApplicationServer, ExtensionInfo, ApplicationInfo } from '../common/application-protocol';
+import { ApplicationServer, ExtensionInfo, ApplicationInfo } from '../common/application-protocol.js';
 import { ApplicationPackage } from '@theia/application-package';
-import { OS } from '../common/os';
-import { backendGlobal } from './backend-global';
+import { OS } from '../common/os.js';
+import { backendGlobal } from './backend-global.js';
 
 @injectable()
 export class ApplicationServerImpl implements ApplicationServer {

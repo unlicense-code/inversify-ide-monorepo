@@ -20,8 +20,8 @@
 // copied and modified from https://github.com/microsoft/vscode/blob/1.96.3/src/vs/workbench/contrib/mergeEditor/browser/model/editing.ts
 
 import { ArrayUtils } from '@theia/core';
-import { Range, uinteger } from '@theia/core/shared/vscode-languageserver-protocol';
-import { LineRange } from './line-range';
+import { Range, uinteger } from 'vscode-languageserver-protocol';
+import { LineRange } from './line-range.js';
 import * as monaco from '@theia/monaco-editor-core';
 
 /**

@@ -20,12 +20,12 @@
 
 // copied and modified from https://github.com/TypeFox/vscode/blob/70b8db24a37fafc77247de7f7cb5bb0195120ed0/src/vs/workbench/api/common/extHostLanguageFeatures.ts#L771
 
-import { URI } from '@theia/core/shared/vscode-uri';
+import { URI } from 'vscode-uri';
 import * as theia from '@theia/plugin';
-import { DocumentsExtImpl } from '../documents';
-import * as Converter from '../type-converters';
-import { Position } from '../../common/plugin-api-rpc';
-import { SignatureHelp, SignatureHelpContext } from '../../common/plugin-api-rpc-model';
+import { DocumentsExtImpl } from '../documents.js';
+import * as Converter from '../type-converters.js';
+import { Position } from '../../common/plugin-api-rpc.js';
+import { SignatureHelp, SignatureHelpContext } from '../../common/plugin-api-rpc-model.js';
 
 export class SignatureHelpAdapter {
 

@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { RpcServer } from '@theia/core/lib/common/messaging/proxy-factory';
-import { PluginMetadata } from '@theia/plugin-ext/lib/common/plugin-protocol';
+import { RpcServer } from '@theia/core/lib/common/messaging/proxy-factory.js';
+import { PluginMetadata } from '@theia/plugin-ext/lib/common/plugin-protocol.js';
 
 export const pluginDevServicePath = '/services/plugin-dev';
 export const PluginDevServer = Symbol('PluginDevServer');
-export interface PluginDevServer extends RpcServer<PluginDevClient> {
+export type PluginDevServer = RpcServer<PluginDevClient> & {
     getHostedPlugin(): Promise<PluginMetadata | undefined>;
     runHostedPluginInstance(uri: string): Promise<string>;
     runDebugHostedPluginInstance(uri: string, debugConfig: PluginDebugConfiguration): Promise<string>;
@@ -35,15 +35,15 @@ export interface PluginDevServer extends RpcServer<PluginDevClient> {
     isPluginValid(uri: string): Promise<boolean>;
 }
 
-export interface PluginDevClient {
+export type PluginDevClient = {
 }
 
-export interface PluginDebugPort {
+export type PluginDebugPort = {
     serverName: string,
     debugPort: number,
 }
 
-export interface PluginDebugConfiguration {
+export type PluginDebugConfiguration = {
     debugMode?: string;
     pluginLocation?: string;
     debugPort?: string | PluginDebugPort[]

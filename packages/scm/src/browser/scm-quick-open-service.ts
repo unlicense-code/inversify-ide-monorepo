@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, optional } from '@theia/core/shared/inversify';
-import { MessageService } from '@theia/core/lib/common/message-service';
-import URI from '@theia/core/lib/common/uri';
-import { ScmService } from './scm-service';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
-import { QuickInputService } from '@theia/core/lib/browser';
+import { injectable, inject, optional } from 'inversify';
+import { MessageService } from '@theia/core/lib/common/message-service.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ScmService } from './scm-service.js';
+import { LabelProvider } from '@theia/core/lib/browser/label-provider.js';
+import { QuickInputService } from '@theia/core/lib/browser/index.js';
 
 @injectable()
 export class ScmQuickOpenService {

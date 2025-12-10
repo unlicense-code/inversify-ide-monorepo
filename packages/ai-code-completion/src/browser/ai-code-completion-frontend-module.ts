@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Agent, AIVariableContribution } from '@theia/ai-core';
-import { FrontendApplicationContribution, KeybindingContribution, } from '@theia/core/lib/browser';
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { AICodeCompletionPreferencesSchema } from '../common/ai-code-completion-preference';
-import { AIFrontendApplicationContribution } from './ai-code-frontend-application-contribution';
-import { AICodeInlineCompletionsProvider } from './ai-code-inline-completion-provider';
-import { CodeCompletionAgent, CodeCompletionAgentImpl } from './code-completion-agent';
-import { CodeCompletionPostProcessor, DefaultCodeCompletionPostProcessor } from './code-completion-postprocessor';
-import { CodeCompletionVariableContribution } from './code-completion-variable-contribution';
+import { Agent, AIVariableContribution } from '@theia/ai-core/lib/common/index.js';
+import { FrontendApplicationContribution, KeybindingContribution, } from '@theia/core/lib/browser/index.js';
+import { ContainerModule } from 'inversify';
+import { AICodeCompletionPreferencesSchema } from '../common/ai-code-completion-preference.js';
+import { AIFrontendApplicationContribution } from './ai-code-frontend-application-contribution.js';
+import { AICodeInlineCompletionsProvider } from './ai-code-inline-completion-provider.js';
+import { CodeCompletionAgent, CodeCompletionAgentImpl } from './code-completion-agent.js';
+import { CodeCompletionPostProcessor, DefaultCodeCompletionPostProcessor } from './code-completion-postprocessor.js';
+import { CodeCompletionVariableContribution } from './code-completion-variable-contribution.js';
 import { PreferenceContribution } from '@theia/core';
 
 export default new ContainerModule(bind => {

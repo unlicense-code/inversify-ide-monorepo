@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { MenuPath } from '@theia/core/lib/common/menu';
-import { EDITOR_CONTEXT_MENU } from '@theia/editor/lib/browser';
-import { Anchor, ContextMenuAccess, ContextMenuRenderer, Coordinate } from '@theia/core/lib/browser';
-import { Menu } from '@theia/core/shared/@lumino/widgets';
-import { CommandRegistry } from '@theia/core/shared/@lumino/commands';
-import { IContextMenuService } from '@theia/monaco-editor-core/esm/vs/platform/contextview/browser/contextView';
-import { IContextMenuDelegate } from '@theia/monaco-editor-core/esm/vs/base/browser/contextmenu';
-import { IAction, Separator, SubmenuAction } from '@theia/monaco-editor-core/esm/vs/base/common/actions';
-import { MenuItemAction } from '@theia/monaco-editor-core/esm/vs/platform/actions/common/actions';
-import { Event, Emitter } from '@theia/monaco-editor-core/esm/vs/base/common/event';
-import { StandardMouseEvent } from '@theia/monaco-editor-core/esm/vs/base/browser/mouseEvent';
+import { injectable, inject } from 'inversify';
+import { MenuPath } from '@theia/core/lib/common/menu/index.js';
+import { EDITOR_CONTEXT_MENU } from '@theia/editor/lib/browser/index.js';
+import { Anchor, ContextMenuAccess, ContextMenuRenderer, Coordinate } from '@theia/core/lib/browser/index.js';
+import { Menu } from '@lumino/widgets';
+import { CommandRegistry } from '@lumino/commands';
+import { IContextMenuService } from '@theia/monaco-editor-core/esm/vs/platform/contextview/browser/contextView.js';
+import { IContextMenuDelegate } from '@theia/monaco-editor-core/esm/vs/base/browser/contextmenu.js';
+import { IAction, Separator, SubmenuAction } from '@theia/monaco-editor-core/esm/vs/base/common/actions.js';
+import { MenuItemAction } from '@theia/monaco-editor-core/esm/vs/platform/actions/common/actions.js';
+import { Event, Emitter } from '@theia/monaco-editor-core/esm/vs/base/common/event.js';
+import { StandardMouseEvent } from '@theia/monaco-editor-core/esm/vs/base/browser/mouseEvent.js';
 
 @injectable()
 export class MonacoContextMenuService implements IContextMenuService {

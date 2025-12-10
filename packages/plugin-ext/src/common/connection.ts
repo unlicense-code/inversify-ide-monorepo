@@ -13,9 +13,9 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { DebugChannel } from '@theia/debug/lib/common/debug-service';
-import { ConnectionExt, ConnectionMain } from './plugin-api-rpc';
-import { Emitter } from '@theia/core/lib/common/event';
+import { DebugChannel } from '@theia/debug/lib/common/debug-service.js';
+import { ConnectionExt, ConnectionMain } from './plugin-api-rpc.js';
+import { Emitter } from '@theia/core';
 
 /**
  * A channel communicating with a counterpart in a plugin host.

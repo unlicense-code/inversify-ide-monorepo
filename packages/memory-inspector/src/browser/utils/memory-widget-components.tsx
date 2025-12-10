@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2021 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,18 +14,18 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { Key, KeyCode } from '@theia/core/lib/browser';
-import * as React from '@theia/core/shared/react';
-import { Interfaces } from './memory-widget-utils';
+import { Key, KeyCode } from '@theia/core/lib/browser/index.js';
+import * as React from 'react';
+import { Interfaces } from './memory-widget-utils.js';
 
-export interface MWLabelProps { id: string; label: string; disabled?: boolean; classNames?: string[] }
+export type MWLabelProps = { id: string; label: string; disabled?: boolean; classNames?: string[] }
 
 export const MWLabel: React.FC<MWLabelProps> = ({ id, label, disabled, classNames }) => {
     const additionalClassNames = classNames ? classNames.join(' ') : '';
     return <label htmlFor={id} className={`t-mv-label theia-header no-select ${additionalClassNames}${disabled ? ' disabled' : ''}`}>{label}</label>;
 };
 
-export interface InputProps<T extends HTMLElement = HTMLElement> {
+export type InputProps<T extends HTMLElement = HTMLElement> = {
     id: string;
     label: string;
     defaultValue?: string;
@@ -57,7 +57,7 @@ export const MWInput: React.FC<InputProps<HTMLInputElement>> = ({ id, label, pas
     </>
 );
 
-export interface LabelAndSelectProps extends InputProps<HTMLSelectElement> {
+export type LabelAndSelectProps = InputProps<HTMLSelectElement> & {
     options: string[];
 }
 
@@ -79,7 +79,7 @@ export const MWSelect: React.FC<LabelAndSelectProps> = ({ id, label, options, pa
     </>
 );
 
-export interface LabelAndSelectWithNameProps extends InputProps<HTMLSelectElement> {
+export type LabelAndSelectWithNameProps = InputProps<HTMLSelectElement> & {
     options: Array<[string, string]>;
 }
 
@@ -101,7 +101,7 @@ export const MWSelectWithName: React.FC<LabelAndSelectWithNameProps> = ({ id, la
     </>
 );
 
-export interface InputWithSelectProps<T extends HTMLElement> extends InputProps<T> {
+export type InputWithSelectProps<T extends HTMLElement> = InputProps<T> & {
     options: string[];
     onSelectChange?(e: React.ChangeEvent): void;
     onInputChange?(e: React.ChangeEvent<HTMLInputElement>): void;
@@ -136,7 +136,7 @@ export const MWInputWithSelect: React.FC<InputWithSelectProps<HTMLInputElement>>
     </>
 );
 
-export interface MoreMemoryProps {
+export type MoreMemoryProps = {
     options: number[];
     direction: 'above' | 'below';
     handler(opts: Interfaces.MoreMemoryOptions): void;

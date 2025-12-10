@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,28 +15,28 @@
 // *****************************************************************************
 
 import { Command, CommandContribution, CommandHandler, CommandRegistry, MenuContribution, MenuModelRegistry, nls } from '@theia/core';
-import { codicon, Key, KeybindingContribution, KeybindingRegistry, KeyCode, KeyModifier } from '@theia/core/lib/browser';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { NotebookModel } from '../view-model/notebook-model';
-import { NotebookCellModel } from '../view-model/notebook-cell-model';
+import { codicon, Key, KeybindingContribution, KeybindingRegistry, KeyCode, KeyModifier } from '@theia/core/lib/browser/index.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import { NotebookModel } from '../view-model/notebook-model.js';
+import { NotebookCellModel } from '../view-model/notebook-cell-model.js';
 import {
     NOTEBOOK_CELL_MARKDOWN_EDIT_MODE, NOTEBOOK_CELL_TYPE,
     NotebookContextKeys, NOTEBOOK_CELL_EXECUTING, NOTEBOOK_EDITOR_FOCUSED,
     NOTEBOOK_CELL_FOCUSED,
     NOTEBOOK_CELL_LIST_FOCUSED
-} from './notebook-context-keys';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { NotebookExecutionService } from '../service/notebook-execution-service';
-import { NotebookCellOutputModel } from '../view-model/notebook-cell-output-model';
-import { CellData, CellEditType, CellKind } from '../../common';
-import { NotebookEditorWidgetService } from '../service/notebook-editor-widget-service';
-import { NotebookCommands } from './notebook-actions-contribution';
-import { changeCellType } from './cell-operations';
-import { EditorLanguageQuickPickService } from '@theia/editor/lib/browser/editor-language-quick-pick-service';
-import { NotebookService } from '../service/notebook-service';
-import { Selection } from '@theia/monaco-editor-core/esm/vs/editor/common/core/selection';
-import { Range } from '@theia/core/shared/vscode-languageserver-protocol';
-import { NOTEBOOK_EDITOR_ID_PREFIX } from '../notebook-editor-widget';
+} from './notebook-context-keys.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { NotebookExecutionService } from '../service/notebook-execution-service.js';
+import { NotebookCellOutputModel } from '../view-model/notebook-cell-output-model.js';
+import { CellData, CellEditType, CellKind } from '../../common/index.js';
+import { NotebookEditorWidgetService } from '../service/notebook-editor-widget-service.js';
+import { NotebookCommands } from './notebook-actions-contribution.js';
+import { changeCellType } from './cell-operations.js';
+import { EditorLanguageQuickPickService } from '@theia/editor/lib/browser/editor-language-quick-pick-service.js';
+import { NotebookService } from '../service/notebook-service.js';
+import { Selection } from '@theia/monaco-editor-core/esm/vs/editor/common/core/selection.js';
+import { Range } from 'vscode-languageserver-protocol';
+import { NOTEBOOK_EDITOR_ID_PREFIX } from '../notebook-editor-widget.js';
 
 export namespace NotebookCellCommands {
     /** Parameters: notebookModel: NotebookModel | undefined, cell: NotebookCellModel */

@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { Command, CommandContribution, CommandRegistry } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { codicon } from '@theia/core/lib/browser';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { ChatCommands } from '@theia/ai-chat-ui/lib/browser/chat-view-commands';
+import { inject, injectable } from 'inversify';
+import { codicon } from '@theia/core/lib/browser/index.js';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { ChatCommands } from '@theia/ai-chat-ui/lib/browser/chat-view-commands.js';
 import { AIActivationService } from '@theia/ai-core/lib/browser';
 
 export const OPEN_CLAUDE_CODE_CONFIG = Command.toLocalizedCommand({

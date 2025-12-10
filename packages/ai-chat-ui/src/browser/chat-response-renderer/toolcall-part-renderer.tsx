@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ChatResponsePartRenderer } from '../chat-response-part-renderer';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { ChatResponseContent, ToolCallChatResponseContent } from '@theia/ai-chat/lib/common';
-import { ReactNode } from '@theia/core/shared/react';
-import { nls } from '@theia/core/lib/common/nls';
-import { codicon, OpenerService } from '@theia/core/lib/browser';
-import * as React from '@theia/core/shared/react';
-import { ToolConfirmation, ToolConfirmationState } from './tool-confirmation';
-import { ToolConfirmationMode } from '@theia/ai-chat/lib/common/chat-tool-preferences';
-import { ResponseNode } from '../chat-tree-view';
-import { useMarkdownRendering } from './markdown-part-renderer';
-import { ToolCallResult } from '@theia/ai-core';
-import { ToolConfirmationManager } from '@theia/ai-chat/lib/browser/chat-tool-preference-bindings';
+import { ChatResponsePartRenderer } from '../chat-response-part-renderer.js';
+import { inject, injectable } from 'inversify';
+import { ChatResponseContent, ToolCallChatResponseContent } from '@theia/ai-chat/lib/common/index.js';
+import { ReactNode } from 'react';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { codicon, OpenerService } from '@theia/core/lib/browser/index.js';
+import * as React from 'react';
+import { ToolConfirmation, ToolConfirmationState } from './tool-confirmation.js';
+import { ToolConfirmationMode } from '@theia/ai-chat/lib/common/chat-tool-preferences.js';
+import { ResponseNode } from '../chat-tree-view/index.js';
+import { useMarkdownRendering } from './markdown-part-renderer.js';
+import { ToolCallResult } from '@theia/ai-core/lib/common/index.js';
+import { ToolConfirmationManager } from '@theia/ai-chat/lib/browser/chat-tool-preference-bindings.js';
 
 @injectable()
 export class ToolCallPartRenderer implements ChatResponsePartRenderer<ToolCallChatResponseContent> {
@@ -133,7 +133,7 @@ const Spinner = () => (
     <span className={`${codicon('loading')} theia-animation-spin`}></span>
 );
 
-interface ToolCallContentProps {
+type ToolCallContentProps = {
     response: ToolCallChatResponseContent;
     confirmationMode: ToolConfirmationMode;
     toolConfirmationManager: ToolConfirmationManager;

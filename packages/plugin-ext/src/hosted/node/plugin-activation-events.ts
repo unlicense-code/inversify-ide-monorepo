@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { flatten } from '../../common/arrays';
-import { isStringArray, isObject } from '@theia/core/lib/common/types';
+import { flatten } from '../../common/arrays.js';
+import { isStringArray, isObject } from '@theia/core/lib/common/types.js';
 import {
     PluginPackage,
     PluginPackageAuthenticationProvider,
@@ -25,7 +25,7 @@ import {
     PluginPackageLanguageContribution,
     PluginPackageNotebook,
     PluginPackageView
-} from '../../common/plugin-protocol';
+} from '../../common/plugin-protocol.js';
 
 /**
  * Most activation events can be automatically deduced from the package manifest.

@@ -25,10 +25,10 @@ import {
     ToolRequest,
     ToolRequestParameters,
     UserRequest
-} from '@theia/ai-core';
+} from '@theia/ai-core/lib/common/index.js';
 import { CancellationToken, unreachable } from '@theia/core';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { injectable } from '@theia/core/shared/inversify';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { injectable } from 'inversify';
 import { OpenAI } from 'openai';
 import type { RunnerOptions } from 'openai/lib/AbstractChatCompletionRunner';
 import type {
@@ -40,10 +40,10 @@ import type {
     ResponseStreamEvent
 } from 'openai/resources/responses/responses';
 import type { ResponsesModel } from 'openai/resources/shared';
-import { DeveloperMessageSettings, OpenAiModelUtils } from './openai-language-model';
+import { DeveloperMessageSettings, OpenAiModelUtils } from './openai-language-model.js';
 import { JSONSchema, JSONSchemaDefinition } from 'openai/lib/jsonschema';
 
-interface ToolCall {
+type ToolCall = {
     id: string;
     call_id?: string;
     name: string;

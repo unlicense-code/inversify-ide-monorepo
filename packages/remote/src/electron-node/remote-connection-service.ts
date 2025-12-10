@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { RemoteConnection } from './remote-types';
+import { inject, injectable } from 'inversify';
+import { RemoteConnection } from './remote-types.js';
 import { Disposable } from '@theia/core';
-import { RemoteCopyService } from './setup/remote-copy-service';
-import { BackendApplicationContribution } from '@theia/core/lib/node';
-import { RemoteSetupService } from './setup/remote-setup-service';
+import { RemoteCopyService } from './setup/remote-copy-service.js';
+import { BackendApplicationContribution } from '@theia/core/lib/node/index.js';
+import { RemoteSetupService } from './setup/remote-setup-service.js';
 
 @injectable()
 export class RemoteConnectionService implements BackendApplicationContribution {

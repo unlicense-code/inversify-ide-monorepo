@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,12 +19,12 @@
  *--------------------------------------------------------------------------------------------*/
 // based on https://github.com/microsoft/vscode/blob/04c36be045a94fee58e5f8992d3e3fd980294a84/src/vs/workbench/api/browser/mainThreadFileSystemEventService.ts
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { RPCProtocol } from '../../common/rpc-protocol';
-import { MAIN_RPC_CONTEXT, FileSystemEvents } from '../../common/plugin-api-rpc';
-import { DisposableCollection } from '@theia/core/lib/common/disposable';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileChangeType } from '@theia/filesystem/lib/common/files';
+import { interfaces } from 'inversify';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
+import { MAIN_RPC_CONTEXT, FileSystemEvents } from '../../common/plugin-api-rpc.js';
+import { DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { FileChangeType } from '@theia/filesystem/lib/common/files.js';
 
 export class MainFileSystemEventService {
 

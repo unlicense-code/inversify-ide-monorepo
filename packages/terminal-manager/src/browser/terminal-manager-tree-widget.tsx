@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { Container, inject, injectable, interfaces, postConstruct } from '@theia/core/shared/inversify';
+import * as React from 'react';
+import { inject, injectable, interfaces, postConstruct } from 'inversify';
 import {
     codicon,
     CompositeTreeNode,
@@ -28,10 +28,16 @@ import {
     TreeNode,
     TreeWidget,
     TREE_NODE_INDENT_GUIDE_CLASS,
-} from '@theia/core/lib/browser';
-import { CommandRegistry, CompoundMenuNode, Emitter, MenuAction, MenuModelRegistry } from '@theia/core';
-import { TerminalManagerTreeModel } from './terminal-manager-tree-model';
-import { ReactInteraction, TerminalManagerTreeTypes, TERMINAL_MANAGER_TREE_CONTEXT_MENU } from './terminal-manager-types';
+} from '@theia/core/lib/browser/index.js';
+import {
+    CommandRegistry, CompoundMenuNode, Emitter, MenuAction, MenuModelRegistry
+
+} from '@theia/core';
+import { TerminalManagerTreeModel } from './terminal-manager-tree-model.js';
+import {
+    ReactInteraction, TerminalManagerTreeTypes, TERMINAL_MANAGER_TREE_CONTEXT_MENU
+
+} from './terminal-manager-types.js';
 
 /* eslint-disable no-param-reassign */
 @injectable()
@@ -42,10 +48,10 @@ export class TerminalManagerTreeWidget extends TreeWidget {
     readonly onDidChange = this.onDidChangeEmitter.event;
 
     @inject(MenuModelRegistry) protected menuRegistry: MenuModelRegistry;
-    @inject(TreeModel) override readonly model: TerminalManagerTreeModel;
+    @inject(TreeModel) declare readonly model: TerminalManagerTreeModel;
     @inject(CommandRegistry) protected commandRegistry: CommandRegistry;
 
-    static createContainer(parent: interfaces.Container): Container {
+    static createContainer(parent: interfaces.Container): interfaces.Container {
         const child = createTreeContainer(
             parent,
             {

@@ -14,25 +14,25 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { SimpleObservableCollection, TreeCollection, observableProperty } from '@theia/test/lib/common/collections';
+import { SimpleObservableCollection, TreeCollection, observableProperty } from '@theia/test/lib/common/collections.js';
 import {
     TestController, TestItem, TestOutputItem, TestRun, TestRunProfile, TestService, TestState, TestStateChangedEvent
-} from '@theia/test/lib/browser/test-service';
-import { TestExecutionProgressService } from '@theia/test/lib/browser/test-execution-progress-service';
-import { AccumulatingTreeDeltaEmitter, CollectionDelta, DeltaKind, TreeDelta, TreeDeltaBuilder } from '@theia/test/lib/common/tree-delta';
-import { Emitter, Location, Range } from '@theia/core/shared/vscode-languageserver-protocol';
-import { Range as PluginRange, Location as PluginLocation } from '../../common/plugin-api-rpc-model';
+} from '@theia/test/lib/browser/test-service.js';
+import { TestExecutionProgressService } from '@theia/test/lib/browser/test-execution-progress-service.js';
+import { AccumulatingTreeDeltaEmitter, CollectionDelta, DeltaKind, TreeDelta, TreeDeltaBuilder } from '@theia/test/lib/common/tree-delta.js';
+import { Emitter, Location, Range } from 'vscode-languageserver-protocol';
+import { Range as PluginRange, Location as PluginLocation } from '../../common/plugin-api-rpc-model.js';
 import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
 import { CancellationToken, Disposable, Event, URI } from '@theia/core';
-import { MAIN_RPC_CONTEXT, TestControllerUpdate, TestingExt, TestingMain } from '../../common';
-import { RPCProtocol } from '../../common/rpc-protocol';
-import { interfaces } from '@theia/core/shared/inversify';
+import { MAIN_RPC_CONTEXT, TestControllerUpdate, TestingExt, TestingMain } from '../../common/index.js';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
+import { interfaces } from 'inversify';
 import {
     TestExecutionState, TestItemDTO, TestItemReference, TestOutputDTO,
     TestRunDTO, TestRunProfileDTO, TestStateChangeDTO
-} from '../../common/test-types';
-import { TestRunProfileKind } from '../../plugin/types-impl';
-import { CommandRegistryMainImpl } from './command-registry-main';
+} from '../../common/test-types.js';
+import { TestRunProfileKind } from '../../plugin/types-impl.js';
+import { CommandRegistryMainImpl } from './command-registry-main.js';
 
 export class TestItemCollection extends TreeCollection<string, TestItemImpl, TestItemImpl | TestControllerImpl> {
     override add(item: TestItemImpl): TestItemImpl | undefined {
@@ -381,7 +381,7 @@ function convertLocation(location: PluginLocation | undefined): Location | undef
     };
 }
 
-interface TestCollectionHolder {
+type TestCollectionHolder = {
     items: TestItemCollection;
 }
 

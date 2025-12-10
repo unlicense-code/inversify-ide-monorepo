@@ -14,21 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContentReplacer, Replacement } from './content-replacer';
+import { ContentReplacer, Replacement } from './content-replacer.js';
 
-/**
- * Represents a match with its position and the actual matched content
- */
-interface MatchInfo {
+type MatchInfo = {
     startIndex: number;
     endIndex: number;
     matchedContent: string;
 }
 
-/**
- * Result of finding matches
- */
-interface MatchResult {
+type MatchResult = {
     matches: MatchInfo[];
     strategy: string;
 }

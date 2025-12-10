@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -23,13 +23,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/tslint/config */
 
-import URI from './uri';
-import { CharCode } from './char-code';
-import { compareSubstringIgnoreCase, compare, compareSubstring } from './strings';
+import URI from './uri.js';
+import { CharCode } from './char-code.js';
+import { compareSubstringIgnoreCase, compare, compareSubstring } from './strings.js';
 
-export interface IKeyIterator<K> {
-    reset(key: K): this;
-    next(): this;
+export type IKeyIterator<K> = {
+    reset(key: K): IKeyIterator<K>;
+    next(): IKeyIterator<K>;
 
     hasNext(): boolean;
     cmp(a: string): number;

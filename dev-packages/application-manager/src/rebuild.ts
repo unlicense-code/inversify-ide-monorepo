@@ -23,7 +23,7 @@ export type RebuildTarget = 'electron' | 'browser' | 'browser-only';
 
 const EXIT_SIGNALS: NodeJS.Signals[] = ['SIGINT', 'SIGTERM'];
 
-interface ExitToken {
+type ExitToken = {
     getLastSignal(): NodeJS.Signals | undefined
     onSignal(callback: (signal: NodeJS.Signals) => void): void
 }
@@ -40,7 +40,7 @@ export const DEFAULT_MODULES = [
     'cpu-features'
 ];
 
-export interface RebuildOptions {
+export type RebuildOptions = {
     /**
      * What modules to rebuild.
      */
@@ -68,13 +68,18 @@ export function rebuild(target: RebuildTarget, options: RebuildOptions = {}): vo
     } = options;
     const cache = path.resolve(cacheRoot, '.browser_modules');
     const cacheExists = folderExists(cache);
+    console.log(`[Rebuild] Target: ${target}, Cache: ${cache}, Cache exists: ${cacheExists}`);
+    console.log(`[Rebuild] Modules: ${modules.join(', ')}`);
+    console.log(`[Rebuild] Cache root: ${cacheRoot}`);
     guardExit(async token => {
         if (target === 'electron' && !cacheExists) {
+            console.log(`[Rebuild] Rebuilding Electron modules...`);
             process.exitCode = await rebuildElectronModules(cache, modules, forceAbi, token);
         } else if (target === 'browser' && cacheExists) {
+            console.log(`[Rebuild] Reverting to browser modules...`);
             process.exitCode = await revertBrowserModules(cache, modules);
         } else {
-            console.log(`native node modules are already rebuilt for ${target}`);
+            console.log(`[Rebuild] native node modules are already rebuilt for ${target}`);
         }
     }).catch(errorOrSignal => {
         if (typeof errorOrSignal === 'string' && errorOrSignal in os.constants.signals) {
@@ -96,17 +101,17 @@ function folderExists(folder: string): boolean {
     return false;
 }
 
-/**
- * Schema for `<browserModuleCache>/modules.json`.
- */
-interface ModulesJson {
+type ModulesJson = {
     [moduleName: string]: ModuleBackup
 }
-interface ModuleBackup {
+type ModuleBackup = {
     originalLocation: string
 }
 
 async function rebuildElectronModules(browserModuleCache: string, modules: string[], forceAbi: NodeABI | undefined, token: ExitToken): Promise<number> {
+    console.log(`[Rebuild] Starting Electron module rebuild...`);
+    console.log(`[Rebuild] Browser module cache: ${browserModuleCache}`);
+    console.log(`[Rebuild] Modules to rebuild: ${modules.join(', ')}`);
     const modulesJsonPath = path.join(browserModuleCache, 'modules.json');
     const modulesJson: ModulesJson = await fs.access(modulesJsonPath).then(
         () => fs.readJson(modulesJsonPath),
@@ -114,6 +119,7 @@ async function rebuildElectronModules(browserModuleCache: string, modules: strin
     );
     let success = true;
     // Backup already built browser modules.
+    console.log(`[Rebuild] Backing up browser modules...`);
     await Promise.all(modules.map(async module => {
         let modulePath;
         try {
@@ -121,7 +127,7 @@ async function rebuildElectronModules(browserModuleCache: string, modules: strin
                 paths: [process.cwd()],
             });
         } catch (_) {
-            console.debug(`Module not found: ${module}`);
+            console.log(`[Rebuild] Module not found: ${module} (skipping)`);
             return; // Skip current module.
         }
         const src = path.dirname(modulePath);
@@ -132,14 +138,14 @@ async function rebuildElectronModules(browserModuleCache: string, modules: strin
             modulesJson[module] = {
                 originalLocation: src,
             };
-            console.debug(`Processed "${module}"`);
+            console.log(`[Rebuild] Backed up "${module}" from ${src} to ${dest}`);
         } catch (error) {
-            console.error(`Error while doing a backup for "${module}": ${error}`);
+            console.error(`[Rebuild] Error while doing a backup for "${module}": ${error}`);
             success = false;
         }
     }));
     if (Object.keys(modulesJson).length === 0) {
-        console.debug('No module to rebuild.');
+        console.log(`[Rebuild] No modules to rebuild.`);
         return 0;
     }
     // Update manifest tracking the backups' original locations.
@@ -155,18 +161,22 @@ async function rebuildElectronModules(browserModuleCache: string, modules: strin
             ? m.substring(slash + 1)
             : m;
     });
+    console.log(`[Rebuild] Modules to rebuild (processed): ${todo.join(', ')}`);
     let exitCode: number | undefined;
     try {
         if (process.env.THEIA_REBUILD_NO_WORKAROUND) {
+            console.log(`[Rebuild] Using direct electron-rebuild (no workaround)`);
             exitCode = await runElectronRebuild(todo, forceAbi, token);
         } else {
+            console.log(`[Rebuild] Using electron-rebuild with workaround`);
             exitCode = await electronRebuildExtraModulesWorkaround(process.cwd(), todo, () => runElectronRebuild(todo, forceAbi, token), token);
         }
     } catch (error) {
-        console.error(error);
+        console.error(`[Rebuild] Error during rebuild:`, error);
     } finally {
         // If code is undefined or different from zero we need to revert back to the browser modules.
         if (exitCode !== 0) {
+            console.log(`[Rebuild] Rebuild failed (exit code: ${exitCode}), reverting to browser modules...`);
             await revertBrowserModules(browserModuleCache, modules);
         }
         return exitCode ?? 1;
@@ -174,17 +184,20 @@ async function rebuildElectronModules(browserModuleCache: string, modules: strin
 }
 
 async function revertBrowserModules(browserModuleCache: string, modules: string[]): Promise<number> {
+    console.log(`[Rebuild] Reverting browser modules from cache: ${browserModuleCache}`);
     let exitCode = 0;
     const modulesJsonPath = path.join(browserModuleCache, 'modules.json');
     const modulesJson: ModulesJson = await fs.readJson(modulesJsonPath);
+    console.log(`[Rebuild] Modules to revert: ${Object.keys(modulesJson).join(', ')}`);
     await Promise.all(Object.entries(modulesJson).map(async ([moduleName, entry]) => {
         if (!modules.includes(moduleName)) {
+            console.log(`[Rebuild] Skipping ${moduleName} (not in requested modules)`);
             return; // Skip modules that weren't requested.
         }
         const src = path.join(browserModuleCache, moduleName);
         if (!await fs.pathExists(src)) {
             delete modulesJson[moduleName];
-            console.error(`Missing backup for ${moduleName}!`);
+            console.error(`[Rebuild] Missing backup for ${moduleName}!`);
             exitCode = 1;
             return;
         }
@@ -194,14 +207,15 @@ async function revertBrowserModules(browserModuleCache: string, modules: string[
             await fs.copy(src, dest, { overwrite: false });
             await fs.remove(src);
             delete modulesJson[moduleName];
-            console.debug(`Reverted "${moduleName}"`);
+            console.log(`[Rebuild] Reverted "${moduleName}" from ${src} to ${dest}`);
         } catch (error) {
-            console.error(`Error while reverting "${moduleName}": ${error}`);
+            console.error(`[Rebuild] Error while reverting "${moduleName}": ${error}`);
             exitCode = 1;
         }
     }));
     if (Object.keys(modulesJson).length === 0) {
         // We restored everything, so we can delete the cache.
+        console.log(`[Rebuild] All modules reverted, removing cache directory`);
         await fs.remove(browserModuleCache);
     } else {
         // Some things were not restored, so we update the manifest.
@@ -217,16 +231,32 @@ async function runElectronRebuild(modules: string[], forceAbi: NodeABI | undefin
         if (forceAbi) {
             command += ` --force-abi ${forceAbi}`;
         }
+        console.log(`[Rebuild] Executing: ${command}`);
+        console.log(`[Rebuild] Disabling Spectre mitigations for MSBuild`);
+        // Disable Spectre mitigations to avoid MSB8040 error
+        // Set environment variables to disable Spectre mitigations in MSBuild
+        const env = {
+            ...process.env,
+            GYP_MSVS_SPECTRE_MITIGATION: '0',
+            // MSBuild property to disable Spectre mitigations
+            MSBUILDDISABESPECTREMITIGATION: '1'
+        };
         const electronRebuild = cp.spawn(command, {
             stdio: 'inherit',
             shell: true,
+            env
         });
         token.onSignal(signal => electronRebuild.kill(signal));
-        electronRebuild.on('error', reject);
+        electronRebuild.on('error', (error) => {
+            console.error(`[Rebuild] electron-rebuild spawn error:`, error);
+            reject(error);
+        });
         electronRebuild.on('close', (code, signal) => {
             if (signal) {
+                console.error(`[Rebuild] electron-rebuild exited with signal: ${signal}`);
                 reject(new Error(`electron-rebuild exited with "${signal}"`));
             } else {
+                console.log(`[Rebuild] electron-rebuild completed with exit code: ${code}`);
                 resolve(code!);
             }
         });

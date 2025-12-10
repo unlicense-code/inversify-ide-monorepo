@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import * as idb from 'idb';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { ThemeService } from '@theia/core/lib/browser/theming';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { ThemeService } from '@theia/core/lib/browser/theming.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { injectable } from '@theia/core/shared/inversify';
-import type { ThemeMix } from './textmate/monaco-theme-types';
-import { Theme } from '@theia/core/lib/common/theme';
-import { Emitter, Event, isObject } from '@theia/core';
+import { injectable } from 'inversify';
+import type { ThemeMix } from './textmate/monaco-theme-types.js';
+import { Theme } from '@theia/core/lib/common/theme.js';
+import { Emitter, Event, isObject } from '@theia/core/lib/common/index.js';
 
 let _monacoDB: Promise<idb.IDBPDatabase> | undefined;
 if ('indexedDB' in window) {
@@ -36,7 +36,7 @@ if ('indexedDB' in window) {
 
 export const monacoDB = _monacoDB;
 
-export interface MonacoThemeState {
+export type MonacoThemeState = {
     id: string,
     label: string,
     description?: string,

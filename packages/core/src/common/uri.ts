@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { URI as Uri } from 'vscode-uri';
-import { Path } from './path';
+import { Path } from './path.js';
 
 export class URI {
 
@@ -267,13 +267,13 @@ export class URI {
     }
 }
 
-export interface UriComponents {
+export type UriComponents = {
     scheme: string;
     authority: string;
     path: string;
     query: string;
     fragment: string;
     external?: string;
-}
+};
 
 export default URI;

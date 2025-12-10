@@ -17,8 +17,8 @@
 import { rejects } from 'assert';
 import { strictEqual } from 'assert/strict';
 import { promises as fs } from 'fs';
-import { generateUuid } from '@theia/core/lib/common/uuid';
-import { isENOENT } from '../../common/errors';
+import { generateUuid } from '@theia/core';
+import { isENOENT } from '../../common/errors.js';
 
 describe('errors', () => {
     describe('errno-exception', () => {

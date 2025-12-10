@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 import { Command, nls } from '@theia/core';
-import { codicon } from '@theia/core/lib/browser';
-import { isRequestNode, RequestNode, ResponseNode } from './chat-tree-view';
-import { EditableChatRequestModel } from '@theia/ai-chat';
+import { codicon } from '@theia/core/lib/browser/index.js';
+import { isRequestNode, RequestNode, ResponseNode } from './chat-tree-view/index.js';
+import { EditableChatRequestModel } from '@theia/ai-chat/lib/common/index.js';
 
-export interface ChatNodeToolbarAction {
+export type ChatNodeToolbarAction = {
     /**
      * The command to execute when the item is selected. The handler will receive the `RequestNode` or `ResponseNode` as first argument.
      */
@@ -58,7 +58,7 @@ export interface ChatNodeToolbarAction {
  * ```
  */
 export const ChatNodeToolbarActionContribution = Symbol('ChatNodeToolbarActionContribution');
-export interface ChatNodeToolbarActionContribution {
+export type ChatNodeToolbarActionContribution = {
     /**
      * Returns the toolbar actions for the given node.
      */

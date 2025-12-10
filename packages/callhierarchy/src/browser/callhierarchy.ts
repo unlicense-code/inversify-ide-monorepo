@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,14 +15,14 @@
 // *****************************************************************************
 
 import { nls } from '@theia/core';
-import { UriComponents } from '@theia/core/lib/common/uri';
-import { Range, SymbolKind, SymbolTag } from '@theia/core/shared/vscode-languageserver-protocol';
+import { UriComponents } from '@theia/core/lib/common/uri.js';
+import { Range, SymbolKind, SymbolTag } from 'vscode-languageserver-protocol';
 
 export const CALLHIERARCHY_ID = 'callhierarchy';
 export const CALL_HIERARCHY_TOGGLE_COMMAND_ID = 'callhierarchy:toggle';
 export const CALL_HIERARCHY_LABEL = nls.localizeByDefault('Call Hierarchy');
 
-export interface CallHierarchyItem {
+export type CallHierarchyItem = {
     _sessionId?: string;
     _itemId?: string;
 
@@ -36,12 +36,12 @@ export interface CallHierarchyItem {
     data?: unknown;
 }
 
-export interface CallHierarchyIncomingCall {
+export type CallHierarchyIncomingCall = {
     from: CallHierarchyItem;
     fromRanges: Range[];
 }
 
-export interface CallHierarchyOutgoingCall {
+export type CallHierarchyOutgoingCall = {
     to: CallHierarchyItem;
     fromRanges: Range[];
 }

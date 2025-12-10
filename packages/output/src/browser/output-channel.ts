@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { Resource, ResourceResolver } from '@theia/core/lib/common/resource';
+import { injectable, inject } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { Resource, ResourceResolver } from '@theia/core/lib/common/resource.js';
 import { Emitter, Event, Disposable, DisposableCollection } from '@theia/core';
-import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model';
-import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service';
-import { OutputUri } from '../common/output-uri';
-import { OutputResource } from '../browser/output-resource';
-import { OutputPreferences } from '../common/output-preferences';
-import { IReference } from '@theia/monaco-editor-core/esm/vs/base/common/lifecycle';
+import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model.js';
+import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service.js';
+import { OutputUri } from '../common/output-uri.js';
+import { OutputResource } from '../browser/output-resource.js';
+import { OutputPreferences } from '../common/output-preferences.js';
+import { IReference } from '@theia/monaco-editor-core/esm/vs/base/common/lifecycle.js';
 import * as monaco from '@theia/monaco-editor-core';
 import PQueue from 'p-queue';
 
@@ -201,7 +201,7 @@ export class OutputChannel implements Disposable {
     protected readonly contentChangeEmitter = new Emitter<void>();
     protected readonly visibilityChangeEmitter = new Emitter<{ isVisible: boolean, preserveFocus?: boolean }>();
     protected readonly disposedEmitter = new Emitter<void>();
-    protected readonly textModifyQueue = new PQueue({ autoStart: true, concurrency: 1 });
+    protected readonly textModifyQueue: InstanceType<typeof PQueue> = new PQueue({ autoStart: true, concurrency: 1 });
     protected readonly toDispose = new DisposableCollection(
         Disposable.create(() => this.textModifyQueue.clear()),
         this.contentChangeEmitter,

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Diagnostic } from '@theia/core/shared/vscode-languageserver-protocol';
-import { ProtocolToMonacoConverter } from './protocol-to-monaco-converter';
+import { Diagnostic } from 'vscode-languageserver-protocol';
+import { ProtocolToMonacoConverter } from './protocol-to-monaco-converter.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { Marker } from '@theia/markers/lib/common/marker';
-import URI from '@theia/core/lib/common/uri';
+import { Marker } from '@theia/markers/lib/common/marker.js';
+import { URI } from '@theia/core/lib/common/uri.js';
 
 export class MonacoMarkerCollection {
     protected readonly uri: monaco.Uri;

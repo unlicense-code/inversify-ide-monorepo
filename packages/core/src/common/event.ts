@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,13 +16,10 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Disposable, DisposableGroup, DisposableCollection } from './disposable';
-import { MaybePromise } from './types';
+import { Disposable, DisposableGroup, DisposableCollection } from './disposable.js';
+import { MaybePromise } from './types.js';
 
-/**
- * Represents a typed event.
- */
-export interface Event<T> {
+export type Event<T> = {
 
     /**
      *
@@ -199,7 +196,7 @@ class CallbackList implements Iterable<Callback> {
     }
 }
 
-export interface EmitterOptions {
+export type EmitterOptions = {
     onFirstListenerAdd?: Function;
     onLastListenerRemove?: Function;
 }
@@ -357,7 +354,7 @@ export class Emitter<T = any> {
 
 export type WaitUntilData<T> = Omit<T, 'waitUntil' | 'token'>;
 
-export interface WaitUntilEvent {
+export type WaitUntilEvent = {
     /**
      * A cancellation token.
      */
@@ -411,7 +408,7 @@ export namespace WaitUntilEvent {
     }
 }
 
-import { CancellationToken } from './cancellation';
+import { CancellationToken } from './cancellation.js';
 
 export class AsyncEmitter<T extends WaitUntilEvent> extends Emitter<T> {
 

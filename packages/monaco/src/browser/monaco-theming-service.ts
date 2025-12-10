@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,17 +16,17 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { injectable, inject } from '@theia/core/shared/inversify';
+import { injectable, inject } from 'inversify';
 import * as jsoncparser from 'jsonc-parser';
 import * as plistparser from 'fast-plist';
-import URI from '@theia/core/lib/common/uri';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { MonacoThemeRegistry } from './textmate/monaco-theme-registry';
-import { getThemes, putTheme, MonacoThemeState, stateToTheme, ThemeServiceWithDB } from './monaco-indexed-db';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { MonacoThemeRegistry } from './textmate/monaco-theme-registry.js';
+import { getThemes, putTheme, MonacoThemeState, stateToTheme, ThemeServiceWithDB } from './monaco-indexed-db.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
 import * as monaco from '@theia/monaco-editor-core';
 
-export interface MonacoTheme {
+export type MonacoTheme = {
     id?: string;
     label?: string;
     uiTheme?: monaco.editor.BuiltinTheme;
@@ -34,7 +34,7 @@ export interface MonacoTheme {
     uri: string;
 }
 
-export interface MonacoThemeJson {
+export type MonacoThemeJson = {
     /**
      * theme id (optional), label is used if not provided
      */

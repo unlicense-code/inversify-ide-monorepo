@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,11 +18,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { NotebookRenderersExt, NotebookRenderersMain, PLUGIN_RPC_CONTEXT } from '../../common';
-import { RPCProtocol } from '../../common/rpc-protocol';
-import { NotebooksExtImpl } from './notebooks';
+import { NotebookRenderersExt, NotebookRenderersMain, PLUGIN_RPC_CONTEXT } from '../../common/index.js';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
+import { NotebooksExtImpl } from './notebooks.js';
 import * as theia from '@theia/plugin';
-import { NotebookEditor } from './notebook-editor';
+import { NotebookEditor } from './notebook-editor.js';
 import { Emitter } from '@theia/core';
 
 export class NotebookRenderersExtImpl implements NotebookRenderersExt {

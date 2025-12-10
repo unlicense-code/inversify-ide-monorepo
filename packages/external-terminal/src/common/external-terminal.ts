@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,10 +17,7 @@
 export const ExternalTerminalService = Symbol('ExternalTerminalService');
 export const externalTerminalServicePath = '/services/external-terminal';
 
-/**
- * Represents the external terminal configuration options.
- */
-export interface ExternalTerminalConfiguration {
+export type ExternalTerminalConfiguration = {
     /**
      * The external terminal executable for Windows.
      */
@@ -35,7 +32,7 @@ export interface ExternalTerminalConfiguration {
     'terminal.external.linuxExec': string;
 }
 
-export interface ExternalTerminalService {
+export type ExternalTerminalService = {
 
     /**
      * Open a native terminal in the designated working directory.

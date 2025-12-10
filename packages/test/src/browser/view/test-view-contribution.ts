@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { AbstractViewContribution, FrontendApplicationContribution, ViewContainerTitleOptions, Widget, codicon } from '@theia/core/lib/browser';
+import { AbstractViewContribution, FrontendApplicationContribution, ViewContainerTitleOptions, Widget, codicon } from '@theia/core/lib/browser/index.js';
 import { Command, CommandRegistry, MenuModelRegistry, nls } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { TestItem, TestRunProfileKind, TestService } from '../test-service';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { TestTreeWidget } from './test-tree-widget';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { TestCommandId } from '../constants';
-import { NavigationLocationService } from '@theia/editor/lib/browser/navigation/navigation-location-service';
-import { NavigationLocation } from '@theia/editor/lib/browser/navigation/navigation-location';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileNavigatorCommands } from '@theia/navigator/lib/browser/file-navigator-commands';
+import { inject, injectable } from 'inversify';
+import { TestItem, TestRunProfileKind, TestService } from '../test-service.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { TestTreeWidget } from './test-tree-widget.js';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { TestCommandId } from '../constants.js';
+import { NavigationLocationService } from '@theia/editor/lib/browser/navigation/navigation-location-service.js';
+import { NavigationLocation } from '@theia/editor/lib/browser/navigation/navigation-location.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { FileNavigatorCommands } from '@theia/navigator/lib/browser/file-navigator-commands.js';
 export const PLUGIN_TEST_VIEW_TITLE_MENU = ['plugin_test', 'title'];
 
 export namespace TestViewCommands {
@@ -308,7 +308,7 @@ export class TestViewContribution extends AbstractViewContribution<TestTreeWidge
             command: TestViewCommands.RUN_ALL_TESTS.id,
             menuPath: PLUGIN_TEST_VIEW_TITLE_MENU,
             priority: 1,
-            isVisible(widget): boolean {
+            isVisible(widget: any): boolean {
                 return widget instanceof TestTreeWidget && widget.id === TestTreeWidget.ID;
             }
         });
@@ -318,7 +318,7 @@ export class TestViewContribution extends AbstractViewContribution<TestTreeWidge
             command: TestViewCommands.DEBUG_ALL_TESTS.id,
             menuPath: PLUGIN_TEST_VIEW_TITLE_MENU,
             priority: 2,
-            isVisible(widget): boolean {
+            isVisible(widget: any): boolean {
                 return widget instanceof TestTreeWidget && widget.id === TestTreeWidget.ID;
             }
         });

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { OS } from './os';
+import { OS } from './os.js';
 
 export const applicationPath = '/services/application';
 
 export const ApplicationServer = Symbol('ApplicationServer');
 
-export interface ApplicationServer {
+export type ApplicationServer = {
     getExtensionsInfos(): Promise<ExtensionInfo[]>;
     getApplicationInfo(): Promise<ApplicationInfo | undefined>;
     getApplicationRoot(): Promise<string>;
@@ -31,12 +31,12 @@ export interface ApplicationServer {
     getBackendOS(): Promise<OS.Type>;
 }
 
-export interface ExtensionInfo {
+export type ExtensionInfo = {
     name: string;
     version: string;
 }
 
-export interface ApplicationInfo {
+export type ApplicationInfo = {
     name: string;
     version: string;
 }

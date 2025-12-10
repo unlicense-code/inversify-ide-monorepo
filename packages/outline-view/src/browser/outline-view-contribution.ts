@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { AbstractViewContribution } from '@theia/core/lib/browser/shell/view-contribution';
-import { FrontendApplication } from '@theia/core/lib/browser/frontend-application';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser/frontend-application-contribution';
-import { Command, CommandRegistry } from '@theia/core/lib/common/command';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { codicon, Widget } from '@theia/core/lib/browser/widgets';
-import { OutlineViewWidget } from './outline-view-widget';
-import { CompositeTreeNode } from '@theia/core/lib/browser/tree';
-import { OS } from '@theia/core/lib/common/os';
-import { nls } from '@theia/core/lib/common/nls';
+import { injectable } from 'inversify';
+import { AbstractViewContribution } from '@theia/core/lib/browser/shell/view-contribution.js';
+import { FrontendApplication } from '@theia/core/lib/browser/frontend-application.js';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser/frontend-application-contribution.js';
+import { Command, CommandRegistry } from '@theia/core/lib/common/index.js';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { codicon, Widget } from '@theia/core/lib/browser/widgets/index.js';
+import { OutlineViewWidget } from './outline-view-widget.js';
+import { CompositeTreeNode } from '@theia/core/lib/browser/tree/index.js';
+import { OS } from '@theia/core/lib/common/os.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 export const OUTLINE_WIDGET_FACTORY_ID = 'outline-view';
 

@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { OpenAiLanguageModelsManager, OpenAiModelDescription, OPENAI_PROVIDER_ID } from '../common';
-import { API_KEY_PREF, CUSTOM_ENDPOINTS_PREF, MODELS_PREF, USE_RESPONSE_API_PREF } from '../common/openai-preferences';
-import { AICorePreferences, PREFERENCE_NAME_MAX_RETRIES } from '@theia/ai-core/lib/common/ai-core-preferences';
-import { PreferenceService } from '@theia/core';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
+import { inject, injectable } from 'inversify';
+import { OpenAiLanguageModelsManager, OpenAiModelDescription, OPENAI_PROVIDER_ID } from '../common/index.js';
+import { API_KEY_PREF, CUSTOM_ENDPOINTS_PREF, MODELS_PREF, USE_RESPONSE_API_PREF } from '../common/openai-preferences.js';
+import { AICorePreferences, PREFERENCE_NAME_MAX_RETRIES } from '@theia/ai-core/lib/common/ai-core-preferences.js';
+import { PreferenceService } from '@theia/core/lib/common/index.js';
 
 @injectable()
 export class OpenAiFrontendApplicationContribution implements FrontendApplicationContribution {

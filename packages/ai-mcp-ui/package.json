@@ -1,6 +1,7 @@
 {
   "name": "@theia/ai-mcp-ui",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - MCP UI Integration",
   "dependencies": {
     "@theia/ai-core": "1.66.0",

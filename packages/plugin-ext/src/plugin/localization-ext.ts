@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,14 +16,14 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, postConstruct } from 'inversify';
 import { nls } from '@theia/core';
-import { Localization } from '@theia/core/lib/common/i18n/localization';
-import { LocalizationExt, LocalizationMain, Plugin, PLUGIN_RPC_CONTEXT, StringDetails } from '../common';
-import { LanguagePackBundle } from '../common/language-pack-service';
-import { RPCProtocol } from '../common/rpc-protocol';
-import { URI } from './types-impl';
-import { PluginLogger } from './logger';
+import { Localization } from '@theia/core/lib/common/i18n/localization.js';
+import { LocalizationExt, LocalizationMain, Plugin, PLUGIN_RPC_CONTEXT, StringDetails } from '../common/index.js';
+import { LanguagePackBundle } from '../common/language-pack-service.js';
+import { RPCProtocol } from '../common/rpc-protocol.js';
+import { URI } from './types-impl.js';
+import { PluginLogger } from './logger.js';
 
 @injectable()
 export class LocalizationExtImpl implements LocalizationExt {

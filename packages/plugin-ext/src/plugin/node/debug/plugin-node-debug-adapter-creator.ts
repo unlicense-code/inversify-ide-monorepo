@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { PluginDebugAdapterCreator } from '../../debug/plugin-debug-adapter-creator';
+import { PluginDebugAdapterCreator } from '../../debug/plugin-debug-adapter-creator.js';
 import * as path from 'path';
 import * as theia from '@theia/plugin';
-import { PlatformSpecificAdapterContribution, PluginPackageDebuggersContribution } from '../../../common';
-import { isWindows, isOSX } from '@theia/core/lib/common/os';
+import { PlatformSpecificAdapterContribution, PluginPackageDebuggersContribution } from '../../../common/index.js';
+import { isWindows, isOSX } from '@theia/core/lib/common/os.js';
 import * as net from 'net';
 import { ChildProcess, spawn, fork, ForkOptions } from 'child_process';
-import { DebugAdapter } from '@theia/debug/lib/common/debug-model';
-import { DebugAdapterExecutable, DebugAdapterInlineImplementation, DebugAdapterNamedPipeServer, DebugAdapterServer } from '../../types-impl';
-import { ProcessDebugAdapter, SocketDebugAdapter } from '@theia/debug/lib/node/stream-debug-adapter';
+import { DebugAdapter } from '@theia/debug/lib/common/debug-model.js';
+import { DebugAdapterExecutable, DebugAdapterInlineImplementation, DebugAdapterNamedPipeServer, DebugAdapterServer } from '../../types-impl.js';
+import { ProcessDebugAdapter, SocketDebugAdapter } from '@theia/debug/lib/node/stream-debug-adapter.js';
 const isElectron = require('is-electron');
 
 export class NodeDebugAdapterCreator extends PluginDebugAdapterCreator {

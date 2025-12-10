@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,22 +15,22 @@
 // *****************************************************************************
 
 import { Command, CommandRegistry, ContributionProvider, Emitter, MaybePromise, MessageService, nls } from '@theia/core';
-import { KeybindingRegistry, Widget } from '@theia/core/lib/browser';
-import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { injectable, inject, postConstruct, named } from '@theia/core/shared/inversify';
+import { KeybindingRegistry, Widget } from '@theia/core/lib/browser/index.js';
+import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { injectable, inject, postConstruct, named } from 'inversify';
 import {
     DeflatedToolbarTree,
     ToolbarContribution,
     ToolbarTreeSchema,
     ToolbarAlignment,
     ToolbarItemPosition,
-} from './toolbar-interfaces';
-import { ToolbarStorageProvider, TOOLBAR_BAD_JSON_ERROR_MESSAGE } from './toolbar-storage-provider';
-import { ReactToolbarItemImpl, RenderedToolbarItemImpl, TabBarToolbarItem } from '@theia/core/lib/browser/shell/tab-bar-toolbar/tab-toolbar-item';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { LabelParser } from '@theia/core/lib/browser/label-parser';
-import { ToolbarCommands } from './toolbar-constants';
+} from './toolbar-interfaces.js';
+import { ToolbarStorageProvider, TOOLBAR_BAD_JSON_ERROR_MESSAGE } from './toolbar-storage-provider.js';
+import { ReactToolbarItemImpl, RenderedToolbarItemImpl, TabBarToolbarItem } from '@theia/core/lib/browser/shell/tab-bar-toolbar/tab-toolbar-item.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { LabelParser } from '@theia/core/lib/browser/label-parser.js';
+import { ToolbarCommands } from './toolbar-constants.js';
 
 @injectable()
 export class ToolbarController {

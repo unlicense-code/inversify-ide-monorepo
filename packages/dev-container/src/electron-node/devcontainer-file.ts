@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 Typefox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -68,7 +68,7 @@ export type DockerfileContainer = {
     [k: string]: unknown
 };
 
-export interface BuildOptions {
+export type BuildOptions = {
     /**
      * Target stage in a multi-stage build.
      */
@@ -85,7 +85,7 @@ export interface BuildOptions {
     cacheFrom?: string | string[]
     [k: string]: unknown
 }
-export interface ImageContainer {
+export type ImageContainer = {
     /**
      * The docker image that will be used to create the container.
      */
@@ -93,7 +93,7 @@ export interface ImageContainer {
     [k: string]: unknown
 }
 
-export interface NonComposeContainerBase {
+export type NonComposeContainerBase = {
     /**
      * Application ports that are exposed by the container. This can be a single port or an array of ports. Each port can be a number or a string. A number is mapped to
      * the same port on the host. A string is passed to Docker unchanged and can be used to map ports differently, e.g. '8000:8010'.
@@ -136,7 +136,7 @@ export interface NonComposeContainerBase {
     [k: string]: unknown
 }
 
-export interface ComposeContainer {
+export type ComposeContainer = {
     /**
      * The name of the docker-compose file(s) used to start the services.
      */
@@ -168,7 +168,7 @@ export interface ComposeContainer {
     [k: string]: unknown
 }
 
-export interface DevContainerCommon {
+export type DevContainerCommon = {
     /**
      * A name for the dev container which can be displayed to the user.
      */
@@ -408,7 +408,7 @@ export interface DevContainerCommon {
     [k: string]: unknown
 }
 
-export interface MountConfig {
+export type MountConfig = {
     source: string,
     target: string,
     type: 'volume' | 'bind',

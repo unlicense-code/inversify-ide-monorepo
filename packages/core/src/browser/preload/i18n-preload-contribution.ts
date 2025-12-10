@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { PreloadContribution } from './preloader';
-import { FrontendApplicationConfigProvider } from '../frontend-application-config-provider';
-import { nls } from '../../common/nls';
+import { PreloadContribution } from './preloader.js';
+import { FrontendApplicationConfigProvider } from '../frontend-application-config-provider.js';
+import { nls } from '../../common/nls.js';
 import { inject, injectable, named } from 'inversify';
-import { LocalizationServer } from '../../common/i18n/localization-server';
-import { ContributionProvider } from '../../common';
-import { TextReplacementContribution } from './text-replacement-contribution';
+import { LocalizationServer } from '../../common/i18n/localization-server.js';
+import { ContributionProvider } from '../../common/index.js';
+import { TextReplacementContribution } from './text-replacement-contribution.js';
 
 @injectable()
 export class I18nPreloadContribution implements PreloadContribution {

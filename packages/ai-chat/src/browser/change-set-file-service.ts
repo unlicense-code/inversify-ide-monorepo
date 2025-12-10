@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import { ILogger, nls, URI } from '@theia/core';
-import { ApplicationShell, DiffUris, LabelProvider, NavigatableWidget, OpenerService, open } from '@theia/core/lib/browser';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { MonacoWorkspace } from '@theia/monaco/lib/browser/monaco-workspace';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { ChangeSetFileElement } from './change-set-file-element';
+import { ApplicationShell, DiffUris, LabelProvider, NavigatableWidget, OpenerService, open } from '@theia/core/lib/browser/index.js';
+import { inject, injectable } from 'inversify';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { MonacoWorkspace } from '@theia/monaco/lib/browser/monaco-workspace.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
+import { ChangeSetFileElement } from './change-set-file-element.js';
 
 @injectable()
 export class ChangeSetFileService {

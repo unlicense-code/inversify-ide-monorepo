@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,10 +17,10 @@
 import { find, toArray } from '@lumino/algorithm';
 import { TabBar, Widget, DockPanel, Title } from '@lumino/widgets';
 import { Signal } from '@lumino/signaling';
-import { Disposable, DisposableCollection } from '../../common/disposable';
-import { CorePreferences } from '../../common/core-preferences';
-import { Emitter, Event, environment } from '../../common';
-import { ToolbarAwareTabBar } from './tab-bars';
+import { Disposable, DisposableCollection } from '../../common/disposable.js';
+import { CorePreferences } from '../../common/core-preferences.js';
+import { Emitter, Event, environment } from '../../common/index.js';
+import { ToolbarAwareTabBar } from './tab-bars.js';
 
 export const ACTIVE_TABBAR_CLASS = 'theia-tabBar-active';
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -21,10 +21,10 @@
 import { spawn, execSync, SpawnOptions, ChildProcess, spawnSync } from 'child_process';
 import { Readable } from 'stream';
 import { join } from 'path';
-import { ShellCommandBuilder, CommandLineOptions, ProcessInfo } from './shell-command-builder';
+import { ShellCommandBuilder, CommandLineOptions, ProcessInfo } from './shell-command-builder.js';
 import * as chalk from 'chalk'; // tslint:disable-line:no-implicit-dependencies
 
-export interface TestProcessInfo extends ProcessInfo {
+export type TestProcessInfo = ProcessInfo & {
     shell: ChildProcess
 }
 
@@ -429,7 +429,7 @@ async function scanLines<T = void>(
     });
 
 }
-interface ScanLineHandle<T> {
+type ScanLineHandle<T> = {
 
     /**
      * Finish listening to new events with a return value.

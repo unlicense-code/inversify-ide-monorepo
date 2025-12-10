@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,22 +14,22 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 
 let disableJSDOM = enableJSDOM();
 
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 FrontendApplicationConfigProvider.set({});
 
 import { expect } from 'chai';
-import { Container } from '@theia/core/shared/inversify';
-import { ResourcePropertyDataService } from './resource-property-data-service';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import URI from '@theia/core/lib/common/uri';
-import { PropertyDataService } from '../property-data-service';
-import { FileSelection } from '@theia/filesystem/lib/browser/file-selection';
-import { Navigatable } from '@theia/core/lib/browser/navigatable';
-import { FileStat } from '@theia/filesystem/lib/common/files';
+import { Container } from 'inversify';
+import { ResourcePropertyDataService } from './resource-property-data-service.js';
+import { FileService } from '@theia/filesystem/lib/browser/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { PropertyDataService } from '../property-data-service.js';
+import { FileSelection } from '@theia/filesystem/lib/browser/index.js';
+import { Navigatable } from '@theia/core/lib/browser/navigatable.js';
+import { FileStat } from '@theia/filesystem/lib/common/index.js';
 
 disableJSDOM();
 

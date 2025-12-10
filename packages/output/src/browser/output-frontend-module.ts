@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { OutputWidget } from './output-widget';
-import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { ResourceResolver } from '@theia/core/lib/common';
-import { WidgetFactory, bindViewContribution, OpenHandler } from '@theia/core/lib/browser';
-import { OutputChannelManager } from './output-channel';
-import { bindOutputPreferences } from '../common/output-preferences';
-import { OutputToolbarContribution } from './output-toolbar-contribution';
-import { OutputContribution } from './output-contribution';
-import { MonacoEditorFactory } from '@theia/monaco/lib/browser/monaco-editor-provider';
-import { OutputContextMenuService } from './output-context-menu';
-import { OutputEditorFactory } from './output-editor-factory';
-import { MonacoEditorModelFactory } from '@theia/monaco/lib/browser/monaco-text-model-service';
-import { OutputEditorModelFactory } from './output-editor-model-factory';
+import { ContainerModule } from 'inversify';
+import { OutputWidget } from './output-widget.js';
+import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { ResourceResolver } from '@theia/core/lib/common/index.js';
+import { WidgetFactory, bindViewContribution, OpenHandler } from '@theia/core/lib/browser/index.js';
+import { OutputChannelManager } from './output-channel.js';
+import { bindOutputPreferences } from '../common/output-preferences.js';
+import { OutputToolbarContribution } from './output-toolbar-contribution.js';
+import { OutputContribution } from './output-contribution.js';
+import { MonacoEditorFactory } from '@theia/monaco/lib/browser/monaco-editor-provider.js';
+import { OutputContextMenuService } from './output-context-menu.js';
+import { OutputEditorFactory } from './output-editor-factory.js';
+import { MonacoEditorModelFactory } from '@theia/monaco/lib/browser/monaco-text-model-service.js';
+import { OutputEditorModelFactory } from './output-editor-model-factory.js';
 
 export default new ContainerModule(bind => {
     bind(OutputChannelManager).toSelf().inSingletonScope();

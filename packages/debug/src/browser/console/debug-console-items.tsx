@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { DebugProtocol } from '@vscode/debugprotocol/lib/debugProtocol';
-import { codicon, SingleTextInputDialog } from '@theia/core/lib/browser';
-import { ConsoleItem, CompositeConsoleItem } from '@theia/console/lib/browser/console-session';
-import { DebugSession, formatMessage } from '../debug-session';
-import { Severity } from '@theia/core/lib/common/severity';
+import * as React from 'react';
+import { DebugProtocol } from '@vscode/debugprotocol/lib/debugProtocol.js';
+import { codicon, SingleTextInputDialog } from '@theia/core/lib/browser/index.js';
+import { ConsoleItem, CompositeConsoleItem } from '@theia/console/lib/browser/console-session.js';
+import { DebugSession, formatMessage } from '../debug-session.js';
+import { Severity } from '@theia/core/lib/common/severity.js';
 import * as monaco from '@theia/monaco-editor-core';
 import { generateUuid, nls } from '@theia/core';
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { GitPrompt } from '../../common/git-prompt';
-import { bindPromptServer } from '../../browser/prompt/git-prompt-module';
-import { GitQuickOpenPrompt } from './git-quick-open-prompt';
+import { ContainerModule } from 'inversify';
+import { GitPrompt } from '../../common/git-prompt.js';
+import { bindPromptServer } from '../../browser/prompt/git-prompt-module.js';
+import { GitQuickOpenPrompt } from './git-quick-open-prompt.js';
 
 export default new ContainerModule(bind => {
     bind(GitQuickOpenPrompt).toSelf().inSingletonScope();

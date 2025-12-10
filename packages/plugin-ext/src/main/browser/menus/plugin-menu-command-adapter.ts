@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,22 +15,22 @@
 // *****************************************************************************
 
 import { MenuPath, SelectionService, UriSelection } from '@theia/core';
-import { ResourceContextKey } from '@theia/core/lib/browser/resource-context-key';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { URI as CodeUri } from '@theia/core/shared/vscode-uri';
-import { TreeWidgetSelection } from '@theia/core/lib/browser/tree/tree-widget-selection';
-import { ScmRepository } from '@theia/scm/lib/browser/scm-repository';
-import { ScmService } from '@theia/scm/lib/browser/scm-service';
-import { DirtyDiffWidget } from '@theia/scm/lib/browser/dirty-diff/dirty-diff-widget';
-import { Change, LineRange } from '@theia/scm/lib/browser/dirty-diff/diff-computer';
-import { IChange } from '@theia/monaco-editor-core/esm/vs/editor/common/diff/legacyLinesDiffComputer';
-import { TimelineItem } from '@theia/timeline/lib/common/timeline-model';
-import { ScmCommandArg, TimelineCommandArg, TreeViewItemReference } from '../../../common';
-import { TestItemReference, TestMessageArg } from '../../../common/test-types';
-import { PluginScmProvider, PluginScmResource, PluginScmResourceGroup } from '../scm-main';
-import { TreeViewWidget } from '../view/tree-view-widget';
-import { CodeEditorWidgetUtil, codeToTheiaMappings, ContributionPoint } from './vscode-theia-menu-mappings';
-import { TestItem, TestMessage } from '@theia/test/lib/browser/test-service';
+import { ResourceContextKey } from '@theia/core/lib/browser/resource-context-key.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import { URI as CodeUri } from 'vscode-uri';
+import { TreeWidgetSelection } from '@theia/core/lib/browser/tree/tree-widget-selection.js';
+import { ScmRepository } from '@theia/scm/lib/browser/scm-repository.js';
+import { ScmService } from '@theia/scm/lib/browser/scm-service.js';
+import { DirtyDiffWidget } from '@theia/scm/lib/browser/dirty-diff/dirty-diff-widget.js';
+import { Change, LineRange } from '@theia/scm/lib/browser/dirty-diff/diff-computer.js';
+import { IChange } from '@theia/monaco-editor-core/esm/vs/editor/common/diff/legacyLinesDiffComputer.js';
+import { TimelineItem } from '@theia/timeline/lib/common/timeline-model.js';
+import { ScmCommandArg, TimelineCommandArg, TreeViewItemReference } from '../../../common/index.js';
+import { TestItemReference, TestMessageArg } from '../../../common/test-types.js';
+import { PluginScmProvider, PluginScmResource, PluginScmResourceGroup } from '../scm-main.js';
+import { TreeViewWidget } from '../view/tree-view-widget.js';
+import { CodeEditorWidgetUtil, codeToTheiaMappings, ContributionPoint } from './vscode-theia-menu-mappings.js';
+import { TestItem, TestMessage } from '@theia/test/lib/browser/test-service.js';
 
 export type ArgumentAdapter = (...args: unknown[]) => unknown[];
 function identity(...args: unknown[]): unknown[] {

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017-2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,9 +19,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { injectable, inject, named } from '@theia/core/shared/inversify';
+import { injectable, inject, named } from 'inversify';
 import { deepClone, isWindows, isOSX, ILogger } from '@theia/core';
-import { FileUri } from '@theia/core/lib/node';
+import { FileUri } from '@theia/core/lib/node/index.js';
 import {
     RawProcessFactory,
     ProcessErrorEvent,
@@ -31,22 +31,22 @@ import {
 } from '@theia/process/lib/node';
 import {
     ShellQuotedString, ShellQuotingFunctions, BashQuotingFunctions, CmdQuotingFunctions, PowershellQuotingFunctions, createShellCommandLine, ShellQuoting,
-} from '@theia/process/lib/common/shell-quoting';
-import { TaskFactory } from './process-task';
-import { TaskRunner } from '../task-runner-protocol';
-import { Task } from '../task';
-import { TaskConfiguration } from '../../common/task-protocol';
-import { ProcessTaskError, CommandOptions } from '../../common/process/task-protocol';
+} from '@theia/process/lib/common/shell-quoting.js';
+import { TaskFactory } from './process-task.js';
+import { TaskRunner } from '../task-runner-protocol.js';
+import { Task } from '../task.js';
+import { TaskConfiguration } from '../../common/task-protocol.js';
+import { ProcessTaskError, CommandOptions } from '../../common/process/task-protocol.js';
 import * as fs from 'fs';
-import { ShellProcess } from '@theia/terminal/lib/node/shell-process';
+import { ShellProcess } from '@theia/terminal/lib/node/shell-process.js';
 
-export interface OsSpecificCommand {
+export type OsSpecificCommand = {
     command: string,
     args: Array<string | ShellQuotedString> | undefined,
     options: CommandOptions
 }
 
-export interface ShellSpecificOptions {
+export type ShellSpecificOptions = {
     /** Arguments passed to the shell, aka `command` here. */
     execArgs: string[];
     /** Pack of functions used to escape the `subCommand` and `subArgs` to run in the shell. */

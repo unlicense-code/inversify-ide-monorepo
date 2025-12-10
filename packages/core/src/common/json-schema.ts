@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -28,10 +28,7 @@ export type JsonType = 'string' | 'array' | 'number' | 'integer' | 'object' | 'b
 // Keep tab indent for easier comparison with the original file.
 /* eslint-disable @typescript-eslint/indent */
 
-/**
- * extended JSON schema
- */
-export interface IJSONSchema {
+export type IJSONSchema = {
     id?: string;
     $id?: string;
     $schema?: string;
@@ -97,11 +94,11 @@ export interface IJSONSchema {
     allowTrailingCommas?: boolean; // VSCode extension
 }
 
-export interface IJSONSchemaMap {
+export type IJSONSchemaMap = {
     [name: string]: IJSONSchema;
 }
 
-export interface IJSONSchemaSnippet {
+export type IJSONSchemaSnippet = {
     label?: string;
     description?: string;
     body?: JSONValue; // a object that will be JSON stringified

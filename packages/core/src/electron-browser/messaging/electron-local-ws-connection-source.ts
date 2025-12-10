@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { injectable } from 'inversify';
-import { Endpoint } from '../../browser/endpoint';
-import { WebSocketConnectionSource } from '../../browser/messaging/ws-connection-source';
+import { Endpoint } from '../../browser/endpoint.js';
+import { WebSocketConnectionSource } from '../../browser/messaging/ws-connection-source.js';
 
 export function getLocalPort(): string | undefined {
     const params = new URLSearchParams(location.search);

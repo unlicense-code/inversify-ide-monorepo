@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,13 +19,13 @@
 *  Licensed under the MIT License. See License.txt in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import { injectable, inject, named } from '@theia/core/shared/inversify';
+import { injectable, inject, named } from 'inversify';
 import { ILogger } from '@theia/core/lib/common/';
 import { Process, IProcessExitEvent } from '@theia/process/lib/node';
-import { Task, TaskOptions } from '../task';
-import { TaskManager } from '../task-manager';
-import { ProcessType, ProcessTaskInfo } from '../../common/process/task-protocol';
-import { TaskExitedEvent } from '../../common/task-protocol';
+import { Task, TaskOptions } from '../task.js';
+import { TaskManager } from '../task-manager.js';
+import { ProcessType, ProcessTaskInfo } from '../../common/process/task-protocol.js';
+import { TaskExitedEvent } from '../../common/task-protocol.js';
 
 // copied from https://github.com/microsoft/vscode/blob/1.79.0/src/vs/base/common/strings.ts#L736
 const CSI_SEQUENCE = /(:?\x1b\[|\x9B)[=?>!]?[\d;:]*["$#'* ]?[a-zA-Z@^`{}|~]/g;
@@ -42,7 +42,7 @@ export function removeAnsiEscapeCodes(str: string): string {
 }
 
 export const TaskProcessOptions = Symbol('TaskProcessOptions');
-export interface TaskProcessOptions extends TaskOptions {
+export type TaskProcessOptions = TaskOptions & {
     process: Process;
     processType: ProcessType;
     command?: string;

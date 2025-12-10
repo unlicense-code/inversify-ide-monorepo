@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { UserPreferenceProvider, UserPreferenceProviderFactory } from '../common/user-preference-provider';
-import { SectionPreferenceProviderUri, SectionPreferenceProviderSection } from '../common/section-preference-provider';
+import { interfaces } from 'inversify';
+import { UserPreferenceProvider, UserPreferenceProviderFactory } from '../common/user-preference-provider.js';
+import { SectionPreferenceProviderUri, SectionPreferenceProviderSection } from '../common/section-preference-provider.js';
 import { bindFactory, PreferenceProvider, PreferenceScope, URI } from '@theia/core';
-import { UserConfigsPreferenceProvider, UserStorageLocationProvider } from '../common/user-configs-preference-provider';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
+import { UserConfigsPreferenceProvider, UserStorageLocationProvider } from '../common/user-configs-preference-provider.js';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
 
 export function bindPreferenceProviders(bind: interfaces.Bind): void {
     bind(UserStorageLocationProvider).toDynamicValue(context => async () => {

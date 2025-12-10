@@ -1,6 +1,7 @@
 {
   "name": "@theia/ai-code-completion",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - AI Core",
   "dependencies": {
     "@theia/ai-core": "1.66.0",

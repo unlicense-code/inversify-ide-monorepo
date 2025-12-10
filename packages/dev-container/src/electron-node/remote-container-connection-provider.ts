@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 Typefox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,28 +14,28 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as net from 'net';
+import net from 'node:net';
 import {
     ContainerConnectionOptions, ContainerConnectionResult,
     DevContainerFile, RemoteContainerConnectionProvider
-} from '../electron-common/remote-container-connection-provider';
-import { RemoteConnection, RemoteExecOptions, RemoteExecResult, RemoteExecTester, RemoteStatusReport } from '@theia/remote/lib/electron-node/remote-types';
-import { RemoteSetupResult, RemoteSetupService } from '@theia/remote/lib/electron-node/setup/remote-setup-service';
-import { RemoteConnectionService } from '@theia/remote/lib/electron-node/remote-connection-service';
-import { RemoteProxyServerProvider } from '@theia/remote/lib/electron-node/remote-proxy-server-provider';
+} from '../electron-common/remote-container-connection-provider.js';
+import { RemoteConnection, RemoteExecOptions, RemoteExecResult, RemoteExecTester, RemoteStatusReport } from '@theia/remote/lib/electron-node/remote-types.js';
+import { RemoteSetupResult, RemoteSetupService } from '@theia/remote/lib/electron-node/setup/remote-setup-service.js';
+import { RemoteConnectionService } from '@theia/remote/lib/electron-node/remote-connection-service.js';
+import { RemoteProxyServerProvider } from '@theia/remote/lib/electron-node/remote-proxy-server-provider.js';
 import { Emitter, Event, generateUuid, MessageService, RpcServer, ILogger } from '@theia/core';
 import { Socket } from 'net';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import * as Docker from 'dockerode';
-import { DockerContainerService } from './docker-container-service';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { WriteStream } from 'tty';
-import { PassThrough } from 'stream';
-import { exec, execSync } from 'child_process';
-import { DevContainerFileService } from './dev-container-file-service';
-import { ContainerOutputProvider } from '../electron-common/container-output-provider';
-import { DevContainerConfiguration } from './devcontainer-file';
-import { resolveComposeFilePath } from './docker-compose/compose-service';
+import { inject, injectable } from 'inversify';
+import Docker from 'dockerode';
+import { DockerContainerService } from './docker-container-service.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { WriteStream } from 'node:tty';
+import { PassThrough } from 'node:stream';
+import { exec, execSync } from 'node:child_process';
+import { DevContainerFileService } from './dev-container-file-service.js';
+import { ContainerOutputProvider } from '../electron-common/container-output-provider.js';
+import { DevContainerConfiguration } from './devcontainer-file.js';
+import { resolveComposeFilePath } from './docker-compose/compose-service.js';
 
 @injectable()
 export class DevContainerConnectionProvider implements RemoteContainerConnectionProvider, RpcServer<ContainerOutputProvider> {
@@ -188,7 +188,7 @@ export class DevContainerConnectionProvider implements RemoteContainerConnection
 
 }
 
-export interface RemoteContainerConnectionOptions {
+export type RemoteContainerConnectionOptions = {
     id: string;
     name: string;
     type: string;
@@ -198,14 +198,7 @@ export interface RemoteContainerConnectionOptions {
     logger: ILogger;
 }
 
-interface ContainerTerminalSession {
-    execution: Docker.Exec,
-    stdout: WriteStream,
-    stderr: WriteStream,
-    executeCommand(cmd: string, args?: string[]): Promise<{ stdout: string, stderr: string }>;
-}
-
-interface ContainerTerminalSession {
+type ContainerTerminalSession = {
     execution: Docker.Exec,
     stdout: WriteStream,
     stderr: WriteStream,

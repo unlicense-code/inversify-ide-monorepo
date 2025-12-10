@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -22,8 +22,8 @@ import {
     codicon,
     ExpandableTreeNode,
     Widget,
-} from '@theia/core/lib/browser';
-import { TerminalWidgetFactoryOptions, TerminalWidgetImpl } from '@theia/terminal/lib/browser/terminal-widget-impl';
+} from '@theia/core/lib/browser/index.js';
+import { TerminalWidgetFactoryOptions, TerminalWidgetImpl } from '@theia/terminal/lib/browser/terminal-widget-impl.js';
 
 export namespace TerminalManagerCommands {
     export const MANAGER_NEW_TERMINAL_GROUP = Command.toDefaultLocalizedCommand({

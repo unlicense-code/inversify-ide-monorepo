@@ -15,15 +15,12 @@
 // *****************************************************************************
 
 import { ContributionProvider, MaybePromise, Prioritizeable } from '@theia/core';
-import { inject, injectable, named, postConstruct } from '@theia/core/shared/inversify';
-import { PropertyDataService } from './property-data-service';
-import { PropertyViewContentWidget } from './property-view-content-widget';
+import { inject, injectable, named, postConstruct } from 'inversify';
+import { PropertyDataService } from './property-data-service.js';
+import { PropertyViewContentWidget } from './property-view-content-widget.js';
 
 export const PropertyViewWidgetProvider = Symbol('PropertyViewWidgetProvider');
-/**
- * The `PropertyViewWidgetProvider` should be implemented to provide a property view content widget for the given selection..
- */
-export interface PropertyViewWidgetProvider {
+export type PropertyViewWidgetProvider = {
     /**
      * A unique id for this provider.
      */

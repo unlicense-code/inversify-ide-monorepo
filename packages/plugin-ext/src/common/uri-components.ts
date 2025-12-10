@@ -18,7 +18,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { UriComponents } from '@theia/core/lib/common/uri';
+import { UriComponents } from '@theia/core/lib/common/uri.js';
 import { CellUri } from '@theia/notebook/lib/common';
 
 export { UriComponents };

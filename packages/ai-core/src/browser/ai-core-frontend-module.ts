@@ -18,10 +18,10 @@ import { bindContributionProvider, CommandContribution, CommandHandler, Resource
 import {
     RemoteConnectionProvider,
     ServiceConnectionProvider,
-} from '@theia/core/lib/browser/messaging/service-connection-provider';
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { DefaultLanguageModelAliasRegistry } from './frontend-language-model-alias-registry';
-import { LanguageModelAliasRegistry } from '../common/language-model-alias';
+} from '@theia/core/lib/browser/messaging/service-connection-provider.js';
+import { ContainerModule } from 'inversify';
+import { DefaultLanguageModelAliasRegistry } from './frontend-language-model-alias-registry.js';
+import { LanguageModelAliasRegistry } from '../common/language-model-alias.js';
 import {
     AIVariableContribution,
     AIVariableService,
@@ -46,39 +46,39 @@ import {
     ConfigurableInMemoryResources,
     Agent,
     FrontendLanguageModelRegistry
-} from '../common';
+} from '../common/index.js';
 import {
     FrontendLanguageModelRegistryImpl,
     LanguageModelDelegateClientImpl,
-} from './frontend-language-model-registry';
-import { FrontendApplicationContribution, LabelProviderContribution } from '@theia/core/lib/browser';
-import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { LanguageGrammarDefinitionContribution } from '@theia/monaco/lib/browser/textmate';
-import { AICoreFrontendApplicationContribution } from './ai-core-frontend-application-contribution';
-import { bindAICorePreferences } from '../common/ai-core-preferences';
-import { AISettingsServiceImpl } from './ai-settings-service';
-import { DefaultPromptFragmentCustomizationService } from './frontend-prompt-customization-service';
-import { DefaultFrontendVariableService, FrontendVariableService } from './frontend-variable-service';
-import { PromptTemplateContribution } from './prompttemplate-contribution';
-import { FileVariableContribution } from './file-variable-contribution';
-import { TheiaVariableContribution } from './theia-variable-contribution';
-import { TodayVariableContribution } from '../common/today-variable-contribution';
-import { AgentsVariableContribution } from '../common/agents-variable-contribution';
-import { OpenEditorsVariableContribution } from './open-editors-variable-contribution';
-import { AIActivationService, AIActivationServiceImpl } from './ai-activation-service';
-import { AgentService, AgentServiceImpl } from '../common/agent-service';
-import { AICommandHandlerFactory } from './ai-command-handler-factory';
-import { AISettingsService } from '../common/settings-service';
-import { AiCoreCommandContribution } from './ai-core-command-contribution';
-import { PromptVariableContribution } from '../common/prompt-variable-contribution';
-import { LanguageModelService } from '../common/language-model-service';
-import { FrontendLanguageModelServiceImpl } from './frontend-language-model-service';
-import { TokenUsageFrontendService } from './token-usage-frontend-service';
-import { TokenUsageFrontendServiceImpl, TokenUsageServiceClientImpl } from './token-usage-frontend-service-impl';
-import { AIVariableUriLabelProvider } from './ai-variable-uri-label-provider';
-import { AgentCompletionNotificationService } from './agent-completion-notification-service';
-import { OSNotificationService } from './os-notification-service';
-import { WindowBlinkService } from './window-blink-service';
+} from './frontend-language-model-registry.js';
+import { FrontendApplicationContribution, LabelProviderContribution } from '@theia/core/lib/browser/index.js';
+import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { LanguageGrammarDefinitionContribution } from '@theia/monaco/lib/browser/textmate/index.js';
+import { AICoreFrontendApplicationContribution } from './ai-core-frontend-application-contribution.js';
+import { bindAICorePreferences } from '../common/ai-core-preferences.js';
+import { AISettingsServiceImpl } from './ai-settings-service.js';
+import { DefaultPromptFragmentCustomizationService } from './frontend-prompt-customization-service.js';
+import { DefaultFrontendVariableService, FrontendVariableService } from './frontend-variable-service.js';
+import { PromptTemplateContribution } from './prompttemplate-contribution.js';
+import { FileVariableContribution } from './file-variable-contribution.js';
+import { TheiaVariableContribution } from './theia-variable-contribution.js';
+import { TodayVariableContribution } from '../common/today-variable-contribution.js';
+import { AgentsVariableContribution } from '../common/agents-variable-contribution.js';
+import { OpenEditorsVariableContribution } from './open-editors-variable-contribution.js';
+import { AIActivationService, AIActivationServiceImpl } from './ai-activation-service.js';
+import { AgentService, AgentServiceImpl } from '../common/agent-service.js';
+import { AICommandHandlerFactory } from './ai-command-handler-factory.js';
+import { AISettingsService } from '../common/settings-service.js';
+import { AiCoreCommandContribution } from './ai-core-command-contribution.js';
+import { PromptVariableContribution } from '../common/prompt-variable-contribution.js';
+import { LanguageModelService } from '../common/language-model-service.js';
+import { FrontendLanguageModelServiceImpl } from './frontend-language-model-service.js';
+import { TokenUsageFrontendService } from './token-usage-frontend-service.js';
+import { TokenUsageFrontendServiceImpl, TokenUsageServiceClientImpl } from './token-usage-frontend-service-impl.js';
+import { AIVariableUriLabelProvider } from './ai-variable-uri-label-provider.js';
+import { AgentCompletionNotificationService } from './agent-completion-notification-service.js';
+import { OSNotificationService } from './os-notification-service.js';
+import { WindowBlinkService } from './window-blink-service.js';
 
 export default new ContainerModule(bind => {
     bindContributionProvider(bind, Agent);

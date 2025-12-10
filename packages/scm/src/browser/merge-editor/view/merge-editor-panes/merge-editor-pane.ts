@@ -14,21 +14,21 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, postConstruct } from 'inversify';
 import { Disposable, DisposableCollection } from '@theia/core';
 import { Autorun, DerivedObservable, Observable, ObservableFromEvent } from '@theia/core/lib/common/observable';
-import { BoxPanel, Message } from '@theia/core/lib/browser';
-import { EditorDecoration, EditorWidget, MinimapPosition, OverviewRulerLane, Position, Range, TrackedRangeStickiness } from '@theia/editor/lib/browser';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
-import { MonacoToProtocolConverter } from '@theia/monaco/lib/browser/monaco-to-protocol-converter';
+import { BoxPanel, Message } from '@theia/core/lib/browser/index.js';
+import { EditorDecoration, EditorWidget, MinimapPosition, OverviewRulerLane, Position, Range, TrackedRangeStickiness } from '@theia/editor/lib/browser/index.js';
+import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor.js';
+import { MonacoToProtocolConverter } from '@theia/monaco/lib/browser/monaco-to-protocol-converter.js';
 import { Selection } from '@theia/monaco-editor-core';
-import { MergeEditorPaneHeader, MergeEditorPaneToolbarItem } from './merge-editor-pane-header';
-import { MergeEditor } from '../../merge-editor';
-import { MergeRange } from '../../model/merge-range';
-import { DetailedLineRangeMapping } from '../../model/range-mapping';
-import { LineRange } from '../../model/line-range';
-import { RangeUtils } from '../../model/range-utils';
-import { ScmColors } from '../../../scm-colors';
+import { MergeEditorPaneHeader, MergeEditorPaneToolbarItem } from './merge-editor-pane-header.js';
+import { MergeEditor } from '../../merge-editor.js';
+import { MergeRange } from '../../model/merge-range.js';
+import { DetailedLineRangeMapping } from '../../model/range-mapping.js';
+import { LineRange } from '../../model/line-range.js';
+import { RangeUtils } from '../../model/range-utils.js';
+import { ScmColors } from '../../../scm-colors.js';
 
 @injectable()
 export abstract class MergeEditorPane extends BoxPanel {

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, decorate, named } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { OpenerService, open, WidgetOpenMode, ApplicationShell } from '@theia/core/lib/browser';
-import { EditorWidget, EditorOpenerOptions, EditorManager, CustomEditorWidget } from '@theia/editor/lib/browser';
-import { MonacoEditor } from './monaco-editor';
-import { MonacoToProtocolConverter } from './monaco-to-protocol-converter';
-import { MonacoEditorModel } from './monaco-editor-model';
-import { IResourceEditorInput, ITextResourceEditorInput } from '@theia/monaco-editor-core/esm/vs/platform/editor/common/editor';
-import { StandaloneCodeEditorService } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneCodeEditorService';
-import { StandaloneCodeEditor } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneCodeEditor';
-import { ICodeEditor } from '@theia/monaco-editor-core/esm/vs/editor/browser/editorBrowser';
-import { IContextKeyService } from '@theia/monaco-editor-core/esm/vs/platform/contextkey/common/contextkey';
-import { IThemeService } from '@theia/monaco-editor-core/esm/vs/platform/theme/common/themeService';
+import { injectable, inject, decorate, named } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { OpenerService, open, WidgetOpenMode, ApplicationShell } from '@theia/core/lib/browser/index.js';
+import { EditorWidget, EditorOpenerOptions, EditorManager, CustomEditorWidget } from '@theia/editor/lib/browser/index.js';
+import { MonacoEditor } from './monaco-editor.js';
+import { MonacoToProtocolConverter } from './monaco-to-protocol-converter.js';
+import { MonacoEditorModel } from './monaco-editor-model.js';
+import { IResourceEditorInput, ITextResourceEditorInput } from '@theia/monaco-editor-core/esm/vs/platform/editor/common/editor.js';
+import { StandaloneCodeEditorService } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneCodeEditorService.js';
+import { StandaloneCodeEditor } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneCodeEditor.js';
+import { ICodeEditor } from '@theia/monaco-editor-core/esm/vs/editor/browser/editorBrowser.js';
+import { IContextKeyService } from '@theia/monaco-editor-core/esm/vs/platform/contextkey/common/contextkey.js';
+import { IThemeService } from '@theia/monaco-editor-core/esm/vs/platform/theme/common/themeService.js';
 import { ContributionProvider, PreferenceService } from '@theia/core';
 
 decorate(injectable(), StandaloneCodeEditorService);
@@ -41,7 +41,7 @@ export type MonacoEditorServiceFactoryType = (contextKeyService: IContextKeyServ
  * contribution provider to extend the active editor handling to other editor types than just standalone editor widgets.
  */
 export const ActiveMonacoEditorContribution = Symbol('ActiveMonacoEditorContribution');
-export interface ActiveMonacoEditorContribution {
+export type ActiveMonacoEditorContribution = {
     getActiveEditor(): ICodeEditor | undefined;
 }
 

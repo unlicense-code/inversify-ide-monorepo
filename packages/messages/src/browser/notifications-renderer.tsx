@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { createRoot, Root } from '@theia/core/shared/react-dom/client';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { ApplicationShell } from '@theia/core/lib/browser';
-import { NotificationManager } from './notifications-manager';
-import { NotificationCenterComponent } from './notification-center-component';
-import { NotificationToastsComponent } from './notification-toasts-component';
-import { CorePreferences } from '@theia/core';
+import * as React from 'react';
+import { createRoot, Root } from 'react-dom/client';
+import { injectable, inject, postConstruct } from 'inversify';
+import { ApplicationShell } from '@theia/core/lib/browser/index.js';
+import { NotificationManager } from './notifications-manager.js';
+import { NotificationCenterComponent } from './notification-center-component.js';
+import { NotificationToastsComponent } from './notification-toasts-component.js';
+import { CorePreferences } from '@theia/core/lib/common/index.js';
 
 @injectable()
 export class NotificationsRenderer {

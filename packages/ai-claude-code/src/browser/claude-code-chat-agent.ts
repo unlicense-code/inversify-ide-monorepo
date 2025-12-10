@@ -23,15 +23,15 @@ import {
     MutableChatRequestModel,
     QuestionResponseContentImpl,
     ThinkingChatResponseContentImpl,
-} from '@theia/ai-chat';
-import { AI_CHAT_NEW_CHAT_WINDOW_COMMAND, AI_CHAT_SHOW_CHATS_COMMAND } from '@theia/ai-chat-ui/lib/browser/chat-view-commands';
-import { PromptText } from '@theia/ai-core/lib/common/prompt-text';
-import { AIVariableResolutionRequest, BasePromptFragment, PromptService, ResolvedPromptFragment, TokenUsageService } from '@theia/ai-core';
+} from '@theia/ai-chat/lib/common/index.js';
+import { AI_CHAT_NEW_CHAT_WINDOW_COMMAND, AI_CHAT_SHOW_CHATS_COMMAND } from '@theia/ai-chat-ui/lib/browser/chat-view-commands.js';
+import { PromptText } from '@theia/ai-core/lib/common/prompt-text.js';
+import { AIVariableResolutionRequest, BasePromptFragment, PromptService, ResolvedPromptFragment, TokenUsageService } from '@theia/ai-core/lib/common/index.js';
 import { CommandService, ILogger, nls, SelectionService } from '@theia/core';
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { inject, injectable, named } from 'inversify';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
 import {
     ContentBlock,
     EditInput,
@@ -43,12 +43,12 @@ import {
     ToolApprovalResponseMessage,
     Usage,
     WriteInput
-} from '../common/claude-code-service';
-import { ClaudeCodeEditToolService, ToolUseBlock } from './claude-code-edit-tool-service';
-import { FileEditBackupService } from './claude-code-file-edit-backup-service';
-import { ClaudeCodeFrontendService } from './claude-code-frontend-service';
-import { ClaudeCodeToolCallChatResponseContent } from './claude-code-tool-call-content';
-import { OPEN_CLAUDE_CODE_CONFIG, OPEN_CLAUDE_CODE_MEMORY } from './claude-code-command-contribution';
+} from '../common/claude-code-service.js';
+import { ClaudeCodeEditToolService, ToolUseBlock } from './claude-code-edit-tool-service.js';
+import { FileEditBackupService } from './claude-code-file-edit-backup-service.js';
+import { ClaudeCodeFrontendService } from './claude-code-frontend-service.js';
+import { ClaudeCodeToolCallChatResponseContent } from './claude-code-tool-call-content.js';
+import { OPEN_CLAUDE_CODE_CONFIG, OPEN_CLAUDE_CODE_MEMORY } from './claude-code-command-contribution.js';
 
 export const CLAUDE_SESSION_ID_KEY = 'claudeSessionId';
 export const CLAUDE_EDIT_TOOL_USES_KEY = 'claudeEditToolUses';

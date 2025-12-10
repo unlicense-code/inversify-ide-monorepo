@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { createPreferenceProxy, PreferenceContribution, PreferenceProxy, PreferenceSchema, PreferenceService } from '@theia/core/lib/common';
-import { nls } from '@theia/core/lib/common/nls';
-import { PluginDebugPort } from './plugin-dev-protocol';
+import { interfaces } from 'inversify';
+import { createPreferenceProxy, PreferenceContribution, PreferenceProxy, PreferenceSchema, PreferenceService } from '@theia/core/lib/common/index.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { PluginDebugPort } from './plugin-dev-protocol.js';
 
 export const HostedPluginConfigSchema: PreferenceSchema = {
     properties: {
@@ -68,7 +68,7 @@ export const HostedPluginConfigSchema: PreferenceSchema = {
     }
 };
 
-export interface HostedPluginConfiguration {
+export type HostedPluginConfiguration = {
     'hosted-plugin.watchMode': boolean;
     'hosted-plugin.debugMode': string;
     'hosted-plugin.launchOutFiles': string[];

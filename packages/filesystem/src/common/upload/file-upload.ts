@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import URI from '@theia/core/lib/common/uri';
-import { CancellationToken } from '@theia/core/lib/common/cancellation';
-import { Progress } from '@theia/core/lib/common/message-service-protocol';
-import { Event } from '@theia/core/lib/common/event';
+import { URI } from '@theia/core';
+import { CancellationToken } from '@theia/core';
+import { Progress } from '@theia/core';
+import { Event } from '@theia/core';
 
 export type CustomDataTransfer = Iterable<readonly [string, CustomDataTransferItem]>;
 
-export interface CustomDataTransferItem {
+export type CustomDataTransferItem = {
     asFile(): {
         readonly id: string;
         readonly name: string;
@@ -29,7 +29,7 @@ export interface CustomDataTransferItem {
     } | undefined
 }
 
-export interface FileUploadService {
+export type FileUploadService = {
     upload(targetUri: string | URI, params?: FileUploadService.UploadParams): Promise<FileUploadService.UploadResult>;
     readonly onDidUpload: Event<string[]>;
 }

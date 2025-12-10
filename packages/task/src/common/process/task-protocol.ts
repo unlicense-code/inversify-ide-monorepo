@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { TaskConfiguration, TaskInfo } from '../task-protocol';
-import { ApplicationError } from '@theia/core/lib/common/application-error';
+import { TaskConfiguration, TaskInfo } from '../task-protocol.js';
+import { ApplicationError } from '@theia/core/lib/common/application-error.js';
 
 export type ProcessType = 'shell' | 'process';
 
-export interface CommandOptions {
+export type CommandOptions = {
     /**
      * The 'current working directory' the task will run in. Can be a uri-as-string
      * or plain string path. If the cwd is meant to be somewhere under the workspace,
@@ -51,14 +51,13 @@ export interface CommandOptions {
     };
 }
 
-export interface CommandProperties {
+export type CommandProperties = {
     readonly command?: string;
     readonly args?: string[];
     readonly options?: CommandOptions;
 }
 
-/** Configuration of a Task that may be run as a process or a command inside a shell. */
-export interface ProcessTaskConfiguration extends TaskConfiguration, CommandProperties {
+export type ProcessTaskConfiguration = TaskConfiguration & CommandProperties & {
     readonly type: ProcessType;
 
     /**
@@ -77,7 +76,7 @@ export interface ProcessTaskConfiguration extends TaskConfiguration, CommandProp
     readonly linux?: CommandProperties;
 }
 
-export interface ProcessTaskInfo extends TaskInfo {
+export type ProcessTaskInfo = TaskInfo & {
     /** process id. Defined if task is run as a process */
     readonly processId?: number;
     /** process task command */

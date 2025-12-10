@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import debounce = require('@theia/core/shared/lodash.debounce');
+import debounce from 'lodash/debounce.js'
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import { StorageService } from '@theia/core/lib/browser/storage-service';
-import { Git, Repository } from '../common';
-import { GitCommitMessageValidator } from './git-commit-message-validator';
-import { GitScmProvider } from './git-scm-provider';
-import { ScmService } from '@theia/scm/lib/browser/scm-service';
-import { ScmRepository } from '@theia/scm/lib/browser/scm-repository';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
+import { injectable, inject, postConstruct } from 'inversify';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
+import { Emitter, Event } from '@theia/core/lib/common/event.js';
+import { StorageService } from '@theia/core/lib/browser/storage-service.js';
+import { Git, Repository } from '../common/index.js';
+import { GitCommitMessageValidator } from './git-commit-message-validator.js';
+import { GitScmProvider } from './git-scm-provider.js';
+import { ScmService } from '@theia/scm/lib/browser/scm-service.js';
+import { ScmRepository } from '@theia/scm/lib/browser/scm-repository.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
 
-export interface GitRefreshOptions {
+export type GitRefreshOptions = {
     readonly maxCount: number
 }
 
@@ -204,7 +204,7 @@ export class GitRepositoryProvider {
 
 }
 
-export interface GitScmRepository extends ScmRepository {
+export type GitScmRepository = ScmRepository & {
     readonly provider: GitScmProvider;
 }
 export namespace GitScmRepository {

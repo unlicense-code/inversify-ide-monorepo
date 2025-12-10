@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { AbstractViewContribution, Widget } from '@theia/core/lib/browser';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { TestRun, TestService } from '../test-service';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { TestRunTreeWidget } from './test-run-widget';
-import { TEST_VIEW_CONTAINER_ID, TestViewCommands } from './test-view-contribution';
+import { AbstractViewContribution, Widget } from '@theia/core/lib/browser/index.js';
+import { inject, injectable } from 'inversify';
+import { TestRun, TestService } from '../test-service.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { TestRunTreeWidget } from './test-run-widget.js';
+import { TEST_VIEW_CONTAINER_ID, TestViewCommands } from './test-view-contribution.js';
 import { CommandRegistry, MenuModelRegistry, nls } from '@theia/core';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
 
 export const TEST_RUNS_CONTEXT_MENU = ['test-runs-context-menu'];
 export const TEST_RUNS_INLINE_MENU = [...TEST_RUNS_CONTEXT_MENU, 'inline'];

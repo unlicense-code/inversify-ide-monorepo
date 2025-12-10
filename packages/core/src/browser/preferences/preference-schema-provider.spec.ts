@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { enableJSDOM } from '../test/jsdom';
+import { enableJSDOM } from '../test/jsdom.js';
 
 let disableJSDOM = enableJSDOM();
 
-import * as assert from 'assert';
+import assert from 'assert';
 import { Container } from 'inversify';
-import { bindPreferenceService } from '../frontend-application-bindings';
-import { FrontendApplicationConfigProvider } from '../frontend-application-config-provider';
-import { IndexedAccess, PreferenceDataProperty, PreferenceSchemaService } from '../../common/preferences/preference-schema';
-import { PreferenceProvider, PreferenceProviderProvider, PreferenceScope } from '../../common/preferences';
+import { bindPreferenceService } from '../frontend-application-bindings.js';
+import { FrontendApplicationConfigProvider } from '../frontend-application-config-provider.js';
+import { IndexedAccess, PreferenceDataProperty, PreferenceSchemaService } from '../../common/preferences/preference-schema.js';
+import { PreferenceProvider, PreferenceProviderProvider, PreferenceScope } from '../../common/preferences/index.js';
 
 disableJSDOM();
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { injectable, inject, unmanaged } from 'inversify';
-import { Disposable, MaybePromise, CancellationTokenSource, nls } from '../common';
-import { Key } from './keyboard/keys';
-import { Widget, BaseWidget, Message, addKeyListener, codiconArray } from './widgets/widget';
-import { FrontendApplicationContribution } from './frontend-application-contribution';
+import { Disposable, MaybePromise, CancellationTokenSource, nls } from '../common/index.js';
+import { Key } from './keyboard/keys.js';
+import { Widget, BaseWidget, Message, addKeyListener, codiconArray } from './widgets/widget.js';
+import { FrontendApplicationContribution } from './frontend-application-contribution.js';
 
 @injectable()
 export class DialogProps {

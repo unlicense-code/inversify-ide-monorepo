@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { PreferenceInspection } from '@theia/core';
-import { JSONValue } from '@theia/core/shared/@lumino/coreutils';
+import { JSONValue } from '@lumino/coreutils';
 
 export const sampleBackendPreferencesServicePath = '/services/sampleBackendPreferences';
 export const SampleBackendPreferencesService = Symbol('SampleBackendPreferencesService');
 
-export interface SampleBackendPreferencesService {
+export type SampleBackendPreferencesService = {
     getPreference(key: string, overrideIdentifier?: string): Promise<JSONValue | undefined>;
     inspectPreference(key: string, overrideIdentifier?: string): Promise<PreferenceInspection | undefined>;
     setPreference(key: string, overrideIdentifier: string | undefined, value: JSONValue): Promise<void>

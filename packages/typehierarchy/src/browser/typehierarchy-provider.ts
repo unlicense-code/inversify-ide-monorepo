@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { Disposable } from '@theia/core/lib/common/disposable';
-import { SymbolKind, Range, TextDocumentPositionParams } from '@theia/core/shared/vscode-languageserver-protocol';
+import { injectable } from 'inversify';
+import { Disposable } from '@theia/core/lib/common/disposable.js';
+import { SymbolKind, Range, TextDocumentPositionParams } from 'vscode-languageserver-protocol';
 
 @injectable()
 export class TypeHierarchyRegistry {
@@ -38,18 +38,14 @@ export class TypeHierarchyRegistry {
 
 }
 
-export interface TypeHierarchyProvider extends Disposable {
+export type TypeHierarchyProvider = Disposable & {
     readonly languageId: string;
     get(params: TypeHierarchyParams): Promise<TypeHierarchyItem | undefined>;
     resolve(params: ResolveTypeHierarchyItemParams): Promise<TypeHierarchyItem | undefined>;
 
 }
 
-/**
- * The type hierarchy params is an extension of the `TextDocumentPositionParams` with optional properties
- * which can be used to eagerly resolve the item when requesting from the server.
- */
-export interface TypeHierarchyParams extends TextDocumentPositionParams {
+export type TypeHierarchyParams = TextDocumentPositionParams & {
 
     /**
      * The hierarchy levels to resolve. `0` indicates no level. When not defined, it is treated as `0`.
@@ -82,10 +78,7 @@ export const enum TypeHierarchyDirection {
 
 }
 
-/**
- * Parameters for the `typeHierarchy/resolve` request.
- */
-export interface ResolveTypeHierarchyItemParams {
+export type ResolveTypeHierarchyItemParams = {
 
     /**
      * The item to resolve.
@@ -103,7 +96,7 @@ export interface ResolveTypeHierarchyItemParams {
     direction: TypeHierarchyDirection;
 }
 
-export interface TypeHierarchyItem {
+export type TypeHierarchyItem = {
 
     /**
      * The human readable name of the hierarchy item.

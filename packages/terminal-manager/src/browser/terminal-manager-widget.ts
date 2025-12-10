@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, interfaces, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, interfaces, postConstruct } from 'inversify';
 import {
     ApplicationShell,
     BaseWidget,
@@ -31,17 +31,17 @@ import {
     ViewContainerLayout,
     Widget,
     WidgetManager,
-} from '@theia/core/lib/browser';
+} from '@theia/core/lib/browser/index.js';
 import { Emitter, nls } from '@theia/core';
-import { UUID } from '@theia/core/shared/@lumino/coreutils';
-import { TerminalWidget, TerminalWidgetOptions } from '@theia/terminal/lib/browser/base/terminal-widget';
-import { TerminalWidgetImpl } from '@theia/terminal/lib/browser/terminal-widget-impl';
-import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
-import { TerminalFrontendContribution } from '@theia/terminal/lib/browser/terminal-frontend-contribution';
-import { TerminalManagerPreferences } from './terminal-manager-preferences';
-import { TerminalManagerTreeTypes } from './terminal-manager-types';
-import { TerminalManagerTreeWidget } from './terminal-manager-tree-widget';
-import { ConfirmDialog } from '@theia/core/lib/browser/dialogs';
+import { UUID } from '@lumino/coreutils';
+import { TerminalWidget, TerminalWidgetOptions } from '@theia/terminal/lib/browser/base/terminal-widget.js';
+import { TerminalWidgetImpl } from '@theia/terminal/lib/browser/terminal-widget-impl.js';
+import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state.js';
+import { TerminalFrontendContribution } from '@theia/terminal/lib/browser/terminal-frontend-contribution.js';
+import { TerminalManagerPreferences } from './terminal-manager-preferences.js';
+import { TerminalManagerTreeTypes } from './terminal-manager-types.js';
+import { TerminalManagerTreeWidget } from './terminal-manager-tree-widget.js';
+import { ConfirmDialog } from '@theia/core/lib/browser/dialogs.js';
 
 export namespace TerminalManagerWidgetState {
     export interface BaseLayoutData<ID> {

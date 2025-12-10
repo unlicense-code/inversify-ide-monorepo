@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { LanguagesMainPluginMetrics } from './plugin-metrics-languages-main';
-import { PluginMetrics, metricsJsonRpcPath } from '../common/metrics-protocol';
-import { WebSocketConnectionProvider } from '@theia/core/lib/browser/messaging/ws-connection-provider';
-import { PluginMetricsCreator } from './plugin-metrics-creator';
-import { PluginMetricsResolver } from './plugin-metrics-resolver';
-import { PluginMetricsOutputChannelRegistry } from './plugin-metrics-output-registry';
-import { LanguagesMainImpl } from '@theia/plugin-ext/lib/main/browser/languages-main';
-import { OutputChannelRegistryMainImpl } from '@theia/plugin-ext/lib/main/browser/output-channel-registry-main';
+import { ContainerModule } from 'inversify';
+import { LanguagesMainPluginMetrics } from './plugin-metrics-languages-main.js';
+import { PluginMetrics, metricsJsonRpcPath } from '../common/metrics-protocol.js';
+import { WebSocketConnectionProvider } from '@theia/core/lib/browser/messaging/ws-connection-provider.js';
+import { PluginMetricsCreator } from './plugin-metrics-creator.js';
+import { PluginMetricsResolver } from './plugin-metrics-resolver.js';
+import { PluginMetricsOutputChannelRegistry } from './plugin-metrics-output-registry.js';
+import { LanguagesMainImpl } from '@theia/plugin-ext/lib/main/browser/languages-main.js';
+import { OutputChannelRegistryMainImpl } from '@theia/plugin-ext/lib/main/browser/output-channel-registry-main.js';
 
 export default new ContainerModule((bind, unbind, isBound, rebind) => {
     bind(PluginMetricsResolver).toSelf().inSingletonScope();

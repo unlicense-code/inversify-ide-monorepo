@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { PreferenceService } from '@theia/core/lib/common';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { Prioritizeable } from '@theia/core/lib/common/prioritizeable';
-import { LanguageModel, LanguageModelResponse, UserRequest } from '../common';
-import { LanguageModelServiceImpl } from '../common/language-model-service';
-import { PREFERENCE_NAME_REQUEST_SETTINGS, RequestSetting, getRequestSettingSpecificity } from '../common/ai-core-preferences';
+import { PreferenceService } from '@theia/core/lib/common/index.js';
+import { inject, injectable } from 'inversify';
+import { Prioritizeable } from '@theia/core/lib/common/prioritizeable.js';
+import { LanguageModel, LanguageModelResponse, UserRequest } from '../common/index.js';
+import { LanguageModelServiceImpl } from '../common/language-model-service.js';
+import { PREFERENCE_NAME_REQUEST_SETTINGS, RequestSetting, getRequestSettingSpecificity } from '../common/ai-core-preferences.js';
 
 @injectable()
 export class FrontendLanguageModelServiceImpl extends LanguageModelServiceImpl {

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,48 +15,75 @@
 // *****************************************************************************
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import URI from '@theia/core/lib/common/uri';
-import { TextEditor, DiffNavigator } from '@theia/editor/lib/browser';
-import { DiffUris } from '@theia/core/lib/browser/diff-uris';
-import { inject, injectable, named, postConstruct } from '@theia/core/shared/inversify';
-import { DisposableCollection, deepClone, Disposable, CancellationToken } from '@theia/core/lib/common';
-import { MonacoDiffEditor } from './monaco-diff-editor';
-import { MonacoDiffNavigatorFactory } from './monaco-diff-navigator-factory';
-import { EditorServiceOverrides, MonacoEditor, MonacoEditorServices } from './monaco-editor';
-import { MonacoEditorModel, TextDocumentSaveReason } from './monaco-editor-model';
-import { MonacoWorkspace } from './monaco-workspace';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { TextEditor, DiffNavigator } from '@theia/editor/lib/browser/index.js';
+import { DiffUris } from '@theia/core/lib/browser/diff-uris.js';
+import { inject, injectable, named, postConstruct } from 'inversify';
+import { DisposableCollection, deepClone, Disposable, CancellationToken } from '@theia/core/lib/common/index.js';
+import { MonacoDiffEditor } from './monaco-diff-editor.js';
+import { MonacoDiffNavigatorFactory } from './monaco-diff-navigator-factory.js';
+import { EditorServiceOverrides, MonacoEditor, MonacoEditorServices } from './monaco-editor.js';
+import { MonacoEditorModel, TextDocumentSaveReason } from './monaco-editor-model.js';
+import { MonacoWorkspace } from './monaco-workspace.js';
 import { ContributionProvider } from '@theia/core';
-import { KeybindingRegistry, OpenerService, open, WidgetOpenerOptions, SaveOptions, FormatType } from '@theia/core/lib/browser';
-import { MonacoResolvedKeybinding } from './monaco-resolved-keybinding';
-import { HttpOpenHandlerOptions } from '@theia/core/lib/browser/http-open-handler';
-import { MonacoToProtocolConverter } from './monaco-to-protocol-converter';
-import { ProtocolToMonacoConverter } from './protocol-to-monaco-converter';
+import { KeybindingRegistry, OpenerService, open, WidgetOpenerOptions,
+     SaveOptions, FormatType } from '@theia/core/lib/browser/index.js';
+import { MonacoResolvedKeybinding } from './monaco-resolved-keybinding.js';
+import { HttpOpenHandlerOptions } from '@theia/core/lib/browser/http-open-handler.js';
+import { MonacoToProtocolConverter } from './monaco-to-protocol-converter.js';
+import { ProtocolToMonacoConverter } from './protocol-to-monaco-converter.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { IOpenerService, OpenExternalOptions, OpenInternalOptions } from '@theia/monaco-editor-core/esm/vs/platform/opener/common/opener';
-import { IKeybindingService } from '@theia/monaco-editor-core/esm/vs/platform/keybinding/common/keybinding';
-import { IContextMenuService } from '@theia/monaco-editor-core/esm/vs/platform/contextview/browser/contextView';
-import { KeyCodeChord } from '@theia/monaco-editor-core/esm/vs/base/common/keybindings';
-import { IContextKeyService } from '@theia/monaco-editor-core/esm/vs/platform/contextkey/common/contextkey';
-import { ITextModelService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/resolverService';
-import { IReference } from '@theia/monaco-editor-core/esm/vs/base/common/lifecycle';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
-import { SimpleMonacoEditor } from './simple-monaco-editor';
-import { ICodeEditorWidgetOptions } from '@theia/monaco-editor-core/esm/vs/editor/browser/widget/codeEditor/codeEditorWidget';
-import { timeoutReject } from '@theia/core/lib/common/promise-util';
-import { FileSystemPreferences } from '@theia/filesystem/lib/common';
-import { insertFinalNewline } from './monaco-utilities';
-import { EditorPreferenceChange, EditorPreferences } from '@theia/editor/lib/common/editor-preferences';
+import { StandaloneServices 
+
+} from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { IOpenerService, OpenExternalOptions, OpenInternalOptions 
+
+} from '@theia/monaco-editor-core/esm/vs/platform/opener/common/opener.js';
+import { IKeybindingService 
+
+} from '@theia/monaco-editor-core/esm/vs/platform/keybinding/common/keybinding.js';
+import { IContextMenuService 
+
+} from '@theia/monaco-editor-core/esm/vs/platform/contextview/browser/contextView.js';
+import { KeyCodeChord 
+
+} from '@theia/monaco-editor-core/esm/vs/base/common/keybindings.js';
+import { IContextKeyService 
+
+} from '@theia/monaco-editor-core/esm/vs/platform/contextkey/common/contextkey.js';
+import { ITextModelService 
+
+} from '@theia/monaco-editor-core/esm/vs/editor/common/services/resolverService.js';
+import { IReference 
+
+} from '@theia/monaco-editor-core/esm/vs/base/common/lifecycle.js';
+import { MarkdownString 
+
+} from '@theia/core/lib/common/markdown-rendering/markdown-string.js';
+import { SimpleMonacoEditor } from './simple-monaco-editor.js';
+import { ICodeEditorWidgetOptions 
+
+} from '@theia/monaco-editor-core/esm/vs/editor/browser/widget/codeEditor/codeEditorWidget.js';
+import { timeoutReject 
+
+} from '@theia/core/lib/common/promise-util.js';
+import { FileSystemPreferences 
+
+} from '@theia/filesystem/lib/common/index.js';
+import { insertFinalNewline } from './monaco-utilities.js';
+import { EditorPreferenceChange, EditorPreferences 
+
+} from '@theia/editor/lib/common/editor-preferences.js';
 
 export const MonacoEditorFactory = Symbol('MonacoEditorFactory');
-export interface MonacoEditorFactory {
+export type MonacoEditorFactory = {
     readonly scheme: string;
     create(model: MonacoEditorModel, defaultOptions: MonacoEditor.IOptions, defaultOverrides: EditorServiceOverrides): Promise<MonacoEditor>;
 }
 
 export const SaveParticipant = Symbol('SaveParticipant');
 
-export interface SaveParticipant {
+export type SaveParticipant = {
     readonly order: number;
     applyChangesOnSave(
         editor: MonacoEditor,

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,25 +17,26 @@
 import {
     AbstractViewContribution, KeybindingRegistry, LabelProvider, CommonMenus, FrontendApplication,
     FrontendApplicationContribution, CommonCommands, StylingParticipant, ColorTheme, CssStyleCollector
-} from '@theia/core/lib/browser';
-import { SearchInWorkspaceWidget } from './search-in-workspace-widget';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
+} from '@theia/core/lib/browser/index.js';
+import { SearchInWorkspaceWidget } from './search-in-workspace-widget.js';
+import { injectable, inject, postConstruct } from 'inversify';
 import { CommandRegistry, MenuModelRegistry, SelectionService, Command, isOSX, nls } from '@theia/core';
 import { codicon, Widget } from '@theia/core/lib/browser/widgets';
-import { FileNavigatorCommands, NavigatorContextMenu } from '@theia/navigator/lib/browser/navigator-contribution';
-import { UriCommandHandler, UriAwareCommandHandler } from '@theia/core/lib/common/uri-command-handler';
-import URI from '@theia/core/lib/common/uri';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { SearchInWorkspaceContextKeyService } from './search-in-workspace-context-key-service';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { EditorManager } from '@theia/editor/lib/browser/editor-manager';
-import { Range } from '@theia/core/shared/vscode-languageserver-protocol';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { SEARCH_VIEW_CONTAINER_ID } from './search-in-workspace-factory';
-import { SearchInWorkspaceFileNode, SearchInWorkspaceResultTreeWidget } from './search-in-workspace-result-tree-widget';
-import { TreeWidgetSelection } from '@theia/core/lib/browser/tree/tree-widget-selection';
-import { ClipboardService } from '@theia/core/lib/browser/clipboard-service';
-import { isHighContrast } from '@theia/core/lib/common/theme';
+import { FileNavigatorCommands, NavigatorContextMenu } from '@theia/navigator/lib/browser/navigator-contribution.js';
+import { UriCommandHandler, UriAwareCommandHandler } from '@theia/core/lib/common/uri-command-handler.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { SearchInWorkspaceContextKeyService } from './search-in-workspace-context-key-service.js';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { EditorManager } from '@theia/editor/lib/browser/editor-manager.js';
+import { Range } from 'vscode-languageserver-protocol';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { SEARCH_VIEW_CONTAINER_ID } from './search-in-workspace-factory.js';
+import { SearchInWorkspaceFileNode, SearchInWorkspaceResultTreeWidget } from './search-in-workspace-result-tree-widget.js';
+import { TreeWidgetSelection } from '@theia/core/lib/browser/tree/tree-widget-selection.js';
+import { SelectableTreeNode } from '@theia/core/lib/browser/tree/tree-selection.js';
+import { ClipboardService } from '@theia/core/lib/browser/clipboard-service.js';
+import { isHighContrast } from '@theia/core/lib/common/theme.js';
 
 export namespace SearchInWorkspaceCommands {
     const SEARCH_CATEGORY = 'Search';
@@ -196,9 +197,9 @@ export class SearchInWorkspaceFrontendContribution extends AbstractViewContribut
         });
 
         commands.registerCommand(SearchInWorkspaceCommands.FIND_IN_FOLDER, this.newMultiUriAwareCommandHandler({
-            execute: async uris => {
+            execute: async (uris: URI[]) => {
                 const resources: string[] = [];
-                for (const { stat } of await this.fileService.resolveAll(uris.map(resource => ({ resource })))) {
+                for (const { stat } of await this.fileService.resolveAll(uris.map((resource: URI) => ({ resource })))) {
                     if (stat) {
                         const uri = stat.resource;
                         let uriStr = this.labelProvider.getLongName(uri);
@@ -241,61 +242,61 @@ export class SearchInWorkspaceFrontendContribution extends AbstractViewContribut
         commands.registerCommand(SearchInWorkspaceCommands.DISMISS_RESULT, {
             isEnabled: () => this.withWidget(undefined, widget => {
                 const { selection } = this.selectionService;
-                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && selection.length > 0;
+                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && TreeWidgetSelection.is(selection) && selection.length > 0;
             }),
             isVisible: () => this.withWidget(undefined, widget => {
                 const { selection } = this.selectionService;
-                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && selection.length > 0;
+                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && TreeWidgetSelection.is(selection) && selection.length > 0;
             }),
             execute: () => this.withWidget(undefined, widget => {
                 const { selection } = this.selectionService;
                 if (TreeWidgetSelection.is(selection)) {
-                    selection.forEach(n => widget.resultTreeWidget.removeNode(n));
+                    selection.forEach((n: SelectableTreeNode) => widget.resultTreeWidget.removeNode(n));
                 }
             })
         });
         commands.registerCommand(SearchInWorkspaceCommands.REPLACE_RESULT, {
             isEnabled: () => this.withWidget(undefined, widget => {
                 const { selection } = this.selectionService;
-                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && selection.length > 0 && !SearchInWorkspaceFileNode.is(selection[0]);
+                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && TreeWidgetSelection.is(selection) && selection.length > 0 && !SearchInWorkspaceFileNode.is(selection[0]);
             }),
             isVisible: () => this.withWidget(undefined, widget => {
                 const { selection } = this.selectionService;
-                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && selection.length > 0 && !SearchInWorkspaceFileNode.is(selection[0]);
+                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && TreeWidgetSelection.is(selection) && selection.length > 0 && !SearchInWorkspaceFileNode.is(selection[0]);
             }),
             execute: () => this.withWidget(undefined, widget => {
                 const { selection } = this.selectionService;
                 if (TreeWidgetSelection.is(selection)) {
-                    selection.forEach(n => widget.resultTreeWidget.replace(n));
+                    selection.forEach((n: SelectableTreeNode) => widget.resultTreeWidget.replace(n));
                 }
             }),
         });
         commands.registerCommand(SearchInWorkspaceCommands.REPLACE_ALL_RESULTS, {
             isEnabled: () => this.withWidget(undefined, widget => {
                 const { selection } = this.selectionService;
-                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && selection.length > 0
+                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && TreeWidgetSelection.is(selection) && selection.length > 0
                     && SearchInWorkspaceFileNode.is(selection[0]);
             }),
             isVisible: () => this.withWidget(undefined, widget => {
                 const { selection } = this.selectionService;
-                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && selection.length > 0
+                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && TreeWidgetSelection.is(selection) && selection.length > 0
                     && SearchInWorkspaceFileNode.is(selection[0]);
             }),
             execute: () => this.withWidget(undefined, widget => {
                 const { selection } = this.selectionService;
                 if (TreeWidgetSelection.is(selection)) {
-                    selection.forEach(n => widget.resultTreeWidget.replace(n));
+                    selection.forEach((n: SelectableTreeNode) => widget.resultTreeWidget.replace(n));
                 }
             }),
         });
         commands.registerCommand(SearchInWorkspaceCommands.COPY_ONE, {
             isEnabled: () => this.withWidget(undefined, widget => {
                 const { selection } = this.selectionService;
-                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && selection.length > 0;
+                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && TreeWidgetSelection.is(selection) && selection.length > 0;
             }),
             isVisible: () => this.withWidget(undefined, widget => {
                 const { selection } = this.selectionService;
-                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && selection.length > 0;
+                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && TreeWidgetSelection.is(selection) && selection.length > 0;
             }),
             execute: () => this.withWidget(undefined, widget => {
                 const { selection } = this.selectionService;
@@ -310,11 +311,11 @@ export class SearchInWorkspaceFrontendContribution extends AbstractViewContribut
         commands.registerCommand(SearchInWorkspaceCommands.COPY_ALL, {
             isEnabled: () => this.withWidget(undefined, widget => {
                 const { selection } = this.selectionService;
-                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && selection.length > 0;
+                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && TreeWidgetSelection.is(selection) && selection.length > 0;
             }),
             isVisible: () => this.withWidget(undefined, widget => {
                 const { selection } = this.selectionService;
-                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && selection.length > 0;
+                return TreeWidgetSelection.isSource(selection, widget.resultTreeWidget) && TreeWidgetSelection.is(selection) && selection.length > 0;
             }),
             execute: () => this.withWidget(undefined, widget => {
                 const { selection } = this.selectionService;

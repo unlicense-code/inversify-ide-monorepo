@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { ApplicationShell, WidgetOpenerOptions } from '@theia/core/lib/browser';
-import { TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget';
-import { TerminalWidgetFactoryOptions } from '@theia/terminal/lib/browser/terminal-widget-impl';
-import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
-import { PanelKind, TaskConfiguration, TaskWatcher, TaskExitedEvent, TaskServer, TaskOutputPresentation, TaskInfo } from '../common';
-import { ProcessTaskInfo } from '../common/process/task-protocol';
-import { TaskDefinitionRegistry } from './task-definition-registry';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import URI from '@theia/core/lib/common/uri';
+import { inject, injectable, postConstruct } from 'inversify';
+import { ApplicationShell, WidgetOpenerOptions } from '@theia/core/lib/browser/index.js';
+import { TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget.js';
+import { TerminalWidgetFactoryOptions } from '@theia/terminal/lib/browser/terminal-widget-impl.js';
+import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service.js';
+import { PanelKind, TaskConfiguration, TaskWatcher, TaskExitedEvent, TaskServer, TaskOutputPresentation, TaskInfo } from '../common/index.js';
+import { ProcessTaskInfo } from '../common/process/task-protocol.js';
+import { TaskDefinitionRegistry } from './task-definition-registry.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
+import { URI } from '@theia/core/lib/common/uri.js';
 import { nls } from '@theia/core';
 
-export interface TaskTerminalWidget extends TerminalWidget {
+export type TaskTerminalWidget = TerminalWidget & {
     readonly kind: 'task';
     dedicated?: boolean;
     taskId?: number;
@@ -39,7 +39,7 @@ export namespace TaskTerminalWidget {
     }
 }
 
-export interface TaskTerminalWidgetOpenerOptions extends WidgetOpenerOptions {
+export type TaskTerminalWidgetOpenerOptions = WidgetOpenerOptions & {
     taskConfig?: TaskConfiguration;
     taskInfo?: TaskInfo;
 }

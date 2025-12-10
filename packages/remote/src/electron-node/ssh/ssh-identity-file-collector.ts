@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as fs from '@theia/core/shared/fs-extra';
+import * as fs from 'fs-extra';
 import * as os from 'os';
 import * as path from 'path';
 import * as crypto from 'crypto';
 import { ParsedKey } from 'ssh2';
 import * as ssh2 from 'ssh2';
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable } from 'inversify';
 
-export interface SSHKey {
+export type SSHKey = {
     filename: string;
     parsedKey: ParsedKey;
     fingerprint: string;

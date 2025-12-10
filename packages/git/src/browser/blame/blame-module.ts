@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { KeybindingContribution } from '@theia/core/lib/browser';
-import { CommandContribution, MenuContribution } from '@theia/core/lib/common';
-import { BlameContribution } from './blame-contribution';
-import { BlameDecorator } from './blame-decorator';
-import { BlameManager } from './blame-manager';
+import { interfaces } from 'inversify';
+import { KeybindingContribution } from '@theia/core/lib/browser/index.js';
+import { CommandContribution, MenuContribution } from '@theia/core/lib/common/index.js';
+import { BlameContribution } from './blame-contribution.js';
+import { BlameDecorator } from './blame-decorator.js';
+import { BlameManager } from './blame-manager.js';
 
 export function bindBlame(bind: interfaces.Bind): void {
     bind(BlameContribution).toSelf().inSingletonScope();

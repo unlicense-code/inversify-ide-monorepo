@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { JSONExt, JSONObject, JSONValue } from '@lumino/coreutils';
-import { Event } from '../event';
-import { PreferenceScope } from '../preferences/preference-scope';
-import { URI } from '../uri';
+import { Event } from '../event.js';
+import { PreferenceScope } from '../preferences/preference-scope.js';
+import { URI } from '../uri.js';
 import { Disposable } from 'vscode-languageserver-protocol';
 
-export interface PreferenceProviderDataChange {
+export type PreferenceProviderDataChange = {
     /**
      * The name of the changed preference.
      */
@@ -55,17 +55,17 @@ export namespace PreferenceProviderDataChange {
     }
 }
 
-export interface PreferenceResolveResult<T> {
+export type PreferenceResolveResult<T> = {
     configUri?: URI;
     value?: T
 }
 
-export interface PreferenceProviderDataChanges {
+export type PreferenceProviderDataChanges = {
     [preferenceName: string]: PreferenceProviderDataChange;
 }
 export const PreferenceProvider = Symbol('PreferenceProvider');
 
-export interface PreferenceProvider extends Disposable {
+export type PreferenceProvider = Disposable & {
     readonly onDidPreferencesChanged: Event<PreferenceProviderDataChanges>;
     ready: Promise<void>
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,17 +17,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { inject, injectable, postConstruct } from 'inversify';
-import { isOSX, MAIN_MENU_BAR, MenuNode, CompoundMenuNode, Group, RenderedMenuNode, CommandMenu, AcceleratorSource, MenuPath, PreferenceService } from '../../common';
-import { CommonCommands } from '../../browser';
+import { isOSX, MAIN_MENU_BAR, MenuNode, CompoundMenuNode, Group, RenderedMenuNode, CommandMenu, AcceleratorSource, MenuPath, PreferenceService } from '../../common/index.js';
+import { CommonCommands } from '../../browser/index.js';
 import debounce = require('lodash.debounce');
-import { BrowserMainMenuFactory } from '../../browser/menu/browser-menu-plugin';
-import { ContextMatcher } from '../../browser/context-key-service';
-import { MenuDto, MenuRole } from '../../electron-common/electron-api';
+import { BrowserMainMenuFactory } from '../../browser/menu/browser-menu-plugin.js';
+import { ContextMatcher } from '../../browser/context-key-service.js';
+import { MenuDto, MenuRole } from '../../electron-common/electron-api.js';
 
-/**
- * Representation of possible electron menu options.
- */
-export interface ElectronMenuOptions {
+export type ElectronMenuOptions = {
     /**
      * Controls whether to render disabled menu items.
      * Defaults to `true`.

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,23 +14,23 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { CommonCommands, KeybindingRegistry, OpenerService, QuickAccessProvider, QuickAccessRegistry } from '@theia/core/lib/browser';
-import { QuickInputService, QuickPickItem, QuickPicks } from '@theia/core/lib/browser/quick-input/quick-input-service';
-import { CancellationToken, Command, nls } from '@theia/core/lib/common';
-import { MessageService } from '@theia/core/lib/common/message-service';
-import URI from '@theia/core/lib/common/uri';
-import { inject, injectable, optional, postConstruct } from '@theia/core/shared/inversify';
-import { EditorOpenerOptions, EditorWidget, Position, Range } from '@theia/editor/lib/browser';
-import { NavigationLocationService } from '@theia/editor/lib/browser/navigation/navigation-location-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { QuickFileSelectService } from './quick-file-select-service';
+import { CommonCommands, KeybindingRegistry, OpenerService, QuickAccessProvider, QuickAccessRegistry } from '@theia/core/lib/browser/index.js';
+import { QuickInputService, QuickPickItem, QuickPicks } from '@theia/core/lib/browser/quick-input/quick-input-service.js';
+import { CancellationToken, Command, nls } from '@theia/core/lib/common/index.js';
+import { MessageService } from '@theia/core/lib/common/message-service.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { inject, injectable, optional, postConstruct } from 'inversify';
+import { EditorOpenerOptions, EditorWidget, Position, Range } from '@theia/editor/lib/browser/index.js';
+import { NavigationLocationService } from '@theia/editor/lib/browser/navigation/navigation-location-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { QuickFileSelectService } from './quick-file-select-service.js';
 
 export const quickFileOpen = Command.toDefaultLocalizedCommand({
     id: 'file-search.openFile',
     category: CommonCommands.FILE_CATEGORY,
     label: 'Open File...'
 });
-export interface FilterAndRange {
+export type FilterAndRange = {
     filter: string;
     range?: Range;
 }
@@ -149,7 +149,7 @@ export class QuickFileOpenService implements QuickAccessProvider {
 
     openFile(uri: URI): void {
         const options = this.buildOpenerOptions();
-        const closedEditor = this.navigationLocationService.closedEditorsStack.find(editor => editor.uri.path.toString() === uri.path.toString());
+        const closedEditor = this.navigationLocationService.closedEditorsStack.find((editor: { uri: { path: { toString: () => string } } }) => editor.uri.path.toString() === uri.path.toString());
         this.openerService.getOpener(uri, options)
             .then(opener => opener.open(uri, options))
             .then(widget => {

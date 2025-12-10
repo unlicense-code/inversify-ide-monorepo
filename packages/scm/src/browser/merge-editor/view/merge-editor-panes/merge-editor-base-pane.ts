@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable } from 'inversify';
 import { nls } from '@theia/core';
 import { Autorun } from '@theia/core/lib/common/observable';
-import { EditorDecoration, Range } from '@theia/editor/lib/browser';
-import { MergeEditorPane } from './merge-editor-pane';
-import { MergeRange } from '../../model/merge-range';
-import { LineRange } from '../../model/line-range';
+import { EditorDecoration, Range } from '@theia/editor/lib/browser/index.js';
+import { MergeEditorPane } from './merge-editor-pane.js';
+import { MergeRange } from '../../model/merge-range.js';
+import { LineRange } from '../../model/line-range.js';
 
 @injectable()
 export class MergeEditorBasePane extends MergeEditorPane {

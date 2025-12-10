@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,16 +15,13 @@
 // *****************************************************************************
 
 import { inject, injectable, postConstruct } from 'inversify';
-import { ILogger } from '../common/logger';
-import { MessageService } from '../common/message-service';
-import { WindowService } from './window/window-service';
-import { environment } from '@theia/application-package/lib/environment';
+import { ILogger } from '../common/logger.js';
+import { MessageService } from '../common/message-service.js';
+import { WindowService } from './window/window-service.js';
+import { environment } from '@theia/application-package/lib/environment.js';
 
 export const StorageService = Symbol('IStorageService');
-/**
- * The storage service provides an interface to some data storage that allows extensions to keep state among sessions.
- */
-export interface StorageService {
+export type StorageService = {
 
     /**
      * Stores the given data under the given key.
@@ -38,7 +35,7 @@ export interface StorageService {
     getData<T>(key: string): Promise<T | undefined>;
 }
 
-interface LocalStorage {
+type LocalStorage = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
 }

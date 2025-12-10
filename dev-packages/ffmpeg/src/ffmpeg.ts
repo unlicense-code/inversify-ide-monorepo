@@ -16,17 +16,17 @@
 
 import path = require('path');
 
-export interface Codec {
+export type Codec = {
     id: number
     name: string
     longName: string
 }
 
-export interface FfmpegNativeAddon {
+export type FfmpegNativeAddon = {
     codecs(ffmpegPath: string): Codec[]
 }
 
-export interface FfmpegNameAndLocation {
+export type FfmpegNameAndLocation = {
     /**
      * Name with extension of the shared library.
      */
@@ -37,7 +37,7 @@ export interface FfmpegNameAndLocation {
     location: string
 }
 
-export interface FfmpegOptions {
+export type FfmpegOptions = {
     electronVersion?: string
     electronDist?: string
     ffmpegPath?: string

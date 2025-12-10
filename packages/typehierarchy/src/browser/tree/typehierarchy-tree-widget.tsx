@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { DockPanel } from '@theia/core/shared/@lumino/widgets';
-import URI from '@theia/core/lib/common/uri';
-import { SymbolKind, Range } from '@theia/core/shared/vscode-languageserver-protocol';
-import { TreeNode } from '@theia/core/lib/browser/tree/tree';
-import { EditorManager } from '@theia/editor/lib/browser/editor-manager';
-import { ContextMenuRenderer } from '@theia/core/lib/browser/context-menu-renderer';
-import { TreeWidget, TreeProps } from '@theia/core/lib/browser/tree/tree-widget';
-import { TypeHierarchyTreeModel } from './typehierarchy-tree-model';
-import { TypeHierarchyTree } from './typehierarchy-tree';
-import { codicon } from '@theia/core/lib/browser';
-import { nls } from '@theia/core/lib/common/nls';
+import * as React from 'react';
+import { inject, injectable } from 'inversify';
+import { DockPanel } from '@lumino/widgets';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { SymbolKind, Range } from 'vscode-languageserver-protocol';
+import { TreeNode } from '@theia/core/lib/browser/tree/tree.js';
+import { EditorManager } from '@theia/editor/lib/browser/editor-manager.js';
+import { ContextMenuRenderer } from '@theia/core/lib/browser/context-menu-renderer.js';
+import { TreeWidget, TreeProps } from '@theia/core/lib/browser/tree/tree-widget.js';
+import { TypeHierarchyTreeModel } from './typehierarchy-tree-model.js';
+import { TypeHierarchyTree } from './typehierarchy-tree.js';
+import { codicon } from '@theia/core/lib/browser/index.js';
+import { nls } from '@theia/core/lib/common/nls.js';
 
 @injectable()
 export class TypeHierarchyTreeWidget extends TreeWidget {
@@ -48,7 +48,10 @@ export class TypeHierarchyTreeWidget extends TreeWidget {
         this.addClass(TypeHierarchyTreeWidget.Styles.TYPE_HIERARCHY_TREE_CLASS);
         this.title.closable = true;
         this.title.iconClass = codicon('type-hierarchy');
-        this.toDispose.push(this.model.onSelectionChanged(selection => {
+        this.toDispose.push(this.model.onSelectionChanged((selection: ReadonlyArray<TreeNode> | undefined) => {
+            if (!selection || selection.length === 0) {
+                return;
+            }
             const node = selection[0];
             if (node) {
                 this.openEditor(node, true);

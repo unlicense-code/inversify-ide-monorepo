@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,18 +18,18 @@
 /* eslint-disable no-null/no-null */
 
 import * as jsoncparser from 'jsonc-parser';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { Disposable } from '@theia/core/lib/common/disposable';
+import { inject, injectable, postConstruct } from 'inversify';
+import { Disposable } from '@theia/core/lib/common/disposable.js';
 import {
     PreferenceProviderImpl, PreferenceScope, PreferenceProviderDataChange, PreferenceSchemaService,
     PreferenceConfigurations, PreferenceUtils, PreferenceLanguageOverrideService,
     Listener
-} from '@theia/core/lib/common';
-import URI from '@theia/core/lib/common/uri';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+} from '@theia/core/lib/common/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
 import { Emitter, Event } from '@theia/core';
-import { JSONValue } from '@theia/core/shared/@lumino/coreutils';
-export interface FileContentStatus {
+import { JSONValue } from '@lumino/coreutils';
+export type FileContentStatus = {
     content: string;
     fileOK: boolean
 }

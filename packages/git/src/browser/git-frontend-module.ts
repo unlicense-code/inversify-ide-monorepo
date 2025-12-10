@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,36 +16,36 @@
 
 import '../../src/browser/style/index.css';
 
-import { ContainerModule, interfaces } from '@theia/core/shared/inversify';
-import { CommandContribution, MenuContribution, ResourceResolver } from '@theia/core/lib/common';
+import { ContainerModule, interfaces } from 'inversify';
+import { CommandContribution, MenuContribution, ResourceResolver } from '@theia/core/lib/common/index.js';
 import {
     WebSocketConnectionProvider,
     FrontendApplicationContribution,
-} from '@theia/core/lib/browser';
-import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { Git, GitPath, GitWatcher, GitWatcherPath, GitWatcherServer, GitWatcherServerProxy, ReconnectingGitWatcherServer } from '../common';
-import { GitContribution } from './git-contribution';
-import { bindGitDiffModule } from './diff/git-diff-frontend-module';
-import { bindGitHistoryModule } from './history/git-history-frontend-module';
-import { GitResourceResolver } from './git-resource-resolver';
-import { GitRepositoryProvider } from './git-repository-provider';
-import { GitQuickOpenService } from './git-quick-open-service';
-import { bindGitPreferences } from '../common/git-preferences';
-import { bindDirtyDiff } from './dirty-diff/dirty-diff-module';
-import { bindBlame } from './blame/blame-module';
-import { GitRepositoryTracker } from './git-repository-tracker';
-import { GitCommitMessageValidator } from './git-commit-message-validator';
-import { GitSyncService } from './git-sync-service';
-import { GitErrorHandler } from './git-error-handler';
-import { GitScmProvider, GitScmProviderOptions } from './git-scm-provider';
-import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution';
-import { ScmHistorySupport } from '@theia/scm-extra/lib/browser/history/scm-history-widget';
-import { ScmHistoryProvider } from '@theia/scm-extra/lib/browser/history';
-import { GitHistorySupport } from './history/git-history-support';
-import { GitDecorationProvider } from './git-decoration-provider';
-import { GitFileSystemProvider } from './git-file-system-provider';
-import { GitFileServiceContribution } from './git-file-service-contribution';
-import { FileServiceContribution } from '@theia/filesystem/lib/browser/file-service';
+} from '@theia/core/lib/browser/index.js';
+import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { Git, GitPath, GitWatcher, GitWatcherPath, GitWatcherServer, GitWatcherServerProxy, ReconnectingGitWatcherServer } from '../common/index.js';
+import { GitContribution } from './git-contribution.js';
+import { bindGitDiffModule } from './diff/git-diff-frontend-module.js';
+import { bindGitHistoryModule } from './history/git-history-frontend-module.js';
+import { GitResourceResolver } from './git-resource-resolver.js';
+import { GitRepositoryProvider } from './git-repository-provider.js';
+import { GitQuickOpenService } from './git-quick-open-service.js';
+import { bindGitPreferences } from '../common/git-preferences.js';
+import { bindDirtyDiff } from './dirty-diff/dirty-diff-module.js';
+import { bindBlame } from './blame/blame-module.js';
+import { GitRepositoryTracker } from './git-repository-tracker.js';
+import { GitCommitMessageValidator } from './git-commit-message-validator.js';
+import { GitSyncService } from './git-sync-service.js';
+import { GitErrorHandler } from './git-error-handler.js';
+import { GitScmProvider, GitScmProviderOptions } from './git-scm-provider.js';
+import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution.js';
+import { ScmHistorySupport } from '@theia/scm-extra/lib/browser/history/scm-history-constants.js';
+import { ScmHistoryProvider } from '@theia/scm-extra/lib/browser/history/scm-history-provider.js';
+import { GitHistorySupport } from './history/git-history-support.js';
+import { GitDecorationProvider } from './git-decoration-provider.js';
+import { GitFileSystemProvider } from './git-file-system-provider.js';
+import { GitFileServiceContribution } from './git-file-service-contribution.js';
+import { FileServiceContribution } from '@theia/filesystem/lib/browser/file-service.js';
 
 export default new ContainerModule(bind => {
     bindGitPreferences(bind);

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { LocalStorageService, StorageService } from '@theia/core/lib/browser/storage-service';
-import { WorkspaceService } from './workspace-service';
-import { FileStat } from '@theia/filesystem/lib/common/files';
+import { inject, injectable, postConstruct } from 'inversify';
+import { LocalStorageService, StorageService } from '@theia/core/lib/browser/storage-service.js';
+import { WorkspaceService } from './workspace-service.js';
+import { FileStat } from '@theia/filesystem/lib/common/index.js';
 
 /*
  * Prefixes any stored data with the current workspace path.

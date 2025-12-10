@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces, Container } from '@theia/core/shared/inversify';
-import { GitDiffContribution } from './git-diff-contribution';
-import { WidgetFactory, bindViewContribution, TreeModel } from '@theia/core/lib/browser';
-import { GitDiffWidget, GIT_DIFF } from './git-diff-widget';
-import { GitDiffHeaderWidget } from './git-diff-header-widget';
-import { GitDiffTreeModel } from './git-diff-tree-model';
-import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { createScmTreeContainer } from '@theia/scm/lib/browser/scm-frontend-module';
-import { GitResourceOpener } from './git-resource-opener';
-import { GitOpenerInPrimaryArea } from './git-opener-in-primary-area';
+import { interfaces } from 'inversify';
+import { GitDiffContribution } from './git-diff-contribution.js';
+import { WidgetFactory, bindViewContribution, TreeModel } from '@theia/core/lib/browser/index.js';
+import { GitDiffWidget, GIT_DIFF } from './git-diff-widget.js';
+import { GitDiffHeaderWidget } from './git-diff-header-widget.js';
+import { GitDiffTreeModel } from './git-diff-tree-model.js';
+import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { createScmTreeContainer } from '@theia/scm/lib/browser/scm-frontend-module.js';
+import { GitResourceOpener } from './git-resource-opener.js';
+import { GitOpenerInPrimaryArea } from './git-opener-in-primary-area.js';
 import '../../../src/browser/style/diff.css';
 
 export function bindGitDiffModule(bind: interfaces.Bind): void {
@@ -42,7 +42,7 @@ export function bindGitDiffModule(bind: interfaces.Bind): void {
 
 }
 
-export function createGitDiffWidgetContainer(parent: interfaces.Container): Container {
+export function createGitDiffWidgetContainer(parent: interfaces.Container): interfaces.Container {
     const child = createScmTreeContainer(parent);
 
     child.bind(GitDiffHeaderWidget).toSelf();

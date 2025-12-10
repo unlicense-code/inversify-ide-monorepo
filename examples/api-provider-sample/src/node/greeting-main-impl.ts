@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { generateUuid } from '@theia/core/lib/common/uuid';
-import { RPCProtocol } from '@theia/plugin-ext/lib/common/rpc-protocol';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { GreetingKind, GreeterData, GreetingExt, GreetingMain, MAIN_RPC_CONTEXT } from '../common/plugin-api-rpc';
+import { generateUuid } from '@theia/core';
+import { RPCProtocol } from '@theia/plugin-ext/lib/common/rpc-protocol.js';
+import { inject, injectable } from 'inversify';
+import { GreetingKind, GreeterData, GreetingExt, GreetingMain, MAIN_RPC_CONTEXT } from '../common/plugin-api-rpc.js';
 
 const GREETINGS = {
     [GreetingKind.DIRECT]: ['Hello, world!', "I'm here!", 'Good day!'],

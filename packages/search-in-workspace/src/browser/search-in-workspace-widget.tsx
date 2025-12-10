@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,25 +14,25 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Widget, Message, BaseWidget, Key, StatefulWidget, MessageLoop, KeyCode, codicon } from '@theia/core/lib/browser';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { SearchInWorkspaceResultTreeWidget } from './search-in-workspace-result-tree-widget';
-import { SearchInWorkspaceOptions } from '../common/search-in-workspace-interface';
-import * as React from '@theia/core/shared/react';
-import { createRoot, Root } from '@theia/core/shared/react-dom/client';
-import { Event, Emitter, Disposable } from '@theia/core/lib/common';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { SearchInWorkspaceContextKeyService } from './search-in-workspace-context-key-service';
+import { Widget, Message, BaseWidget, Key, StatefulWidget, MessageLoop, KeyCode, codicon } from '@theia/core/lib/browser/index.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import { SearchInWorkspaceResultTreeWidget, SearchInWorkspaceRootFolderNode, SearchInWorkspaceFileNode } from './search-in-workspace-result-tree-widget.js';
+import { SearchInWorkspaceOptions } from '../common/search-in-workspace-interface.js';
+import * as React from 'react';
+import { createRoot, Root } from 'react-dom/client';
+import { Event, Emitter, Disposable } from '@theia/core/lib/common/index.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { SearchInWorkspaceContextKeyService } from './search-in-workspace-context-key-service.js';
 import { CancellationTokenSource } from '@theia/core';
-import { ProgressBarFactory } from '@theia/core/lib/browser/progress-bar-factory';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { SearchInWorkspacePreferences } from '../common/search-in-workspace-preferences';
-import { SearchInWorkspaceInput } from './components/search-in-workspace-input';
-import { SearchInWorkspaceTextArea } from './components/search-in-workspace-textarea';
-import { nls } from '@theia/core/lib/common/nls';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { ProgressBarFactory } from '@theia/core/lib/browser/progress-bar-factory.js';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { SearchInWorkspacePreferences } from '../common/search-in-workspace-preferences.js';
+import { SearchInWorkspaceInput } from './components/search-in-workspace-input.js';
+import { SearchInWorkspaceTextArea } from './components/search-in-workspace-textarea.js';
+import { nls } from '@theia/core/lib/common/nls.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
 
-export interface SearchFieldState {
+export type SearchFieldState = {
     className: string;
     enabled: boolean;
     title: string;
@@ -152,21 +152,21 @@ export class SearchInWorkspaceWidget extends BaseWidget implements StatefulWidge
             exclude: [],
             maxResults: 2000
         };
-        this.toDispose.push(this.resultTreeWidget.onChange(r => {
+        this.toDispose.push(this.resultTreeWidget.onChange((r: Map<string, SearchInWorkspaceRootFolderNode>) => {
             this.hasResults = r.size > 0;
             this.resultNumber = 0;
             const results = Array.from(r.values());
-            results.forEach(rootFolder =>
-                rootFolder.children.forEach(file => this.resultNumber += file.children.length)
+            results.forEach((rootFolder: SearchInWorkspaceRootFolderNode) =>
+                rootFolder.children.forEach((file: SearchInWorkspaceFileNode) => this.resultNumber += file.children.length)
             );
             this.update();
         }));
 
-        this.toDispose.push(this.resultTreeWidget.onFocusInput(b => {
+        this.toDispose.push(this.resultTreeWidget.onFocusInput(() => {
             this.focusInputField();
         }));
 
-        this.toDispose.push(this.searchInWorkspacePreferences.onPreferenceChanged(e => {
+        this.toDispose.push(this.searchInWorkspacePreferences.onPreferenceChanged((e: { preferenceName: string }) => {
             if (e.preferenceName === 'search.smartCase') {
                 this.performSearch();
             }
@@ -640,11 +640,11 @@ export class SearchInWorkspaceWidget extends BaseWidget implements StatefulWidge
                     ? nls.localizeByDefault('e.g. *.ts, src/**/include')
                     : nls.localizeByDefault('e.g. *.ts, src/**/exclude')
                 }
-                onKeyUp={e => {
+                onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
                     if (e.target) {
                         const targetValue = (e.target as HTMLInputElement).value || '';
                         let shouldSearch = Key.ENTER.keyCode === KeyCode.createKeyCode(e.nativeEvent).key?.keyCode;
-                        const currentOptions = (this.searchInWorkspaceOptions[kind] || []).slice().map(s => s.trim()).sort();
+                        const currentOptions = (this.searchInWorkspaceOptions[kind] || []).slice().map((s: string) => s.trim()).sort();
                         const candidateOptions = this.splitOnComma(targetValue).map(s => s.trim()).sort();
                         const sameAs = (left: string[], right: string[]) => {
                             if (left.length !== right.length) {

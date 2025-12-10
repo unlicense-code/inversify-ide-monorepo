@@ -20,14 +20,11 @@
 // Partially copied from https://github.com/microsoft/vscode/blob/a2cab7255c0df424027be05d58e1b7b941f4ea60/src/vs/workbench/contrib/chat/common/chatVariables.ts
 
 import { ContributionProvider, Disposable, Emitter, ILogger, MaybePromise, Prioritizeable, Event } from '@theia/core';
-import { inject, injectable, named } from '@theia/core/shared/inversify';
+import { inject, injectable, named } from 'inversify';
 import * as monaco from '@theia/monaco-editor-core';
-import { PromptText } from './prompt-text';
+import { PromptText } from './prompt-text.js';
 
-/**
- * A variable is a short string that is used to reference a value that is resolved and replaced in the user prompt at request-time.
- */
-export interface AIVariable {
+export type AIVariable = {
     /** provider id */
     id: string;
     /** variable name, used for referencing variables in the chat */
@@ -53,7 +50,7 @@ export namespace AIVariable {
     }
 }
 
-export interface AIContextVariable extends AIVariable {
+export type AIContextVariable = AIVariable & {
     label: string;
     isContextVariable: true;
 }
@@ -64,14 +61,14 @@ export namespace AIContextVariable {
     }
 }
 
-export interface AIVariableDescription {
+export type AIVariableDescription = {
     name: string;
     description: string;
     enum?: string[];
     isOptional?: boolean;
 }
 
-export interface ResolvedAIVariable {
+export type ResolvedAIVariable = {
     variable: AIVariable;
     arg?: string;
     /** value that is inserted into the prompt at the position of the variable usage */
@@ -90,14 +87,7 @@ export namespace ResolvedAIVariable {
     }
 }
 
-/**
- * A context variable is a variable that also contributes to the context of a chat request.
- *
- * In contrast to a plain variable, it can also be attached to a request and is resolved into a context value.
- * The context value is put into the `ChatRequestModel.context`, available to the processing chat agent for further
- * processing by the chat agent, or invoked tool functions.
- */
-export interface ResolvedAIContextVariable extends ResolvedAIVariable {
+export type ResolvedAIContextVariable = ResolvedAIVariable & {
     contextValue: string;
 }
 
@@ -109,7 +99,7 @@ export namespace ResolvedAIContextVariable {
     }
 }
 
-export interface AIVariableResolutionRequest {
+export type AIVariableResolutionRequest = {
     variable: AIVariable;
     arg?: string;
 }
@@ -129,7 +119,7 @@ export namespace AIVariableResolutionRequest {
     }
 }
 
-export interface AIVariableContext {
+export type AIVariableContext = {
 }
 
 export type AIVariableArg = string | { variable: string, arg?: string } | AIVariableResolutionRequest;
@@ -138,17 +128,17 @@ export type AIVariableArgPicker = (context: AIVariableContext) => MaybePromise<s
 export type AIVariableArgCompletionProvider =
     (model: monaco.editor.ITextModel, position: monaco.Position, matchString?: string) => MaybePromise<monaco.languages.CompletionItem[] | undefined>;
 
-export interface AIVariableResolver {
+export type AIVariableResolver = {
     canResolve(request: AIVariableResolutionRequest, context: AIVariableContext): MaybePromise<number>,
     resolve(request: AIVariableResolutionRequest, context: AIVariableContext): Promise<ResolvedAIVariable | undefined>;
 }
 
-export interface AIVariableOpener {
+export type AIVariableOpener = {
     canOpen(request: AIVariableResolutionRequest, context: AIVariableContext): MaybePromise<number>;
     open(request: AIVariableResolutionRequest, context: AIVariableContext): Promise<void>;
 }
 
-export interface AIVariableResolverWithVariableDependencies extends AIVariableResolver {
+export type AIVariableResolverWithVariableDependencies = AIVariableResolver & {
     resolve(request: AIVariableResolutionRequest, context: AIVariableContext): Promise<ResolvedAIVariable | undefined>;
     /**
      * Resolve the given AI variable resolution request. When resolving dependencies with `resolveDependency`,
@@ -167,7 +157,7 @@ function isResolverWithDependencies(resolver: AIVariableResolver | undefined): r
 }
 
 export const AIVariableService = Symbol('AIVariableService');
-export interface AIVariableService {
+export type AIVariableService = {
     hasVariable(name: string): boolean;
     getVariable(name: string): Readonly<AIVariable> | undefined;
     getVariables(): Readonly<AIVariable>[];
@@ -192,11 +182,11 @@ export interface AIVariableService {
 
 /** Contributions on the frontend can optionally implement `FrontendVariableContribution`. */
 export const AIVariableContribution = Symbol('AIVariableContribution');
-export interface AIVariableContribution {
+export type AIVariableContribution = {
     registerVariables(service: AIVariableService): void;
 }
 
-export interface ResolveAIVariableCacheEntry {
+export type ResolveAIVariableCacheEntry = {
     promise: Promise<ResolvedAIVariable | undefined>;
     inProgress: boolean;
 }

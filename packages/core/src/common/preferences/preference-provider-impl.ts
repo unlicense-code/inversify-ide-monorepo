@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,11 +17,11 @@
 import debounce = require('p-debounce');
 import { injectable } from 'inversify';
 import { JSONObject } from '@lumino/coreutils';
-import URI from '../../common/uri';
-import { DisposableCollection, Emitter, Event, isObject, PreferenceLanguageOverrideService } from '../../common';
-import { Deferred } from '../../common/promise-util';
-import { PreferenceScope } from './preference-scope';
-import { PreferenceProvider, PreferenceProviderDataChange, PreferenceProviderDataChanges, PreferenceResolveResult } from './preference-provider';
+import URI from '../../common/uri.js';
+import { DisposableCollection, Emitter, Event, isObject, PreferenceLanguageOverrideService } from '../../common/index.js';
+import { Deferred } from '../../common/promise-util.js';
+import { PreferenceScope } from './preference-scope.js';
+import { PreferenceProvider, PreferenceProviderDataChange, PreferenceProviderDataChanges, PreferenceResolveResult } from './preference-provider.js';
 
 export abstract class PreferenceProviderBase {
 

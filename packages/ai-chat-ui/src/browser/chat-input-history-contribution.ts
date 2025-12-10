@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import { Command, CommandContribution, CommandRegistry } from '@theia/core';
-import { ApplicationShell, KeybindingContribution, KeybindingRegistry } from '@theia/core/lib/browser';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { AIChatInputWidget } from './chat-input-widget';
-import { ChatInputHistoryService } from './chat-input-history';
-import { ChatCommands } from './chat-view-commands';
+import { ApplicationShell, KeybindingContribution, KeybindingRegistry } from '@theia/core/lib/browser/index.js';
+import { inject, injectable } from 'inversify';
+import { AIChatInputWidget } from './chat-input-widget.js';
+import { ChatInputHistoryService } from './chat-input-history.js';
+import { ChatCommands } from './chat-view-commands.js';
 
 const CHAT_INPUT_PREVIOUS_PROMPT_COMMAND = Command.toLocalizedCommand({
     id: 'chat-input:previous-prompt',

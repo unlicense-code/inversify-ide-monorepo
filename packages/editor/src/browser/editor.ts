@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Position, Range, Location } from '@theia/core/shared/vscode-languageserver-protocol';
-import * as lsp from '@theia/core/shared/vscode-languageserver-protocol';
-import URI from '@theia/core/lib/common/uri';
-import { Event, Disposable, TextDocumentContentChangeDelta, Reference, isObject } from '@theia/core/lib/common';
-import { Saveable, Navigatable, Widget } from '@theia/core/lib/browser';
-import { EditorDecoration } from './decorations/editor-decoration';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
+import { Position, Range, Location } from 'vscode-languageserver-protocol';
+import * as lsp from 'vscode-languageserver-protocol';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Event, Disposable, TextDocumentContentChangeDelta, Reference, isObject } from '@theia/core/lib/common/index.js';
+import { Saveable, Navigatable, Widget } from '@theia/core/lib/browser/index.js';
+import { EditorDecoration } from './decorations/editor-decoration.js';
+import { MarkdownString } from '@theia/core';
 
 export { Position, Range, Location };
 
 export const TextEditorProvider = Symbol('TextEditorProvider');
 export type TextEditorProvider = (uri: URI) => Promise<TextEditor>;
 
-export interface TextEditorDocument extends lsp.TextDocument, Saveable, Disposable {
+export type TextEditorDocument = lsp.TextDocument & Saveable & Disposable & {
     /**
      * @param lineNumber 1-based
      */
@@ -56,7 +56,7 @@ export interface TextEditorDocument extends lsp.TextDocument, Saveable, Disposab
 // Refactoring
 export { TextDocumentContentChangeDelta };
 
-export interface TextDocumentChangeEvent {
+export type TextDocumentChangeEvent = {
     readonly document: TextEditorDocument;
     readonly contentChanges: TextDocumentContentChangeDelta[];
 }
@@ -124,7 +124,7 @@ export enum MouseTargetType {
     OUTSIDE_EDITOR = 13,
 }
 
-export interface MouseTarget {
+export type MouseTarget = {
     /**
      * The target element
      */
@@ -152,7 +152,7 @@ export interface MouseTarget {
     readonly detail: any;
 }
 
-export interface EditorMouseEvent {
+export type EditorMouseEvent = {
     readonly event: MouseEvent;
     readonly target: MouseTarget;
 }
@@ -170,10 +170,7 @@ export const enum EncodingMode {
     Decode
 }
 
-/**
- * Options for searching in an editor.
- */
-export interface FindMatchesOptions {
+export type FindMatchesOptions = {
     /**
      * The string used to search. If it is a regular expression, set `isRegex` to true.
      */
@@ -196,10 +193,7 @@ export interface FindMatchesOptions {
     limitResultCount?: number;
 }
 
-/**
- * Representation of a find match.
- */
-export interface FindMatch {
+export type FindMatch = {
     /**
      * The textual match.
      */
@@ -210,7 +204,7 @@ export interface FindMatch {
     readonly range: Range;
 }
 
-export interface TextEditor extends Disposable, TextEditorSelection, Navigatable {
+export type TextEditor = Disposable & TextEditorSelection & Navigatable & {
     readonly node: HTMLElement;
 
     readonly uri: URI;
@@ -309,36 +303,36 @@ export interface TextEditor extends Disposable, TextEditorSelection, Navigatable
     handleVisibilityChanged(nowVisible: boolean): void;
 }
 
-export interface Selection extends Range {
+export type Selection = Range & {
     direction: 'ltr' | 'rtl';
 }
 
-export interface Dimension {
+export type Dimension = {
     width: number;
     height: number;
 }
 
-export interface TextEditorSelection {
+export type TextEditorSelection = {
     uri: URI
     cursor?: Position
     selection?: Range
 }
 
-export interface RevealPositionOptions {
+export type RevealPositionOptions = {
     vertical: 'auto' | 'center' | 'centerIfOutsideViewport';
     horizontal?: boolean;
 }
 
-export interface RevealRangeOptions {
+export type RevealRangeOptions = {
     at: 'auto' | 'center' | 'top' | 'centerIfOutsideViewport';
 }
 
-export interface DeltaDecorationParams {
+export type DeltaDecorationParams = {
     oldDecorations: string[];
     newDecorations: EditorDecoration[];
 }
 
-export interface ReplaceTextParams {
+export type ReplaceTextParams = {
     /**
      * the source to edit
      */
@@ -349,7 +343,7 @@ export interface ReplaceTextParams {
     replaceOperations: ReplaceOperation[];
 }
 
-export interface ReplaceOperation {
+export type ReplaceOperation = {
     /**
      * the position that shall be replaced
      */
@@ -372,7 +366,7 @@ export namespace CustomEditorWidget {
     }
 }
 
-export interface CustomEditorWidget extends Widget {
+export type CustomEditorWidget = Widget & {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     readonly modelRef: Reference<any>;
 }

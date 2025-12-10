@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,6 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-export * from './messaging-service';
-export * from './ipc-connection-provider';
-export * from './ipc-channel';
+export * from './messaging-service.js';
+export * from './ipc-connection-provider.js';
+export * from './ipc-channel.js';
+export * from './ipc-protocol.js';

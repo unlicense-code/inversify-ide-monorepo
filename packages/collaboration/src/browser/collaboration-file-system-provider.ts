@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,7 +19,7 @@ import { Disposable, Emitter, Event, URI } from '@theia/core';
 import {
     FileChange, FileDeleteOptions,
     FileOverwriteOptions, FileSystemProviderCapabilities, FileType, Stat, WatchOptions, FileSystemProviderWithFileReadWriteCapability, FileWriteOptions
-} from '@theia/filesystem/lib/common/files';
+} from '@theia/filesystem/lib/common/files.js';
 import { ProtocolBroadcastConnection, Workspace, Peer } from 'open-collaboration-protocol';
 
 export namespace CollaborationURI {

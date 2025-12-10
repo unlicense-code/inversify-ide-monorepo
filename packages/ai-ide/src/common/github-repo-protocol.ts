@@ -17,12 +17,12 @@
 export const GitHubRepoService = Symbol('GitHubRepoService');
 export const githubRepoServicePath = '/services/github-repo';
 
-export interface GitHubRepoInfo {
+export type GitHubRepoInfo = {
     owner: string;
     repo: string;
 }
 
-export interface GitHubRepoService {
+export type GitHubRepoService = {
     /**
      * Gets the GitHub repository information for the given workspace path.
      * @param workspacePath The absolute path to the workspace directory

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { injectable, inject } from 'inversify';
-import { CancellationToken } from '../../shared/vscode-languageserver-protocol';
-import { ProgressClient, ProgressMessage, ProgressUpdate } from '../common';
-import { StatusBar, StatusBarAlignment } from './status-bar';
-import { Deferred } from '../common/promise-util';
+import { CancellationToken } from 'vscode-languageserver-protocol';
+import { ProgressClient, ProgressMessage, ProgressUpdate } from '../common/index.js';
+import { StatusBar, StatusBarAlignment } from './status-bar/index.js';
+import { Deferred } from '../common/promise-util.js';
 import throttle = require('lodash.throttle');
 
 @injectable()

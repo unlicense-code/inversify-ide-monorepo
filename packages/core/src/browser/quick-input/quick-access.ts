@@ -14,30 +14,26 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { CancellationToken, Disposable } from '../../common';
-import { QuickPicks } from './quick-input-service';
+import { CancellationToken, Disposable } from '../../common/index.js';
+import { QuickPicks } from './quick-input-service.js';
 
 export const QuickAccessContribution = Symbol('QuickAccessContribution');
-/**
- * Bind this contribution in order to register quick access providers with the
- * QuickAccessRegistry at startup
- */
-export interface QuickAccessContribution {
+export type QuickAccessContribution = {
     registerQuickAccessProvider(): void;
 }
 
-export interface QuickAccessProvider {
+export type QuickAccessProvider = {
     getPicks(filter: string, token: CancellationToken): QuickPicks | Promise<QuickPicks>;
     reset?(): void;
 }
 
-export interface QuickAccessProviderHelp {
+export type QuickAccessProviderHelp = {
     prefix?: string;
     description: string;
     needsEditor: boolean;
 }
 
-export interface QuickAccessProviderDescriptor {
+export type QuickAccessProviderDescriptor = {
     /**
      * return an instance of QuickAccessProvider. Implementers are free to return that same instance multiple times
      */
@@ -64,10 +60,7 @@ export interface QuickAccessProviderDescriptor {
 
 export const QuickAccessRegistry = Symbol('QuickAccessRegistry');
 
-/**
- * A registry for quick access providers.
- */
-export interface QuickAccessRegistry {
+export type QuickAccessRegistry = {
     registerQuickAccessProvider(provider: QuickAccessProviderDescriptor): Disposable;
     getQuickAccessProviders(): QuickAccessProviderDescriptor[];
     getQuickAccessProvider(prefix: string): QuickAccessProviderDescriptor | undefined;

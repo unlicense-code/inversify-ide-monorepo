@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ToolRequest } from '@theia/ai-core';
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { ChatToolRequestService, ChatToolRequest } from '../common/chat-tool-request-service';
-import { MutableChatRequestModel, ToolCallChatResponseContent } from '../common/chat-model';
-import { ToolConfirmationMode, ChatToolPreferences } from '../common/chat-tool-preferences';
-import { ToolConfirmationManager } from './chat-tool-preference-bindings';
+import { ToolRequest } from '@theia/ai-core/lib/common/index.js';
+import { injectable, inject } from 'inversify';
+import { ChatToolRequestService, ChatToolRequest } from '../common/chat-tool-request-service.js';
+import { MutableChatRequestModel, ToolCallChatResponseContent } from '../common/chat-model.js';
+import { ToolConfirmationMode, ChatToolPreferences } from '../common/chat-tool-preferences.js';
+import { ToolConfirmationManager } from './chat-tool-preference-bindings.js';
 
 /**
  * Frontend-specific implementation of ChatToolRequestService that handles tool confirmation

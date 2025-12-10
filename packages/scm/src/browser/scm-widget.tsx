@@ -16,20 +16,20 @@
 
 /* eslint-disable no-null/no-null, @typescript-eslint/no-explicit-any */
 
-import { Message } from '@theia/core/shared/@lumino/messaging';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { DisposableCollection } from '@theia/core/lib/common/disposable';
+import { Message } from '@lumino/messaging';
+import { injectable, inject, postConstruct } from 'inversify';
+import { DisposableCollection } from '@theia/core/lib/common/disposable.js';
 import {
     BaseWidget, Widget, StatefulWidget, Panel, PanelLayout, MessageLoop, CompositeTreeNode, SelectableTreeNode, ApplicationShell, NavigatableWidget,
     BadgeService,
-} from '@theia/core/lib/browser';
-import { ScmCommitWidget } from './scm-commit-widget';
-import { ScmAmendWidget } from './scm-amend-widget';
-import { ScmNoRepositoryWidget } from './scm-no-repository-widget';
-import { ScmService } from './scm-service';
-import { ScmTreeWidget } from './scm-tree-widget';
-import { ScmPreferences } from '../common/scm-preferences';
-import { nls } from '@theia/core/lib/common/nls';
+} from '@theia/core/lib/browser/index.js';
+import { ScmCommitWidget } from './scm-commit-widget.js';
+import { ScmAmendWidget } from './scm-amend-widget.js';
+import { ScmNoRepositoryWidget } from './scm-no-repository-widget.js';
+import { ScmService } from './scm-service.js';
+import { ScmTreeWidget } from './scm-tree-widget.js';
+import { ScmPreferences } from '../common/scm-preferences.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 @injectable()
 export class ScmWidget extends BaseWidget implements StatefulWidget {

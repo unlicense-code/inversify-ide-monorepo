@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable } from 'inversify';
 import { Tool, Resource, ResourceContents, Prompt, PromptMessage } from '@modelcontextprotocol/sdk/types.js';
-import { MCPToolFrontendDelegate, MCPToolDelegateClient } from '../common/mcp-tool-delegate';
+import { MCPToolFrontendDelegate, MCPToolDelegateClient } from '../common/mcp-tool-delegate.js';
 
 @injectable()
 export class MCPToolFrontendDelegateImpl implements MCPToolFrontendDelegate {

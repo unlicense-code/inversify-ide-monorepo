@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,22 +16,23 @@
 
 import { inject, injectable, postConstruct } from 'inversify';
 import * as React from 'react';
-import { ContextKeyService } from '../../context-key-service';
-import { CommandRegistry, Disposable, DisposableCollection, nls } from '../../../common';
-import { Anchor, ContextMenuAccess, ContextMenuRenderer } from '../../context-menu-renderer';
-import { LabelParser } from '../../label-parser';
-import { codicon, ReactWidget, Widget } from '../../widgets';
-import { TabBarToolbarRegistry } from './tab-bar-toolbar-registry';
-import { TAB_BAR_TOOLBAR_CONTEXT_MENU, TabBarDelegator, TabBarToolbarAction } from './tab-bar-toolbar-types';
-import { KeybindingRegistry } from '../..//keybinding';
-import { TabBarToolbarItem } from './tab-toolbar-item';
-import { GroupImpl, MenuModelRegistry } from '../../../common/menu';
+import { ContextKeyService } from '../../context-key-service.js';
+import { CommandRegistry, Disposable, DisposableCollection, nls } from '../../../common/index.js';
+import { Anchor, ContextMenuAccess, ContextMenuRenderer } from '../../context-menu-renderer.js';
+import { LabelParser } from '../../label-parser.js';
+import { codicon, Widget } from '../../widgets/widget.js';
+import { TabBarToolbarRegistry } from './tab-bar-toolbar-registry.js';
+import { TAB_BAR_TOOLBAR_CONTEXT_MENU, TabBarDelegator, TabBarToolbarAction } from './tab-bar-toolbar-types.js';
+import { KeybindingRegistry } from '../../keybinding.js';
+import { TabBarToolbarItem } from './tab-toolbar-item.js';
+import { GroupImpl, MenuModelRegistry } from '../../../common/menu/index.js';
+import { ReactWidget } from '../../widgets/react-widget.js';
 
 /**
  * Factory for instantiating tab-bar toolbars.
  */
 export const TabBarToolbarFactory = Symbol('TabBarToolbarFactory');
-export interface TabBarToolbarFactory {
+export type TabBarToolbarFactory = {
     (): TabBarToolbar;
 }
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,23 +17,23 @@
 import '../../../../src/browser/tree/tree-compression/tree-compression.css';
 import { injectable, inject } from 'inversify';
 import * as React from 'react';
-import { ArrayUtils } from '../../../common/types';
-import { ContextMenuRenderer } from '../../context-menu-renderer';
-import { CompressionToggle, TreeCompressionService } from './tree-compression-service';
-import { CompositeTreeNode, TreeNode } from '../tree';
-import { NodeProps, TreeProps, TreeWidget } from '../tree-widget';
-import { SelectableTreeNode, TreeSelection } from '../tree-selection';
-import { ExpandableTreeNode } from '../tree-expansion';
-import { TreeViewWelcomeWidget } from '../tree-view-welcome-widget';
-import { CompressedTreeModel } from './compressed-tree-model';
+import { ArrayUtils } from '../../../common/types.js';
+import { ContextMenuRenderer } from '../../context-menu-renderer.js';
+import { CompressionToggle, TreeCompressionService } from './tree-compression-service.js';
+import { CompositeTreeNode, TreeNode } from '../tree.js';
+import { NodeProps, TreeProps, TreeWidget } from '../tree-widget.js';
+import { SelectableTreeNode, TreeSelection } from '../tree-selection.js';
+import { ExpandableTreeNode } from '../tree-expansion.js';
+import { TreeViewWelcomeWidget } from '../tree-view-welcome-widget.js';
+import { CompressedTreeModel } from './compressed-tree-model.js';
 
-export interface CompressedChildren {
+export type CompressedChildren = {
     compressionChain?: ArrayUtils.HeadAndTail<TreeNode>;
 }
 
-export interface CompressedNodeRow extends TreeWidget.NodeRow, CompressedChildren { }
+export type CompressedNodeRow = TreeWidget.NodeRow & CompressedChildren & { }
 
-export interface CompressedNodeProps extends NodeProps, CompressedChildren { }
+export type CompressedNodeProps = NodeProps & CompressedChildren & { }
 
 @injectable()
 export class CompressedTreeWidget extends TreeViewWelcomeWidget {

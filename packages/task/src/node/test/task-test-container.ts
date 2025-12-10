@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -13,18 +13,18 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { Container } from '@theia/core/shared/inversify';
-import { bindLogger } from '@theia/core/lib/node/logger-backend-module';
-import { backendApplicationModule } from '@theia/core/lib/node/backend-application-module';
-import processBackendModule from '@theia/process/lib/node/process-backend-module';
-import terminalBackendModule from '@theia/terminal/lib/node/terminal-backend-module';
-import taskBackendModule from '../task-backend-module';
-import filesystemBackendModule from '@theia/filesystem/lib/node/filesystem-backend-module';
-import workspaceServer from '@theia/workspace/lib/node/workspace-backend-module';
-import { messagingBackendModule } from '@theia/core/lib/node/messaging/messaging-backend-module';
-import { ApplicationPackage } from '@theia/core/shared/@theia/application-package';
+import { Container } from 'inversify';
+import { bindLogger } from '@theia/core/lib/node/logger-backend-module.js';
+import { backendApplicationModule } from '@theia/core/lib/node/backend-application-module.js';
+import processBackendModule from '@theia/process/lib/node/process-backend-module.js';
+import terminalBackendModule from '@theia/terminal/lib/node/terminal-backend-module.js';
+import taskBackendModule from '../task-backend-module.js';
+import filesystemBackendModule from '@theia/filesystem/lib/node/filesystem-backend-module.js';
+import workspaceServer from '@theia/workspace/lib/node/workspace-backend-module.js';
+import { messagingBackendModule } from '@theia/core/lib/node/messaging/messaging-backend-module.js';
+import { ApplicationPackage } from '@theia/application-package';
 import { TerminalProcess } from '@theia/process/lib/node';
-import { ProcessUtils } from '@theia/core/lib/node/process-utils';
+import { ProcessUtils } from '@theia/core/lib/node/process-utils.js';
 
 export function createTaskTestContainer(): Container {
     const testContainer = new Container();

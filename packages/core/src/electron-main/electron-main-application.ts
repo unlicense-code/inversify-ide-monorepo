@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,41 +18,38 @@ import { inject, injectable, named } from 'inversify';
 import {
     screen, app, BrowserWindow, WebContents, Event as ElectronEvent, BrowserWindowConstructorOptions, nativeImage,
     nativeTheme, shell, dialog
-} from '../../electron-shared/electron';
+} from 'electron';
 import * as path from 'path';
 import { Argv } from 'yargs';
 import { AddressInfo } from 'net';
 import { promises as fs } from 'fs';
 import { existsSync, mkdirSync } from 'fs-extra';
 import { fork, ForkOptions } from 'child_process';
-import { DefaultTheme, ElectronFrontendApplicationConfig, FrontendApplicationConfig } from '@theia/application-package/lib/application-props';
-import URI from '../common/uri';
-import { FileUri } from '../common/file-uri';
-import { Deferred, timeout } from '../common/promise-util';
-import { MaybePromise } from '../common/types';
-import { ContributionProvider } from '../common/contribution-provider';
-import { ElectronSecurityTokenService } from './electron-security-token-service';
-import { ElectronSecurityToken } from '../electron-common/electron-token';
+import { DefaultTheme, ElectronFrontendApplicationConfig, FrontendApplicationConfig } from '@theia/application-package/lib/application-props.js';
+import URI from '../common/uri.js';
+import { FileUri } from '../common/file-uri.js';
+import { Deferred, timeout } from '../common/promise-util.js';
+import { MaybePromise } from '../common/types.js';
+import { ContributionProvider } from '../common/contribution-provider.js';
+import { ElectronSecurityTokenService } from './electron-security-token-service.js';
+import { ElectronSecurityToken } from '../electron-common/electron-token.js';
 import Storage = require('electron-store');
-import { CancellationTokenSource, Disposable, DisposableCollection, Path, isOSX, isWindows } from '../common';
-import { DEFAULT_WINDOW_HASH, WindowSearchParams } from '../common/window';
-import { TheiaBrowserWindowOptions, TheiaElectronWindow, TheiaElectronWindowFactory } from './theia-electron-window';
-import { ElectronMainApplicationGlobals } from './electron-main-constants';
-import { createDisposableListener } from './event-utils';
-import { TheiaRendererAPI } from './electron-api-main';
-import { StopReason } from '../common/frontend-application-state';
-import { dynamicRequire } from '../node/dynamic-require';
-import { ThemeMode } from '../common/theme';
-import { backendGlobal } from '../node/backend-global';
+import { CancellationTokenSource, Disposable, DisposableCollection, Path, isOSX, isWindows } from '../common/index.js';
+import { DEFAULT_WINDOW_HASH, WindowSearchParams } from '../common/window.js';
+import { TheiaBrowserWindowOptions, TheiaElectronWindow, TheiaElectronWindowFactory } from './theia-electron-window.js';
+import { ElectronMainApplicationGlobals } from './electron-main-constants.js';
+import { createDisposableListener } from './event-utils.js';
+import { TheiaRendererAPI } from './electron-api-main.js';
+import { StopReason } from '../common/frontend-application-state.js';
+import { dynamicRequire } from '../node/dynamic-require.js';
+import { ThemeMode } from '../common/theme.js';
+import { backendGlobal } from '../node/backend-global.js';
 
 export { ElectronMainApplicationGlobals };
 
 const createYargs: (argv?: string[], cwd?: string) => Argv = require('yargs/yargs');
 
-/**
- * Options passed to the main/default command handler.
- */
-export interface ElectronMainCommandOptions {
+export type ElectronMainCommandOptions = {
 
     /**
      * By default, the first positional argument. Should be either a relative or absolute file-system path pointing to a file or a folder.
@@ -88,7 +85,7 @@ export interface ElectronMainCommandOptions {
  *     ).inSingletonScope();
  */
 export const ElectronMainApplicationContribution = Symbol('ElectronMainApplicationContribution');
-export interface ElectronMainApplicationContribution {
+export type ElectronMainApplicationContribution = {
     /**
      * The application is ready and is starting. This is the time to initialize
      * services global to this process.

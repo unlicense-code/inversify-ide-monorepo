@@ -17,7 +17,7 @@
 export const OLLAMA_LANGUAGE_MODELS_MANAGER_PATH = '/services/ollama/language-model-manager';
 export const OllamaLanguageModelsManager = Symbol('OllamaLanguageModelsManager');
 
-export interface OllamaModelDescription {
+export type OllamaModelDescription = {
     /**
      * The identifier of the model which will be shown in the UI.
      */
@@ -28,7 +28,7 @@ export interface OllamaModelDescription {
     model: string;
 }
 
-export interface OllamaLanguageModelsManager {
+export type OllamaLanguageModelsManager = {
     host: string | undefined;
     setHost(host: string | undefined): void;
     createOrUpdateLanguageModels(...models: OllamaModelDescription[]): Promise<void>;

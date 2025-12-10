@@ -16,16 +16,16 @@
 
 import '../../src/browser/style/scm-amend-component.css';
 
-import * as React from '@theia/core/shared/react';
-import { ScmAvatarService } from './scm-avatar-service';
-import { codicon, StorageService } from '@theia/core/lib/browser';
+import * as React from 'react';
+import { ScmAvatarService } from './scm-avatar-service.js';
+import { codicon, StorageService } from '@theia/core/lib/browser/index.js';
 import { Disposable, DisposableCollection } from '@theia/core';
 
-import { ScmRepository } from './scm-repository';
-import { ScmAmendSupport, ScmCommit } from './scm-provider';
-import { nls } from '@theia/core/lib/common/nls';
+import { ScmRepository } from './scm-repository.js';
+import { ScmAmendSupport, ScmCommit } from './scm-provider.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
-export interface ScmAmendComponentProps {
+export type ScmAmendComponentProps = {
     style: React.CSSProperties | undefined,
     repository: ScmRepository,
     scmAmendSupport: ScmAmendSupport,
@@ -34,7 +34,7 @@ export interface ScmAmendComponentProps {
     storageService: StorageService,
 }
 
-interface ScmAmendComponentState {
+type ScmAmendComponentState = {
     /**
      * This is used for transitioning.  When setting up a transition, we first set to render
      * the elements in their starting positions.  This includes creating the elements to be

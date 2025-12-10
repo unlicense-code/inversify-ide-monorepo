@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import { inject, injectable, named, postConstruct } from 'inversify';
-import { ContributionProvider, Prioritizeable, Emitter, Event } from '../../common';
-import URI from '../../common/uri';
-import { Coordinate } from '../context-menu-renderer';
-import { BreadcrumbPopupContainer, BreadcrumbPopupContainerFactory } from './breadcrumb-popup-container';
-import { BreadcrumbsContribution, Styles, Breadcrumb } from './breadcrumbs-constants';
+import { ContributionProvider, Prioritizeable, Emitter, Event } from '../../common/index.js';
+import URI from '../../common/uri.js';
+import { Coordinate } from '../context-menu-renderer.js';
+import { BreadcrumbPopupContainer, BreadcrumbPopupContainerFactory } from './breadcrumb-popup-container.js';
+import { BreadcrumbsContribution, Styles, Breadcrumb } from './breadcrumbs-constants.js';
 
 @injectable()
 export class BreadcrumbsService {

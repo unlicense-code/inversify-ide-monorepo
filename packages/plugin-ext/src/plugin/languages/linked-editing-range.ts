@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import * as theia from '@theia/plugin';
-import * as rpc from '../../common/plugin-api-rpc';
-import { DocumentsExtImpl } from '../documents';
-import { LinkedEditingRanges } from '../../common/plugin-api-rpc-model';
-import { URI } from '@theia/core/shared/vscode-uri';
-import { coalesce } from '../../common/arrays';
-import { fromRange, toPosition } from '../type-converters';
-import { serializeRegExp } from '../languages-utils';
+import * as rpc from '../../common/plugin-api-rpc.js';
+import { DocumentsExtImpl } from '../documents.js';
+import { LinkedEditingRanges } from '../../common/plugin-api-rpc-model.js';
+import { URI } from 'vscode-uri';
+import { coalesce } from '../../common/arrays.js';
+import { fromRange, toPosition } from '../type-converters.js';
+import { serializeRegExp } from '../languages-utils.js';
 
 export class LinkedEditingRangeAdapter {
 

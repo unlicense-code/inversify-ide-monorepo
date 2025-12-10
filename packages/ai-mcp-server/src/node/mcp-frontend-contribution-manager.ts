@@ -1,3 +1,4 @@
+// @ts-check
 // *****************************************************************************
 // Copyright (C) 2025 EclipseSource.
 //
@@ -14,11 +15,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { McpServer, RegisteredTool, RegisteredPrompt, RegisteredResource } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { inject, injectable } from 'inversify';
+import { ILogger } from '@theia/core/lib/common/logger.js';
+import { McpServer, RegisteredTool, RegisteredPrompt, 
+    RegisteredResource } from '@modelcontextprotocol/sdk/server/mcp.js';
 import type { ReadResourceResult } from '@modelcontextprotocol/sdk/types.js';
-import { MCPToolFrontendDelegate } from '../common/mcp-tool-delegate';
+import { MCPToolFrontendDelegate } from '../common/mcp-tool-delegate.js';
 
 /**
  * Manages the registration and delegation of frontend MCP contributions
@@ -158,11 +160,14 @@ export class MCPFrontendContributionManager {
         try {
             const tools = await delegate.listTools(this.serverId);
             for (const tool of tools) {
+                // Convert JSON schema to Zod schema - use empty object schema for dynamic schemas from frontend
+                // Empty object {} satisfies ZodRawShapeCompat which expects { [key: string]: ZodTypeAny }
+                const zodSchema = {};
                 const registeredTool = this.mcpServer.tool(
                     `${tool.name}_${delegateId}`,
                     tool.description ?? '',
-                    tool.inputSchema,
-                    async args => {
+                    zodSchema,
+                    async (args: any) => {
                         try {
                             const result = await delegate.callTool(
                                 this.serverId!,
@@ -171,7 +176,7 @@ export class MCPFrontendContributionManager {
                             );
                             return {
                                 content: [{
-                                    type: 'text',
+                                    type: 'text' as const,
                                     text: typeof result === 'string' ? result : JSON.stringify(result)
                                 }]
                             };
@@ -244,7 +249,7 @@ export class MCPFrontendContributionManager {
                     `${prompt.name}_${delegateId}`,
                     prompt.description ?? '',
                     prompt.arguments ?? {},
-                    async args => {
+                    async (args: unknown) => {
                         try {
                             const messages = await delegate.getPrompt(this.serverId!, prompt.name, args);
                             return {

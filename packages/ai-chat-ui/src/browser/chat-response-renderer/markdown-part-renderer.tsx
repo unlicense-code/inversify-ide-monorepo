@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ChatResponsePartRenderer } from '../chat-response-part-renderer';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { ChatResponsePartRenderer } from '../chat-response-part-renderer.js';
+import { inject, injectable } from 'inversify';
 import {
     ChatResponseContent,
     InformationalChatResponseContent,
     MarkdownChatResponseContent,
 } from '@theia/ai-chat/lib/common';
-import { ReactNode, useEffect, useRef } from '@theia/core/shared/react';
-import * as React from '@theia/core/shared/react';
-import * as markdownit from '@theia/core/shared/markdown-it';
-import * as markdownitemoji from '@theia/core/shared/markdown-it-emoji';
-import * as DOMPurify from '@theia/core/shared/dompurify';
+import { ReactNode, useEffect, useRef } from 'react';
+import * as React from 'react';
+import markdownit from 'markdown-it';
+import * as markdownitemoji from 'markdown-it-emoji';
+import DOMPurify from 'dompurify';
 import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
-import { OpenerService, open } from '@theia/core/lib/browser';
+import { OpenerService, open } from '@theia/core/lib/browser/index.js';
 import { URI } from '@theia/core';
 
 @injectable()
@@ -61,7 +61,7 @@ const MarkdownRender = ({ response, openerService }: { response: MarkdownChatRes
     return <div ref={ref}></div>;
 };
 
-export interface DeclaredEventsEventListenerObject extends EventListenerObject {
+export type DeclaredEventsEventListenerObject = EventListenerObject & {
     handledEvents?: (keyof HTMLElementEventMap)[];
 }
 

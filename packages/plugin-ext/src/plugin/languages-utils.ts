@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import * as theia from '@theia/plugin';
-import { SerializedAutoClosingPair, SerializedIndentationRule, SerializedOnEnterRule, SerializedRegExp } from '../common';
-import { SyntaxTokenType } from './types-impl';
+import { SerializedAutoClosingPair, SerializedIndentationRule, SerializedOnEnterRule, SerializedRegExp } from '../common/index.js';
+import { SyntaxTokenType } from './types-impl.js';
 
 export function serializeEnterRules(rules?: theia.OnEnterRule[]): SerializedOnEnterRule[] | undefined {
     if (typeof rules === 'undefined' || rules === null) {

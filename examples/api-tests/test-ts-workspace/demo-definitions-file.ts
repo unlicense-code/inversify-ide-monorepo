@@ -1,4 +1,4 @@
 
-export interface DefinedInterface {
+export type DefinedInterface = {
     coolField: number[];
 }

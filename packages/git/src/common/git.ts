@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,7 +19,7 @@ import { Disposable, isObject } from '@theia/core';
 import {
     Repository, WorkingDirectoryStatus, Branch, GitResult, GitError, GitFileStatus,
     GitFileChange, CommitWithChanges, GitFileBlame, Remote as RemoteModel, StashEntry
-} from './git-model';
+} from './git-model.js';
 
 /**
  * The WS endpoint path to the Git service.
@@ -597,10 +597,7 @@ export namespace Git {
     }
 }
 
-/**
- * Provides basic functionality for Git.
- */
-export interface Git extends Disposable {
+export type Git = Disposable & {
 
     /**
      * Clones a remote repository into the desired local location.

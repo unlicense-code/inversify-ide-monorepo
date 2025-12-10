@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 RedHat and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,20 +15,20 @@
 // *****************************************************************************
 
 import { injectable, inject } from 'inversify';
-import { isFirefox } from './browser';
-import { ClipboardService } from './clipboard-service';
-import { ILogger } from '../common/logger';
-import { MessageService } from '../common/message-service';
-import { nls } from '../common/nls';
+import { isFirefox } from './browser.js';
+import { ClipboardService } from './clipboard-service.js';
+import { ILogger } from '../common/logger.js';
+import { MessageService } from '../common/message-service.js';
+import { nls } from '../common/nls.js';
 
-export interface NavigatorClipboard {
+export type NavigatorClipboard = {
     readText(): Promise<string>;
     writeText(value: string): Promise<void>;
 }
-export interface PermissionStatus {
+export type PermissionStatus = {
     state: 'granted' | 'prompt' | 'denied'
 }
-export interface NavigatorPermissions {
+export type NavigatorPermissions = {
     query(options: { name: string }): Promise<PermissionStatus>
 }
 

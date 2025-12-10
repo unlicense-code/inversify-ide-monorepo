@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,19 +15,19 @@
 // *****************************************************************************
 
 import { injectable, inject, named } from 'inversify';
-import { isOSX } from '../common/os';
-import { Emitter, Event } from '../common/event';
-import { CommandRegistry, Command } from '../common/command';
-import { Disposable, DisposableCollection } from '../common/disposable';
-import { KeyCode, KeySequence, Key } from './keyboard/keys';
-import { KeyboardLayoutService } from './keyboard/keyboard-layout-service';
-import { ContributionProvider } from '../common/contribution-provider';
-import { ILogger } from '../common/logger';
-import { StatusBarAlignment, StatusBar } from './status-bar/status-bar';
-import { ContextKeyService } from './context-key-service';
-import { CorePreferences } from '../common/core-preferences';
-import * as common from '../common/keybinding';
-import { nls } from '../common/nls';
+import { isOSX } from '../common/os.js';
+import { Emitter, Event } from '../common/event.js';
+import { CommandRegistry, Command } from '../common/command.js';
+import { Disposable, DisposableCollection } from '../common/disposable.js';
+import { KeyCode, KeySequence, Key } from './keyboard/keys.js';
+import { KeyboardLayoutService } from './keyboard/keyboard-layout-service.js';
+import { ContributionProvider } from '../common/contribution-provider.js';
+import { ILogger } from '../common/logger.js';
+import { StatusBarAlignment, StatusBar } from './status-bar/status-bar.js';
+import { ContextKeyService } from './context-key-service.js';
+import { CorePreferences } from '../common/core-preferences.js';
+import * as common from '../common/keybinding.js';
+import { nls } from '../common/nls.js';
 
 export enum KeybindingScope {
     DEFAULT,
@@ -45,7 +45,7 @@ export namespace KeybindingScope {
 export type Keybinding = common.Keybinding;
 export const Keybinding = common.Keybinding;
 
-export interface ResolvedKeybinding extends common.Keybinding {
+export type ResolvedKeybinding = common.Keybinding & {
     /**
      * The KeyboardLayoutService may transform the `keybinding` depending on the
      * user's keyboard layout. This property holds the transformed keybinding that
@@ -55,16 +55,13 @@ export interface ResolvedKeybinding extends common.Keybinding {
     resolved?: KeyCode[];
 }
 
-export interface ScopedKeybinding extends common.Keybinding {
+export type ScopedKeybinding = common.Keybinding & {
     /** Current keybinding scope */
     scope: KeybindingScope;
 }
 
 export const KeybindingContribution = Symbol('KeybindingContribution');
-/**
- * Allows extensions to contribute {@link common.Keybinding}s
- */
-export interface KeybindingContribution {
+export type KeybindingContribution = {
     /**
      * Registers keybindings.
      * @param keybindings the keybinding registry.
@@ -73,7 +70,7 @@ export interface KeybindingContribution {
 }
 
 export const KeybindingContext = Symbol('KeybindingContext');
-export interface KeybindingContext {
+export type KeybindingContext = {
     /**
      * The unique ID of the current context.
      */

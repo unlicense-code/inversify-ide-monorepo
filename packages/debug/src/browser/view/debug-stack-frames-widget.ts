@@ -14,22 +14,23 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct, interfaces, Container } from '@theia/core/shared/inversify';
+import { injectable, inject, postConstruct, interfaces } from 'inversify';
 import { MenuPath } from '@theia/core';
-import { TreeNode, NodeProps, SelectableTreeNode } from '@theia/core/lib/browser';
-import { SourceTreeWidget, TreeElementNode } from '@theia/core/lib/browser/source-tree';
-import { DebugStackFramesSource, LoadMoreStackFrames } from './debug-stack-frames-source';
-import { DebugStackFrame } from '../model/debug-stack-frame';
-import { DebugViewModel } from './debug-view-model';
-import { DebugCallStackItemTypeKey } from '../debug-call-stack-item-type-key';
-import { nls } from '@theia/core/lib/common/nls';
+import { TreeNode, NodeProps, SelectableTreeNode } from '@theia/core/lib/browser/index.js';
+import { SourceTreeWidget } from '@theia/core/lib/browser/source-tree/source-tree-widget.js';
+import { TreeElementNode } from '@theia/core/lib/browser/source-tree/source-tree.js';
+import { DebugStackFramesSource, LoadMoreStackFrames } from './debug-stack-frames-source.js';
+import { DebugStackFrame } from '../model/debug-stack-frame.js';
+import { DebugViewModel } from './debug-view-model.js';
+import { DebugCallStackItemTypeKey } from '../debug-call-stack-item-type-key.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 @injectable()
 export class DebugStackFramesWidget extends SourceTreeWidget {
 
     static CONTEXT_MENU: MenuPath = ['debug-frames-context-menu'];
     static FACTORY_ID = 'debug:frames';
-    static override createContainer(parent: interfaces.Container): Container {
+    static override createContainer(parent: interfaces.Container): interfaces.Container {
         const child = SourceTreeWidget.createContainer(parent, {
             contextMenuPath: DebugStackFramesWidget.CONTEXT_MENU,
             virtualized: false,

@@ -13,13 +13,13 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { interfaces } from '@theia/core/shared/inversify';
-import { RPCProtocol } from '@theia/plugin-ext/lib/common/rpc-protocol';
-import { EnvMainImpl } from '@theia/plugin-ext/lib/main/common/env-main';
-import { BasicMessageRegistryMainImpl } from '@theia/plugin-ext/lib/main/common/basic-message-registry-main';
-import { BasicNotificationMainImpl } from '@theia/plugin-ext/lib/main/common/basic-notification-main';
+import { interfaces } from 'inversify';
+import { RPCProtocol } from '@theia/plugin-ext/lib/common/rpc-protocol.js';
+import { EnvMainImpl } from '@theia/plugin-ext/lib/main/common/env-main.js';
+import { BasicMessageRegistryMainImpl } from '@theia/plugin-ext/lib/main/common/basic-message-registry-main.js';
+import { BasicNotificationMainImpl } from '@theia/plugin-ext/lib/main/common/basic-notification-main.js';
 
-import { HEADLESSMAIN_RPC_CONTEXT, HEADLESSPLUGIN_RPC_CONTEXT } from '../../common/headless-plugin-rpc';
+import { HEADLESSMAIN_RPC_CONTEXT, HEADLESSPLUGIN_RPC_CONTEXT } from '../../common/headless-plugin-rpc.js';
 
 // This sets up only the minimal plugin API required by the plugin manager to report
 // messages and notifications to the main side and to initialize plugins.

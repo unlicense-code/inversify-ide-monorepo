@@ -16,14 +16,14 @@
 
 import '../../src/browser/style/index.css';
 import { bindContributionProvider, CommandContribution, MenuContribution } from '@theia/core';
-import { bindViewContribution, FrontendApplicationContribution, WidgetFactory, KeybindingContribution } from '@theia/core/lib/browser';
-import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { ContainerModule, interfaces } from '@theia/core/shared/inversify';
-import { EditorSelectionResolver } from '@theia/editor/lib/browser/editor-manager';
-import { AIChatContribution } from './ai-chat-ui-contribution';
-import { AIChatInputConfiguration, AIChatInputWidget } from './chat-input-widget';
-import { ChatNodeToolbarActionContribution, DefaultChatNodeToolbarActionContribution } from './chat-node-toolbar-action-contribution';
-import { ChatResponsePartRenderer } from './chat-response-part-renderer';
+import { bindViewContribution, FrontendApplicationContribution, WidgetFactory, KeybindingContribution } from '@theia/core/lib/browser/index.js';
+import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { ContainerModule, interfaces } from 'inversify';
+import { EditorSelectionResolver } from '@theia/editor/lib/browser/editor-manager.js';
+import { AIChatContribution } from './ai-chat-ui-contribution.js';
+import { AIChatInputConfiguration, AIChatInputWidget } from './chat-input-widget.js';
+import { ChatNodeToolbarActionContribution, DefaultChatNodeToolbarActionContribution } from './chat-node-toolbar-action-contribution.js';
+import { ChatResponsePartRenderer } from './chat-response-part-renderer.js';
 import {
     CodePartRenderer,
     CodePartRendererAction,
@@ -38,28 +38,28 @@ import {
     ProgressPartRenderer,
     DelegationResponseRenderer,
     TextPartRenderer,
-} from './chat-response-renderer';
-import { UnknownPartRenderer } from './chat-response-renderer/unknown-part-renderer';
+} from './chat-response-renderer/index.js';
+import { UnknownPartRenderer } from './chat-response-renderer/unknown-part-renderer.js';
 import {
     GitHubSelectionResolver,
     TextFragmentSelectionResolver,
     TypeDocSymbolSelectionResolver,
-} from './chat-response-renderer/ai-selection-resolver';
-import { QuestionPartRenderer } from './chat-response-renderer/question-part-renderer';
-import { createChatViewTreeWidget } from './chat-tree-view';
-import { ChatViewTreeWidget } from './chat-tree-view/chat-view-tree-widget';
-import { ChatViewMenuContribution } from './chat-view-contribution';
-import { ChatViewLanguageContribution } from './chat-view-language-contribution';
-import { ChatViewWidget } from './chat-view-widget';
-import { ChatViewWidgetToolbarContribution } from './chat-view-widget-toolbar-contribution';
-import { ContextVariablePicker } from './context-variable-picker';
-import { ChangeSetActionRenderer, ChangeSetActionService } from './change-set-actions/change-set-action-service';
-import { ChangeSetAcceptAction } from './change-set-actions/change-set-accept-action';
-import { AIChatTreeInputArgs, AIChatTreeInputConfiguration, AIChatTreeInputFactory, AIChatTreeInputWidget } from './chat-tree-view/chat-view-tree-input-widget';
-import { SubChatWidget, SubChatWidgetFactory } from './chat-tree-view/sub-chat-widget';
-import { ChatInputHistoryService } from './chat-input-history';
-import { ChatInputHistoryContribution } from './chat-input-history-contribution';
-import { ChatInputModeContribution } from './chat-input-mode-contribution';
+} from './chat-response-renderer/ai-selection-resolver.js';
+import { QuestionPartRenderer } from './chat-response-renderer/question-part-renderer.js';
+import { createChatViewTreeWidget } from './chat-tree-view/index.js';
+import { ChatViewTreeWidget } from './chat-tree-view/chat-view-tree-widget.js';
+import { ChatViewMenuContribution } from './chat-view-contribution.js';
+import { ChatViewLanguageContribution } from './chat-view-language-contribution.js';
+import { ChatViewWidget } from './chat-view-widget.js';
+import { ChatViewWidgetToolbarContribution } from './chat-view-widget-toolbar-contribution.js';
+import { ContextVariablePicker } from './context-variable-picker.js';
+import { ChangeSetActionRenderer, ChangeSetActionService } from './change-set-actions/change-set-action-service.js';
+import { ChangeSetAcceptAction } from './change-set-actions/change-set-accept-action.js';
+import { AIChatTreeInputArgs, AIChatTreeInputConfiguration, AIChatTreeInputFactory, AIChatTreeInputWidget } from './chat-tree-view/chat-view-tree-input-widget.js';
+import { SubChatWidget, SubChatWidgetFactory } from './chat-tree-view/sub-chat-widget.js';
+import { ChatInputHistoryService } from './chat-input-history.js';
+import { ChatInputHistoryContribution } from './chat-input-history-contribution.js';
+import { ChatInputModeContribution } from './chat-input-mode-contribution.js';
 
 export default new ContainerModule((bind, _unbind, _isBound, rebind) => {
     bindViewContribution(bind, AIChatContribution);

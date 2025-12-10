@@ -15,17 +15,17 @@
 // *****************************************************************************
 
 import { ContributionProvider, Emitter, type Event } from '@theia/core';
-import { type FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import debounce = require('@theia/core/shared/lodash.debounce');
-import type { ChangeSetDecoration, ChangeSetElement } from '../common';
+import { type FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
+import { inject, injectable, named } from 'inversify';
+import debounce from  'lodash/debounce.js'
+import type { ChangeSetDecoration, ChangeSetElement } from '../common/index.js';
 
 /**
  * A decorator for a change set element.
  * It allows to add additional information to the element, such as icons.
  */
 export const ChangeSetDecorator = Symbol('ChangeSetDecorator');
-export interface ChangeSetDecorator {
+export type ChangeSetDecorator = {
     readonly id: string;
 
     readonly onDidChangeDecorations: Event<void>;

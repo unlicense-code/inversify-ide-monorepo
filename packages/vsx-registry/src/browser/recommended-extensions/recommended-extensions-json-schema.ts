@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { JsonSchemaContribution, JsonSchemaDataStore, JsonSchemaRegisterContext } from '@theia/core/lib/browser/json-schema-store';
-import { IJSONSchema } from '@theia/core/lib/common/json-schema';
-import URI from '@theia/core/lib/common/uri';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { extensionsSchemaID } from '../../common/recommended-extensions-preference-contribution';
+import { inject, injectable, postConstruct } from 'inversify';
+import { JsonSchemaContribution, JsonSchemaDataStore, JsonSchemaRegisterContext } from '@theia/core/lib/browser/json-schema-store.js';
+import { IJSONSchema } from '@theia/core/lib/common/json-schema.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { extensionsSchemaID } from '../../common/recommended-extensions-preference-contribution.js';
 
 export const extensionsConfigurationSchema: IJSONSchema = {
     $id: extensionsSchemaID,

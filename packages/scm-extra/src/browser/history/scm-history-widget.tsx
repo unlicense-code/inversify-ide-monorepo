@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,23 +14,23 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
+import { injectable, inject, postConstruct } from 'inversify';
 import { DisposableCollection } from '@theia/core';
-import { OpenerService, open, StatefulWidget, SELECTED_CLASS, WidgetManager, ApplicationShell, codicon } from '@theia/core/lib/browser';
-import { CancellationTokenSource } from '@theia/core/lib/common/cancellation';
-import { Message } from '@theia/core/shared/@lumino/messaging';
-import { Virtuoso, VirtuosoHandle } from '@theia/core/shared/react-virtuoso';
-import URI from '@theia/core/lib/common/uri';
-import { ScmFileChange, ScmFileChangeNode } from '../scm-file-change-node';
-import { ScmAvatarService } from '@theia/scm/lib/browser/scm-avatar-service';
-import { ScmItemComponent, ScmNavigableListWidget } from '../scm-navigable-list-widget';
-import * as React from '@theia/core/shared/react';
-import { AlertMessage } from '@theia/core/lib/browser/widgets/alert-message';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { nls } from '@theia/core/lib/common/nls';
-import { ScmHistoryProvider } from './scm-history-provider';
-import throttle = require('@theia/core/shared/lodash.throttle');
-import { HistoryWidgetOptions, ScmCommitNode, ScmHistoryListNode, ScmHistorySupport, SCM_HISTORY_ID, SCM_HISTORY_LABEL, SCM_HISTORY_MAX_COUNT } from './scm-history-constants';
+import { OpenerService, open, StatefulWidget, SELECTED_CLASS, WidgetManager, ApplicationShell, codicon } from '@theia/core/lib/browser/index.js';
+import { CancellationTokenSource } from '@theia/core/lib/common/cancellation.js';
+import { Message } from '@lumino/messaging';
+import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ScmFileChange, ScmFileChangeNode } from '../scm-file-change-node.js';
+import { ScmAvatarService } from '@theia/scm/lib/browser/scm-avatar-service.js';
+import { ScmItemComponent, ScmNavigableListWidget } from '../scm-navigable-list-widget.js';
+import * as React from 'react';
+import { AlertMessage } from '@theia/core/lib/browser/widgets/alert-message.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { ScmHistoryProvider } from './scm-history-provider.js';
+import throttle from 'lodash/throttle.js';
+import { HistoryWidgetOptions, ScmCommitNode, ScmHistoryListNode, ScmHistorySupport, SCM_HISTORY_ID, SCM_HISTORY_LABEL, SCM_HISTORY_MAX_COUNT } from './scm-history-constants.js';
 export { HistoryWidgetOptions, ScmCommitNode, ScmHistoryListNode, ScmHistorySupport };
 
 @injectable()

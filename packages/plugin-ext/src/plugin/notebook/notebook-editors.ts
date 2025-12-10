@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,10 +19,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Emitter } from '@theia/core';
-import { NotebookEditorPropertiesChangeData, NotebookEditorsExt, NotebookEditorViewColumnInfo } from '../../common';
-import * as typeConverters from '../type-converters';
+import { NotebookEditorPropertiesChangeData, NotebookEditorsExt, NotebookEditorViewColumnInfo } from '../../common/index.js';
+import * as typeConverters from '../type-converters.js';
 import * as theia from '@theia/plugin';
-import { NotebooksExtImpl } from './notebooks';
+import { NotebooksExtImpl } from './notebooks.js';
 
 export class NotebookEditorsExtImpl implements NotebookEditorsExt {
 

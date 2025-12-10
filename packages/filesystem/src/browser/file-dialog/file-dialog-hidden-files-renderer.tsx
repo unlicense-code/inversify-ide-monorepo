@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,17 +15,17 @@
 // *****************************************************************************
 
 import { nls } from '@theia/core';
-import { ReactRenderer } from '@theia/core/lib/browser';
-import { inject, postConstruct } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { FileDialogTree } from './file-dialog-tree';
+import { ReactRenderer } from '@theia/core/lib/browser/index.js';
+import { inject, postConstruct } from 'inversify';
+import * as React from 'react';
+import { FileDialogTree } from './file-dialog-tree.js';
 
 const TOGGLE_HIDDEN_PANEL_CLASS = 'theia-ToggleHiddenPanel';
 const TOGGLE_HIDDEN_CONTAINER_CLASS = 'theia-ToggleHiddenInputContainer';
 const CHECKBOX_CLASS = 'theia-ToggleHiddenInputCheckbox';
 
 export const HiddenFilesToggleRendererFactory = Symbol('HiddenFilesToggleRendererFactory');
-export interface HiddenFilesToggleRendererFactory {
+export type HiddenFilesToggleRendererFactory = {
     (fileDialogTree: FileDialogTree): FileDialogHiddenFilesToggleRenderer;
 }
 export class FileDialogHiddenFilesToggleRenderer extends ReactRenderer {

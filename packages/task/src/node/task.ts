@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, unmanaged } from '@theia/core/shared/inversify';
+import { injectable, unmanaged } from 'inversify';
 import { ILogger, Disposable, DisposableCollection, Emitter, Event, MaybePromise } from '@theia/core/lib/common/';
-import { TaskInfo, TaskExitedEvent, TaskConfiguration, TaskOutputEvent, ManagedTask, ManagedTaskManager } from '../common/task-protocol';
-/**
- * Represents the options used for running a task.
- */
-export interface TaskOptions {
+import { TaskInfo, TaskExitedEvent, TaskConfiguration, TaskOutputEvent, ManagedTask, ManagedTaskManager } from '../common/task-protocol.js';
+export type TaskOptions = {
     /** The task label */
     label: string;
     /** The task configuration which should be executed */

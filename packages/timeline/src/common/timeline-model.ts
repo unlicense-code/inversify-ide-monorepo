@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 RedHat and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -20,13 +20,13 @@
  *--------------------------------------------------------------------------------------------*/
 // some code copied and modified from https://github.com/microsoft/vscode/blob/3aab025eaebde6c9544293b6c7554f3f583e15d0/src/vs/workbench/contrib/timeline/common/timeline.ts
 
-import { Command, Disposable, Event } from '@theia/core/lib/common';
-import { URI } from '@theia/core/shared/vscode-uri';
-import { ThemeIcon } from '@theia/core/lib/common/theme';
+import { Command, Disposable, Event } from '@theia/core/lib/common/index.js';
+import { URI } from 'vscode-uri';
+import { ThemeIcon } from '@theia/core/lib/common/theme.js';
 import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
-import { AccessibilityInformation } from '@theia/core/lib/common/accessibility';
+import { AccessibilityInformation } from '@theia/core/lib/common/accessibility.js';
 
-export interface TimelineItem {
+export type TimelineItem = {
     source: string;
     uri: string;
     handle: string;
@@ -41,28 +41,28 @@ export interface TimelineItem {
     accessibilityInformation?: AccessibilityInformation;
 }
 
-export interface TimelineChangeEvent {
+export type TimelineChangeEvent = {
     id: string;
     uri: URI | undefined;
     reset: boolean
 }
 
-export interface TimelineProvidersChangeEvent {
+export type TimelineProvidersChangeEvent = {
     readonly added?: string[];
     readonly removed?: string[];
 }
 
-export interface TimelineOptions {
+export type TimelineOptions = {
     cursor?: string;
     limit?: number | { timestamp: number; id?: string };
 }
 
-export interface InternalTimelineOptions {
+export type InternalTimelineOptions = {
     cacheResults: boolean;
     resetCache: boolean;
 }
 
-export interface Timeline {
+export type Timeline = {
     source: string;
 
     paging?: {
@@ -72,18 +72,18 @@ export interface Timeline {
     items: TimelineItem[];
 }
 
-export interface TimelineProviderDescriptor {
+export type TimelineProviderDescriptor = {
     id: string;
     label: string;
     scheme: string | string[];
 }
 
-export interface TimelineProvider extends TimelineProviderDescriptor, Disposable {
+export type TimelineProvider = TimelineProviderDescriptor & Disposable & {
     onDidChange?: Event<TimelineChangeEvent>;
     provideTimeline(uri: URI, options: TimelineOptions, internalOptions?: InternalTimelineOptions): Promise<Timeline | undefined>;
 }
 
-export interface TimelineSource {
+export type TimelineSource = {
     id: string;
     label: string;
 }

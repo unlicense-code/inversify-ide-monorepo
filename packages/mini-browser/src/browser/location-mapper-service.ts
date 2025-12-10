@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Endpoint } from '@theia/core/lib/browser';
-import { MaybePromise, Prioritizeable } from '@theia/core/lib/common/types';
-import { ContributionProvider } from '@theia/core/lib/common/contribution-provider';
-import { MiniBrowserEnvironment } from './environment/mini-browser-environment';
+import { inject, injectable, named } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Endpoint } from '@theia/core/lib/browser/index.js';
+import { MaybePromise, Prioritizeable } from '@theia/core/lib/common/types.js';
+import { ContributionProvider } from '@theia/core/lib/common/contribution-provider.js';
+import { MiniBrowserEnvironment } from './environment/mini-browser-environment.js';
 
 /**
  * Contribution for the `LocationMapperService`.
  */
 export const LocationMapper = Symbol('LocationMapper');
-export interface LocationMapper {
+export type LocationMapper = {
 
     /**
      * Should return with a positive number if the current contribution can handle the given location.
@@ -64,8 +64,8 @@ export class LocationMapperService {
     }
 
     protected async prioritize(location: string): Promise<LocationMapper[]> {
-        const prioritized = await Prioritizeable.prioritizeAll(this.getContributions(), contribution => contribution.canHandle(location));
-        return prioritized.map(p => p.value);
+        const prioritized = await Prioritizeable.prioritizeAll(this.getContributions(), (contribution: LocationMapper) => contribution.canHandle(location));
+        return prioritized.map((p: Prioritizeable<LocationMapper>) => p.value);
     }
 
     protected getContributions(): LocationMapper[] {

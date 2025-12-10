@@ -1,6 +1,7 @@
 {
   "name": "@theia/ai-terminal",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - AI Terminal Extension",
   "dependencies": {
     "@theia/ai-chat": "1.66.0",

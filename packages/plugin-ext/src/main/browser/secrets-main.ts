@@ -20,11 +20,11 @@
  *--------------------------------------------------------------------------------------------*/
 // code copied and modified from https://github.com/microsoft/vscode/blob/1.55.2/src/vs/workbench/api/browser/mainThreadSecretState.ts
 
-import { SecretsExt, SecretsMain } from '../../common/plugin-api-rpc';
-import { RPCProtocol } from '../../common/rpc-protocol';
-import { interfaces } from '@theia/core/shared/inversify';
-import { MAIN_RPC_CONTEXT } from '../../common';
-import { CredentialsService } from '@theia/core/lib/browser/credentials-service';
+import { SecretsExt, SecretsMain } from '../../common/plugin-api-rpc.js';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
+import { interfaces } from 'inversify';
+import { MAIN_RPC_CONTEXT } from '../../common/index.js';
+import { CredentialsService } from '@theia/core/lib/browser/credentials-service.js';
 
 export class SecretsMainImpl implements SecretsMain {
 

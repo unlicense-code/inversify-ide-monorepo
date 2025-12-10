@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable } from 'inversify';
 
-import { ElectronMainApplication, ElectronMainApplicationContribution } from '@theia/core/lib/electron-main/electron-main-application';
+import { ElectronMainApplication, ElectronMainApplicationContribution } from '@theia/core/lib/electron-main';
 import { MaybePromise } from '@theia/core';
-import { CHANNEL_SHOW_OPEN, CHANNEL_SHOW_SAVE, OpenDialogOptions, SaveDialogOptions } from '../electron-common/electron-api';
+import { CHANNEL_SHOW_OPEN, CHANNEL_SHOW_SAVE, OpenDialogOptions, SaveDialogOptions } from '../electron-common/electron-api.js';
 import { ipcMain, OpenDialogOptions as ElectronOpenDialogOptions, SaveDialogOptions as ElectronSaveDialogOptions, BrowserWindow, dialog }
     from '@theia/core/electron-shared/electron';
 
@@ -26,7 +26,7 @@ import { ipcMain, OpenDialogOptions as ElectronOpenDialogOptions, SaveDialogOpti
 export class ElectronApi implements ElectronMainApplicationContribution {
     onStart(application: ElectronMainApplication): MaybePromise<void> {
         // dialogs
-        ipcMain.handle(CHANNEL_SHOW_OPEN, async (event, options: OpenDialogOptions) => {
+        ipcMain.handle(CHANNEL_SHOW_OPEN, async (event: any, options: OpenDialogOptions) => {
             const properties: ElectronOpenDialogOptions['properties'] = [];
 
             // checking proper combination of file/dir opening is done on the renderer side
@@ -58,7 +58,7 @@ export class ElectronApi implements ElectronMainApplicationContribution {
             return (await dialog.showOpenDialog(dialogOpts)).filePaths;
         });
 
-        ipcMain.handle(CHANNEL_SHOW_SAVE, async (event, options: SaveDialogOptions) => {
+        ipcMain.handle(CHANNEL_SHOW_SAVE, async (event: any, options: SaveDialogOptions) => {
             const dialogOpts: ElectronSaveDialogOptions = {
                 defaultPath: options.path,
                 buttonLabel: options.buttonLabel,

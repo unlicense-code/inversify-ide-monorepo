@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { ContextMenuRenderer, NodeProps, TreeProps, TreeNode, SELECTED_CLASS, FOCUS_CLASS } from '@theia/core/lib/browser';
-import { FileTreeWidget, FileStatNode } from '../file-tree';
-import { FileDialogModel } from './file-dialog-model';
+import { injectable, inject } from 'inversify';
+import { ContextMenuRenderer, NodeProps, TreeProps, TreeNode, SELECTED_CLASS, FOCUS_CLASS } from '@theia/core/lib/browser/index.js';
+import { FileTreeWidget, FileStatNode } from '../file-tree/index.js';
+import { FileDialogModel } from './file-dialog-model.js';
 
 export const FILE_DIALOG_CLASS = 'theia-FileDialog';
 export const NOT_SELECTABLE_CLASS = 'theia-mod-not-selectable';

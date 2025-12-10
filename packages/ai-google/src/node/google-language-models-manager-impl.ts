@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { LanguageModelRegistry, LanguageModelStatus, TokenUsageService } from '@theia/ai-core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { GoogleModel } from './google-language-model';
-import { GoogleLanguageModelsManager, GoogleModelDescription } from '../common';
+import { LanguageModelRegistry, LanguageModelStatus, TokenUsageService } from '@theia/ai-core/lib/common/index.js';
+import { inject, injectable } from 'inversify';
+import { GoogleModel } from './google-language-model.js';
+import { GoogleLanguageModelsManager, GoogleModelDescription } from '../common/index.js';
 
-export interface GoogleLanguageModelRetrySettings {
+export type GoogleLanguageModelRetrySettings = {
     maxRetriesOnErrors: number;
     retryDelayOnRateLimitError: number;
     retryDelayOnOtherErrors: number;

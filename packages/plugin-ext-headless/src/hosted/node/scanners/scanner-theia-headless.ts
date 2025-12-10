@@ -16,10 +16,10 @@
 
 /* eslint-disable @theia/localization-check */
 
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable } from 'inversify';
 import { DeployedPlugin, PluginPackage, PluginEntryPoint } from '@theia/plugin-ext';
-import { AbstractPluginScanner } from '@theia/plugin-ext/lib/hosted/node/scanners/scanner-theia';
-import { deepClone } from '@theia/core/lib/common/objects';
+import { AbstractPluginScanner } from '@theia/plugin-ext/lib/hosted/node/scanners/scanner-theia.js';
+import { deepClone } from '@theia/core/lib/common/objects.js';
 
 @injectable()
 export class TheiaHeadlessPluginScanner extends AbstractPluginScanner {

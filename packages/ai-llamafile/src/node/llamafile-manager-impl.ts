@@ -13,13 +13,13 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { LanguageModelRegistry, LanguageModelStatus } from '@theia/ai-core';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { LanguageModelRegistry, LanguageModelStatus } from '@theia/ai-core/lib/common/index.js';
+import { inject, injectable } from 'inversify';
 import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
 import { basename, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { LlamafileLanguageModel } from '../common/llamafile-language-model';
-import { LlamafileManager, LlamafileModelDescription, LlamafileServerManagerClient } from '../common/llamafile-manager';
+import { LlamafileLanguageModel } from '../common/llamafile-language-model.js';
+import { LlamafileManager, LlamafileModelDescription, LlamafileServerManagerClient } from '../common/llamafile-manager.js';
 
 @injectable()
 export class LlamafileManagerImpl implements LlamafileManager {

@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
+import { interfaces } from 'inversify';
 import {
     MessageClient, MessageService,
     ProgressClient, ProgressService,
     bindContributionProvider
 } from '@theia/core';
 import { MainPluginApiProvider, PluginDeployerDirectoryHandler } from '@theia/plugin-ext';
-import { PluginTheiaHeadlessDirectoryHandler } from './handlers/plugin-theia-headless-directory-handler';
-import { HeadlessProgressClient } from './headless-progress-client';
+import { PluginTheiaHeadlessDirectoryHandler } from './handlers/plugin-theia-headless-directory-handler.js';
+import { HeadlessProgressClient } from './headless-progress-client.js';
 
 export function bindHeadlessMain(bind: interfaces.Bind): void {
     bind(PluginDeployerDirectoryHandler).to(PluginTheiaHeadlessDirectoryHandler).inSingletonScope();

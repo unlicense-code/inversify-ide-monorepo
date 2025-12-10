@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { AIVariable } from '@theia/ai-core';
+import { AIVariable } from '@theia/ai-core/lib/common/index.js';
 import { nls } from '@theia/core';
-import { codiconArray } from '@theia/core/lib/browser';
+import { codiconArray } from '@theia/core/lib/browser/index.js';
 
 export const TASK_CONTEXT_VARIABLE: AIVariable = {
     id: 'taskContext',

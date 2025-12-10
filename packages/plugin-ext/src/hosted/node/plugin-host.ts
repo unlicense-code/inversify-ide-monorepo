@@ -13,15 +13,15 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import '@theia/core/shared/reflect-metadata';
-import { Container } from '@theia/core/shared/inversify';
-import { URI as VSCodeURI } from '@theia/core/shared/vscode-uri';
-import { MsgPackExtensionManager } from '@theia/core/lib/common/message-rpc/msg-pack-extension-manager';
-import { ConnectionClosedError, MsgPackExtensionTag, RPCProtocol } from '../../common/rpc-protocol';
-import { ProcessTerminatedMessage, ProcessTerminateMessage } from './hosted-plugin-protocol';
-import { PluginHostRPC } from './plugin-host-rpc';
-import pluginHostModule from './plugin-host-module';
-import { URI } from '../../plugin/types-impl';
+import 'reflect-metadata';
+import { Container } from 'inversify';
+import { URI as VSCodeURI } from 'vscode-uri';
+import { MsgPackExtensionManager } from '@theia/core/lib/common/message-rpc/msg-pack-extension-manager.js';
+import { ConnectionClosedError, MsgPackExtensionTag, RPCProtocol } from '../../common/rpc-protocol.js';
+import { ProcessTerminatedMessage, ProcessTerminateMessage } from './hosted-plugin-protocol.js';
+import { PluginHostRPC } from './plugin-host-rpc.js';
+import pluginHostModule from './plugin-host-module.js';
+import { URI } from '../../plugin/types-impl.js';
 
 console.log('PLUGIN_HOST(' + process.pid + ') starting instance');
 

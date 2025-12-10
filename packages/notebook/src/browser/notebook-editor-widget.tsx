@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,30 +14,30 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
+import * as React from 'react';
 import { CommandRegistry, MenuModelRegistry, URI, nls } from '@theia/core';
-import { ReactWidget, Navigatable, SaveableSource, Message, DelegatingSaveable, lock, unlock, animationFrame, codicon } from '@theia/core/lib/browser';
-import { ReactNode } from '@theia/core/shared/react';
-import { CellKind, NotebookCellsChangeType } from '../common';
-import { CellRenderer as CellRenderer, NotebookCellListView } from './view/notebook-cell-list-view';
-import { NotebookCodeCellRenderer } from './view/notebook-code-cell-view';
-import { NotebookMarkdownCellRenderer } from './view/notebook-markdown-cell-view';
-import { NotebookModel } from './view-model/notebook-model';
-import { NotebookCellToolbarFactory } from './view/notebook-cell-toolbar-factory';
-import { inject, injectable, interfaces, postConstruct } from '@theia/core/shared/inversify';
-import { Emitter } from '@theia/core/shared/vscode-languageserver-protocol';
-import { NotebookEditorWidgetService } from './service/notebook-editor-widget-service';
-import { NotebookMainToolbarRenderer } from './view/notebook-main-toolbar';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
-import { NotebookContextManager } from './service/notebook-context-manager';
-import { NotebookViewportService } from './view/notebook-viewport-service';
-import { NotebookCellCommands } from './contributions/notebook-cell-actions-contribution';
-import { NotebookFindWidget } from './view/notebook-find-widget';
-import debounce = require('@theia/core/shared/lodash.debounce');
-import { CellOutputWebview, CellOutputWebviewFactory } from './renderers/cell-output-webview';
-import { NotebookCellOutputModel } from './view-model/notebook-cell-output-model';
-import { NotebookViewModel } from './view-model/notebook-view-model';
+import { ReactWidget, Navigatable, SaveableSource, Message, DelegatingSaveable, lock, unlock, animationFrame, codicon } from '@theia/core/lib/browser/index.js';
+import { ReactNode } from 'react';
+import { CellKind, NotebookCellsChangeType } from '../common/index.js';
+import { CellRenderer as CellRenderer, NotebookCellListView } from './view/notebook-cell-list-view.js';
+import { NotebookCodeCellRenderer } from './view/notebook-code-cell-view.js';
+import { NotebookMarkdownCellRenderer } from './view/notebook-markdown-cell-view.js';
+import { NotebookModel } from './view-model/notebook-model.js';
+import { NotebookCellToolbarFactory } from './view/notebook-cell-toolbar-factory.js';
+import { inject, injectable, interfaces, postConstruct } from 'inversify';
+import { Emitter } from 'vscode-languageserver-protocol';
+import { NotebookEditorWidgetService } from './service/notebook-editor-widget-service.js';
+import { NotebookMainToolbarRenderer } from './view/notebook-main-toolbar.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/markdown-string.js';
+import { NotebookContextManager } from './service/notebook-context-manager.js';
+import { NotebookViewportService } from './view/notebook-viewport-service.js';
+import { NotebookCellCommands } from './contributions/notebook-cell-actions-contribution.js';
+import { NotebookFindWidget } from './view/notebook-find-widget.js';
+import debounce from 'lodash/debounce.js'
+import { CellOutputWebview, CellOutputWebviewFactory } from './renderers/cell-output-webview.js';
+import { NotebookCellOutputModel } from './view-model/notebook-cell-output-model.js';
+import { NotebookViewModel } from './view-model/notebook-view-model.js';
 const PerfectScrollbar = require('react-perfect-scrollbar');
 
 export const NotebookEditorWidgetContainerFactory = Symbol('NotebookEditorWidgetContainerFactory');
@@ -66,12 +66,12 @@ export function createNotebookEditorWidgetContainer(parent: interfaces.Container
 
 export const NotebookEditorProps = Symbol('NotebookEditorProps');
 
-interface RenderMessage {
+type RenderMessage = {
     rendererId: string;
     message: unknown;
 }
 
-export interface NotebookEditorProps {
+export type NotebookEditorProps = {
     uri: URI,
     readonly notebookType: string,
     notebookData: Promise<NotebookModel>

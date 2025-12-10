@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { LabelProvider } from '@theia/core/lib/browser';
-import { EditorManager, EditorOpenerOptions, EditorWidget } from '@theia/editor/lib/browser';
-import URI from '@theia/core/lib/common/uri';
-import { DebugProtocol } from '@vscode/debugprotocol/lib/debugProtocol';
-import { DebugSession } from '../debug-session';
-import { URI as Uri } from '@theia/core/shared/vscode-uri';
-import { DEBUG_SCHEME, SCHEME_PATTERN } from '../../common/debug-uri-utils';
+import { LabelProvider } from '@theia/core/lib/browser/index.js';
+import { EditorManager, EditorOpenerOptions, EditorWidget } from '@theia/editor/lib/browser/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { DebugProtocol } from '@vscode/debugprotocol/lib/debugProtocol.js';
+import { DebugSession } from '../debug-session.js';
+import { URI as Uri } from 'vscode-uri';
+import { DEBUG_SCHEME, SCHEME_PATTERN } from '../../common/debug-uri-utils.js';
 
 export class DebugSourceData {
     readonly raw: DebugProtocol.Source;

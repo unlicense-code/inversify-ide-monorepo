@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,10 +18,10 @@
 
 import { ReactNode } from 'react';
 import { injectable, unmanaged } from 'inversify';
-import { Disposable, DisposableCollection, Emitter, Event, isObject, MaybePromise } from '../../common';
-import { TreeWidget } from '../tree';
+import { Disposable, DisposableCollection, Emitter, Event, isObject, MaybePromise } from '../../common/index.js';
+import { TreeWidget } from '../tree/index.js';
 
-export interface TreeElement {
+export type TreeElement = {
     /** default: parent id + position among siblings */
     readonly id?: number | string | undefined
     /** default: true */
@@ -30,7 +30,7 @@ export interface TreeElement {
     open?(): MaybePromise<any>
 }
 
-export interface CompositeTreeElement extends TreeElement {
+export type CompositeTreeElement = TreeElement & {
     /** default: true */
     readonly hasElements?: boolean
     getElements(): MaybePromise<IterableIterator<TreeElement>>
@@ -68,7 +68,7 @@ export abstract class TreeSource implements Disposable {
 
     abstract getElements(): MaybePromise<IterableIterator<TreeElement>>;
 }
-export interface TreeSourceOptions {
+export type TreeSourceOptions = {
     id?: string
     placeholder?: string
 }

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ScmCommit } from '@theia/scm/lib/browser/scm-provider';
-import URI from '@theia/core/lib/common/uri';
-import { isObject } from '@theia/core/lib/common';
+import { ScmCommit } from '@theia/scm/lib/browser/scm-provider.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { isObject } from '@theia/core/lib/common/index.js';
 
-export interface ScmFileChangeNode {
+export type ScmFileChangeNode = {
     readonly fileChange: ScmFileChange;
     readonly commitId: string;
     selected?: boolean;
@@ -29,13 +29,13 @@ export namespace ScmFileChangeNode {
     }
 }
 
-export interface ScmHistoryCommit extends ScmCommit {
+export type ScmHistoryCommit = ScmCommit & {
     readonly commitDetailUri: URI;
     readonly fileChanges: ScmFileChange[];
     readonly commitDetailOptions: {};
 }
 
-export interface ScmFileChange {
+export type ScmFileChange = {
     readonly uri: string;
     getCaption(): string;
     getStatusCaption(): string;

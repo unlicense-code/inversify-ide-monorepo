@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,8 +17,8 @@
 import * as http from 'http';
 import * as https from 'https';
 import { AddressInfo } from 'net';
-import { checkParentAlive } from './messaging/ipc-protocol';
-import { MaybePromise } from '../common/types';
+import { checkParentAlive } from './messaging/ipc-protocol.js';
+import { MaybePromise } from '../common/types.js';
 
 checkParentAlive();
 

@@ -15,15 +15,15 @@
 // *****************************************************************************
 
 import { Emitter, Event } from '@theia/core';
-import { injectable, unmanaged } from '@theia/core/shared/inversify';
-import { TerminalWidget } from './base/terminal-widget';
-import { ShellTerminalProfile } from './shell-terminal-profile';
+import { injectable, unmanaged } from 'inversify';
+import { TerminalWidget } from './base/terminal-widget.js';
+import { ShellTerminalProfile } from './shell-terminal-profile.js';
 
 export const TerminalProfileService = Symbol('TerminalProfileService');
 export const ContributedTerminalProfileStore = Symbol('ContributedTerminalProfileStore');
 export const UserTerminalProfileStore = Symbol('UserTerminalProfileStore');
 
-export interface TerminalProfile {
+export type TerminalProfile = {
     start(): Promise<TerminalWidget>;
 }
 
@@ -31,7 +31,7 @@ export const NULL_PROFILE: TerminalProfile = {
     start: async () => { throw new Error('you cannot start a null profile'); }
 };
 
-export interface TerminalProfileService {
+export type TerminalProfileService = {
     onAdded: Event<string>;
     onRemoved: Event<string>;
     getProfile(id: string): TerminalProfile | undefined
@@ -41,7 +41,7 @@ export interface TerminalProfileService {
     readonly defaultProfile: TerminalProfile | undefined;
 }
 
-export interface TerminalProfileStore {
+export type TerminalProfileStore = {
     onAdded: Event<[string, TerminalProfile]>;
     onRemoved: Event<string>;
     registerTerminalProfile(id: string, profile: TerminalProfile): void;

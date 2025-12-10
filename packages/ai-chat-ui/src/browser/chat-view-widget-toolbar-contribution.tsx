@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { AIChatContribution } from './ai-chat-ui-contribution';
+import { inject, injectable, postConstruct } from 'inversify';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { AIChatContribution } from './ai-chat-ui-contribution.js';
 import { Emitter, InMemoryResources, URI, nls } from '@theia/core';
-import { ChatCommands } from './chat-view-commands';
-import { CommandRegistry } from '@theia/core/lib/common/command';
-import { SessionSettingsDialog } from './session-settings-dialog';
-import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider';
-import { ChatViewWidget } from './chat-view-widget';
+import { ChatCommands } from './chat-view-commands.js';
+import { CommandRegistry } from '@theia/core/lib/common/command.js';
+import { SessionSettingsDialog } from './session-settings-dialog.js';
+import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider.js';
+import { ChatViewWidget } from './chat-view-widget.js';
 import { AIActivationService, ENABLE_AI_CONTEXT_KEY } from '@theia/ai-core/lib/browser';
 
 @injectable()

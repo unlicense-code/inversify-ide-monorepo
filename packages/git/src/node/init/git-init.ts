@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import findGit from 'find-git-exec';
+import { injectable, inject } from 'inversify';
+import * as findGit from 'find-git-exec';
 import { dirname } from 'path';
-import { pathExists } from '@theia/core/shared/fs-extra';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
+import { pathExists } from 'fs-extra';
+import { ILogger } from '@theia/core/lib/common/logger.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
 import { MessageService } from '@theia/core';
 
 /**
  * Initializer hook for Git.
  */
 export const GitInit = Symbol('GitInit');
-export interface GitInit extends Disposable {
+export type GitInit = Disposable & {
 
     /**
      * Called before `Git` is ready to be used in Theia. Git operations cannot be executed before the returning promise is not resolved or rejected.
@@ -54,7 +54,7 @@ export class DefaultGitInit implements GitInit {
     async init(): Promise<void> {
         const { env } = process;
         try {
-            const { execPath, path, version } = await findGit();
+            const { execPath, path, version } = await (findGit as any).default();
             if (!!execPath && !!path && !!version) {
                 // https://github.com/desktop/dugite/issues/111#issuecomment-323222834
                 // Instead of the executable path, we need the root directory of Git.

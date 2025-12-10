@@ -18,12 +18,12 @@ import {
     inject,
     injectable,
     postConstruct,
-} from '@theia/core/shared/inversify';
+} from 'inversify';
 import {
     OutputChannel,
     OutputChannelManager,
     OutputChannelSeverity,
-} from '@theia/output/lib/browser/output-channel';
+} from '@theia/output/lib/browser/output-channel.js';
 import {
     AISettingsService,
     DefaultLanguageModelRegistryImpl,
@@ -45,7 +45,7 @@ import {
     LanguageModelSelector,
     LanguageModelStreamResponsePart,
     ToolCallResult
-} from '../common';
+} from '../common/index.js';
 
 @injectable()
 export class LanguageModelDelegateClientImpl
@@ -80,7 +80,7 @@ export class LanguageModelDelegateClientImpl
     }
 }
 
-interface StreamState {
+type StreamState = {
     id: string;
     tokens: (LanguageModelStreamResponsePart | undefined)[];
     resolve?: (_: unknown) => void;
@@ -135,7 +135,7 @@ export class FrontendLanguageModelRegistryImpl
     protected client: LanguageModelDelegateClientImpl;
 
     @inject(ILogger)
-    protected override logger: ILogger;
+    protected declare logger: ILogger;
 
     @inject(OutputChannelManager)
     protected outputChannelManager: OutputChannelManager;

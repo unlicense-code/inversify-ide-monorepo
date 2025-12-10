@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { injectable } from 'inversify';
-import { Emitter, Event, OverridePreferenceName, PreferenceChange, PreferenceChanges, PreferenceInspection, PreferenceScope, PreferenceService } from '../../../common';
-import URI from '../../../common/uri';
+import { Emitter, Event, OverridePreferenceName, PreferenceChange, PreferenceChanges, PreferenceInspection, PreferenceScope, PreferenceService } from '../../../common/index.js';
+import URI from '../../../common/uri.js';
 
 @injectable()
 export class MockPreferenceService implements PreferenceService {

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,20 +15,17 @@
 // *****************************************************************************
 
 import { FrontendApplicationConfig } from '@theia/application-package';
-import { FrontendApplicationState, StopReason } from '../common/frontend-application-state';
-import { BrowserWindow, BrowserWindowConstructorOptions } from '../../electron-shared/electron';
-import { inject, injectable, postConstruct } from '../../shared/inversify';
-import { ElectronMainApplicationGlobals } from './electron-main-constants';
-import { DisposableCollection, Emitter, Event } from '../common';
-import { createDisposableListener } from './event-utils';
-import { URI } from '../common/uri';
-import { FileUri } from '../common/file-uri';
-import { TheiaRendererAPI } from './electron-api-main';
+import { FrontendApplicationState, StopReason } from '../common/frontend-application-state.js';
+import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
+import { inject, injectable, postConstruct } from 'inversify';
+import { ElectronMainApplicationGlobals } from './electron-main-constants.js';
+import { DisposableCollection, Emitter, Event } from '../common/index.js';
+import { createDisposableListener } from './event-utils.js';
+import { URI } from '../common/uri.js';
+import { FileUri } from '../common/file-uri.js';
+import { TheiaRendererAPI } from './electron-api-main.js';
 
-/**
- * Theia tracks the maximized state of Electron Browser Windows.
- */
-export interface TheiaBrowserWindowOptions extends BrowserWindowConstructorOptions {
+export type TheiaBrowserWindowOptions = BrowserWindowConstructorOptions & {
     isMaximized?: boolean;
     isFullScreen?: boolean;
     /**
@@ -222,7 +219,7 @@ export class TheiaElectronWindow {
     }
 }
 
-export interface TheiaElectronWindowFactory {
+export type TheiaElectronWindowFactory = {
     (options: TheiaBrowserWindowOptions, config: FrontendApplicationConfig): TheiaElectronWindow;
 }
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017-2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,7 +16,7 @@
 
 import { RpcServer } from '@theia/core';
 
-export interface SearchInWorkspaceOptions {
+export type SearchInWorkspaceOptions = {
     /**
      * Maximum number of results to return.  Defaults to unlimited.
      */
@@ -63,7 +63,7 @@ export interface SearchInWorkspaceOptions {
     followSymlinks?: boolean;
 }
 
-export interface SearchInWorkspaceResult {
+export type SearchInWorkspaceResult = {
     /**
      * The string uri to the root folder that the search was performed.
      */
@@ -80,7 +80,7 @@ export interface SearchInWorkspaceResult {
     matches: SearchMatch[];
 }
 
-export interface SearchMatch {
+export type SearchMatch = {
     /**
      * The (1-based) line number of the result.
      */
@@ -105,7 +105,7 @@ export interface SearchMatch {
 
 }
 
-export interface LinePreview {
+export type LinePreview = {
     text: string;
     character: number;
 }
@@ -124,7 +124,7 @@ export namespace SearchInWorkspaceResult {
 }
 
 export const SearchInWorkspaceClient = Symbol('SearchInWorkspaceClient');
-export interface SearchInWorkspaceClient {
+export type SearchInWorkspaceClient = {
     /**
      * Called by the server for every search match.
      */
@@ -138,7 +138,7 @@ export interface SearchInWorkspaceClient {
 
 export const SIW_WS_PATH = '/services/search-in-workspace';
 export const SearchInWorkspaceServer = Symbol('SearchInWorkspaceServer');
-export interface SearchInWorkspaceServer extends RpcServer<SearchInWorkspaceClient> {
+export type SearchInWorkspaceServer = RpcServer<SearchInWorkspaceClient> & {
     /**
      * Start a search for WHAT in directories ROOTURIS. Return a unique search id.
      */

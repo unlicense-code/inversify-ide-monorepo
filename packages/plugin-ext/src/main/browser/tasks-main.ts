@@ -21,14 +21,14 @@ import {
     TasksExt,
     TaskDto,
     TaskPresentationOptionsDTO
-} from '../../common/plugin-api-rpc';
-import { RPCProtocol } from '../../common/rpc-protocol';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common';
-import { TaskProviderRegistry, TaskResolverRegistry, TaskProvider, TaskResolver } from '@theia/task/lib/browser/task-contribution';
-import { interfaces } from '@theia/core/shared/inversify';
-import { TaskInfo, TaskExitedEvent, TaskConfiguration, TaskOutputPresentation, RevealKind, PanelKind } from '@theia/task/lib/common/task-protocol';
-import { TaskWatcher } from '@theia/task/lib/common/task-watcher';
-import { TaskService } from '@theia/task/lib/browser/task-service';
+} from '../../common/plugin-api-rpc.js';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/index.js';
+import { TaskProviderRegistry, TaskResolverRegistry, TaskProvider, TaskResolver } from '@theia/task/lib/browser/task-contribution.js';
+import { interfaces } from 'inversify';
+import { TaskInfo, TaskExitedEvent, TaskConfiguration, TaskOutputPresentation, RevealKind, PanelKind } from '@theia/task/lib/common/task-protocol.js';
+import { TaskWatcher } from '@theia/task/lib/common/task-watcher.js';
+import { TaskService } from '@theia/task/lib/browser/task-service.js';
 import { TaskDefinitionRegistry } from '@theia/task/lib/browser';
 
 const revealKindMap = new Map<number | RevealKind, RevealKind | number>(

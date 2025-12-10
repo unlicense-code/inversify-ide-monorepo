@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { ScmAvatarService } from '@theia/scm/lib/browser/scm-avatar-service';
-import { GitCommitDetailWidgetOptions } from './git-commit-detail-widget-options';
-import { ReactWidget, KeybindingRegistry, codicon } from '@theia/core/lib/browser';
-import { Git } from '../../common';
-import * as React from '@theia/core/shared/react';
+import { injectable, inject, postConstruct } from 'inversify';
+import { ScmAvatarService } from '@theia/scm/lib/browser/scm-avatar-service.js';
+import { GitCommitDetailWidgetOptions } from './git-commit-detail-widget-options.js';
+import { ReactWidget, KeybindingRegistry, codicon } from '@theia/core/lib/browser/index.js';
+import { Git } from '../../common/index.js';
+import * as React from 'react';
 
 @injectable()
 export class GitCommitDetailHeaderWidget extends ReactWidget {

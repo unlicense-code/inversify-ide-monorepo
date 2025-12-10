@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import URI from '@theia/core/lib/common/uri';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { inject, injectable } from 'inversify';
 import { OVSXRouterConfig } from '@theia/ovsx-client';
-import { PluginVsCodeCliContribution } from '@theia/plugin-ext-vscode/lib/node/plugin-vscode-cli-contribution';
-import { VSXEnvironment } from '../common/vsx-environment';
-import { VsxCli } from './vsx-cli';
+import {
+    PluginVsCodeCliContribution
+
+} from '@theia/plugin-ext-vscode/lib/node/plugin-vscode-cli-contribution.js';
+import { VSXEnvironment } from '../common/vsx-environment.js';
+import { VsxCli } from './vsx-cli.js';
 
 @injectable()
 export class VSXEnvironmentImpl implements VSXEnvironment {

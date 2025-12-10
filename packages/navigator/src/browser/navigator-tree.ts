@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { FileTree, DirNode } from '@theia/filesystem/lib/browser';
-import { FileStat } from '@theia/filesystem/lib/common/files';
-import URI from '@theia/core/lib/common/uri';
-import { TreeNode, CompositeTreeNode, SelectableTreeNode, CompressionToggle } from '@theia/core/lib/browser';
-import { FileNavigatorFilter } from './navigator-filter';
-import { EXPLORER_COMPACT_FOLDERS, FileNavigatorPreferences } from '../common/navigator-preferences';
+import { injectable, inject, postConstruct } from 'inversify';
+import { FileTree, DirNode } from '@theia/filesystem/lib/browser/index.js';
+import { FileStat } from '@theia/filesystem/lib/common/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { TreeNode, CompositeTreeNode, SelectableTreeNode, CompressionToggle } from '@theia/core/lib/browser/index.js';
+import { FileNavigatorFilter } from './navigator-filter.js';
+import { EXPLORER_COMPACT_FOLDERS, FileNavigatorPreferences } from '../common/navigator-preferences.js';
 
 @injectable()
 export class FileNavigatorTree extends FileTree {
@@ -75,10 +75,7 @@ export class FileNavigatorTree extends FileTree {
     }
 }
 
-/**
- * File tree root node for multi-root workspaces.
- */
-export interface WorkspaceNode extends CompositeTreeNode, SelectableTreeNode {
+export type WorkspaceNode = CompositeTreeNode & SelectableTreeNode & {
     children: WorkspaceRootNode[];
 }
 export namespace WorkspaceNode {
@@ -105,10 +102,7 @@ export namespace WorkspaceNode {
     }
 }
 
-/**
- * A node representing a folder from a multi-root workspace.
- */
-export interface WorkspaceRootNode extends DirNode {
+export type WorkspaceRootNode = DirNode & {
     parent: WorkspaceNode;
 }
 export namespace WorkspaceRootNode {

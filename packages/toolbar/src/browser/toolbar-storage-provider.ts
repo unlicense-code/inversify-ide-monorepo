@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,17 +16,17 @@
 
 import * as jsoncParser from 'jsonc-parser';
 import { Command, deepClone, Disposable, DisposableCollection, Emitter, MessageService, nls } from '@theia/core';
-import { injectable, postConstruct, inject, interfaces } from '@theia/core/shared/inversify';
-import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service';
-import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model';
-import { MonacoWorkspace } from '@theia/monaco/lib/browser/monaco-workspace';
+import { injectable, postConstruct, inject, interfaces } from 'inversify';
+import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service.js';
+import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model.js';
+import { MonacoWorkspace } from '@theia/monaco/lib/browser/monaco-workspace.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { Widget } from '@theia/core/lib/browser';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import URI from '@theia/core/lib/common/uri';
+import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state.js';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { Widget } from '@theia/core/lib/browser/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { URI } from '@theia/core/lib/common/uri.js';
 import {
     DeflatedToolbarTree,
     ToolbarTreeSchema,
@@ -35,10 +35,10 @@ import {
     ToolbarAlignment,
     ToolbarItemPosition,
     LateInjector,
-} from './toolbar-interfaces';
-import { UserToolbarURI } from './toolbar-constants';
-import { isToolbarPreferences } from './toolbar-preference-schema';
-import { ToolbarDefaultsFactory } from './toolbar-defaults';
+} from './toolbar-interfaces.js';
+import { UserToolbarURI } from './toolbar-constants.js';
+import { isToolbarPreferences } from './toolbar-preference-schema.js';
+import { ToolbarDefaultsFactory } from './toolbar-defaults.js';
 
 export const TOOLBAR_BAD_JSON_ERROR_MESSAGE = 'There was an error reading your toolbar.json file. Please check if it is corrupt'
     + ' by right-clicking the toolbar and selecting "Customize Toolbar". You can also reset it to its defaults by selecting'

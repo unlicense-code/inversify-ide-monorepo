@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,34 +17,34 @@
 import '../../src/browser/style/terminal.css';
 import 'xterm/css/xterm.css';
 
-import { ContainerModule, Container } from '@theia/core/shared/inversify';
-import { CommandContribution, MenuContribution, nls } from '@theia/core/lib/common';
-import { bindContributionProvider } from '@theia/core';
-import { KeybindingContribution, WebSocketConnectionProvider, WidgetFactory, FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { TerminalFrontendContribution } from './terminal-frontend-contribution';
-import { TerminalWidgetImpl, TERMINAL_WIDGET_FACTORY_ID } from './terminal-widget-impl';
-import { TerminalWidget, TerminalWidgetOptions } from './base/terminal-widget';
-import { ITerminalServer, terminalPath } from '../common/terminal-protocol';
-import { TerminalWatcher } from '../common/terminal-watcher';
-import { IShellTerminalServer, shellTerminalPath, ShellTerminalServerProxy } from '../common/shell-terminal-protocol';
-import { TerminalService } from './base/terminal-service';
-import { bindTerminalPreferences } from '../common/terminal-preferences';
-import { TerminalContribution } from './terminal-contribution';
-import { TerminalSearchWidgetFactory } from './search/terminal-search-widget';
-import { TerminalQuickOpenService, TerminalQuickOpenContribution } from './terminal-quick-open-service';
-import { createTerminalSearchFactory } from './search/terminal-search-container';
-import { TerminalCopyOnSelectionHandler } from './terminal-copy-on-selection-handler';
-import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution';
-import { TerminalThemeService } from './terminal-theme-service';
-import { QuickAccessContribution } from '@theia/core/lib/browser/quick-input/quick-access';
-import { createXtermLinkFactory, TerminalLinkProvider, TerminalLinkProviderContribution, XtermLinkFactory } from './terminal-link-provider';
-import { UrlLinkProvider } from './terminal-url-link-provider';
-import { FileDiffPostLinkProvider, FileDiffPreLinkProvider, FileLinkProvider, LocalFileLinkProvider } from './terminal-file-link-provider';
+import { ContainerModule, Container } from 'inversify';
+import { CommandContribution, MenuContribution, nls } from '@theia/core/lib/common/index.js';
+import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider.js';
+import { KeybindingContribution, WebSocketConnectionProvider, WidgetFactory, FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
+import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { TerminalFrontendContribution } from './terminal-frontend-contribution.js';
+import { TerminalWidgetImpl, TERMINAL_WIDGET_FACTORY_ID } from './terminal-widget-impl.js';
+import { TerminalWidget, TerminalWidgetOptions } from './base/terminal-widget.js';
+import { ITerminalServer, terminalPath } from '../common/terminal-protocol.js';
+import { TerminalWatcher } from '../common/terminal-watcher.js';
+import { IShellTerminalServer, shellTerminalPath, ShellTerminalServerProxy } from '../common/shell-terminal-protocol.js';
+import { TerminalService } from './base/terminal-service.js';
+import { bindTerminalPreferences } from '../common/terminal-preferences.js';
+import { TerminalContribution } from './terminal-contribution.js';
+import { TerminalSearchWidgetFactory } from './search/terminal-search-widget.js';
+import { TerminalQuickOpenService, TerminalQuickOpenContribution } from './terminal-quick-open-service.js';
+import { createTerminalSearchFactory } from './search/terminal-search-container.js';
+import { TerminalCopyOnSelectionHandler } from './terminal-copy-on-selection-handler.js';
+import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution.js';
+import { TerminalThemeService } from './terminal-theme-service.js';
+import { QuickAccessContribution } from '@theia/core/lib/browser/quick-input/quick-access.js';
+import { createXtermLinkFactory, TerminalLinkProvider, TerminalLinkProviderContribution, XtermLinkFactory } from './terminal-link-provider.js';
+import { UrlLinkProvider } from './terminal-url-link-provider.js';
+import { FileDiffPostLinkProvider, FileDiffPreLinkProvider, FileLinkProvider, LocalFileLinkProvider } from './terminal-file-link-provider.js';
 import {
     ContributedTerminalProfileStore, DefaultProfileStore, DefaultTerminalProfileService,
     TerminalProfileService, TerminalProfileStore, UserTerminalProfileStore
-} from './terminal-profile-service';
+} from './terminal-profile-service.js';
 
 export default new ContainerModule(bind => {
     bindTerminalPreferences(bind);

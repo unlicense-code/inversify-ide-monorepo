@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Command, CommandService } from '@theia/core/lib/common/command';
-import { AbstractDialog } from '@theia/core/lib/browser';
-import { WindowService } from '@theia/core/lib/browser/window/window-service';
-import * as DOMPurify from '@theia/core/shared/dompurify';
-import { nls } from '@theia/core/lib/common/nls';
+import { injectable, inject } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Command, CommandService } from '@theia/core/lib/common/command.js';
+import { AbstractDialog } from '@theia/core/lib/browser/index.js';
+import { WindowService } from '@theia/core/lib/browser/window/window-service.js';
+import DOMPurify from 'dompurify';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 @injectable()
 export class OpenUriCommandHandler {

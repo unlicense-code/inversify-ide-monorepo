@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { expect } from 'chai';
-import { AnthropicModel, DEFAULT_MAX_TOKENS, addCacheControlToLastMessage } from './anthropic-language-model';
+import { AnthropicModel, DEFAULT_MAX_TOKENS, addCacheControlToLastMessage } from './anthropic-language-model.js';
 
 describe('AnthropicModel', () => {
 

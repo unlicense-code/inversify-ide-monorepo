@@ -28,9 +28,9 @@
  */
 
 // Before importing anything from monaco we need to override its localization function
-import * as MonacoNls from '@theia/monaco-editor-core/esm/vs/nls';
-import { nls } from '@theia/core/lib/common/nls';
-import { FormatType, Localization } from '@theia/core/lib/common/i18n/localization';
+import * as MonacoNls from '@theia/monaco-editor-core/esm/vs/nls.js';
+import { nls } from '@theia/core/lib/common/nls.js';
+import { FormatType, Localization } from '@theia/core/lib/common/i18n/localization.js';
 
 function localize(label: string, ...args: FormatType[]): MonacoNls.ILocalizedString {
     const original = Localization.format(label, args);
@@ -58,32 +58,32 @@ Object.assign(MonacoNls, {
     }
 });
 
-import { Container } from '@theia/core/shared/inversify';
-import { ICodeEditorService } from '@theia/monaco-editor-core/esm/vs/editor/browser/services/codeEditorService';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { SyncDescriptor } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/descriptors';
-import { MonacoEditorServiceFactory, MonacoEditorServiceFactoryType } from './monaco-editor-service';
-import { IConfigurationService } from '@theia/monaco-editor-core/esm/vs/platform/configuration/common/configuration';
-import { ITextModelService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/resolverService';
-import { MonacoConfigurationService } from './monaco-frontend-module';
-import { MonacoTextModelService } from './monaco-text-model-service';
-import { MonacoContextMenuService } from './monaco-context-menu';
-import { IContextMenuService } from '@theia/monaco-editor-core/esm/vs/platform/contextview/browser/contextView';
-import { IContextKeyService } from '@theia/monaco-editor-core/esm/vs/platform/contextkey/common/contextkey';
-import { IThemeService } from '@theia/monaco-editor-core/esm/vs/platform/theme/common/themeService';
-import { MonacoBulkEditService } from './monaco-bulk-edit-service';
-import { MonacoCommandService } from './monaco-command-service';
-import { IBulkEditService } from '@theia/monaco-editor-core/esm/vs/editor/browser/services/bulkEditService';
-import { ICommandService } from '@theia/monaco-editor-core/esm/vs/platform/commands/common/commands';
-import { MonacoQuickInputImplementation } from './monaco-quick-input-service';
-import { IQuickInputService } from '@theia/monaco-editor-core/esm/vs/platform/quickinput/common/quickInput';
-import { IStandaloneThemeService } from '@theia/monaco-editor-core/esm/vs/editor/standalone/common/standaloneTheme';
-import { MonacoStandaloneThemeService } from './monaco-standalone-theme-service';
-import { createContentHoverWidgetPatcher } from './content-hover-widget-patcher';
-import { IHoverService } from '@theia/monaco-editor-core/esm/vs/platform/hover/browser/hover';
-import { setBaseLayerHoverDelegate } from '@theia/monaco-editor-core/esm/vs/base/browser/ui/hover/hoverDelegate2';
-import { IWorkspaceContextService } from '@theia/monaco-editor-core/esm/vs/platform/workspace/common/workspace';
-import { MonacoWorkspaceContextService } from './monaco-workspace-context-service';
+import { Container } from 'inversify';
+import { ICodeEditorService } from '@theia/monaco-editor-core/esm/vs/editor/browser/services/codeEditorService.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { SyncDescriptor } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/descriptors.js';
+import { MonacoEditorServiceFactory, MonacoEditorServiceFactoryType } from './monaco-editor-service.js';
+import { IConfigurationService } from '@theia/monaco-editor-core/esm/vs/platform/configuration/common/configuration.js';
+import { ITextModelService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/resolverService.js';
+import { MonacoConfigurationService } from './monaco-frontend-module.js';
+import { MonacoTextModelService } from './monaco-text-model-service.js';
+import { MonacoContextMenuService } from './monaco-context-menu.js';
+import { IContextMenuService } from '@theia/monaco-editor-core/esm/vs/platform/contextview/browser/contextView.js';
+import { IContextKeyService } from '@theia/monaco-editor-core/esm/vs/platform/contextkey/common/contextkey.js';
+import { IThemeService } from '@theia/monaco-editor-core/esm/vs/platform/theme/common/themeService.js';
+import { MonacoBulkEditService } from './monaco-bulk-edit-service.js';
+import { MonacoCommandService } from './monaco-command-service.js';
+import { IBulkEditService } from '@theia/monaco-editor-core/esm/vs/editor/browser/services/bulkEditService.js';
+import { ICommandService } from '@theia/monaco-editor-core/esm/vs/platform/commands/common/commands.js';
+import { MonacoQuickInputImplementation } from './monaco-quick-input-service.js';
+import { IQuickInputService } from '@theia/monaco-editor-core/esm/vs/platform/quickinput/common/quickInput.js';
+import { IStandaloneThemeService } from '@theia/monaco-editor-core/esm/vs/editor/standalone/common/standaloneTheme.js';
+import { MonacoStandaloneThemeService } from './monaco-standalone-theme-service.js';
+import { createContentHoverWidgetPatcher } from './content-hover-widget-patcher.js';
+import { IHoverService } from '@theia/monaco-editor-core/esm/vs/platform/hover/browser/hover.js';
+import { setBaseLayerHoverDelegate } from '@theia/monaco-editor-core/esm/vs/base/browser/ui/hover/hoverDelegate2.js';
+import { IWorkspaceContextService } from '@theia/monaco-editor-core/esm/vs/platform/workspace/common/workspace.js';
+import { MonacoWorkspaceContextService } from './monaco-workspace-context-service.js';
 
 export const contentHoverWidgetPatcher = createContentHoverWidgetPatcher();
 

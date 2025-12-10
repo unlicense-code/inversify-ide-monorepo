@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import { URI, Reference, Event, Emitter } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { MonacoTextModelService, MonacoEditorModelFilter } from '@theia/monaco/lib/browser/monaco-text-model-service';
-import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model';
-import { NotebookModel } from '../view-model/notebook-model';
-import { CellUri } from '../../common/notebook-common';
+import { inject, injectable } from 'inversify';
+import { MonacoTextModelService, MonacoEditorModelFilter } from '@theia/monaco/lib/browser/monaco-text-model-service.js';
+import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model.js';
+import { NotebookModel } from '../view-model/notebook-model.js';
+import { CellUri } from '../../common/notebook-common.js';
 
 @injectable()
 export class NotebookMonacoEditorModelFilter implements MonacoEditorModelFilter {

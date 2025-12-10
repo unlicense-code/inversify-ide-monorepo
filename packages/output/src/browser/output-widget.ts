@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,18 +15,18 @@
 // *****************************************************************************
 
 import '../../src/browser/style/output.css';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { toArray } from '@theia/core/shared/@lumino/algorithm';
-import { EditorWidget } from '@theia/editor/lib/browser';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
-import { SelectionService } from '@theia/core/lib/common/selection-service';
-import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { Message, BaseWidget, DockPanel, Widget, MessageLoop, StatefulWidget, codicon } from '@theia/core/lib/browser';
-import { OutputUri } from '../common/output-uri';
-import { OutputChannelManager, OutputChannel } from './output-channel';
+import { inject, injectable, postConstruct } from 'inversify';
+import { toArray } from '@lumino/algorithm';
+import { EditorWidget } from '@theia/editor/lib/browser/index.js';
+import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor.js';
+import { SelectionService } from '@theia/core/lib/common/selection-service.js';
+import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { Message, BaseWidget, DockPanel, Widget, MessageLoop, StatefulWidget, codicon } from '@theia/core/lib/browser/index.js';
+import { OutputUri } from '../common/output-uri.js';
+import { OutputChannelManager, OutputChannel } from './output-channel.js';
 import { Emitter, Event, deepClone } from '@theia/core';
-import { nls } from '@theia/core/lib/common/nls';
+import { nls } from '@theia/core/lib/common/nls.js'
 import * as monaco from '@theia/monaco-editor-core';
 
 @injectable()

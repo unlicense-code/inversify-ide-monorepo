@@ -15,28 +15,28 @@
 // *****************************************************************************
 
 import { injectable } from 'inversify';
-import { ArrayUtils } from '../../../common/types';
-import { TreeNode } from '../tree';
-import { ExpandableTreeNode } from '../tree-expansion';
+import { ArrayUtils } from '../../../common/types.js';
+import { TreeNode } from '../tree.js';
+import { ExpandableTreeNode } from '../tree-expansion.js';
 
-export interface CompressionParent extends ExpandableTreeNode {
+export type CompressionParent = ExpandableTreeNode & {
     children: [CompressionChild];
 }
 
-export interface CompressionChild extends ExpandableTreeNode {
+export type CompressionChild = ExpandableTreeNode & {
     parent: CompressionParent;
 }
 
 export type CompressionParticipant = CompressionChild | CompressionParent;
 
-export interface CompressionHead extends CompressionParent {
+export type CompressionHead = CompressionParent & {
     parent: ExpandableTreeNode;
 }
 
-export interface CompressionTail extends CompressionChild { }
+export type CompressionTail = CompressionChild & { }
 
 export const CompressionToggle = Symbol('CompressionToggle');
-export interface CompressionToggle {
+export type CompressionToggle = {
     compress: boolean;
 }
 

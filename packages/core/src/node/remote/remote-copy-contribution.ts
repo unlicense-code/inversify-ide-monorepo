@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { MaybePromise } from '../../common/types';
+import { MaybePromise } from '../../common/types.js';
 
 export const RemoteCopyContribution = Symbol('RemoteCopyContribution');
 
-export interface RemoteCopyContribution {
+export type RemoteCopyContribution = {
     copy(registry: RemoteCopyRegistry): MaybePromise<void>
 }
 
-export interface RemoteCopyOptions {
+export type RemoteCopyOptions = {
     /**
      * The mode that the file should be set to once copied to the remote.
      *
@@ -31,13 +31,13 @@ export interface RemoteCopyOptions {
     mode?: number;
 }
 
-export interface RemoteFile {
+export type RemoteFile = {
     path: string
     target: string
     options?: RemoteCopyOptions;
 }
 
-export interface RemoteCopyRegistry {
+export type RemoteCopyRegistry = {
     getFiles(): RemoteFile[];
     glob(pattern: string, target?: string): Promise<void>;
     file(file: string, target?: string, options?: RemoteCopyOptions): void;

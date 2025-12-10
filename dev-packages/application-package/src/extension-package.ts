@@ -19,7 +19,7 @@ import * as paths from 'path';
 import * as semver from 'semver';
 import { NpmRegistry, PublishedNodePackage, NodePackage } from './npm-registry';
 
-export interface Extension {
+export type Extension = {
     frontendPreload?: string;
     frontendOnlyPreload?: string;
     frontend?: string;
@@ -32,7 +32,7 @@ export interface Extension {
     preload?: string;
 }
 
-export interface ExtensionPackageOptions {
+export type ExtensionPackageOptions = {
     /**
      * Alias to use in place of the original package's name.
      */
@@ -155,7 +155,7 @@ export class ExtensionPackage {
 
 }
 
-export interface RawExtensionPackage extends PublishedNodePackage {
+export type RawExtensionPackage = PublishedNodePackage & {
     installed?: RawExtensionPackage.InstalledState
     view?: RawExtensionPackage.ViewState
     theiaExtensions: Extension[];

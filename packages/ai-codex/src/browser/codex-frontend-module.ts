@@ -14,23 +14,23 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ChatAgent } from '@theia/ai-chat';
-import { ChatResponsePartRenderer } from '@theia/ai-chat-ui/lib/browser/chat-response-part-renderer';
-import { Agent } from '@theia/ai-core';
+import { ChatAgent } from '@theia/ai-chat/lib/common/index.js';
+import { ChatResponsePartRenderer } from '@theia/ai-chat-ui/lib/browser/chat-response-part-renderer.js';
+import { Agent } from '@theia/ai-core/lib/common/index.js';
 import { PreferenceContribution } from '@theia/core';
-import { RemoteConnectionProvider, ServiceConnectionProvider } from '@theia/core/lib/browser';
-import { ContainerModule } from '@theia/core/shared/inversify';
+import { RemoteConnectionProvider, ServiceConnectionProvider } from '@theia/core/lib/browser/index.js';
+import { ContainerModule } from 'inversify';
 import {
     CODEX_SERVICE_PATH,
     CodexClient,
     CodexService
-} from '../common/codex-service';
-import { CodexPreferencesSchema } from '../common/codex-preferences';
-import { CodexChatAgent } from './codex-chat-agent';
-import { CodexClientImpl, CodexFrontendService } from './codex-frontend-service';
-import { CommandExecutionRenderer } from './renderers/command-execution-renderer';
-import { TodoListRenderer } from './renderers/todo-list-renderer';
-import { WebSearchRenderer } from './renderers/web-search-renderer';
+} from '../common/codex-service.js';
+import { CodexPreferencesSchema } from '../common/codex-preferences.js';
+import { CodexChatAgent } from './codex-chat-agent.js';
+import { CodexClientImpl, CodexFrontendService } from './codex-frontend-service.js';
+import { CommandExecutionRenderer } from './renderers/command-execution-renderer.js';
+import { TodoListRenderer } from './renderers/todo-list-renderer.js';
+import { WebSearchRenderer } from './renderers/web-search-renderer.js';
 import '../../src/browser/style/codex-tool-renderers.css';
 
 export default new ContainerModule(bind => {

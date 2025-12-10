@@ -20,9 +20,9 @@
 // copied and modified from https://github.com/microsoft/vscode/blob/1.96.3/src/vs/workbench/contrib/mergeEditor/browser/view/scrollSynchronizer.ts
 
 import { Disposable, DisposableCollection } from '@theia/core';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
-import { MergeEditor } from '../merge-editor';
-import { DocumentLineRangeMap } from '../model/range-mapping';
+import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor.js';
+import { MergeEditor } from '../merge-editor.js';
+import { DocumentLineRangeMap } from '../model/range-mapping.js';
 
 export class MergeEditorScrollSync implements Disposable {
 

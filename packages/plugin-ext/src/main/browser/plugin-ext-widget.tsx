@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { Message } from '@theia/core/shared/@lumino/messaging';
-import { PluginMetadata } from '../../common/plugin-protocol';
-import { ReactWidget } from '@theia/core/lib/browser/widgets/react-widget';
-import { AlertMessage } from '@theia/core/lib/browser/widgets/alert-message';
-import { HostedPluginSupport, PluginProgressLocation } from '../../hosted/browser/hosted-plugin';
-import { ProgressBarFactory } from '@theia/core/lib/browser/progress-bar-factory';
-import { DisposableCollection } from '@theia/core/lib/common/disposable';
-import { codicon } from '@theia/core/lib/browser';
-import { nls } from '@theia/core/lib/common';
+import * as React from 'react';
+import { injectable, inject, postConstruct } from 'inversify';
+import { Message } from '@lumino/messaging';
+import { PluginMetadata } from '../../common/plugin-protocol.js';
+import { ReactWidget } from '@theia/core/lib/browser/widgets/react-widget.js';
+import { AlertMessage } from '@theia/core/lib/browser/widgets/alert-message.js';
+import { HostedPluginSupport, PluginProgressLocation } from '../../hosted/browser/hosted-plugin.js';
+import { ProgressBarFactory } from '@theia/core/lib/browser/progress-bar-factory.js';
+import { DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { codicon } from '@theia/core/lib/browser/index.js';
+import { nls } from '@theia/core/lib/common/index.js';
 
 export const PLUGINS_LABEL = nls.localize('theia/plugin-ext/plugins', 'Plugins');
 

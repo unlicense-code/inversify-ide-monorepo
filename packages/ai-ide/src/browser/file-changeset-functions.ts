@@ -13,15 +13,15 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { ChangeSet, MutableChatRequestModel } from '@theia/ai-chat';
-import { ChangeSetElementArgs, ChangeSetFileElement, ChangeSetFileElementFactory } from '@theia/ai-chat/lib/browser/change-set-file-element';
-import { ToolProvider, ToolRequest, ToolRequestParameters, ToolRequestParametersProperties } from '@theia/ai-core';
-import { ContentReplacerV1Impl, Replacement, ContentReplacer } from '@theia/core/lib/common/content-replacer';
-import { ContentReplacerV2Impl } from '@theia/core/lib/common/content-replacer-v2-impl';
-import { URI } from '@theia/core/lib/common/uri';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { WorkspaceFunctionScope } from './workspace-functions';
+import { ChangeSet, MutableChatRequestModel } from '@theia/ai-chat/lib/common/index.js';
+import { ChangeSetElementArgs, ChangeSetFileElement, ChangeSetFileElementFactory } from '@theia/ai-chat/lib/browser/change-set-file-element.js';
+import { ToolProvider, ToolRequest, ToolRequestParameters, ToolRequestParametersProperties } from '@theia/ai-core/lib/common/index.js';
+import { ContentReplacerV1Impl, Replacement, ContentReplacer } from '@theia/core/lib/common/content-replacer.js';
+import { ContentReplacerV2Impl } from '@theia/core/lib/common/content-replacer-v2-impl.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { inject, injectable } from 'inversify';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { WorkspaceFunctionScope } from './workspace-functions.js';
 
 import { nls } from '@theia/core';
 import {
@@ -32,11 +32,11 @@ import {
     WRITE_FILE_CONTENT_ID,
     WRITE_FILE_REPLACEMENTS_ID,
     SUGGEST_FILE_REPLACEMENTS_SIMPLE_ID
-} from '../common/file-changeset-function-ids';
+} from '../common/file-changeset-function-ids.js';
 
 export const FileChangeSetTitleProvider = Symbol('FileChangeSetTitleProvider');
 
-export interface FileChangeSetTitleProvider {
+export type FileChangeSetTitleProvider = {
     getChangeSetTitle(ctx: MutableChatRequestModel): string;
 }
 

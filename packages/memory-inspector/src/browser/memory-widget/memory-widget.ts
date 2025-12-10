@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2021 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import { nls } from '@theia/core';
-import { BaseWidget, PanelLayout } from '@theia/core/lib/browser';
-import { Container, inject, injectable, interfaces, postConstruct } from '@theia/core/shared/inversify';
-import { MemoryWidgetOptions } from '../utils/memory-widget-utils';
-import { MemoryOptionsWidget } from './memory-options-widget';
-import { MemoryTableWidget } from './memory-table-widget';
+import { BaseWidget, PanelLayout } from '@theia/core/lib/browser/index.js';
+import { Container, inject, injectable, interfaces, postConstruct } from 'inversify';
+import { MemoryWidgetOptions } from '../utils/memory-widget-utils.js';
+import { MemoryOptionsWidget } from './memory-options-widget.js';
+import { MemoryTableWidget } from './memory-table-widget.js';
 
 @injectable()
 export class MemoryWidget<

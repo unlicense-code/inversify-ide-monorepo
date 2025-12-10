@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,31 +14,36 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { MonacoEditorServices } from '@theia/monaco/lib/browser/monaco-editor';
-import { NotebookRendererRegistry } from '../notebook-renderer-registry';
-import { NotebookCellModel } from '../view-model/notebook-cell-model';
-import { NotebookModel } from '../view-model/notebook-model';
-import { CellEditor } from './notebook-cell-editor';
-import { CellRenderer, observeCellHeight } from './notebook-cell-list-view';
-import { NotebookCellToolbarFactory } from './notebook-cell-toolbar-factory';
-import { NotebookCellActionContribution, NotebookCellCommands } from '../contributions/notebook-cell-actions-contribution';
-import { CellExecution, NotebookExecutionStateService } from '../service/notebook-execution-state-service';
-import { codicon } from '@theia/core/lib/browser';
-import { NotebookCellExecutionState } from '../../common';
+import { inject, injectable } from 'inversify';
+import * as React from 'react';
+import { MonacoEditorServices } from '@theia/monaco/lib/browser/monaco-editor.js';
+import { NotebookRendererRegistry } from '../notebook-renderer-registry.js';
+import { NotebookCellModel } from '../view-model/notebook-cell-model.js';
+import { NotebookModel } from '../view-model/notebook-model.js';
+import { CellEditor } from './notebook-cell-editor.js';
+import { CellRenderer, observeCellHeight } from './notebook-cell-list-view.js';
+import { NotebookCellToolbarFactory } from './notebook-cell-toolbar-factory.js';
+import { NotebookCellActionContribution, NotebookCellCommands 
+
+} from '../contributions/notebook-cell-actions-contribution.js';
+import { CellExecution, NotebookExecutionStateService } from '../service/notebook-execution-state-service.js';
+import { codicon } from '@theia/core/lib/browser/index.js';
+import { NotebookCellExecutionState 
+
+} from '../../common/index.js';
 import { CancellationToken, CommandRegistry, DisposableCollection, nls } from '@theia/core';
-import { NotebookContextManager } from '../service/notebook-context-manager';
-import { NotebookViewportService } from './notebook-viewport-service';
-import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences';
-import { NotebookOptionsService } from '../service/notebook-options';
-import { MarkdownRenderer } from '@theia/core/lib/browser/markdown-rendering/markdown-renderer';
-import { MarkdownString } from '@theia/monaco-editor-core/esm/vs/base/common/htmlContent';
-import { NotebookCellEditorService } from '../service/notebook-cell-editor-service';
-import { CellOutputWebview } from '../renderers/cell-output-webview';
-import { NotebookCellStatusBarItem, NotebookCellStatusBarItemList, NotebookCellStatusBarService } from '../service/notebook-cell-status-bar-service';
-import { LabelParser } from '@theia/core/lib/browser/label-parser';
-import { NotebookViewModel } from '../view-model/notebook-view-model';
+import { NotebookContextManager } from '../service/notebook-context-manager.js';
+import { NotebookViewportService } from './notebook-viewport-service.js';
+import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences.js';
+import { NotebookOptionsService } from '../service/notebook-options.js';
+import { MarkdownRenderer } from '@theia/core/lib/browser/markdown-rendering/markdown-renderer.js';
+import { MarkdownString } from '@theia/monaco-editor-core/esm/vs/base/common/htmlContent.js';
+import { NotebookCellEditorService } from '../service/notebook-cell-editor-service.js';
+import { CellOutputWebview } from '../renderers/cell-output-webview.js';
+import { NotebookCellStatusBarItem, NotebookCellStatusBarItemList, 
+    NotebookCellStatusBarService } from '../service/notebook-cell-status-bar-service.js';
+import { LabelParser } from '@theia/core/lib/browser/label-parser.js';
+import { NotebookViewModel } from '../view-model/notebook-view-model.js';
 
 @injectable()
 export class NotebookCodeCellRenderer implements CellRenderer {
@@ -162,7 +167,7 @@ export class NotebookCodeCellRenderer implements CellRenderer {
 
 }
 
-export interface NotebookCodeCellSidebarProps {
+export type NotebookCodeCellSidebarProps = {
     cell: NotebookCellModel;
     notebook: NotebookModel;
     notebookCellToolbarFactory: NotebookCellToolbarFactory
@@ -193,7 +198,7 @@ export class NotebookCodeCellSidebar extends React.Component<NotebookCodeCellSid
     }
 }
 
-export interface NotebookCodeCellStatusProps {
+export type NotebookCodeCellStatusProps = {
     notebook: NotebookModel;
     cell: NotebookCellModel;
     commandRegistry: CommandRegistry;
@@ -203,7 +208,7 @@ export interface NotebookCodeCellStatusProps {
     onClick: () => void;
 }
 
-export interface NotebookCodeCellStatusState {
+export type NotebookCodeCellStatusState = {
     currentExecution?: CellExecution;
     executionTime: number;
 }
@@ -350,7 +355,7 @@ export class NotebookCodeCellStatus extends React.Component<NotebookCodeCellStat
 
 }
 
-interface NotebookCellOutputProps {
+type NotebookCellOutputProps = {
     cell: NotebookCellModel;
     notebook: NotebookModel;
     outputWebview: CellOutputWebview;
@@ -393,7 +398,7 @@ export class NotebookCodeCellOutputs extends React.Component<NotebookCellOutputP
 
 }
 
-interface NotebookCellExecutionOrderProps {
+type NotebookCellExecutionOrderProps = {
     cell: NotebookCellModel;
 }
 

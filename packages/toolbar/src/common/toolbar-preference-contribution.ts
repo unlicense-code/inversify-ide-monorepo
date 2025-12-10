@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { PreferenceProxy } from '@theia/core/lib/common/preferences/preference-proxy';
-import { PreferenceScope } from '@theia/core/lib/common/preferences/preference-scope';
-import { PreferenceSchema } from '@theia/core/lib/common/preferences/preference-schema';
+import { PreferenceProxy } from '@theia/core/lib/common/preferences/preference-proxy.js';
+import { PreferenceScope } from '@theia/core/lib/common/preferences/preference-scope.js';
+import { PreferenceSchema } from '@theia/core/lib/common/preferences/preference-schema.js';
 
 export const TOOLBAR_ENABLE_PREFERENCE_ID = 'toolbar.showToolbar';
 

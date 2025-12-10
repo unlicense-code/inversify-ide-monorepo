@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,12 +16,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { injectable } from 'inversify';
-import { Emitter, Event } from '../common/event';
+import { Emitter, Event } from '../common/event.js';
 
-/**
- * `SelectionProvider` is implemented by services to notify listeners about selection changes.
- */
-export interface SelectionProvider<T> {
+export type SelectionProvider<T> = {
     onSelectionChanged: Event<T | undefined>;
 }
 

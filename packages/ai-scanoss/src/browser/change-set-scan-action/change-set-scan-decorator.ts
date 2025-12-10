@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import type { ChangeSetDecoration, ChangeSetElement } from '@theia/ai-chat';
-import type { ChangeSetDecorator } from '@theia/ai-chat/lib/browser/change-set-decorator-service';
+import type { ChangeSetDecoration, ChangeSetElement } from '@theia/ai-chat/lib/common/index.js';
+import type { ChangeSetDecorator } from '@theia/ai-chat/lib/browser/change-set-decorator-service.js';
 import { Emitter } from '@theia/core';
-import { injectable } from '@theia/core/shared/inversify';
-import type { ScanOSSResult } from '@theia/scanoss';
+import { injectable } from 'inversify';
+import type { ScanOSSResult } from '@theia/scanoss/lib/common/index.js';
 
 @injectable()
 export class ChangeSetScanDecorator implements ChangeSetDecorator {

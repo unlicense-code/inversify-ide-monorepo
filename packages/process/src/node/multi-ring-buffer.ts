@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import * as stream from 'stream';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { Disposable } from '@theia/core/lib/common';
+import { inject, injectable } from 'inversify';
+import { Disposable } from '@theia/core/lib/common/index.js';
 
 /**
  * The MultiRingBuffer is a ring buffer implementation that allows
@@ -79,12 +79,12 @@ export class MultiRingBufferReadableStream extends stream.Readable implements Di
 }
 
 export const MultiRingBufferOptions = Symbol('MultiRingBufferOptions');
-export interface MultiRingBufferOptions {
+export type MultiRingBufferOptions = {
     readonly size: number,
     readonly encoding?: BufferEncoding,
 }
 
-export interface WrappedPosition { newPos: number, wrap: boolean }
+export type WrappedPosition = { newPos: number, wrap: boolean }
 
 @injectable()
 export class MultiRingBuffer implements Disposable {

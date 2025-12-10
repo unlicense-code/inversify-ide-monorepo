@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable } from 'inversify';
 import { MenuContribution, MenuModelRegistry, MenuPath, MAIN_MENU_BAR } from '@theia/core';
-import { CommonCommands, CommonMenus } from '@theia/core/lib/browser';
-import { EditorCommands } from './editor-command';
-import { nls } from '@theia/core/lib/common/nls';
+import { CommonCommands, CommonMenus } from '@theia/core/lib/browser/index.js';
+import { EditorCommands } from './editor-command.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 export const EDITOR_CONTEXT_MENU: MenuPath = ['editor_context_menu'];
 

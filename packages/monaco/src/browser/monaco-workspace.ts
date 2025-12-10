@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,34 +16,34 @@
 
 /* eslint-disable no-null/no-null */
 
-import { URI as Uri } from '@theia/core/shared/vscode-uri';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Emitter } from '@theia/core/lib/common/event';
-import { FileSystemPreferences } from '@theia/filesystem/lib/common';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { MonacoTextModelService } from './monaco-text-model-service';
-import { MonacoEditorModel, MonacoModelContentChangedEvent } from './monaco-editor-model';
-import { MonacoEditor } from './monaco-editor';
-import { ProblemManager } from '@theia/markers/lib/browser';
-import { ArrayUtils } from '@theia/core/lib/common/types';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileSystemProviderCapabilities } from '@theia/filesystem/lib/common/files';
+import { URI as Uri } from 'vscode-uri';
+import { injectable, inject, postConstruct } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Emitter } from '@theia/core/lib/common/event.js';
+import { FileSystemPreferences } from '@theia/filesystem/lib/common/index.js';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { MonacoTextModelService } from './monaco-text-model-service.js';
+import { MonacoEditorModel, MonacoModelContentChangedEvent } from './monaco-editor-model.js';
+import { MonacoEditor } from './monaco-editor.js';
+import { ProblemManager } from '@theia/markers/lib/browser/index.js';
+import { ArrayUtils } from '@theia/core/lib/common/types.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { FileSystemProviderCapabilities } from '@theia/filesystem/lib/common/files.js';
 import * as monaco from '@theia/monaco-editor-core';
 import {
     IBulkEditOptions,
     IBulkEditResult, ResourceEdit, ResourceFileEdit as MonacoResourceFileEdit,
     ResourceTextEdit as MonacoResourceTextEdit
-} from '@theia/monaco-editor-core/esm/vs/editor/browser/services/bulkEditService';
-import { IEditorWorkerService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/editorWorker';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { EndOfLineSequence } from '@theia/monaco-editor-core/esm/vs/editor/common/model';
-import { SnippetParser } from '@theia/monaco-editor-core/esm/vs/editor/contrib/snippet/browser/snippetParser';
-import { TextEdit } from '@theia/monaco-editor-core/esm/vs/editor/common/languages';
-import { SnippetController2 } from '@theia/monaco-editor-core/esm/vs/editor/contrib/snippet/browser/snippetController2';
-import { isObject, MaybePromise, nls } from '@theia/core/lib/common';
-import { SaveableService } from '@theia/core/lib/browser';
-import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences';
+} from '@theia/monaco-editor-core/esm/vs/editor/browser/services/bulkEditService.js';
+import { IEditorWorkerService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/editorWorker.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { EndOfLineSequence } from '@theia/monaco-editor-core/esm/vs/editor/common/model.js';
+import { SnippetParser } from '@theia/monaco-editor-core/esm/vs/editor/contrib/snippet/browser/snippetParser.js';
+import { TextEdit } from '@theia/monaco-editor-core/esm/vs/editor/common/languages.js';
+import { SnippetController2 } from '@theia/monaco-editor-core/esm/vs/editor/contrib/snippet/browser/snippetController2.js';
+import { isObject, MaybePromise, nls } from '@theia/core/lib/common/index.js';
+import { SaveableService } from '@theia/core/lib/browser/index.js';
+import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences.js';
 
 export namespace WorkspaceFileEdit {
     export function is(arg: Edit): arg is monaco.languages.IWorkspaceFileEdit {
@@ -74,12 +74,12 @@ export namespace ResourceTextEdit {
     }
 }
 
-export interface WorkspaceFoldersChangeEvent {
+export type WorkspaceFoldersChangeEvent = {
     readonly added: WorkspaceFolder[];
     readonly removed: WorkspaceFolder[];
 }
 
-export interface WorkspaceFolder {
+export type WorkspaceFolder = {
     readonly uri: Uri;
     readonly name: string;
     readonly index: number;

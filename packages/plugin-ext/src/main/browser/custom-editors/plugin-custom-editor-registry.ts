@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { CustomEditor, DeployedPlugin } from '../../../common';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { CustomEditorOpener } from './custom-editor-opener';
+import { injectable, inject, postConstruct } from 'inversify';
+import { CustomEditor, DeployedPlugin } from '../../../common/index.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { CustomEditorOpener } from './custom-editor-opener.js';
 import { Emitter, PreferenceService } from '@theia/core';
-import { ApplicationShell, DefaultOpenerService, OpenWithService, WidgetManager } from '@theia/core/lib/browser';
-import { CustomEditorWidget } from './custom-editor-widget';
+import { ApplicationShell, DefaultOpenerService, OpenWithService, WidgetManager } from '@theia/core/lib/browser/index.js';
+import { CustomEditorWidget } from './custom-editor-widget.js';
 
 @injectable()
 export class PluginCustomEditorRegistry {

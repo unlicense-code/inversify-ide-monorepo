@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,12 +17,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import * as url from 'url';
-import { injectable, inject, named } from '@theia/core/shared/inversify';
+import { injectable, inject, named } from 'inversify';
 import { json } from 'body-parser';
-import { Application, Router } from '@theia/core/shared/express';
-import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application';
-import { FileUri } from '@theia/core/lib/common/file-uri';
-import { FileDownloadHandler } from './file-download-handler';
+import { Application, Router } from 'express';
+import { BackendApplicationContribution } from '@theia/core/lib/node/index.js';
+import { FileUri } from '@theia/core/lib/node/index.js';
+import { FileDownloadHandler } from './file-download-handler.js';
 
 @injectable()
 export class FileDownloadEndpoint implements BackendApplicationContribution {
@@ -43,13 +43,13 @@ export class FileDownloadEndpoint implements BackendApplicationContribution {
 
     configure(app: Application): void {
         const router = Router();
-        router.get('/download', (request, response) => this.downloadLinkHandler.handle(request, response));
-        router.get('/', (request, response) => this.singleFileDownloadHandler.handle(request, response));
-        router.put('/', (request, response) => this.multiFileDownloadHandler.handle(request, response));
+        router.get('/download', (request: any, response: any) => this.downloadLinkHandler.handle(request, response));
+        router.get('/', (request: any, response: any) => this.singleFileDownloadHandler.handle(request, response));
+        router.put('/', (request: any, response: any) => this.multiFileDownloadHandler.handle(request, response));
         // Content-Type: application/json
         app.use(json());
         app.use(FileDownloadEndpoint.PATH, router);
-        app.get('/file', (request, response) => {
+        app.get('/file', (request: any, response: any) => {
             const uri = url.parse(request.url).query;
             if (!uri) {
                 response.status(400).send('invalid uri');

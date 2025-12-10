@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 
 let disableJSDOM = enableJSDOM();
 
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 FrontendApplicationConfigProvider.set({});
 
 import * as chai from 'chai';
-import { Container, ContainerModule } from '@theia/core/shared/inversify';
-import { ILogger, bindContributionProvider } from '@theia/core/lib/common';
-import { MockLogger } from '@theia/core/lib/common/test/mock-logger';
-import { VariableContribution, VariableRegistry } from './variable';
-import { VariableQuickOpenService } from './variable-quick-open-service';
-import { VariableResolverFrontendContribution } from './variable-resolver-frontend-contribution';
+import { Container, ContainerModule } from 'inversify';
+import { ILogger, bindContributionProvider } from '@theia/core/lib/common/index.js';
+import { MockLogger } from '@theia/core/lib/common/test/mock-logger.js';
+import { VariableContribution, VariableRegistry } from './variable.js';
+import { VariableQuickOpenService } from './variable-quick-open-service.js';
+import { VariableResolverFrontendContribution } from './variable-resolver-frontend-contribution.js';
 
 disableJSDOM();
 

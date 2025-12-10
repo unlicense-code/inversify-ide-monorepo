@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,8 +17,8 @@
 import * as http from 'http';
 import { inject, injectable } from 'inversify';
 import * as url from 'url';
-import { WsRequestValidatorContribution } from '../ws-request-validators';
-import { BackendApplicationHosts } from './backend-application-hosts';
+import { WsRequestValidatorContribution } from '../ws-request-validators.js';
+import { BackendApplicationHosts } from './backend-application-hosts.js';
 
 @injectable()
 export class WsOriginValidator implements WsRequestValidatorContribution {

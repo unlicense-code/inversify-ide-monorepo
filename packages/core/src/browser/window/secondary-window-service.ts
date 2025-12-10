@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Event } from '../../common';
-import { ApplicationShell } from '../shell';
-import { TheiaDockPanel } from '../shell/theia-dock-panel';
-import { ExtractableWidget, TabBar, Widget } from '../widgets';
+import { Event } from '../../common/index.js';
+import { ApplicationShell } from '../shell/index.js';
+import { TheiaDockPanel } from '../shell/theia-dock-panel.js';
+import { ExtractableWidget, TabBar, Widget } from '../widgets/index.js';
 
 export abstract class SecondaryWindowRootWidget extends Widget {
     secondaryWindow: Window | SecondaryWindow;
@@ -27,7 +27,7 @@ export abstract class SecondaryWindowRootWidget extends Widget {
     getTabBar?(widget: Widget): TabBar<Widget> | undefined;
 }
 
-export interface SecondaryWindow extends Window {
+export type SecondaryWindow = Window & {
     rootWidget: SecondaryWindowRootWidget | undefined;
 }
 
@@ -40,12 +40,7 @@ export function isSecondaryWindow(window: unknown): window is SecondaryWindow {
 
 export const SecondaryWindowService = Symbol('SecondaryWindowService');
 
-/**
- * Service for opening new secondary windows to contain widgets extracted from the application shell.
- *
- * @experimental The functionality provided by this service and its implementation is still under development. Use with caution.
- */
-export interface SecondaryWindowService {
+export type SecondaryWindowService = {
     /**
      * Creates a new secondary window for a widget to be extracted from the application shell.
      * The created window is closed automatically when the current theia instance is closed.

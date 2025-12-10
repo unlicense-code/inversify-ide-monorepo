@@ -13,16 +13,14 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
-import { nls } from '@theia/core/lib/common/nls';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { VariableRegistry, VariableResolverService } from '@theia/variable-resolver/lib/browser';
-import { AIVariableContribution, AIVariableResolver, AIVariableService, AIVariableResolutionRequest, AIVariableContext, ResolvedAIVariable } from '../common';
+import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { inject, injectable } from 'inversify';
+import { VariableRegistry, VariableResolverService } from '@theia/variable-resolver/lib/browser/index.js';
+import { AIVariableContribution, AIVariableResolver, AIVariableService, AIVariableResolutionRequest,
+     AIVariableContext, ResolvedAIVariable } from '../common/index.js';
 
-/**
- * Mapping configuration for a Theia variable to one or more AI variables
- */
-interface VariableMapping {
+type VariableMapping = {
     name?: string;
     description?: string;
 }

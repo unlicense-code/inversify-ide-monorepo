@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017-2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, optional, postConstruct } from '@theia/core/shared/inversify';
-import { AbstractViewContribution } from '@theia/core/lib/browser/shell/view-contribution';
+import { inject, injectable, optional, postConstruct } from 'inversify';
+import { AbstractViewContribution } from '@theia/core/lib/browser/shell/view-contribution.js';
 import {
     CommonCommands,
     CompositeTreeNode,
@@ -31,8 +31,8 @@ import {
     Title,
     SHELL_TABBAR_CONTEXT_MENU,
     OpenWithService
-} from '@theia/core/lib/browser';
-import { FileDownloadCommands } from '@theia/filesystem/lib/browser/download/file-download-command-contribution';
+} from '@theia/core/lib/browser/index.js';
+import { FileDownloadCommands } from '@theia/filesystem/lib/browser/index.js';
 import {
     CommandRegistry,
     isOSX,
@@ -42,37 +42,37 @@ import {
     PreferenceScope,
     PreferenceService,
     QuickInputService,
-} from '@theia/core/lib/common';
+} from '@theia/core/lib/common/index.js';
 import {
     DidCreateNewResourceEvent,
     WorkspaceCommandContribution,
     WorkspaceCommands,
     WorkspaceService
-} from '@theia/workspace/lib/browser';
-import { EXPLORER_VIEW_CONTAINER_ID, EXPLORER_VIEW_CONTAINER_TITLE_OPTIONS } from './navigator-widget-factory';
-import { FILE_NAVIGATOR_ID, FileNavigatorWidget } from './navigator-widget';
-import { FileNavigatorPreferences } from '../common/navigator-preferences';
-import { FileNavigatorFilter } from './navigator-filter';
-import { WorkspaceNode } from './navigator-tree';
-import { NavigatorContextKeyService } from './navigator-context-key-service';
+} from '@theia/workspace/lib/browser/index.js';
+import { EXPLORER_VIEW_CONTAINER_ID, EXPLORER_VIEW_CONTAINER_TITLE_OPTIONS } from './navigator-widget-factory.js';
+import { FILE_NAVIGATOR_ID, FileNavigatorWidget } from './navigator-widget.js';
+import { FileNavigatorPreferences } from '../common/navigator-preferences.js';
+import { FileNavigatorFilter } from './navigator-filter.js';
+import { WorkspaceNode } from './navigator-tree.js';
+import { NavigatorContextKeyService } from './navigator-context-key-service.js';
 import {
     RenderedToolbarAction,
     TabBarToolbarContribution,
     TabBarToolbarRegistry
-} from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { FileSystemCommands } from '@theia/filesystem/lib/browser/filesystem-frontend-contribution';
-import { NavigatorDiff, NavigatorDiffCommands } from './navigator-diff';
-import { DirNode, FileNode } from '@theia/filesystem/lib/browser';
-import { FileNavigatorModel } from './navigator-model';
-import { ClipboardService } from '@theia/core/lib/browser/clipboard-service';
-import { SelectionService } from '@theia/core/lib/common/selection-service';
-import { OpenEditorsWidget } from './open-editors-widget/navigator-open-editors-widget';
-import { OpenEditorsContextMenu } from './open-editors-widget/navigator-open-editors-menus';
-import { OpenEditorsCommands } from './open-editors-widget/navigator-open-editors-commands';
-import { nls } from '@theia/core/lib/common/nls';
-import URI from '@theia/core/lib/common/uri';
-import { UriAwareCommandHandler } from '@theia/core/lib/common/uri-command-handler';
-import { FileNavigatorCommands } from './file-navigator-commands';
+} from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { FileSystemCommands } from '@theia/filesystem/lib/browser/index.js';
+import { NavigatorDiff, NavigatorDiffCommands } from './navigator-diff.js';
+import { DirNode, FileNode } from '@theia/filesystem/lib/browser/index.js';
+import { FileNavigatorModel } from './navigator-model.js';
+import { ClipboardService } from '@theia/core/lib/browser/clipboard-service.js';
+import { SelectionService } from '@theia/core/lib/common/selection-service.js';
+import { OpenEditorsWidget } from './open-editors-widget/navigator-open-editors-widget.js';
+import { OpenEditorsContextMenu } from './open-editors-widget/navigator-open-editors-menus.js';
+import { OpenEditorsCommands } from './open-editors-widget/navigator-open-editors-commands.js';
+import { nls } from '@theia/core/lib/common/nls.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { UriAwareCommandHandler } from '@theia/core/lib/common/uri-command-handler.js';
+import { FileNavigatorCommands } from './file-navigator-commands.js';
 import { WorkspacePreferences } from '@theia/workspace/lib/common';
 export { FileNavigatorCommands };
 
@@ -226,13 +226,13 @@ export class FileNavigatorContribution extends AbstractViewContribution<FileNavi
             execute: () => this.openView({ activate: true })
         });
         registry.registerCommand(FileNavigatorCommands.REVEAL_IN_NAVIGATOR, UriAwareCommandHandler.MonoSelect(this.selectionService, {
-            execute: async uri => {
+            execute: async (uri: URI) => {
                 if (await this.selectFileNode(uri)) {
                     this.openView({ activate: false, reveal: true });
                 }
             },
-            isEnabled: uri => !!this.workspaceService.getWorkspaceRootUri(uri),
-            isVisible: uri => !!this.workspaceService.getWorkspaceRootUri(uri),
+            isEnabled: (uri: URI) => !!this.workspaceService.getWorkspaceRootUri(uri),
+            isVisible: (uri: URI) => !!this.workspaceService.getWorkspaceRootUri(uri),
         }));
         registry.registerCommand(FileNavigatorCommands.TOGGLE_HIDDEN_FILES, {
             execute: () => {
@@ -303,9 +303,9 @@ export class FileNavigatorContribution extends AbstractViewContribution<FileNavi
             }
         });
         registry.registerCommand(FileNavigatorCommands.OPEN_WITH, UriAwareCommandHandler.MonoSelect(this.selectionService, {
-            isEnabled: uri => this.openWithService.getHandlers(uri).length > 0,
-            isVisible: uri => this.openWithService.getHandlers(uri).length > 0,
-            execute: uri => this.openWithService.openWith(uri)
+            isEnabled: (uri: URI) => this.openWithService.getHandlers(uri).length > 0,
+            isVisible: (uri: URI) => this.openWithService.getHandlers(uri).length > 0,
+            execute: (uri: URI) => this.openWithService.openWith(uri)
         }));
         registry.registerCommand(OpenEditorsCommands.CLOSE_ALL_TABS_FROM_TOOLBAR, {
             execute: widget => this.withOpenEditorsWidget(widget, () => this.shell.closeMany(this.editorWidgets)),

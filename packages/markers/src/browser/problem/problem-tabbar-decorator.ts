@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { Diagnostic, DiagnosticSeverity } from '@theia/core/shared/vscode-languageserver-protocol';
-import { Event, Emitter } from '@theia/core/lib/common/event';
-import { Title, Widget } from '@theia/core/shared/@lumino/widgets';
-import { WidgetDecoration } from '@theia/core/lib/browser/widget-decoration';
-import { TabBarDecorator } from '@theia/core/lib/browser/shell/tab-bar-decorator';
-import { Marker } from '../../common/marker';
-import { ProblemManager } from './problem-manager';
-import { ProblemPreferences, ProblemConfiguration } from '../../common/problem-preferences';
-import { Navigatable } from '@theia/core/lib/browser';
+import { inject, injectable, postConstruct } from 'inversify';
+import { Diagnostic, DiagnosticSeverity } from 'vscode-languageserver-protocol';
+import { Event, Emitter } from '@theia/core/lib/common/event.js';
+import { Title, Widget } from '@lumino/widgets';
+import { WidgetDecoration } from '@theia/core/lib/browser/widget-decoration.js';
+import { TabBarDecorator } from '@theia/core/lib/browser/shell/tab-bar-decorator.js';
+import { Marker } from '../../common/marker.js';
+import { ProblemManager } from './problem-manager.js';
+import { ProblemPreferences, ProblemConfiguration } from '../../common/problem-preferences.js';
+import { Navigatable } from '@theia/core/lib/browser/index.js';
 import { PreferenceChangeEvent } from '@theia/core';
 
 @injectable()

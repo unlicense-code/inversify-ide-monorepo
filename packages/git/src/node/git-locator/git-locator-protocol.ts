@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,12 +16,12 @@
 
 import { Disposable } from '@theia/core';
 
-export interface GitLocateOptions {
+export type GitLocateOptions = {
     readonly maxCount?: number;
 }
 
 export const GitLocator = Symbol('GitLocator');
-export interface GitLocator extends Disposable {
+export type GitLocator = Disposable & {
 
     /**
      * Resolves to the repository paths under the given absolute path.

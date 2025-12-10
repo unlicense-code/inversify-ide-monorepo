@@ -1,6 +1,6 @@
 
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,14 +19,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import { ArrayUtils, CommandService, DisposableCollection, Event, ILogger, nls, QuickInputButton, QuickInputService, QuickPickInput, QuickPickItem, URI, } from '@theia/core';
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import { NotebookKernelService, NotebookKernel, NotebookKernelMatchResult, SourceCommand } from './notebook-kernel-service';
-import { NotebookModel } from '../view-model/notebook-model';
-import { NotebookEditorWidget } from '../notebook-editor-widget';
-import { codicon, OpenerService } from '@theia/core/lib/browser';
-import { NotebookKernelHistoryService } from './notebook-kernel-history-service';
-import { NotebookCommand, NotebookModelResource } from '../../common';
-import debounce = require('@theia/core/shared/lodash.debounce');
+import { inject, injectable, named } from 'inversify';
+import { NotebookKernelService, NotebookKernel, NotebookKernelMatchResult, SourceCommand } from './notebook-kernel-service.js';
+import { NotebookModel } from '../view-model/notebook-model.js';
+import { NotebookEditorWidget } from '../notebook-editor-widget.js';
+import { codicon, OpenerService } from '@theia/core/lib/browser/index.js';
+import { NotebookKernelHistoryService } from './notebook-kernel-history-service.js';
+import { NotebookCommand, NotebookModelResource } from '../../common/index.js';
+import debounce from  'lodash/debounce.js'
 
 export const JUPYTER_EXTENSION_ID = 'ms-toolsai.jupyter';
 

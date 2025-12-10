@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,22 +14,22 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { StorageService } from '@theia/core/lib/browser/storage-service';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser/frontend-application-contribution';
-import { CommandRegistry } from '@theia/core/lib/common/command';
-import { EditorCommands } from './editor-command';
-import { EditorWidget } from './editor-widget';
-import { EditorManager } from './editor-manager';
-import { TextEditor, Position, Range, TextDocumentChangeEvent } from './editor';
-import { NavigationLocation, RecentlyClosedEditor } from './navigation/navigation-location';
-import { NavigationLocationService } from './navigation/navigation-location-service';
-import { addEventListener } from '@theia/core/lib/browser';
-import { ConfirmDialog, Dialog } from '@theia/core/lib/browser/dialogs';
+import { inject, injectable, postConstruct } from 'inversify';
+import { ILogger } from '@theia/core/lib/common/logger.js';
+import { StorageService } from '@theia/core/lib/browser/storage-service.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser/frontend-application-contribution.js';
+import { CommandRegistry } from '@theia/core/lib/common/command.js';
+import { EditorCommands } from './editor-command.js';
+import { EditorWidget } from './editor-widget.js';
+import { EditorManager } from './editor-manager.js';
+import { TextEditor, Position, Range, TextDocumentChangeEvent } from './editor.js';
+import { NavigationLocation, RecentlyClosedEditor } from './navigation/navigation-location.js';
+import { NavigationLocationService } from './navigation/navigation-location-service.js';
+import { addEventListener } from '@theia/core/lib/browser/index.js';
+import { ConfirmDialog, Dialog } from '@theia/core/lib/browser/dialogs.js';
 import { nls } from '@theia/core';
-import { PreferenceService, PreferenceScope } from '@theia/core/lib/common/preferences';
+import { PreferenceService, PreferenceScope } from '@theia/core';
 
 @injectable()
 export class EditorNavigationContribution implements Disposable, FrontendApplicationContribution {
@@ -133,7 +133,7 @@ export class EditorNavigationContribution implements Disposable, FrontendApplica
                 mouseNavigationSupport.push(addEventListener(document.body, 'mousedown', event => this.onMouseDown(event), true));
             }
         };
-        this.toDispose.push(this.preferenceService.onPreferenceChanged(change => {
+        this.toDispose.push(this.preferenceService.onPreferenceChanged((change: any) => {
             if (change.preferenceName === EditorNavigationContribution.MOUSE_NAVIGATION_PREFERENCE) {
                 updateMouseNavigationListener();
             }

@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { ANTHROPIC_LANGUAGE_MODELS_MANAGER_PATH, AnthropicLanguageModelsManager } from '../common/anthropic-language-models-manager';
+import { ContainerModule } from 'inversify';
+import { ANTHROPIC_LANGUAGE_MODELS_MANAGER_PATH, AnthropicLanguageModelsManager } from '../common/anthropic-language-models-manager.js';
 import { ConnectionHandler, PreferenceContribution, RpcConnectionHandler } from '@theia/core';
-import { AnthropicLanguageModelsManagerImpl } from './anthropic-language-models-manager-impl';
-import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module';
-import { AnthropicPreferencesSchema } from '../common/anthropic-preferences';
+import { AnthropicLanguageModelsManagerImpl } from './anthropic-language-models-manager-impl.js';
+import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module.js';
+import { AnthropicPreferencesSchema } from '../common/anthropic-preferences.js';
 
 // We use a connection module to handle AI services separately for each frontend.
 const anthropicConnectionModule = ConnectionContainerModule.create(({ bind, bindBackendService, bindFrontendService }) => {

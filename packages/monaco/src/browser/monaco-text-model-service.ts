@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,24 +14,24 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, named, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
+import { inject, injectable, named, postConstruct } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
 import { ResourceProvider, ReferenceCollection, Event, MaybePromise, Resource, ContributionProvider, OS, Emitter } from '@theia/core';
-import { EditorPreferences, EditorPreferenceChange } from '@theia/editor/lib/common/editor-preferences';
-import { MonacoEditorModel } from './monaco-editor-model';
-import { IDisposable, IReference } from '@theia/monaco-editor-core/esm/vs/base/common/lifecycle';
-import { MonacoToProtocolConverter } from './monaco-to-protocol-converter';
-import { ProtocolToMonacoConverter } from './protocol-to-monaco-converter';
-import { ILogger } from '@theia/core/lib/common/logger';
+import { EditorPreferences, EditorPreferenceChange } from '@theia/editor/lib/common/editor-preferences.js';
+import { MonacoEditorModel } from './monaco-editor-model.js';
+import { IDisposable, IReference } from '@theia/monaco-editor-core/esm/vs/base/common/lifecycle.js';
+import { MonacoToProtocolConverter } from './monaco-to-protocol-converter.js';
+import { ProtocolToMonacoConverter } from './protocol-to-monaco-converter.js';
+import { ILogger } from '@theia/core/lib/common/logger.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { ITextModelService, ITextModelContentProvider } from '@theia/monaco-editor-core/esm/vs/editor/common/services/resolverService';
-import { ITextModelUpdateOptions } from '@theia/monaco-editor-core/esm/vs/editor/common/model';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { ITextResourcePropertiesService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/textResourceConfiguration';
+import { ITextModelService, ITextModelContentProvider } from '@theia/monaco-editor-core/esm/vs/editor/common/services/resolverService.js';
+import { ITextModelUpdateOptions } from '@theia/monaco-editor-core/esm/vs/editor/common/model.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { ITextResourcePropertiesService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/textResourceConfiguration.js';
 
 export const MonacoEditorModelFactory = Symbol('MonacoEditorModelFactory');
-export interface MonacoEditorModelFactory {
+export type MonacoEditorModelFactory = {
 
     readonly scheme: string;
 
@@ -42,14 +42,7 @@ export interface MonacoEditorModelFactory {
 }
 
 export const MonacoEditorModelFilter = Symbol('MonacoEditorModelFilter');
-/**
- * A filter that prevents firing the `onDidCreate` event for certain models.
- * Preventing this event from firing will also prevent the propagation of the model to the plugin host.
- *
- * This is useful for models that are not supposed to be opened in a dedicated monaco editor widgets.
- * This includes models for notebook cells.
- */
-export interface MonacoEditorModelFilter {
+export type MonacoEditorModelFilter = {
     /**
      * Return `true` on models that should be filtered.
      */

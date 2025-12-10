@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
+import { injectable, inject } from 'inversify';
 import { Resource, ResourceResolver } from '@theia/core';
-import URI from '@theia/core/lib/common/uri';
-import { DebugSessionManager } from './debug-session-manager';
-import { DebugSource } from './model/debug-source';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { DebugSessionManager } from './debug-session-manager.js';
+import { DebugSource } from './model/debug-source.js';
 
 export class DebugResource implements Resource {
 

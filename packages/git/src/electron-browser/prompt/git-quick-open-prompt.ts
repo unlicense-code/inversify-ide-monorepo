@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, optional } from '@theia/core/shared/inversify';
-import { QuickInputService } from '@theia/core/lib/browser';
+import { inject, injectable, optional } from 'inversify';
+import { QuickInputService } from '@theia/core/lib/browser/index.js';
 import PQueue from 'p-queue';
-import { GitPrompt } from '../../common/git-prompt';
+import { GitPrompt } from '../../common/git-prompt.js';
 
 @injectable()
 export class GitQuickOpenPrompt extends GitPrompt {
@@ -25,7 +25,7 @@ export class GitQuickOpenPrompt extends GitPrompt {
     @inject(QuickInputService) @optional()
     protected readonly quickInputService: QuickInputService;
 
-    protected readonly queue = new PQueue({ autoStart: true, concurrency: 1 });
+    protected readonly queue: InstanceType<typeof PQueue> = new PQueue({ autoStart: true, concurrency: 1 });
 
     override async ask(question: GitPrompt.Question): Promise<GitPrompt.Answer> {
         return this.queue.add(() => {

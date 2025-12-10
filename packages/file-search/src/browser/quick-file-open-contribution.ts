@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { QuickFileOpenService, quickFileOpen } from './quick-file-open';
-import { CommandRegistry, CommandContribution, MenuContribution, MenuModelRegistry } from '@theia/core/lib/common';
-import { KeybindingRegistry, KeybindingContribution, QuickAccessContribution } from '@theia/core/lib/browser';
-import { EditorMainMenu } from '@theia/editor/lib/browser';
-import { nls } from '@theia/core/lib/common/nls';
+import { injectable, inject } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { QuickFileOpenService, quickFileOpen } from './quick-file-open.js';
+import { CommandRegistry, CommandContribution, MenuContribution, MenuModelRegistry } from '@theia/core/lib/common/index.js';
+import { KeybindingRegistry, KeybindingContribution, QuickAccessContribution } from '@theia/core/lib/browser/index.js';
+import { EditorMainMenu } from '@theia/editor/lib/browser/index.js';
+import { nls } from '@theia/core/lib/common/nls.js';
 
 @injectable()
 export class QuickFileOpenFrontendContribution implements QuickAccessContribution, CommandContribution, KeybindingContribution, MenuContribution {

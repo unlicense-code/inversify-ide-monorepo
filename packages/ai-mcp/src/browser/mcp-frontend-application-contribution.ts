@@ -14,25 +14,25 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { MCPServerDescription, MCPServerManager } from '../common';
-import { MCP_SERVERS_PREF } from '../common/mcp-preferences';
-import { JSONObject } from '@theia/core/shared/@lumino/coreutils';
-import { MCPFrontendService } from '../common/mcp-server-manager';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
+import { inject, injectable } from 'inversify';
+import { MCPServerDescription, MCPServerManager } from '../common/index.js';
+import { MCP_SERVERS_PREF } from '../common/mcp-preferences.js';
+import { JSONObject } from '@lumino/coreutils';
+import { MCPFrontendService } from '../common/mcp-server-manager.js';
 import { PreferenceService, PreferenceUtils } from '@theia/core';
 
-interface BaseMCPServerPreferenceValue {
+type BaseMCPServerPreferenceValue = {
     autostart?: boolean;
 }
 
-interface LocalMCPServerPreferenceValue extends BaseMCPServerPreferenceValue {
+type LocalMCPServerPreferenceValue = BaseMCPServerPreferenceValue & {
     command: string;
     args?: string[];
     env?: { [key: string]: string };
 }
 
-interface RemoteMCPServerPreferenceValue extends BaseMCPServerPreferenceValue {
+type RemoteMCPServerPreferenceValue = BaseMCPServerPreferenceValue & {
     serverUrl: string;
     serverAuthToken?: string;
     serverAuthTokenHeader?: string;

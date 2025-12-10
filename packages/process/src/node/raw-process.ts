@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,43 +14,27 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, named } from '@theia/core/shared/inversify';
-import { ProcessManager } from './process-manager';
-import { ILogger } from '@theia/core/lib/common';
-import { Process, ProcessType, ProcessOptions, ForkOptions, ProcessErrorEvent } from './process';
+import { injectable, inject, named } from 'inversify';
+import { ProcessManager } from './process-manager.js';
+import { ILogger } from '@theia/core/lib/common/index.js';
+import { Process, ProcessType, ProcessOptions, ForkOptions, ProcessErrorEvent } from './process.js';
 import { ChildProcess, spawn, fork } from 'child_process';
 import * as stream from 'stream';
+import { DevNullStream } from './dev-null-stream.js';
 
 // The class was here before, exporting to not break anything.
-export { DevNullStream } from './dev-null-stream';
-import { DevNullStream } from './dev-null-stream';
+export { DevNullStream } from './dev-null-stream.js';
 
 export const RawProcessOptions = Symbol('RawProcessOptions');
 
-/**
- * Options to spawn a new process (`spawn`).
- *
- * For more information please refer to the spawn function of Node's
- * child_process module:
- *
- *   https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options
- */
-export interface RawProcessOptions extends ProcessOptions {
+export type RawProcessOptions = ProcessOptions & {
 }
 
-/**
- * Options to fork a new process using the current Node interpreter (`fork`).
- *
- * For more information please refer to the fork function of Node's
- * `child_process` module:
- *
- *   https://nodejs.org/api/child_process.html#child_process_child_process_fork_modulepath_args_options
- */
-export interface RawForkOptions extends ForkOptions {
+export type RawForkOptions = ForkOptions & {
 }
 
 export const RawProcessFactory = Symbol('RawProcessFactory');
-export interface RawProcessFactory {
+export type RawProcessFactory = {
     (options: RawProcessOptions | RawForkOptions): RawProcess;
 }
 

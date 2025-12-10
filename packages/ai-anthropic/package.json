@@ -1,6 +1,7 @@
 {
   "name": "@theia/ai-anthropic",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - Anthropic Integration",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.65.0",

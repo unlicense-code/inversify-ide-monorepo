@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { ChatResponsePartRenderer } from '../chat-response-part-renderer';
-import { ChatResponseContent, UnknownChatResponseContent } from '@theia/ai-chat/lib/common';
-import { ReactNode } from '@theia/core/shared/react';
-import { nls } from '@theia/core/lib/common/nls';
-import * as React from '@theia/core/shared/react';
-import { codicon } from '@theia/core/lib/browser';
+import { injectable } from 'inversify';
+import { ChatResponsePartRenderer } from '../chat-response-part-renderer.js';
+import { ChatResponseContent, UnknownChatResponseContent } from '@theia/ai-chat/lib/common/index.js';
+import { ReactNode } from 'react';
+import { nls } from '@theia/core/lib/common/nls.js'
+import * as React from 'react';
+import { codicon } from '@theia/core/lib/browser/index.js';
 
 @injectable()
 export class UnknownPartRenderer implements ChatResponsePartRenderer<UnknownChatResponseContent> {

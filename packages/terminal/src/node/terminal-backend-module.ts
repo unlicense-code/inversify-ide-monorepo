@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule, Container, interfaces } from '@theia/core/shared/inversify';
-import { TerminalBackendContribution } from './terminal-backend-contribution';
-import { ConnectionHandler, RpcConnectionHandler } from '@theia/core/lib/common/messaging';
-import { ShellProcess, ShellProcessFactory, ShellProcessOptions } from './shell-process';
-import { ITerminalServer, terminalPath } from '../common/terminal-protocol';
-import { IBaseTerminalClient, DispatchingBaseTerminalClient, IBaseTerminalServer } from '../common/base-terminal-protocol';
-import { TerminalServer } from './terminal-server';
-import { IShellTerminalServer, shellTerminalPath } from '../common/shell-terminal-protocol';
-import { ShellTerminalServer } from '../node/shell-terminal-server';
-import { TerminalWatcher } from '../common/terminal-watcher';
-import { MessagingService } from '@theia/core/lib/node/messaging/messaging-service';
-import { bindTerminalPreferences } from '../common/terminal-preferences';
+import { ContainerModule, Container, interfaces } from 'inversify';
+import { TerminalBackendContribution } from './terminal-backend-contribution.js';
+import { ConnectionHandler, RpcConnectionHandler, RpcProxy } from '@theia/core/lib/common/messaging/index.js';
+import { ShellProcess, ShellProcessFactory, ShellProcessOptions } from './shell-process.js';
+import { ITerminalServer, terminalPath } from '../common/terminal-protocol.js';
+import { IBaseTerminalClient, DispatchingBaseTerminalClient, IBaseTerminalServer } from '../common/base-terminal-protocol.js';
+import { TerminalServer } from './terminal-server.js';
+import { IShellTerminalServer, shellTerminalPath } from '../common/shell-terminal-protocol.js';
+import { ShellTerminalServer } from '../node/shell-terminal-server.js';
+import { TerminalWatcher } from '../common/terminal-watcher.js';
+import { MessagingService } from '@theia/core/lib/node/messaging/messaging-service.js';
+import { bindTerminalPreferences } from '../common/terminal-preferences.js';
 
 export function bindTerminalServer(bind: interfaces.Bind, { path, identifier, constructor }: {
     path: string,
@@ -37,15 +37,15 @@ export function bindTerminalServer(bind: interfaces.Bind, { path, identifier, co
 }): void {
     const dispatchingClient = new DispatchingBaseTerminalClient();
     bind<IBaseTerminalServer>(identifier).to(constructor).inSingletonScope().onActivation((context, terminalServer) => {
-        terminalServer.setClient(dispatchingClient);
+        (terminalServer as any).setClient(dispatchingClient);
         dispatchingClient.push(context.container.get(TerminalWatcher).getTerminalClient());
-        terminalServer.setClient = () => {
+        (terminalServer as any).setClient = () => {
             throw new Error('use TerminalWatcher');
         };
         return terminalServer;
     });
     bind(ConnectionHandler).toDynamicValue(ctx =>
-        new RpcConnectionHandler<IBaseTerminalClient>(path, client => {
+        new RpcConnectionHandler<IBaseTerminalClient>(path, (client: RpcProxy<IBaseTerminalClient>) => {
             const disposable = dispatchingClient.push(client);
             client.onDidCloseConnection(() => disposable.dispose());
             return ctx.container.get(identifier);

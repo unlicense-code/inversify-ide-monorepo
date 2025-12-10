@@ -1,6 +1,6 @@
 
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -35,9 +35,6 @@ export namespace ConnectionManagementMessages {
     export const RECONNECT = 'reconnect';
 }
 
-/**
- * A service to mark a front end as unused. As soon as it disconnects from the back end, the connection context will be discarded.
- */
-export interface ConnectionCloseService {
+export type ConnectionCloseService = {
     markForClose(frontEndId: string): Promise<void>;
 }

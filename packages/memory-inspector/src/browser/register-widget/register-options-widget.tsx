@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2021 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,16 +15,16 @@
  ********************************************************************************/
 
 import { Disposable, DisposableCollection, Emitter, nls } from '@theia/core';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { DebugSession, DebugState } from '@theia/debug/lib/browser/debug-session';
-import { ASCII_TOGGLE_ID, AUTO_UPDATE_TOGGLE_ID, MemoryOptionsWidget } from '../memory-widget/memory-options-widget';
-import { MWInputWithSelect } from '../utils/memory-widget-components';
-import { Constants, Interfaces, RegisterWidgetOptions } from '../utils/memory-widget-utils';
-import { getRegisters, RegisterReadResult } from '../utils/memory-widget-variable-utils';
-import { MWMultiSelect } from '../utils/multi-select-bar';
-import { RegisterFilterService } from './register-filter-service';
-import debounce = require('@theia/core/shared/lodash.debounce');
+import { inject, injectable, postConstruct } from 'inversify';
+import * as React from 'react';
+import { DebugSession, DebugState } from '@theia/debug/lib/browser/debug-session.js';
+import { ASCII_TOGGLE_ID, AUTO_UPDATE_TOGGLE_ID, MemoryOptionsWidget } from '../memory-widget/memory-options-widget.js';
+import { MWInputWithSelect } from '../utils/memory-widget-components.js';
+import { Constants, Interfaces, RegisterWidgetOptions } from '../utils/memory-widget-utils.js';
+import { getRegisters, RegisterReadResult } from '../utils/memory-widget-variable-utils.js';
+import { MWMultiSelect } from '../utils/multi-select-bar.js';
+import { RegisterFilterService } from './register-filter-service.js';
+import debounce from  'lodash/debounce.js'
 
 export const EMPTY_REGISTERS: RegisterReadResult = {
     threadId: undefined,
@@ -35,7 +35,7 @@ export const REGISTER_FIELD_ID = 't-mv-register';
 export const REGISTER_RADIX_ID = 't-mv-radix';
 export const REGISTER_PRE_SETS_ID = 't-mv-pre-set';
 
-export interface RegisterOptions extends Interfaces.MemoryOptions {
+export type RegisterOptions = Interfaces.MemoryOptions & {
     reg: string;
     noRadixColumnDisplayed: boolean;
 }
@@ -83,7 +83,7 @@ export class RegisterOptionsWidget extends MemoryOptionsWidget {
         },
     };
 
-    @inject(RegisterWidgetOptions) protected override readonly memoryWidgetOptions: RegisterWidgetOptions;
+    @inject(RegisterWidgetOptions) protected declare readonly memoryWidgetOptions: RegisterWidgetOptions;
     @inject(RegisterFilterService) protected readonly filterService: RegisterFilterService;
 
     get registers(): RegisterReadResult {

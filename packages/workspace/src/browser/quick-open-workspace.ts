@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, optional, named } from '@theia/core/shared/inversify';
-import { QuickPickItem, LabelProvider, QuickInputService, QuickInputButton, QuickPickSeparator } from '@theia/core/lib/browser';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
-import { WorkspaceOpenHandlerContribution, WorkspaceService } from './workspace-service';
-import URI from '@theia/core/lib/common/uri';
-import { ContributionProvider, nls, Path } from '@theia/core/lib/common';
-import { UntitledWorkspaceService } from '../common/untitled-workspace-service';
+import { injectable, inject, optional, named } from 'inversify';
+import { QuickPickItem, LabelProvider, QuickInputService, QuickInputButton, QuickPickSeparator } from '@theia/core/lib/browser/index.js';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
+import { WorkspaceOpenHandlerContribution, WorkspaceService } from './workspace-service.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ContributionProvider, nls, Path } from '@theia/core/lib/common/index.js';
+import { UntitledWorkspaceService } from '../common/untitled-workspace-service.js';
 
-interface RecentlyOpenedPick extends QuickPickItem {
+type RecentlyOpenedPick = QuickPickItem & {
     resource?: URI
 }
 

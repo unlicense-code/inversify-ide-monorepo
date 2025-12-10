@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,26 +19,26 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Command, CommandService, Disposable, Emitter, Event, URI } from '@theia/core';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { StorageService } from '@theia/core/lib/browser';
-import { NotebookKernelSourceAction } from '../../common';
-import { NotebookModel } from '../view-model/notebook-model';
-import { NotebookService } from './notebook-service';
+import { inject, injectable, postConstruct } from 'inversify';
+import { StorageService } from '@theia/core/lib/browser/index.js';
+import { NotebookKernelSourceAction } from '../../common/index.js';
+import { NotebookModel } from '../view-model/notebook-model.js';
+import { NotebookService } from './notebook-service.js';
 
-export interface SelectedNotebookKernelChangeEvent {
+export type SelectedNotebookKernelChangeEvent = {
     notebook: URI;
     oldKernel: string | undefined;
     newKernel: string | undefined;
 }
 
-export interface NotebookKernelMatchResult {
+export type NotebookKernelMatchResult = {
     readonly selected: NotebookKernel | undefined;
     readonly suggestions: NotebookKernel[];
     readonly all: NotebookKernel[];
     readonly hidden: NotebookKernel[];
 }
 
-export interface NotebookKernelChangeEvent {
+export type NotebookKernelChangeEvent = {
     label?: true;
     description?: true;
     detail?: true;
@@ -47,7 +47,7 @@ export interface NotebookKernelChangeEvent {
     hasInterruptHandler?: true;
 }
 
-export interface NotebookKernel {
+export type NotebookKernel = {
     readonly id: string;
     readonly viewType: string;
     readonly onDidChange: Event<Readonly<NotebookKernelChangeEvent>>;
@@ -76,11 +76,11 @@ export const enum ProxyKernelState {
     Initializing = 3
 }
 
-export interface INotebookProxyKernelChangeEvent extends NotebookKernelChangeEvent {
+export type INotebookProxyKernelChangeEvent = NotebookKernelChangeEvent & {
     connectionState?: true;
 }
 
-export interface NotebookTextModelLike { uri: URI; viewType: string }
+export type NotebookTextModelLike = { uri: URI; viewType: string }
 
 class KernelInfo {
 
@@ -97,12 +97,12 @@ class KernelInfo {
     }
 }
 
-export interface NotebookSourceActionChangeEvent {
+export type NotebookSourceActionChangeEvent = {
     notebook?: URI;
     viewType: string;
 }
 
-export interface KernelSourceActionProvider {
+export type KernelSourceActionProvider = {
     readonly viewType: string;
     onDidChangeSourceActions?: Event<void>;
     provideKernelSourceActions(): Promise<NotebookKernelSourceAction[]>;

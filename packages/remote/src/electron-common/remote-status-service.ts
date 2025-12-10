@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,11 +16,11 @@
 
 export type RemoteStatus = RemoteConnectedStatus | RemoteDisconnectedStatus;
 
-export interface RemoteDisconnectedStatus {
+export type RemoteDisconnectedStatus = {
     alive: false;
 }
 
-export interface RemoteConnectedStatus {
+export type RemoteConnectedStatus = {
     alive: true;
     type: string;
     name: string;
@@ -30,7 +30,7 @@ export const RemoteStatusServicePath = '/remote/status';
 
 export const RemoteStatusService = Symbol('RemoteStatusService');
 
-export interface RemoteStatusService {
+export type RemoteStatusService = {
     getStatus(localPort: number): Promise<RemoteStatus>;
 
     connectionClosed(localPort: number): Promise<void>;

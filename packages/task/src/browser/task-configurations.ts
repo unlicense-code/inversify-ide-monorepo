@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017-2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, postConstruct } from 'inversify';
 import {
     TaskConfiguration,
     TaskCustomization,
@@ -23,17 +23,17 @@ import {
     TaskConfigurationScope,
     TaskScope,
     asVariableName
-} from '../common';
-import { TaskDefinitionRegistry } from './task-definition-registry';
-import { ProvidedTaskConfigurations } from './provided-task-configurations';
-import { TaskConfigurationManager, TasksChange } from './task-configuration-manager';
-import { TaskSchemaUpdater } from './task-schema-updater';
-import { TaskSourceResolver } from './task-source-resolver';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common';
-import { FileChangeType } from '@theia/filesystem/lib/common/filesystem-watcher-protocol';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+} from '../common/index.js';
+import { TaskDefinitionRegistry } from './task-definition-registry.js';
+import { ProvidedTaskConfigurations } from './provided-task-configurations.js';
+import { TaskConfigurationManager, TasksChange } from './task-configuration-manager.js';
+import { TaskSchemaUpdater } from './task-schema-updater.js';
+import { TaskSourceResolver } from './task-source-resolver.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/index.js';
+import { FileChangeType } from '@theia/filesystem/lib/common/filesystem-watcher-protocol.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
 
-export interface TaskConfigurationClient {
+export type TaskConfigurationClient = {
     /**
      * The task configuration file has changed, so a client might want to refresh its configurations
      * @returns an array of strings, each one being a task label

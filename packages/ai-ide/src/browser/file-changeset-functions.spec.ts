@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 let disableJSDOM = enableJSDOM();
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 FrontendApplicationConfigProvider.set({});
 
 import { expect } from 'chai';
@@ -33,13 +33,13 @@ import {
     FileChangeSetTitleProvider,
     DefaultFileChangeSetTitleProvider,
     ReplaceContentInFileFunctionHelperV2
-} from './file-changeset-functions';
-import { MutableChatRequestModel, MutableChatResponseModel, ChangeSet, ChangeSetElement, MutableChatModel } from '@theia/ai-chat';
-import { Container } from '@theia/core/shared/inversify';
-import { WorkspaceFunctionScope } from './workspace-functions';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { ChangeSetFileElementFactory, ChangeSetFileElement } from '@theia/ai-chat/lib/browser/change-set-file-element';
-import { URI } from '@theia/core/lib/common/uri';
+} from './file-changeset-functions.js';
+import { MutableChatRequestModel, MutableChatResponseModel, ChangeSet, ChangeSetElement, MutableChatModel } from '@theia/ai-chat/lib/common/index.js';
+import { Container } from 'inversify';
+import { WorkspaceFunctionScope } from './workspace-functions.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { ChangeSetFileElementFactory, ChangeSetFileElement } from '@theia/ai-chat/lib/browser/change-set-file-element.js';
+import { URI } from '@theia/core/lib/common/uri.js';
 
 disableJSDOM();
 

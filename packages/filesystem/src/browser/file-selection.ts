@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { SelectionService } from '@theia/core/lib/common/selection-service';
-import { SelectionCommandHandler } from '@theia/core/lib/common/selection-command-handler';
-import { isObject } from '@theia/core/lib/common';
-import { FileStat } from '../common/files';
+import { SelectionService } from '@theia/core';
+import { SelectionCommandHandler } from '@theia/core/lib/common/selection-command-handler.js';
+import { isObject } from '@theia/core/lib/common/index.js';
+import { FileStat } from '../common/files.js';
 
-export interface FileSelection {
+export type FileSelection = {
     fileStat: FileStat
 }
 export namespace FileSelection {
@@ -34,7 +34,7 @@ export namespace FileSelection {
         ) {
             super(
                 selectionService,
-                arg => FileSelection.is(arg) ? arg : undefined,
+                (arg: unknown) => FileSelection.is(arg) ? arg : undefined,
                 options
             );
         }

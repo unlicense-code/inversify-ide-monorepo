@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { ApplicationShellLayoutMigration, WidgetDescription, ApplicationShellLayoutMigrationContext } from '@theia/core/lib/browser/shell/shell-layout-restorer';
-import { SCM_HISTORY_ID } from './history/scm-history-contribution';
+import { injectable } from 'inversify';
+import { ApplicationShellLayoutMigration, WidgetDescription, ApplicationShellLayoutMigrationContext } from '@theia/core/lib/browser/shell/shell-layout-restorer.js';
+import { SCM_HISTORY_ID } from './history/scm-history-contribution.js';
 
 @injectable()
 export class ScmExtraLayoutVersion4Migration implements ApplicationShellLayoutMigration {

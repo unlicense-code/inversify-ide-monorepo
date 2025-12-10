@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -20,18 +20,18 @@
  *--------------------------------------------------------------------------------------------*/
 // Based on https://github.com/theia-ide/vscode/blob/standalone/0.19.x/src/vs/workbench/contrib/debug/common/debugModel.ts
 
-import * as React from '@theia/core/shared/react';
-import { DISABLED_CLASS } from '@theia/core/lib/browser';
-import { EditorWidget, Range, Position, EditorOpenerOptions } from '@theia/editor/lib/browser';
-import { DebugProtocol } from '@vscode/debugprotocol/lib/debugProtocol';
-import { TreeElement } from '@theia/core/lib/browser/source-tree';
-import { DebugScope } from '../console/debug-console-items';
-import { DebugSource } from './debug-source';
+import * as React from 'react';
+import { DISABLED_CLASS } from '@theia/core/lib/browser/index.js';
+import { EditorWidget, Range, Position, EditorOpenerOptions } from '@theia/editor/lib/browser/index.js';
+import { DebugProtocol } from '@vscode/debugprotocol/lib/debugProtocol.js';
+import { TreeElement } from '@theia/core/lib/browser/source-tree/tree-source.js';
+import { DebugScope } from '../console/debug-console-items.js';
+import { DebugSource } from './debug-source.js';
 import { RecursivePartial } from '@theia/core';
-import { DebugSession } from '../debug-session';
-import { DebugThread } from './debug-thread';
+import { DebugSession } from '../debug-session.js';
+import { DebugThread } from './debug-thread.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { stringHash } from '@theia/core/lib/common/hash';
+import { stringHash } from '@theia/core/lib/common/hash.js';
 
 export class DebugStackFrameData {
     readonly raw: DebugProtocol.StackFrame;

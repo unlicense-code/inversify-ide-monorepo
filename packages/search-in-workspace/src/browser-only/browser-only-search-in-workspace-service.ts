@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, postConstruct } from '@theia/core/shared/inversify';
-import { SearchInWorkspaceService } from '../browser/search-in-workspace-service';
+import { injectable, postConstruct } from 'inversify';
+import { SearchInWorkspaceService } from '../browser/search-in-workspace-service.js';
 
 @injectable()
 export class BrowserOnlySearchInWorkspaceService extends SearchInWorkspaceService {

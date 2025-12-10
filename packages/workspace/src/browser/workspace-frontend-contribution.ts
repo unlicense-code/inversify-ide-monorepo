@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,31 +14,30 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { CommandContribution, CommandRegistry, MenuContribution, MenuModelRegistry, MessageService, isWindows, MaybeArray } from '@theia/core/lib/common';
+import { injectable, inject } from 'inversify';
+import { CommandContribution, CommandRegistry, MenuContribution, MenuModelRegistry, MessageService, isWindows, MaybeArray } from '@theia/core/lib/common/index.js';
 import { isOSX, environment } from '@theia/core';
 import {
     open, OpenerService, CommonMenus, KeybindingRegistry, KeybindingContribution,
     FrontendApplicationContribution, SHELL_TABBAR_CONTEXT_COPY, OnWillStopAction, Navigatable, SaveableSource, Widget
-} from '@theia/core/lib/browser';
-import { FileDialogService, OpenFileDialogProps, FileDialogTreeFilters } from '@theia/filesystem/lib/browser';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { WorkspaceService } from './workspace-service';
-import { WorkspaceFileService, THEIA_EXT, VSCODE_EXT } from '../common';
-import { WorkspaceCommands } from './workspace-commands';
-import { QuickOpenWorkspace } from './quick-open-workspace';
-import URI from '@theia/core/lib/common/uri';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { EncodingRegistry } from '@theia/core/lib/browser/encoding-registry';
-import { UTF8 } from '@theia/core/lib/common/encodings';
-import { DisposableCollection } from '@theia/core/lib/common/disposable';
-import { PreferenceConfigurations } from '@theia/core/lib/common/preferences/preference-configurations';
-import { nls } from '@theia/core/lib/common/nls';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
-import { FileStat } from '@theia/filesystem/lib/common/files';
-import { UntitledWorkspaceExitDialog } from './untitled-workspace-exit-dialog';
-import { FilesystemSaveableService } from '@theia/filesystem/lib/browser/filesystem-saveable-service';
-import { StopReason } from '@theia/core/lib/common/frontend-application-state';
+} from '@theia/core/lib/browser/index.js';
+import { FileDialogService, OpenFileDialogProps, FileDialogTreeFilters } from '@theia/filesystem/lib/browser/index.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { WorkspaceService } from './workspace-service.js';
+import { WorkspaceFileService, THEIA_EXT, VSCODE_EXT } from '../common/index.js';
+import { WorkspaceCommands } from './workspace-commands.js';
+import { QuickOpenWorkspace } from './quick-open-workspace.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { FileService, FilesystemSaveableService } from '@theia/filesystem/lib/browser/index.js';
+import { FileStat } from '@theia/filesystem/lib/common/index.js';
+import { EncodingRegistry } from '@theia/core/lib/browser/encoding-registry.js';
+import { UTF8 } from '@theia/core/lib/common/encodings.js';
+import { DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { PreferenceConfigurations } from '@theia/core/lib/common/preferences/preference-configurations.js';
+import { nls } from '@theia/core/lib/common/nls.js';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
+import { UntitledWorkspaceExitDialog } from './untitled-workspace-exit-dialog.js';
+import { StopReason } from '@theia/core/lib/common/frontend-application-state.js';
 
 export enum WorkspaceStates {
     /**
@@ -364,7 +363,7 @@ export class WorkspaceFrontendContribution implements CommandContribution, Keybi
                 return uris[0];
             } else {
                 const foldersToOpen = (await Promise.all(uris.map(uri => this.fileService.resolve(uri))))
-                    .filter(fileStat => !!fileStat?.isDirectory);
+                    .filter((fileStat: FileStat | undefined) => !!fileStat?.isDirectory);
                 if (foldersToOpen.length === 1) {
                     return foldersToOpen[0].resource;
                 } else {

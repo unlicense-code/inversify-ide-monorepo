@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
+import { inject, injectable, named } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
 import { ContributionProvider, isObject, MaybePromise, Prioritizeable } from '@theia/core';
 
 export const PreviewHandler = Symbol('PreviewHandler');
 
-/**
- * The parameters given to the preview handler to render the preview content.
- */
-export interface RenderContentParams {
+export type RenderContentParams = {
     /**
      * Textual content of the resource.
      */
@@ -40,16 +37,7 @@ export namespace RenderContentParams {
     }
 }
 
-/**
- * A PreviewHandler manages the integration of one or more previews.
- *
- * It indicates whether a preview shall be rendered for a given resource URI and, if yes, renders the content.
- * Additionally it optionally provides methods with which the scroll state of the preview and corresponding
- * editor can be managed.
- *
- * See {@link MarkdownPreviewHandler} for an example implementation.
- */
-export interface PreviewHandler {
+export type PreviewHandler = {
     /**
      * One or more classes which specify the preview widget icon.
      */

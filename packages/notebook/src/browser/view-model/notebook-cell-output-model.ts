@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { Disposable, Emitter } from '@theia/core';
-import { CellOutput, CellOutputItem, isTextStreamMime } from '../../common';
-import { compressOutputItemStreams } from '../notebook-output-utils';
+import { CellOutput, CellOutputItem, isTextStreamMime } from '../../common/index.js';
+import { compressOutputItemStreams } from '../notebook-output-utils.js';
 
 export class NotebookCellOutputModel implements Disposable {
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,45 +14,45 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Position, Range, TextDocumentSaveReason } from '@theia/core/shared/vscode-languageserver-protocol';
-import { TextEditorDocument, EncodingMode, FindMatchesOptions, FindMatch } from '@theia/editor/lib/browser';
-import { DisposableCollection, Disposable } from '@theia/core/lib/common/disposable';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import { CancellationTokenSource, CancellationToken } from '@theia/core/lib/common/cancellation';
-import { Resource, ResourceError, ResourceVersion } from '@theia/core/lib/common/resource';
-import { Saveable, SaveOptions, SaveReason } from '@theia/core/lib/browser/saveable';
-import { MonacoToProtocolConverter } from './monaco-to-protocol-converter';
-import { ProtocolToMonacoConverter } from './protocol-to-monaco-converter';
-import { ILogger, Loggable, Log } from '@theia/core/lib/common/logger';
-import { ITextBufferFactory, ITextModel, ITextSnapshot } from '@theia/monaco-editor-core/esm/vs/editor/common/model';
-import { IResolvedTextEditorModel } from '@theia/monaco-editor-core/esm/vs/editor/common/services/resolverService';
+import { Position, Range, TextDocumentSaveReason } from 'vscode-languageserver-protocol';
+import { TextEditorDocument, EncodingMode, FindMatchesOptions, FindMatch } from '@theia/editor/lib/browser/index.js';
+import { DisposableCollection, Disposable } from '@theia/core/lib/common/disposable.js';
+import { Emitter, Event } from '@theia/core/lib/common/event.js';
+import { CancellationTokenSource, CancellationToken } from '@theia/core/lib/common/cancellation.js';
+import { Resource, ResourceError, ResourceVersion } from '@theia/core/lib/common/resource.js';
+import { Saveable, SaveOptions, SaveReason } from '@theia/core/lib/browser/saveable.js';
+import { MonacoToProtocolConverter } from './monaco-to-protocol-converter.js';
+import { ProtocolToMonacoConverter } from './protocol-to-monaco-converter.js';
+import { ILogger, Loggable, Log } from '@theia/core/lib/common/logger.js';
+import { ITextBufferFactory, ITextModel, ITextSnapshot } from '@theia/monaco-editor-core/esm/vs/editor/common/model.js';
+import { IResolvedTextEditorModel } from '@theia/monaco-editor-core/esm/vs/editor/common/services/resolverService.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { ILanguageService } from '@theia/monaco-editor-core/esm/vs/editor/common/languages/language';
-import { IModelService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/model';
-import { createTextBufferFactoryFromStream } from '@theia/monaco-editor-core/esm/vs/editor/common/model/textModel';
-import { editorGeneratedPreferenceProperties } from '@theia/editor/lib/common/editor-generated-preference-schema';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
-import { Listener, ListenerList } from '@theia/core';
-import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { ILanguageService } from '@theia/monaco-editor-core/esm/vs/editor/common/languages/language.js';
+import { IModelService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/model.js';
+import { createTextBufferFactoryFromStream } from '@theia/monaco-editor-core/esm/vs/editor/common/model/textModel.js';
+import { editorGeneratedPreferenceProperties } from '@theia/editor/lib/common/editor-generated-preference-schema.js';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/markdown-string.js';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
+import { Listener, ListenerList } from '@theia/core/lib/common/index.js';
+import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences.js';
 
 export {
     TextDocumentSaveReason
 };
 
-export interface WillSaveMonacoModelEvent {
+export type WillSaveMonacoModelEvent = {
     model: MonacoEditorModel,
     token: CancellationToken,
     options?: SaveOptions
 }
 
-export interface MonacoModelContentChangedEvent {
+export type MonacoModelContentChangedEvent = {
     readonly model: MonacoEditorModel;
     readonly contentChanges: MonacoTextDocumentContentChange[];
 }
 
-export interface MonacoTextDocumentContentChange {
+export type MonacoTextDocumentContentChange = {
     readonly range: Range;
     readonly rangeOffset: number;
     readonly rangeLength: number;
@@ -90,7 +90,9 @@ export class MonacoEditorModel implements IResolvedTextEditorModel, TextEditorDo
     protected readonly onDidChangeEncodingEmitter = new Emitter<string>();
     readonly onDidChangeEncoding = this.onDidChangeEncodingEmitter.event;
 
-    readonly onDidChangeReadOnly: Event<boolean | MarkdownString> = this.resource.onDidChangeReadOnly ?? Event.None;
+    get onDidChangeReadOnly(): Event<boolean | MarkdownString> {
+        return this.resource.onDidChangeReadOnly ?? Event.None;
+    }
 
     private preferredEncoding: string | undefined;
     private contentEncoding: string | undefined;

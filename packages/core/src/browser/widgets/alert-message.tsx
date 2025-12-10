@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import React = require('react');
-import { codicon } from './widget';
+import { codicon } from './widget.js';
 
 export type MessageType = keyof AlertMessageIcon;
 
-interface AlertMessageIcon {
+type AlertMessageIcon = {
     INFO: string;
     SUCCESS: string;
     WARNING: string;
@@ -33,7 +33,7 @@ const AlertMessageIcon = {
     ERROR: codicon('error')
 };
 
-export interface AlertMessageProps {
+export type AlertMessageProps = {
     type: MessageType;
     header: string;
     children?: React.ReactNode

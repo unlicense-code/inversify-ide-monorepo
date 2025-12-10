@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,15 +15,15 @@
 // *****************************************************************************
 
 import * as React from 'react';
-import { ArrayUtils, Event, isFunction, isObject } from '../../../common';
-import { Widget } from '../../widgets';
-import { MenuPath } from '../../../common/menu';
+import { ArrayUtils, Event, isFunction, isObject } from '../../../common/index.js';
+import { Widget } from '../../widgets/index.js';
+import { MenuPath } from '../../../common/menu/index.js';
 
 /** Items whose group is exactly 'navigation' will be rendered inline. */
 export const NAVIGATION = 'navigation';
 export const TAB_BAR_TOOLBAR_CONTEXT_MENU = ['TAB_BAR_TOOLBAR_CONTEXT_MENU'];
 
-export interface TabBarDelegator extends Widget {
+export type TabBarDelegator = Widget & {
     getTabBarDelegate(): Widget | undefined;
 }
 
@@ -35,10 +35,7 @@ export namespace TabBarDelegator {
 
 export type TabBarToolbarAction = RenderedToolbarAction | ReactTabBarToolbarAction;
 
-/**
- * Representation of an item in the tab
- */
-export interface TabBarToolbarActionBase {
+export type TabBarToolbarActionBase = {
     /**
      * The unique ID of the toolbar item.
      */
@@ -80,7 +77,7 @@ export interface TabBarToolbarActionBase {
     order?: string;
 }
 
-export interface RenderedToolbarAction extends TabBarToolbarActionBase {
+export type RenderedToolbarAction = TabBarToolbarActionBase & {
     /**
      * Optional icon for the item.
      */
@@ -104,11 +101,7 @@ export interface RenderedToolbarAction extends TabBarToolbarActionBase {
     tooltip?: string;
 }
 
-/**
- * Tab-bar toolbar item backed by a `React.ReactNode`.
- * Unlike the `TabBarToolbarAction`, this item is not connected to the command service.
- */
-export interface ReactTabBarToolbarAction extends TabBarToolbarActionBase {
+export type ReactTabBarToolbarAction = TabBarToolbarActionBase & {
     render(widget?: Widget): React.ReactNode;
 }
 

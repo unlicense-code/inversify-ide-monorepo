@@ -17,13 +17,13 @@ export const VERCEL_AI_LANGUAGE_MODELS_MANAGER_PATH = '/services/vercel-ai/langu
 
 export type VercelAiProvider = 'openai' | 'anthropic';
 
-export interface VercelAiProviderConfig {
+export type VercelAiProviderConfig = {
     provider: VercelAiProvider;
     apiKey?: string;
     baseURL?: string;
 }
 
-export interface VercelAiModelDescription {
+export type VercelAiModelDescription = {
     /**
      * The identifier of the model which will be shown in the UI.
      */
@@ -59,7 +59,7 @@ export interface VercelAiModelDescription {
 }
 
 export const VercelAiLanguageModelsManager = Symbol('VercelAiLanguageModelsManager');
-export interface VercelAiLanguageModelsManager {
+export type VercelAiLanguageModelsManager = {
     apiKey: string | undefined;
     setProviderConfig(provider: VercelAiProvider, config: Partial<VercelAiProviderConfig>): void;
     createOrUpdateLanguageModels(...models: VercelAiModelDescription[]): Promise<void>;

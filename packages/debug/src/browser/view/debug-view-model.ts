@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,21 +15,21 @@
 // *****************************************************************************
 
 import debounce from 'p-debounce';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { Disposable, DisposableCollection, Event, Emitter, deepClone, nls } from '@theia/core/lib/common';
-import URI from '@theia/core/lib/common/uri';
-import { DebugSession, DebugState } from '../debug-session';
-import { DebugSessionManager } from '../debug-session-manager';
-import { DebugThread } from '../model/debug-thread';
-import { DebugStackFrame } from '../model/debug-stack-frame';
-import { DebugSourceBreakpoint } from '../model/debug-source-breakpoint';
-import { DebugWatchExpression } from './debug-watch-expression';
-import { DebugWatchManager } from '../debug-watch-manager';
-import { DebugFunctionBreakpoint } from '../model/debug-function-breakpoint';
-import { DebugInstructionBreakpoint } from '../model/debug-instruction-breakpoint';
-import { DebugSessionOptionsBase } from '../debug-session-options';
-import { DebugDataBreakpoint } from '../model/debug-data-breakpoint';
-import { DebugVariable } from '../console/debug-console-items';
+import { injectable, inject, postConstruct } from 'inversify';
+import { Disposable, DisposableCollection, Event, Emitter, deepClone, nls } from '@theia/core/lib/common/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { DebugSession, DebugState } from '../debug-session.js';
+import { DebugSessionManager } from '../debug-session-manager.js';
+import { DebugThread } from '../model/debug-thread.js';
+import { DebugStackFrame } from '../model/debug-stack-frame.js';
+import { DebugSourceBreakpoint } from '../model/debug-source-breakpoint.js';
+import { DebugWatchExpression } from './debug-watch-expression.js';
+import { DebugWatchManager } from '../debug-watch-manager.js';
+import { DebugFunctionBreakpoint } from '../model/debug-function-breakpoint.js';
+import { DebugInstructionBreakpoint } from '../model/debug-instruction-breakpoint.js';
+import { DebugSessionOptionsBase } from '../debug-session-options.js';
+import { DebugDataBreakpoint } from '../model/debug-data-breakpoint.js';
+import { DebugVariable } from '../console/debug-console-items.js';
 
 @injectable()
 export class DebugViewModel implements Disposable {
@@ -205,7 +205,7 @@ export class DebugViewModel implements Disposable {
     }
 
     removeWatchExpression(expression: DebugWatchExpression): void {
-        this.watch.removeWatchExpression(expression.id);
+        this.watch.removeWatchExpression(typeof expression.id === 'number' ? expression.id : Number(expression.id));
     }
 
     protected updateWatchExpressions(): void {

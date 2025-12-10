@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -22,30 +22,30 @@ import {
 } from '@lumino/widgets';
 import { Message } from '@lumino/messaging';
 import { Drag } from '@lumino/dragdrop';
-import { RecursivePartial, Event as CommonEvent, DisposableCollection, Disposable, environment, isObject, UntitledResourceResolver, UNTITLED_SCHEME } from '../../common';
-import { animationFrame } from '../browser';
-import { Saveable, SaveableWidget, SaveOptions } from '../saveable';
-import { StatusBarImpl, StatusBarEntry, StatusBarAlignment } from '../status-bar/status-bar';
-import { TheiaDockPanel, BOTTOM_AREA_ID, MAIN_AREA_ID } from './theia-dock-panel';
-import { SidePanelHandler, SidePanel, SidePanelHandlerFactory } from './side-panel-handler';
-import { TabBarRendererFactory, SHELL_TABBAR_CONTEXT_MENU, ScrollableTabBar, ToolbarAwareTabBar } from './tab-bars';
-import { SplitPositionHandler, SplitPositionOptions } from './split-panels';
-import { FrontendApplicationStateService } from '../frontend-application-state';
-import { TabBarToolbarRegistry, TabBarToolbarFactory } from './tab-bar-toolbar';
-import { ContextKeyService } from '../context-key-service';
-import { Emitter } from '../../common/event';
-import { waitForRevealed, waitForClosed, PINNED_CLASS, UnsafeWidgetUtilities } from '../widgets';
-import { CorePreferences } from '../../common/core-preferences';
-import { BreadcrumbsRendererFactory } from '../breadcrumbs/breadcrumbs-renderer';
-import { Deferred } from '../../common/promise-util';
-import { SaveableService } from '../saveable-service';
-import { nls } from '../../common/nls';
-import { extractSecondaryWindow, SecondaryWindowHandler } from '../secondary-window-handler';
-import URI from '../../common/uri';
-import { OpenerService } from '../opener-service';
-import { PreviewableWidget } from '../widgets/previewable-widget';
-import { WindowService } from '../window/window-service';
-import { TheiaSplitPanel } from './theia-split-panel';
+import { RecursivePartial, Event as CommonEvent, DisposableCollection, Disposable, environment, isObject, UntitledResourceResolver, UNTITLED_SCHEME } from '../../common/index.js';
+import { animationFrame } from '../browser.js';
+import { Saveable, SaveableWidget, SaveOptions } from '../saveable.js';
+import { StatusBarImpl, StatusBarEntry, StatusBarAlignment } from '../status-bar/status-bar.js';
+import { TheiaDockPanel, BOTTOM_AREA_ID, MAIN_AREA_ID } from './theia-dock-panel.js';
+import { SidePanelHandler, SidePanel, SidePanelHandlerFactory } from './side-panel-handler.js';
+import { TabBarRendererFactory, SHELL_TABBAR_CONTEXT_MENU, ScrollableTabBar, ToolbarAwareTabBar } from './tab-bars.js';
+import { SplitPositionHandler, SplitPositionOptions } from './split-panels.js';
+import { FrontendApplicationStateService } from '../frontend-application-state.js';
+import { TabBarToolbarRegistry, TabBarToolbarFactory } from './tab-bar-toolbar/index.js';
+import { ContextKeyService } from '../context-key-service.js';
+import { Emitter } from '../../common/event.js';
+import { waitForRevealed, waitForClosed, PINNED_CLASS, UnsafeWidgetUtilities } from '../widgets/index.js';
+import { CorePreferences } from '../../common/core-preferences.js';
+import { BreadcrumbsRendererFactory } from '../breadcrumbs/breadcrumbs-renderer.js';
+import { Deferred } from '../../common/promise-util.js';
+import { SaveableService } from '../saveable-service.js';
+import { nls } from '../../common/nls.js';
+import { extractSecondaryWindow, SecondaryWindowHandler } from '../secondary-window-handler.js';
+import URI from '../../common/uri.js';
+import { OpenerService } from '../opener-service.js';
+import { PreviewableWidget } from '../widgets/previewable-widget.js';
+import { WindowService } from '../window/window-service.js';
+import { TheiaSplitPanel } from './theia-split-panel.js';
 
 /** The class name added to ApplicationShell instances. */
 export const APPLICATION_SHELL_CLASS = 'theia-ApplicationShell';
@@ -77,7 +77,7 @@ export const applicationShellLayoutVersion: ApplicationShellLayoutVersion = 5.0;
 
 export const ApplicationShellOptions = Symbol('ApplicationShellOptions');
 export const DockPanelRendererFactory = Symbol('DockPanelRendererFactory');
-export interface DockPanelRendererFactory {
+export type DockPanelRendererFactory = {
     (document?: Document | ShadowRoot): DockPanelRenderer
 }
 
@@ -167,10 +167,7 @@ export class DockPanelRenderer implements DockLayout.IRenderer {
     }
 }
 
-/**
- * Data stored while dragging widgets in the shell.
- */
-interface WidgetDragState {
+type WidgetDragState = {
     startTime: number;
     leftExpanded: boolean;
     rightExpanded: boolean;

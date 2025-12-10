@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
-import { StorageService } from '@theia/core/lib/browser';
+import { inject, injectable, named } from 'inversify';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
+import { StorageService } from '@theia/core/lib/browser/index.js';
 import { URI } from '@theia/core';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { ChatModel } from '../common/chat-model';
-import { ChatSessionIndex, ChatSessionStore, ChatModelWithMetadata, ChatSessionMetadata } from '../common/chat-session-store';
-import { SerializedChatData, CHAT_DATA_VERSION } from '../common/chat-model-serialization';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
+import { ILogger } from '@theia/core/lib/common/logger.js';
+import { ChatModel } from '../common/chat-model.js';
+import { ChatSessionIndex, ChatSessionStore, ChatModelWithMetadata, ChatSessionMetadata } from '../common/chat-session-store.js';
+import { SerializedChatData, CHAT_DATA_VERSION } from '../common/chat-model-serialization.js';
 
 const MAX_SESSIONS = 25;
 const INDEX_FILE = 'index.json';

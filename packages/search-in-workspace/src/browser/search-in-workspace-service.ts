@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017-2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
+import { injectable, inject, postConstruct } from 'inversify';
 import {
     SearchInWorkspaceServer,
     SearchInWorkspaceClient,
     SearchInWorkspaceResult,
     SearchInWorkspaceOptions
-} from '../common/search-in-workspace-interface';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+} from '../common/search-in-workspace-interface.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
 import { ILogger } from '@theia/core';
 
 /**

@@ -14,18 +14,24 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { MonacoQuickInputService } from './monaco-quick-input-service';
+import { injectable, inject } from 'inversify';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { MonacoQuickInputService } from './monaco-quick-input-service.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { FormattingConflicts, FormattingMode } from '@theia/monaco-editor-core/esm/vs/editor/contrib/format/browser/format';
-import { DocumentFormattingEditProvider, DocumentRangeFormattingEditProvider } from '@theia/monaco-editor-core/esm/vs/editor/common/languages';
-import { ITextModel } from '@theia/monaco-editor-core/esm/vs/editor/common/model';
-import { nls } from '@theia/core/lib/common/nls';
+import { FormattingConflicts, FormattingMode } from '@theia/monaco-editor-core/esm/vs/editor/contrib/format/browser/format.js';
+import { DocumentFormattingEditProvider, DocumentRangeFormattingEditProvider } from '@theia/monaco-editor-core/esm/vs/editor/common/languages.js';
+import { ITextModel } from '@theia/monaco-editor-core/esm/vs/editor/common/model.js';
+import { nls } from '@theia/core/lib/common/nls.js';
 import { PreferenceService, PreferenceLanguageOverrideService } from '@theia/core';
 
 type FormattingEditProvider = DocumentFormattingEditProvider | DocumentRangeFormattingEditProvider;
+
+// Extended type that includes optional properties that may exist on formatter instances
+type FormatterWithMetadata = FormattingEditProvider & {
+    extensionId?: { value: string };
+    displayName?: string;
+};
 
 const PREFERENCE_NAME = 'editor.defaultFormatter';
 
@@ -89,7 +95,10 @@ export class MonacoFormattingConflictsContribution implements FrontendApplicatio
         const defaultFormatterId = this.getDefaultFormatter(languageId, document.uri.toString());
 
         if (defaultFormatterId) {
-            const formatter = formatters.find(f => f.extensionId && f.extensionId.value === defaultFormatterId);
+            const formatter = formatters.find(f => {
+                const withMetadata = f as FormatterWithMetadata;
+                return withMetadata.extensionId && withMetadata.extensionId.value === defaultFormatterId;
+            });
             if (formatter) {
                 return formatter;
             }
@@ -97,11 +106,12 @@ export class MonacoFormattingConflictsContribution implements FrontendApplicatio
 
         return new Promise<T | undefined>(async (resolve, reject) => {
             const items = formatters
+                .map(f => f as FormatterWithMetadata)
                 .filter(formatter => formatter.displayName)
                 .map(formatter => ({
                     label: formatter.displayName!,
                     detail: formatter.extensionId ? formatter.extensionId.value : undefined,
-                    value: formatter,
+                    value: formatter as T,
                 }))
                 .sort((a, b) => a.label!.localeCompare(b.label!));
 

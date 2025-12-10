@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,18 +16,18 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { enableJSDOM } from '../test/jsdom';
+import { enableJSDOM } from '../test/jsdom.js';
 
 let disableJSDOM = enableJSDOM();
 
-import * as assert from 'assert';
+import assert from 'assert';
 import { Container } from 'inversify';
-import { bindPreferenceService } from '../frontend-application-bindings';
-import { bindMockPreferenceProviders, MockPreferenceProvider } from './test';
-import { PreferenceScope } from '../../common/preferences/preference-scope';
-import { FrontendApplicationConfigProvider } from '../frontend-application-config-provider';
-import { PreferenceProxyOptions, PreferenceProxy, PreferenceChangeEvent, createPreferenceProxy } from '../../common/preferences/preference-proxy';
-import { PreferenceProxyFactory } from '../../common/preferences/injectable-preference-proxy';
+import { bindPreferenceService } from '../frontend-application-bindings.js';
+import { bindMockPreferenceProviders, MockPreferenceProvider } from './test/index.js';
+import { PreferenceScope } from '../../common/preferences/preference-scope.js';
+import { FrontendApplicationConfigProvider } from '../frontend-application-config-provider.js';
+import { PreferenceProxyOptions, PreferenceProxy, PreferenceChangeEvent, createPreferenceProxy } from '../../common/preferences/preference-proxy.js';
+import { PreferenceProxyFactory } from '../../common/preferences/injectable-preference-proxy.js';
 
 disableJSDOM();
 
@@ -37,10 +37,10 @@ process.on('unhandledRejection', (reason, promise) => {
 });
 
 import { expect } from 'chai';
-import { PreferenceProvider } from '../../common/preferences/preference-provider';
-import { PreferenceSchema, PreferenceSchemaService } from '../../common/preferences/preference-schema';
-import { PreferenceService, PreferenceServiceImpl } from '../../common/preferences';
-import { waitForEvent } from '../../common/promise-util';
+import { PreferenceProvider } from '../../common/preferences/preference-provider.js';
+import { PreferenceSchema, PreferenceSchemaService } from '../../common/preferences/preference-schema.js';
+import { PreferenceService, PreferenceServiceImpl } from '../../common/preferences/index.js';
+import { waitForEvent } from '../../common/promise-util.js';
 let testContainer: Container;
 
 function createTestContainer(): Container {

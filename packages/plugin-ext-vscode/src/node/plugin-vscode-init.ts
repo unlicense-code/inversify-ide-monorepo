@@ -18,7 +18,7 @@
 
 import * as theia from '@theia/plugin';
 import { BackendInitializationFn, PluginAPIFactory, Plugin, emptyPlugin } from '@theia/plugin-ext';
-import { VSCODE_DEFAULT_API_VERSION } from '../common/plugin-vscode-types';
+import { VSCODE_DEFAULT_API_VERSION } from '../common/plugin-vscode-types.js';
 
 process.env['VSCODE_PID'] = process.env['THEIA_PARENT_PID'];
 

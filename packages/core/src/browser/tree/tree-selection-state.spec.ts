@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import { expect } from 'chai';
-import { MockTreeModel } from './test/mock-tree-model';
-import { createTreeTestContainer } from './test/tree-test-container';
-import { TreeModel } from './tree-model';
-import { SelectableTreeNode, TreeSelection } from './tree-selection';
-import { TreeSelectionState } from './tree-selection-state';
+import { MockTreeModel } from './test/mock-tree-model.js';
+import { createTreeTestContainer } from './test/tree-test-container.js';
+import { TreeModel } from './tree-model.js';
+import { SelectableTreeNode, TreeSelection } from './tree-selection.js';
+import { TreeSelectionState } from './tree-selection-state.js';
 
 namespace TreeSelectionState {
 

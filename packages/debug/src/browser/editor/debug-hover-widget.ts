@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,27 +14,27 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import debounce = require('@theia/core/shared/lodash.debounce');
+import debounce from 'lodash/debounce.js'
 
 import { MenuPath } from '@theia/core';
-import { Key } from '@theia/core/lib/browser';
-import { SourceTreeWidget } from '@theia/core/lib/browser/source-tree';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { Message } from '@theia/core/shared/@lumino/messaging';
-import { Widget } from '@theia/core/shared/@lumino/widgets';
-import { Container, inject, injectable, interfaces, postConstruct } from '@theia/core/shared/inversify';
-import { URI as CodeUri } from '@theia/core/shared/vscode-uri';
+import { Key } from '@theia/core/lib/browser/index.js';
+import { SourceTreeWidget } from '@theia/core/lib/browser/source-tree/source-tree-widget.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { Message } from '@lumino/messaging';
+import { Widget } from '@lumino/widgets';
+import { inject, injectable, interfaces, postConstruct } from 'inversify';
+import { URI as CodeUri } from 'vscode-uri';
 import * as monaco from '@theia/monaco-editor-core';
-import { IEditorHoverOptions } from '@theia/monaco-editor-core/esm/vs/editor/common/config/editorOptions';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { IConfigurationService } from '@theia/monaco-editor-core/esm/vs/platform/configuration/common/configuration';
-import { DebugVariable } from '../console/debug-console-items';
-import { DebugSessionManager } from '../debug-session-manager';
-import { DebugEditor } from './debug-editor';
-import { DebugExpressionProvider } from './debug-expression-provider';
-import { DebugHoverSource } from './debug-hover-source';
+import { IEditorHoverOptions } from '@theia/monaco-editor-core/esm/vs/editor/common/config/editorOptions.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { IConfigurationService } from '@theia/monaco-editor-core/esm/vs/platform/configuration/common/configuration.js';
+import { DebugVariable } from '../console/debug-console-items.js';
+import { DebugSessionManager } from '../debug-session-manager.js';
+import { DebugEditor } from './debug-editor.js';
+import { DebugExpressionProvider } from './debug-expression-provider.js';
+import { DebugHoverSource } from './debug-hover-source.js';
 
-export interface ShowDebugHoverOptions {
+export type ShowDebugHoverOptions = {
     selection: monaco.Range
     /** default: false */
     focus?: boolean
@@ -42,12 +42,12 @@ export interface ShowDebugHoverOptions {
     immediate?: boolean
 }
 
-export interface HideDebugHoverOptions {
+export type HideDebugHoverOptions = {
     /** default: true */
     immediate?: boolean
 }
 
-export function createDebugHoverWidgetContainer(parent: interfaces.Container, editor: DebugEditor): Container {
+export function createDebugHoverWidgetContainer(parent: interfaces.Container, editor: DebugEditor): interfaces.Container {
     const child = SourceTreeWidget.createContainer(parent, {
         contextMenuPath: DebugHoverWidget.CONTEXT_MENU,
         virtualized: false

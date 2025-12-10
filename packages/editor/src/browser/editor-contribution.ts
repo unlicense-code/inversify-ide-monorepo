@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,28 +14,28 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { EditorManager } from './editor-manager';
-import { TextEditor } from './editor';
-import { injectable, inject, optional, named } from '@theia/core/shared/inversify';
-import { StatusBarAlignment, StatusBar } from '@theia/core/lib/browser/status-bar/status-bar';
+import { EditorManager } from './editor-manager.js';
+import { TextEditor } from './editor.js';
+import { injectable, inject, optional, named } from 'inversify';
+import { StatusBarAlignment, StatusBar } from '@theia/core/lib/browser/status-bar/status-bar.js';
 import {
     FrontendApplicationContribution, DiffUris, DockLayout,
     QuickInputService, KeybindingRegistry, KeybindingContribution, SHELL_TABBAR_CONTEXT_SPLIT, ApplicationShell,
     WidgetStatusBarContribution,
     Widget,
     OpenWithService
-} from '@theia/core/lib/browser';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
+} from '@theia/core/lib/browser/index.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
 import { CommandHandler, DisposableCollection, MenuContribution, MenuModelRegistry, ContributionProvider, Prioritizeable } from '@theia/core';
-import { EditorCommands } from './editor-command';
-import { CommandRegistry, CommandContribution } from '@theia/core/lib/common';
-import { SUPPORTED_ENCODINGS } from '@theia/core/lib/common/supported-encodings';
-import { nls } from '@theia/core/lib/common/nls';
-import { CurrentWidgetCommandAdapter } from '@theia/core/lib/browser/shell/current-widget-command-adapter';
-import { EditorWidget } from './editor-widget';
-import { EditorLanguageStatusService } from './language-status/editor-language-status-service';
-import { QuickEditorService } from './quick-editor-service';
-import { SplitEditorContribution } from './split-editor-contribution';
+import { EditorCommands } from './editor-command.js';
+import { CommandRegistry, CommandContribution } from '@theia/core/lib/common/index.js';
+import { SUPPORTED_ENCODINGS } from '@theia/core/lib/common/supported-encodings.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { CurrentWidgetCommandAdapter } from '@theia/core/lib/browser/shell/current-widget-command-adapter.js';
+import { EditorWidget } from './editor-widget.js';
+import { EditorLanguageStatusService } from './language-status/editor-language-status-service.js';
+import { QuickEditorService } from './quick-editor-service.js';
+import { SplitEditorContribution } from './split-editor-contribution.js';
 
 @injectable()
 export class EditorContribution implements FrontendApplicationContribution,

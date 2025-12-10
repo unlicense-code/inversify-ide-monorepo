@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import { Command, URI, isObject } from '@theia/core';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/markdown-string';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
-import { UriComponents } from '@theia/core/lib/common/uri';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/markdown-string.js';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
+import { UriComponents } from '@theia/core/lib/common/uri.js';
 
-export interface NotebookCommand extends Command {
+export type NotebookCommand = Command & {
     title?: string;
     tooltip?: string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -31,14 +31,14 @@ export enum CellKind {
     Code = 2
 }
 
-export interface NotebookCellMetadata {
+export type NotebookCellMetadata = {
     /**
      * custom metadata
      */
     [key: string]: unknown;
 }
 
-export interface NotebookCellInternalMetadata {
+export type NotebookCellInternalMetadata = {
     executionId?: string;
     executionOrder?: number;
     lastRunSuccess?: boolean;
@@ -50,7 +50,7 @@ export interface NotebookCellInternalMetadata {
 
 export type NotebookDocumentMetadata = Record<string, unknown>;
 
-export interface NotebookCellStatusBarItem {
+export type NotebookCellStatusBarItem = {
     readonly alignment: CellStatusbarAlignment;
     readonly priority?: number;
     readonly text: string;
@@ -72,29 +72,29 @@ export type TransientCellMetadata = { readonly [K in keyof NotebookCellMetadata]
 export type CellContentMetadata = { readonly [K in keyof NotebookCellMetadata]?: boolean };
 export type TransientDocumentMetadata = { readonly [K in keyof NotebookDocumentMetadata]?: boolean };
 
-export interface TransientOptions {
+export type TransientOptions = {
     readonly transientOutputs: boolean;
     readonly transientCellMetadata: TransientCellMetadata;
     readonly transientDocumentMetadata: TransientDocumentMetadata;
 }
 
-export interface CellOutputItem {
+export type CellOutputItem = {
     readonly mime: string;
     readonly data: BinaryBuffer;
 }
 
-export interface CellOutput {
+export type CellOutput = {
     outputId: string;
     outputs: CellOutputItem[];
     metadata?: Record<string, unknown>;
 }
 
-export interface NotebookCellCollapseState {
+export type NotebookCellCollapseState = {
     inputCollapsed?: boolean;
     outputCollapsed?: boolean;
 }
 
-export interface CellData {
+export type CellData = {
     source: string;
     language: string;
     cellKind: CellKind;
@@ -104,17 +104,17 @@ export interface CellData {
     collapseState?: NotebookCellCollapseState;
 }
 
-export interface NotebookDocumentMetadataEdit {
+export type NotebookDocumentMetadataEdit = {
     editType: CellEditType.DocumentMetadata;
     metadata: NotebookDocumentMetadata;
 }
 
-export interface NotebookData {
+export type NotebookData = {
     readonly cells: CellData[];
     readonly metadata: NotebookDocumentMetadata;
 }
 
-export interface NotebookContributionData {
+export type NotebookContributionData = {
     extension?: string;
     providerDisplayName: string;
     displayName: string;
@@ -148,30 +148,30 @@ export enum NotebookCellsChangeType {
     Unknown = 100
 }
 
-export interface NotebookCellsChangeLanguageEvent {
+export type NotebookCellsChangeLanguageEvent = {
     readonly kind: NotebookCellsChangeType.ChangeCellLanguage;
     readonly index: number;
     readonly language: string;
 }
 
-export interface NotebookCellsChangeMetadataEvent {
+export type NotebookCellsChangeMetadataEvent = {
     readonly kind: NotebookCellsChangeType.ChangeCellMetadata;
     readonly index: number;
     readonly metadata: NotebookCellMetadata;
 }
 
-export interface NotebookCellsChangeInternalMetadataEvent {
+export type NotebookCellsChangeInternalMetadataEvent = {
     readonly kind: NotebookCellsChangeType.ChangeCellInternalMetadata;
     readonly index: number;
     readonly internalMetadata: NotebookCellInternalMetadata;
 }
 
-export interface NotebookCellContentChangeEvent {
+export type NotebookCellContentChangeEvent = {
     readonly kind: NotebookCellsChangeType.ChangeCellContent;
     readonly index: number;
 }
 
-export interface NotebookModelResource {
+export type NotebookModelResource = {
     notebookModelUri: URI;
 }
 
@@ -184,7 +184,7 @@ export namespace NotebookModelResource {
     }
 }
 
-export interface NotebookCellModelResource {
+export type NotebookCellModelResource = {
     notebookCellModelUri: URI;
 }
 
@@ -209,21 +209,21 @@ export enum CellExecutionUpdateType {
     ExecutionState = 3,
 }
 
-export interface CellExecuteOutputEdit {
+export type CellExecuteOutputEdit = {
     editType: CellExecutionUpdateType.Output;
     cellHandle: number;
     append?: boolean;
     outputs: CellOutput[];
 }
 
-export interface CellExecuteOutputItemEdit {
+export type CellExecuteOutputItemEdit = {
     editType: CellExecutionUpdateType.OutputItems;
     append?: boolean;
     outputId: string,
     items: CellOutputItem[];
 }
 
-export interface CellExecutionStateUpdateDto {
+export type CellExecutionStateUpdateDto = {
     editType: CellExecutionUpdateType.ExecutionState;
     executionOrder?: number;
     runStartTime?: number;
@@ -231,7 +231,7 @@ export interface CellExecutionStateUpdateDto {
     isPaused?: boolean;
 }
 
-export interface CellMetadataEdit {
+export type CellMetadataEdit = {
     editType: CellEditType.Metadata;
     index: number;
     metadata: NotebookCellMetadata;
@@ -249,7 +249,7 @@ export const enum CellEditType {
     PartialInternalMetadata = 9,
 }
 
-export interface NotebookKernelSourceAction {
+export type NotebookKernelSourceAction = {
     readonly label: string;
     readonly description?: string;
     readonly detail?: string;

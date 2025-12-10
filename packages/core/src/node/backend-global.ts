@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2025 TypeFox and others.
+// Copyright (C) 2025 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import type { AddressInfo } from 'net';
-import type { ExtensionInfo } from '../common/application-protocol';
+import type { ExtensionInfo } from '../common/application-protocol.js';
 import { isPromise } from 'util/types';
 
-export interface BackendGlobal {
+export type BackendGlobal = {
     serverAddress?: Promise<AddressInfo>;
     extensionInfo: ExtensionInfo[];
 }

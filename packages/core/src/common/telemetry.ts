@@ -22,7 +22,7 @@ export class TelemetryTrustedValue<T> {
     }
 }
 
-export interface TelemetryLogger {
+export type TelemetryLogger = {
     readonly sender: TelemetrySender;
     readonly options: TelemetryLoggerOptions | undefined;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -33,7 +33,7 @@ export interface TelemetryLogger {
     dispose(): void;
 }
 
-interface TelemetrySender {
+type TelemetrySender = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     sendEventData(eventName: string, data?: Record<string, any>): void;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -41,5 +41,5 @@ interface TelemetrySender {
     flush?(): void | Thenable<void>;
 }
 
-interface TelemetryLoggerOptions {
+type TelemetryLoggerOptions = {
 }

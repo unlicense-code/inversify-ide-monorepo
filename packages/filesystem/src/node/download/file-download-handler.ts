@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,21 +15,21 @@
 // *****************************************************************************
 
 import * as os from 'os';
-import * as fs from '@theia/core/shared/fs-extra';
+import * as fs from 'fs-extra';
 import * as path from 'path';
-import { generateUuid } from '@theia/core/lib/common/uuid';
-import { Request, Response } from '@theia/core/shared/express';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { generateUuid } from '@theia/core';
+import { Request, Response } from 'express';
+import { inject, injectable } from 'inversify';
 import { OK, BAD_REQUEST, METHOD_NOT_ALLOWED, NOT_FOUND, INTERNAL_SERVER_ERROR, REQUESTED_RANGE_NOT_SATISFIABLE, PARTIAL_CONTENT } from 'http-status-codes';
-import URI from '@theia/core/lib/common/uri';
-import { isEmpty } from '@theia/core/lib/common/objects';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { FileUri } from '@theia/core/lib/common/file-uri';
-import { DirectoryArchiver } from './directory-archiver';
-import { FileDownloadData } from '../../common/download/file-download';
-import { FileDownloadCache, DownloadStorageItem } from './file-download-cache';
+import { URI } from '@theia/core';
+import { isEmpty } from '@theia/core';
+import { ILogger } from '@theia/core';
+import { FileUri } from '@theia/core/lib/node/index.js';
+import { DirectoryArchiver } from './directory-archiver.js';
+import { FileDownloadData } from '../../common/download/file-download.js';
+import { FileDownloadCache, DownloadStorageItem } from './file-download-cache.js';
 
-interface PrepareDownloadOptions {
+type PrepareDownloadOptions = {
     filePath: string;
     downloadId: string;
     remove: boolean;
@@ -104,11 +104,11 @@ export abstract class FileDownloadHandler {
      */
     protected streamDownload(status: number, response: Response, stream: fs.ReadStream, id: string): void {
         response.status(status);
-        stream.on('error', error => {
+        stream.on('error', (error: any) => {
             this.fileDownloadCache.deleteDownload(id);
             this.handleError(response, error, INTERNAL_SERVER_ERROR);
         });
-        response.on('error', error => {
+        response.on('error', (error: any) => {
             this.fileDownloadCache.deleteDownload(id);
             this.handleError(response, error, INTERNAL_SERVER_ERROR);
         });
@@ -278,7 +278,7 @@ export class MultiFileDownloadHandler extends FileDownloadHandler {
             // We should have one key in the map per FS drive.
             for (const [rootUri, uris] of (await this.directoryArchiver.findCommonParents(distinctUris)).entries()) {
                 const rootPath = FileUri.fsPath(rootUri);
-                const entries = uris.map(FileUri.fsPath).map(p => path.relative(rootPath, p));
+                const entries = uris.map(FileUri.fsPath).map((p: string) => path.relative(rootPath, p));
                 const outputPath = path.join(outputRootPath, `${path.basename(rootPath)}.tar`);
                 await this.archive(rootPath, outputPath, entries);
                 tarPaths.push(outputPath);

@@ -21,21 +21,21 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import debounce = require('@theia/core/shared/lodash.debounce');
-import { injectable, inject, interfaces, named, postConstruct, unmanaged } from '@theia/core/shared/inversify';
-import { PluginMetadata, HostedPluginServer, DeployedPlugin, PluginServer, PluginIdentifiers } from '../../common/plugin-protocol';
-import { AbstractPluginManagerExt, ConfigStorage } from '../../common/plugin-api-rpc';
+import debounce from  'lodash/debounce.js'
+import { injectable, inject, interfaces, named, postConstruct, unmanaged } from 'inversify';
+import { PluginMetadata, HostedPluginServer, DeployedPlugin, PluginServer, PluginIdentifiers } from '../../common/plugin-protocol.js';
+import { AbstractPluginManagerExt, ConfigStorage } from '../../common/plugin-api-rpc.js';
 import {
     Disposable, DisposableCollection, Emitter,
     ILogger, ContributionProvider,
     RpcProxy
 } from '@theia/core';
-import { MainPluginApiProvider } from '../../common/plugin-ext-api-contribution';
-import { PluginPathsService } from '../../main/common/plugin-paths-protocol';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
-import { environment } from '@theia/core/shared/@theia/application-package/lib/environment';
-import { Measurement, Stopwatch } from '@theia/core/lib/common';
+import { MainPluginApiProvider } from '../../common/plugin-ext-api-contribution.js';
+import { PluginPathsService } from '../../main/common/plugin-paths-protocol.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
+import { environment } from '@theia/application-package';
+import { Measurement, Stopwatch } from '@theia/core/lib/common/index.js';
 
 export type PluginHost = 'frontend' | string;
 

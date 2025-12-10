@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { AIVariableResolutionRequest } from '@theia/ai-core';
-import { LabelProviderContribution } from '@theia/core/lib/browser';
-import { injectable } from '@theia/core/shared/inversify';
+import { AIVariableResolutionRequest } from '@theia/ai-core/lib/common/index.js';
+import { LabelProviderContribution } from '@theia/core/lib/browser/index.js';
+import { injectable } from 'inversify';
 
 @injectable()
 export class ContextVariableLabelProvider implements LabelProviderContribution {

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,21 +14,21 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, named, postConstruct } from '@theia/core/shared/inversify';
-import { ILogger, ContributionProvider, CommandContribution, Command, CommandRegistry, MenuContribution, MenuModelRegistry, nls } from '@theia/core/lib/common';
-import { QuickOpenTask, TaskTerminateQuickOpen, TaskRunningQuickOpen, TaskRestartRunningQuickOpen } from './quick-open-task';
+import { inject, injectable, named, postConstruct } from 'inversify';
+import { ILogger, ContributionProvider, CommandContribution, Command, CommandRegistry, MenuContribution, MenuModelRegistry, nls } from '@theia/core/lib/common/index.js';
+import { QuickOpenTask, TaskTerminateQuickOpen, TaskRunningQuickOpen, TaskRestartRunningQuickOpen } from './quick-open-task.js';
 import {
     FrontendApplication, FrontendApplicationContribution, QuickAccessContribution,
     KeybindingRegistry, KeybindingContribution, StorageService, StatusBar, StatusBarAlignment, CommonMenus
-} from '@theia/core/lib/browser';
-import { WidgetManager } from '@theia/core/lib/browser/widget-manager';
-import { TaskContribution, TaskResolverRegistry, TaskProviderRegistry } from './task-contribution';
-import { TaskService } from './task-service';
-import { TerminalMenus } from '@theia/terminal/lib/browser/terminal-frontend-contribution';
-import { TaskSchemaUpdater } from './task-schema-updater';
-import { TaskConfiguration, TaskWatcher } from '../common';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
+} from '@theia/core/lib/browser/index.js';
+import { WidgetManager } from '@theia/core/lib/browser/widget-manager.js';
+import { TaskContribution, TaskResolverRegistry, TaskProviderRegistry } from './task-contribution.js';
+import { TaskService } from './task-service.js';
+import { TerminalMenus } from '@theia/terminal/lib/browser/terminal-frontend-contribution.js';
+import { TaskSchemaUpdater } from './task-schema-updater.js';
+import { TaskConfiguration, TaskWatcher } from '../common/index.js';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
 
 export namespace TaskCommands {
     const TASK_CATEGORY = 'Task';

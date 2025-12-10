@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, interfaces } from '@theia/core/shared/inversify';
-import { AbstractViewContribution, bindViewContribution } from '@theia/core/lib/browser/shell/view-contribution';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { Command, CommandRegistry, MessageService } from '@theia/core/lib/common';
-import { ApplicationShell, codicon, DockLayout, ShellLayoutTransformer, Widget, WidgetFactory } from '@theia/core/lib/browser';
-import { SampleViewUnclosableView } from './sample-unclosable-view';
+import { inject, injectable, interfaces } from 'inversify';
+import { AbstractViewContribution, bindViewContribution } from '@theia/core/lib/browser/shell/view-contribution.js';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { Command, CommandRegistry, MessageService } from '@theia/core/lib/common/index.js';
+import { ApplicationShell, codicon, DockLayout, ShellLayoutTransformer, Widget, WidgetFactory } from '@theia/core/lib/browser/index.js';
+import { SampleViewUnclosableView } from './sample-unclosable-view.js';
 
 export const SampleToolBarCommand: Command = {
     id: 'sample.toggle.toolbarCommand',

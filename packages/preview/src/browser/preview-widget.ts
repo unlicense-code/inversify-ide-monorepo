@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import throttle = require('@theia/core/shared/lodash.throttle');
-import { inject, injectable } from '@theia/core/shared/inversify';
+import throttle from 'lodash/throttle.js';
+import { inject, injectable } from 'inversify';
 import { Resource, MaybePromise } from '@theia/core';
-import { Navigatable } from '@theia/core/lib/browser/navigatable';
-import { BaseWidget, Message, addEventListener, codicon } from '@theia/core/lib/browser';
-import URI from '@theia/core/lib/common/uri';
-import { Event, Emitter } from '@theia/core/lib/common';
-import { PreviewHandler, PreviewHandlerProvider } from './preview-handler';
-import { ThemeService } from '@theia/core/lib/browser/theming';
-import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences';
-import { Disposable } from '@theia/core/lib/common/disposable';
-import { MonacoWorkspace } from '@theia/monaco/lib/browser/monaco-workspace';
-import { Range, Location } from '@theia/core/shared/vscode-languageserver-protocol';
+import { Navigatable } from '@theia/core/lib/browser/navigatable.js';
+import { BaseWidget, Message, addEventListener, codicon } from '@theia/core/lib/browser/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Event, Emitter } from '@theia/core/lib/common/index.js';
+import { PreviewHandler, PreviewHandlerProvider } from './preview-handler.js';
+import { ThemeService } from '@theia/core/lib/browser/theming.js';
+import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences.js';
+import { Disposable } from '@theia/core/lib/common/disposable.js';
+import { MonacoWorkspace } from '@theia/monaco/lib/browser/monaco-workspace.js';
+import { Range, Location } from 'vscode-languageserver-protocol';
 
 export const PREVIEW_WIDGET_CLASS = 'theia-preview-widget';
 
@@ -35,7 +35,7 @@ const DEFAULT_ICON = codicon('eye');
 let widgetCounter: number = 0;
 
 export const PreviewWidgetOptions = Symbol('PreviewWidgetOptions');
-export interface PreviewWidgetOptions {
+export type PreviewWidgetOptions = {
     resource: Resource
 }
 

@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { MCPFrontendService, RemoteMCPServerDescription } from '@theia/ai-mcp';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { FrontendApplicationContribution, QuickInputService } from '@theia/core/lib/browser';
+import { MCPFrontendService, RemoteMCPServerDescription } from '@theia/ai-mcp/lib/common/mcp-server-manager.js';
+import { inject, injectable } from 'inversify';
+import { FrontendApplicationContribution, QuickInputService } from '@theia/core/lib/browser/index.js';
 
 @injectable()
 export class ResolveMcpFrontendContribution
@@ -32,7 +32,7 @@ export class ResolveMcpFrontendContribution
         const githubServer: RemoteMCPServerDescription = {
             name: 'github',
             serverUrl: 'https://api.githubcopilot.com/mcp/',
-            resolve: async serverDescription => {
+            resolve: async (serverDescription: RemoteMCPServerDescription) => {
                 console.log('Resolving GitHub MCP server description');
 
                 // Prompt user for authentication token

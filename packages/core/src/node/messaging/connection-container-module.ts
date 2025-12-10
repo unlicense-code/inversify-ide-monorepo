@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,7 +17,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { interfaces, ContainerModule } from 'inversify';
-import { RpcProxyFactory, ConnectionHandler, RpcConnectionHandler, RpcProxy } from '../../common';
+import { RpcProxyFactory, ConnectionHandler, RpcConnectionHandler, RpcProxy } from '../../common/index.js';
 
 export type BindFrontendService = <T extends object>(path: string, serviceIdentifier: interfaces.ServiceIdentifier<T>) => interfaces.BindingWhenOnSyntax<T>;
 export type BindBackendService = <T extends object, C extends object = object>(

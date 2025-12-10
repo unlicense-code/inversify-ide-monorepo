@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Severity } from '@theia/core/lib/common/severity';
-import { DiagnosticSeverity } from '@theia/core/shared/vscode-languageserver-protocol';
+import { Severity } from '@theia/core/lib/common/severity.js';
+import { DiagnosticSeverity } from 'vscode-languageserver-protocol';
 import { expect } from 'chai';
-import { ApplyToKind, FileLocationKind, ProblemLocationKind, ProblemMatch, ProblemMatchData, ProblemMatcher } from '../common/problem-matcher-protocol';
-import { ProblemCollector } from './task-problem-collector';
+import { ApplyToKind, FileLocationKind, ProblemLocationKind, ProblemMatch, ProblemMatchData, ProblemMatcher } from '../common/problem-matcher-protocol.js';
+import { ProblemCollector } from './task-problem-collector.js';
 
 const startStopMatcher1: ProblemMatcher = {
     owner: 'test1',

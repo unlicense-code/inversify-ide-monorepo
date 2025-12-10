@@ -1,6 +1,7 @@
 {
   "name": "@theia/core",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia is a cloud & desktop IDE framework implemented in TypeScript.",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",

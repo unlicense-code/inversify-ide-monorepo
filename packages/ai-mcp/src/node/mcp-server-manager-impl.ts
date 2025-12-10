@@ -13,10 +13,10 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { injectable } from '@theia/core/shared/inversify';
-import { MCPServerDescription, MCPServerManager, MCPFrontendNotificationService } from '../common/mcp-server-manager';
-import { MCPServer } from './mcp-server';
-import { Disposable } from '@theia/core/lib/common/disposable';
+import { injectable } from 'inversify';
+import { MCPServerDescription, MCPServerManager, MCPFrontendNotificationService } from '../common/mcp-server-manager.js';
+import { MCPServer } from './mcp-server.js';
+import { Disposable } from '@theia/core/lib/common/disposable.js';
 import { CallToolResult, ListResourcesResult, ReadResourceResult } from '@modelcontextprotocol/sdk/types.js';
 
 @injectable()

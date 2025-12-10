@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { codiconArray } from '@theia/core/lib/browser';
-import { injectable, interfaces } from '@theia/core/shared/inversify';
-import { IJSONSchema } from '@theia/core/lib/common/json-schema';
-import { Preference } from '../../util/preference-types';
-import { PreferenceLeafNodeRenderer, PreferenceNodeRenderer } from './preference-node-renderer';
-import { PreferenceLeafNodeRendererContribution } from './preference-node-renderer-creator';
+import { codiconArray } from '@theia/core/lib/browser/index.js';
+import { injectable, interfaces } from 'inversify';
+import { IJSONSchema } from '@theia/core/lib/common/json-schema.js';
+import { Preference } from '../../util/preference-types.js';
+import { PreferenceLeafNodeRenderer, PreferenceNodeRenderer } from './preference-node-renderer.js';
+import { PreferenceLeafNodeRendererContribution } from './preference-node-renderer-creator.js';
 
 @injectable()
 export class PreferenceArrayInputRenderer extends PreferenceLeafNodeRenderer<string[], HTMLInputElement> {

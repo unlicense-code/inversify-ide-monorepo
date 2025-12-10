@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ChatResponsePartRenderer } from '@theia/ai-chat-ui/lib/browser/chat-response-part-renderer';
-import { ChatResponseContent } from '@theia/ai-chat/lib/common';
-import { codicon } from '@theia/core/lib/browser';
+import { ChatResponsePartRenderer } from '@theia/ai-chat-ui/lib/browser/chat-response-part-renderer.js';
+import { ChatResponseContent } from '@theia/ai-chat/lib/common/index.js';
+import { codicon } from '@theia/core/lib/browser/index.js';
 import { nls } from '@theia/core';
-import { injectable } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { ReactNode } from '@theia/core/shared/react';
+import { injectable } from 'inversify';
+import * as React from 'react';
+import { ReactNode } from 'react';
 import type { WebSearchItem } from '@openai/codex-sdk';
-import { CodexToolCallChatResponseContent } from '../codex-tool-call-content';
+import { CodexToolCallChatResponseContent } from '../codex-tool-call-content.js';
 
 @injectable()
 export class WebSearchRenderer implements ChatResponsePartRenderer<CodexToolCallChatResponseContent> {

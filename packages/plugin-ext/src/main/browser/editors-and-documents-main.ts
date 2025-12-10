@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
+import { interfaces } from 'inversify';
 import * as monaco from '@theia/monaco-editor-core';
-import { type ILineChange } from '@theia/monaco-editor-core/esm/vs/editor/common/diff/legacyLinesDiffComputer';
-import { RPCProtocol } from '../../common/rpc-protocol';
+import { type ILineChange } from '@theia/monaco-editor-core/esm/vs/editor/common/diff/legacyLinesDiffComputer.js';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
 import {
     MAIN_RPC_CONTEXT,
     EditorsAndDocumentsExt,
@@ -25,19 +25,19 @@ import {
     ModelAddedData,
     TextEditorAddData,
     EditorPosition
-} from '../../common/plugin-api-rpc';
-import { Disposable } from '@theia/core/lib/common/disposable';
-import { EditorModelService } from './text-editor-model-service';
-import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
-import { TextEditorMain } from './text-editor-main';
+} from '../../common/plugin-api-rpc.js';
+import { Disposable } from '@theia/core/lib/common/disposable.js';
+import { EditorModelService } from './text-editor-model-service.js';
+import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model.js';
+import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor.js';
+import { TextEditorMain } from './text-editor-main.js';
 import { DisposableCollection, Emitter, URI } from '@theia/core';
-import { EditorManager, EditorWidget } from '@theia/editor/lib/browser';
-import { SaveableService } from '@theia/core/lib/browser/saveable-service';
-import { TabsMainImpl } from './tabs/tabs-main';
+import { EditorManager, EditorWidget } from '@theia/editor/lib/browser/index.js';
+import { SaveableService } from '@theia/core/lib/browser/saveable-service.js';
+import { TabsMainImpl } from './tabs/tabs-main.js';
 import { NotebookCellEditorService, NotebookEditorWidgetService } from '@theia/notebook/lib/browser';
-import { SimpleMonacoEditor } from '@theia/monaco/lib/browser/simple-monaco-editor';
-import { EncodingRegistry } from '@theia/core/lib/browser/encoding-registry';
+import { SimpleMonacoEditor } from '@theia/monaco/lib/browser/simple-monaco-editor.js';
+import { EncodingRegistry } from '@theia/core/lib/browser/encoding-registry.js';
 
 export class EditorsAndDocumentsMain implements Disposable {
 

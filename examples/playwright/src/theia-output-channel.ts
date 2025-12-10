@@ -20,7 +20,7 @@ import { TheiaPageObject } from './theia-page-object';
 import { isElementVisible } from './util';
 import { TheiaMonacoEditor } from './theia-monaco-editor';
 
-export interface TheiaOutputViewChannelData {
+export type TheiaOutputViewChannelData = {
     viewSelector: string;
     dataUri: string;
     channelName: string;

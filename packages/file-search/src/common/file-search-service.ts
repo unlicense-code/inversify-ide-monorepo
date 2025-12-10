@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,10 +18,7 @@ import { CancellationToken } from '@theia/core';
 
 export const fileSearchServicePath = '/services/search';
 
-/**
- * The JSON-RPC file search service interface.
- */
-export interface FileSearchService {
+export type FileSearchService = {
 
     /**
      * finds files by a given search pattern.

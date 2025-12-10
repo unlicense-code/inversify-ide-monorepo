@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,21 +14,21 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { OpenerService } from '@theia/core/lib/browser';
-import { isOSX } from '@theia/core/lib/common';
-import { Path } from '@theia/core/lib/common/path';
+import { injectable, inject } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { OpenerService } from '@theia/core/lib/browser/index.js';
+import { isOSX } from '@theia/core/lib/common/index.js';
+import { Path } from '@theia/core/lib/common/path.js';
 
 import * as hljs from 'highlight.js';
-import * as markdownit from '@theia/core/shared/markdown-it';
-import * as markdownitemoji from '@theia/core/shared/markdown-it-emoji';
-import * as anchor from '@theia/core/shared/markdown-it-anchor';
-import * as DOMPurify from '@theia/core/shared/dompurify';
-import { PreviewUri } from '../preview-uri';
-import { PreviewHandler, RenderContentParams } from '../preview-handler';
-import { PreviewOpenerOptions } from '../preview-contribution';
-import { PreviewLinkNormalizer } from '../preview-link-normalizer';
+import markdownit from 'markdown-it';
+import * as markdownitemoji from 'markdown-it-emoji/index.js';
+import * as anchor from 'markdown-it-anchor';
+import DOMPurify from 'dompurify';
+import { PreviewUri } from '../preview-uri.js';
+import { PreviewHandler, RenderContentParams } from '../preview-handler.js';
+import { PreviewOpenerOptions } from '../preview-contribution.js';
+import { PreviewLinkNormalizer } from '../preview-link-normalizer.js';
 
 @injectable()
 export class MarkdownPreviewHandler implements PreviewHandler {
@@ -218,7 +218,7 @@ export class MarkdownPreviewHandler implements PreviewHandler {
             const engine: markdownit = this.engine = markdownit({
                 html: true,
                 linkify: true,
-                highlight: (str, lang) => {
+                highlight: (str: string, lang: string) => {
                     if (lang && hljs.getLanguage(lang)) {
                         try {
                             return '<pre class="hljs"><code><div>' + hljs.highlight(lang, str, true).value + '</div></code></pre>';
@@ -230,8 +230,9 @@ export class MarkdownPreviewHandler implements PreviewHandler {
             const renderers = ['heading_open', 'paragraph_open', 'list_item_open', 'blockquote_open', 'code_block', 'image', 'fence'];
             for (const renderer of renderers) {
                 const originalRenderer = engine.renderer.rules[renderer];
-                engine.renderer.rules[renderer] = (tokens, index, options, env, self) => {
-                    const token = tokens[index];
+                engine.renderer.rules[renderer] = (tokens: any[], index: string | number, options: any, env: any, self: any) => {
+                    const numIndex = typeof index === 'number' ? index : Number(index);
+                    const token = tokens[numIndex];
                     if (token.map) {
                         const line = token.map[0];
                         token.attrJoin('class', 'line');
@@ -239,25 +240,26 @@ export class MarkdownPreviewHandler implements PreviewHandler {
                     }
                     return (originalRenderer)
                         // tslint:disable-next-line:no-void-expression
-                        ? originalRenderer(tokens, index, options, env, self)
-                        : self.renderToken(tokens, index, options);
+                        ? (originalRenderer as any)(tokens, numIndex, options, env, self)
+                        : self.renderToken(tokens, numIndex, options);
                 };
             }
             const originalImageRenderer = engine.renderer.rules.image;
             if (originalImageRenderer) {
-                engine.renderer.rules.image = (tokens, index, options, env, self) => {
+                engine.renderer.rules.image = (tokens: any[], index: string | number, options: any, env: unknown, self: any) => {
+                    const numIndex = typeof index === 'number' ? index : Number(index);
                     if (RenderContentParams.is(env)) {
                         const documentUri = env.originUri;
-                        const token = tokens[index];
+                        const token = tokens[numIndex];
                         if (token.attrs) {
-                            const srcAttr = token.attrs.find(a => a[0] === 'src');
+                            const srcAttr = token.attrs.find((a: string[]) => a[0] === 'src');
                             if (srcAttr) {
                                 const href = srcAttr[1];
                                 srcAttr[1] = this.linkNormalizer.normalizeLink(documentUri, href);
                             }
                         }
                     }
-                    return originalImageRenderer(tokens, index, options, env, self);
+                    return originalImageRenderer(tokens, numIndex, options, env, self);
                 };
             }
 
@@ -290,14 +292,15 @@ export class MarkdownPreviewHandler implements PreviewHandler {
             for (const name of ['html_block', 'html_inline']) {
                 const originalRenderer = engine.renderer.rules[name];
                 if (originalRenderer) {
-                    engine.renderer.rules[name] = (tokens, index, options, env, self) => {
-                        const currentToken = tokens[index];
+                    engine.renderer.rules[name] = (tokens: any[], index: string | number, options: any, env: unknown, self: any) => {
+                        const numIndex = typeof index === 'number' ? index : Number(index);
+                        const currentToken = tokens[numIndex];
                         const content = currentToken.content;
                         if (content.includes('<img') && RenderContentParams.is(env)) {
                             const documentUri = env.originUri;
                             currentToken.content = normalizeAllImgSrcInHTML(content, link => this.linkNormalizer.normalizeLink(documentUri, link));
                         }
-                        return originalRenderer(tokens, index, options, env, self);
+                        return originalRenderer(tokens, numIndex, options, env, self);
                     };
                 }
             }

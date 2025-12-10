@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { MarkdownString } from '../../common/markdown-rendering/markdown-string';
-import { AccessibilityInformation } from '../../common/accessibility';
-import { CancellationToken, MaybePromise } from '../../common';
+import { MarkdownString } from '../../common/markdown-rendering/markdown-string.js';
+import { AccessibilityInformation } from '../../common/accessibility.js';
+import { CancellationToken, MaybePromise } from '../../common/index.js';
 
-export interface StatusBarEntry {
+export type StatusBarEntry = {
     /**
      * For icons we use Codicons by default, and Font Awesome icons will also be respected.
      * You can find Codicon classnames here: https://microsoft.github.io/vscode-codicons/dist/codicon.html
@@ -58,14 +58,14 @@ export const STATUSBAR_WIDGET_FACTORY_ID = 'statusBar';
 
 export const StatusBar = Symbol('StatusBar');
 
-export interface StatusBar {
+export type StatusBar = {
     setBackgroundColor(color?: string): Promise<void>;
     setColor(color?: string): Promise<void>;
     setElement(id: string, entry: StatusBarEntry): Promise<void>;
     removeElement(id: string): Promise<void>;
 }
 
-export interface StatusBarAffinity {
+export type StatusBarAffinity = {
     /**
      * a reference to the {@link StatusBarEntry.id id} of another entry relative to which this item should be positioned.
      */
@@ -82,14 +82,14 @@ export interface StatusBarAffinity {
     compact?: boolean;
 }
 
-export interface StatusBarViewModelEntry {
+export type StatusBarViewModelEntry = {
     id: string;
     leftChildren: StatusBarViewModelEntry[];
     head: StatusBarEntry;
     rightChildren: StatusBarViewModelEntry[];
 }
 
-export interface StatusBarViewEntry {
+export type StatusBarViewEntry = {
     id: string,
     entry: StatusBarEntry;
     compact?: boolean;

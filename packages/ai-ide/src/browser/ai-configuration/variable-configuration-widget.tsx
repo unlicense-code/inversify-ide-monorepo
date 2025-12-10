@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Agent, AgentService, AIVariable, AIVariableService } from '@theia/ai-core/lib/common';
-import { codicon } from '@theia/core/lib/browser';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { AIAgentConfigurationWidget } from './agent-configuration-widget';
-import { AIConfigurationSelectionService } from './ai-configuration-service';
+import { Agent, AgentService, AIVariable, AIVariableService } from '@theia/ai-core/lib/common/index.js';
+import { codicon } from '@theia/core/lib/browser/index.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import * as React from 'react';
+import { AIAgentConfigurationWidget } from './agent-configuration-widget.js';
+import { AIConfigurationSelectionService } from './ai-configuration-service.js';
 import { nls } from '@theia/core';
-import { AIListDetailConfigurationWidget } from './base/ai-list-detail-configuration-widget';
+import { AIListDetailConfigurationWidget } from './base/ai-list-detail-configuration-widget.js';
 
 @injectable()
 export class AIVariableConfigurationWidget extends AIListDetailConfigurationWidget<AIVariable> {

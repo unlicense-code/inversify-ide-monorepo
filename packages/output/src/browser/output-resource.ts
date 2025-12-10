@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import URI from '@theia/core/lib/common/uri';
-import { Event, Resource, ResourceReadOptions, DisposableCollection, Emitter } from '@theia/core/lib/common';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model';
-import { IReference } from '@theia/monaco-editor-core/esm/vs/base/common/lifecycle';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Event, Resource, ResourceReadOptions, DisposableCollection, Emitter } from '@theia/core/lib/common/index.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model.js';
+import { IReference } from '@theia/monaco-editor-core/esm/vs/base/common/lifecycle.js';
 import * as monaco from '@theia/monaco-editor-core';
 
 export class OutputResource implements Resource {

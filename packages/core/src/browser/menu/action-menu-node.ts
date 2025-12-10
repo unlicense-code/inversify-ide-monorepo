@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { KeybindingRegistry } from '../keybinding';
-import { ContextKeyService } from '../context-key-service';
-import { DisposableCollection, isObject, CommandRegistry, Emitter } from '../../common';
-import { CommandMenu, ContextExpressionMatcher, MenuAction, MenuPath } from '../../common/menu/menu-types';
+import { KeybindingRegistry } from '../keybinding.js';
+import { ContextKeyService } from '../context-key-service.js';
+import { DisposableCollection, isObject, CommandRegistry, Emitter } from '../../common/index.js';
+import { CommandMenu, ContextExpressionMatcher, MenuAction, MenuPath } from '../../common/menu/menu-types.js';
 
-export interface AcceleratorSource {
+export type AcceleratorSource = {
     getAccelerator(context: HTMLElement | undefined): string[];
 }
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,15 +15,15 @@
 // *****************************************************************************
 
 import * as cp from 'child_process';
-import * as fuzzy from '@theia/core/shared/fuzzy';
+import * as fuzzy from 'fuzzy';
 import * as readline from 'readline';
 import { rgPath } from '@vscode/ripgrep';
-import { injectable, inject } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { FileUri } from '@theia/core/lib/common/file-uri';
+import { injectable, inject } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { FileUri } from '@theia/core/lib/common/file-uri.js';
 import { CancellationTokenSource, CancellationToken, ILogger, isWindows } from '@theia/core';
 import { RawProcessFactory } from '@theia/process/lib/node';
-import { FileSearchService, WHITESPACE_QUERY_SEPARATOR } from '../common/file-search-service';
+import { FileSearchService, WHITESPACE_QUERY_SEPARATOR } from '../common/file-search-service.js';
 import * as path from 'path';
 
 @injectable()

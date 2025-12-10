@@ -24,7 +24,45 @@ export async function readJson<T = unknown>(jsonPath: string): Promise<T> {
 }
 
 export async function readPackageJson(packageName: string, options?: { paths?: string[] }): Promise<[string, PackageJson]> {
-    const packageJsonPath = require.resolve(`${packageName}/package.json`, options);
+    let packageJsonPath: string | undefined;
+    try {
+        // Try to resolve package.json directly (works for packages without exports or that allow it)
+        packageJsonPath = require.resolve(`${packageName}/package.json`, options);
+    } catch (error: any) {
+        // If that fails (e.g., due to exports field restrictions), resolve the package itself
+        // and find package.json in the package root
+        try {
+            // Try to resolve the package's main entry point
+            const packageMainPath = require.resolve(packageName, options);
+            // Walk up from the resolved file to find package.json
+            let currentDir = path.dirname(packageMainPath);
+            while (currentDir !== path.dirname(currentDir)) {
+                const potentialPackageJson = path.join(currentDir, 'package.json');
+                try {
+                    await fs.promises.access(potentialPackageJson, fs.constants.F_OK);
+                    packageJsonPath = potentialPackageJson;
+                    break;
+                } catch {
+                    // Continue searching up
+                }
+                currentDir = path.dirname(currentDir);
+            }
+            if (!packageJsonPath) {
+                throw new Error(`Could not find package.json for ${packageName}`);
+            }
+        } catch (resolveError: any) {
+            // If resolving the package also fails, try resolving a known export path
+            try {
+                const packageIndexPath = require.resolve(`${packageName}/lib/common/index.js`, options);
+                packageJsonPath = path.join(path.dirname(path.dirname(path.dirname(packageIndexPath))), 'package.json');
+            } catch {
+                throw new Error(`Could not resolve package.json for ${packageName}: ${error.message}`);
+            }
+        }
+    }
+    if (!packageJsonPath) {
+        throw new Error(`Could not resolve package.json for ${packageName}`);
+    }
     const packageJson = await readJson<PackageJson>(packageJsonPath);
     return [packageJsonPath, packageJson];
 }
@@ -112,7 +150,7 @@ export function getPackageVersionRange(packageJson: PackageJson, packageName: st
 
 export type ReExport = ReExportStar | ReExportEqual;
 
-export interface ReExportInfo {
+export type ReExportInfo = {
     /**
      * The full name of the module. e.g. '@some/dep/nested/file'
      */
@@ -147,11 +185,11 @@ export interface ReExportInfo {
     versionRange: string
 }
 
-export interface ReExportStar extends ReExportInfo {
+export type ReExportStar = ReExportInfo & {
     reExportStyle: '*'
 }
 
-export interface ReExportEqual extends ReExportInfo {
+export type ReExportEqual = ReExportInfo & {
     reExportStyle: '='
     /**
      * Pretty name for the re-exported namespace. e.g. 'react-dom' as 'ReactDOM'

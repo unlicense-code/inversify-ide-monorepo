@@ -22,19 +22,19 @@ import {
 } from '@theia/plugin';
 // TODO: extract `@theia/util` for event, disposable, cancellation and common types
 // don't use @theia/core directly from plugin host
-import { Emitter } from '@theia/core/lib/common/event';
-import { basename } from '@theia/core/lib/common/paths';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { DataTransfer, DataTransferItem, Disposable as PluginDisposable, ThemeIcon, TreeItemCheckboxState } from '../types-impl';
-import { Plugin, PLUGIN_RPC_CONTEXT, TreeViewsExt, TreeViewsMain, TreeViewItem, TreeViewRevealOptions, DataTransferFileDTO } from '../../common/plugin-api-rpc';
-import { RPCProtocol } from '../../common/rpc-protocol';
-import { CommandRegistryImpl, CommandsConverter } from '../command-registry';
-import { TreeViewItemReference } from '../../common';
-import { PluginIconPath } from '../plugin-icon-path';
-import { URI } from '@theia/core/shared/vscode-uri';
-import { UriComponents } from '@theia/core/lib/common/uri';
+import { Emitter } from '@theia/core';
+import { basename } from '@theia/core/lib/common/paths.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { DataTransfer, DataTransferItem, Disposable as PluginDisposable, ThemeIcon, TreeItemCheckboxState } from '../types-impl.js';
+import { Plugin, PLUGIN_RPC_CONTEXT, TreeViewsExt, TreeViewsMain, TreeViewItem, TreeViewRevealOptions, DataTransferFileDTO } from '../../common/plugin-api-rpc.js';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
+import { CommandRegistryImpl, CommandsConverter } from '../command-registry.js';
+import { TreeViewItemReference } from '../../common/index.js';
+import { PluginIconPath } from '../plugin-icon-path.js';
+import { URI } from 'vscode-uri';
+import { UriComponents } from '@theia/core/lib/common/uri.js';
 import { isObject } from '@theia/core';
-import { coalesce } from '../../common/arrays';
+import { coalesce } from '../../common/arrays.js';
 
 export class TreeViewsExtImpl implements TreeViewsExt {
     private proxy: TreeViewsMain;
@@ -191,7 +191,7 @@ export class TreeViewsExtImpl implements TreeViewsExt {
 
 }
 
-interface TreeExtNode<T> extends Disposable {
+type TreeExtNode<T> = Disposable & {
     id: string
     /** Collection of disposables. Must be disposed by an instance's `dispose` implementation. */
     disposables: DisposableCollection;

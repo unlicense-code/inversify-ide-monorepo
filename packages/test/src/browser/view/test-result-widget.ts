@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { BaseWidget, LabelProvider, Message, OpenerService, codicon } from '@theia/core/lib/browser';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { TestOutputUIModel } from './test-output-ui-model';
+import { BaseWidget, LabelProvider, Message, OpenerService, codicon } from '@theia/core/lib/browser/index.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import { TestOutputUIModel } from './test-output-ui-model.js';
 import { DisposableCollection, nls } from '@theia/core';
-import { TestFailure, TestMessage, TestMessageStackFrame } from '../test-service';
-import { MarkdownRenderer } from '@theia/core/lib/browser/markdown-rendering/markdown-renderer';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
-import { URI } from '@theia/core/lib/common/uri';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { NavigationLocationService } from '@theia/editor/lib/browser/navigation/navigation-location-service';
-import { NavigationLocation, Position } from '@theia/editor/lib/browser/navigation/navigation-location';
+import { TestFailure, TestMessage, TestMessageStackFrame } from '../test-service.js';
+import { MarkdownRenderer } from '@theia/core/lib/browser/markdown-rendering/markdown-renderer.js';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/markdown-string.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { NavigationLocationService } from '@theia/editor/lib/browser/navigation/navigation-location-service.js';
+import { NavigationLocation, Position } from '@theia/editor/lib/browser/navigation/navigation-location.js';
 @injectable()
 export class TestResultWidget extends BaseWidget {
 

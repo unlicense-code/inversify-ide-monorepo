@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { expect } from 'chai';
-import { ChatAgentLocation } from './chat-agents';
-import { MutableChatModel } from './chat-model';
-import { ParsedChatRequest } from './parsed-chat-request';
+import { ChatAgentLocation } from './chat-agents.js';
+import { MutableChatModel } from './chat-model.js';
+import { ParsedChatRequest } from './parsed-chat-request.js';
 
 describe('ChatModel Serialization and Restoration', () => {
 

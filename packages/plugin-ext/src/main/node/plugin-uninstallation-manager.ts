@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { Emitter, Event } from '@theia/core';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { PluginIdentifiers } from '../../common';
-import { SettingService } from '@theia/core/lib/node';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { inject, injectable, postConstruct } from 'inversify';
+import { PluginIdentifiers } from '../../common/index.js';
+import { SettingService } from '@theia/core/lib/node/index.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
 
 @injectable()
 export class PluginUninstallationManager {
@@ -46,7 +46,7 @@ export class PluginUninstallationManager {
     protected async load(): Promise<void> {
         try {
             const disabled: (PluginIdentifiers.VersionedId | PluginIdentifiers.UnversionedId)[] =
-               JSON.parse(await this.settingService.get(PluginUninstallationManager.DISABLED_PLUGINS) || '[]');
+                JSON.parse(await this.settingService.get(PluginUninstallationManager.DISABLED_PLUGINS) || '[]');
 
             disabled.forEach(id => this.disabledPlugins.add(PluginIdentifiers.toUnversioned(id)));
         } catch (e) {

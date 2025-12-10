@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { FileStat } from '@theia/filesystem/lib/common/files';
-import { SectionPreferenceProvider } from '../common/section-preference-provider';
+import { inject, injectable } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { FileStat } from '@theia/filesystem/lib/common/files.js';
+import { SectionPreferenceProvider } from '../common/section-preference-provider.js';
 import { PreferenceScope } from '@theia/core';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
 
 export const FolderPreferenceProviderFactory = Symbol('FolderPreferenceProviderFactory');
-export interface FolderPreferenceProviderFactory {
+export type FolderPreferenceProviderFactory = {
     (uri: URI, section: string, folder: FileStat): FolderPreferenceProvider;
 }
 
 export const FolderPreferenceProviderFolder = Symbol('FolderPreferenceProviderFolder');
-export interface FolderPreferenceProviderOptions {
+export type FolderPreferenceProviderOptions = {
     readonly configUri: URI;
     readonly sectionName: string | undefined;
 }

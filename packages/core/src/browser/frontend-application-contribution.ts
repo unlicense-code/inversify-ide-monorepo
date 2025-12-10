@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import type { FrontendApplication } from './frontend-application';
-import { MaybePromise, isObject } from '../common/types';
-import { StopReason } from '../common/frontend-application-state';
+import type { FrontendApplication } from './frontend-application.js';
+import { MaybePromise, isObject } from '../common/types.js';
+import { StopReason } from '../common/frontend-application-state.js';
 import { injectable } from 'inversify';
 
 /**
  * Clients can implement to get a callback for contributing widgets to a shell on start.
  */
 export const FrontendApplicationContribution = Symbol('FrontendApplicationContribution');
-export interface FrontendApplicationContribution {
+export type FrontendApplicationContribution = {
 
     /**
      * Called on application startup before configure is called.
@@ -69,7 +69,7 @@ export interface FrontendApplicationContribution {
     onDidInitializeLayout?(app: FrontendApplication): MaybePromise<void>;
 }
 
-export interface OnWillStopAction<T = unknown> {
+export type OnWillStopAction<T = unknown> = {
     /**
      * @resolves to a prepared value to be passed into the `action` function.
      */

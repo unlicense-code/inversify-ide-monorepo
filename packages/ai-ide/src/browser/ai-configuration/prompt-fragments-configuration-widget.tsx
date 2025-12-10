@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { nls } from '@theia/core';
-import { ConfirmDialog, ReactWidget, codicon } from '@theia/core/lib/browser';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
+import { ConfirmDialog, ReactWidget, codicon } from '@theia/core/lib/browser/index.js';
+import { inject, injectable, postConstruct } from 'inversify';
 import {
     CustomizedPromptFragment,
     PromptFragment,
@@ -24,11 +24,11 @@ import {
     isBasePromptFragment,
     PromptService,
     BasePromptFragment
-} from '@theia/ai-core/lib/common/prompt-service';
-import * as React from '@theia/core/shared/react';
-import { AgentService } from '@theia/ai-core/lib/common/agent-service';
-import { Agent } from '@theia/ai-core/lib/common/agent';
-import { CustomizationSource } from '@theia/ai-core/lib/browser/frontend-prompt-customization-service';
+} from '@theia/ai-core/lib/common/prompt-service.js';
+import * as React from 'react';
+import { AgentService } from '@theia/ai-core/lib/common/agent-service.js';
+import { Agent } from '@theia/ai-core/lib/common/agent.js';
+import { CustomizationSource } from '@theia/ai-core/lib/browser/frontend-prompt-customization-service.js';
 
 /**
  * Widget for configuring AI prompt fragments and prompt variant sets.
@@ -673,10 +673,7 @@ export class AIPromptFragmentsConfigurationWidget extends ReactWidget {
     }
 }
 
-/**
- * Props for the CustomizationTypeBadge component
- */
-interface CustomizationTypeBadgeProps {
+type CustomizationTypeBadgeProps = {
     promptFragment: PromptFragment;
     promptService: PromptService;
 }
@@ -705,10 +702,7 @@ const CustomizationTypeBadge: React.FC<CustomizationTypeBadgeProps> = ({ promptF
     return <span>{typeLabel}</span>;
 };
 
-/**
- * Props for the DescriptionBadge component
- */
-interface CustomizationDescriptionBadgeProps {
+type CustomizationDescriptionBadgeProps = {
     promptFragment: CustomizedPromptFragment;
     promptService: PromptService;
 }

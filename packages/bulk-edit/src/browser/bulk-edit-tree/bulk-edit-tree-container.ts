@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces, Container } from '@theia/core/shared/inversify';
-import { BulkEditTreeWidget } from './bulk-edit-tree-widget';
-import { BulkEditTree } from './bulk-edit-tree';
-import { BulkEditTreeModel } from './bulk-edit-tree-model';
-import { createTreeContainer } from '@theia/core/lib/browser';
+import { interfaces } from 'inversify';
+import { BulkEditTreeWidget } from './bulk-edit-tree-widget.js';
+import { BulkEditTree } from './bulk-edit-tree.js';
+import { BulkEditTreeModel } from './bulk-edit-tree-model.js';
+import { createTreeContainer } from '@theia/core/lib/browser/index.js';
 
-export function createBulkEditContainer(parent: interfaces.Container): Container {
+export function createBulkEditContainer(parent: interfaces.Container): interfaces.Container {
     const child = createTreeContainer(parent, {
         tree: BulkEditTree,
         widget: BulkEditTreeWidget,

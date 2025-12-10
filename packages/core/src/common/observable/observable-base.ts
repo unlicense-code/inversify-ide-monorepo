@@ -19,17 +19,9 @@
  *--------------------------------------------------------------------------------------------*/
 // copied and modified from https://github.com/microsoft/vscode/blob/1.96.3/src/vs/base/common/observableInternal/base.ts
 
-import { Disposable } from '../disposable';
+import { Disposable } from '../disposable.js';
 
-/**
- * Represents an observable value.
- *
- * @template T The type of values the observable can hold.
- * @template TChange Describes how or why the observable changed.
- * While observers might miss intermediate values of an observable,
- * they will receive all change notifications as long as they are subscribed.
- */
-export interface Observable<T, TChange = unknown> {
+export type Observable<T, TChange = unknown> = {
     /**
      * - If an accessor is given, has the same effect as calling `accessor(this)`.
      * - If no accessor is given, uses the {@link Observable.Accessor.getCurrent current accessor} if it is set.

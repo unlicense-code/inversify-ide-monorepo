@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ChatModel } from './chat-model';
-import { SerializedChatData } from './chat-model-serialization';
-import { ChatAgentLocation } from './chat-agents';
+import { ChatModel } from './chat-model.js';
+import { SerializedChatData } from './chat-model-serialization.js';
+import { ChatAgentLocation } from './chat-agents.js';
 
 export const ChatSessionStore = Symbol('ChatSessionStore');
 
-export interface ChatModelWithMetadata {
+export type ChatModelWithMetadata = {
     model: ChatModel;
     title?: string;
     pinnedAgentId?: string;
 }
 
-export interface ChatSessionStore {
+export type ChatSessionStore = {
     /**
      * Stores the handed over sessions.
      *
@@ -51,11 +51,11 @@ export interface ChatSessionStore {
     getSessionIndex(): Promise<ChatSessionIndex>;
 }
 
-export interface ChatSessionIndex {
+export type ChatSessionIndex = {
     [sessionId: string]: ChatSessionMetadata;
 }
 
-export interface ChatSessionMetadata {
+export type ChatSessionMetadata = {
     sessionId: string;
     title: string;
     saveDate: number;

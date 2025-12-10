@@ -15,15 +15,11 @@
 // *****************************************************************************
 
 import { injectable } from 'inversify';
-import { generateUuid } from '../../common/uuid';
+import { generateUuid } from '../../common/uuid.js';
 
 export const FrontendIdProvider = Symbol('FrontendIdProvider');
 
-/**
- * A FrontendIdProvider computes an id for an instance of the front end that may be reconnected to a back end
- * connection context.
- */
-export interface FrontendIdProvider {
+export type FrontendIdProvider = {
     getId(): string;
 }
 

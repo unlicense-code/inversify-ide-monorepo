@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { TreeNode } from './tree';
-import { Event, Disposable, isObject, SelectionProvider } from '../../common';
+import { TreeNode } from './tree.js';
+import { Event, Disposable, isObject, SelectionProvider } from '../../common/index.js';
 
 /**
  * The tree selection service.
  */
 export const TreeSelectionService = Symbol('TreeSelectionService');
-export interface TreeSelectionService extends Disposable, SelectionProvider<ReadonlyArray<Readonly<SelectableTreeNode>>> {
+export type TreeSelectionService = Disposable & SelectionProvider<ReadonlyArray<Readonly<SelectableTreeNode>>> & {
 
     /**
      * The tree selection, representing the selected nodes from the tree. If nothing is selected, the
@@ -58,10 +58,7 @@ export interface TreeSelectionService extends Disposable, SelectionProvider<Read
 
 }
 
-/**
- * Representation of a tree selection.
- */
-export interface TreeSelection {
+export type TreeSelection = {
 
     /**
      * The actual item that has been selected.
@@ -108,10 +105,7 @@ export namespace TreeSelection {
 
 }
 
-/**
- * A selectable tree node.
- */
-export interface SelectableTreeNode extends TreeNode {
+export type SelectableTreeNode = TreeNode & {
 
     /**
      * `true` if the tree node is selected. Otherwise, `false`.

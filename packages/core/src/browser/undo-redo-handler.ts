@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import { inject, injectable, named, postConstruct } from 'inversify';
-import { ContributionProvider } from '../common';
+import { ContributionProvider } from '../common/index.js';
 
 export const UndoRedoHandler = Symbol('UndoRedoHandler');
 
-export interface UndoRedoHandler<T> {
+export type UndoRedoHandler<T> = {
     priority: number;
     select(): T | undefined;
     undo(item: T): void;

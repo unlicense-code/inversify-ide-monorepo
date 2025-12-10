@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2021 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,22 +14,22 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { ContextMenuRenderer, ReactWidget, Widget } from '@theia/core/lib/browser';
-import { ThemeService } from '@theia/core/lib/browser/theming';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { ThemeChangeEvent } from '@theia/core/lib/common/theme';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { hexStrToUnsignedLong } from '../../common/util';
-import { MemoryProviderService } from '../memory-provider/memory-provider-service';
-import { EasilyMappedObject, MemoryHoverRendererService } from '../utils/memory-hover-renderer';
-import { MWMoreMemorySelect } from '../utils/memory-widget-components';
+import { ContextMenuRenderer, ReactWidget, Widget } from '@theia/core/lib/browser/index.js';
+import { ThemeService } from '@theia/core/lib/browser/theming.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { ThemeChangeEvent } from '@theia/core/lib/common/theme.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import * as React from 'react';
+import { hexStrToUnsignedLong } from '../../common/util.js';
+import { MemoryProviderService } from '../memory-provider/memory-provider-service.js';
+import { EasilyMappedObject, MemoryHoverRendererService } from '../utils/memory-hover-renderer.js';
+import { MWMoreMemorySelect } from '../utils/memory-widget-components.js';
 import {
     Constants, Interfaces, Utils
-} from '../utils/memory-widget-utils';
-import { VariableDecoration, VariableFinder } from '../utils/memory-widget-variable-utils';
-import { MemoryOptionsWidget } from './memory-options-widget';
-import debounce = require('@theia/core/shared/lodash.debounce');
+} from '../utils/memory-widget-utils.js';
+import { VariableDecoration, VariableFinder } from '../utils/memory-widget-variable-utils.js';
+import { MemoryOptionsWidget } from './memory-options-widget.js';
+import debounce from  'lodash/debounce.js'
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export namespace MemoryTable {

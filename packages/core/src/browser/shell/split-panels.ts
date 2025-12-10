@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,7 +17,7 @@
 import { injectable } from 'inversify';
 import { SplitPanel, SplitLayout, Widget } from '@lumino/widgets';
 
-export interface SplitPositionOptions {
+export type SplitPositionOptions = {
     /** The side of the side panel that shall be resized. */
     side?: 'left' | 'right' | 'top' | 'bottom';
     /** The duration in milliseconds, or 0 for no animation. */
@@ -26,7 +26,7 @@ export interface SplitPositionOptions {
     referenceWidget?: Widget;
 }
 
-export interface MoveEntry extends SplitPositionOptions {
+export type MoveEntry = SplitPositionOptions & {
     parent: SplitPanel;
     index: number;
     started: boolean;

@@ -14,26 +14,26 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { ApplicationShell, WidgetOpenerOptions, codicon } from '@theia/core/lib/browser';
+import { interfaces } from 'inversify';
+import { ApplicationShell, WidgetOpenerOptions, codicon } from '@theia/core/lib/browser/index.js';
 import { TerminalEditorLocationOptions } from '@theia/plugin';
-import { TerminalLocation, TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget';
-import { TerminalProfileService } from '@theia/terminal/lib/browser/terminal-profile-service';
-import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
-import { TerminalServiceMain, TerminalServiceExt, MAIN_RPC_CONTEXT, TerminalOptions } from '../../common/plugin-api-rpc';
-import { RPCProtocol } from '../../common/rpc-protocol';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { SerializableEnvironmentVariableCollection, ShellTerminalServerProxy } from '@theia/terminal/lib/common/shell-terminal-protocol';
-import { TerminalLink, TerminalLinkProvider } from '@theia/terminal/lib/browser/terminal-link-provider';
-import { URI } from '@theia/core/lib/common/uri';
-import { PluginTerminalRegistry } from './plugin-terminal-registry';
+import { TerminalLocation, TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget.js';
+import { TerminalProfileService } from '@theia/terminal/lib/browser/terminal-profile-service.js';
+import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service.js';
+import { TerminalServiceMain, TerminalServiceExt, MAIN_RPC_CONTEXT, TerminalOptions } from '../../common/plugin-api-rpc.js';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { SerializableEnvironmentVariableCollection, ShellTerminalServerProxy } from '@theia/terminal/lib/common/shell-terminal-protocol.js';
+import { TerminalLink, TerminalLinkProvider } from '@theia/terminal/lib/browser/terminal-link-provider.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { PluginTerminalRegistry } from './plugin-terminal-registry.js';
 import { CancellationToken, isObject } from '@theia/core';
-import { HostedPluginSupport } from '../../hosted/browser/hosted-plugin';
-import { PluginSharedStyle } from './plugin-shared-style';
-import { ThemeIcon } from '@theia/core/lib/common/theme';
-import debounce = require('@theia/core/shared/lodash.debounce');
+import { HostedPluginSupport } from '../../hosted/browser/hosted-plugin.js';
+import { PluginSharedStyle } from './plugin-shared-style.js';
+import { ThemeIcon } from '@theia/monaco-editor-core/esm/vs/base/common/themables.js';
+import debounce from  'lodash/debounce.js'
 
-interface TerminalObserverData {
+type TerminalObserverData = {
     nrOfLinesToMatch: number;
     outputMatcherRegex: RegExp
     disposables: DisposableCollection;

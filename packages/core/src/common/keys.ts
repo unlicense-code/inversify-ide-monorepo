@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017-2019 TypeFox and others.
+// Copyright (C) 2017-2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { nls } from './nls';
-import { isOSX } from './os';
-import { isObject } from './types';
+import { nls } from './nls.js';
+import { isOSX } from './os.js';
+import { isObject } from './types.js';
 
 export type KeySequence = KeyCode[];
 export namespace KeySequence {
@@ -86,18 +86,12 @@ export namespace KeySequence {
     }
 }
 
-/**
- * The key sequence for this binding. This key sequence should consist of one or more key strokes. Key strokes
- * consist of one or more keys held down at the same time. This should be zero or more modifier keys, and zero or one other key.
- * Since `M2+M3+<Key>` (Alt+Shift+<Key>) is reserved on MacOS X for writing special characters, such bindings are commonly
- * undefined for platform MacOS X and redefined as `M1+M3+<Key>`. The rule applies on the `M3+M2+<Key>` sequence.
- */
-export interface Keystroke {
+export type Keystroke = {
     readonly first?: Key;
     readonly modifiers?: KeyModifier[];
 }
 
-export interface KeyCodeSchema {
+export type KeyCodeSchema = {
     key?: Partial<Key>;
     ctrl?: boolean;
     shift?: boolean;
@@ -460,7 +454,7 @@ export namespace KeyModifier {
     }
 }
 
-export interface Key {
+export type Key = {
     readonly code: string;
     readonly keyCode: number;
     readonly easyString: string;

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { URI } from '@theia/core';
-import { injectable } from '@theia/core/shared/inversify';
-import { FileStat } from '@theia/filesystem/lib/common/files';
+import { injectable } from 'inversify';
+import { FileStat } from '@theia/filesystem/lib/common/index.js';
 
-export interface WorkspaceFileType {
+export type WorkspaceFileType = {
     extension: string
     name: string
 }

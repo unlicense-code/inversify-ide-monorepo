@@ -16,15 +16,15 @@
 
 /* eslint-disable max-len */
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { IJSONSchema } from '@theia/core/lib/common/json-schema';
-import { PreferenceService } from '@theia/core/lib/common';
-import { createPreferenceProxy, PreferenceProxy } from '@theia/core/lib/common/preferences/preference-proxy';
-import { nls } from '@theia/core/lib/common/nls';
-import { editorGeneratedPreferenceProperties } from '@theia/editor/lib/common/editor-generated-preference-schema';
+import { interfaces } from 'inversify';
+import { IJSONSchema } from '@theia/core/lib/common/json-schema.js';
+import { PreferenceService } from '@theia/core/lib/common/index.js';
+import { createPreferenceProxy, PreferenceProxy } from '@theia/core/lib/common/preferences/preference-proxy.js';
+import { nls } from '@theia/core/lib/common/nls.js';
+import { editorGeneratedPreferenceProperties } from '@theia/editor/lib/common/editor-generated-preference-schema.js';
 import { OS } from '@theia/core';
-import { PreferenceContribution, PreferenceSchema } from '@theia/core/lib/common/preferences/preference-schema';
-import { ColorDefaults } from '@theia/core/lib/common/color';
+import { PreferenceContribution, PreferenceSchema } from '@theia/core/lib/common/preferences/preference-schema.js';
+import { ColorDefaults } from '@theia/core/lib/common/color.js';
 
 /**
  * It should be aligned with https://github.com/microsoft/vscode/blob/0dfa355b3ad185a6289ba28a99c141ab9e72d2be/src/vs/workbench/contrib/terminal/common/terminalColorRegistry.ts#L40
@@ -524,7 +524,7 @@ export type Profiles = null | {
     }
 };
 
-export interface TerminalConfiguration {
+export type TerminalConfiguration = {
     'terminal.enableCopy': boolean
     'terminal.enablePaste': boolean
     // xterm compatible, see https://xtermjs.org/docs/api/terminal/interfaces/iterminaloptions/

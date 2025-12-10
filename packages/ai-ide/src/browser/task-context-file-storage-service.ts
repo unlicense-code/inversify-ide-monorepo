@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Summary, SummaryMetadata, TaskContextStorageService } from '@theia/ai-chat/lib/browser/task-context-service';
-import { InMemoryTaskContextStorage } from '@theia/ai-chat/lib/browser/task-context-storage-service';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
+import { Summary, SummaryMetadata, TaskContextStorageService } from '@theia/ai-chat/lib/browser/task-context-service.js';
+import { InMemoryTaskContextStorage } from '@theia/ai-chat/lib/browser/task-context-storage-service.js';
+import { inject, injectable, postConstruct } from 'inversify';
 import { DisposableCollection, EOL, Emitter, ILogger, Path, PreferenceService, URI, unreachable } from '@theia/core';
-import { OpenerService, open } from '@theia/core/lib/browser';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { OpenerService, open } from '@theia/core/lib/browser/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
 import * as yaml from 'js-yaml';
-import { FileChange, FileChangeType } from '@theia/filesystem/lib/common/files';
-import { TASK_CONTEXT_STORAGE_DIRECTORY_PREF } from '../common/workspace-preferences';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
+import { FileChange, FileChangeType } from '@theia/filesystem/lib/common/files.js';
+import { TASK_CONTEXT_STORAGE_DIRECTORY_PREF } from '../common/workspace-preferences.js';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
 
 @injectable()
 export class TaskContextFileStorageService implements TaskContextStorageService {

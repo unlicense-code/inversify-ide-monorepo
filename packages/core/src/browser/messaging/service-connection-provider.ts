@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { inject, injectable, interfaces, postConstruct } from 'inversify';
-import { Channel, RpcProxy, RpcProxyFactory } from '../../common';
-import { ChannelMultiplexer } from '../../common/message-rpc/channel';
-import { Deferred } from '../../common/promise-util';
-import { ConnectionSource } from './connection-source';
+import { Channel, RpcProxy, RpcProxyFactory } from '../../common/index.js';
+import { ChannelMultiplexer } from '../../common/message-rpc/channel.js';
+import { Deferred } from '../../common/promise-util.js';
+import { ConnectionSource } from './connection-source.js';
 
 /**
  * Service id for the local connection provider

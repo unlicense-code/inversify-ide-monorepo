@@ -21,19 +21,19 @@
 
 /* eslint-disable no-null/no-null */
 
-import { UUID } from '@theia/core/shared/@lumino/coreutils';
-import { illegalArgument } from '../common/errors';
+import { UUID } from '@lumino/coreutils';
+import { illegalArgument } from '../common/errors.js';
 import type * as theia from '@theia/plugin';
-import { URI as CodeURI, UriComponents } from '@theia/core/shared/vscode-uri';
-import { relative } from '../common/paths-util';
-import { startsWithIgnoreCase } from '@theia/core/lib/common/strings';
-import { SymbolKind } from '../common/plugin-api-rpc-model';
-import { FileSystemProviderErrorCode, markAsFileSystemProviderError } from '@theia/filesystem/lib/common/files';
+import { URI as CodeURI, UriComponents } from 'vscode-uri';
+import { relative } from '../common/paths-util.js';
+import { startsWithIgnoreCase } from '@theia/core/lib/common/strings.js';
+import { SymbolKind } from '../common/plugin-api-rpc-model.js';
+import { FileSystemProviderErrorCode, markAsFileSystemProviderError } from '@theia/filesystem/lib/common/files.js';
 import * as paths from 'path';
-import { es5ClassCompat } from '../common/types';
-import { isObject, isStringArray } from '@theia/core/lib/common';
+import { es5ClassCompat } from '../common/types.js';
+import { isObject, isStringArray } from '@theia/core/lib/common/index.js';
 import { CellEditType, CellMetadataEdit, NotebookDocumentMetadataEdit } from '@theia/notebook/lib/common';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
 
 /**
  * This is an implementation of #theia.Uri based on vscode-uri.
@@ -141,7 +141,7 @@ export class Disposable {
     static NULL: Disposable;
 }
 
-export interface AccessibilityInformation {
+export type AccessibilityInformation = {
     label: string;
     role?: string;
 }
@@ -1786,7 +1786,7 @@ export class CodeAction {
     }
 }
 
-export interface FileOperationOptions {
+export type FileOperationOptions = {
     overwrite?: boolean;
     ignoreIfExists?: boolean;
     ignoreIfNotExists?: boolean;
@@ -1794,7 +1794,7 @@ export interface FileOperationOptions {
 }
 
 // copied from https://github.com/microsoft/vscode/blob/b165e20587dd0797f37251515bc9e4dbe513ede8/src/vs/editor/common/modes.ts
-export interface WorkspaceEditMetadata {
+export type WorkspaceEditMetadata = {
     needsConfirmation: boolean;
     label: string;
     description?: string;
@@ -1813,7 +1813,7 @@ export const enum FileEditType {
     Snippet = 6,
 }
 
-export interface FileOperation {
+export type FileOperation = {
     _type: FileEditType.File;
     from: URI | undefined;
     to: URI | undefined;
@@ -1821,14 +1821,14 @@ export interface FileOperation {
     metadata?: WorkspaceEditMetadata;
 }
 
-export interface FileTextEdit {
+export type FileTextEdit = {
     _type: FileEditType.Text;
     uri: URI;
     edit: TextEdit;
     metadata?: WorkspaceEditMetadata;
 }
 
-export interface FileSnippetTextEdit {
+export type FileSnippetTextEdit = {
     readonly _type: FileEditType.Snippet;
     readonly uri: URI;
     readonly range: Range;
@@ -1836,7 +1836,7 @@ export interface FileSnippetTextEdit {
     readonly metadata?: theia.WorkspaceEditEntryMetadata;
 }
 
-export interface FileCellEdit {
+export type FileCellEdit = {
     readonly _type: FileEditType.Cell;
     readonly uri: URI;
     readonly edit?: CellMetadataEdit | NotebookDocumentMetadataEdit;
@@ -1844,7 +1844,7 @@ export interface FileCellEdit {
     readonly metadata?: theia.WorkspaceEditEntryMetadata;
 }
 
-export interface CellEdit {
+export type CellEdit = {
     readonly _type: FileEditType.CellReplace;
     readonly metadata?: theia.WorkspaceEditEntryMetadata;
     readonly uri: URI;
@@ -2357,7 +2357,7 @@ export enum FileType {
     SymbolicLink = 64
 }
 
-export interface FileStat {
+export type FileStat = {
     readonly type: FileType;
     readonly ctime: number;
     readonly mtime: number;
@@ -3738,7 +3738,7 @@ export class TelemetryLogger {
     constructor(readonly sender: TelemetrySender, readonly options?: TelemetryLoggerOptions) { }
 }
 
-export interface TelemetrySender {
+export type TelemetrySender = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     sendEventData(eventName: string, data?: Record<string, any>): void;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -3746,7 +3746,7 @@ export interface TelemetrySender {
     flush?(): void | Thenable<void>;
 }
 
-export interface TelemetryLoggerOptions {
+export type TelemetryLoggerOptions = {
     /**
      * Whether or not you want to avoid having the built-in common properties such as os, extension name, etc injected into the data object.
      * Defaults to `false` if not defined.
@@ -4155,20 +4155,14 @@ export class LanguageModelDataPart {
     constructor(data: Uint8Array, mimeType: string) { }
 }
 
-/**
- * @stubbed
- */
-export interface ProvideLanguageModelChatResponseOptions {
+export type ProvideLanguageModelChatResponseOptions = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     readonly modelOptions?: { readonly [name: string]: any };
     readonly tools?: readonly theia.LanguageModelChatTool[];
     readonly toolMode: LanguageModelChatToolMode;
 }
 
-/**
- * @stubbed
- */
-export interface LanguageModelChatInformation {
+export type LanguageModelChatInformation = {
     readonly id: string;
     readonly name: string;
     readonly family: string;
@@ -4183,19 +4177,13 @@ export interface LanguageModelChatInformation {
     };
 }
 
-/**
- * @stubbed
- */
-export interface LanguageModelChatRequestMessage {
+export type LanguageModelChatRequestMessage = {
     readonly role: LanguageModelChatMessageRole;
     readonly content: ReadonlyArray<LanguageModelInputPart | unknown>;
     readonly name: string | undefined;
 }
 
-/**
- * @stubbed
- */
-export interface LanguageModelChatProvider<T extends LanguageModelChatInformation = LanguageModelChatInformation> {
+export type LanguageModelChatProvider<T extends LanguageModelChatInformation = LanguageModelChatInformation> = {
     readonly onDidChangeLanguageModelChatInformation?: theia.Event<void>;
 
     provideLanguageModelChatInformation(options: PrepareLanguageModelChatModelOptions, token: theia.CancellationToken): theia.ProviderResult<T[]>;
@@ -4206,10 +4194,7 @@ export interface LanguageModelChatProvider<T extends LanguageModelChatInformatio
     provideTokenCount(model: T, text: string | LanguageModelChatRequestMessage, token: theia.CancellationToken): Thenable<number>;
 }
 
-/**
- * @stubbed
- */
-export interface PrepareLanguageModelChatModelOptions {
+export type PrepareLanguageModelChatModelOptions = {
     readonly silent: boolean;
 }
 
@@ -4365,18 +4350,18 @@ export enum TextEditorChangeKind {
     Modification = 3
 }
 
-export interface TextEditorLineRange {
+export type TextEditorLineRange = {
     readonly startLineNumber: number;
     readonly endLineNumberExclusive: number;
 }
 
-export interface TextEditorChange {
+export type TextEditorChange = {
     readonly original: TextEditorLineRange;
     readonly modified: TextEditorLineRange;
     readonly kind: TextEditorChangeKind;
 }
 
-export interface TextEditorDiffInformation {
+export type TextEditorDiffInformation = {
     readonly documentVersion: number;
     readonly original: theia.Uri | undefined;
     readonly modified: theia.Uri;
@@ -4384,12 +4369,12 @@ export interface TextEditorDiffInformation {
     readonly isStale: boolean;
 }
 
-export interface TextEditorDiffInformationChangeEvent {
+export type TextEditorDiffInformationChangeEvent = {
     readonly textEditor: TextEditor;
     readonly diffInformation: TextEditorDiffInformation[] | undefined;
 }
 
-export interface TextEditor {
+export type TextEditor = {
     readonly diffInformation: TextEditorDiffInformation[] | undefined;
 }
 

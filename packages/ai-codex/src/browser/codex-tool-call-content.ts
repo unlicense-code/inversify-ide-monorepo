@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { ToolCallChatResponseContentImpl } from '@theia/ai-chat/lib/common';
-import { ToolCallResult } from '@theia/ai-core';
+import { ToolCallResult } from '@theia/ai-core/lib/common/index.js';
 
 export class CodexToolCallChatResponseContent extends ToolCallChatResponseContentImpl {
     static readonly type = 'codex-tool-call';

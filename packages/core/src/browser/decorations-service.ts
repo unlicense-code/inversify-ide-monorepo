@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { injectable } from 'inversify';
-import { isThenable } from '../common/promise-util';
-import { CancellationToken, CancellationTokenSource, Disposable, Emitter, Event } from '../common';
-import { TernarySearchTree } from '../common/ternary-search-tree';
-import URI from '../common/uri';
+import { isThenable } from '../common/promise-util.js';
+import { CancellationToken, CancellationTokenSource, Disposable, Emitter, Event } from '../common/index.js';
+import { TernarySearchTree } from '../common/ternary-search-tree.js';
+import URI from '../common/uri.js';
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
@@ -26,12 +26,12 @@ import URI from '../common/uri';
  *--------------------------------------------------------------------------------------------*/
 // some code copied and modified from https://github.com/microsoft/vscode/blob/1.52.1/src/vs/workbench/services/decorations/browser/decorationsService.ts#L24-L23
 
-export interface DecorationsProvider {
+export type DecorationsProvider = {
     readonly onDidChange: Event<URI[]>;
     provideDecorations(uri: URI, token: CancellationToken): Decoration | Promise<Decoration | undefined> | undefined;
 }
 
-export interface Decoration {
+export type Decoration = {
     readonly weight?: number;
     readonly colorId?: string;
     readonly letter?: string;
@@ -39,11 +39,11 @@ export interface Decoration {
     readonly bubble?: boolean;
 }
 
-export interface ResourceDecorationChangeEvent {
+export type ResourceDecorationChangeEvent = {
     affectsResource(uri: URI): boolean;
 }
 export const DecorationsService = Symbol('DecorationsService');
-export interface DecorationsService {
+export type DecorationsService = {
 
     readonly onDidChangeDecorations: Event<Map<string, Decoration>>;
 

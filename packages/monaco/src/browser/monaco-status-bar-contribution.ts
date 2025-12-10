@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable } from 'inversify';
 import { DisposableCollection, nls } from '@theia/core';
-import { StatusBar, StatusBarAlignment, Widget, WidgetStatusBarContribution } from '@theia/core/lib/browser';
-import { EditorCommands, EditorWidget } from '@theia/editor/lib/browser';
-import { MonacoEditor } from './monaco-editor';
+import { StatusBar, StatusBarAlignment, Widget, WidgetStatusBarContribution } from '@theia/core/lib/browser/index.js';
+import { EditorCommands, EditorWidget } from '@theia/editor/lib/browser/index.js';
+import { MonacoEditor } from './monaco-editor.js';
 import * as monaco from '@theia/monaco-editor-core';
 
 export const EDITOR_STATUS_TABBING_CONFIG = 'editor-status-tabbing-config';

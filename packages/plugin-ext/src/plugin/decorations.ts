@@ -22,12 +22,12 @@ import {
     DecorationsExt,
     DecorationsMain,
     PLUGIN_RPC_CONTEXT, PluginInfo
-} from '../common/plugin-api-rpc';
-import { RPCProtocol } from '../common/rpc-protocol';
-import { Disposable, FileDecoration, URI } from './types-impl';
-import { CancellationToken } from '@theia/core/lib/common';
+} from '../common/plugin-api-rpc.js';
+import { RPCProtocol } from '../common/rpc-protocol.js';
+import { Disposable, FileDecoration, URI } from './types-impl.js';
+import { CancellationToken } from '@theia/core/lib/common/index.js';
 import { dirname } from 'path';
-import { PluginLogger } from './logger';
+import { PluginLogger } from './logger.js';
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
@@ -35,7 +35,7 @@ import { PluginLogger } from './logger';
  *--------------------------------------------------------------------------------------------*/
 // some code copied and modified from https://github.com/microsoft/vscode/blob/1.52.1/src/vs/workbench/api/common/extHostDecorations.ts#L39-L38
 
-interface ProviderData {
+type ProviderData = {
     provider: theia.FileDecorationProvider;
     pluginInfo: PluginInfo;
 }

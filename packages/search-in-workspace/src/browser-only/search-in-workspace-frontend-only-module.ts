@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { SearchInWorkspaceServer } from '../common/search-in-workspace-interface';
-import { BrowserSearchInWorkspaceServer } from './browser-search-in-workspace-server';
-import { SearchInWorkspaceService } from '../browser/search-in-workspace-service';
-import { BrowserOnlySearchInWorkspaceService } from './browser-only-search-in-workspace-service';
+import { ContainerModule } from 'inversify';
+import { SearchInWorkspaceServer } from '../common/search-in-workspace-interface.js';
+import { BrowserSearchInWorkspaceServer } from './browser-search-in-workspace-server.js';
+import { SearchInWorkspaceService } from '../browser/search-in-workspace-service.js';
+import { BrowserOnlySearchInWorkspaceService } from './browser-only-search-in-workspace-service.js';
 
 export default new ContainerModule((bind, _unbind, isBound, rebind) => {
     if (isBound(SearchInWorkspaceServer)) {

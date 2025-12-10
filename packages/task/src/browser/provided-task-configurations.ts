@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { TaskProviderRegistry, TaskProvider } from './task-contribution';
-import { TaskDefinitionRegistry } from './task-definition-registry';
-import { TaskConfiguration, TaskCustomization, TaskOutputPresentation, TaskConfigurationScope, TaskScope } from '../common';
+import { inject, injectable } from 'inversify';
+import { TaskProviderRegistry, TaskProvider } from './task-contribution.js';
+import { TaskDefinitionRegistry } from './task-definition-registry.js';
+import { TaskConfiguration, TaskCustomization, TaskOutputPresentation, TaskConfigurationScope, TaskScope } from '../common/index.js';
 
 export const ALL_TASK_TYPES: string = '*';
 

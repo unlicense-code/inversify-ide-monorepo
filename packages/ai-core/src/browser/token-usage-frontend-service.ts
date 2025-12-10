@@ -16,10 +16,7 @@
 
 import { Event } from '@theia/core';
 
-/**
- * Data structure for token usage data specific to a model.
- */
-export interface ModelTokenUsageData {
+export type ModelTokenUsageData = {
     /** The model identifier */
     modelId: string;
     /** Number of input tokens used */
@@ -38,7 +35,7 @@ export interface ModelTokenUsageData {
  * Service for managing token usage data on the frontend.
  */
 export const TokenUsageFrontendService = Symbol('TokenUsageFrontendService');
-export interface TokenUsageFrontendService {
+export type TokenUsageFrontendService = {
     /**
      * Event emitted when token usage data is updated
      */

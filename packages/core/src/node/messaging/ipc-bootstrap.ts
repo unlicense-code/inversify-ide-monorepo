@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import 'reflect-metadata';
-import { dynamicRequire } from '../dynamic-require';
-import { IPCChannel } from './ipc-channel';
-import { checkParentAlive, IPCEntryPoint } from './ipc-protocol';
+import { dynamicRequire } from '../dynamic-require.js';
+import { IPCChannel } from './ipc-channel.js';
+import { checkParentAlive, IPCEntryPoint } from './ipc-protocol.js';
 
 checkParentAlive();
 

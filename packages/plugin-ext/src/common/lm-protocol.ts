@@ -14,13 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { UriComponents } from './uri-components';
+import { UriComponents } from './uri-components.js';
 
-/**
- * Protocol interfaces for MCP server definition providers.
- */
-
-export interface McpStdioServerDefinitionDto {
+export type McpStdioServerDefinitionDto = {
     /**
      * The human-readable name of the server.
      */
@@ -57,11 +53,7 @@ export interface McpStdioServerDefinitionDto {
 
 }
 
-/**
- * McpHttpServerDefinition represents an MCP server available using the
- * Streamable HTTP transport.
- */
-export interface McpHttpServerDefinitionDto {
+export type McpHttpServerDefinitionDto = {
     /**
      * The human-readable name of the server.
      */
@@ -91,10 +83,7 @@ export interface McpHttpServerDefinitionDto {
  */
 export type McpServerDefinitionDto = McpStdioServerDefinitionDto | McpHttpServerDefinitionDto;
 export const isMcpHttpServerDefinitionDto = (definition: McpServerDefinitionDto): definition is McpHttpServerDefinitionDto => 'uri' in definition;
-/**
- * Main side of the MCP server definition registry.
- */
-export interface McpServerDefinitionRegistryMain {
+export type McpServerDefinitionRegistryMain = {
     /**
      * Register an MCP server definition provider.
      */
@@ -121,10 +110,7 @@ export interface McpServerDefinitionRegistryMain {
     $resolveServerDefinition(handle: number, server: McpServerDefinitionDto): Promise<McpServerDefinitionDto | undefined>;
 }
 
-/**
- * Extension side of the MCP server definition registry.
- */
-export interface McpServerDefinitionRegistryExt {
+export type McpServerDefinitionRegistryExt = {
     /**
      * Request server definitions from a provider.
      */

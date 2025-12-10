@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,20 +19,20 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { EOL } from '@theia/core/lib/common/os';
-import { Diagnostic, DiagnosticSeverity, Range } from '@theia/core/shared/vscode-languageserver-protocol';
+import { EOL } from '@theia/core/lib/common/os.js';
+import { Diagnostic, DiagnosticSeverity, Range } from 'vscode-languageserver-protocol';
 import {
     FileLocationKind, ProblemMatcher, ProblemPattern,
     ProblemMatch, ProblemMatchData, ProblemLocationKind
-} from '../common/problem-matcher-protocol';
-import URI from '@theia/core/lib/common/uri';
-import { Severity } from '@theia/core/lib/common/severity';
-import { MAX_SAFE_INTEGER } from '@theia/core/lib/common/numbers';
+} from '../common/problem-matcher-protocol.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Severity } from '@theia/core/lib/common/severity.js';
+import { MAX_SAFE_INTEGER } from '@theia/core/lib/common/numbers.js';
 import { join } from 'path';
 
 const endOfLine: string = EOL;
 
-export interface ProblemData {
+export type ProblemData = {
     kind?: ProblemLocationKind;
     file?: string;
     location?: string;

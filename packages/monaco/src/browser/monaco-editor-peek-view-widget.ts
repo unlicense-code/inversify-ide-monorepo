@@ -14,21 +14,21 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Position, Range } from '@theia/core/shared/vscode-languageserver-protocol';
-import { DisposableCollection } from '@theia/core';
-import { MonacoEditor } from './monaco-editor';
+import { Position, Range } from 'vscode-languageserver-protocol';
+import { DisposableCollection, Disposable } from '@theia/core/lib/common/index.js';
+import { MonacoEditor } from './monaco-editor.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { PeekViewWidget, IPeekViewOptions, IPeekViewStyles } from '@theia/monaco-editor-core/esm/vs/editor/contrib/peekView/browser/peekView';
-import { ICodeEditor } from '@theia/monaco-editor-core/esm/vs/editor/browser/editorBrowser';
-import { ActionBar } from '@theia/monaco-editor-core/esm/vs/base/browser/ui/actionbar/actionbar';
-import { Action } from '@theia/monaco-editor-core/esm/vs/base/common/actions';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { IInstantiationService } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/instantiation';
-import { IThemeService } from '@theia/monaco-editor-core/esm/vs/platform/theme/common/themeService';
-import { Color } from '@theia/monaco-editor-core/esm/vs/base/common/color';
+import { PeekViewWidget, IPeekViewOptions, IPeekViewStyles } from '@theia/monaco-editor-core/esm/vs/editor/contrib/peekView/browser/peekView.js';
+import { ICodeEditor } from '@theia/monaco-editor-core/esm/vs/editor/browser/editorBrowser.js';
+import { ActionBar } from '@theia/monaco-editor-core/esm/vs/base/browser/ui/actionbar/actionbar.js';
+import { Action } from '@theia/monaco-editor-core/esm/vs/base/common/actions.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { IInstantiationService } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/instantiation.js';
+import { IThemeService } from '@theia/monaco-editor-core/esm/vs/platform/theme/common/themeService.js';
+import { Color } from '@theia/monaco-editor-core/esm/vs/base/common/color.js';
 
 export { peekViewBorder, peekViewTitleBackground, peekViewTitleForeground, peekViewTitleInfoForeground }
-    from '@theia/monaco-editor-core/esm/vs/editor/contrib/peekView/browser/peekView';
+    from '@theia/monaco-editor-core/esm/vs/editor/contrib/peekView/browser/peekView.js';
 
 export namespace MonacoEditorPeekViewWidget {
     export interface Styles {
@@ -84,7 +84,7 @@ export class MonacoEditorPeekViewWidget {
         protected styles: MonacoEditorPeekViewWidget.Styles = {}
     ) {
         const that = this;
-        this.toDispose.push(this.delegate = new class extends PeekViewWidget {
+        this.delegate = new class extends PeekViewWidget {
 
             get actionBar(): ActionBar | undefined {
                 return this._actionbarWidget;
@@ -169,7 +169,8 @@ export class MonacoEditorPeekViewWidget {
             editor.getControl() as unknown as ICodeEditor,
             Object.assign(<IPeekViewOptions>{}, options, this.convertStyles(styles)),
             StandaloneServices.get(IInstantiationService)
-        ));
+        );
+        this.toDispose.push(this.delegate as unknown as Disposable);
         this.toDispose.push(this.themeService.onDidColorThemeChange(() => this.style(this.styles)));
     }
 

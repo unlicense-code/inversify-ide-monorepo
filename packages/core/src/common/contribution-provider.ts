@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import { interfaces } from 'inversify';
-import { ContributionFilterRegistry } from './contribution-filter';
+import { ContributionFilterRegistry } from './contribution-filter/index.js';
 
 export const ContributionProvider = Symbol('ContributionProvider');
 
-export interface ContributionProvider<T extends object> {
+export type ContributionProvider<T extends object> = {
 
     /**
      * @param recursive `true` if the contributions should be collected from the parent containers as well. Otherwise, `false`. It is `false` by default.

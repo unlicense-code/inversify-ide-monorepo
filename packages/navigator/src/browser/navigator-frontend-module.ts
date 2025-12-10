@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,32 +17,32 @@
 import '../../src/browser/style/index.css';
 import '../../src/browser/open-editors-widget/open-editors.css';
 
-import { ContainerModule } from '@theia/core/shared/inversify';
+import { ContainerModule } from 'inversify';
 import {
     bindViewContribution,
     FrontendApplicationContribution,
     ApplicationShellLayoutMigration
-} from '@theia/core/lib/browser';
-import { FileNavigatorWidget, FILE_NAVIGATOR_ID } from './navigator-widget';
-import { FileNavigatorContribution } from './navigator-contribution';
-import { createFileNavigatorWidget } from './navigator-container';
-import { WidgetFactory } from '@theia/core/lib/browser/widget-manager';
-import { bindFileNavigatorPreferences } from '../common/navigator-preferences';
-import { FileNavigatorFilter } from './navigator-filter';
-import { NavigatorContextKeyService } from './navigator-context-key-service';
-import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { NavigatorDiff } from './navigator-diff';
-import { NavigatorLayoutVersion3Migration, NavigatorLayoutVersion5Migration } from './navigator-layout-migrations';
-import { NavigatorTabBarDecorator } from './navigator-tab-bar-decorator';
-import { TabBarDecorator } from '@theia/core/lib/browser/shell/tab-bar-decorator';
-import { NavigatorWidgetFactory } from './navigator-widget-factory';
-import { bindContributionProvider } from '@theia/core/lib/common';
-import { OpenEditorsTreeDecorator } from './open-editors-widget/navigator-open-editors-decorator-service';
-import { OpenEditorsWidget } from './open-editors-widget/navigator-open-editors-widget';
-import { NavigatorTreeDecorator } from './navigator-decorator-service';
-import { NavigatorDeletedEditorDecorator } from './open-editors-widget/navigator-deleted-editor-decorator';
-import { NavigatorSymlinkDecorator } from './navigator-symlink-decorator';
-import { FileTreeDecoratorAdapter } from '@theia/filesystem/lib/browser';
+} from '@theia/core/lib/browser/index.js';
+import { FileNavigatorWidget, FILE_NAVIGATOR_ID } from './navigator-widget.js';
+import { FileNavigatorContribution } from './navigator-contribution.js';
+import { createFileNavigatorWidget } from './navigator-container.js';
+import { WidgetFactory } from '@theia/core/lib/browser/widget-manager.js';
+import { bindFileNavigatorPreferences } from '../common/navigator-preferences.js';
+import { FileNavigatorFilter } from './navigator-filter.js';
+import { NavigatorContextKeyService } from './navigator-context-key-service.js';
+import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { NavigatorDiff } from './navigator-diff.js';
+import { NavigatorLayoutVersion3Migration, NavigatorLayoutVersion5Migration } from './navigator-layout-migrations.js';
+import { NavigatorTabBarDecorator } from './navigator-tab-bar-decorator.js';
+import { TabBarDecorator } from '@theia/core/lib/browser/shell/tab-bar-decorator.js';
+import { NavigatorWidgetFactory } from './navigator-widget-factory.js';
+import { bindContributionProvider } from '@theia/core/lib/common/index.js';
+import { OpenEditorsTreeDecorator } from './open-editors-widget/navigator-open-editors-decorator-service.js';
+import { OpenEditorsWidget } from './open-editors-widget/navigator-open-editors-widget.js';
+import { NavigatorTreeDecorator } from './navigator-decorator-service.js';
+import { NavigatorDeletedEditorDecorator } from './open-editors-widget/navigator-deleted-editor-decorator.js';
+import { NavigatorSymlinkDecorator } from './navigator-symlink-decorator.js';
+import { FileTreeDecoratorAdapter } from '@theia/filesystem/lib/browser/index.js';
 
 export default new ContainerModule(bind => {
     bindFileNavigatorPreferences(bind);

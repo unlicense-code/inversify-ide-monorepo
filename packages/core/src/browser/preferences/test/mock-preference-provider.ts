@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,7 +17,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { interfaces } from 'inversify';
-import { PreferenceProviderImpl, PreferenceScope, PreferenceProvider } from '../../../common/preferences';
+import { PreferenceProviderImpl, PreferenceScope, PreferenceProvider } from '../../../common/preferences/index.js';
 
 export class MockPreferenceProvider extends PreferenceProviderImpl {
     readonly prefs: { [p: string]: any } = {};

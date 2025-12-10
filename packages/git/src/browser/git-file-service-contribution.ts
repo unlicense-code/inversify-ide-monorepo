@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { FileService, FileServiceContribution } from '@theia/filesystem/lib/browser/file-service';
-import { GitFileSystemProvider } from './git-file-system-provider';
-import { GIT_RESOURCE_SCHEME } from './git-resource';
+import { interfaces } from 'inversify';
+import { FileService, FileServiceContribution } from '@theia/filesystem/lib/browser/file-service.js';
+import { GitFileSystemProvider } from './git-file-system-provider.js';
+import { GIT_RESOURCE_SCHEME } from './git-resource.js';
 
 export class GitFileServiceContribution implements FileServiceContribution {
 

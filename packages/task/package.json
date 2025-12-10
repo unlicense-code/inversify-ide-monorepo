@@ -1,6 +1,7 @@
 {
   "name": "@theia/task",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - Task extension. This extension adds support for executing raw or terminal processes in the backend.",
   "dependencies": {
     "@theia/core": "1.66.0",

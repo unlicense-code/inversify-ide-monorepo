@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { codicon, LabelProvider, LabelProviderContribution } from '@theia/core/lib/browser';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { CellKind, CellUri } from '../../common';
-import { NotebookService } from '../service/notebook-service';
-import { NotebookCellOutlineNode } from './notebook-outline-contribution';
+import { codicon, LabelProvider, LabelProviderContribution } from '@theia/core/lib/browser/index.js';
+import { inject, injectable } from 'inversify';
+import { CellKind, CellUri } from '../../common/index.js';
+import { NotebookService } from '../service/notebook-service.js';
+import { NotebookCellOutlineNode } from './notebook-outline-contribution.js';
 import type Token = require('markdown-it/lib/token');
-import markdownit = require('@theia/core/shared/markdown-it');
-import * as markdownitemoji from '@theia/core/shared/markdown-it-emoji';
-import { NotebookCellModel } from '../view-model/notebook-cell-model';
+import markdownit from 'markdown-it';
+import * as markdownitemoji from 'markdown-it-emoji';
+import { NotebookCellModel } from '../view-model/notebook-cell-model.js';
 import { URI } from '@theia/core';
 
 @injectable()
@@ -34,7 +34,7 @@ export class NotebookLabelProviderContribution implements LabelProviderContribut
     @inject(LabelProvider)
     protected readonly labelProvider: LabelProvider;
 
-    protected markdownIt = markdownit().use(markdownitemoji.full);
+    protected markdownIt = markdownit().use(markdownitemoji.full as any);
 
     canHandle(element: object): number {
         if (NotebookCellOutlineNode.is(element)) {

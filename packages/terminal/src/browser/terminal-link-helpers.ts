@@ -17,16 +17,13 @@
 import type { IBufferRange, IBufferLine, IBuffer, Terminal } from 'xterm';
 
 export const LinkContext = Symbol('LinkContext');
-export interface LinkContext {
+export type LinkContext = {
     text: string;
     startLine: number;
     lines: IBufferLine[];
 }
 
-/**
- * Mimics VS Code IRange
- */
-interface TerminalRange {
+type TerminalRange = {
     readonly startLineNumber: number;
     readonly startColumn: number;
     readonly endLineNumber: number;

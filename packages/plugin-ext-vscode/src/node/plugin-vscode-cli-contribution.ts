@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { Argv, Arguments } from '@theia/core/shared/yargs';
-import { CliContribution } from '@theia/core/lib/node/cli';
+import { injectable } from 'inversify';
+import { Argv, Arguments } from 'yargs';
+import { CliContribution } from '@theia/core/lib/node/cli.js';
 import { PluginHostEnvironmentVariable } from '@theia/plugin-ext/lib/common';
-import { VSCODE_DEFAULT_API_VERSION } from '../common/plugin-vscode-types';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { VSCODE_DEFAULT_API_VERSION } from '../common/plugin-vscode-types.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
 
 /**
  * CLI Contribution allowing to override the VS Code API version which is returned by `vscode.version` API call.

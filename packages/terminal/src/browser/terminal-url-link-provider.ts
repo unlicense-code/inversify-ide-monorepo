@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { OpenerService, open } from '@theia/core/lib/browser';
-import { TerminalWidget } from './base/terminal-widget';
-import { TerminalLink, TerminalLinkProvider } from './terminal-link-provider';
-import URI from '@theia/core/lib/common/uri';
+import { inject, injectable } from 'inversify';
+import { OpenerService, open } from '@theia/core/lib/browser/index.js';
+import { TerminalWidget } from './base/terminal-widget.js';
+import { TerminalLink, TerminalLinkProvider } from './terminal-link-provider.js';
+import { URI } from '@theia/core/lib/common/uri.js';
 
 @injectable()
 export class UrlLinkProvider implements TerminalLinkProvider {

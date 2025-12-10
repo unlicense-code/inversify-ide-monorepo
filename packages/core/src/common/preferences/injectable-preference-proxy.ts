@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,16 +15,16 @@
 // *****************************************************************************
 
 import { inject, injectable, postConstruct } from 'inversify';
-import { PreferenceSchema } from '../../common/preferences/preference-schema';
-import { Disposable, DisposableCollection, Emitter, Event, isObject, MaybePromise, PreferenceScope } from '../../common';
-import { PreferenceChangeEvent, PreferenceEventEmitter, PreferenceProxy, PreferenceProxyOptions, PreferenceRetrieval } from './preference-proxy';
-import { PreferenceChange, PreferenceChangeImpl, PreferenceChanges, PreferenceService } from './preference-service';
+import { PreferenceSchema } from '../../common/preferences/preference-schema.js';
+import { Disposable, DisposableCollection, Emitter, Event, isObject, MaybePromise, PreferenceScope } from '../../common/index.js';
+import { PreferenceChangeEvent, PreferenceEventEmitter, PreferenceProxy, PreferenceProxyOptions, PreferenceRetrieval } from './preference-proxy.js';
+import { PreferenceChange, PreferenceChangeImpl, PreferenceChanges, PreferenceService } from './preference-service.js';
 import { JSONValue } from '@lumino/coreutils';
-import { PreferenceProviderDataChange } from './preference-provider';
-import { OverridePreferenceName } from '../../common/preferences/preference-language-override-service';
+import { PreferenceProviderDataChange } from './preference-provider.js';
+import { OverridePreferenceName } from '../../common/preferences/preference-language-override-service.js';
 
 export const PreferenceProxySchema = Symbol('PreferenceProxySchema');
-export interface PreferenceProxyFactory {
+export type PreferenceProxyFactory = {
     <T>(schema: MaybePromise<PreferenceSchema>, options?: PreferenceProxyOptions): PreferenceProxy<T>;
 }
 export const PreferenceProxyFactory = Symbol('PreferenceProxyFactory');

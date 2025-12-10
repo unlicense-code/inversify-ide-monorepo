@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import { Emitter } from '@theia/core';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { RemotePortForwardingProvider } from '../../electron-common/remote-port-forwarding-provider';
-import { getCurrentPort } from '@theia/core/lib/electron-browser/messaging/electron-local-ws-connection-source';
+import { inject, injectable, postConstruct } from 'inversify';
+import { RemotePortForwardingProvider } from '../../electron-common/remote-port-forwarding-provider.js';
+import { getCurrentPort } from '@theia/core/lib/electron-browser/messaging/electron-local-ws-connection-source.js';
 
-export interface ForwardedPort {
+export type ForwardedPort = {
     localPort?: number;
     address?: string;
     origin?: string;

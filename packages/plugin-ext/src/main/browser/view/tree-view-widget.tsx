@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { TreeViewsExt, TreeViewItemCollapsibleState, TreeViewItem, TreeViewItemReference, ThemeIcon, DataTransferFileDTO } from '../../../common/plugin-api-rpc';
-import { Command } from '../../../common/plugin-api-rpc-model';
+import { injectable, inject, postConstruct } from 'inversify';
+import { TreeViewsExt, TreeViewItemCollapsibleState, TreeViewItem, TreeViewItemReference, ThemeIcon, DataTransferFileDTO } from '../../../common/plugin-api-rpc.js';
+import { Command } from '../../../common/plugin-api-rpc-model.js';
 import {
     TreeNode,
     NodeProps,
@@ -34,36 +34,36 @@ import {
     HoverService,
     ApplicationShell,
     KeybindingRegistry
-} from '@theia/core/lib/browser';
-import { MenuPath, MenuModelRegistry, CommandMenu, AcceleratorSource } from '@theia/core/lib/common/menu';
-import * as React from '@theia/core/shared/react';
-import { PluginSharedStyle } from '../plugin-shared-style';
-import { ACTION_ITEM, Widget } from '@theia/core/lib/browser/widgets/widget';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import { MessageService } from '@theia/core/lib/common/message-service';
-import { View } from '../../../common/plugin-protocol';
-import { URI } from '@theia/core/lib/common/uri';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
+} from '@theia/core/lib/browser/index.js';
+import { MenuPath, MenuModelRegistry, CommandMenu, AcceleratorSource } from '@theia/core/lib/common/menu/index.js';
+import * as React from 'react';
+import { PluginSharedStyle } from '../plugin-shared-style.js';
+import { ACTION_ITEM, Widget } from '@theia/core/lib/browser/widgets/widget.js';
+import { Emitter, Event } from '@theia/core/lib/common/event.js';
+import { MessageService } from '@theia/core/lib/common/message-service.js';
+import { View } from '../../../common/plugin-protocol.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/index.js';
 import { AccessibilityInformation } from '@theia/plugin';
-import { ColorRegistry } from '@theia/core/lib/browser/color-registry';
-import { DecoratedTreeNode } from '@theia/core/lib/browser/tree/tree-decorator';
-import { WidgetDecoration } from '@theia/core/lib/browser/widget-decoration';
-import { CancellationTokenSource, CancellationToken, Mutable } from '@theia/core/lib/common';
-import { mixin } from '../../../common/types';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { DnDFileContentStore } from './dnd-file-content-store';
+import { ColorRegistry } from '@theia/core/lib/browser/color-registry.js';
+import { DecoratedTreeNode } from '@theia/core/lib/browser/tree/tree-decorator.js';
+import { WidgetDecoration } from '@theia/core/lib/browser/widget-decoration.js';
+import { CancellationTokenSource, CancellationToken, Mutable } from '@theia/core/lib/common/index.js';
+import { mixin } from '../../../common/types.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { DnDFileContentStore } from './dnd-file-content-store.js';
 
 export const TREE_NODE_HYPERLINK = 'theia-TreeNodeHyperlink';
 export const VIEW_ITEM_CONTEXT_MENU: MenuPath = ['view-item-context-menu'];
 export const VIEW_ITEM_INLINE_MENU: MenuPath = ['view-item-context-menu', 'inline'];
 
-export interface SelectionEventHandler {
+export type SelectionEventHandler = {
     readonly node: SelectableTreeNode;
     readonly contextSelection: boolean;
 }
 
-export interface TreeViewNode extends SelectableTreeNode, DecoratedTreeNode {
+export type TreeViewNode = SelectableTreeNode & DecoratedTreeNode & {
     contextValue?: string;
     command?: Command;
     resourceUri?: string;
@@ -151,7 +151,7 @@ export class ResolvableCompositeTreeViewNode extends ResolvableTreeViewNode impl
     }
 }
 
-export interface CompositeTreeViewNode extends TreeViewNode, ExpandableTreeNode, CompositeTreeNode {
+export type CompositeTreeViewNode = TreeViewNode & ExpandableTreeNode & CompositeTreeNode & {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     description?: string | boolean | any;
 }
@@ -393,7 +393,7 @@ export class PluginTree extends TreeImpl {
 export class PluginTreeModel extends TreeModelImpl {
 
     @inject(PluginTree)
-    protected override readonly tree: PluginTree;
+    protected declare readonly tree: PluginTree;
 
     set proxy(proxy: TreeViewsExt | undefined) {
         this.tree.proxy = proxy;
@@ -459,7 +459,7 @@ export class TreeViewWidget extends TreeViewWelcomeWidget {
     readonly options: TreeViewWidgetOptions;
 
     @inject(PluginTreeModel)
-    override readonly model: PluginTreeModel;
+    declare readonly model: PluginTreeModel;
 
     @inject(ContextKeyService)
     protected readonly contextKeyService: ContextKeyService;
@@ -724,7 +724,7 @@ export class TreeViewWidget extends TreeViewWelcomeWidget {
                         if (f) {
                             const fileId = this.dndFileContentStore.addFile(f);
                             files.push(fileId);
-                            const path = window.electronTheiaCore.getPathForFile(f);
+                            const path = (window as any).electronTheiaCore?.getPathForFile(f);
                             const uri = path ? {
                                 scheme: 'file',
                                 path: path,

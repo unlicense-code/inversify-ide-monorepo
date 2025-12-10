@@ -14,21 +14,21 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { EncodingService } from '@theia/core/lib/common/encoding-service';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { MockLogger } from '@theia/core/lib/common/test/mock-logger';
-import { FileUri } from '@theia/core/lib/common/file-uri';
-import { IPCConnectionProvider } from '@theia/core/lib/node/messaging/ipc-connection-provider';
-import { Container, ContainerModule } from '@theia/core/shared/inversify';
+import { Disposable, DisposableCollection } from '@theia/core';
+import { EncodingService } from '@theia/core';
+import { ILogger } from '@theia/core';
+import { MockLogger } from '@theia/core';
+import { FileUri } from '@theia/core/lib/node/index.js';
+import { IPCConnectionProvider } from '@theia/core/lib/node/index.js';
+import { Container, ContainerModule } from 'inversify';
 import { equal, fail } from 'assert';
 import { promises as fs } from 'fs';
 import { join } from 'path';
 import * as temp from 'temp';
-import { generateUuid } from '@theia/core/lib/common/uuid';
-import { FilePermission, FileSystemProviderCapabilities, FileSystemProviderError, FileSystemProviderErrorCode } from '../common/files';
-import { DiskFileSystemProvider } from './disk-file-system-provider';
-import { bindFileSystemWatcherServer } from './filesystem-backend-module';
+import { generateUuid } from '@theia/core';
+import { FilePermission, FileSystemProviderCapabilities, FileSystemProviderError, FileSystemProviderErrorCode } from '../common/files.js';
+import { DiskFileSystemProvider } from './disk-file-system-provider.js';
+import { bindFileSystemWatcherServer } from './filesystem-backend-module.js';
 
 const tracked = temp.track();
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
+import { injectable, inject, postConstruct } from 'inversify';
 import * as monaco from '@theia/monaco-editor-core';
-import { EditorManager, EditorWidget } from '@theia/editor/lib/browser';
-import { ContextMenuRenderer } from '@theia/core/lib/browser';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
-import { DebugSessionManager } from '../debug-session-manager';
-import { DebugEditorModel, DebugEditorModelFactory } from './debug-editor-model';
-import { BreakpointManager } from '../breakpoint/breakpoint-manager';
-import { DebugSourceBreakpoint } from '../model/debug-source-breakpoint';
-import { DebugBreakpointWidget } from './debug-breakpoint-widget';
-import URI from '@theia/core/lib/common/uri';
+import { EditorManager, EditorWidget } from '@theia/editor/lib/browser/index.js';
+import { ContextMenuRenderer } from '@theia/core/lib/browser/index.js';
+import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor.js';
+import { DebugSessionManager } from '../debug-session-manager.js';
+import { DebugEditorModel, DebugEditorModelFactory } from './debug-editor-model.js';
+import { BreakpointManager } from '../breakpoint/breakpoint-manager.js';
+import { DebugSourceBreakpoint } from '../model/debug-source-breakpoint.js';
+import { DebugBreakpointWidget } from './debug-breakpoint-widget.js';
+import { URI } from '@theia/core/lib/common/uri.js';
 
 @injectable()
 export class DebugEditorService {

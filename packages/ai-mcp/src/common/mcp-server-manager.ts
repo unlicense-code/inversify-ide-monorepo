@@ -14,11 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import type { CallToolResult, ListResourcesResult, ListToolsResult, ReadResourceResult } from '@modelcontextprotocol/sdk/types';
-import { Event } from '@theia/core/lib/common/event';
+import type { CallToolResult, ListResourcesResult,
+    ListToolsResult, ReadResourceResult } from '@modelcontextprotocol/sdk/types.js';
+import { Event } from '@theia/core/lib/common/event.js';
 
 export const MCPFrontendService = Symbol('MCPFrontendService');
-export interface MCPFrontendService {
+export type MCPFrontendService = {
     startServer(serverName: string): Promise<void>;
     hasServer(serverName: string): Promise<boolean>;
     isServerStarted(serverName: string): Promise<boolean>;
@@ -33,12 +34,12 @@ export interface MCPFrontendService {
 }
 
 export const MCPFrontendNotificationService = Symbol('MCPFrontendNotificationService');
-export interface MCPFrontendNotificationService {
+export type MCPFrontendNotificationService = {
     readonly onDidUpdateMCPServers: Event<void>;
     didUpdateMCPServers(): void;
 }
 
-export interface MCPServer {
+export type MCPServer = {
     callTool(toolName: string, arg_string: string): Promise<CallToolResult>;
     getTools(): Promise<ListToolsResult>;
     readResource(resourceId: string): Promise<ReadResourceResult>;
@@ -46,7 +47,7 @@ export interface MCPServer {
     description: MCPServerDescription;
 }
 
-export interface MCPServerManager {
+export type MCPServerManager = {
     callTool(serverName: string, toolName: string, arg_string: string): Promise<CallToolResult>;
     removeServer(name: string): void;
     addOrUpdateServer(description: MCPServerDescription): void;
@@ -62,7 +63,7 @@ export interface MCPServerManager {
     getResources(serverName: string): Promise<ListResourcesResult>;
 }
 
-export interface ToolInformation {
+export type ToolInformation = {
     name: string;
     description?: string;
 }
@@ -77,7 +78,7 @@ export enum MCPServerStatus {
     Errored = 'Errored'
 }
 
-export interface BaseMCPServerDescription {
+export type BaseMCPServerDescription = {
     /**
      * The unique name of the MCP server.
      */
@@ -115,7 +116,7 @@ export interface BaseMCPServerDescription {
     resolve?: (description: MCPServerDescription) => Promise<MCPServerDescription>;
 }
 
-export interface LocalMCPServerDescription extends BaseMCPServerDescription {
+export type LocalMCPServerDescription = BaseMCPServerDescription & {
     /**
      * The command to execute the MCP server.
      */
@@ -132,7 +133,7 @@ export interface LocalMCPServerDescription extends BaseMCPServerDescription {
     env?: { [key: string]: string };
 }
 
-export interface RemoteMCPServerDescription extends BaseMCPServerDescription {
+export type RemoteMCPServerDescription = BaseMCPServerDescription & {
     /**
      * The URL of the remote MCP server.
      */

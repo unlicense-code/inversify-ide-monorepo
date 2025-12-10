@@ -29,7 +29,7 @@ import {
     ToolCallResult,
     ImageMimeType,
     LanguageModelStatus
-} from '@theia/ai-core';
+} from '@theia/ai-core/lib/common/index.js';
 import { CancellationToken, isArray } from '@theia/core';
 import { Anthropic } from '@anthropic-ai/sdk';
 import type { Base64ImageSource, ImageBlockParam, Message, MessageParam, TextBlockParam, ToolResultBlockParam } from '@anthropic-ai/sdk/resources';
@@ -37,7 +37,7 @@ import * as undici from 'undici';
 
 export const DEFAULT_MAX_TOKENS = 4096;
 
-interface ToolCallback {
+type ToolCallback = {
     readonly name: string;
     readonly id: string;
     readonly index: number;

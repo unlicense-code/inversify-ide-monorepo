@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { escapeRegExpCharacters } from '../strings';
-import { UriComponents } from '../uri';
-import { escapeIcons } from './icon-utilities';
-import { isObject, isString } from '../types';
+import { escapeRegExpCharacters } from '../strings.js';
+import { UriComponents } from '../uri.js';
+import { escapeIcons } from './icon-utilities.js';
+import { isObject, isString } from '../types.js';
 
-export interface MarkdownStringTrustedOptions {
+export type MarkdownStringTrustedOptions = {
     readonly enabledCommands: readonly string[];
 }
 
-export interface MarkdownString {
+export type MarkdownString = {
     readonly value: string;
     readonly isTrusted?: boolean | MarkdownStringTrustedOptions;
     readonly supportThemeIcons?: boolean;

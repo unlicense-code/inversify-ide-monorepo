@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -22,8 +22,8 @@ import {
     Progress,
     ProgressUpdate,
     ProgressMessage
-} from './message-service-protocol';
-import { CancellationTokenSource } from './cancellation';
+} from './message-service-protocol.js';
+import { CancellationTokenSource } from './cancellation.js';
 
 /**
  * Service to log and categorize messages, show progress information and offer actions.

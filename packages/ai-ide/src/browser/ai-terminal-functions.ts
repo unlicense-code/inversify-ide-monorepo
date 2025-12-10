@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { MutableChatRequestModel } from '@theia/ai-chat';
-import { ToolProvider, ToolRequest } from '@theia/ai-core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
-import { SUGGEST_TERMINAL_COMMAND_ID } from '../common/ai-terminal-functions';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget';
-import { waitForEvent } from '@theia/core/lib/common/promise-util';
-import { ApplicationShell } from '@theia/core/lib/browser';
+import { MutableChatRequestModel } from '@theia/ai-chat/lib/common/index.js';
+import { ToolProvider, ToolRequest } from '@theia/ai-core/lib/common/index.js';
+import { inject, injectable } from 'inversify';
+import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service.js';
+import { SUGGEST_TERMINAL_COMMAND_ID } from '../common/ai-terminal-functions.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget.js';
+import { waitForEvent } from '@theia/core/lib/common/promise-util.js';
+import { ApplicationShell } from '@theia/core/lib/browser/index.js';
 
 @injectable()
 export class SuggestTerminalCommand implements ToolProvider {

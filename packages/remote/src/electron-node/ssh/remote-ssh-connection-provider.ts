@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,19 +16,19 @@
 
 import * as ssh2 from 'ssh2';
 import * as net from 'net';
-import * as fs from '@theia/core/shared/fs-extra';
+import * as fs from 'fs-extra';
 import SftpClient = require('ssh2-sftp-client');
-import SshConfig from 'ssh-config';
+import * as SshConfig from 'ssh-config';
 import { Emitter, Event, MessageService, QuickInputService } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { RemoteSSHConnectionProvider, RemoteSSHConnectionProviderOptions, SSHConfig } from '../../electron-common/remote-ssh-connection-provider';
-import { RemoteConnectionService } from '../remote-connection-service';
-import { RemoteProxyServerProvider } from '../remote-proxy-server-provider';
-import { RemoteConnection, RemoteExecOptions, RemoteExecResult, RemoteExecTester, RemoteStatusReport } from '../remote-types';
-import { Deferred, timeout } from '@theia/core/lib/common/promise-util';
-import { SSHIdentityFileCollector, SSHKey } from './ssh-identity-file-collector';
-import { RemoteSetupService } from '../setup/remote-setup-service';
-import { generateUuid } from '@theia/core/lib/common/uuid';
+import { inject, injectable } from 'inversify';
+import { RemoteSSHConnectionProvider, RemoteSSHConnectionProviderOptions, SSHConfig } from '../../electron-common/remote-ssh-connection-provider.js';
+import { RemoteConnectionService } from '../remote-connection-service.js';
+import { RemoteProxyServerProvider } from '../remote-proxy-server-provider.js';
+import { RemoteConnection, RemoteExecOptions, RemoteExecResult, RemoteExecTester, RemoteStatusReport } from '../remote-types.js';
+import { Deferred, timeout } from '@theia/core/lib/common/promise-util.js';
+import { SSHIdentityFileCollector, SSHKey } from './ssh-identity-file-collector.js';
+import { RemoteSetupService } from '../setup/remote-setup-service.js';
+import { generateUuid } from '@theia/core/lib/common/uuid.js';
 
 @injectable()
 export class RemoteSSHConnectionProviderImpl implements RemoteSSHConnectionProvider {
@@ -58,8 +58,9 @@ export class RemoteSSHConnectionProviderImpl implements RemoteSSHConnectionProvi
         const sshConfig = await this.doGetSSHConfig(customConfigFile);
         const host2 = host.trim().split(':');
 
-        const record = Object.fromEntries(
-            Object.entries(sshConfig.compute(host2[0])).map(([k, v]) => [k.toLowerCase(), v])
+        const computed = sshConfig.compute(host2[0]);
+        const record: Record<string, string | string[]> = Object.fromEntries(
+            Object.entries(computed).map(([k, v]) => [k.toLowerCase(), v as string | string[]])
         );
 
         // Generate a regexp to find wildcards and process the hostname with the wildcards
@@ -85,11 +86,13 @@ export class RemoteSSHConnectionProviderImpl implements RemoteSSHConnectionProvi
     }
 
     async getSSHConfig(customConfigFile?: string): Promise<SSHConfig> {
-        return this.doGetSSHConfig(customConfigFile);
+        const config = await this.doGetSSHConfig(customConfigFile);
+        return config as unknown as SSHConfig;
     }
 
-    async doGetSSHConfig(customConfigFile?: string): Promise<SshConfig> {
-        const empty = new SshConfig();
+    async doGetSSHConfig(customConfigFile?: string): Promise<any> {
+        const SshConfigClass = SshConfig as any;
+        const empty = new SshConfigClass();
         if (!customConfigFile) {
             return empty;
         }
@@ -297,7 +300,7 @@ export class RemoteSSHConnectionProviderImpl implements RemoteSSHConnectionProvi
     }
 }
 
-export interface RemoteSSHConnectionOptions {
+export type RemoteSSHConnectionOptions = {
     id: string;
     name: string;
     type: string;

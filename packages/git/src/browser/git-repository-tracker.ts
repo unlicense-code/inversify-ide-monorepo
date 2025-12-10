@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { Git, Repository, WorkingDirectoryStatus } from '../common';
+import { injectable, inject, postConstruct } from 'inversify';
+import { Git, Repository, WorkingDirectoryStatus } from '../common/index.js';
 import { Event, Emitter, Disposable, DisposableCollection, CancellationToken, CancellationTokenSource } from '@theia/core';
-import { GitRepositoryProvider } from './git-repository-provider';
-import { GitWatcher, GitStatusChangeEvent } from '../common/git-watcher';
-import URI from '@theia/core/lib/common/uri';
+import { GitRepositoryProvider } from './git-repository-provider.js';
+import { GitWatcher, GitStatusChangeEvent } from '../common/git-watcher.js';
+import { URI } from '@theia/core/lib/common/uri.js';
 
-import debounce = require('@theia/core/shared/lodash.debounce');
+import debounce from  'lodash/debounce.js'
 
 /**
  * The repository tracker watches the selected repository for status changes. It provides a convenient way to listen on status updates.

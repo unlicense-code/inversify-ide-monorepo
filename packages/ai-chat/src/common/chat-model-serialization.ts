@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ChatAgentLocation } from './chat-agents';
+import { ChatAgentLocation } from './chat-agents.js';
 
-export interface SerializableChangeSetElement {
+export type SerializableChangeSetElement = {
     kind?: string;
     uri: string;
     name?: string;
@@ -27,7 +27,7 @@ export interface SerializableChangeSetElement {
     data?: { [key: string]: unknown };
 }
 
-export interface SerializableChangeSetFileElementData {
+export type SerializableChangeSetFileElementData = {
     targetState?: string;
     originalState?: string;
     replacements?: Array<{
@@ -37,7 +37,7 @@ export interface SerializableChangeSetFileElementData {
     }>;
 }
 
-export interface SerializableChatRequestData {
+export type SerializableChatRequestData = {
     id: string;
     text: string;
     agentId?: string;
@@ -47,7 +47,7 @@ export interface SerializableChatRequestData {
     };
 }
 
-export interface SerializableChatResponseContentData<T = unknown> {
+export type SerializableChatResponseContentData<T = unknown> = {
     kind: string;
     /**
      * Fallback message used when the deserializer for this content type is not available.
@@ -56,7 +56,7 @@ export interface SerializableChatResponseContentData<T = unknown> {
     data: T; // Content-specific serialization
 }
 
-export interface SerializableChatResponseData {
+export type SerializableChatResponseData = {
     id: string;
     requestId: string;
     isComplete: boolean;
@@ -65,20 +65,12 @@ export interface SerializableChatResponseData {
     content: SerializableChatResponseContentData[];
 }
 
-/**
- * Serialized representation of an item in a hierarchy branch.
- * Each item represents a request and optionally links to the next branch.
- */
-export interface SerializableHierarchyBranchItem {
+export type SerializableHierarchyBranchItem = {
     requestId: string;
     nextBranchId?: string;
 }
 
-/**
- * Serialized representation of a branch in the chat request hierarchy.
- * A branch contains alternative requests (created by editing messages).
- */
-export interface SerializableHierarchyBranch {
+export type SerializableHierarchyBranch = {
     /** Unique identifier for this branch */
     id: string;
     /** All items (alternative requests) in this branch */
@@ -87,21 +79,14 @@ export interface SerializableHierarchyBranch {
     activeBranchIndex: number;
 }
 
-/**
- * Serialized representation of the complete chat request hierarchy.
- * The hierarchy is stored as a flat map of branches.
- */
-export interface SerializableHierarchy {
+export type SerializableHierarchy = {
     /** ID of the root branch where the hierarchy starts */
     rootBranchId: string;
     /** Map of branch ID to branch data for all branches in the hierarchy */
     branches: { [branchId: string]: SerializableHierarchyBranch };
 }
 
-/**
- * Serialized representation of ChatModel.
- */
-export interface SerializedChatModel {
+export type SerializedChatModel = {
     sessionId: string;
     location: ChatAgentLocation;
     /**
@@ -114,11 +99,7 @@ export interface SerializedChatModel {
     responses: SerializableChatResponseData[];
 }
 
-/**
- * Wrapper for persisted chat model data.
- * Includes metadata (version, pinned agent, title) along with the chat model.
- */
-export interface SerializedChatData {
+export type SerializedChatData = {
     version: number;
     pinnedAgentId?: string;
     title?: string;
@@ -126,7 +107,7 @@ export interface SerializedChatData {
     saveDate: number;
 }
 
-export interface SerializableChatsData {
+export type SerializableChatsData = {
     [sessionId: string]: SerializedChatData;
 }
 

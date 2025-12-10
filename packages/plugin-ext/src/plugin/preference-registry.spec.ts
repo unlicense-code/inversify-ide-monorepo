@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Container } from '@theia/core/shared/inversify';
-import { PreferenceRegistryExtImpl, PreferenceScope } from './preference-registry';
+import { Container } from 'inversify';
+import { PreferenceRegistryExtImpl, PreferenceScope } from './preference-registry.js';
 import * as chai from 'chai';
-import { WorkspaceExtImpl } from '../plugin/workspace';
-import { ProxyIdentifier, RPCProtocol } from '../common/rpc-protocol';
-import { URI } from './types-impl';
+import { WorkspaceExtImpl } from '../plugin/workspace.js';
+import { ProxyIdentifier, RPCProtocol } from '../common/rpc-protocol.js';
+import { URI } from './types-impl.js';
 
 const expect = chai.expect;
 

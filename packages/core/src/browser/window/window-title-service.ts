@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,14 +15,14 @@
 // *****************************************************************************
 
 import { inject, injectable, named, postConstruct } from 'inversify';
-import { escapeRegExpCharacters } from '../../common/strings';
-import { Emitter, Event } from '../../common/event';
-import { CorePreferences } from '../../common/core-preferences';
-import { FrontendApplicationConfigProvider } from '../frontend-application-config-provider';
-import { ContributionProvider } from '../../common';
+import { escapeRegExpCharacters } from '../../common/strings.js';
+import { Emitter, Event } from '../../common/event.js';
+import { CorePreferences } from '../../common/core-preferences.js';
+import { FrontendApplicationConfigProvider } from '../frontend-application-config-provider.js';
+import { ContributionProvider } from '../../common/index.js';
 
 export const WindowTitleContribution = Symbol('WindowTitleAddOnContribution');
-export interface WindowTitleContribution {
+export type WindowTitleContribution = {
     enhanceTitle(title: string, parts: Map<string, string | undefined>): string;
 }
 

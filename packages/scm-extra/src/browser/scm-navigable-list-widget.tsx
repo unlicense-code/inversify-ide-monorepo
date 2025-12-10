@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { SELECTED_CLASS, Key, Widget } from '@theia/core/lib/browser';
-import { ScmService } from '@theia/scm/lib/browser/scm-service';
-import URI from '@theia/core/lib/common/uri';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
-import { Message } from '@theia/core/shared/@lumino/messaging';
-import { ElementExt } from '@theia/core/shared/@lumino/domutils';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { ReactWidget } from '@theia/core/lib/browser/widgets/react-widget';
-import * as React from '@theia/core/shared/react';
-import { ScmFileChangeLabelProvider } from './scm-file-change-label-provider';
-import { ScmFileChangeNode } from './scm-file-change-node';
+import { SELECTED_CLASS, Key, Widget } from '@theia/core/lib/browser/index.js';
+import { ScmService } from '@theia/scm/lib/browser/scm-service.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { LabelProvider } from '@theia/core/lib/browser/label-provider.js';
+import { Message } from '@lumino/messaging';
+import { ElementExt } from '@lumino/domutils';
+import { inject, injectable } from 'inversify';
+import { ReactWidget } from '@theia/core/lib/browser/widgets/react-widget.js';
+import * as React from 'react';
+import { ScmFileChangeLabelProvider } from './scm-file-change-label-provider.js';
+import { ScmFileChangeNode } from './scm-file-change-node.js';
 
 @injectable()
 export abstract class ScmNavigableListWidget<T extends { selected?: boolean }> extends ReactWidget {

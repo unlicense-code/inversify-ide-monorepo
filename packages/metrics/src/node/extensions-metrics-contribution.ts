@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -13,10 +13,10 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { injectable } from '@theia/core/shared/inversify';
-import { MetricsContribution } from './metrics-contribution';
-import { PROMETHEUS_REGEXP, toPrometheusValidName } from './prometheus';
-import { backendGlobal } from '@theia/core/lib/node';
+import { injectable } from 'inversify';
+import { MetricsContribution } from './metrics-contribution.js';
+import { PROMETHEUS_REGEXP, toPrometheusValidName } from './prometheus.js';
+import { backendGlobal } from '@theia/core/lib/node/index.js';
 
 const metricsName = 'theia_extension_version';
 

@@ -16,9 +16,9 @@
 
 import type * as theia from '@theia/plugin';
 
-import { TreeCollection, observableProperty } from '@theia/test/lib/common/collections';
-import { TreeDeltaBuilder } from '@theia/test/lib/common/tree-delta';
-import { TestControllerImpl } from './tests';
+import { TreeCollection, observableProperty } from '@theia/test/lib/common/collections.js';
+import { TreeDeltaBuilder } from '@theia/test/lib/common/tree-delta.js';
+import { TestControllerImpl } from './tests.js';
 
 export class TestTagImpl {
     constructor(readonly id: string) { }

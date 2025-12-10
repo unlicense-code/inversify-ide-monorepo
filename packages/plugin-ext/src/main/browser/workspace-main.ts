@@ -19,26 +19,26 @@
  *--------------------------------------------------------------------------------------------*/
 // some code was copied and modified from https://github.com/Microsoft/vscode/blob/main/src/vs/workbench/api/browser/mainThreadWorkspace.ts
 import * as theia from '@theia/plugin';
-import { interfaces, injectable } from '@theia/core/shared/inversify';
-import { WorkspaceExt, StorageExt, MAIN_RPC_CONTEXT, WorkspaceMain, WorkspaceFolderPickOptionsMain, FindFilesOptions } from '../../common/plugin-api-rpc';
-import { RPCProtocol } from '../../common/rpc-protocol';
-import { URI as Uri } from '@theia/core/shared/vscode-uri';
-import { UriComponents } from '../../common/uri-components';
-import { FileSearchService } from '@theia/file-search/lib/common/file-search-service';
-import URI from '@theia/core/lib/common/uri';
-import { WorkspaceService, WorkspaceTrustService, CanonicalUriService } from '@theia/workspace/lib/browser';
-import { Resource } from '@theia/core/lib/common/resource';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
+import { interfaces, injectable } from 'inversify';
+import { WorkspaceExt, StorageExt, MAIN_RPC_CONTEXT, WorkspaceMain, WorkspaceFolderPickOptionsMain, FindFilesOptions } from '../../common/plugin-api-rpc.js';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
+import { URI as Uri } from 'vscode-uri';
+import { UriComponents } from '../../common/uri-components.js';
+import { FileSearchService } from '@theia/file-search/lib/common/file-search-service.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { WorkspaceService, WorkspaceTrustService, CanonicalUriService } from '@theia/workspace/lib/browser/index.js';
+import { Resource } from '@theia/core/lib/common/resource.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
 import { Emitter, Event, ResourceResolver, CancellationToken, isUndefined } from '@theia/core';
-import { PluginServer } from '../../common/plugin-protocol';
-import { FileSystemPreferences } from '@theia/filesystem/lib/common';
-import { SearchInWorkspaceService } from '@theia/search-in-workspace/lib/browser/search-in-workspace-service';
-import { FileStat } from '@theia/filesystem/lib/common/files';
-import { MonacoQuickInputService } from '@theia/monaco/lib/browser/monaco-quick-input-service';
-import { RequestService } from '@theia/core/shared/@theia/request';
-import { UTF16be, UTF16le, UTF8, UTF8_with_bom } from '@theia/core/lib/common/encodings';
-import { EncodingRegistry } from '@theia/core/lib/browser/encoding-registry';
-import { PreferenceService } from '@theia/core/lib/common/preferences/preference-service';
+import { PluginServer } from '../../common/plugin-protocol.js';
+import { FileSystemPreferences } from '@theia/filesystem/lib/common/index.js';
+import { SearchInWorkspaceService } from '@theia/search-in-workspace/lib/browser/search-in-workspace-service.js';
+import { FileStat } from '@theia/filesystem/lib/common/files.js';
+import { MonacoQuickInputService } from '@theia/monaco/lib/browser/monaco-quick-input-service.js';
+import { RequestService } from '@theia/request';
+import { UTF16be, UTF16le, UTF8, UTF8_with_bom } from '@theia/core/lib/common/encodings.js';
+import { EncodingRegistry } from '@theia/core/lib/browser/encoding-registry.js';
+import { PreferenceService } from '@theia/core/lib/common/preferences/preference-service.js';
 
 export class WorkspaceMainImpl implements WorkspaceMain, Disposable {
 
@@ -385,10 +385,7 @@ export class WorkspaceMainImpl implements WorkspaceMain, Disposable {
     }
 }
 
-/**
- * Text content provider for resources with custom scheme.
- */
-export interface TextContentResourceProvider {
+export type TextContentResourceProvider = {
 
     /**
      * Provides resource for given URI

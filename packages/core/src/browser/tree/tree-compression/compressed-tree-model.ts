@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { injectable, inject } from 'inversify';
-import { CompressionToggle, TreeCompressionService } from './tree-compression-service';
-import { CompositeTreeNode, TreeNode } from '../tree';
-import { TreeModelImpl } from '../tree-model';
-import { SelectableTreeNode, TreeSelection } from '../tree-selection';
-import { ExpandableTreeNode } from '../tree-expansion';
-import { TopDownTreeIterator, TreeIterator } from '../tree-iterator';
+import { CompressionToggle, TreeCompressionService } from './tree-compression-service.js';
+import { CompositeTreeNode, TreeNode } from '../tree.js';
+import { TreeModelImpl } from '../tree-model.js';
+import { SelectableTreeNode, TreeSelection } from '../tree-selection.js';
+import { ExpandableTreeNode } from '../tree-expansion.js';
+import { TopDownTreeIterator, TreeIterator } from '../tree-iterator.js';
 
 export class TopDownCompressedTreeIterator extends TopDownTreeIterator {
     protected override isCollapsed(candidate: TreeNode): boolean {

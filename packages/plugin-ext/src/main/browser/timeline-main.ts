@@ -13,19 +13,19 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { interfaces } from '@theia/core/shared/inversify';
-import { MAIN_RPC_CONTEXT, TimelineExt, TimelineMain } from '../../common/plugin-api-rpc';
-import { RPCProtocol } from '../../common/rpc-protocol';
-import { TimelineService } from '@theia/timeline/lib/browser/timeline-service';
-import { Emitter } from '@theia/core/lib/common';
-import { URI } from '@theia/core/shared/vscode-uri';
+import { interfaces } from 'inversify';
+import { MAIN_RPC_CONTEXT, TimelineExt, TimelineMain } from '../../common/plugin-api-rpc.js';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
+import { TimelineService } from '@theia/timeline/lib/browser/timeline-service.js';
+import { Emitter } from '@theia/core/lib/common/index.js';
+import { URI } from 'vscode-uri';
 import {
     InternalTimelineOptions,
     Timeline,
     TimelineOptions,
     TimelineProviderDescriptor,
     TimelineChangeEvent
-} from '@theia/timeline/lib/common/timeline-model';
+} from '@theia/timeline/lib/common/timeline-model.js';
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.

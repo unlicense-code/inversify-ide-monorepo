@@ -14,22 +14,22 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 let disableJSDOM = enableJSDOM();
 FrontendApplicationConfigProvider.set({});
 
 import { expect } from 'chai';
 import * as sinon from 'sinon';
-import { Container } from '@theia/core/shared/inversify';
-import { TokenUsageService } from '@theia/ai-core';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { URI } from '@theia/core/lib/common/uri';
-import { ChangeSetFileElementFactory } from '@theia/ai-chat/lib/browser/change-set-file-element';
-import { ChatAgentLocation, MarkdownChatResponseContentImpl, ThinkingChatResponseContentImpl, ErrorChatResponseContentImpl, MutableChatRequestModel } from '@theia/ai-chat';
-import { CodexFrontendService } from './codex-frontend-service';
-import { CodexChatAgent, CODEX_CHAT_AGENT_ID, CODEX_TOOL_CALLS_KEY, CODEX_INPUT_TOKENS_KEY, CODEX_OUTPUT_TOKENS_KEY } from './codex-chat-agent';
+import { Container } from 'inversify';
+import { TokenUsageService } from '@theia/ai-core/lib/common/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ChangeSetFileElementFactory } from '@theia/ai-chat/lib/browser/change-set-file-element.js';
+import { ChatAgentLocation, MarkdownChatResponseContentImpl, ThinkingChatResponseContentImpl, ErrorChatResponseContentImpl, MutableChatRequestModel } from '@theia/ai-chat/lib/common/index.js';
+import { CodexFrontendService } from './codex-frontend-service.js';
+import { CodexChatAgent, CODEX_CHAT_AGENT_ID, CODEX_TOOL_CALLS_KEY, CODEX_INPUT_TOKENS_KEY, CODEX_OUTPUT_TOKENS_KEY } from './codex-chat-agent.js';
 
 import type {
     CommandExecutionItem,
@@ -45,11 +45,7 @@ import type {
 
 disableJSDOM();
 
-/**
- * Helper interface to access protected methods for testing purposes.
- * This avoids using 'as any' casts when testing protected methods.
- */
-interface CodexChatAgentTestAccess {
+type CodexChatAgentTestAccess = {
     getToolCalls(request: MutableChatRequestModel): Map<string, unknown>;
     isToolInvocation(item: unknown): boolean;
     extractToolArguments(item: CommandExecutionItem | FileChangeItem | McpToolCallItem | WebSearchItem | TodoListItem): string;

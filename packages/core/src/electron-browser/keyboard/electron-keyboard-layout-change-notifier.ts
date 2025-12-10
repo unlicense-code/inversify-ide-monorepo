@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { postConstruct, injectable } from 'inversify';
-import { KeyboardLayoutChangeNotifier, NativeKeyboardLayout } from '../../common/keyboard/keyboard-layout-provider';
-import { Emitter, Event } from '../../common/event';
+import { KeyboardLayoutChangeNotifier, NativeKeyboardLayout } from '../../common/keyboard/keyboard-layout-provider.js';
+import { Emitter, Event } from '../../common/event.js';
 
 /**
  * Keyboard layout changes are detected by the native-keymap package. This must happen in the

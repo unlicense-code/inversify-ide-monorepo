@@ -14,16 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { Disposable } from '@theia/core/lib/common/disposable';
-import { ProcessTaskRunner } from './process/process-task-runner';
-import { TaskRunner } from './task-runner-protocol';
+import { injectable, inject, postConstruct } from 'inversify';
+import { Disposable } from '@theia/core/lib/common/disposable.js';
+import { ProcessTaskRunner } from './process/process-task-runner.js';
+import { TaskRunner } from './task-runner-protocol.js';
 export { TaskRunner };
 
 export const TaskRunnerContribution = Symbol('TaskRunnerContribution');
 
-/** The {@link TaskRunnerContribution} can be used to contribute custom {@link TaskRunner}s. */
-export interface TaskRunnerContribution {
+export type TaskRunnerContribution = {
     /**
      * Register custom runners using the given {@link TaskRunnerRegistry}.
      * @param runners the common task runner registry.

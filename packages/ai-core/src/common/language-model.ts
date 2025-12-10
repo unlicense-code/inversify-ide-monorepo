@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { ContributionProvider, ILogger, isFunction, isObject, Event, Emitter, CancellationToken } from '@theia/core';
-import { inject, injectable, named, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, named, postConstruct } from 'inversify';
 
 export type MessageActor = 'user' | 'ai' | 'system';
 
@@ -38,19 +38,19 @@ export namespace LanguageModelMessage {
         return obj.type === 'image';
     }
 }
-export interface TextMessage {
+export type TextMessage = {
     actor: MessageActor;
     type: 'text';
     text: string;
 }
-export interface ThinkingMessage {
+export type ThinkingMessage = {
     actor: 'ai'
     type: 'thinking';
     thinking: string;
     signature: string;
 }
 
-export interface ToolResultMessage {
+export type ToolResultMessage = {
     actor: 'user';
     tool_use_id: string;
     name: string;
@@ -59,7 +59,7 @@ export interface ToolResultMessage {
     is_error?: boolean;
 }
 
-export interface ToolUseMessage {
+export type ToolUseMessage = {
     actor: 'ai';
     type: 'tool_use';
     id: string;
@@ -67,8 +67,8 @@ export interface ToolUseMessage {
     name: string;
 }
 export type ImageMimeType = 'image/jpeg' | 'image/png' | 'image/gif' | 'image/webp' | 'image/bmp' | 'image/svg+xml' | string & {};
-export interface UrlImageContent { url: string };
-export interface Base64ImageContent {
+export type UrlImageContent = { url: string };
+export type Base64ImageContent = {
     base64data: string;
     mimeType: ImageMimeType;
 };
@@ -77,7 +77,7 @@ export namespace ImageContent {
     export const isUrl = (obj: ImageContent): obj is UrlImageContent => 'url' in obj;
     export const isBase64 = (obj: ImageContent): obj is Base64ImageContent => 'base64data' in obj && 'mimeType' in obj;
 }
-export interface ImageMessage {
+export type ImageMessage = {
     actor: 'ai' | 'user';
     type: 'image';
     image: ImageContent;
@@ -92,19 +92,19 @@ export const isLanguageModelRequestMessage = (obj: unknown): obj is LanguageMode
         typeof (obj as { query: unknown }).query === 'string'
     );
 
-export interface ToolRequestParameterProperty {
+export type ToolRequestParameterProperty = {
     type?: | 'string' | 'number' | 'integer' | 'boolean' | 'object' | 'array' | 'null';
     anyOf?: ToolRequestParameterProperty[];
     [key: string]: unknown;
 }
 
 export type ToolRequestParametersProperties = Record<string, ToolRequestParameterProperty>;
-export interface ToolRequestParameters {
+export type ToolRequestParameters = {
     type?: 'object';
     properties: ToolRequestParametersProperties;
     required?: string[];
 }
-export interface ToolRequest {
+export type ToolRequest = {
     id: string;
     name: string;
     parameters: ToolRequestParameters
@@ -161,14 +161,14 @@ export namespace ToolRequest {
             (!('required' in obj) || (Array.isArray(obj.required) && obj.required.every(prop => typeof prop === 'string')));
     }
 }
-export interface LanguageModelRequest {
+export type LanguageModelRequest = {
     messages: LanguageModelMessage[],
     tools?: ToolRequest[];
     response_format?: { type: 'text' } | { type: 'json_object' } | ResponseFormatJsonSchema;
     settings?: { [key: string]: unknown };
     clientSettings?: { keepToolCalls: boolean; keepThinking: boolean }
 }
-export interface ResponseFormatJsonSchema {
+export type ResponseFormatJsonSchema = {
     type: 'json_schema';
     json_schema: {
         name: string,
@@ -178,13 +178,7 @@ export interface ResponseFormatJsonSchema {
     };
 }
 
-/**
- * The UserRequest extends the "pure" LanguageModelRequest for cancelling support as well as
- * logging metadata.
- * The additional metadata might also be used for other use cases, for example to query default
- * request settings based on the agent id, merging with the request settings handed over.
- */
-export interface UserRequest extends LanguageModelRequest {
+export type UserRequest = LanguageModelRequest & {
     /**
      * Identifier of the Ai/ChatSession
      */
@@ -207,7 +201,7 @@ export interface UserRequest extends LanguageModelRequest {
     cancellationToken?: CancellationToken;
 }
 
-export interface LanguageModelTextResponse {
+export type LanguageModelTextResponse = {
     text: string;
 }
 export const isLanguageModelTextResponse = (obj: unknown): obj is LanguageModelTextResponse =>
@@ -218,7 +212,7 @@ export type LanguageModelStreamResponsePart = TextResponsePart | ToolCallRespons
 export const isLanguageModelStreamResponsePart = (part: unknown): part is LanguageModelStreamResponsePart =>
     isUsageResponsePart(part) || isTextResponsePart(part) || isThinkingResponsePart(part) || isToolCallResponsePart(part);
 
-export interface UsageResponsePart {
+export type UsageResponsePart = {
     input_tokens: number;
     output_tokens: number;
 }
@@ -226,35 +220,35 @@ export const isUsageResponsePart = (part: unknown): part is UsageResponsePart =>
     !!(part && typeof part === 'object' &&
         'input_tokens' in part && typeof part.input_tokens === 'number' &&
         'output_tokens' in part && typeof part.output_tokens === 'number');
-export interface TextResponsePart {
+export type TextResponsePart = {
     content: string;
 }
 export const isTextResponsePart = (part: unknown): part is TextResponsePart =>
     !!(part && typeof part === 'object' && 'content' in part && typeof part.content === 'string');
 
-export interface ToolCallResponsePart {
+export type ToolCallResponsePart = {
     tool_calls: ToolCall[];
 }
 export const isToolCallResponsePart = (part: unknown): part is ToolCallResponsePart =>
     !!(part && typeof part === 'object' && 'tool_calls' in part && Array.isArray(part.tool_calls));
 
-export interface ThinkingResponsePart {
+export type ThinkingResponsePart = {
     thought: string;
     signature: string;
 }
 export const isThinkingResponsePart = (part: unknown): part is ThinkingResponsePart =>
     !!(part && typeof part === 'object' && 'thought' in part && typeof part.thought === 'string');
 
-export interface ToolCallTextResult { type: 'text', text: string; };
-export interface ToolCallImageResult extends Base64ImageContent { type: 'image' };
-export interface ToolCallAudioResult { type: 'audio', data: string; mimeType: string };
+export type ToolCallTextResult = { type: 'text', text: string; };
+export type ToolCallImageResult = Base64ImageContent & { type: 'image' };
+export type ToolCallAudioResult = { type: 'audio', data: string; mimeType: string };
 export interface ToolCallErrorResult { type: 'error', data: string; };
 export type ToolCallContentResult = ToolCallTextResult | ToolCallImageResult | ToolCallAudioResult | ToolCallErrorResult;
-export interface ToolCallContent {
+export type ToolCallContent = {
     content: ToolCallContentResult[];
 }
 export type ToolCallResult = undefined | object | string | ToolCallContent;
-export interface ToolCall {
+export type ToolCall = {
     id?: string;
     function?: {
         arguments?: string;
@@ -264,13 +258,13 @@ export interface ToolCall {
     result?: ToolCallResult;
 }
 
-export interface LanguageModelStreamResponse {
+export type LanguageModelStreamResponse = {
     stream: AsyncIterable<LanguageModelStreamResponsePart>;
 }
 export const isLanguageModelStreamResponse = (obj: unknown): obj is LanguageModelStreamResponse =>
     !!(obj && typeof obj === 'object' && 'stream' in obj);
 
-export interface LanguageModelParsedResponse {
+export type LanguageModelParsedResponse = {
     parsed: unknown;
     content: string;
 }
@@ -287,7 +281,7 @@ export const LanguageModelProvider = Symbol('LanguageModelProvider');
 export type LanguageModelProvider = () => Promise<LanguageModel[]>;
 
 // See also VS Code `ILanguageModelChatMetadata`
-export interface LanguageModelMetaData {
+export type LanguageModelMetaData = {
     readonly id: string;
     readonly name?: string;
     readonly vendor?: string;
@@ -304,12 +298,12 @@ export namespace LanguageModelMetaData {
     }
 }
 
-export interface LanguageModelStatus {
+export type LanguageModelStatus = {
     status: 'ready' | 'unavailable';
     message?: string;
 }
 
-export interface LanguageModel extends LanguageModelMetaData {
+export type LanguageModel = LanguageModelMetaData & {
     request(request: UserRequest, cancellationToken?: CancellationToken): Promise<LanguageModelResponse>;
 }
 
@@ -320,7 +314,7 @@ export namespace LanguageModel {
 }
 
 // See also VS Code `ILanguageModelChatSelector`
-interface VsCodeLanguageModelSelector {
+type VsCodeLanguageModelSelector = {
     readonly identifier?: string;
     readonly name?: string;
     readonly vendor?: string;
@@ -329,7 +323,7 @@ interface VsCodeLanguageModelSelector {
     readonly tokens?: number;
 }
 
-export interface LanguageModelSelector extends VsCodeLanguageModelSelector {
+export type LanguageModelSelector = VsCodeLanguageModelSelector & {
     readonly agent: string;
     readonly purpose: string;
 }
@@ -338,10 +332,7 @@ export type LanguageModelRequirement = Omit<LanguageModelSelector, 'agent'>;
 
 export const LanguageModelRegistry = Symbol('LanguageModelRegistry');
 
-/**
- * Base interface for language model registries (frontend and backend).
- */
-export interface LanguageModelRegistry {
+export type LanguageModelRegistry = {
     onChange: Event<{ models: LanguageModel[] }>;
     addLanguageModels(models: LanguageModel[]): void;
     getLanguageModels(): Promise<LanguageModel[]>;
@@ -354,10 +345,7 @@ export interface LanguageModelRegistry {
 
 export const FrontendLanguageModelRegistry = Symbol('FrontendLanguageModelRegistry');
 
-/**
- * Frontend-specific language model registry interface (supports alias resolution).
- */
-export interface FrontendLanguageModelRegistry extends LanguageModelRegistry {
+export type FrontendLanguageModelRegistry = LanguageModelRegistry & {
     /**
      * If an id of a language model is provded, returns the LanguageModel if it is `ready`.
      * If an alias is provided, finds the highest-priority ready model from that alias.

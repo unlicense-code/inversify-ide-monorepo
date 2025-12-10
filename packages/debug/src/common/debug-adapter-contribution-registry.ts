@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, named } from '@theia/core/shared/inversify';
+import { injectable, inject, named } from 'inversify';
 import { ContributionProvider } from '@theia/core';
-import { DebugConfiguration } from './debug-configuration';
-import { DebuggerDescription, DebugError } from './debug-service';
+import { DebugConfiguration } from './debug-configuration.js';
+import { DebuggerDescription, DebugError } from './debug-service.js';
 
-import { DebugAdapterContribution, DebugAdapterExecutable, DebugAdapterSessionFactory } from './debug-model';
-import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema';
+import { DebugAdapterContribution, DebugAdapterExecutable, DebugAdapterSessionFactory } from './debug-model.js';
+import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema.js';
 
 /**
  * Contributions registry.

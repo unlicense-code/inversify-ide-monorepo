@@ -13,13 +13,13 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { PromptVariantSet } from '@theia/ai-core/lib/common';
+import { PromptVariantSet } from '@theia/ai-core/lib/common/index.js';
 import {
     GET_WORKSPACE_FILE_LIST_FUNCTION_ID, FILE_CONTENT_FUNCTION_ID, SEARCH_IN_WORKSPACE_FUNCTION_ID,
     GET_FILE_DIAGNOSTICS_ID, FIND_FILES_BY_PATTERN_FUNCTION_ID
-} from './workspace-functions';
-import { CONTEXT_FILES_VARIABLE_ID, TASK_CONTEXT_SUMMARY_VARIABLE_ID } from './context-variables';
-import { UPDATE_CONTEXT_FILES_FUNCTION_ID } from './context-functions';
+} from './workspace-functions.js';
+import { CONTEXT_FILES_VARIABLE_ID, TASK_CONTEXT_SUMMARY_VARIABLE_ID } from './context-variables.js';
+import { UPDATE_CONTEXT_FILES_FUNCTION_ID } from './context-functions.js';
 
 export const architectSystemVariants = <PromptVariantSet>{
     id: 'architect-system',

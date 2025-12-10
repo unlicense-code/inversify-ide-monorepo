@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,25 +19,25 @@ import * as net from 'net';
 
 export type RemoteStatusReport = (message: string) => void;
 
-export interface ExpressLayer {
+export type ExpressLayer = {
     name: string
     regexp: RegExp
     handle: Function
     path?: string
 }
 
-export interface RemoteExecOptions {
+export type RemoteExecOptions = {
     env?: NodeJS.ProcessEnv;
 }
 
-export interface RemoteExecResult {
+export type RemoteExecResult = {
     stdout: string;
     stderr: string;
 }
 
 export type RemoteExecTester = (stdout: string, stderr: string) => boolean;
 
-export interface RemoteConnection extends Disposable {
+export type RemoteConnection = Disposable & {
     id: string;
     name: string;
     type: string;

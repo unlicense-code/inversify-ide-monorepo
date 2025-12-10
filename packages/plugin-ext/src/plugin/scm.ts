@@ -21,25 +21,25 @@
 // code copied and modified from https://github.com/microsoft/vscode/blob/1.52.1/src/vs/workbench/api/common/extHostSCM.ts
 
 import * as theia from '@theia/plugin';
-import { Emitter, Event } from '@theia/core/lib/common/event';
+import { Emitter, Event } from '@theia/core';
 import {
     Plugin, PLUGIN_RPC_CONTEXT,
     ScmExt,
     ScmMain, ScmRawResource, ScmRawResourceGroup,
     ScmRawResourceSplice, ScmRawResourceSplices,
     SourceControlGroupFeatures
-} from '../common';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { CommandRegistryImpl } from '../plugin/command-registry';
-import { Splice } from '../common/arrays';
-import { UriComponents } from '../common/uri-components';
-import { Command } from '../common/plugin-api-rpc-model';
-import { RPCProtocol } from '../common/rpc-protocol';
-import { URI, ThemeIcon } from './types-impl';
-import { ScmCommandArg } from '../common/plugin-api-rpc';
-import { sep } from '@theia/core/lib/common/paths';
-import { PluginIconPath } from './plugin-icon-path';
-import { createAPIObject } from './plugin-context';
+} from '../common/index.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { CommandRegistryImpl } from '../plugin/command-registry.js';
+import { Splice } from '../common/arrays.js';
+import { UriComponents } from '../common/uri-components.js';
+import { Command } from '../common/plugin-api-rpc-model.js';
+import { RPCProtocol } from '../common/rpc-protocol.js';
+import { URI, ThemeIcon } from './types-impl.js';
+import { ScmCommandArg } from '../common/plugin-api-rpc.js';
+import { sep } from '@theia/core/lib/common/paths.js';
+import { PluginIconPath } from './plugin-icon-path.js';
+import { createAPIObject } from './plugin-context.js';
 type ProviderHandle = number;
 type GroupHandle = number;
 type ResourceStateHandle = number;
@@ -284,7 +284,7 @@ function equals<T>(one: ReadonlyArray<T> | undefined, other: ReadonlyArray<T> | 
     return true;
 }
 
-interface ValidateInput {
+type ValidateInput = {
     (value: string, cursorPosition: number): theia.ProviderResult<theia.SourceControlInputBoxValidation | undefined | null>;
 }
 
@@ -934,6 +934,6 @@ function sortedDiff(before: ReadonlyArray<theia.SourceControlResourceState>,
     return result;
 }
 
-interface MutableSplice<T> extends Splice<T> {
+type MutableSplice<T> = Splice<T> & {
     deleteCount: number;
 }

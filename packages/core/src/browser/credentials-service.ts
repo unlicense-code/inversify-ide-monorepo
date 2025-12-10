@@ -21,10 +21,10 @@
 // code copied and modified from https://github.com/microsoft/vscode/blob/1.55.2/src/vs/workbench/services/credentials/common/credentials.ts#L12
 
 import { inject, injectable } from 'inversify';
-import { Emitter, Event } from '../common/event';
-import { KeyStoreService } from '../common/key-store';
+import { Emitter, Event } from '../common/event.js';
+import { KeyStoreService } from '../common/key-store.js';
 
-export interface CredentialsProvider {
+export type CredentialsProvider = {
     getPassword(service: string, account: string): Promise<string | undefined>;
     setPassword(service: string, account: string, password: string): Promise<void>;
     deletePassword(service: string, account: string): Promise<boolean>;
@@ -35,11 +35,11 @@ export interface CredentialsProvider {
 
 export const CredentialsService = Symbol('CredentialsService');
 
-export interface CredentialsService extends CredentialsProvider {
+export type CredentialsService = CredentialsProvider & {
     readonly onDidChangePassword: Event<CredentialsChangeEvent>;
 }
 
-export interface CredentialsChangeEvent {
+export type CredentialsChangeEvent = {
     service: string
     account: string;
 }

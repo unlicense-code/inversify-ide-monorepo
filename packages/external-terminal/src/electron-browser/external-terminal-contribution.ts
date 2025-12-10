@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { Command, CommandContribution, CommandRegistry } from '@theia/core/lib/common';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
-import { KeybindingContribution, KeybindingRegistry, LabelProvider } from '@theia/core/lib/browser';
-import { EditorManager } from '@theia/editor/lib/browser/editor-manager';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { ExternalTerminalService } from '../common/external-terminal';
-import { ExternalTerminalPreferenceService } from './external-terminal-preference';
-import { QuickPickService } from '@theia/core/lib/common/quick-pick-service';
-import { nls } from '@theia/core/lib/common/nls';
+import { inject, injectable } from 'inversify';
+import { Command, CommandContribution, CommandRegistry } from '@theia/core/lib/common/index.js';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
+import { KeybindingContribution, KeybindingRegistry, LabelProvider } from '@theia/core/lib/browser/index.js';
+import { EditorManager } from '@theia/editor/lib/browser/editor-manager.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { ExternalTerminalService } from '../common/external-terminal.js';
+import { ExternalTerminalPreferenceService } from './external-terminal-preference.js';
+import { QuickPickService } from '@theia/core/lib/common/quick-pick-service.js';
+import { nls } from '@theia/core/lib/common/nls.js';
 
 export namespace ExternalTerminalCommands {
     export const OPEN_NATIVE_CONSOLE = Command.toDefaultLocalizedCommand({

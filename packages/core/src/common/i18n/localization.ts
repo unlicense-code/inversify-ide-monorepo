@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,19 +17,19 @@
 export const localizationPath = '/services/i18n';
 
 export const AsyncLocalizationProvider = Symbol('AsyncLocalizationProvider');
-export interface AsyncLocalizationProvider {
+export type AsyncLocalizationProvider = {
     getCurrentLanguage(): Promise<string>
     setCurrentLanguage(languageId: string): Promise<void>
     getAvailableLanguages(): Promise<LanguageInfo[]>
     loadLocalization(languageId: string): Promise<Localization>
 }
 
-export interface Localization extends LanguageInfo {
+export type Localization = LanguageInfo & {
     translations: Record<string, string>;
     replacements?: Record<string, string>;
 }
 
-export interface LanguageInfo {
+export type LanguageInfo = {
     languageId: string;
     languageName?: string;
     languagePack?: boolean;

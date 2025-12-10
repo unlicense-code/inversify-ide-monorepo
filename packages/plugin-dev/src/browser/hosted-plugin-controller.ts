@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { StatusBar } from '@theia/core/lib/browser/status-bar/status-bar';
-import { StatusBarAlignment, StatusBarEntry, FrontendApplicationContribution, codicon } from '@theia/core/lib/browser';
-import { MessageService, PreferenceChange, PreferenceServiceImpl } from '@theia/core/lib/common';
-import { CommandRegistry } from '@theia/core/shared/@lumino/commands';
-import { Menu } from '@theia/core/shared/@lumino/widgets';
-import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
-import { ConnectionStatusService, ConnectionStatus } from '@theia/core/lib/browser/connection-status-service';
-import { PluginDevServer } from '../common/plugin-dev-protocol';
-import { HostedPluginManagerClient, HostedInstanceState, HostedPluginCommands, HostedInstanceData } from './hosted-plugin-manager-client';
-import { HostedPluginLogViewer } from './hosted-plugin-log-viewer';
-import { HostedPluginPreferences } from '../common/hosted-plugin-preferences';
-import { nls } from '@theia/core/lib/common/nls';
+import { injectable, inject } from 'inversify';
+import { StatusBar } from '@theia/core/lib/browser/status-bar/status-bar.js';
+import { StatusBarAlignment, StatusBarEntry, FrontendApplicationContribution, codicon } from '@theia/core/lib/browser/index.js';
+import { MessageService, PreferenceChange, PreferenceServiceImpl } from '@theia/core/lib/common/index.js';
+import { CommandRegistry } from '@lumino/commands';
+import { Menu } from '@lumino/widgets';
+import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state.js';
+import { ConnectionStatusService, ConnectionStatus } from '@theia/core/lib/browser/connection-status-service.js';
+import { PluginDevServer } from '../common/plugin-dev-protocol.js';
+import { HostedPluginManagerClient, HostedInstanceState, HostedPluginCommands, HostedInstanceData } from './hosted-plugin-manager-client.js';
+import { HostedPluginLogViewer } from './hosted-plugin-log-viewer.js';
+import { HostedPluginPreferences } from '../common/hosted-plugin-preferences.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 /**
  * Adds a status bar element displaying the state of secondary Theia instance with hosted plugin and

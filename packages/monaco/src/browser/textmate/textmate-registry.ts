@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable } from 'inversify';
 import { IGrammarConfiguration } from 'vscode-textmate';
-import { TokenizerOption } from './textmate-tokenizer';
-import { Disposable } from '@theia/core/lib/common/disposable';
+import { TokenizerOption } from './textmate-tokenizer.js';
+import { Disposable } from '@theia/core/lib/common/disposable.js';
 
-export interface TextmateGrammarConfiguration extends IGrammarConfiguration {
+export type TextmateGrammarConfiguration = IGrammarConfiguration & {
 
     /**
      * Optional options to further refine the tokenization of the grammar.
@@ -28,12 +28,12 @@ export interface TextmateGrammarConfiguration extends IGrammarConfiguration {
 
 }
 
-export interface GrammarDefinitionProvider {
+export type GrammarDefinitionProvider = {
     getGrammarDefinition(): Promise<GrammarDefinition>;
     getInjections?(scopeName: string): string[];
 }
 
-export interface GrammarDefinition {
+export type GrammarDefinition = {
     format: 'json' | 'plist';
     content: object | string;
     location?: string;

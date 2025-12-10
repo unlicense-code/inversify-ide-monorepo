@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { injectable } from 'inversify';
-import { ArrayUtils, Emitter, Event } from '../../common';
-import { StatusBarAlignment, StatusBarEntry, StatusBarViewEntry, StatusBarViewModelEntry } from './status-bar-types';
+import { ArrayUtils, Emitter, Event } from '../../common/index.js';
+import { StatusBarAlignment, StatusBarEntry, StatusBarViewEntry, StatusBarViewModelEntry } from './status-bar-types.js';
 
-interface EntryLocation {
+type EntryLocation = {
     container: StatusBarViewModelEntry[];
     index: number;
     entry: StatusBarViewModelEntry;

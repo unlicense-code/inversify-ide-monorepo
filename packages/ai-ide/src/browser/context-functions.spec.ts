@@ -13,17 +13,17 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 let disableJSDOM = enableJSDOM();
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 FrontendApplicationConfigProvider.set({});
 import { expect } from 'chai';
-import { ListChatContext, ResolveChatContext, AddFileToChatContext } from './context-functions';
+import { ListChatContext, ResolveChatContext, AddFileToChatContext } from './context-functions.js';
 import { CancellationTokenSource } from '@theia/core';
-import { ChatContextManager, MutableChatModel, MutableChatRequestModel, MutableChatResponseModel } from '@theia/ai-chat';
+import { ChatContextManager, MutableChatModel, MutableChatRequestModel, MutableChatResponseModel } from '@theia/ai-chat/lib/common/index.js';
 import { fail } from 'assert';
-import { AIVariableResolutionRequest, ResolvedAIContextVariable } from '@theia/ai-core';
-import { ContextFileValidationService, FileValidationState } from '@theia/ai-chat/lib/browser/context-file-validation-service';
+import { AIVariableResolutionRequest, ResolvedAIContextVariable } from '@theia/ai-core/lib/common/index.js';
+import { ContextFileValidationService, FileValidationState } from '@theia/ai-chat/lib/browser/context-file-validation-service.js';
 disableJSDOM();
 
 describe('Context Functions Cancellation Tests', () => {

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { ApplicationShell, UndoRedoHandler } from '@theia/core/lib/browser';
-import { CustomEditorWidget } from './custom-editor-widget';
+import { inject, injectable } from 'inversify';
+import { ApplicationShell, UndoRedoHandler } from '@theia/core/lib/browser/index.js';
+import { CustomEditorWidget } from './custom-editor-widget.js';
 
 @injectable()
 export class CustomEditorUndoRedoHandler implements UndoRedoHandler<CustomEditorWidget> {

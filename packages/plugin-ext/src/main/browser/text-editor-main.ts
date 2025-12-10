@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import * as monaco from '@theia/monaco-editor-core';
-import { StandaloneCodeEditor } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneCodeEditor';
-import { type ILineChange } from '@theia/monaco-editor-core/esm/vs/editor/common/diff/legacyLinesDiffComputer';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
+import { StandaloneCodeEditor } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneCodeEditor.js';
+import { type ILineChange } from '@theia/monaco-editor-core/esm/vs/editor/common/diff/legacyLinesDiffComputer.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor.js';
 import {
     TextEditorConfiguration,
     EditorChangedPropertiesData,
@@ -29,15 +29,15 @@ import {
     ApplyEditsOptions,
     SnippetEditOptions,
     DecorationOptions
-} from '../../common/plugin-api-rpc';
-import { Range } from '../../common/plugin-api-rpc-model';
+} from '../../common/plugin-api-rpc.js';
+import { Range } from '../../common/plugin-api-rpc-model.js';
 import { Emitter, Event } from '@theia/core';
-import { TextEditorCursorStyle, cursorStyleToString } from '../../common/editor-options';
-import { TextEditorLineNumbersStyle, EndOfLine } from '../../plugin/types-impl';
-import { SimpleMonacoEditor } from '@theia/monaco/lib/browser/simple-monaco-editor';
-import { MonacoDiffEditor } from '@theia/monaco/lib/browser/monaco-diff-editor';
-import { EndOfLineSequence, ITextModel } from '@theia/monaco-editor-core/esm/vs/editor/common/model';
-import { EditorOption, RenderLineNumbersType } from '@theia/monaco-editor-core/esm/vs/editor/common/config/editorOptions';
+import { TextEditorCursorStyle, cursorStyleToString } from '../../common/editor-options.js';
+import { TextEditorLineNumbersStyle, EndOfLine } from '../../plugin/types-impl.js';
+import { SimpleMonacoEditor } from '@theia/monaco/lib/browser/simple-monaco-editor.js';
+import { MonacoDiffEditor } from '@theia/monaco/lib/browser/monaco-diff-editor.js';
+import { EndOfLineSequence, ITextModel } from '@theia/monaco-editor-core/esm/vs/editor/common/model.js';
+import { EditorOption, RenderLineNumbersType } from '@theia/monaco-editor-core/esm/vs/editor/common/config/editorOptions.js';
 
 export class TextEditorMain implements Disposable {
 
@@ -339,7 +339,7 @@ export class TextEditorMain implements Disposable {
     }
 }
 
-interface SnippetInsertOptions {
+type SnippetInsertOptions = {
     overwriteBefore: number,
     overwriteAfter: number,
     undoStopBefore: boolean,
@@ -348,7 +348,7 @@ interface SnippetInsertOptions {
 }
 
 // TODO move to monaco typings!
-interface SnippetController2 extends monaco.editor.IEditorContribution {
+type SnippetController2 = monaco.editor.IEditorContribution & {
     insert(template: string, options?: Partial<SnippetInsertOptions>): void;
     finish(): void;
     cancel(): void;

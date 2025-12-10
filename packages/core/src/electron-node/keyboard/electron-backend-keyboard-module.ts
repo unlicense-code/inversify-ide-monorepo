@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { ContainerModule } from 'inversify';
-import { ConnectionHandler, RpcConnectionHandler } from '../../common/messaging';
-import { KeyboardLayoutProvider, keyboardPath } from '../../common/keyboard/keyboard-layout-provider';
-import { ElectronKeyboardLayoutProvider } from './electron-keyboard-layout-provider';
+import { ConnectionHandler, RpcConnectionHandler } from '../../common/messaging/index.js';
+import { KeyboardLayoutProvider, keyboardPath } from '../../common/keyboard/keyboard-layout-provider.js';
+import { ElectronKeyboardLayoutProvider } from './electron-keyboard-layout-provider.js';
 
 export default new ContainerModule(bind => {
     bind(ElectronKeyboardLayoutProvider).toSelf().inSingletonScope();

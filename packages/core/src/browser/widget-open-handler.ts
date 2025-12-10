@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,21 +15,15 @@
 // *****************************************************************************
 
 import { inject, postConstruct, injectable } from 'inversify';
-import URI from '../common/uri';
-import { MaybePromise, Emitter, Event } from '../common';
-import { BaseWidget } from './widgets';
-import { ApplicationShell } from './shell';
-import { OpenHandler, OpenerOptions } from './opener-service';
-import { WidgetManager } from './widget-manager';
+import URI from '../common/uri.js';
+import { MaybePromise, Emitter, Event } from '../common/index.js';
+import { BaseWidget } from './widgets/index.js';
+import { ApplicationShell } from './shell/index.js';
+import { OpenHandler, OpenerOptions } from './opener-service.js';
+import { WidgetManager } from './widget-manager.js';
 
 export type WidgetOpenMode = 'open' | 'reveal' | 'activate';
-/**
- * `WidgetOpenerOptions` define generic options used by the {@link WidgetOpenHandler}.
- *
- * _Note:_ This object may contain references to widgets (e.g. `widgetOptions.ref`);
- * these need to be transformed before it can be serialized.
- */
-export interface WidgetOpenerOptions extends OpenerOptions {
+export type WidgetOpenerOptions = OpenerOptions & {
     /**
      * Determines whether the widget should be only opened, revealed or activated.
      * By default is `activate`.

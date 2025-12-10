@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { DisposableCollection } from '@theia/core';
-import { interfaces } from '@theia/core/shared/inversify';
+import { interfaces } from 'inversify';
 import { NotebookRendererMessagingService } from '@theia/notebook/lib/browser';
-import { MAIN_RPC_CONTEXT, NotebookRenderersExt, NotebookRenderersMain } from '../../../common';
-import { RPCProtocol } from '../../../common/rpc-protocol';
+import { MAIN_RPC_CONTEXT, NotebookRenderersExt, NotebookRenderersMain } from '../../../common/index.js';
+import { RPCProtocol } from '../../../common/rpc-protocol.js';
 
 export class NotebookRenderersMainImpl implements NotebookRenderersMain {
     private readonly proxy: NotebookRenderersExt;

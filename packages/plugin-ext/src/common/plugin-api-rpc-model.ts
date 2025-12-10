@@ -17,18 +17,15 @@
 import * as theia from '@theia/plugin';
 import type * as monaco from '@theia/monaco-editor-core';
 import { MarkdownString as MarkdownStringDTO } from '@theia/core/lib/common/markdown-rendering';
-import { UriComponents } from './uri-components';
-import { CompletionItemTag, DocumentPasteEditKind, SnippetString } from '../plugin/types-impl';
-import { Event as TheiaEvent } from '@theia/core/lib/common/event';
-import { URI } from '@theia/core/shared/vscode-uri';
-import { SerializedRegExp } from './plugin-api-rpc';
+import { UriComponents } from './uri-components.js';
+import { CompletionItemTag, DocumentPasteEditKind, SnippetString } from '../plugin/types-impl.js';
+import { Event as TheiaEvent } from '@theia/core';
+import { URI } from 'vscode-uri';
+import { SerializedRegExp } from './plugin-api-rpc.js';
 
 // Should contains internal Plugin API types
 
-/**
- * Represents options to configure the behavior of showing a document in an editor.
- */
-export interface TextDocumentShowOptions {
+export type TextDocumentShowOptions = {
     /**
      * An optional selection to apply for the document in the editor.
      */
@@ -53,7 +50,7 @@ export interface TextDocumentShowOptions {
     viewColumn?: theia.ViewColumn;
 }
 
-export interface Range {
+export type Range = {
     /**
      * Line number on which the range starts (starts at 1).
      */
@@ -72,7 +69,7 @@ export interface Range {
     readonly endColumn: number;
 }
 
-export interface Position {
+export type Position = {
     /**
      * line number (starts at 1)
      */
@@ -85,7 +82,7 @@ export interface Position {
 
 export { MarkdownStringDTO as MarkdownString };
 
-export interface SerializedDocumentFilter {
+export type SerializedDocumentFilter = {
     $serialized: true;
     language?: string;
     scheme?: string;
@@ -99,7 +96,7 @@ export enum CompletionTriggerKind {
     TriggerForIncompleteCompletions = 2
 }
 
-export interface CompletionContext {
+export type CompletionContext = {
     triggerKind: CompletionTriggerKind;
     triggerCharacter?: string;
 }
@@ -109,7 +106,7 @@ export enum CompletionItemInsertTextRule {
     InsertAsSnippet = 4
 }
 
-export interface Completion {
+export type Completion = {
     label: string | theia.CompletionItemLabel;
     label2?: string;
     kind: CompletionItemKind;
@@ -132,7 +129,7 @@ export interface Completion {
     deprecated?: boolean;
 }
 
-export interface SingleEditOperation {
+export type SingleEditOperation = {
     range: Range;
     text: string | null;
     /**
@@ -142,7 +139,7 @@ export interface SingleEditOperation {
     forceMoveMarkers?: boolean;
 }
 
-export interface Command {
+export type Command = {
     id: string;
     title: string;
     tooltip?: string;
@@ -184,12 +181,12 @@ export enum CompletionItemKind {
 export class IdObject {
     id?: number;
 }
-export interface CompletionDto extends Completion {
+export type CompletionDto = Completion & {
     id: number;
     parentId: number;
 }
 
-export interface CompletionResultDto extends IdObject {
+export type CompletionResultDto = IdObject & {
     id: number;
     defaultRange: {
         insert: Range,
@@ -199,7 +196,7 @@ export interface CompletionResultDto extends IdObject {
     incomplete?: boolean;
 }
 
-export interface MarkerData {
+export type MarkerData = {
     code?: string;
     severity: MarkerSeverity;
     message: string;
@@ -212,7 +209,7 @@ export interface MarkerData {
     tags?: MarkerTag[];
 }
 
-export interface RelatedInformation {
+export type RelatedInformation = {
     resource: string;
     message: string;
     startLineNumber: number;
@@ -233,69 +230,69 @@ export enum MarkerTag {
     Deprecated = 2,
 }
 
-export interface ParameterInformation {
+export type ParameterInformation = {
     label: string | [number, number];
     documentation?: string | MarkdownStringDTO;
 }
 
-export interface SignatureInformation {
+export type SignatureInformation = {
     label: string;
     documentation?: string | MarkdownStringDTO;
     parameters: ParameterInformation[];
     activeParameter?: number;
 }
 
-export interface SignatureHelp extends IdObject {
+export type SignatureHelp = IdObject & {
     signatures: SignatureInformation[];
     activeSignature: number;
     activeParameter: number;
 }
 
-export interface SignatureHelpContext {
+export type SignatureHelpContext = {
     triggerKind: theia.SignatureHelpTriggerKind;
     triggerCharacter?: string;
     isRetrigger: boolean;
     activeSignatureHelp?: SignatureHelp;
 }
 
-export interface Hover {
+export type Hover = {
     contents: MarkdownStringDTO[];
     range?: Range;
 }
 
-export interface HoverProvider {
+export type HoverProvider = {
     provideHover(model: monaco.editor.ITextModel, position: monaco.Position, token: monaco.CancellationToken): Hover | undefined | Thenable<Hover | undefined>;
 }
 
-export interface EvaluatableExpression {
+export type EvaluatableExpression = {
     range: Range;
     expression?: string;
 }
 
-export interface EvaluatableExpressionProvider {
+export type EvaluatableExpressionProvider = {
     provideEvaluatableExpression(model: monaco.editor.ITextModel, position: monaco.Position,
         token: monaco.CancellationToken): EvaluatableExpression | undefined | Thenable<EvaluatableExpression | undefined>;
 }
 
-export interface InlineValueContext {
+export type InlineValueContext = {
     frameId: number;
     stoppedLocation: Range;
 }
 
-export interface InlineValueText {
+export type InlineValueText = {
     type: 'text';
     range: Range;
     text: string;
 }
 
-export interface InlineValueVariableLookup {
+export type InlineValueVariableLookup = {
     type: 'variable';
     range: Range;
     variableName?: string;
     caseSensitiveLookup: boolean;
 }
 
-export interface InlineValueEvaluatableExpression {
+export type InlineValueEvaluatableExpression = {
     type: 'expression';
     range: Range;
     expression?: string;
@@ -303,7 +300,7 @@ export interface InlineValueEvaluatableExpression {
 
 export type InlineValue = InlineValueText | InlineValueVariableLookup | InlineValueEvaluatableExpression;
 
-export interface InlineValuesProvider {
+export type InlineValuesProvider = {
     onDidChangeInlineValues?: TheiaEvent<void> | undefined;
     provideInlineValues(model: monaco.editor.ITextModel, viewPort: Range, context: InlineValueContext, token: monaco.CancellationToken):
         InlineValue[] | undefined | Thenable<InlineValue[] | undefined>;
@@ -315,79 +312,75 @@ export enum DocumentHighlightKind {
     Write = 2
 }
 
-export interface DocumentHighlight {
+export type DocumentHighlight = {
     range: Range;
     kind?: DocumentHighlightKind;
 }
 
-export interface DocumentHighlightProvider {
+export type DocumentHighlightProvider = {
     provideDocumentHighlights(model: monaco.editor.ITextModel, position: monaco.Position, token: monaco.CancellationToken): DocumentHighlight[] | undefined;
 }
 
-export interface FormattingOptions {
+export type FormattingOptions = {
     tabSize: number;
     insertSpaces: boolean;
 }
 
-export interface TextEdit {
+export type TextEdit = {
     range: Range;
     text: string;
     eol?: monaco.editor.EndOfLineSequence;
 }
 
-export interface DocumentDropEdit {
+export type DocumentDropEdit = {
     insertText: string | SnippetString;
     additionalEdit?: WorkspaceEdit;
 }
 
-export interface DocumentDropEditProviderMetadata {
+export type DocumentDropEditProviderMetadata = {
     readonly providedDropEditKinds?: readonly DocumentPasteEditKind[];
     readonly dropMimeTypes: readonly string[];
 }
 
-export interface DataTransferFileDTO {
+export type DataTransferFileDTO = {
     readonly id: string;
     readonly name: string;
     readonly uri?: UriComponents;
 }
 
-export interface DataTransferItemDTO {
+export type DataTransferItemDTO = {
     readonly asString: string;
     readonly fileData: DataTransferFileDTO | undefined;
     readonly uriListData?: ReadonlyArray<string | UriComponents>;
 }
 
-export interface DataTransferDTO {
+export type DataTransferDTO = {
     readonly items: Array<[/* type */string, DataTransferItemDTO]>;
 }
 
-export interface Location {
+export type Location = {
     uri: UriComponents;
     range: Range;
 }
 
 export type Definition = Location | Location[] | LocationLink[];
 
-export interface LocationLink {
+export type LocationLink = {
     uri: UriComponents;
     range: Range;
     originSelectionRange?: Range;
     targetSelectionRange?: Range;
 }
 
-export interface DefinitionProvider {
+export type DefinitionProvider = {
     provideDefinition(model: monaco.editor.ITextModel, position: monaco.Position, token: monaco.CancellationToken): Definition | undefined;
 }
 
-export interface DeclarationProvider {
+export type DeclarationProvider = {
     provideDeclaration(model: monaco.editor.ITextModel, position: monaco.Position, token: monaco.CancellationToken): Definition | undefined;
 }
 
-/**
- * Value-object that contains additional information when
- * requesting references.
- */
-export interface ReferenceContext {
+export type ReferenceContext = {
 
     /**
      * Include the declaration of the current symbol.
@@ -401,24 +394,24 @@ export type ChainedCacheId = [CacheId, CacheId];
 export type CachedSessionItem<T> = T & { cacheId?: ChainedCacheId };
 export type CachedSession<T> = T & { cacheId?: CacheId };
 
-export interface DocumentLink {
+export type DocumentLink = {
     cacheId?: ChainedCacheId,
     range: Range;
     url?: UriComponents | string;
     tooltip?: string;
 }
 
-export interface DocumentLinkProvider {
+export type DocumentLinkProvider = {
     provideLinks(model: monaco.editor.ITextModel, token: monaco.CancellationToken): DocumentLink[] | undefined | PromiseLike<DocumentLink[] | undefined>;
     resolveLink?: (link: DocumentLink, token: monaco.CancellationToken) => DocumentLink | PromiseLike<DocumentLink[]>;
 }
 
-export interface CodeLensSymbol {
+export type CodeLensSymbol = {
     range: Range;
     command?: Command;
 }
 
-export interface CodeAction {
+export type CodeAction = {
     cacheId: number;
     title: string;
     command?: Command;
@@ -434,14 +427,14 @@ export enum CodeActionTriggerKind {
     Automatic = 2,
 }
 
-export interface CodeActionContext {
+export type CodeActionContext = {
     only?: string;
     trigger: CodeActionTriggerKind
 }
 
 export type CodeActionProviderDocumentation = ReadonlyArray<{ command: Command, kind: string }>;
 
-export interface CodeActionProvider {
+export type CodeActionProvider = {
     provideCodeActions(
         model: monaco.editor.ITextModel,
         range: Range | Selection,
@@ -453,7 +446,7 @@ export interface CodeActionProvider {
 }
 
 // copied from https://github.com/microsoft/vscode/blob/b165e20587dd0797f37251515bc9e4dbe513ede8/src/vs/editor/common/modes.ts
-export interface WorkspaceEditMetadata {
+export type WorkspaceEditMetadata = {
     needsConfirmation: boolean;
     label: string;
     description?: string;
@@ -465,21 +458,21 @@ export interface WorkspaceEditMetadata {
     };
 }
 
-export interface WorkspaceFileEdit {
+export type WorkspaceFileEdit = {
     newResource?: UriComponents;
     oldResource?: UriComponents;
     options?: { overwrite?: boolean, ignoreIfNotExists?: boolean, ignoreIfExists?: boolean, recursive?: boolean };
     metadata?: WorkspaceEditMetadata;
 }
 
-export interface WorkspaceTextEdit {
+export type WorkspaceTextEdit = {
     resource: UriComponents;
     modelVersionId?: number;
     textEdit: TextEdit;
     metadata?: WorkspaceEditMetadata;
 }
 
-export interface WorkspaceEdit {
+export type WorkspaceEdit = {
     edits: Array<WorkspaceTextEdit | WorkspaceFileEdit>;
 }
 
@@ -516,7 +509,7 @@ export enum SymbolTag {
     Deprecated = 1
 }
 
-export interface DocumentSymbol {
+export type DocumentSymbol = {
     name: string;
     detail: string;
     kind: SymbolKind;
@@ -527,17 +520,17 @@ export interface DocumentSymbol {
     children?: DocumentSymbol[];
 }
 
-export interface WorkspaceRootsChangeEvent {
+export type WorkspaceRootsChangeEvent = {
     roots: string[];
 }
 
-export interface WorkspaceFolder {
+export type WorkspaceFolder = {
     uri: UriComponents;
     name: string;
     index: number;
 }
 
-export interface Breakpoint {
+export type Breakpoint = {
     readonly id: string;
     readonly enabled: boolean;
     readonly condition?: string;
@@ -547,14 +540,14 @@ export interface Breakpoint {
     readonly functionName?: string;
 }
 
-export interface WorkspaceSymbolParams {
+export type WorkspaceSymbolParams = {
     query: string
 }
 
-export interface FoldingContext {
+export type FoldingContext = {
 }
 
-export interface FoldingRange {
+export type FoldingRange = {
     start: number;
     end: number;
     kind?: FoldingRangeKind;
@@ -567,38 +560,38 @@ export class FoldingRangeKind {
     public constructor(public value: string) { }
 }
 
-export interface SelectionRange {
+export type SelectionRange = {
     range: Range;
 }
 
-export interface Color {
+export type Color = {
     readonly red: number;
     readonly green: number;
     readonly blue: number;
     readonly alpha: number;
 }
 
-export interface ColorPresentation {
+export type ColorPresentation = {
     label: string;
     textEdit?: TextEdit;
     additionalTextEdits?: TextEdit[];
 }
 
-export interface ColorInformation {
+export type ColorInformation = {
     range: Range;
     color: Color;
 }
 
-export interface DocumentColorProvider {
+export type DocumentColorProvider = {
     provideDocumentColors(model: monaco.editor.ITextModel): PromiseLike<ColorInformation[]>;
     provideColorPresentations(model: monaco.editor.ITextModel, colorInfo: ColorInformation): PromiseLike<ColorPresentation[]>;
 }
 
-export interface Rejection {
+export type Rejection = {
     rejectReason?: string;
 }
 
-export interface RenameLocation {
+export type RenameLocation = {
     range: Range;
     text: string;
 }
@@ -618,62 +611,53 @@ export class HierarchyItem {
 
 export class TypeHierarchyItem extends HierarchyItem { }
 
-export interface CallHierarchyItem extends HierarchyItem {
+export type CallHierarchyItem = HierarchyItem & {
     data?: unknown;
 }
 
-export interface CallHierarchyIncomingCall {
+export type CallHierarchyIncomingCall = {
     from: CallHierarchyItem;
     fromRanges: Range[];
 }
 
-export interface CallHierarchyOutgoingCall {
+export type CallHierarchyOutgoingCall = {
     to: CallHierarchyItem;
     fromRanges: Range[];
 }
 
-export interface LinkedEditingRanges {
+export type LinkedEditingRanges = {
     ranges: Range[];
     wordPattern?: SerializedRegExp;
 }
 
-export interface SearchInWorkspaceResult {
+export type SearchInWorkspaceResult = {
     root: string;
     fileUri: string;
     matches: SearchMatch[];
 }
 
-export interface SearchMatch {
+export type SearchMatch = {
     line: number;
     character: number;
     length: number;
     lineText: string | LinePreview;
 
 }
-export interface LinePreview {
+export type LinePreview = {
     text: string;
     character: number;
 }
 
-/**
- * @deprecated Use {@link theia.AuthenticationSession} instead.
- */
-export interface AuthenticationSession extends theia.AuthenticationSession {
+export type AuthenticationSession = theia.AuthenticationSession & {
 }
 
-/**
- * @deprecated Use {@link theia.AuthenticationProviderAuthenticationSessionsChangeEvent} instead.
- */
-export interface AuthenticationSessionsChangeEvent extends theia.AuthenticationProviderAuthenticationSessionsChangeEvent {
+export type AuthenticationSessionsChangeEvent = theia.AuthenticationProviderAuthenticationSessionsChangeEvent & {
 }
 
-/**
- * @deprecated Use {@link theia.AuthenticationProviderInformation} instead.
- */
-export interface AuthenticationProviderInformation extends theia.AuthenticationProviderInformation {
+export type AuthenticationProviderInformation = theia.AuthenticationProviderInformation & {
 }
 
-export interface CommentOptions {
+export type CommentOptions = {
     /**
      * An optional string to show on the comment input box when it's collapsed.
      */
@@ -690,7 +674,7 @@ export enum CommentMode {
     Preview = 1
 }
 
-export interface Comment {
+export type Comment = {
     readonly uniqueIdInThread: number;
     readonly body: MarkdownStringDTO;
     readonly userName: string;
@@ -718,12 +702,12 @@ export enum CommentThreadCollapsibleState {
     Expanded = 1
 }
 
-export interface CommentInput {
+export type CommentInput = {
     value: string;
     uri: URI;
 }
 
-export interface CommentThread {
+export type CommentThread = {
     commentThreadHandle: number;
     controllerHandle: number;
     extensionId?: string;
@@ -747,11 +731,11 @@ export interface CommentThread {
     onDidChangeCanReply: TheiaEvent<boolean | theia.CommentAuthorInformation>;
 }
 
-export interface CommentThreadChangedEventMain extends CommentThreadChangedEvent {
+export type CommentThreadChangedEventMain = CommentThreadChangedEvent & {
     owner: string;
 }
 
-export interface CommentThreadChangedEvent {
+export type CommentThreadChangedEvent = {
     /**
      * Added comment threads.
      */
@@ -768,30 +752,30 @@ export interface CommentThreadChangedEvent {
     readonly changed: CommentThread[];
 }
 
-export interface CommentingRanges {
+export type CommentingRanges = {
     readonly resource: URI;
     ranges: Range[];
     fileComments: boolean;
 }
 
-export interface CommentInfo {
+export type CommentInfo = {
     extensionId?: string;
     threads: CommentThread[];
     commentingRanges: CommentingRanges;
 }
 
-export interface ProvidedTerminalLink extends theia.TerminalLink {
+export type ProvidedTerminalLink = theia.TerminalLink & {
     providerId: string
 }
 
-export interface InlayHintLabelPart {
+export type InlayHintLabelPart = {
     label: string;
     tooltip?: string | MarkdownStringDTO;
     location?: Location;
     command?: Command;
 }
 
-export interface InlayHint {
+export type InlayHint = {
     position: { lineNumber: number, column: number };
     label: string | InlayHintLabelPart[];
     tooltip?: string | MarkdownStringDTO | undefined;
@@ -806,7 +790,7 @@ export enum InlayHintKind {
     Parameter = 2,
 }
 
-export interface InlayHintsProvider {
+export type InlayHintsProvider = {
     onDidChangeInlayHints?: TheiaEvent<void> | undefined;
     provideInlayHints(model: monaco.editor.ITextModel, range: Range, token: monaco.CancellationToken): InlayHint[] | undefined | Thenable<InlayHint[] | undefined>;
     resolveInlayHint?(hint: InlayHint, token: monaco.CancellationToken): InlayHint[] | undefined | Thenable<InlayHint[] | undefined>;
@@ -829,7 +813,7 @@ export enum InlineCompletionTriggerKind {
     Explicit = 1,
 }
 
-export interface InlineCompletionContext {
+export type InlineCompletionContext = {
     /**
      * How the completion was triggered.
      */
@@ -838,14 +822,14 @@ export interface InlineCompletionContext {
     readonly selectedSuggestionInfo: SelectedSuggestionInfo | undefined;
 }
 
-export interface SelectedSuggestionInfo {
+export type SelectedSuggestionInfo = {
     range: Range;
     text: string;
     isSnippetText: boolean;
     completionKind: CompletionItemKind;
 }
 
-export interface InlineCompletion {
+export type InlineCompletion = {
     /**
      * The text to insert.
      * If the text contains a line break, the range must end at the end of a line.
@@ -884,11 +868,11 @@ export interface InlineCompletion {
     readonly completeBracketPairs?: boolean;
 }
 
-export interface InlineCompletions<TItem extends InlineCompletion = InlineCompletion> {
+export type InlineCompletions<TItem extends InlineCompletion = InlineCompletion> = {
     readonly items: readonly TItem[];
 }
 
-export interface InlineCompletionsProvider<T extends InlineCompletions = InlineCompletions> {
+export type InlineCompletionsProvider<T extends InlineCompletions = InlineCompletions> = {
     provideInlineCompletions(
         model: monaco.editor.ITextModel,
         position: monaco.Position,
@@ -907,13 +891,13 @@ export interface InlineCompletionsProvider<T extends InlineCompletions = InlineC
     freeInlineCompletions(completions: T): void;
 }
 
-export interface DebugStackFrameDTO {
+export type DebugStackFrameDTO = {
     readonly sessionId: string,
     readonly frameId: number,
     readonly threadId: number
 }
 
-export interface DebugThreadDTO {
+export type DebugThreadDTO = {
     readonly sessionId: string,
     readonly threadId: number
 }

@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import * as chai from 'chai';
-import { TestItemImpl } from './test-controller';
+import { TestItemImpl } from './test-controller.js';
 import { URI } from '@theia/core';
-import { DeltaKind, TreeDeltaBuilderImpl } from '@theia/test/lib/common/tree-delta';
+import { DeltaKind, TreeDeltaBuilderImpl } from '@theia/test/lib/common/tree-delta.js';
 
 const expect = chai.expect;
 

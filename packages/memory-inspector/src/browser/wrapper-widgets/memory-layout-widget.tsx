@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2021 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,13 +15,13 @@
  ********************************************************************************/
 
 import { Disposable, DisposableCollection, Emitter, nls } from '@theia/core';
-import { ApplicationShell, Message, Panel, Widget, WidgetManager } from '@theia/core/lib/browser';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { MemoryDiffSelectWidget } from '../diff-widget/memory-diff-select-widget';
-import { MemoryWidget } from '../memory-widget/memory-widget';
-import { MemoryWidgetManager } from '../utils/memory-widget-manager';
-import { MemoryDockPanel } from './memory-dock-panel';
-import { MemoryDockpanelPlaceholder } from './memory-dockpanel-placeholder-widget';
+import { ApplicationShell, Message, Panel, Widget, WidgetManager } from '@theia/core/lib/browser/index.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import { MemoryDiffSelectWidget } from '../diff-widget/memory-diff-select-widget.js';
+import { MemoryWidget } from '../memory-widget/memory-widget.js';
+import { MemoryWidgetManager } from '../utils/memory-widget-manager.js';
+import { MemoryDockPanel } from './memory-dock-panel.js';
+import { MemoryDockpanelPlaceholder } from './memory-dockpanel-placeholder-widget.js';
 
 @injectable()
 export class MemoryLayoutWidget extends Panel implements Disposable, ApplicationShell.TrackableWidgetProvider {

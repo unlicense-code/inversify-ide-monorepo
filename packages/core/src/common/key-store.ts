@@ -17,7 +17,7 @@
 export const keyStoreServicePath = '/services/keyStore';
 
 export const KeyStoreService = Symbol('KeyStoreService');
-export interface KeyStoreService {
+export type KeyStoreService = {
     setPassword(service: string, account: string, password: string): Promise<void>;
     getPassword(service: string, account: string): Promise<string | undefined>;
     deletePassword(service: string, account: string): Promise<boolean>;

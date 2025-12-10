@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { nls, isBoolean, isNumber } from '@theia/core';
-import { injectable, interfaces } from '@theia/core/shared/inversify';
-import { Preference } from '../../util/preference-types';
-import { PreferenceLeafNodeRenderer, PreferenceNodeRenderer } from './preference-node-renderer';
-import { PreferenceLeafNodeRendererContribution } from './preference-node-renderer-creator';
+import { injectable, interfaces } from 'inversify';
+import { Preference } from '../../util/preference-types.js';
+import { PreferenceLeafNodeRenderer, PreferenceNodeRenderer } from './preference-node-renderer.js';
+import { PreferenceLeafNodeRendererContribution } from './preference-node-renderer-creator.js';
 
-interface PreferenceNumberInputValidation {
+type PreferenceNumberInputValidation = {
     /**
      * the numeric value of the input. `NaN` if there is an error.
      */

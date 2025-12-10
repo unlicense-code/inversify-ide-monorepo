@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,23 +14,24 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { Resource, ResourceVersion, ResourceResolver, ResourceError, ResourceSaveOptions } from '@theia/core/lib/common/resource';
-import { DisposableCollection } from '@theia/core/lib/common/disposable';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import { Readable, ReadableStream } from '@theia/core/lib/common/stream';
-import URI from '@theia/core/lib/common/uri';
-import { FileOperation, FileOperationError, FileOperationResult, ETAG_DISABLED, FileSystemProviderCapabilities, FileReadStreamOptions, BinarySize } from '../common/files';
-import { FileService, TextFileOperationError, TextFileOperationResult } from './file-service';
-import { ConfirmDialog, Dialog } from '@theia/core/lib/browser/dialogs';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
-import { GENERAL_MAX_FILE_SIZE_MB } from '../common/filesystem-preferences';
-import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
+import { injectable, inject } from 'inversify';
+import { Resource, ResourceVersion, ResourceResolver, ResourceError, ResourceSaveOptions } from '@theia/core/lib/common/resource.js';
+import { DisposableCollection } from '@theia/core';
+import { Emitter, Event } from '@theia/core';
+import { Readable, ReadableStream } from '@theia/core';
+import { URI } from '@theia/core';
+import { FileOperation, FileOperationError, FileOperationResult, ETAG_DISABLED, FileSystemProviderCapabilities, FileReadStreamOptions, BinarySize } from '../common/files.js';
+import { FileService, TextFileOperationError, TextFileOperationResult } from './file-service.js';
+import { ConfirmDialog, Dialog } from '@theia/core/lib/browser/dialogs.js';
+import { LabelProvider } from '@theia/core/lib/browser/label-provider.js';
+import { GENERAL_MAX_FILE_SIZE_MB } from '../common/filesystem-preferences.js';
+import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state.js';
 import { nls } from '@theia/core';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownString } from '@theia/core';
+import type { TextDocumentContentChangeEvent } from 'vscode-languageserver-protocol';
 import { Mutex } from 'async-mutex';
 
-export interface FileResourceVersion extends ResourceVersion {
+export type FileResourceVersion = ResourceVersion & {
     readonly encoding: string;
     readonly mtime: number;
     readonly etag: string;
@@ -41,7 +42,7 @@ export namespace FileResourceVersion {
     }
 }
 
-export interface FileResourceOptions {
+export type FileResourceOptions = {
     readOnly: boolean | MarkdownString
     shouldOverwrite: () => Promise<boolean>
     shouldOpenAsText: (error: string) => Promise<boolean>
@@ -263,7 +264,7 @@ export class FileResource implements Resource {
             }
         }
     }
-    protected doSaveContentChanges: Resource['saveContentChanges'] = async (changes, options) => {
+    protected doSaveContentChanges: Resource['saveContentChanges'] = async (changes: TextDocumentContentChangeEvent[], options?: ResourceSaveOptions) => {
         const version = options?.version || this._version;
         const current = FileResourceVersion.is(version) ? version : undefined;
         if (!current) {

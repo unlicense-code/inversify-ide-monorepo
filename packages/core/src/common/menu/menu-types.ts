@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Event } from '../event';
-import { isObject } from '../types';
+import { Event } from '../event.js';
+import { isObject } from '../types.js';
 
 export const MAIN_MENU_BAR: MenuPath = ['menubar'];
 export type MenuPath = string[];
@@ -23,14 +23,11 @@ export const MANAGE_MENU: MenuPath = ['manage_menu'];
 export const ACCOUNTS_MENU: MenuPath = ['accounts_menu'];
 export const ACCOUNTS_SUBMENU = [...ACCOUNTS_MENU, '1_accounts_submenu'];
 
-export interface ContextExpressionMatcher<T> {
+export type ContextExpressionMatcher<T> = {
     match(whenExpression: string, context: T | undefined): boolean;
 }
 
-/**
- * @internal For most use cases, refer to {@link MenuAction} or {@link MenuNode}
- */
-export interface MenuNode {
+export type MenuNode = {
     /**
      * technical identifier.
      */
@@ -45,7 +42,7 @@ export interface MenuNode {
     onDidChange?: Event<void>;
 }
 
-export interface Action {
+export type Action = {
     isEnabled(effectiveMenuPath: MenuPath, ...args: unknown[]): boolean;
     isToggled(effectiveMenuPath: MenuPath, ...args: unknown[]): boolean;
     run(effectiveMenuPath: MenuPath, ...args: unknown[]): Promise<void>;
@@ -57,7 +54,7 @@ export namespace Action {
     }
 }
 
-export interface MenuAction {
+export type MenuAction = {
     /**
      * The command to execute.
      */
@@ -83,11 +80,7 @@ export namespace MenuAction {
     }
 }
 
-/**
- * Metadata for the visual presentation of a node.
- * @internal For most uses cases, refer to {@link MenuNode}, {@link CommandMenuNode}, or {@link CompoundMenuNode}
- */
-export interface RenderedMenuNode extends MenuNode {
+export type RenderedMenuNode = MenuNode & {
     /**
      * Optional label. Will be rendered as text of the menu item.
      */
@@ -121,7 +114,7 @@ export namespace Group {
 
 export type Submenu = CompoundMenuNode & RenderedMenuNode;
 
-export interface CompoundMenuNode extends MenuNode {
+export type CompoundMenuNode = MenuNode & {
     children: MenuNode[];
     contextKeyOverlays?: Record<string, string>;
     /**

@@ -13,10 +13,10 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { AbstractStreamParsingChatAgent } from '@theia/ai-chat';
-import { LanguageModelRequirement } from '@theia/ai-core';
-import { injectable } from '@theia/core/shared/inversify';
-import { projectInfoSystemVariants, projectInfoTemplateVariants } from '../common/project-info-prompt-template';
+import { AbstractStreamParsingChatAgent } from '@theia/ai-chat/lib/common/index.js';
+import { LanguageModelRequirement } from '@theia/ai-core/lib/common/index.js';
+import { injectable } from 'inversify';
+import { projectInfoSystemVariants, projectInfoTemplateVariants } from '../common/project-info-prompt-template.js';
 import { nls } from '@theia/core';
 
 @injectable()
@@ -34,7 +34,7 @@ export class ProjectInfoAgent extends AbstractStreamParsingChatAgent {
         'An AI assistant for managing project information templates. This agent helps create, update, and review the .prompts/project-info.prompttemplate file which provides ' +
         'context about your project to other AI agents. It can analyze your workspace to suggest project information or update existing templates based on your requirements.');
 
-    override tags: string[] = [...this.tags, 'Alpha'];
+    override tags: string[] = [nls.localizeByDefault('Chat'), 'Alpha'];
 
     override prompts = [projectInfoSystemVariants, projectInfoTemplateVariants];
     protected override systemPromptId: string | undefined = projectInfoSystemVariants.id;

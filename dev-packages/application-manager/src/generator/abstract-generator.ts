@@ -17,7 +17,7 @@
 import * as fs from 'fs-extra';
 import { ApplicationPackage } from '@theia/application-package';
 
-export interface GeneratorOptions {
+export type GeneratorOptions = {
     mode?: 'development' | 'production'
     splitFrontend?: boolean
 }

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { RpcProxy, RpcServer } from '@theia/core/lib/common/messaging/proxy-factory';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
+import { inject, injectable, postConstruct } from 'inversify';
+import { RpcProxy, RpcServer } from '@theia/core/lib/common/messaging/proxy-factory.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
 
 export const GitPromptServer = Symbol('GitPromptServer');
-export interface GitPromptServer extends RpcServer<GitPromptClient> {
+export type GitPromptServer = RpcServer<GitPromptClient> & {
 }
 
 export const GitPromptServerProxy = Symbol('GitPromptServerProxy');
-export interface GitPromptServerProxy extends RpcProxy<GitPromptServer> {
+export type GitPromptServerProxy = RpcProxy<GitPromptServer> & {
 }
 
 @injectable()
@@ -143,7 +143,7 @@ export namespace GitPrompt {
 }
 
 export const GitPromptClient = Symbol('GitPromptClient');
-export interface GitPromptClient {
+export type GitPromptClient = {
 
     ask(question: GitPrompt.Question): Promise<GitPrompt.Answer>;
 

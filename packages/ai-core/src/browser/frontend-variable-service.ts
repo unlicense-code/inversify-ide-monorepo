@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { Disposable, MessageService, nls, Prioritizeable } from '@theia/core';
-import { FrontendApplicationContribution, OpenerService, open } from '@theia/core/lib/browser';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { FrontendApplicationContribution, OpenerService, open } from '@theia/core/lib/browser/index.js';
+import { inject, injectable } from 'inversify';
 import {
     AIVariable,
     AIVariableArg,
@@ -27,12 +27,12 @@ import {
     AIVariableService,
     DefaultAIVariableService,
     PromptText
-} from '../common';
+} from '../common/index.js';
 import * as monaco from '@theia/monaco-editor-core';
 
 export type AIVariableDropHandler = (event: DragEvent, context: AIVariableContext) => Promise<AIVariableDropResult | undefined>;
 
-export interface AIVariableDropResult {
+export type AIVariableDropResult = {
     variables: AIVariableResolutionRequest[],
     text?: string
 };
@@ -44,7 +44,7 @@ export interface AIVariablePasteResult {
     text?: string
 };
 
-export interface AIVariableCompletionContext {
+export type AIVariableCompletionContext = {
     /** Portion of user input to be used for filtering completion candidates. */
     userInput: string;
     /** The range of suggestion completions. */
@@ -81,7 +81,7 @@ export namespace AIVariableCompletionContext {
 }
 
 export const FrontendVariableService = Symbol('FrontendVariableService');
-export interface FrontendVariableService extends AIVariableService {
+export type FrontendVariableService = AIVariableService & {
     registerDropHandler(handler: AIVariableDropHandler): Disposable;
     unregisterDropHandler(handler: AIVariableDropHandler): void;
     getDropResult(event: DragEvent, context: AIVariableContext): Promise<AIVariableDropResult>;
@@ -96,7 +96,7 @@ export interface FrontendVariableService extends AIVariableService {
     open(variable: AIVariableArg, context?: AIVariableContext): Promise<void>
 }
 
-export interface FrontendVariableContribution {
+export type FrontendVariableContribution = {
     registerVariables(service: FrontendVariableService): void;
 }
 

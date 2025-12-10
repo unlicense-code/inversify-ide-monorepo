@@ -21,28 +21,28 @@
 
 import debounce = require('p-debounce');
 import { visit, parse } from 'jsonc-parser';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Emitter, Event, WaitUntilEvent } from '@theia/core/lib/common/event';
-import { EditorManager, EditorWidget } from '@theia/editor/lib/browser';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
-import { LabelProvider, QuickPickValue, StorageService } from '@theia/core/lib/browser';
-import { QuickPickService } from '@theia/core/lib/common/quick-pick-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { DebugConfigurationModel } from './debug-configuration-model';
-import { DebugSessionOptions, DynamicDebugConfigurationSessionOptions } from './debug-session-options';
-import { DebugService } from '../common/debug-service';
-import { ContextKey, ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { DebugConfiguration } from '../common/debug-common';
-import { WorkspaceVariableContribution } from '@theia/workspace/lib/browser/workspace-variable-contribution';
-import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service';
+import { inject, injectable, postConstruct } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Emitter, Event, WaitUntilEvent } from '@theia/core';
+import { EditorManager, EditorWidget } from '@theia/editor/lib/browser/index.js';
+import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor.js';
+import { LabelProvider, QuickPickValue, StorageService } from '@theia/core/lib/browser/index.js';
+import { QuickPickService } from '@theia/core';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
+import { DebugConfigurationModel } from './debug-configuration-model.js';
+import { DebugSessionOptions, DynamicDebugConfigurationSessionOptions } from './debug-session-options.js';
+import { DebugService } from '../common/debug-service.js';
+import { ContextKey, ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { DebugConfiguration } from '../common/debug-common.js';
+import { WorkspaceVariableContribution } from '@theia/workspace/lib/browser/workspace-variable-contribution.js';
+import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { ICommandService } from '@theia/monaco-editor-core/esm/vs/platform/commands/common/commands';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
+import { ICommandService } from '@theia/monaco-editor-core/esm/vs/platform/commands/common/commands.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
 import { nls, PreferenceConfigurations, PreferenceScope, PreferenceService } from '@theia/core';
-import { DebugCompound } from '../common/debug-compound';
+import { DebugCompound } from '../common/debug-compound.js';
 
-export interface WillProvideDebugConfiguration extends WaitUntilEvent {
+export type WillProvideDebugConfiguration = WaitUntilEvent & {
 }
 
 @injectable()

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces, Container } from '@theia/core/shared/inversify';
-import { MarkerOptions } from '../marker-tree';
-import { ProblemWidget } from './problem-widget';
-import { ProblemTreeModel, ProblemTree } from './problem-tree-model';
-import { TreeProps, defaultTreeProps, createTreeContainer } from '@theia/core/lib/browser';
-import { PROBLEM_KIND } from '../../common/problem-marker';
+import { interfaces } from 'inversify';
+import { MarkerOptions } from '../marker-tree.js';
+import { ProblemWidget } from './problem-widget.js';
+import { ProblemTreeModel, ProblemTree } from './problem-tree-model.js';
+import { TreeProps, defaultTreeProps, createTreeContainer } from '@theia/core/lib/browser/index.js';
+import { PROBLEM_KIND } from '../../common/problem-marker.js';
 
 export const PROBLEM_TREE_PROPS = <TreeProps>{
     ...defaultTreeProps,
@@ -31,7 +31,7 @@ export const PROBLEM_OPTIONS = <MarkerOptions>{
     kind: 'problem'
 };
 
-export function createProblemTreeContainer(parent: interfaces.Container): Container {
+export function createProblemTreeContainer(parent: interfaces.Container): interfaces.Container {
     const child = createTreeContainer(parent, {
         tree: ProblemTree,
         widget: ProblemWidget,

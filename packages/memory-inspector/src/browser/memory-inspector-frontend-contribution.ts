@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2019 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,32 +14,32 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { AbstractViewContribution, FrontendApplicationContribution, Widget } from '@theia/core/lib/browser';
-import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution';
-import { ColorRegistry } from '@theia/core/lib/browser/color-registry';
-import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { Command, CommandRegistry, MenuModelRegistry } from '@theia/core/lib/common';
-import { Color } from '@theia/core/lib/common/color';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { DebugScope, DebugVariable } from '@theia/debug/lib/browser/console/debug-console-items';
-import { DebugFrontendApplicationContribution } from '@theia/debug/lib/browser/debug-frontend-application-contribution';
-import { DebugVariablesWidget } from '@theia/debug/lib/browser/view/debug-variables-widget';
-import { MemoryEditableTableWidget } from './editable-widget/memory-editable-table-widget';
-import { MemoryProviderService } from './memory-provider/memory-provider-service';
-import { MemoryTableWidget } from './memory-widget/memory-table-widget';
-import { MemoryWidget } from './memory-widget/memory-widget';
-import { RegisterTableWidget } from './register-widget/register-table-widget';
-import { RegisterWidget } from './register-widget/register-widget-types';
+import { AbstractViewContribution, FrontendApplicationContribution, Widget } from '@theia/core/lib/browser/index.js';
+import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution.js';
+import { ColorRegistry } from '@theia/core/lib/browser/color-registry.js';
+import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state.js';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { Command, CommandRegistry, MenuModelRegistry } from '@theia/core/lib/common/index.js';
+import { Color } from '@theia/core/lib/common/color.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import { DebugScope, DebugVariable } from '@theia/debug/lib/browser/console/debug-console-items.js';
+import { DebugFrontendApplicationContribution } from '@theia/debug/lib/browser/debug-frontend-application-contribution.js';
+import { DebugVariablesWidget } from '@theia/debug/lib/browser/view/debug-variables-widget.js';
+import { MemoryEditableTableWidget } from './editable-widget/memory-editable-table-widget.js';
+import { MemoryProviderService } from './memory-provider/memory-provider-service.js';
+import { MemoryTableWidget } from './memory-widget/memory-table-widget.js';
+import { MemoryWidget } from './memory-widget/memory-widget.js';
+import { RegisterTableWidget } from './register-widget/register-table-widget.js';
+import { RegisterWidget } from './register-widget/register-widget-types.js';
 import {
     CreateNewMemoryViewCommand, CreateNewRegisterViewCommand, FollowPointerDebugCommand, FollowPointerTableCommand, MemoryCommand,
     RegisterSetVariableCommand, ResetModifiedCellCommand, ToggleDiffSelectWidgetVisibilityCommand, ViewVariableInMemoryCommand, ViewVariableInRegisterViewCommand
-} from './utils/memory-commands';
-import { MemoryWidgetManager } from './utils/memory-widget-manager';
-import { VariableRange } from './utils/memory-widget-variable-utils';
-import { MemoryDockPanel } from './wrapper-widgets/memory-dock-panel';
-import { MemoryLayoutWidget } from './wrapper-widgets/memory-layout-widget';
-import { nls } from '@theia/core/lib/common/nls';
+} from './utils/memory-commands.js';
+import { MemoryWidgetManager } from './utils/memory-widget-manager.js';
+import { VariableRange } from './utils/memory-widget-variable-utils.js';
+import { MemoryDockPanel } from './wrapper-widgets/memory-dock-panel.js';
+import { MemoryLayoutWidget } from './wrapper-widgets/memory-layout-widget.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 import Long from 'long';
 
 const ONE_HALF_OPACITY = 0.5;

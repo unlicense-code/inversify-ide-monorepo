@@ -9,7 +9,7 @@
 // SPDX-License-Identifier: MIT
 // *****************************************************************************
 
-import { PromptVariantSet } from '@theia/ai-core';
+import { PromptVariantSet } from '@theia/ai-core/lib/common/index.js';
 
 export const terminalPrompts: PromptVariantSet[] = [
   {

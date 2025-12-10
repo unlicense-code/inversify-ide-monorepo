@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import * as theia from '@theia/plugin';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import { Disposable, DisposableGroup, Event, Emitter } from '@theia/core';
-import { PLUGIN_RPC_CONTEXT, StorageMain, StorageExt } from '../common/plugin-api-rpc';
-import { KeysToAnyValues, KeysToKeysToAnyValue } from '../common/types';
-import { RPCProtocol } from '../common/rpc-protocol';
+import { PLUGIN_RPC_CONTEXT, StorageMain, StorageExt } from '../common/plugin-api-rpc.js';
+import { KeysToAnyValues, KeysToKeysToAnyValue } from '../common/types.js';
+import { RPCProtocol } from '../common/rpc-protocol.js';
 
 export class Memento implements theia.Memento {
 
@@ -71,7 +71,7 @@ export class GlobalState extends Memento {
 }
 
 export const InternalStorageExt = Symbol('InternalStorageExt');
-export interface InternalStorageExt extends StorageExt {
+export type InternalStorageExt = StorageExt & {
 
     init(initGlobalData: KeysToKeysToAnyValue, initWorkspaceData: KeysToKeysToAnyValue): void;
 

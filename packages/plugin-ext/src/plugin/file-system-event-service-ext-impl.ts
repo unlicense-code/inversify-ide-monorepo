@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -28,21 +28,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/tslint/config */
 
-import { Emitter, WaitUntilEvent, AsyncEmitter, WaitUntilData } from '@theia/core/lib/common/event';
-import { IRelativePattern, parse } from '@theia/core/lib/common/glob';
-import { UriComponents } from '@theia/core/shared/vscode-uri';
-import { Disposable, URI, WorkspaceEdit } from './types-impl';
-import { EditorsAndDocumentsExtImpl as ExtHostDocumentsAndEditors } from './editors-and-documents';
+import { Emitter, WaitUntilEvent, AsyncEmitter, WaitUntilData } from '@theia/core';
+import { IRelativePattern, parse } from '@theia/core/lib/common/glob.js';
+import { UriComponents } from 'vscode-uri';
+import { Disposable, URI, WorkspaceEdit } from './types-impl.js';
+import { EditorsAndDocumentsExtImpl as ExtHostDocumentsAndEditors } from './editors-and-documents.js';
 import type * as vscode from '@theia/plugin';
-import * as typeConverter from './type-converters';
-import { FileOperation } from '@theia/filesystem/lib/common/files';
-import { flatten } from '../common/arrays';
-import { CancellationToken } from '@theia/core/lib/common/cancellation';
+import * as typeConverter from './type-converters.js';
+import { FileOperation } from '@theia/filesystem/lib/common/files.js';
+import { flatten } from '../common/arrays.js';
+import { CancellationToken } from '@theia/core';
 import {
     Plugin, TextEditorsMain as MainThreadTextEditorsShape, PLUGIN_RPC_CONTEXT, FileSystemEvents, ExtHostFileSystemEventServiceShape,
     WorkspaceFileEditDto, WorkspaceTextEditDto
-} from '../common/plugin-api-rpc';
-import { RPCProtocol } from '../common/rpc-protocol';
+} from '../common/plugin-api-rpc.js';
+import { RPCProtocol } from '../common/rpc-protocol.js';
 
 type Event<T> = vscode.Event<T>;
 type IExtensionDescription = Plugin;
@@ -132,7 +132,7 @@ export class FileSystemWatcher implements vscode.FileSystemWatcher {
     }
 }
 
-interface IExtensionListener<E> {
+type IExtensionListener<E> = {
     extension: IExtensionDescription;
     (e: E): any;
 }

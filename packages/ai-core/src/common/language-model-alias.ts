@@ -16,10 +16,7 @@
 
 import { Event } from '@theia/core';
 
-/**
- * Represents an alias for a language model, allowing fallback and selection.
- */
-export interface LanguageModelAlias {
+export type LanguageModelAlias = {
     /**
      * The unique identifier for the alias.
      */
@@ -40,10 +37,7 @@ export interface LanguageModelAlias {
 }
 
 export const LanguageModelAliasRegistry = Symbol('LanguageModelAliasRegistry');
-/**
- * Registry for managing language model aliases.
- */
-export interface LanguageModelAliasRegistry {
+export type LanguageModelAliasRegistry = {
     /**
      * Promise that resolves when the registry is ready for use (preferences loaded).
      */

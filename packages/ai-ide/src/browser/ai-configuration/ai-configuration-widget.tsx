@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { BaseWidget, BoxLayout, codicon, DockPanel, WidgetManager } from '@theia/core/lib/browser';
-import { TheiaDockPanel } from '@theia/core/lib/browser/shell/theia-dock-panel';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { AIAgentConfigurationWidget } from './agent-configuration-widget';
-import { AIVariableConfigurationWidget } from './variable-configuration-widget';
-import { AIToolsConfigurationWidget } from './tools-configuration-widget';
-import { AIConfigurationSelectionService } from './ai-configuration-service';
+import { BaseWidget, BoxLayout, codicon, DockPanel, WidgetManager } from '@theia/core/lib/browser/index.js';
+import { TheiaDockPanel } from '@theia/core/lib/browser/shell/theia-dock-panel.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import { AIAgentConfigurationWidget } from './agent-configuration-widget.js';
+import { AIVariableConfigurationWidget } from './variable-configuration-widget.js';
+import { AIToolsConfigurationWidget } from './tools-configuration-widget.js';
+import { AIConfigurationSelectionService } from './ai-configuration-service.js';
 import { nls } from '@theia/core';
-import { AIMCPConfigurationWidget } from './mcp-configuration-widget';
-import { AITokenUsageConfigurationWidget } from './token-usage-configuration-widget';
-import { AIPromptFragmentsConfigurationWidget } from './prompt-fragments-configuration-widget';
-import { ModelAliasesConfigurationWidget } from './model-aliases-configuration-widget';
+import { AIMCPConfigurationWidget } from './mcp-configuration-widget.js';
+import { AITokenUsageConfigurationWidget } from './token-usage-configuration-widget.js';
+import { AIPromptFragmentsConfigurationWidget } from './prompt-fragments-configuration-widget.js';
+import { ModelAliasesConfigurationWidget } from './model-aliases-configuration-widget.js';
 
 @injectable()
 export class AIConfigurationContainerWidget extends BaseWidget {

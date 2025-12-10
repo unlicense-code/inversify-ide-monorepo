@@ -1,6 +1,7 @@
 {
   "name": "@theia/keymaps",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - Custom Keymaps Extension",
   "dependencies": {
     "@theia/core": "1.66.0",

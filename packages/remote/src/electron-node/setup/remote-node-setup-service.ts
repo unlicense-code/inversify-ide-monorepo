@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import * as path from 'path';
-import * as fs from '@theia/core/shared/fs-extra';
+import * as fs from 'fs-extra';
 import * as os from 'os';
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { RequestService } from '@theia/core/shared/@theia/request';
-import { RemoteSetupScriptService } from './remote-setup-script-service';
-import { RemotePlatform } from '@theia/core/lib/node/remote/remote-cli-contribution';
+import { inject, injectable } from 'inversify';
+import { RequestService } from '@theia/request';
+import { RemoteSetupScriptService } from './remote-setup-script-service.js';
+import { RemotePlatform } from '@theia/core/lib/node/remote/remote-cli-contribution.js';
 import { OS } from '@theia/core';
 
 /**

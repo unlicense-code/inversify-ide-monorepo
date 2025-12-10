@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, optional } from '@theia/core/shared/inversify';
+import { injectable, inject, optional } from 'inversify';
 import { MenuModelRegistry, CommandRegistry, nls, PreferenceScope, PreferenceService } from '@theia/core';
 import {
     CommonMenus,
@@ -25,17 +25,17 @@ import {
     QuickInputService,
     QuickPickItem,
     isFirefox,
-} from '@theia/core/lib/browser';
-import { isOSX } from '@theia/core/lib/common/os';
-import { TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { EditorManager, EditorWidget } from '@theia/editor/lib/browser';
-import URI from '@theia/core/lib/common/uri';
-import { PreferencesWidget } from './views/preference-widget';
-import { Preference, PreferencesCommands, PreferenceMenus } from './util/preference-types';
-import { ClipboardService } from '@theia/core/lib/browser/clipboard-service';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { FileStat } from '@theia/filesystem/lib/common/files';
+} from '@theia/core/lib/browser/index.js';
+import { isOSX } from '@theia/core/lib/common/os.js';
+import { TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { EditorManager, EditorWidget } from '@theia/editor/lib/browser/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { PreferencesWidget } from './views/preference-widget.js';
+import { Preference, PreferencesCommands, PreferenceMenus } from './util/preference-types.js';
+import { ClipboardService } from '@theia/core/lib/browser/clipboard-service.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { FileStat } from '@theia/filesystem/lib/common/files.js';
 
 @injectable()
 export class PreferencesContribution extends AbstractViewContribution<PreferencesWidget> {

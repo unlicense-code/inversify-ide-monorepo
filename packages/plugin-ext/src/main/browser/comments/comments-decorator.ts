@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { CommentInfoMain } from './comments-service';
-import { CommentingRanges, Range } from '../../../common/plugin-api-rpc-model';
+import { injectable } from 'inversify';
+import { CommentInfoMain } from './comments-service.js';
+import { CommentingRanges, Range } from '../../../common/plugin-api-rpc-model.js';
 import * as monaco from '@theia/monaco-editor-core';
 
 @injectable()

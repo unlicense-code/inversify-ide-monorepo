@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { MaybePromise, nls } from '@theia/core';
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable } from 'inversify';
 import {
     AIVariable,
     ResolvedAIVariable,
@@ -25,10 +25,10 @@ import {
     AIVariableContext,
     AIVariableResolverWithVariableDependencies,
     AIVariableArg
-} from '@theia/ai-core';
-import { ChatSessionContext } from '@theia/ai-chat';
-import { TASK_CONTEXT_VARIABLE } from '@theia/ai-chat/lib/browser/task-context-variable';
-import { TASK_CONTEXT_SUMMARY_VARIABLE_ID } from '../common/context-variables';
+} from '@theia/ai-core/lib/common/index.js';
+import { ChatSessionContext } from '@theia/ai-chat/lib/common/index.js';
+import { TASK_CONTEXT_VARIABLE } from '@theia/ai-chat/lib/browser/task-context-variable.js';
+import { TASK_CONTEXT_SUMMARY_VARIABLE_ID } from '../common/context-variables.js';
 
 export const TASK_CONTEXT_SUMMARY_VARIABLE: AIVariable = {
     id: TASK_CONTEXT_SUMMARY_VARIABLE_ID,

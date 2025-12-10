@@ -25,22 +25,21 @@ import {
     UserRequest,
     ImageContent,
     LanguageModelStatus
-} from '@theia/ai-core';
+} from '@theia/ai-core/lib/common/index.js';
 import { CancellationToken } from '@theia/core';
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable } from 'inversify';
 import { OpenAI, AzureOpenAI } from 'openai';
 import { ChatCompletionStream } from 'openai/lib/ChatCompletionStream';
 import { RunnableToolFunctionWithoutParse } from 'openai/lib/RunnableFunction';
 import { ChatCompletionMessageParam } from 'openai/resources';
-import { StreamingAsyncIterator } from './openai-streaming-iterator';
-import { OPENAI_PROVIDER_ID } from '../common';
-import type { FinalRequestOptions } from 'openai/internal/request-options';
+import { StreamingAsyncIterator } from './openai-streaming-iterator.js';
+import { OPENAI_PROVIDER_ID } from '../common/index.js';
 import type { RunnerOptions } from 'openai/lib/AbstractChatCompletionRunner';
-import { OpenAiResponseApiUtils, processSystemMessages } from './openai-response-api-utils';
+import { OpenAiResponseApiUtils, processSystemMessages } from './openai-response-api-utils.js';
 import * as undici from 'undici';
 
 export class MistralFixedOpenAI extends OpenAI {
-    protected override async prepareOptions(options: FinalRequestOptions): Promise<void> {
+    protected override async prepareOptions(options: Parameters<OpenAI['prepareOptions']>[0]): Promise<void> {
         const messages = (options.body as { messages: Array<ChatCompletionMessageParam> }).messages;
         if (Array.isArray(messages)) {
             (options.body as { messages: Array<ChatCompletionMessageParam> }).messages.forEach(m => {

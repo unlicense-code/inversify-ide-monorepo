@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { KeybindingContribution, KeybindingRegistry } from '@theia/core/lib/browser';
-import { CommandContribution, CommandRegistry, Command, MenuContribution, MenuModelRegistry, DisposableCollection } from '@theia/core/lib/common';
-import { BlameDecorator } from './blame-decorator';
-import { EditorManager, EditorWidget } from '@theia/editor/lib/browser';
-import { BlameManager } from './blame-manager';
-import URI from '@theia/core/lib/common/uri';
-import { EDITOR_CONTEXT_MENU_SCM } from '@theia/scm-extra/lib/browser/scm-extra-contribution';
-import { ContextKey, ContextKeyService } from '@theia/core/lib/browser/context-key-service';
+import { inject, injectable, postConstruct } from 'inversify';
+import { KeybindingContribution, KeybindingRegistry } from '@theia/core/lib/browser/index.js';
+import { CommandContribution, CommandRegistry, Command, MenuContribution, MenuModelRegistry, DisposableCollection } from '@theia/core/lib/common/index.js';
+import { BlameDecorator } from './blame-decorator.js';
+import { EditorManager, EditorWidget } from '@theia/editor/lib/browser/index.js';
+import { BlameManager } from './blame-manager.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { EDITOR_CONTEXT_MENU_SCM } from '@theia/scm-extra/lib/browser/scm-extra-contribution.js';
+import { ContextKey, ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
 
-import debounce = require('@theia/core/shared/lodash.debounce');
+import debounce from 'lodash/debounce.js'
 
 export namespace BlameCommands {
     export const TOGGLE_GIT_ANNOTATIONS = Command.toLocalizedCommand({

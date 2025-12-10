@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { StopReason } from '../../common/frontend-application-state';
-import { Event } from '../../common/event';
-import { NewWindowOptions, WindowSearchParams } from '../../common/window';
+import { StopReason } from '../../common/frontend-application-state.js';
+import { Event } from '../../common/event.js';
+import { NewWindowOptions, WindowSearchParams } from '../../common/window.js';
 
-export interface WindowReloadOptions {
+export type WindowReloadOptions = {
     search?: WindowSearchParams,
     hash?: string
 }
@@ -28,7 +28,7 @@ export interface WindowReloadOptions {
  */
 export const WindowService = Symbol('WindowService');
 
-export interface WindowService {
+export type WindowService = {
     /**
      * Opens a new window and loads the content from the given URL.
      * In a browser, opening a new Theia tab or open a link is the same thing.

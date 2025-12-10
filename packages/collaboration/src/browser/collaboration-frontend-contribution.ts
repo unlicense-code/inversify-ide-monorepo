@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -20,15 +20,15 @@ import {
     CancellationToken, CancellationTokenSource, Command, CommandContribution, CommandRegistry, MessageService, nls, PreferenceService, Progress, QuickInputService, QuickPickItem,
     URI
 } from '@theia/core';
-import { inject, injectable, optional, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, optional, postConstruct } from 'inversify';
 import { AuthMetadata, AuthProvider, ConnectionProvider, FormAuthProvider, initializeProtocol, SocketIoTransportProvider, WebAuthProvider } from 'open-collaboration-protocol';
-import { WindowService } from '@theia/core/lib/browser/window/window-service';
-import { CollaborationInstance, CollaborationInstanceFactory } from './collaboration-instance';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
-import { CollaborationWorkspaceService } from './collaboration-workspace-service';
-import { StatusBar, StatusBarAlignment, StatusBarEntry } from '@theia/core/lib/browser/status-bar';
-import { codiconArray } from '@theia/core/lib/browser/widgets/widget';
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { WindowService } from '@theia/core/lib/browser/window/window-service.js';
+import { CollaborationInstance, CollaborationInstanceFactory } from './collaboration-instance.js';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
+import { CollaborationWorkspaceService } from './collaboration-workspace-service.js';
+import { StatusBar, StatusBarAlignment, StatusBarEntry } from '@theia/core/lib/browser/status-bar/index.js';
+import { codiconArray } from '@theia/core/lib/browser/widgets/widget.js';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 
 initializeProtocol({
     cryptoModule: window.crypto
@@ -50,7 +50,7 @@ export namespace CollaborationCommands {
     };
 }
 
-export interface CollaborationAuthQuickPickItem extends QuickPickItem {
+export type CollaborationAuthQuickPickItem = QuickPickItem & {
     provider: AuthProvider;
 }
 

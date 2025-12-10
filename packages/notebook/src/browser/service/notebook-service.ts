@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,30 +15,30 @@
 // *****************************************************************************
 
 import { Disposable, DisposableCollection, Emitter, Resource, URI } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
-import { CellKind, NotebookData, TransientOptions } from '../../common';
-import { NotebookModel, NotebookModelFactory, NotebookModelProps } from '../view-model/notebook-model';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { NotebookCellModel, NotebookCellModelFactory, NotebookCellModelProps } from '../view-model/notebook-cell-model';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { NotebookMonacoTextModelService } from './notebook-monaco-text-model-service';
-import { CellEditOperation } from '../notebook-types';
+import { inject, injectable } from 'inversify';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
+import { CellKind, NotebookData, TransientOptions } from '../../common/index.js';
+import { NotebookModel, NotebookModelFactory, NotebookModelProps } from '../view-model/notebook-model.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { NotebookCellModel, NotebookCellModelFactory, NotebookCellModelProps } from '../view-model/notebook-cell-model.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { NotebookMonacoTextModelService } from './notebook-monaco-text-model-service.js';
+import { CellEditOperation } from '../notebook-types.js';
 
 export const NotebookProvider = Symbol('notebook provider');
 
-export interface NotebookProviderInfo {
+export type NotebookProviderInfo = {
     readonly notebookType: string,
     readonly serializer: NotebookSerializer,
 }
 
-export interface NotebookSerializer {
+export type NotebookSerializer = {
     options: TransientOptions;
     toNotebook(data: BinaryBuffer): Promise<NotebookData>;
     fromNotebook(data: NotebookData): Promise<BinaryBuffer>;
 }
 
-export interface NotebookWorkspaceEdit {
+export type NotebookWorkspaceEdit = {
     edits: {
         resource: URI;
         edit: CellEditOperation

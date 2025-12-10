@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
+import { injectable, inject } from 'inversify';
 import { Event, Emitter, DisposableCollection } from '@theia/core';
-import { WidgetFactory } from '@theia/core/lib/browser';
-import { OutlineViewWidget, OutlineViewWidgetFactory, OutlineSymbolInformationNode } from './outline-view-widget';
-import { Widget } from '@theia/core/shared/@lumino/widgets';
+import { WidgetFactory } from '@theia/core/lib/browser/index.js';
+import {
+    OutlineViewWidget, OutlineViewWidgetFactory, OutlineSymbolInformationNode
+
+} from './outline-view-widget.js';
+import { Widget } from '@lumino/widgets';
 
 @injectable()
 export class OutlineViewService implements WidgetFactory {
@@ -81,7 +84,11 @@ export class OutlineViewService implements WidgetFactory {
         const disposables = new DisposableCollection();
         disposables.push(this.widget.onDidChangeOpenStateEmitter.event(open => this.onDidChangeOpenStateEmitter.fire(open)));
         disposables.push(this.widget.model.onOpenNode(node => this.onDidOpenEmitter.fire(node as OutlineSymbolInformationNode)));
-        disposables.push(this.widget.model.onSelectionChanged(selection => this.onDidSelectEmitter.fire(selection[0] as OutlineSymbolInformationNode)));
+        disposables.push(this.widget.model.onSelectionChanged((selection: ReadonlyArray<any> | undefined) => {
+            if (selection && selection.length > 0) {
+                this.onDidSelectEmitter.fire(selection[0] as OutlineSymbolInformationNode);
+            }
+        }));
         this.widget.disposed.connect(() => {
             this.widget = undefined;
             disposables.dispose();

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,17 +15,17 @@
 // *****************************************************************************
 
 import { isObject } from '@theia/core';
-import { RequestOptions } from '@theia/core/shared/@theia/request';
-import { RemotePlatform } from '@theia/core/lib/node/remote/remote-cli-contribution';
+import { RequestOptions } from '@theia/request';
+import { RemotePlatform } from '@theia/core/lib/node/remote/remote-cli-contribution.js';
 
-export interface FileDependencyResult {
+export type FileDependencyResult = {
     path: string;
     mode?: number;
 }
 
 export type DependencyDownload = FileDependencyDownload | DirectoryDependencyDownload;
 
-export interface FileDependencyDownload {
+export type FileDependencyDownload = {
     file: FileDependencyResult
     buffer: Buffer
 }
@@ -36,7 +36,7 @@ export namespace FileDependencyResult {
     }
 }
 
-export interface DirectoryDependencyDownload {
+export type DirectoryDependencyDownload = {
     archive: 'tar' | 'zip' | 'tgz'
     buffer: Buffer
 }
@@ -47,7 +47,7 @@ export namespace DirectoryDependencyDownload {
     }
 }
 
-export interface DownloadOptions {
+export type DownloadOptions = {
     remotePlatform: RemotePlatform
     theiaVersion: string;
     download: (requestInfo: string | RequestOptions) => Promise<Buffer>
@@ -55,9 +55,6 @@ export interface DownloadOptions {
 
 export const RemoteNativeDependencyContribution = Symbol('RemoteNativeDependencyContribution');
 
-/**
- * contribution used for downloading prebuild native dependency when connecting to a remote machine with a different system
- */
-export interface RemoteNativeDependencyContribution {
+export type RemoteNativeDependencyContribution = {
     download(options: DownloadOptions): Promise<DependencyDownload>;
 }

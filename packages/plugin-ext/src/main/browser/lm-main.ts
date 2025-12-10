@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { RPCProtocol } from '../../common/rpc-protocol';
+import { interfaces } from 'inversify';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
 import {
     McpServerDefinitionRegistryMain,
     McpServerDefinitionRegistryExt,
     McpServerDefinitionDto,
     isMcpHttpServerDefinitionDto,
-} from '../../common/lm-protocol';
-import { MAIN_RPC_CONTEXT } from '../../common/plugin-api-rpc';
+} from '../../common/lm-protocol.js';
+import { MAIN_RPC_CONTEXT } from '../../common/plugin-api-rpc.js';
 import { MCPServerManager, MCPServerDescription, RemoteMCPServerDescription } from '@theia/ai-mcp/lib/common';
 import { URI } from '@theia/core';
 

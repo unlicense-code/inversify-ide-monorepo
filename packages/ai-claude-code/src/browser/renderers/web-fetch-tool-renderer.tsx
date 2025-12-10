@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ChatResponsePartRenderer } from '@theia/ai-chat-ui/lib/browser/chat-response-part-renderer';
-import { ResponseNode } from '@theia/ai-chat-ui/lib/browser/chat-tree-view';
-import { ChatResponseContent, ToolCallChatResponseContent } from '@theia/ai-chat/lib/common';
-import { codicon } from '@theia/core/lib/browser';
-import { injectable } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { ReactNode } from '@theia/core/shared/react';
-import { ClaudeCodeToolCallChatResponseContent } from '../claude-code-tool-call-content';
-import { CollapsibleToolRenderer } from './collapsible-tool-renderer';
+import { ChatResponsePartRenderer } from '@theia/ai-chat-ui/lib/browser/chat-response-part-renderer.js';
+import { ResponseNode } from '@theia/ai-chat-ui/lib/browser/chat-tree-view/index.js';
+import { ChatResponseContent, ToolCallChatResponseContent } from '@theia/ai-chat/lib/common/index.js';
+import { codicon } from '@theia/core/lib/browser/index.js';
+import { injectable } from 'inversify';
+import * as React from 'react';
+import { ReactNode } from 'react';
+import { ClaudeCodeToolCallChatResponseContent } from '../claude-code-tool-call-content.js';
+import { CollapsibleToolRenderer } from './collapsible-tool-renderer.js';
 import { nls } from '@theia/core';
 
-interface WebFetchToolInput {
+type WebFetchToolInput = {
     url: string;
     prompt: string;
 }

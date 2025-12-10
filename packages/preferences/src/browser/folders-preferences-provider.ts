@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,11 +16,11 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { FolderPreferenceProvider, FolderPreferenceProviderFactory } from './folder-preference-provider';
-import { FileStat } from '@theia/filesystem/lib/common/files';
+import { inject, injectable, postConstruct } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
+import { FolderPreferenceProvider, FolderPreferenceProviderFactory } from './folder-preference-provider.js';
+import { FileStat } from '@theia/filesystem/lib/common/files.js';
 import { PreferenceProviderImpl, PreferenceConfigurations, PreferenceResolveResult, PreferenceScope, PreferenceUtils } from '@theia/core';
 
 @injectable()

@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-export interface PackageJson {
+export type PackageJson = {
     name: string
     dependencies?: Record<string, string>
     peerDependencies?: Record<string, string>
@@ -22,10 +22,7 @@ export interface PackageJson {
     theiaReExports?: Record<string, ReExportJson>
 }
 
-/**
- * Raw re-export declaration as written in `package.json#theiaReExports[<destination>]`.
- */
-export interface ReExportJson {
+export type ReExportJson = {
     'export *'?: string[]
     'export ='?: string[]
     copy?: string

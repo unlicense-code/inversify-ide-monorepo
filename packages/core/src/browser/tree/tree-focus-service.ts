@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import { inject, injectable } from 'inversify';
-import { Emitter, Event } from '../../common';
-import { Tree, TreeNode } from './tree';
-import { SelectableTreeNode } from './tree-selection';
+import { Emitter, Event } from '../../common/index.js';
+import { Tree, TreeNode } from './tree.js';
+import { SelectableTreeNode } from './tree-selection.js';
 
-export interface TreeFocusService {
+export type TreeFocusService = {
     readonly focusedNode: SelectableTreeNode | undefined;
     readonly onDidChangeFocus: Event<SelectableTreeNode | undefined>;
     setFocus(node?: SelectableTreeNode): void;

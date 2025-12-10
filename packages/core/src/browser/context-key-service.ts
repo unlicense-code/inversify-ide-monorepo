@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,14 +15,14 @@
 // *****************************************************************************
 
 import { injectable } from 'inversify';
-import { Emitter, Event } from '../common/event';
-import { Disposable } from '../common';
+import { Emitter, Event } from '../common/event.js';
+import { Disposable } from '../common/index.js';
 
 export type ContextKeyValue = null | undefined | boolean | number | string
     | Array<null | undefined | boolean | number | string>
     | Record<string, null | undefined | boolean | number | string>;
 
-export interface ContextKey<T extends ContextKeyValue = ContextKeyValue> {
+export type ContextKey<T extends ContextKeyValue = ContextKeyValue> = {
     set(value: T | undefined): void;
     reset(): void;
     get(): T | undefined;
@@ -37,25 +37,25 @@ export namespace ContextKey {
     });
 }
 
-export interface ContextKeyChangeEvent {
+export type ContextKeyChangeEvent = {
     affects(keys: { has(key: string): boolean }): boolean;
 }
 
-export interface Context {
+export type Context = {
     getValue<T extends ContextKeyValue = ContextKeyValue>(key: string): T | undefined;
     readonly onDidChange?: Event<ContextKeyChangeEvent>;
 }
 
 export const ContextKeyService = Symbol('ContextKeyService');
 
-export interface ContextMatcher {
+export type ContextMatcher = {
     /**
      * Whether the expression is satisfied. If `context` provided, the service will attempt to retrieve a context object associated with that element.
      */
     match(expression: string, context?: HTMLElement): boolean;
 }
 
-export interface ContextKeyService extends ContextMatcher {
+export type ContextKeyService = ContextMatcher & {
     readonly onDidChange: Event<ContextKeyChangeEvent>;
 
     createKey<T extends ContextKeyValue>(key: string, defaultValue: T | undefined): ContextKey<T>;

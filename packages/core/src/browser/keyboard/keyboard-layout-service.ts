@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,14 +16,14 @@
 
 import { injectable, inject, optional } from 'inversify';
 import type { IWindowsKeyMapping } from 'native-keymap';
-import { isWindows } from '../../common/os';
+import { isWindows } from '../../common/os.js';
 import {
     NativeKeyboardLayout, KeyboardLayoutProvider, KeyboardLayoutChangeNotifier, KeyValidator
-} from '../../common/keyboard/keyboard-layout-provider';
-import { Emitter, Event } from '../../common/event';
-import { KeyCode, Key } from './keys';
+} from '../../common/keyboard/keyboard-layout-provider.js';
+import { Emitter, Event } from '../../common/event.js';
+import { KeyCode, Key } from './keys.js';
 
-export interface KeyboardLayout {
+export type KeyboardLayout = {
     /**
      * Mapping of standard US keyboard keys to the actual key codes to use.
      * See `KeyboardLayoutService.getCharacterIndex` for the index computation.

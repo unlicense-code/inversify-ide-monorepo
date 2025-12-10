@@ -19,33 +19,33 @@ import {
     InputBox, InputOptions, KeybindingRegistry, PickOptions,
     QuickInputButton, QuickInputHideReason, QuickInputService, QuickPick, QuickPickItem,
     QuickPickItemButtonEvent, QuickPickItemHighlights, QuickPickOptions, QuickPickSeparator
-} from '@theia/core/lib/browser';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
+} from '@theia/core/lib/browser/index.js';
+import { injectable, inject, postConstruct } from 'inversify';
 import {
     IInputBox, IInputOptions, IKeyMods, IPickOptions, IQuickInput, IQuickInputButton,
     IQuickInputService, IQuickNavigateConfiguration, IQuickPick, IQuickPickItem, IQuickPickItemButtonEvent, IQuickPickSeparator, IQuickWidget, QuickPickInput
-} from '@theia/monaco-editor-core/esm/vs/platform/quickinput/common/quickInput';
-import { IQuickInputOptions, IQuickInputStyles } from '@theia/monaco-editor-core/esm/vs/platform/quickinput/browser/quickInput';
-import { QuickInputController } from '@theia/monaco-editor-core/esm/vs/platform/quickinput/browser/quickInputController';
-import { MonacoResolvedKeybinding } from './monaco-resolved-keybinding';
-import { IQuickAccessController } from '@theia/monaco-editor-core/esm/vs/platform/quickinput/common/quickAccess';
-import { QuickAccessController } from '@theia/monaco-editor-core/esm/vs/platform/quickinput/browser/quickAccess';
-import { IContextKey, IContextKeyService } from '@theia/monaco-editor-core/esm/vs/platform/contextkey/common/contextkey';
+} from '@theia/monaco-editor-core/esm/vs/platform/quickinput/common/quickInput.js';
+import { IQuickInputOptions, IQuickInputStyles } from '@theia/monaco-editor-core/esm/vs/platform/quickinput/browser/quickInput.js';
+import { QuickInputController } from '@theia/monaco-editor-core/esm/vs/platform/quickinput/browser/quickInputController.js';
+import { MonacoResolvedKeybinding } from './monaco-resolved-keybinding.js';
+import { IQuickAccessController } from '@theia/monaco-editor-core/esm/vs/platform/quickinput/common/quickAccess.js';
+import { QuickAccessController } from '@theia/monaco-editor-core/esm/vs/platform/quickinput/browser/quickAccess.js';
+import { IContextKey, IContextKeyService } from '@theia/monaco-editor-core/esm/vs/platform/contextkey/common/contextkey.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { ResolvedKeybinding } from '@theia/monaco-editor-core/esm/vs/base/common/keybindings';
-import { IInstantiationService } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/instantiation';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { IMatch } from '@theia/monaco-editor-core/esm/vs/base/common/filters';
-import { CancellationToken, Event } from '@theia/core';
-import { MonacoColorRegistry } from './monaco-color-registry';
-import { ThemeService } from '@theia/core/lib/browser/theming';
-import { IStandaloneThemeService } from '@theia/monaco-editor-core/esm/vs/editor/standalone/common/standaloneTheme';
-import { ILayoutService } from '@theia/monaco-editor-core/esm/vs/platform/layout/browser/layoutService';
-import { IHoverDelegate, IHoverDelegateOptions } from '@theia/monaco-editor-core/esm/vs/base/browser/ui/hover/hoverDelegate';
-import { IHoverWidget } from '@theia/monaco-editor-core/esm/vs/base/browser/ui/hover/hover';
+import { ResolvedKeybinding } from '@theia/monaco-editor-core/esm/vs/base/common/keybindings.js';
+import { IInstantiationService } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/instantiation.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { IMatch } from '@theia/monaco-editor-core/esm/vs/base/common/filters.js';
+import { CancellationToken, Event } from '@theia/core/lib/common/index.js';
+import { MonacoColorRegistry } from './monaco-color-registry.js';
+import { ThemeService } from '@theia/core/lib/browser/theming.js';
+import { IStandaloneThemeService } from '@theia/monaco-editor-core/esm/vs/editor/standalone/common/standaloneTheme.js';
+import { ILayoutService } from '@theia/monaco-editor-core/esm/vs/platform/layout/browser/layoutService.js';
+import { IHoverDelegate, IHoverDelegateOptions } from '@theia/monaco-editor-core/esm/vs/base/browser/ui/hover/hoverDelegate.js';
+import { IHoverWidget } from '@theia/monaco-editor-core/esm/vs/base/browser/ui/hover/hover.js';
 
 // Copied from @vscode/src/vs/base/parts/quickInput/browser/quickInputList.ts
-export interface IListElement {
+export type IListElement = {
     readonly index: number;
     readonly item: IQuickPickItem;
     readonly saneLabel: string;
@@ -548,8 +548,28 @@ class MonacoQuickInput {
 }
 
 class MonacoQuickPick<T extends QuickPickItem> extends MonacoQuickInput implements QuickPick<T> {
+    readonly onDidAccept: Event<{ inBackground: boolean }>;
+    readonly onDidChangeValue: Event<string>;
+    readonly onDidTriggerButton: Event<QuickInputButton>;
+    readonly onDidTriggerItemButton: Event<QuickPickItemButtonEvent<T>>;
+    readonly onDidChangeActive: Event<T[]>;
+    readonly onDidChangeSelection: Event<T[]>;
+
     constructor(protected override readonly wrapped: IQuickPick<MonacoQuickPickItem<T>, { useSeparators: true }>, protected readonly keybindingRegistry: KeybindingRegistry) {
         super(wrapped);
+        this.onDidAccept = this.wrapped.onDidAccept;
+        this.onDidChangeValue = this.wrapped.onDidChangeValue;
+        // need to cast because of vscode issue https://github.com/microsoft/vscode/issues/190584
+        this.onDidTriggerButton = this.wrapped.onDidTriggerButton as Event<QuickInputButton>;
+        this.onDidTriggerItemButton = Event.map(this.wrapped.onDidTriggerItemButton, (evt: IQuickPickItemButtonEvent<MonacoQuickPickItem<T>>) => ({
+            item: evt.item.item,
+            button: evt.button
+        })) as Event<QuickPickItemButtonEvent<T>>;
+        this.onDidChangeActive = Event.map(
+            this.wrapped.onDidChangeActive,
+            (items: MonacoQuickPickItem<T>[]) => items.map(item => item.item));
+        this.onDidChangeSelection = Event.map(
+            this.wrapped.onDidChangeSelection, (items: MonacoQuickPickItem<T>[]) => items.map(item => item.item));
     }
 
     get value(): string {
@@ -646,22 +666,6 @@ class MonacoQuickPick<T extends QuickPickItem> extends MonacoQuickInput implemen
     get selectedItems(): readonly (T)[] {
         return this.wrapped.selectedItems.map(item => item.item);
     }
-
-    readonly onDidAccept: Event<{ inBackground: boolean }> = this.wrapped.onDidAccept;
-    readonly onDidChangeValue: Event<string> = this.wrapped.onDidChangeValue;
-
-    // need to cast because of vscode issue https://github.com/microsoft/vscode/issues/190584
-    readonly onDidTriggerButton: Event<QuickInputButton> = this.wrapped.onDidTriggerButton as Event<QuickInputButton>;
-    readonly onDidTriggerItemButton: Event<QuickPickItemButtonEvent<T>> =
-        Event.map(this.wrapped.onDidTriggerItemButton, (evt: IQuickPickItemButtonEvent<MonacoQuickPickItem<T>>) => ({
-            item: evt.item.item,
-            button: evt.button
-        })) as Event<QuickPickItemButtonEvent<T>>;
-    readonly onDidChangeActive: Event<T[]> = Event.map(
-        this.wrapped.onDidChangeActive,
-        (items: MonacoQuickPickItem<T>[]) => items.map(item => item.item));
-    readonly onDidChangeSelection: Event<T[]> = Event.map(
-        this.wrapped.onDidChangeSelection, (items: MonacoQuickPickItem<T>[]) => items.map(item => item.item));
 
     /**
      * Monaco doesn't check for deep equality when setting the `activeItems` or `selectedItems`.

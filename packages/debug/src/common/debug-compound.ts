@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { isObject } from '@theia/core/lib/common';
+import { isObject } from '@theia/core/lib/common/index.js';
 import { TaskIdentifier } from '@theia/task/lib/common';
 
 export const defaultCompound: DebugCompound = { name: 'Compound', configurations: [] };
 
-export interface DebugCompound {
+export type DebugCompound = {
     name: string;
     stopAll?: boolean;
     preLaunchTask?: string | TaskIdentifier;

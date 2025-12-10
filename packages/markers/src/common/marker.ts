@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { isObject, isString } from '@theia/core/lib/common/types';
+import { isObject, isString } from '@theia/core/lib/common/types.js';
 
 /*
 * A marker represents meta information for a given uri
 */
-export interface Marker<T> {
+export type Marker<T> = {
     /**
      * the uri this marker is associated with.
      */
@@ -44,9 +44,10 @@ export namespace Marker {
     export function is<T>(value: unknown, subTypeCheck: (value: unknown) => value is T): value is Marker<T>;
     export function is(value: unknown, subTypeCheck?: (value: unknown) => boolean): boolean {
         subTypeCheck ??= isObject;
-        return isObject<Marker<object>>(value)
-            && !Array.isArray(value)
-            && subTypeCheck(value.data)
+        if (!isObject<Marker<object>>(value) || Array.isArray(value)) {
+            return false;
+        }
+        return subTypeCheck(value.data)
             && isString(value.uri)
             && isString(value.owner);
     }

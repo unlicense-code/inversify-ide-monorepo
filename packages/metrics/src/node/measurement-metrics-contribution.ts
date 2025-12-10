@@ -13,11 +13,12 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { inject, injectable, } from '@theia/core/shared/inversify';
-import { MetricsContribution } from './metrics-contribution';
-import { LogLevel, MeasurementResult, Stopwatch } from '@theia/core';
-import { MeasurementNotificationService } from '../common';
-import { LogLevelCliContribution } from '@theia/core/lib/node/logger-cli-contribution';
+import { inject, injectable, } from 'inversify';
+import { MetricsContribution } from './metrics-contribution.js';
+import { LogLevel, MeasurementResult, Stopwatch } from '@theia/core/lib/common/index.js';
+import { MeasurementNotificationService } from '../common/measurement-notification-service.js';
+import { LogLevelCliContribution } from '@theia/core/lib/node/logger-cli-contribution.js';
+
 
 const backendId = 'backend';
 const metricsName = 'theia_measurements';

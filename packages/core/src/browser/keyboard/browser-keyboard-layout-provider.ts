@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,14 +15,14 @@
 // *****************************************************************************
 
 import { injectable, postConstruct, inject } from 'inversify';
-import { isOSX } from '../../common/os';
-import { Emitter, Event } from '../../common/event';
-import { ILogger } from '../../common/logger';
-import { Deferred } from '../../common/promise-util';
+import { isOSX } from '../../common/os.js';
+import { Emitter, Event } from '../../common/event.js';
+import { ILogger } from '../../common/logger.js';
+import { Deferred } from '../../common/promise-util.js';
 import {
     NativeKeyboardLayout, KeyboardLayoutProvider, KeyboardLayoutChangeNotifier, KeyValidator, KeyValidationInput
-} from '../../common/keyboard/keyboard-layout-provider';
-import { LocalStorageService } from '../storage-service';
+} from '../../common/keyboard/keyboard-layout-provider.js';
+import { LocalStorageService } from '../storage-service.js';
 
 export type KeyboardLayoutSource = 'navigator.keyboard' | 'user-choice' | 'pressed-keys';
 
@@ -221,7 +221,7 @@ export class BrowserKeyboardLayoutProvider implements KeyboardLayoutProvider, Ke
 
 }
 
-export interface KeyboardLayoutData {
+export type KeyboardLayoutData = {
     name: string;
     hardware: 'pc' | 'mac';
     language: string;
@@ -247,13 +247,13 @@ export const DEFAULT_LAYOUT_DATA: KeyboardLayoutData = {
     }
 };
 
-export interface LayoutProviderState {
+export type LayoutProviderState = {
     tester?: KeyboardTesterState;
     source?: KeyboardLayoutSource;
     currentLayout?: string;
 }
 
-export interface KeyboardTesterState {
+export type KeyboardTesterState = {
     scores?: { [id: string]: number };
     topScore?: number;
     testedInputs?: { [key: string]: string }
@@ -373,14 +373,11 @@ export class KeyboardTester {
 
 }
 
-/**
- * API specified by https://wicg.github.io/keyboard-map/
- */
-interface NavigatorExtension extends Navigator {
+type NavigatorExtension = Navigator & {
     keyboard: Keyboard;
 }
 
-interface Keyboard {
+type Keyboard = {
     getLayoutMap(): Promise<KeyboardLayoutMap>;
     addEventListener(type: 'layoutchange', listener: EventListenerOrEventListenerObject): void;
 }

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,23 +14,23 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ApplicationShell, FrontendApplication, QuickPickValue, WidgetManager, WidgetOpenMode } from '@theia/core/lib/browser';
-import { open, OpenerService } from '@theia/core/lib/browser/opener-service';
-import { CommandService, ILogger, nls } from '@theia/core/lib/common';
-import { MessageService } from '@theia/core/lib/common/message-service';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { QuickPickItemOrSeparator, QuickPickService } from '@theia/core/lib/common/quick-pick-service';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
-import URI from '@theia/core/lib/common/uri';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { ProblemManager } from '@theia/markers/lib/browser/problem/problem-manager';
-import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
-import { TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget';
-import { TerminalWidgetFactoryOptions } from '@theia/terminal/lib/browser/terminal-widget-impl';
+import { ApplicationShell, FrontendApplication, QuickPickValue, WidgetManager, WidgetOpenMode } from '@theia/core/lib/browser/index.js';
+import { open, OpenerService } from '@theia/core/lib/browser/opener-service.js';
+import { CommandService, ILogger, nls } from '@theia/core/lib/common/index.js';
+import { MessageService } from '@theia/core/lib/common/message-service.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { QuickPickItemOrSeparator, QuickPickService } from '@theia/core/lib/common/quick-pick-service.js';
+import { LabelProvider } from '@theia/core/lib/browser/label-provider.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { ProblemManager } from '@theia/markers/lib/browser/problem/problem-manager.js';
+import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service.js';
+import { TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget.js';
+import { TerminalWidgetFactoryOptions } from '@theia/terminal/lib/browser/terminal-widget-impl.js';
 import { VariableResolverService } from '@theia/variable-resolver/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { inject, injectable, named, postConstruct } from '@theia/core/shared/inversify';
-import { DiagnosticSeverity, Range } from '@theia/core/shared/vscode-languageserver-protocol';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
+import { inject, injectable, named, postConstruct } from 'inversify';
+import { DiagnosticSeverity, Range } from 'vscode-languageserver-protocol';
 import {
     ApplyToKind,
     BackgroundTaskEndedEvent,
@@ -50,31 +50,31 @@ import {
     TaskOutputProcessedEvent,
     TaskServer,
     asVariableName
-} from '../common';
-import { TaskWatcher } from '../common/task-watcher';
-import { ProvidedTaskConfigurations } from './provided-task-configurations';
-import { TaskConfigurationClient, TaskConfigurations } from './task-configurations';
-import { TaskResolverRegistry } from './task-contribution';
-import { TaskDefinitionRegistry } from './task-definition-registry';
-import { TaskNameResolver } from './task-name-resolver';
-import { TaskSourceResolver } from './task-source-resolver';
-import { ProblemMatcherRegistry } from './task-problem-matcher-registry';
-import { TaskSchemaUpdater } from './task-schema-updater';
-import { TaskConfigurationManager } from './task-configuration-manager';
-import { PROBLEMS_WIDGET_ID, ProblemWidget } from '@theia/markers/lib/browser/problem/problem-widget';
-import { TaskNode } from './task-node';
-import { MonacoWorkspace } from '@theia/monaco/lib/browser/monaco-workspace';
-import { TaskTerminalWidgetManager } from './task-terminal-widget-manager';
-import { ShellTerminalServerProxy } from '@theia/terminal/lib/common/shell-terminal-protocol';
+} from '../common/index.js';
+import { TaskWatcher } from '../common/task-watcher.js';
+import { ProvidedTaskConfigurations } from './provided-task-configurations.js';
+import { TaskConfigurationClient, TaskConfigurations } from './task-configurations.js';
+import { TaskResolverRegistry } from './task-contribution.js';
+import { TaskDefinitionRegistry } from './task-definition-registry.js';
+import { TaskNameResolver } from './task-name-resolver.js';
+import { TaskSourceResolver } from './task-source-resolver.js';
+import { ProblemMatcherRegistry } from './task-problem-matcher-registry.js';
+import { TaskSchemaUpdater } from './task-schema-updater.js';
+import { TaskConfigurationManager } from './task-configuration-manager.js';
+import { PROBLEMS_WIDGET_ID, ProblemWidget } from '@theia/markers/lib/browser/problem/problem-widget.js';
+import { TaskNode } from './task-node.js';
+import { MonacoWorkspace } from '@theia/monaco/lib/browser/monaco-workspace.js';
+import { TaskTerminalWidgetManager } from './task-terminal-widget-manager.js';
+import { ShellTerminalServerProxy } from '@theia/terminal/lib/common/shell-terminal-protocol.js';
 import { Mutex } from 'async-mutex';
-import { TaskContextKeyService } from './task-context-key-service';
+import { TaskContextKeyService } from './task-context-key-service.js';
 
-export interface QuickPickProblemMatcherItem {
+export type QuickPickProblemMatcherItem = {
     problemMatchers: NamedProblemMatcher[] | undefined;
     learnMore?: boolean;
 }
 
-interface TaskGraphNode {
+type TaskGraphNode = {
     taskConfiguration: TaskConfiguration;
     node: TaskNode;
 }
@@ -84,12 +84,12 @@ export enum TaskEndedTypes {
     BackgroundTaskEnded
 }
 
-export interface TaskEndedInfo {
+export type TaskEndedInfo = {
     taskEndedType: TaskEndedTypes,
     value: number | boolean | undefined
 }
 
-export interface LastRunTaskInfo {
+export type LastRunTaskInfo = {
     resolvedTask?: TaskConfiguration;
     option?: RunTaskOption
 }

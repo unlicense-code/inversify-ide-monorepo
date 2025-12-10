@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { AnthropicLanguageModelsManager, AnthropicModelDescription } from '../common';
-import { API_KEY_PREF, MODELS_PREF } from '../common/anthropic-preferences';
-import { AICorePreferences, PREFERENCE_NAME_MAX_RETRIES } from '@theia/ai-core/lib/common/ai-core-preferences';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
+import { AnthropicLanguageModelsManager, AnthropicModelDescription } from '../common/index.js';
+import { API_KEY_PREF, MODELS_PREF } from '../common/anthropic-preferences.js';
+import { AICorePreferences, PREFERENCE_NAME_MAX_RETRIES } from '@theia/ai-core/lib/common/ai-core-preferences.js';
 import { PreferenceService } from '@theia/core';
 
 const ANTHROPIC_PROVIDER_ID = 'anthropic';

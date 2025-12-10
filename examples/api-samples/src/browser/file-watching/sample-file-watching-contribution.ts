@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { postConstruct, injectable, inject, interfaces } from '@theia/core/shared/inversify';
+import { postConstruct, injectable, inject, interfaces } from 'inversify';
 import {
     FrontendApplicationContribution, LabelProvider,
-} from '@theia/core/lib/browser';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+} from '@theia/core/lib/browser/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
 import { createPreferenceProxy, PreferenceService, PreferenceProxy, PreferenceContribution } from '@theia/core';
-import { FileWatchingPreferencesSchema } from '../../common/preference-schema';
+import { FileWatchingPreferencesSchema } from '../../common/preference-schema.js';
 
 export function bindSampleFileWatching(bind: interfaces.Bind): void {
     bind(FrontendApplicationContribution).to(SampleFileWatchingContribution).inSingletonScope();
@@ -34,7 +34,7 @@ export function bindSampleFileWatching(bind: interfaces.Bind): void {
 const FileWatchingPreferences = Symbol('FileWatchingPreferences');
 type FileWatchingPreferences = PreferenceProxy<FileWatchingPreferencesSchema>;
 
-interface FileWatchingPreferencesSchema {
+type FileWatchingPreferencesSchema = {
     'sample.file-watching.verbose': boolean
 }
 

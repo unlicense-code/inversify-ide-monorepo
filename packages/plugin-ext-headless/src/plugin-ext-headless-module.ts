@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { HeadlessPluginContainerModule } from './common/headless-plugin-container';
-import { bindHeadlessHosted, bindCommonHostedBackend } from './hosted/node/plugin-ext-headless-hosted-module';
-import { bindHeadlessMain, bindBackendMain } from './main/node/plugin-ext-headless-main-module';
+import { ContainerModule } from 'inversify';
+import { HeadlessPluginContainerModule } from './common/headless-plugin-container.js';
+import { bindHeadlessHosted, bindCommonHostedBackend } from './hosted/node/plugin-ext-headless-hosted-module.js';
+import { bindHeadlessMain, bindBackendMain } from './main/node/plugin-ext-headless-main-module.js';
 
 const backendModule = new ContainerModule((bind, unbind, isBound, rebind) => {
     bindBackendMain(bind, unbind, isBound, rebind);

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2025 TypeFox and others.
+// Copyright (C) 2025 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import { Emitter, Event } from '@theia/core';
-import { RemoteConnection, RemoteExecOptions, RemoteExecResult, RemoteExecTester } from '@theia/remote/lib/electron-node/remote-types';
+import { RemoteConnection, RemoteExecOptions, RemoteExecResult, RemoteExecTester } from '@theia/remote/lib/electron-node/remote-types.js';
 import { Socket } from 'net';
 import { exec, spawn } from 'child_process';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
 import * as fs from 'fs';
 
-export interface RemoteWslConnectionOptions {
+export type RemoteWslConnectionOptions = {
     id: string;
     name: string;
     type: string;

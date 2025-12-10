@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,17 +15,17 @@
 // *****************************************************************************
 
 import { Emitter, Resource, ResourceProvider, UNTITLED_SCHEME, URI } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { UriComponents } from '@theia/core/lib/common/uri';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { NotebookData } from '../../common';
-import { NotebookModel } from '../view-model/notebook-model';
-import { NotebookService } from './notebook-service';
-import { NotebookTypeRegistry } from '../notebook-type-registry';
-import { NotebookFileSelector } from '../../common/notebook-protocol';
-import { match } from '@theia/core/lib/common/glob';
+import { inject, injectable } from 'inversify';
+import { UriComponents } from '@theia/core/lib/common/uri.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { NotebookData } from '../../common/index.js';
+import { NotebookModel } from '../view-model/notebook-model.js';
+import { NotebookService } from './notebook-service.js';
+import { NotebookTypeRegistry } from '../notebook-type-registry.js';
+import { NotebookFileSelector } from '../../common/notebook-protocol.js';
+import { match } from '@theia/core/lib/common/glob.js';
 
-export interface UntitledResource {
+export type UntitledResource = {
     untitledResource: URI | undefined
 }
 

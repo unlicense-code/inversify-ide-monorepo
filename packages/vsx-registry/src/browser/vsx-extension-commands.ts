@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { nls } from '@theia/core/lib/common/nls';
-import { codicon } from '@theia/core/lib/browser';
-import { Command } from '@theia/core/lib/common';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { codicon } from '@theia/core/lib/browser/index.js';
+import { Command } from '@theia/core/lib/common/index.js';
 
 export namespace VSXExtensionsCommands {
 

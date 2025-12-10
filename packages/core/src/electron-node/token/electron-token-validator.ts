@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,9 +18,9 @@ import * as http from 'http';
 import * as cookie from 'cookie';
 import * as crypto from 'crypto';
 import { injectable, postConstruct } from 'inversify';
-import { isObject, isString, MaybePromise } from '../../common';
-import { ElectronSecurityToken } from '../../electron-common/electron-token';
-import { WsRequestValidatorContribution } from '../../node/ws-request-validators';
+import { isObject, isString, MaybePromise } from '../../common/index.js';
+import { ElectronSecurityToken } from '../../electron-common/electron-token.js';
+import { WsRequestValidatorContribution } from '../../node/ws-request-validators.js';
 
 /**
  * On Electron, we want to make sure that only Electron's browser-windows access the backend services.

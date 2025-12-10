@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,24 +14,24 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { open, OpenerService } from '@theia/core/lib/browser';
-import { URI as TheiaURI } from '@theia/core/lib/common/uri';
-import { EditorOpenerOptions } from '@theia/editor/lib/browser';
+import { open, OpenerService } from '@theia/core/lib/browser/index.js';
+import { URI as TheiaURI } from '@theia/core/lib/common/uri.js';
+import { EditorOpenerOptions } from '@theia/editor/lib/browser/index.js';
 import { IDisposable, Uri as URI } from '@theia/monaco-editor-core';
-import { $, addStandardDisposableListener, append } from '@theia/monaco-editor-core/esm/vs/base/browser/dom';
-import { ITableRenderer } from '@theia/monaco-editor-core/esm/vs/base/browser/ui/table/table';
-import { Color } from '@theia/monaco-editor-core/esm/vs/base/common/color';
-import { Disposable, dispose } from '@theia/monaco-editor-core/esm/vs/base/common/lifecycle';
-import { isAbsolute } from '@theia/monaco-editor-core/esm/vs/base/common/path';
-import { Constants } from '@theia/monaco-editor-core/esm/vs/base/common/uint';
-import { applyFontInfo } from '@theia/monaco-editor-core/esm/vs/editor/browser/config/domFontInfo';
-import { StringBuilder } from '@theia/monaco-editor-core/esm/vs/editor/common/core/stringBuilder';
-import { ITextModel } from '@theia/monaco-editor-core/esm/vs/editor/common/model';
-import { ITextModelService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/resolverService';
-import { IThemeService } from '@theia/monaco-editor-core/esm/vs/platform/theme/common/themeService';
+import { $, addStandardDisposableListener, append } from '@theia/monaco-editor-core/esm/vs/base/browser/dom.js';
+import { ITableRenderer } from '@theia/monaco-editor-core/esm/vs/base/browser/ui/table/table.js';
+import { Color } from '@theia/monaco-editor-core/esm/vs/base/common/color.js';
+import { Disposable, dispose } from '@theia/monaco-editor-core/esm/vs/base/common/lifecycle.js';
+import { isAbsolute } from '@theia/monaco-editor-core/esm/vs/base/common/path.js';
+import { Constants } from '@theia/monaco-editor-core/esm/vs/base/common/uint.js';
+import { applyFontInfo } from '@theia/monaco-editor-core/esm/vs/editor/browser/config/domFontInfo.js';
+import { StringBuilder } from '@theia/monaco-editor-core/esm/vs/editor/common/core/stringBuilder.js';
+import { ITextModel } from '@theia/monaco-editor-core/esm/vs/editor/common/model.js';
+import { ITextModelService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/resolverService.js';
+import { IThemeService } from '@theia/monaco-editor-core/esm/vs/platform/theme/common/themeService.js';
 import { DebugProtocol } from '@vscode/debugprotocol';
-import { DebugSource } from '../model/debug-source';
-import { DisassembledInstructionEntry, DisassemblyViewRendererReference, InstructionColumnTemplateData } from './disassembly-view-utilities';
+import { DebugSource } from '../model/debug-source.js';
+import { DisassembledInstructionEntry, DisassemblyViewRendererReference, InstructionColumnTemplateData } from './disassembly-view-utilities.js';
 
 // This file is adapted from https://github.com/microsoft/vscode/blob/c061ce5c24fc480342fbc5f23244289d633c56eb/src/vs/workbench/contrib/debug/browser/disassemblyView.ts
 
@@ -62,7 +62,7 @@ export class InstructionRenderer extends Disposable implements ITableRenderer<Di
         this._topStackFrameColor = themeService.getColorTheme().getColor(topStackFrameColor);
         this._focusedStackFrameColor = themeService.getColorTheme().getColor(focusedStackFrameColor);
 
-        this._register(themeService.onDidColorThemeChange(e => {
+        this._register(themeService.onDidColorThemeChange((e: any) => {
             this._topStackFrameColor = e.getColor(topStackFrameColor);
             this._focusedStackFrameColor = e.getColor(focusedStackFrameColor);
         }));

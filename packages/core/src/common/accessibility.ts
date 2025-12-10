@@ -14,10 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-/**
- * Accessibility information which controls screen reader behavior.
- */
-export interface AccessibilityInformation {
+export type AccessibilityInformation = {
     /**
      * Label to be read out by a screen reader once the item has focus.
      */

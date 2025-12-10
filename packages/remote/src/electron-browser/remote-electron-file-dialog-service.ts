@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { MaybeArray, URI } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import { OpenFileDialogProps, SaveFileDialogProps } from '@theia/filesystem/lib/browser/file-dialog';
-import { FileStat } from '@theia/filesystem/lib/common/files';
-import { DefaultFileDialogService } from '@theia/filesystem/lib/browser/file-dialog/file-dialog-service';
-import { ElectronFileDialogService } from '@theia/filesystem/lib/electron-browser/file-dialog/electron-file-dialog-service';
-import { RemoteService } from './remote-service';
+import { FileStat } from '@theia/filesystem/lib/common/files.js';
+import { DefaultFileDialogService } from '@theia/filesystem/lib/browser/file-dialog/file-dialog-service.js';
+import { ElectronFileDialogService } from '@theia/filesystem/lib/electron-browser/file-dialog/electron-file-dialog-service.js';
+import { RemoteService } from './remote-service.js';
 
 @injectable()
 export class RemoteElectronFileDialogService extends ElectronFileDialogService {

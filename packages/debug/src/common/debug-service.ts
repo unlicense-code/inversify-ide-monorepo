@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { Channel, Disposable, Emitter, Event } from '@theia/core';
-import { ApplicationError } from '@theia/core/lib/common/application-error';
-import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema';
-import { CommandIdVariables } from '@theia/variable-resolver/lib/common/variable-types';
-import { DebugConfiguration } from './debug-configuration';
+import { ApplicationError } from '@theia/core/lib/common/application-error.js';
+import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema.js';
+import { CommandIdVariables } from '@theia/variable-resolver/lib/common/variable-types.js';
+import { DebugConfiguration } from './debug-configuration.js';
 
-export interface DebuggerDescription {
+export type DebuggerDescription = {
     type: string
     label: string
 }
@@ -35,16 +35,7 @@ export const DebugPath = '/services/debug';
  */
 export const DebugService = Symbol('DebugService');
 
-/**
- * This service provides functionality to configure and to start a new debug adapter session.
- * The workflow is the following. If user wants to debug an application and
- * there is no debug configuration associated with the application then
- * the list of available providers is requested to create suitable debug configuration.
- * When configuration is chosen it is possible to alter the configuration
- * by filling in missing values or by adding/changing/removing attributes. For this purpose the
- * #resolveDebugConfiguration method is invoked. After that the debug adapter session will be started.
- */
-export interface DebugService extends Disposable {
+export type DebugService = Disposable & {
     onDidChangeDebuggers?: Event<void>;
 
     /**
@@ -141,10 +132,7 @@ export namespace DebugError {
     }));
 }
 
-/**
- * A closeable channel to send debug protocol messages over with error/close handling
- */
-export interface DebugChannel {
+export type DebugChannel = {
     send(content: string): void;
     onMessage(cb: (message: string) => void): void;
     onError(cb: (reason: unknown) => void): void;

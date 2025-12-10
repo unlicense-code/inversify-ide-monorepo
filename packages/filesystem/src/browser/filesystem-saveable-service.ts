@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import { environment, MessageService, nls } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { Navigatable, Saveable, SaveableSource, SaveOptions, Widget, open, OpenerService, ConfirmDialog, CommonCommands, LabelProvider } from '@theia/core/lib/browser';
-import { SaveableService } from '@theia/core/lib/browser/saveable-service';
-import URI from '@theia/core/lib/common/uri';
-import { FileService } from './file-service';
-import { FileDialogService } from './file-dialog';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
+import { inject, injectable } from 'inversify';
+import { Navigatable, Saveable, SaveableSource, SaveOptions, Widget, open, OpenerService, ConfirmDialog, CommonCommands, LabelProvider } from '@theia/core/lib/browser/index.js';
+import { SaveableService } from '@theia/core/lib/browser/saveable-service.js';
+import { URI } from '@theia/core';
+import { FileService } from './file-service.js';
+import { FileDialogService } from './file-dialog/index.js';
+import { BinaryBuffer } from '@theia/core';
 
 @injectable()
 export class FilesystemSaveableService extends SaveableService {

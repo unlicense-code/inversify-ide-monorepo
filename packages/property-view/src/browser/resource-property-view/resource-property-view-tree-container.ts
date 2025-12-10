@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { createTreeContainer, LabelProviderContribution, TreeProps } from '@theia/core/lib/browser';
-import { interfaces } from '@theia/core/shared/inversify';
-import { PropertyDataService } from '../property-data-service';
-import { PropertyViewWidgetProvider } from '../property-view-widget-provider';
-import { ResourcePropertyDataService } from './resource-property-data-service';
-import { ResourcePropertiesLabelProvider } from './resource-property-view-label-provider';
-import { ResourcePropertyViewTreeWidget } from './resource-property-view-tree-widget';
-import { ResourcePropertyViewWidgetProvider } from './resource-property-view-widget-provider';
+import { createTreeContainer, LabelProviderContribution, TreeProps } from '@theia/core/lib/browser/index.js';
+import { interfaces } from 'inversify';
+import { PropertyDataService } from '../property-data-service.js';
+import { PropertyViewWidgetProvider } from '../property-view-widget-provider.js';
+import { ResourcePropertyDataService } from './resource-property-data-service.js';
+import { ResourcePropertiesLabelProvider } from './resource-property-view-label-provider.js';
+import { ResourcePropertyViewTreeWidget } from './resource-property-view-tree-widget.js';
+import { ResourcePropertyViewWidgetProvider } from './resource-property-view-widget-provider.js';
 
 const RESOURCE_PROPERTY_VIEW_TREE_PROPS = {
     multiSelect: true,

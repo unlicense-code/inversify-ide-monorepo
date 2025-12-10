@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,15 +16,15 @@
 
 import { WebContents } from '@theia/electron/shared/electron';
 import { inject, injectable, named, postConstruct } from 'inversify';
-import { ConnectionHandlers } from '../../node/messaging/default-messaging-service';
-import { AbstractChannel, Channel, ChannelMultiplexer, MessageProvider } from '../../common/message-rpc/channel';
-import { ConnectionHandler, ContributionProvider, Emitter, WriteBuffer } from '../../common';
-import { Uint8ArrayReadBuffer, Uint8ArrayWriteBuffer } from '../../common/message-rpc/uint8-array-message-buffer';
-import { TheiaRendererAPI } from '../electron-api-main';
-import { MessagingService } from '../../node';
-import { ElectronMessagingService } from './electron-messaging-service';
-import { ElectronConnectionHandler } from './electron-connection-handler';
-import { ElectronMainApplicationContribution } from '../electron-main-application';
+import { ConnectionHandlers } from '../../node/messaging/default-messaging-service.js';
+import { AbstractChannel, Channel, ChannelMultiplexer, MessageProvider } from '../../common/message-rpc/channel.js';
+import { ConnectionHandler, ContributionProvider, Emitter, WriteBuffer } from '../../common/index.js';
+import { Uint8ArrayReadBuffer, Uint8ArrayWriteBuffer } from '../../common/message-rpc/uint8-array-message-buffer.js';
+import { TheiaRendererAPI } from '../electron-api-main.js';
+import { MessagingService } from '../../node/index.js';
+import { ElectronMessagingService } from './electron-messaging-service.js';
+import { ElectronConnectionHandler } from './electron-connection-handler.js';
+import { ElectronMainApplicationContribution } from '../electron-main-application.js';
 
 /**
  * This component replicates the role filled by `MessagingContribution` but for Electron.

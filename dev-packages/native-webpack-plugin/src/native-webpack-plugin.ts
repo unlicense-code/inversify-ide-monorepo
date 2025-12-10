@@ -25,7 +25,7 @@ const REQUIRE_BINDINGS = 'bindings';
 const REQUIRE_PARCEL_WATCHER = './build/Release/watcher.node';
 const REQUIRE_NODE_PTY_CONPTY = '../build/Release/conpty.node';
 
-export interface NativeWebpackPluginOptions {
+export type NativeWebpackPluginOptions = {
     out: string;
     trash: boolean;
     ripgrep: boolean;
@@ -113,17 +113,23 @@ export class NativeWebpackPlugin {
 
     protected async copyNodePtySpawnHelper(issuer: string, compiler: Compiler): Promise<void> {
         const targetDirectory = path.resolve(compiler.outputPath, '..', 'build', 'Release');
-        if (process.platform === 'win32') {
-            const agentFile = require.resolve('node-pty/build/Release/winpty-agent.exe', { paths: [issuer] });
-            const targetAgentFile = path.join(targetDirectory, 'winpty-agent.exe');
-            await this.copyExecutable(agentFile, targetAgentFile);
-            const dllFile = require.resolve('node-pty/build/Release/winpty.dll', { paths: [issuer] });
-            const targetDllFile = path.join(targetDirectory, 'winpty.dll');
-            await this.copyExecutable(dllFile, targetDllFile);
-        } else if (process.platform === 'darwin') {
-            const sourceFile = require.resolve('node-pty/build/Release/spawn-helper', { paths: [issuer] });
-            const targetFile = path.join(targetDirectory, 'spawn-helper');
-            await this.copyExecutable(sourceFile, targetFile);
+        try {
+            if (process.platform === 'win32') {
+                const agentFile = require.resolve('node-pty/build/Release/winpty-agent.exe', { paths: [issuer] });
+                const targetAgentFile = path.join(targetDirectory, 'winpty-agent.exe');
+                await this.copyExecutable(agentFile, targetAgentFile);
+                const dllFile = require.resolve('node-pty/build/Release/winpty.dll', { paths: [issuer] });
+                const targetDllFile = path.join(targetDirectory, 'winpty.dll');
+                await this.copyExecutable(dllFile, targetDllFile);
+            } else if (process.platform === 'darwin') {
+                const sourceFile = require.resolve('node-pty/build/Release/spawn-helper', { paths: [issuer] });
+                const targetFile = path.join(targetDirectory, 'spawn-helper');
+                await this.copyExecutable(sourceFile, targetFile);
+            }
+        } catch (error) {
+            // node-pty native binaries may not be available if the module wasn't built
+            // This is acceptable for browser builds where node-pty isn't used
+            console.warn(`Warning: Could not copy node-pty spawn helper files: ${error instanceof Error ? error.message : String(error)}`);
         }
     }
 

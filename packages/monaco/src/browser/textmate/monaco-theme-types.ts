@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import * as monaco from '@theia/monaco-editor-core';
-import { IStandaloneTheme } from '@theia/monaco-editor-core/esm/vs/editor/standalone/common/standaloneTheme';
+import { IStandaloneTheme } from '@theia/monaco-editor-core/esm/vs/editor/standalone/common/standaloneTheme.js';
 import { IOnigLib, IRawTheme, Registry } from 'vscode-textmate';
 
-export interface ThemeMix extends IRawTheme, monaco.editor.IStandaloneThemeData { }
-export interface MixStandaloneTheme extends IStandaloneTheme {
+export type ThemeMix = IRawTheme & monaco.editor.IStandaloneThemeData & { }
+export type MixStandaloneTheme = IStandaloneTheme & {
     themeData: ThemeMix
 }
 
@@ -31,6 +31,6 @@ export type TextmateRegistryFactory = (currentTheme?: ThemeMix) => Registry;
 export type MonacoThemeColor = monaco.editor.IColors;
 export interface MonacoTokenRule extends monaco.editor.ITokenThemeRule { };
 export type MonacoBuiltinTheme = monaco.editor.BuiltinTheme;
-export interface MonacoTheme extends monaco.editor.IStandaloneThemeData {
+export type MonacoTheme = monaco.editor.IStandaloneThemeData & {
     name: string;
 }

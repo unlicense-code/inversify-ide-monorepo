@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import URI from '@theia/core/lib/common/uri';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { TaskCustomization, TaskConfiguration, TaskConfigurationScope } from '../common/task-protocol';
-import { PreferenceProviderDataChanges, PreferenceProviderDataChange, isObject } from '@theia/core/lib/common';
-import { PreferenceProvider } from '@theia/core/lib/common/preferences/preference-provider';
-import { JSONValue } from '@theia/core/shared/@lumino/coreutils';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Emitter, Event } from '@theia/core/lib/common/event.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { TaskCustomization, TaskConfiguration, TaskConfigurationScope } from '../common/task-protocol.js';
+import { PreferenceProviderDataChanges, PreferenceProviderDataChange, isObject } from '@theia/core/lib/common/index.js';
+import { PreferenceProvider } from '@theia/core/lib/common/preferences/preference-provider.js';
+import { JSONValue } from '@lumino/coreutils';
 
 /**
  * Holds the task configurations associated with a particular file. Uses an editor model to facilitate

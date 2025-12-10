@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { AIVariableResolutionRequest } from '@theia/ai-core';
+import { AIVariableResolutionRequest } from '@theia/ai-core/lib/common/index.js';
 import { URI } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { codicon, LabelProviderContribution } from '@theia/core/lib/browser';
-import { TaskContextVariableContribution } from './task-context-variable-contribution';
-import { ChatService } from '../common';
-import { TaskContextService } from './task-context-service';
-import { TASK_CONTEXT_VARIABLE } from './task-context-variable';
+import { inject, injectable } from 'inversify';
+import { codicon, LabelProviderContribution } from '@theia/core/lib/browser/index.js';
+import { TaskContextVariableContribution } from './task-context-variable-contribution.js';
+import { ChatService } from '../common/index.js';
+import { TaskContextService } from './task-context-service.js';
+import { TASK_CONTEXT_VARIABLE } from './task-context-variable.js';
 
 @injectable()
 export class TaskContextVariableLabelProvider implements LabelProviderContribution {

@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { MCPServerDescription, MCPServerManager } from '../common';
-import { cleanServerDescription, MCPServerDescriptionRCP, MCPServerManagerServer, MCPServerManagerServerClient } from '../common/mcp-protocol';
+import { inject, injectable } from 'inversify';
+import { MCPServerDescription, MCPServerManager } from '../common/index.js';
+import { cleanServerDescription, MCPServerDescriptionRCP, MCPServerManagerServer, MCPServerManagerServerClient } from '../common/mcp-protocol.js';
 
 @injectable()
 export class MCPServerManagerServerImpl implements MCPServerManagerServer {

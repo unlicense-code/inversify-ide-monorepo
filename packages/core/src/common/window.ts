@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,16 +19,13 @@
  */
 export const DEFAULT_WINDOW_HASH: string = '!empty';
 
-/**
- * The options for opening new windows.
- */
-export interface NewWindowOptions {
+export type NewWindowOptions = {
     /**
      * Controls whether the window should be opened externally.
      */
     readonly external?: boolean;
 }
 
-export interface WindowSearchParams {
+export type WindowSearchParams = {
     [key: string]: string
 }

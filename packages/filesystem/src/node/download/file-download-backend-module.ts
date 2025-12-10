@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application';
-import { FileDownloadEndpoint } from './file-download-endpoint';
-import { FileDownloadHandler, SingleFileDownloadHandler, MultiFileDownloadHandler, DownloadLinkHandler } from './file-download-handler';
-import { DirectoryArchiver } from './directory-archiver';
-import { FileDownloadCache } from './file-download-cache';
+import { ContainerModule } from 'inversify';
+import { BackendApplicationContribution } from '@theia/core/lib/node/index.js';
+import { FileDownloadEndpoint } from './file-download-endpoint.js';
+import { FileDownloadHandler, SingleFileDownloadHandler, MultiFileDownloadHandler, DownloadLinkHandler } from './file-download-handler.js';
+import { DirectoryArchiver } from './directory-archiver.js';
+import { FileDownloadCache } from './file-download-cache.js';
 
 export default new ContainerModule(bind => {
     bind(FileDownloadEndpoint).toSelf().inSingletonScope();

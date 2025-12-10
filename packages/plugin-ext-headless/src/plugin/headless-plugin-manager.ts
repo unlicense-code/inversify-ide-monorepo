@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { AbstractPluginManagerExtImpl } from '@theia/plugin-ext/lib/plugin/plugin-manager';
-import { HeadlessPluginManagerExt, HeadlessPluginManagerInitializeParams } from '../common/headless-plugin-rpc';
+import { injectable } from 'inversify';
+import { AbstractPluginManagerExtImpl } from '@theia/plugin-ext/lib/plugin/plugin-manager.js';
+import { HeadlessPluginManagerExt, HeadlessPluginManagerInitializeParams } from '../common/headless-plugin-rpc.js';
 import { Plugin } from '@theia/plugin-ext';
 
 @injectable()
@@ -34,12 +34,13 @@ export class HeadlessPluginManagerExtImpl extends AbstractPluginManagerExtImpl<H
         this.envExt.setAppHost(params.env.appHost);
 
         if (params.extApi) {
-            this.host.initExtApi(params.extApi);
+            this.host.initExtApi(params.extApi as any);
         }
     }
 
     protected override getActivationEvents(plugin: Plugin): string[] | undefined {
-        const result = plugin.rawModel?.headless?.activationEvents;
+        const rawModel = plugin.rawModel as import('../common/headless-plugin-protocol.js').PluginPackage;
+        const result = rawModel?.headless?.activationEvents;
         return Array.isArray(result) ? result : undefined;
     }
 

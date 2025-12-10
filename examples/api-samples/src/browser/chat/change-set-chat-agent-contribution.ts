@@ -21,13 +21,13 @@ import {
     MarkdownChatResponseContentImpl,
     SystemMessageDescription,
     ChangeSetElement
-} from '@theia/ai-chat';
-import { ChangeSetFileElementFactory } from '@theia/ai-chat/lib/browser/change-set-file-element';
-import { Agent, LanguageModelRequirement } from '@theia/ai-core';
+} from '@theia/ai-chat/lib/common/index.js';
+import { ChangeSetFileElementFactory } from '@theia/ai-chat/lib/browser/change-set-file-element.js';
+import { Agent, LanguageModelRequirement } from '@theia/ai-core/lib/common/index.js';
 import { URI } from '@theia/core';
-import { inject, injectable, interfaces } from '@theia/core/shared/inversify';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { inject, injectable, interfaces } from 'inversify';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
 
 export function bindChangeSetChatAgentContribution(bind: interfaces.Bind): void {
     bind(ChangeSetChatAgent).toSelf().inSingletonScope();

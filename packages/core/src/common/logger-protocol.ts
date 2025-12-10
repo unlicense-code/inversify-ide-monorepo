@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import { injectable } from 'inversify';
-import { RpcServer } from './messaging/proxy-factory';
+import { RpcServer } from './messaging/proxy-factory.js';
 
 export const ILoggerServer = Symbol('ILoggerServer');
 
 export const loggerPath = '/services/logger';
 
-export interface ILoggerServer extends RpcServer<ILoggerClient> {
+export type ILoggerServer = RpcServer<ILoggerClient> & {
     setLogLevel(name: string, logLevel: number): Promise<void>;
     getLogLevel(name: string): Promise<number>;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -31,12 +31,12 @@ export interface ILoggerServer extends RpcServer<ILoggerClient> {
 
 export const ILoggerClient = Symbol('ILoggerClient');
 
-export interface ILogLevelChangedEvent {
+export type ILogLevelChangedEvent = {
     loggerName: string;
     newLogLevel: number;
 }
 
-export interface ILoggerClient {
+export type ILoggerClient = {
     onLogLevelChanged(event: ILogLevelChangedEvent): void;
     onLogConfigChanged(): void;
 }

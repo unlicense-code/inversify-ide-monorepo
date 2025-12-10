@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { LanguageModelRegistry, LanguageModelStatus, TokenUsageService } from '@theia/ai-core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { OpenAiModel, OpenAiModelUtils } from './openai-language-model';
-import { OpenAiResponseApiUtils } from './openai-response-api-utils';
-import { OpenAiLanguageModelsManager, OpenAiModelDescription } from '../common';
+import { LanguageModelRegistry, LanguageModelStatus, TokenUsageService } from '@theia/ai-core/lib/common/index.js';
+import { inject, injectable } from 'inversify';
+import { OpenAiModel, OpenAiModelUtils } from './openai-language-model.js';
+import { OpenAiResponseApiUtils } from './openai-response-api-utils.js';
+import { OpenAiLanguageModelsManager, OpenAiModelDescription } from '../common/index.js';
 
 @injectable()
 export class OpenAiLanguageModelsManagerImpl implements OpenAiLanguageModelsManager {

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -33,31 +33,32 @@ import {
     bindTreePreferences,
     PreferenceProviderProvider,
     PreferenceProvider
-} from '../common';
-import { BackendApplication, BackendApplicationContribution, BackendApplicationCliContribution, BackendApplicationServer, BackendApplicationPath } from './backend-application';
-import { CliManager, CliContribution } from './cli';
-import { IPCConnectionProvider } from './messaging';
-import { ApplicationServerImpl } from './application-server';
-import { ApplicationServer, applicationPath } from '../common/application-protocol';
-import { EnvVariablesServer, envVariablesPath } from './../common/env-variables';
-import { EnvVariablesServerImpl } from './env-variables';
-import { ConnectionContainerModule } from './messaging/connection-container-module';
-import { QuickInputService, quickInputServicePath, QuickPickService, quickPickServicePath } from '../common/quick-pick-service';
-import { WsRequestValidator, WsRequestValidatorContribution } from './ws-request-validators';
-import { KeyStoreService, keyStoreServicePath } from '../common/key-store';
-import { KeyStoreServiceImpl } from './key-store-server';
-import { ContributionFilterRegistry, ContributionFilterRegistryImpl } from '../common/contribution-filter';
-import { EnvironmentUtils } from './environment-utils';
-import { ProcessUtils } from './process-utils';
-import { ProxyCliContribution } from './request/proxy-cli-contribution';
-import { bindNodeStopwatch, bindBackendStopwatchServer } from './performance';
-import { OSBackendProviderImpl } from './os-backend-provider';
-import { BackendRequestFacade } from './request/backend-request-facade';
-import { FileSystemLocking, FileSystemLockingImpl } from './filesystem-locking';
-import { BackendRemoteService } from './remote/backend-remote-service';
-import { RemoteCliContribution } from './remote/remote-cli-contribution';
-import { SettingService, SettingServiceImpl } from './setting-service';
-import { bindCorePreferences } from '../common/core-preferences';
+} from '../common/index.js';
+import { BackendApplication, BackendApplicationContribution, BackendApplicationCliContribution, BackendApplicationServer, BackendApplicationPath } from './backend-application.js';
+import { CliManager, CliContribution } from './cli.js';
+import { IPCConnectionProvider } from './messaging/ipc-connection-provider.js';
+import { ApplicationServerImpl } from './application-server.js';
+import { ApplicationServer, applicationPath } from '../common/application-protocol.js';
+import { EnvVariablesServer, envVariablesPath } from './../common/env-variables/index.js';
+import { EnvVariablesServerImpl } from './env-variables/env-variables-server.js';
+import { ConnectionContainerModule } from './messaging/connection-container-module.js';
+import { QuickInputService, quickInputServicePath, QuickPickService, quickPickServicePath } from '../common/quick-pick-service.js';
+import { WsRequestValidator, WsRequestValidatorContribution } from './ws-request-validators.js';
+import { KeyStoreService, keyStoreServicePath } from '../common/key-store.js';
+import { KeyStoreServiceImpl } from './key-store-server.js';
+import { ContributionFilterRegistry, ContributionFilterRegistryImpl } from '../common/contribution-filter/index.js';
+import { EnvironmentUtils } from './environment-utils.js';
+import { ProcessUtils } from './process-utils.js';
+import { ProxyCliContribution } from './request/proxy-cli-contribution.js';
+import { bindNodeStopwatch } from './performance/index.js';
+import { bindBackendStopwatchServer } from './performance/measurement-backend-bindings.js';
+import { OSBackendProviderImpl } from './os-backend-provider.js';
+import { BackendRequestFacade } from './request/backend-request-facade.js';
+import { FileSystemLocking, FileSystemLockingImpl } from './filesystem-locking.js';
+import { BackendRemoteService } from './remote/backend-remote-service.js';
+import { RemoteCliContribution } from './remote/remote-cli-contribution.js';
+import { SettingService, SettingServiceImpl } from './setting-service.js';
+import { bindCorePreferences } from '../common/core-preferences.js';
 
 decorate(injectable(), ApplicationPackage);
 

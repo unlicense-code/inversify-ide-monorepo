@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable } from 'inversify';
 import {
     EditorDecoration,
     EditorDecorationOptions,
@@ -22,8 +22,8 @@ import {
     EditorDecorator,
     TextEditor,
     MinimapPosition
-} from '@theia/editor/lib/browser';
-import { DirtyDiff, LineRange, Change } from './diff-computer';
+} from '@theia/editor/lib/browser/index.js';
+import { DirtyDiff, LineRange, Change } from './diff-computer.js';
 import { URI } from '@theia/core';
 
 export enum DirtyDiffDecorationType {
@@ -93,7 +93,7 @@ function getEditorDecorationOptions(change: Change): EditorDecorationOptions {
     return ModifiedLineDecoration;
 }
 
-export interface DirtyDiffUpdate extends DirtyDiff {
+export type DirtyDiffUpdate = DirtyDiff & {
     readonly editor: TextEditor;
     readonly previousRevisionUri?: URI;
 }

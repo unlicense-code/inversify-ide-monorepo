@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -13,8 +13,8 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { LabelParser, LabelPart, LabelIcon } from './label-parser';
-import { CommandService } from './../common';
+import { LabelParser, LabelPart, LabelIcon } from './label-parser.js';
+import { CommandService } from './../common/index.js';
 import { Container } from 'inversify';
 import { expect } from 'chai';
 

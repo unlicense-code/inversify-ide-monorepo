@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { ConnectionHandler, RpcConnectionHandler, bindContributionProvider } from '@theia/core/lib/common';
-import { WorkspaceServer, workspacePath, UntitledWorkspaceService, WorkspaceFileService, bindWorkspacePreferences } from '../common';
-import { DefaultWorkspaceServer, FileWorkspaceHandlerContribution, WorkspaceCliContribution, WorkspaceHandlerContribution } from './default-workspace-server';
-import { CliContribution } from '@theia/core/lib/node/cli';
-import { BackendApplicationContribution } from '@theia/core/lib/node';
-import { bindWorkspaceTrustPreferences } from '../common/workspace-trust-preferences';
+import { ContainerModule } from 'inversify';
+import { ConnectionHandler, RpcConnectionHandler, bindContributionProvider } from '@theia/core/lib/common/index.js';
+import { WorkspaceServer, workspacePath, UntitledWorkspaceService, WorkspaceFileService, bindWorkspacePreferences } from '../common/index.js';
+import { DefaultWorkspaceServer, FileWorkspaceHandlerContribution, WorkspaceCliContribution, WorkspaceHandlerContribution } from './default-workspace-server.js';
+import { CliContribution } from '@theia/core/lib/node/cli.js';
+import { BackendApplicationContribution } from '@theia/core/lib/node/index.js';
+import { bindWorkspaceTrustPreferences } from '../common/workspace-trust-preferences.js';
 
 export default new ContainerModule(bind => {
     bind(WorkspaceCliContribution).toSelf().inSingletonScope();

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import { MessageService } from '@theia/core';
-import { Dialog, FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
-import { nls } from '@theia/core/lib/common/nls';
-import { WindowService } from '@theia/core/lib/browser/window/window-service';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { MiniBrowserEndpoint } from '../common/mini-browser-endpoint';
-import { MiniBrowserEnvironment } from './environment/mini-browser-environment';
+import { Dialog, FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
+import { nls } from '@theia/core/lib/common/nls.js';
+import { WindowService } from '@theia/core/lib/browser/window/window-service.js';
+import { inject, injectable } from 'inversify';
+import { MiniBrowserEndpoint } from '../common/mini-browser-endpoint.js';
+import { MiniBrowserEnvironment } from './environment/mini-browser-environment.js';
 
 @injectable()
 export class MiniBrowserFrontendSecurityWarnings implements FrontendApplicationContribution {

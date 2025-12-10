@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { DisposableCollection } from '@theia/core/lib/common/disposable';
-import { ScmService } from './scm-service';
-import { ScmTreeModel } from './scm-tree-model';
-import { ScmResourceGroup, ScmProvider } from './scm-provider';
+import { injectable, inject, postConstruct } from 'inversify';
+import { DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { ScmService } from './scm-service.js';
+import { ScmTreeModel } from './scm-tree-model.js';
+import { ScmResourceGroup, ScmProvider } from './scm-provider.js';
 
 @injectable()
 export class ScmGroupsTreeModel extends ScmTreeModel {

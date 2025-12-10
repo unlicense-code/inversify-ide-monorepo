@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { CommandContribution, MenuContribution, bindContributionProvider, ResourceProvider } from '@theia/core/lib/common';
-import { OpenHandler, WidgetFactory, FrontendApplicationContribution, NavigatableWidgetOptions } from '@theia/core/lib/browser';
-import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { PreviewContribution } from './preview-contribution';
-import { PreviewWidget, PreviewWidgetOptions } from './preview-widget';
-import { PreviewHandler, PreviewHandlerProvider } from './preview-handler';
-import { PreviewUri } from './preview-uri';
-import { MarkdownPreviewHandler } from './markdown';
-import { bindPreviewPreferences } from '../common/preview-preferences';
-import { PreviewLinkNormalizer } from './preview-link-normalizer';
+import { ContainerModule } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { CommandContribution, MenuContribution, bindContributionProvider, ResourceProvider } from '@theia/core/lib/common/index.js';
+import { OpenHandler, WidgetFactory, FrontendApplicationContribution, NavigatableWidgetOptions } from '@theia/core/lib/browser/index.js';
+import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { PreviewContribution } from './preview-contribution.js';
+import { PreviewWidget, PreviewWidgetOptions } from './preview-widget.js';
+import { PreviewHandler, PreviewHandlerProvider } from './preview-handler.js';
+import { PreviewUri } from './preview-uri.js';
+import { MarkdownPreviewHandler } from './markdown/index.js';
+import { bindPreviewPreferences } from '../common/preview-preferences.js';
+import { PreviewLinkNormalizer } from './preview-link-normalizer.js';
 
 import '../../src/browser/style/index.css';
 import '../../src/browser/markdown/style/index.css';

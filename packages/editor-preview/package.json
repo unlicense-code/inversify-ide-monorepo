@@ -1,6 +1,7 @@
 {
   "name": "@theia/editor-preview",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - Editor Preview Extension",
   "dependencies": {
     "@theia/core": "1.66.0",

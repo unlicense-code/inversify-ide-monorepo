@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,16 +15,16 @@
 // *****************************************************************************
 
 import { OS, Path, QuickInputService } from '@theia/core';
-import { OpenerService } from '@theia/core/lib/browser';
-import URI from '@theia/core/lib/common/uri';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { Position } from '@theia/editor/lib/browser';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { TerminalWidget } from './base/terminal-widget';
-import { TerminalLink, TerminalLinkProvider } from './terminal-link-provider';
-import { TerminalWidgetImpl } from './terminal-widget-impl';
-import { FileSearchService } from '@theia/file-search/lib/common/file-search-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { OpenerService } from '@theia/core/lib/browser/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { inject, injectable } from 'inversify';
+import { Position } from '@theia/editor/lib/browser/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { TerminalWidget } from './base/terminal-widget.js';
+import { TerminalLink, TerminalLinkProvider } from './terminal-link-provider.js';
+import { TerminalWidgetImpl } from './terminal-widget-impl.js';
+import { FileSearchService } from '@theia/file-search/lib/common/file-search-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
 @injectable()
 export class FileLinkProvider implements TerminalLinkProvider {
 

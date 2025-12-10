@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -20,7 +20,7 @@ export const RemoteSSHConnectionProviderPath = '/remote/ssh';
 
 export const RemoteSSHConnectionProvider = Symbol('RemoteSSHConnectionProvider');
 
-export interface RemoteSSHConnectionProviderOptions {
+export type RemoteSSHConnectionProviderOptions = {
     user: string;
     host: string;
     nodeDownloadTemplate?: string;
@@ -29,7 +29,7 @@ export interface RemoteSSHConnectionProviderOptions {
 
 export type SSHConfig = Array<SshConfig.Line>;
 
-export interface RemoteSSHConnectionProvider {
+export type RemoteSSHConnectionProvider = {
     establishConnection(options: RemoteSSHConnectionProviderOptions): Promise<string>;
     getSSHConfig(customConfigFile?: string): Promise<SSHConfig>;
     matchSSHConfigHost(host: string, user?: string, customConfigFile?: string): Promise<Record<string, string | string[]> | undefined>;

@@ -13,13 +13,13 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { AICommandHandlerFactory } from '@theia/ai-core/lib/browser/ai-command-handler-factory';
-import { CommandContribution, CommandRegistry, MessageService, nls, PreferenceService } from '@theia/core';
-import { QuickInputService } from '@theia/core/lib/browser';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { LlamafileManager } from '../common/llamafile-manager';
-import { PREFERENCE_LLAMAFILE } from '../common/llamafile-preferences';
-import { LlamafileEntry } from './llamafile-frontend-application-contribution';
+import { AICommandHandlerFactory } from '@theia/ai-core/lib/browser/ai-command-handler-factory.js';
+import { CommandContribution, CommandRegistry, MessageService, nls, PreferenceService } from '@theia/core/lib/common/index.js';
+import { QuickInputService } from '@theia/core/lib/browser/index.js';
+import { inject, injectable } from 'inversify';
+import { LlamafileManager } from '../common/llamafile-manager.js';
+import { PREFERENCE_LLAMAFILE } from '../common/llamafile-preferences.js';
+import { LlamafileEntry } from './llamafile-frontend-application-contribution.js';
 
 export const StartLlamafileCommand = {
     id: 'llamafile.start',

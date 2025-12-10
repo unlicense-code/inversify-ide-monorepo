@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2025 TypeFox and others.
+// Copyright (C) 2025 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,8 +16,8 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { LoggerMain, LogLevel, PLUGIN_RPC_CONTEXT } from '../common';
-import { RPCProtocol } from '../common/rpc-protocol';
+import { LoggerMain, LogLevel, PLUGIN_RPC_CONTEXT } from '../common/index.js';
+import { RPCProtocol } from '../common/rpc-protocol.js';
 
 export class PluginLogger {
 

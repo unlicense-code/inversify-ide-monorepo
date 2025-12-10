@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import * as fs from '@theia/core/shared/fs-extra';
+import { injectable } from 'inversify';
+import * as fs from 'fs-extra';
 import { pack } from 'tar-fs';
-import URI from '@theia/core/lib/common/uri';
-import { FileUri } from '@theia/core/lib/common/file-uri';
+import { URI } from '@theia/core';
+import { FileUri } from '@theia/core/lib/node/index.js';
 
 @injectable()
 export class DirectoryArchiver {
 
     async archive(inputPath: string, outputPath: string, entries?: string[]): Promise<void> {
         return new Promise<void>(async (resolve, reject) => {
-            pack(inputPath, { entries }).pipe(fs.createWriteStream(outputPath)).on('finish', () => resolve()).on('error', e => reject(e));
+            pack(inputPath, { entries }).pipe(fs.createWriteStream(outputPath)).on('finish', () => resolve()).on('error', (e: any) => reject(e));
         });
     }
 

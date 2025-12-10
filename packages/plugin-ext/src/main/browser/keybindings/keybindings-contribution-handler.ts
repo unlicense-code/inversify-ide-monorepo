@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { PluginContribution, Keybinding as PluginKeybinding } from '../../../common';
-import { Keybinding } from '@theia/core/lib/common/keybinding';
-import { KeybindingRegistry } from '@theia/core/lib/browser/keybinding';
-import { OS } from '@theia/core/lib/common/os';
-import { Disposable } from '@theia/core/lib/common/disposable';
+import { injectable, inject } from 'inversify';
+import { PluginContribution, Keybinding as PluginKeybinding } from '../../../common/index.js';
+import { Keybinding } from '@theia/core/lib/common/keybinding.js';
+import { KeybindingRegistry } from '@theia/core/lib/browser/keybinding.js';
+import { OS } from '@theia/core/lib/common/os.js';
+import { Disposable } from '@theia/core/lib/common/disposable.js';
 import { DisposableCollection } from '@theia/core';
 
 @injectable()

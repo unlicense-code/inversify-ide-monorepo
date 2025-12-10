@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, optional, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, optional, postConstruct } from 'inversify';
 import {
     CommandContribution,
     Command,
@@ -31,32 +31,32 @@ import {
     MAIN_MENU_BAR,
     PreferenceService,
     PreferenceScope
-} from '@theia/core/lib/common';
+} from '@theia/core/lib/common/index.js';
 import {
     ApplicationShell, KeybindingContribution, KeyCode, Key, WidgetManager,
     KeybindingRegistry, LabelProvider, WidgetOpenerOptions, StorageService, QuickInputService,
     codicon, CommonCommands, FrontendApplicationContribution, OnWillStopAction, Dialog, ConfirmDialog, FrontendApplication, Widget, SHELL_TABBAR_CONTEXT_MENU
-} from '@theia/core/lib/browser';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { TERMINAL_WIDGET_FACTORY_ID, TerminalWidgetFactoryOptions, TerminalWidgetImpl } from './terminal-widget-impl';
-import { TerminalService } from './base/terminal-service';
-import { TerminalWidgetOptions, TerminalWidget, TerminalLocation } from './base/terminal-widget';
-import { ContributedTerminalProfileStore, NULL_PROFILE, TerminalProfile, TerminalProfileService, TerminalProfileStore, UserTerminalProfileStore } from './terminal-profile-service';
-import { UriAwareCommandHandler } from '@theia/core/lib/common/uri-command-handler';
-import { ShellTerminalServerProxy } from '../common/shell-terminal-protocol';
-import URI from '@theia/core/lib/common/uri';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution';
-import { ColorRegistry } from '@theia/core/lib/browser/color-registry';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileStat } from '@theia/filesystem/lib/common/files';
-import { TerminalWatcher } from '../common/terminal-watcher';
-import { nls } from '@theia/core/lib/common/nls';
-import { Profiles, terminalAnsiColorMap, TerminalPreferences } from '../common/terminal-preferences';
-import { ShellTerminalProfile } from './shell-terminal-profile';
+} from '@theia/core/lib/browser/index.js';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/index.js';
+import { TERMINAL_WIDGET_FACTORY_ID, TerminalWidgetFactoryOptions, TerminalWidgetImpl } from './terminal-widget-impl.js';
+import { TerminalService } from './base/terminal-service.js';
+import { TerminalWidgetOptions, TerminalWidget, TerminalLocation } from './base/terminal-widget.js';
+import { ContributedTerminalProfileStore, NULL_PROFILE, TerminalProfile, TerminalProfileService, TerminalProfileStore, UserTerminalProfileStore } from './terminal-profile-service.js';
+import { UriAwareCommandHandler } from '@theia/core/lib/common/uri-command-handler.js';
+import { ShellTerminalServerProxy } from '../common/shell-terminal-protocol.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution.js';
+import { ColorRegistry } from '@theia/core/lib/browser/color-registry.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { FileStat } from '@theia/filesystem/lib/common/files.js';
+import { TerminalWatcher } from '../common/terminal-watcher.js';
+import { nls } from '@theia/core/lib/common/nls.js';
+import { Profiles, terminalAnsiColorMap, TerminalPreferences } from '../common/terminal-preferences.js';
+import { ShellTerminalProfile } from './shell-terminal-profile.js';
 import { VariableResolverService } from '@theia/variable-resolver/lib/browser';
-import { Color } from '@theia/core/lib/common/color';
+import { Color } from '@theia/core/lib/common/color.js';
 
 export namespace TerminalMenus {
     export const TERMINAL = [...MAIN_MENU_BAR, '7_terminal'];
@@ -249,7 +249,7 @@ export class TerminalFrontendContribution implements FrontendApplicationContribu
         updateFocusKey();
         this.shell.onDidChangeActiveWidget(updateFocusKey);
 
-        this.terminalWatcher.onStoreTerminalEnvVariablesRequested(data => {
+        this.terminalWatcher.onStoreTerminalEnvVariablesRequested((data: string) => {
             this.storageService.setData(ENVIRONMENT_VARIABLE_COLLECTIONS_KEY, data);
         });
         this.terminalWatcher.onUpdateTerminalEnvVariablesRequested(() => {
@@ -272,7 +272,7 @@ export class TerminalFrontendContribution implements FrontendApplicationContribu
     async onStart(app: FrontendApplication): Promise<void> {
         this.contributeDefaultProfiles();
 
-        this.terminalPreferences.onPreferenceChanged(e => {
+        this.terminalPreferences.onPreferenceChanged((e: { preferenceName: string }) => {
             if (e.preferenceName.startsWith('terminal.integrated.')) {
                 this.mergePreferencesPromise = this.mergePreferencesPromise.finally(() => this.mergePreferences());
             }
@@ -755,7 +755,7 @@ export class TerminalFrontendContribution implements FrontendApplicationContribu
             command: TerminalCommands.NEW.id,
             icon: codicon('add'),
             tooltip: TerminalCommands.NEW.label,
-            isVisible: w => this.withWidget(w, () => true),
+            isVisible: (w: Widget) => this.withWidget(w, () => true),
         });
         toolbar.registerItem({
             id: TerminalCommands.SPLIT.id,

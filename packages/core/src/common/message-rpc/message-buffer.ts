@@ -14,18 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-/**
- * A buffer maintaining a write position capable of writing primitive values
- */
-export interface WriteBuffer {
-    writeUint8(byte: number): this
-    writeUint16(value: number): this
-    writeUint32(value: number): this
-    writeString(value: string): this
-    writeBytes(value: Uint8Array): this
-    writeNumber(value: number): this
-    writeLength(value: number): this
-    writeRaw(bytes: Uint8Array): this;
+export type WriteBuffer = {
+    writeUint8(byte: number): WriteBuffer
+    writeUint16(value: number): WriteBuffer
+    writeUint32(value: number): WriteBuffer
+    writeString(value: string): WriteBuffer
+    writeBytes(value: Uint8Array): WriteBuffer
+    writeNumber(value: number): WriteBuffer
+    writeLength(value: number): WriteBuffer
+    writeRaw(bytes: Uint8Array): WriteBuffer;
     /**
      * Makes any writes to the buffer permanent, for example by sending the writes over a channel.
      * You must obtain a new write buffer after committing
@@ -82,11 +79,7 @@ export class ForwardingWriteBuffer implements WriteBuffer {
     }
 }
 
-/**
- * A buffer maintaining a read position in a buffer containing a received message capable of
- * reading primitive values.
- */
-export interface ReadBuffer {
+export type ReadBuffer = {
     readUint8(): number;
     readUint16(): number;
     readUint32(): number;

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,15 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
+import { injectable, inject } from 'inversify';
 import { RpcServer, RpcProxy, isObject } from '@theia/core';
-import { Repository, WorkingDirectoryStatus } from './git-model';
-import { Disposable, DisposableCollection, Emitter, Event } from '@theia/core/lib/common';
+import { Repository, WorkingDirectoryStatus } from './git-model.js';
+import { Disposable, DisposableCollection, Emitter, Event } from '@theia/core/lib/common/index.js';
 
-/**
- * An event representing a `Git` status change in one of the watched local working directory.
- */
-export interface GitStatusChangeEvent {
+export type GitStatusChangeEvent = {
 
     /**
      * The source `Git` repository where the event belongs to.
@@ -53,10 +50,7 @@ export namespace GitStatusChangeEvent {
 
 }
 
-/**
- * Client watcher for `Git`.
- */
-export interface GitWatcherClient {
+export type GitWatcherClient = {
 
     /**
      * Invoked with the event that encapsulates the status change in the repository.
@@ -70,10 +64,7 @@ export interface GitWatcherClient {
  */
 export const GitWatcherServer = Symbol('GitWatcherServer');
 
-/**
- * Service representation communicating between the backend and the frontend.
- */
-export interface GitWatcherServer extends RpcServer<GitWatcherClient> {
+export type GitWatcherServer = RpcServer<GitWatcherClient> & {
 
     /**
      * Watches status changes in the given repository.

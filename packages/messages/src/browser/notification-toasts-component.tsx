@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
+import * as React from 'react';
 import { DisposableCollection } from '@theia/core';
-import { NotificationManager, NotificationUpdateEvent } from './notifications-manager';
-import { NotificationComponent } from './notification-component';
-import { CorePreferences } from '@theia/core/lib/common';
+import { NotificationManager, NotificationUpdateEvent } from './notifications-manager.js';
+import { NotificationComponent } from './notification-component.js';
+import { CorePreferences } from '@theia/core/lib/common/index.js';
 
-export interface NotificationToastsComponentProps {
+export type NotificationToastsComponentProps = {
     readonly manager: NotificationManager;
     readonly corePreferences: CorePreferences;
 }

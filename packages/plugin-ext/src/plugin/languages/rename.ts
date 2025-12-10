@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { URI } from '@theia/core/shared/vscode-uri';
+import { URI } from 'vscode-uri';
 import * as theia from '@theia/plugin';
-import * as Converter from '../type-converters';
-import * as model from '../../common/plugin-api-rpc-model';
-import { DocumentsExtImpl } from '../documents';
-import { Position, WorkspaceEditDto } from '../../common/plugin-api-rpc';
-import { Range } from '../types-impl';
-import { isObject } from '../../common/types';
+import * as Converter from '../type-converters.js';
+import * as model from '../../common/plugin-api-rpc-model.js';
+import { DocumentsExtImpl } from '../documents.js';
+import { Position, WorkspaceEditDto } from '../../common/plugin-api-rpc.js';
+import { Range } from '../types-impl.js';
+import { isObject } from '../../common/types.js';
 
 export class RenameAdapter {
 

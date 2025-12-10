@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { environment } from '@theia/core/lib/common';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { BackendApplicationCliContribution, BackendApplicationContribution } from '@theia/core/lib/node';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { environment } from '@theia/core/lib/common/index.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { BackendApplicationCliContribution, BackendApplicationContribution } from '@theia/core/lib/node/index.js';
+import { inject, injectable } from 'inversify';
 import * as net from 'net';
-import { SampleAppInfo } from '../common/vsx/sample-app-info';
+import { SampleAppInfo } from '../common/vsx/sample-app-info.js';
 
 @injectable()
 export class SampleBackendAppInfo implements SampleAppInfo, BackendApplicationContribution {

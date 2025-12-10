@@ -15,22 +15,19 @@
 // *****************************************************************************
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { CancellationToken, CancellationTokenSource } from '../cancellation';
-import { DisposableWrapper, Disposable, DisposableCollection } from '../disposable';
-import { Emitter, Event } from '../event';
-import { Deferred } from '../promise-util';
-import { Channel } from './channel';
-import { MsgPackMessageDecoder, MsgPackMessageEncoder, RpcMessage, RpcMessageDecoder, RpcMessageEncoder, RpcMessageType } from './rpc-message-encoder';
+import { CancellationToken, CancellationTokenSource } from '../cancellation.js';
+import { DisposableWrapper, Disposable, DisposableCollection } from '../disposable.js';
+import { Emitter, Event } from '../event.js';
+import { Deferred } from '../promise-util.js';
+import { Channel } from './channel.js';
+import { MsgPackMessageDecoder, MsgPackMessageEncoder, RpcMessage, RpcMessageDecoder, RpcMessageEncoder, RpcMessageType } from './rpc-message-encoder.js';
 
 /**
  * Handles request messages received by the {@link RPCProtocol}.
  */
 export type RequestHandler = (method: string, args: any[]) => Promise<any>;
 
-/**
- * Initialization options for a {@link RpcProtocol}.
- */
-export interface RpcProtocolOptions {
+export type RpcProtocolOptions = {
     /**
      * The message encoder that should be used. If `undefined` the default {@link RpcMessageEncoder} will be used.
      */

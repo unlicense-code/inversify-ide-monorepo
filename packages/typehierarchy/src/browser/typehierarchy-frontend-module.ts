@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -13,15 +13,15 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { bindContributionProvider } from '@theia/core/lib/common';
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { WidgetFactory } from '@theia/core/lib/browser/widget-manager';
-import { bindViewContribution } from '@theia/core/lib/browser/shell/view-contribution';
-import { TypeHierarchyRegistry } from './typehierarchy-provider';
-import { TypeHierarchyContribution } from './typehierarchy-contribution';
-import { TypeHierarchyTreeWidget } from './tree/typehierarchy-tree-widget';
-import { TypeHierarchyService, TypeHierarchyServiceProvider } from './typehierarchy-service';
-import { createHierarchyTreeWidget } from './tree/typehierarchy-tree-container';
+import { bindContributionProvider } from '@theia/core/lib/common/index.js';
+import { ContainerModule } from 'inversify';
+import { WidgetFactory } from '@theia/core/lib/browser/widget-manager.js';
+import { bindViewContribution } from '@theia/core/lib/browser/shell/view-contribution.js';
+import { TypeHierarchyRegistry } from './typehierarchy-provider.js';
+import { TypeHierarchyContribution } from './typehierarchy-contribution.js';
+import { TypeHierarchyTreeWidget } from './tree/typehierarchy-tree-widget.js';
+import { TypeHierarchyService, TypeHierarchyServiceProvider } from './typehierarchy-service.js';
+import { createHierarchyTreeWidget } from './tree/typehierarchy-tree-container.js';
 
 import '../../src/browser/style/index.css';
 

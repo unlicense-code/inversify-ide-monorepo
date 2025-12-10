@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 Typefox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { DevContainerConfiguration } from '../devcontainer-file';
-import { ContainerCreationContribution } from '../docker-container-service';
+import { DevContainerConfiguration } from '../devcontainer-file.js';
+import { ContainerCreationContribution } from '../docker-container-service.js';
 import * as Docker from 'dockerode';
-import { injectable } from '@theia/core/shared/inversify';
-import { ContainerOutputProvider } from '../../electron-common/container-output-provider';
+import { injectable } from 'inversify';
+import { ContainerOutputProvider } from '../../electron-common/container-output-provider.js';
 
 /**
  * this contribution changes the /etc/profile file so that it won't overwrite the PATH variable set by docker

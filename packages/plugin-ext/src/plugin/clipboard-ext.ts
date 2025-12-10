@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 RedHat and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import * as theia from '@theia/plugin';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { RPCProtocol } from '../common/rpc-protocol';
-import { PLUGIN_RPC_CONTEXT, ClipboardMain } from '../common';
+import { inject, injectable, postConstruct } from 'inversify';
+import { RPCProtocol } from '../common/rpc-protocol.js';
+import { PLUGIN_RPC_CONTEXT, ClipboardMain } from '../common/index.js';
 
 @injectable()
 export class ClipboardExt implements theia.Clipboard {

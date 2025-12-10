@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-export * from './file-tree';
-export * from './file-tree-model';
-export * from './file-tree-widget';
-export * from './file-tree-container';
-export * from './file-tree-decorator-adapter';
-export * from './file-tree-label-provider';
+export * from './file-tree.js';
+export * from './file-tree-model.js';
+export * from './file-tree-widget.js';
+export * from './file-tree-container.js';
+export * from './file-tree-decorator-adapter.js';
+export * from './file-tree-label-provider.js';

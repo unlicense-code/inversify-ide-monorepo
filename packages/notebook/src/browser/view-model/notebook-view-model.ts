@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2025 Typefox and others.
+// Copyright (C) 2025 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { NotebookCellModel } from './notebook-cell-model';
+import { injectable } from 'inversify';
+import { NotebookCellModel } from './notebook-cell-model.js';
 import { Disposable, Emitter } from '@theia/core';
-import { NotebookModel } from './notebook-model';
+import { NotebookModel } from './notebook-model.js';
 
-export interface SelectedCellChangeEvent {
+export type SelectedCellChangeEvent = {
     cell: NotebookCellModel | undefined;
     scrollIntoView: boolean;
 }
@@ -57,7 +57,7 @@ export class NotebookViewModel implements Disposable {
                 }
             }
 
-            if (e.newCellIds && e.newCellIds?.length > 0 && e.externalEvent) {
+            if (e.newCellIds && e.newCellIds?.length > 0 && e.externalEvent === true) {
                 const lastNewCellHandle = e.newCellIds[e.newCellIds.length - 1];
                 const newSelectedCell = model.getCellByHandle(lastNewCellHandle)!;
                 this.setSelectedCell(newSelectedCell, true);

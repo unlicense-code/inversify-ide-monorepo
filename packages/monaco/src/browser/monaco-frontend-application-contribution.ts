@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,27 +14,27 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { ColorTheme, CssStyleCollector, FrontendApplicationContribution, QuickAccessRegistry, StylingParticipant } from '@theia/core/lib/browser';
-import { MonacoSnippetSuggestProvider } from './monaco-snippet-suggest-provider';
+import { injectable, inject, postConstruct } from 'inversify';
+import { ColorTheme, CssStyleCollector, FrontendApplicationContribution, QuickAccessRegistry, StylingParticipant } from '@theia/core/lib/browser/index.js';
+import { MonacoSnippetSuggestProvider } from './monaco-snippet-suggest-provider.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { setSnippetSuggestSupport } from '@theia/monaco-editor-core/esm/vs/editor/contrib/suggest/browser/suggest';
-import { CompletionItemProvider } from '@theia/monaco-editor-core/esm/vs/editor/common/languages';
-import { MonacoTextModelService } from './monaco-text-model-service';
-import { MonacoThemingService } from './monaco-theming-service';
-import { isHighContrast } from '@theia/core/lib/common/theme';
-import { editorOptionsRegistry, IEditorOption } from '@theia/monaco-editor-core/esm/vs/editor/common/config/editorOptions';
+import { setSnippetSuggestSupport } from '@theia/monaco-editor-core/esm/vs/editor/contrib/suggest/browser/suggest.js';
+import { CompletionItemProvider } from '@theia/monaco-editor-core/esm/vs/editor/common/languages.js';
+import { MonacoTextModelService } from './monaco-text-model-service.js';
+import { MonacoThemingService } from './monaco-theming-service.js';
+import { isHighContrast } from '@theia/core/lib/common/theme.js';
+import { editorOptionsRegistry, IEditorOption } from '@theia/monaco-editor-core/esm/vs/editor/common/config/editorOptions.js';
 import { MAX_SAFE_INTEGER, PreferenceSchemaService } from '@theia/core';
-import { editorGeneratedPreferenceProperties } from '@theia/editor/lib/common/editor-generated-preference-schema';
-import { WorkspaceFileService } from '@theia/workspace/lib/common/workspace-file-service';
-import { SecondaryWindowHandler } from '@theia/core/lib/browser/secondary-window-handler';
-import { EditorWidget } from '@theia/editor/lib/browser';
-import { MonacoEditor } from './monaco-editor';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { StandaloneThemeService } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneThemeService';
-import { IStandaloneThemeService } from '@theia/monaco-editor-core/esm/vs/editor/standalone/common/standaloneTheme';
-import { SecondaryWindowService } from '@theia/core/lib/browser/window/secondary-window-service';
-import { registerWindow } from '@theia/monaco-editor-core/esm/vs/base/browser/dom';
+import { editorGeneratedPreferenceProperties } from '@theia/editor/lib/common/editor-generated-preference-schema.js';
+import { WorkspaceFileService } from '@theia/workspace/lib/common/workspace-file-service.js';
+import { SecondaryWindowHandler } from '@theia/core/lib/browser/secondary-window-handler.js';
+import { EditorWidget } from '@theia/editor/lib/browser/index.js';
+import { MonacoEditor } from './monaco-editor.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { StandaloneThemeService } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneThemeService.js';
+import { IStandaloneThemeService } from '@theia/monaco-editor-core/esm/vs/editor/standalone/common/standaloneTheme.js';
+import { SecondaryWindowService } from '@theia/core/lib/browser/window/secondary-window-service.js';
+import { registerWindow } from '@theia/monaco-editor-core/esm/vs/base/browser/dom.js';
 
 type CodeWindow = Window & typeof globalThis & {
     vscodeWindowId: number;

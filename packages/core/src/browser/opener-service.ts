@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,18 +15,15 @@
 // *****************************************************************************
 
 import { named, injectable, inject } from 'inversify';
-import URI from '../common/uri';
-import { ContributionProvider, Prioritizeable, MaybePromise, Emitter, Event, Disposable, PreferenceService } from '../common';
-import { match } from '../common/glob';
+import URI from '../common/uri.js';
+import { ContributionProvider, Prioritizeable, MaybePromise, Emitter, Event, Disposable, PreferenceService } from '../common/index.js';
+import { match } from '../common/glob.js';
 
-export interface OpenerOptions {
+export type OpenerOptions = {
 }
 
 export const OpenHandler = Symbol('OpenHandler');
-/**
- * `OpenHandler` should be implemented to provide a new opener.
- */
-export interface OpenHandler {
+export type OpenHandler = {
     /**
      * A unique id of this handler.
      */
@@ -56,10 +53,7 @@ export interface OpenHandler {
 }
 
 export const OpenerService = Symbol('OpenerService');
-/**
- * `OpenerService` provide an access to existing openers.
- */
-export interface OpenerService {
+export type OpenerService = {
     /**
      * Return all registered openers.
      * Never reject.

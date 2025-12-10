@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2019 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { injectable } from '@theia/core/shared/inversify';
-import { DebugScope, DebugVariable } from '@theia/debug/lib/browser/console/debug-console-items';
-import { DebugSession } from '@theia/debug/lib/browser/debug-session';
-import { hexStrToUnsignedLong } from '../../common/util';
-import { VariableRange } from '../utils/memory-widget-variable-utils';
-import { AbstractMemoryProvider } from './memory-provider';
+import { injectable } from 'inversify';
+import { DebugScope, DebugVariable } from '@theia/debug/lib/browser/console/debug-console-items.js';
+import { DebugSession } from '@theia/debug/lib/browser/debug-session.js';
+import { hexStrToUnsignedLong } from '../../common/util.js';
+import { VariableRange } from '../utils/memory-widget-variable-utils.js';
+import { AbstractMemoryProvider } from './memory-provider.js';
 
 /**
  * @file this file exists to show the customizations possible for specific debug adapters. Within the confines of the DebugAdapterProtocol, different adapters can behave
@@ -53,7 +53,7 @@ export class CDTGDBMemoryProvider extends AbstractMemoryProvider {
         const ranges: VariableRange[] = [];
 
         const scopes = await frame.getScopes();
-        const scopesWithoutRegisters = scopes.filter(x => x.render() !== 'Registers');
+        const scopesWithoutRegisters = scopes.filter((x: any) => x.render() !== 'Registers');
         for (const scope of scopesWithoutRegisters) {
             const variables = await scope.getElements();
             for (const v of variables) {
@@ -64,14 +64,14 @@ export class CDTGDBMemoryProvider extends AbstractMemoryProvider {
                         expression: addrExp,
                         context: 'watch',
                         frameId: frame.raw.id,
-                    }).catch(e => { console.warn(`Failed to evaluate ${addrExp}. Corresponding variable will be omitted from Memory Inspector display.`, e); });
+                    }).catch((e: any) => { console.warn(`Failed to evaluate ${addrExp}. Corresponding variable will be omitted from Memory Inspector display.`, e); });
                     if (!addrResp) { continue; }
 
                     const sizeResp = await session.sendRequest('evaluate', {
                         expression: sizeExp,
                         context: 'watch',
                         frameId: frame.raw.id,
-                    }).catch(e => { console.warn(`Failed to evaluate ${sizeExp}. Corresponding variable will be omitted from Memory Inspector display.`, e); });
+                    }).catch((e: any) => { console.warn(`Failed to evaluate ${sizeExp}. Corresponding variable will be omitted from Memory Inspector display.`, e); });
                     if (!sizeResp) { continue; }
 
                     // Make sure the address is in the format we expect.

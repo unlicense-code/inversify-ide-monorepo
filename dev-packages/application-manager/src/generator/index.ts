@@ -15,5 +15,6 @@
 // *****************************************************************************
 
 export * from './webpack-generator';
+export * from './rollup-generator';
 export * from './frontend-generator';
 export * from './backend-generator';

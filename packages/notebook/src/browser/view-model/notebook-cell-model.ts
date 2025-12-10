@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,21 +19,21 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Disposable, DisposableCollection, Emitter, Event, URI } from '@theia/core';
-import { inject, injectable, interfaces, postConstruct } from '@theia/core/shared/inversify';
-import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model';
-import { type MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
+import { inject, injectable, interfaces, postConstruct } from 'inversify';
+import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model.js';
+import { type MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor.js';
 import {
     CellKind, NotebookCellCollapseState, NotebookCellInternalMetadata,
     NotebookCellMetadata, CellOutput, CellData, CellOutputItem
-} from '../../common';
-import { NotebookCellOutputsSplice } from '../notebook-types';
-import { NotebookMonacoTextModelService } from '../service/notebook-monaco-text-model-service';
-import { NotebookCellOutputModel } from './notebook-cell-output-model';
-import { PreferenceService } from '@theia/core/lib/common';
-import { NotebookPreferences } from '../../common/notebook-preferences';
-import { LanguageService } from '@theia/core/lib/browser/language-service';
-import { NotebookEditorFindMatch, NotebookEditorFindMatchOptions } from '../view/notebook-find-widget';
-import { Range } from '@theia/core/shared/vscode-languageserver-protocol';
+} from '../../common/index.js';
+import { NotebookCellOutputsSplice } from '../notebook-types.js';
+import { NotebookMonacoTextModelService } from '../service/notebook-monaco-text-model-service.js';
+import { NotebookCellOutputModel } from './notebook-cell-output-model.js';
+import { PreferenceService } from '@theia/core/lib/common/index.js';
+import { NotebookPreferences } from '../../common/notebook-preferences.js';
+import { LanguageService } from '@theia/core/lib/browser/language-service.js';
+import { NotebookEditorFindMatch, NotebookEditorFindMatchOptions } from '../view/notebook-find-widget.js';
+import { Range } from 'vscode-languageserver-protocol';
 
 export const NotebookCellModelFactory = Symbol('NotebookModelFactory');
 export type NotebookCellModelFactory = (props: NotebookCellModelProps) => NotebookCellModel;
@@ -47,11 +47,11 @@ export function createNotebookCellModelContainer(parent: interfaces.Container, p
     return child;
 }
 
-export interface CellInternalMetadataChangedEvent {
+export type CellInternalMetadataChangedEvent = {
     readonly lastRunSuccessChanged?: boolean;
 }
 
-export interface NotebookCell {
+export type NotebookCell = {
     readonly uri: URI;
     handle: number;
     language: string;
@@ -73,7 +73,7 @@ export interface NotebookCell {
 }
 
 const NotebookCellModelProps = Symbol('NotebookModelProps');
-export interface NotebookCellModelProps {
+export type NotebookCellModelProps = {
     readonly uri: URI,
     readonly handle: number,
     source: string,
@@ -425,7 +425,7 @@ export class NotebookCellModel implements NotebookCell, Disposable {
     }
 }
 
-export interface NotebookCellFindMatches {
+export type NotebookCellFindMatches = {
     matches: NotebookEditorFindMatch[];
     selected: NotebookEditorFindMatch;
 }

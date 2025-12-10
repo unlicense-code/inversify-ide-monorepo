@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,60 +18,60 @@
 
 import debounce = require('lodash.debounce');
 import { injectable, inject, optional } from 'inversify';
-import { MAIN_MENU_BAR, MANAGE_MENU, MenuContribution, MenuModelRegistry, ACCOUNTS_MENU, CompoundMenuNode, CommandMenu, Group, Submenu } from '../common/menu';
-import { CommonMenus } from './common-menus';
+import { MAIN_MENU_BAR, MANAGE_MENU, MenuContribution, MenuModelRegistry, ACCOUNTS_MENU, CompoundMenuNode, CommandMenu, Group, Submenu } from '../common/menu/index.js';
+import { CommonMenus } from './common-menus.js';
 export { CommonMenus };
-import { KeybindingContribution, KeybindingRegistry } from './keybinding';
-import { FrontendApplication } from './frontend-application';
-import { FrontendApplicationContribution, OnWillStopAction } from './frontend-application-contribution';
-import { CommandContribution, CommandRegistry, Command } from '../common/command';
-import { CommonCommands } from './common-commands';
+import { KeybindingContribution, KeybindingRegistry } from './keybinding.js';
+import { FrontendApplication } from './frontend-application.js';
+import { FrontendApplicationContribution, OnWillStopAction } from './frontend-application-contribution.js';
+import { CommandContribution, CommandRegistry, Command } from '../common/command.js';
+import { CommonCommands } from './common-commands.js';
 export { CommonCommands };
-import { UriAwareCommandHandler } from '../common/uri-command-handler';
-import { SelectionService } from '../common/selection-service';
-import { MessageService } from '../common/message-service';
-import { OpenerService, open } from '../browser/opener-service';
-import { ApplicationShell } from './shell/application-shell';
-import { SHELL_TABBAR_CONTEXT_CLOSE, SHELL_TABBAR_CONTEXT_COPY, SHELL_TABBAR_CONTEXT_PIN, SHELL_TABBAR_CONTEXT_SPLIT } from './shell/tab-bars';
-import { AboutDialog } from './about-dialog';
-import * as browser from './browser';
-import URI from '../common/uri';
-import { ContextKey, ContextKeyService } from './context-key-service';
-import { OS, isOSX, isWindows, EOL } from '../common/os';
-import { ResourceContextKey } from './resource-context-key';
-import { UriSelection } from '../common/selection';
-import { StorageService } from './storage-service';
-import { Navigatable, NavigatableWidget } from './navigatable';
-import { QuickViewService } from './quick-input/quick-view-service';
-import { environment } from '@theia/application-package/lib/environment';
-import { IconTheme, IconThemeService } from './icon-theme-service';
-import { ColorContribution } from './color-application-contribution';
-import { ColorRegistry } from './color-registry';
-import { Color } from '../common/color';
-import { CoreConfiguration, CorePreferences } from '../common/core-preferences';
-import { ThemeService } from './theming';
-import { ClipboardService } from './clipboard-service';
-import { EncodingRegistry } from './encoding-registry';
-import { UTF8 } from '../common/encodings';
-import { EnvVariablesServer } from '../common/env-variables';
-import { AuthenticationService } from './authentication-service';
-import { FormatType, Saveable, SaveOptions } from './saveable';
-import { QuickInputService, QuickPickItem, QuickPickItemOrSeparator, QuickPickSeparator } from './quick-input';
-import { AsyncLocalizationProvider } from '../common/i18n/localization';
-import { nls } from '../common/nls';
-import { CurrentWidgetCommandAdapter } from './shell/current-widget-command-adapter';
-import { ConfirmDialog, confirmExit, ConfirmSaveDialog, Dialog } from './dialogs';
-import { WindowService } from './window/window-service';
-import { FrontendApplicationConfigProvider } from './frontend-application-config-provider';
-import { DecorationStyle } from './decoration-style';
-import { codicon, isPinned, Title, togglePinned, Widget } from './widgets';
-import { SaveableService } from './saveable-service';
-import { UserWorkingDirectoryProvider } from './user-working-directory-provider';
-import { PreferenceChangeEvent, PreferenceScope, PreferenceService, UNTITLED_SCHEME, UntitledResourceResolver } from '../common';
-import { LanguageQuickPickService } from './i18n/language-quick-pick-service';
-import { SidebarMenu } from './shell/sidebar-menu-widget';
-import { UndoRedoHandlerService } from './undo-redo-handler';
-import { timeout } from '../common/promise-util';
+import { UriAwareCommandHandler } from '../common/uri-command-handler.js';
+import { SelectionService } from '../common/selection-service.js';
+import { MessageService } from '../common/message-service.js';
+import { OpenerService, open } from '../browser/opener-service.js';
+import { ApplicationShell } from './shell/application-shell.js';
+import { SHELL_TABBAR_CONTEXT_CLOSE, SHELL_TABBAR_CONTEXT_COPY, SHELL_TABBAR_CONTEXT_PIN, SHELL_TABBAR_CONTEXT_SPLIT } from './shell/tab-bars.js';
+import { AboutDialog } from './about-dialog.js';
+import * as browser from './browser.js';
+import URI from '../common/uri.js';
+import { ContextKey, ContextKeyService } from './context-key-service.js';
+import { OS, isOSX, isWindows, EOL } from '../common/os.js';
+import { ResourceContextKey } from './resource-context-key.js';
+import { UriSelection } from '../common/selection.js';
+import { StorageService } from './storage-service.js';
+import { Navigatable, NavigatableWidget } from './navigatable.js';
+import { QuickViewService } from './quick-input/quick-view-service.js';
+import { environment } from '@theia/application-package/lib/environment.js';
+import { IconTheme, IconThemeService } from './icon-theme-service.js';
+import { ColorContribution } from './color-application-contribution.js';
+import { ColorRegistry } from './color-registry.js';
+import { Color } from '../common/color.js';
+import { CoreConfiguration, CorePreferences } from '../common/core-preferences.js';
+import { ThemeService } from './theming.js';
+import { ClipboardService } from './clipboard-service.js';
+import { EncodingRegistry } from './encoding-registry.js';
+import { UTF8 } from '../common/encodings.js';
+import { EnvVariablesServer } from '../common/env-variables/index.js';
+import { AuthenticationService } from './authentication-service.js';
+import { FormatType, Saveable, SaveOptions } from './saveable.js';
+import { QuickInputService, QuickPickItem, QuickPickItemOrSeparator, QuickPickSeparator } from './quick-input/index.js';
+import { AsyncLocalizationProvider } from '../common/i18n/localization.js';
+import { nls } from '../common/nls.js';
+import { CurrentWidgetCommandAdapter } from './shell/current-widget-command-adapter.js';
+import { ConfirmDialog, confirmExit, ConfirmSaveDialog, Dialog } from './dialogs.js';
+import { WindowService } from './window/window-service.js';
+import { FrontendApplicationConfigProvider } from './frontend-application-config-provider.js';
+import { DecorationStyle } from './decoration-style.js';
+import { codicon, isPinned, Title, togglePinned, Widget } from './widgets/index.js';
+import { SaveableService } from './saveable-service.js';
+import { UserWorkingDirectoryProvider } from './user-working-directory-provider.js';
+import { PreferenceChangeEvent, PreferenceScope, PreferenceService, UNTITLED_SCHEME, UntitledResourceResolver } from '../common/index.js';
+import { LanguageQuickPickService } from './i18n/language-quick-pick-service.js';
+import { SidebarMenu } from './shell/sidebar-menu-widget.js';
+import { UndoRedoHandlerService } from './undo-redo-handler.js';
+import { timeout } from '../common/promise-util.js';
 
 export const supportCut = environment.electron.is() || document.queryCommandSupported('cut');
 export const supportCopy = environment.electron.is() || document.queryCommandSupported('copy');
@@ -487,7 +487,7 @@ export class CommonFrontendContribution implements FrontendApplicationContributi
 
     registerCommands(commandRegistry: CommandRegistry): void {
         commandRegistry.registerCommand(CommonCommands.OPEN, UriAwareCommandHandler.MultiSelect(this.selectionService, {
-            execute: uris => uris.map(uri => open(this.openerService, uri)),
+            execute: (uris: URI[]) => uris.map((uri: URI) => open(this.openerService, uri)),
         }));
         commandRegistry.registerCommand(CommonCommands.CUT, {
             execute: () => {
@@ -522,7 +522,7 @@ export class CommonFrontendContribution implements FrontendApplicationContributi
             execute: async uris => {
                 if (uris.length) {
                     const lineDelimiter = EOL;
-                    const text = uris.map(resource => resource.path.fsPath()).join(lineDelimiter);
+                    const text = uris.map((resource: URI) => resource.path.fsPath()).join(lineDelimiter);
                     await this.clipboardService.writeText(text);
                 } else {
                     await this.messageService.info(nls.localize('theia/core/copyInfo', 'Open a file first to copy its path'));
@@ -580,17 +580,17 @@ export class CommonFrontendContribution implements FrontendApplicationContributi
             execute: (title, tabBar) => tabBar && this.shell.closeTabs(tabBar, candidate => candidate === title),
         }));
         commandRegistry.registerCommand(CommonCommands.CLOSE_OTHER_TABS, new CurrentWidgetCommandAdapter(this.shell, {
-            isEnabled: (title, tabbar) => Boolean(tabbar?.titles.some(candidate => candidate !== title && candidate.closable)),
-            execute: (title, tabbar) => tabbar && this.shell.closeTabs(tabbar, candidate => candidate !== title && candidate.closable),
+            isEnabled: (title, tabbar) => Boolean(tabbar?.titles.some((candidate: Title<Widget>) => candidate !== title && candidate.closable)),
+            execute: (title, tabbar) => tabbar && this.shell.closeTabs(tabbar, (candidate: Title<Widget>) => candidate !== title && candidate.closable),
         }));
         commandRegistry.registerCommand(CommonCommands.CLOSE_SAVED_TABS, new CurrentWidgetCommandAdapter(this.shell, {
-            isEnabled: (_title, tabbar) => Boolean(tabbar?.titles.some(candidate => candidate.closable && !Saveable.isDirty(candidate.owner))),
-            execute: (_title, tabbar) => tabbar && this.shell.closeTabs(tabbar, candidate => candidate.closable && !Saveable.isDirty(candidate.owner)),
+            isEnabled: (_title, tabbar) => Boolean(tabbar?.titles.some((candidate: Title<Widget>) => candidate.closable && !Saveable.isDirty(candidate.owner))),
+            execute: (_title, tabbar) => tabbar && this.shell.closeTabs(tabbar, (candidate: Title<Widget>) => candidate.closable && !Saveable.isDirty(candidate.owner)),
         }));
         commandRegistry.registerCommand(CommonCommands.CLOSE_RIGHT_TABS, new CurrentWidgetCommandAdapter(this.shell, {
             isEnabled: (title, tabbar) => {
                 let targetSeen = false;
-                return Boolean(tabbar?.titles.some(candidate => {
+                return Boolean(tabbar?.titles.some((candidate: Title<Widget>) => {
                     if (targetSeen && candidate.closable) { return true; };
                     if (candidate === title) { targetSeen = true; };
                 }));
@@ -611,8 +611,8 @@ export class CommonFrontendContribution implements FrontendApplicationContributi
             }
         }));
         commandRegistry.registerCommand(CommonCommands.CLOSE_ALL_TABS, new CurrentWidgetCommandAdapter(this.shell, {
-            isEnabled: (_title, tabbar) => Boolean(tabbar?.titles.some(title => title.closable)),
-            execute: (_title, tabbar) => tabbar && this.shell.closeTabs(tabbar, candidate => candidate.closable),
+            isEnabled: (_title, tabbar) => Boolean(tabbar?.titles.some((title: Title<Widget>) => title.closable)),
+            execute: (_title, tabbar) => tabbar && this.shell.closeTabs(tabbar, (candidate: Title<Widget>) => candidate.closable),
         }));
         commandRegistry.registerCommand(CommonCommands.CLOSE_MAIN_TAB, {
             isEnabled: () => {

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,19 +15,14 @@
 // *****************************************************************************
 
 import { injectable, inject, named } from 'inversify';
-import { Event, Emitter, WaitUntilEvent } from './event';
-import { Disposable, DisposableCollection } from './disposable';
-import { ContributionProvider } from './contribution-provider';
-import { nls } from './nls';
+import { Event, Emitter, WaitUntilEvent } from './event.js';
+import { Disposable, DisposableCollection } from './disposable.js';
+import { ContributionProvider } from './contribution-provider.js';
+import { nls } from './nls.js';
 import debounce = require('p-debounce');
-import { isObject } from './types';
+import { isObject } from './types.js';
 
-/**
- * A command is a unique identifier of a function
- * which can be executed by a user via a keyboard shortcut,
- * a menu action or directly.
- */
-export interface Command {
+export type Command = {
     /**
      * A unique identifier of this command.
      */
@@ -106,14 +101,7 @@ export namespace Command {
     }
 }
 
-/**
- * A command handler is an implementation of a command.
- *
- * A command can have multiple handlers
- * but they should be active in different contexts,
- * otherwise first active will be executed.
- */
-export interface CommandHandler {
+export type CommandHandler = {
     /**
      * Execute this handler.
      *
@@ -140,31 +128,25 @@ export interface CommandHandler {
 }
 
 export const CommandContribution = Symbol('CommandContribution');
-/**
- * The command contribution should be implemented to register custom commands and handler.
- */
-export interface CommandContribution {
+export type CommandContribution = {
     /**
      * Register commands and handlers.
      */
     registerCommands(commands: CommandRegistry): void;
 }
 
-export interface CommandEvent {
+export type CommandEvent = {
     commandId: string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     args: any[]
 }
 
-export interface WillExecuteCommandEvent extends WaitUntilEvent, CommandEvent {
+export type WillExecuteCommandEvent = WaitUntilEvent & CommandEvent & {
 }
 
 export const commandServicePath = '/services/commands';
 export const CommandService = Symbol('CommandService');
-/**
- * The command service should be used to execute commands.
- */
-export interface CommandService {
+export type CommandService = {
     /**
      * Execute the active handler for the given command and arguments.
      *

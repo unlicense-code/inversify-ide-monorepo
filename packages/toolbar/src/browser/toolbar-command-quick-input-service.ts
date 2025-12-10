@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import { Command, CommandRegistry, CommandService, nls } from '@theia/core';
-import { QuickCommandService, QuickInputService, QuickPickItem } from '@theia/core/lib/browser';
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { ToolbarIconDialogFactory } from './toolbar-icon-selector-dialog';
-import { ToolbarAlignment, ToolbarAlignmentString } from './toolbar-interfaces';
-import { ToolbarController } from './toolbar-controller';
+import { QuickCommandService, QuickInputService, QuickPickItem } from '@theia/core/lib/browser/index.js';
+import { injectable, inject } from 'inversify';
+import { ToolbarIconDialogFactory } from './toolbar-icon-selector-dialog.js';
+import { ToolbarAlignment, ToolbarAlignmentString } from './toolbar-interfaces.js';
+import { ToolbarController } from './toolbar-controller.js';
 
 @injectable()
 export class ToolbarCommandQuickInputService {

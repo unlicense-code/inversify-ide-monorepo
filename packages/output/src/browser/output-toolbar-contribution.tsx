@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { Emitter } from '@theia/core/lib/common/event';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { SelectComponent, SelectOption } from '@theia/core/lib/browser/widgets/select-component';
-import { OutputWidget } from './output-widget';
-import { OutputCommands } from './output-commands';
-import { OutputContribution } from './output-contribution';
-import { OutputChannelManager } from './output-channel';
-import { nls } from '@theia/core/lib/common/nls';
+import * as React from 'react';
+import { inject, injectable, postConstruct } from 'inversify';
+import { Emitter } from '@theia/core/lib/common/event.js';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { SelectComponent, SelectOption } from '@theia/core/lib/browser/widgets/select-component.js';
+import { OutputWidget } from './output-widget.js';
+import { OutputCommands } from './output-commands.js';
+import { OutputContribution } from './output-contribution.js';
+import { OutputChannelManager } from './output-channel.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 @injectable()
 export class OutputToolbarContribution implements TabBarToolbarContribution {

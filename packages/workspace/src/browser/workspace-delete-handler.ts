@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { ConfirmDialog, ApplicationShell, SaveableWidget, NavigatableWidget } from '@theia/core/lib/browser';
-import { UriCommandHandler } from '@theia/core/lib/common/uri-command-handler';
-import { WorkspaceService } from './workspace-service';
-import { WorkspaceUtils } from './workspace-utils';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileSystemPreferences } from '@theia/filesystem/lib/common/filesystem-preferences';
-import { FileDeleteOptions, FileSystemProviderCapabilities } from '@theia/filesystem/lib/common/files';
-import { nls } from '@theia/core/lib/common/nls';
+import { injectable, inject } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ConfirmDialog, ApplicationShell, SaveableWidget, NavigatableWidget } from '@theia/core/lib/browser/index.js';
+import { UriCommandHandler } from '@theia/core/lib/common/uri-command-handler.js';
+import { WorkspaceService } from './workspace-service.js';
+import { WorkspaceUtils } from './workspace-utils.js';
+import { FileService } from '@theia/filesystem/lib/browser/index.js';
+import { FileSystemPreferences } from '@theia/filesystem/lib/common/index.js';
+import { FileDeleteOptions, FileSystemProviderCapabilities } from '@theia/filesystem/lib/common/index.js';
+import { nls } from '@theia/core/lib/common/nls.js';
 
 @injectable()
 export class WorkspaceDeleteHandler implements UriCommandHandler<URI[]> {
@@ -75,7 +75,7 @@ export class WorkspaceDeleteHandler implements UriCommandHandler<URI[]> {
             useTrash: this.fsPreferences['files.enableTrash'] && distinctUris[0] && this.fileService.hasCapability(distinctUris[0], FileSystemProviderCapabilities.Trash)
         };
         if (await this.confirm(distinctUris, resolved)) {
-            await Promise.all(distinctUris.map(uri => this.delete(uri, resolved)));
+            await Promise.all(distinctUris.map((uri: URI) => this.delete(uri, resolved)));
         }
     }
 

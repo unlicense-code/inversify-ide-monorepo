@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,20 +18,16 @@
 
 import { JSONValue } from '@lumino/coreutils';
 import { inject, injectable, postConstruct } from 'inversify';
-import { Disposable, DisposableCollection, Emitter, Event, deepFreeze, unreachable } from '../../common';
-import { Deferred } from '../../common/promise-util';
-import URI from '../../common/uri';
-import { OverridePreferenceName, PreferenceLanguageOverrideService } from './preference-language-override-service';
-import { PreferenceProvider, PreferenceProviderDataChange, PreferenceProviderDataChanges, PreferenceResolveResult, PreferenceUtils } from './preference-provider';
-import { PreferenceSchemaService } from './preference-schema';
-import { PreferenceScope } from './preference-scope';
-import { PreferenceConfigurations } from './preference-configurations';
+import { Disposable, DisposableCollection, Emitter, Event, deepFreeze, unreachable } from '../../common/index.js';
+import { Deferred } from '../../common/promise-util.js';
+import URI from '../../common/uri.js';
+import { OverridePreferenceName, PreferenceLanguageOverrideService } from './preference-language-override-service.js';
+import { PreferenceProvider, PreferenceProviderDataChange, PreferenceProviderDataChanges, PreferenceResolveResult, PreferenceUtils } from './preference-provider.js';
+import { PreferenceSchemaService } from './preference-schema.js';
+import { PreferenceScope } from './preference-scope.js';
+import { PreferenceConfigurations } from './preference-configurations.js';
 
-/**
- * Representation of a preference change. A preference value can be set to `undefined` for a specific scope.
- * This means that the value from a more general scope will be used.
- */
-export interface PreferenceChange extends PreferenceProviderDataChange {
+export type PreferenceChange = PreferenceProviderDataChange & {
     /**
      * Tests wether the given resource is affected by the preference change.
      * @param resourceUri the uri of the resource to test.
@@ -68,23 +64,12 @@ export class PreferenceChangeImpl implements PreferenceChange {
         return !resourcePath || !domain || domain.some(uri => new URI(uri).path.relativity(resourcePath) >= 0);
     }
 }
-/**
- * A key-value storage for {@link PreferenceChange}s. Used to aggregate multiple simultaneous preference changes.
- */
-export interface PreferenceChanges {
+export type PreferenceChanges = {
     [preferenceName: string]: PreferenceChange
 }
 
 export const PreferenceService = Symbol('PreferenceService');
-/**
- * Service to manage preferences including, among others, getting and setting preference values as well
- * as listening to preference changes.
- *
- * Depending on your use case you might also want to look at {@link createPreferenceProxy} with which
- * you can easily create a typesafe schema-based interface for your preferences. Internally the proxy
- * uses the PreferenceService so both approaches are compatible.
- */
-export interface PreferenceService extends Disposable {
+export type PreferenceService = Disposable & {
     /**
      * Promise indicating whether the service successfully initialized.
      */
@@ -233,10 +218,7 @@ export interface PreferenceService extends Disposable {
     getConfigUri(scope: PreferenceScope, resourceUri?: string, sectionName?: string): URI | undefined;
 }
 
-/**
- * Return type of the {@link PreferenceService.inspect} call.
- */
-export interface PreferenceInspection<T = JSONValue> {
+export type PreferenceInspection<T = JSONValue> = {
     /**
      * The preference identifier.
      */

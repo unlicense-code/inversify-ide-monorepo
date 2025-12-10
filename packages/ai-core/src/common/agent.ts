@@ -14,32 +14,23 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { LanguageModelRequirement } from './language-model';
-import { BasePromptFragment } from './prompt-service';
+import { LanguageModelRequirement } from './language-model.js';
+import { BasePromptFragment } from './prompt-service.js';
 
-export interface AgentSpecificVariables {
+export type AgentSpecificVariables = {
     name: string;
     description: string;
     usedInPrompt: boolean;
 }
 
-export interface PromptVariantSet {
+export type PromptVariantSet = {
     id: string;
     defaultVariant: BasePromptFragment;
     variants?: BasePromptFragment[];
 }
 
 export const Agent = Symbol('Agent');
-/**
- * Agents represent the main functionality of the AI system. They are responsible for processing user input, collecting information from the environment,
- * invoking and processing LLM responses, and providing the final response to the user while recording their actions in the AI history.
- *
- * Agents are meant to cover all use cases, from specialized scenarios to general purpose chat bots.
- *
- * Agents are encouraged to provide a detailed description of their functionality and their processed inputs.
- * They can also declare their used prompt templates, which makes them configurable for the user.
- */
-export interface Agent {
+export type Agent = {
     /**
      * Used to identify an agent, e.g. when it is requesting language models, etc.
      *

@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { nls } from '@theia/core/lib/common/nls';
-import { codicon } from '@theia/core/lib/browser';
+import * as React from 'react';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { codicon } from '@theia/core/lib/browser/index.js';
 import { ToolCallChatResponseContent } from '@theia/ai-chat/lib/common';
 
 /**
@@ -24,7 +24,7 @@ import { ToolCallChatResponseContent } from '@theia/ai-chat/lib/common';
  */
 export type ToolConfirmationState = 'waiting' | 'allowed' | 'denied' | 'rejected';
 
-export interface ToolConfirmationProps {
+export type ToolConfirmationProps = {
     response: ToolCallChatResponseContent;
     onAllow: (mode?: 'once' | 'session' | 'forever') => void;
     onDeny: (mode?: 'once' | 'session' | 'forever') => void;

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,25 +15,25 @@
 // *****************************************************************************
 
 import { MenuPath } from '@theia/core';
-import { CommonMenus, SHELL_TABBAR_CONTEXT_MENU } from '@theia/core/lib/browser';
-import { Navigatable } from '@theia/core/lib/browser/navigatable';
-import { URI as CodeUri } from '@theia/core/shared/vscode-uri';
-import { DebugStackFramesWidget } from '@theia/debug/lib/browser/view/debug-stack-frames-widget';
-import { DebugThreadsWidget } from '@theia/debug/lib/browser/view/debug-threads-widget';
-import { DebugToolBar } from '@theia/debug/lib/browser/view/debug-toolbar-widget';
-import { DebugVariablesWidget } from '@theia/debug/lib/browser/view/debug-variables-widget';
-import { EditorWidget, EDITOR_CONTEXT_MENU, EDITOR_CONTENT_MENU } from '@theia/editor/lib/browser';
-import { NAVIGATOR_CONTEXT_MENU } from '@theia/navigator/lib/browser/navigator-contribution';
-import { ScmTreeWidget } from '@theia/scm/lib/browser/scm-tree-widget';
-import { PLUGIN_SCM_CHANGE_TITLE_MENU } from '@theia/scm/lib/browser/dirty-diff/dirty-diff-widget';
-import { TIMELINE_ITEM_CONTEXT_MENU } from '@theia/timeline/lib/browser/timeline-tree-widget';
-import { COMMENT_CONTEXT, COMMENT_THREAD_CONTEXT, COMMENT_TITLE } from '../comments/comment-thread-widget';
-import { VIEW_ITEM_CONTEXT_MENU } from '../view/tree-view-widget';
-import { WEBVIEW_CONTEXT_MENU, WebviewWidget } from '../webview/webview';
-import { EDITOR_LINENUMBER_CONTEXT_MENU } from '@theia/editor/lib/browser/editor-linenumber-contribution';
-import { PLUGIN_TEST_VIEW_TITLE_MENU, TEST_VIEW_CONTEXT_MENU } from '@theia/test/lib/browser/view/test-view-contribution';
-import { TEST_RUNS_CONTEXT_MENU } from '@theia/test/lib/browser/view/test-run-view-contribution';
-import { TerminalMenus } from '@theia/terminal/lib/browser/terminal-frontend-contribution';
+import { CommonMenus, SHELL_TABBAR_CONTEXT_MENU } from '@theia/core/lib/browser/index.js';
+import { Navigatable } from '@theia/core/lib/browser/navigatable.js';
+import { URI as CodeUri } from 'vscode-uri';
+import { DebugStackFramesWidget } from '@theia/debug/lib/browser/view/debug-stack-frames-widget.js';
+import { DebugThreadsWidget } from '@theia/debug/lib/browser/view/debug-threads-widget.js';
+import { DebugToolBar } from '@theia/debug/lib/browser/view/debug-toolbar-widget.js';
+import { DebugVariablesWidget } from '@theia/debug/lib/browser/view/debug-variables-widget.js';
+import { EditorWidget, EDITOR_CONTEXT_MENU, EDITOR_CONTENT_MENU } from '@theia/editor/lib/browser/index.js';
+import { NAVIGATOR_CONTEXT_MENU } from '@theia/navigator/lib/browser/navigator-contribution.js';
+import { ScmTreeWidget } from '@theia/scm/lib/browser/scm-tree-widget.js';
+import { PLUGIN_SCM_CHANGE_TITLE_MENU } from '@theia/scm/lib/browser/dirty-diff/dirty-diff-widget.js';
+import { TIMELINE_ITEM_CONTEXT_MENU } from '@theia/timeline/lib/browser/timeline-tree-widget.js';
+import { COMMENT_CONTEXT, COMMENT_THREAD_CONTEXT, COMMENT_TITLE } from '../comments/comment-thread-widget.js';
+import { VIEW_ITEM_CONTEXT_MENU } from '../view/tree-view-widget.js';
+import { WEBVIEW_CONTEXT_MENU, WebviewWidget } from '../webview/webview.js';
+import { EDITOR_LINENUMBER_CONTEXT_MENU } from '@theia/editor/lib/browser/editor-linenumber-contribution.js';
+import { PLUGIN_TEST_VIEW_TITLE_MENU, TEST_VIEW_CONTEXT_MENU } from '@theia/test/lib/browser/view/test-view-contribution.js';
+import { TEST_RUNS_CONTEXT_MENU } from '@theia/test/lib/browser/view/test-run-view-contribution.js';
+import { TerminalMenus } from '@theia/terminal/lib/browser/terminal-frontend-contribution.js';
 
 export const PLUGIN_EDITOR_TITLE_MENU = ['plugin_editor/title'];
 export const PLUGIN_EDITOR_TITLE_RUN_MENU = ['plugin_editor/title/run'];

@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, postConstruct } from 'inversify';
 import { Disposable, DisposableCollection, URI } from '@theia/core';
-import { ContextKey, ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { EditorManager, EditorMouseEvent, MouseTargetType, TextEditor } from '@theia/editor/lib/browser';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
-import { Change, LineRange } from './diff-computer';
-import { DirtyDiffUpdate } from './dirty-diff-decorator';
-import { DirtyDiffWidget, DirtyDiffWidgetFactory } from './dirty-diff-widget';
+import { ContextKey, ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { EditorManager, EditorMouseEvent, MouseTargetType, TextEditor } from '@theia/editor/lib/browser/index.js';
+import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor.js';
+import { Change, LineRange } from './diff-computer.js';
+import { DirtyDiffUpdate } from './dirty-diff-decorator.js';
+import { DirtyDiffWidget, DirtyDiffWidgetFactory } from './dirty-diff-widget.js';
 
 @injectable()
 export class DirtyDiffNavigator {

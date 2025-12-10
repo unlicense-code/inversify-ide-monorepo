@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -21,11 +21,11 @@
 
 /* eslint-disable max-len */
 
-import { CharacterClassifier } from './character-classifier';
-import { CharCode } from '@theia/core/lib/common/char-code';
-import { DocumentLink as ILink } from './plugin-api-rpc-model';
+import { CharacterClassifier } from './character-classifier.js';
+import { CharCode } from '@theia/core/lib/common/char-code.js';
+import { DocumentLink as ILink } from './plugin-api-rpc-model.js';
 
-export interface ILinkComputerTarget {
+export type ILinkComputerTarget = {
     getLineCount(): number;
     getLineContent(lineNumber: number): string;
 }

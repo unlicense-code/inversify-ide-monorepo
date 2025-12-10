@@ -13,18 +13,18 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { RpcServer } from '@theia/core/lib/common/messaging/proxy-factory';
-import { RPCProtocol } from './rpc-protocol';
-import { Disposable } from '@theia/core/lib/common/disposable';
-import { LogPart, KeysToAnyValues, KeysToKeysToAnyValue } from './types';
-import { CharacterPair, CommentRule, PluginAPIFactory, Plugin, ThemeIcon } from './plugin-api-rpc';
-import { ExtPluginApi } from './plugin-ext-api-contribution';
-import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema';
-import { ProblemMatcherContribution, ProblemPatternContribution, TaskDefinition } from '@theia/task/lib/common';
-import { ColorDefinition } from '@theia/core/lib/common/color';
-import { ResourceLabelFormatter } from '@theia/core/lib/common/label-protocol';
-import { PluginIdentifiers } from './plugin-identifiers';
-import { JSONObject } from '@theia/core/shared/@lumino/coreutils';
+import { RpcServer } from '@theia/core/lib/common/messaging/proxy-factory.js';
+import { RPCProtocol } from './rpc-protocol.js';
+import { Disposable } from '@theia/core/lib/common/disposable.js';
+import { LogPart, KeysToAnyValues, KeysToKeysToAnyValue } from './types.js';
+import { CharacterPair, CommentRule, PluginAPIFactory, Plugin, ThemeIcon } from './plugin-api-rpc.js';
+import { ExtPluginApi } from './plugin-ext-api-contribution.js';
+import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema.js';
+import { ProblemMatcherContribution, ProblemPatternContribution, TaskDefinition } from '@theia/task/lib/common/index.js';
+import { ColorDefinition } from '@theia/core/lib/common/color.js';
+import { ResourceLabelFormatter } from '@theia/core/lib/common/label-protocol.js';
+import { PluginIdentifiers } from './plugin-identifiers.js';
+import { JSONObject } from '@lumino/coreutils';
 import { PreferenceSchema } from '@theia/core';
 
 export { PluginIdentifiers };
@@ -35,10 +35,7 @@ export const hostedServicePath = '/services/hostedPlugin';
  */
 export type PluginEngine = string;
 
-/**
- * This interface describes a package.json object.
- */
-export interface PluginPackage {
+export type PluginPackage = {
     name: string;
     // The publisher is not guaranteed to be defined for unpublished plugins. https://github.com/microsoft/vscode-vsce/commit/a38657ece04c20e4fbde15d5ac1ed39ca51cb856
     publisher: string | undefined;
@@ -71,10 +68,7 @@ export namespace PluginPackage {
     }
 }
 
-/**
- * This interface describes a package.json contribution section object.
- */
-export interface PluginPackageContribution {
+export type PluginPackageContribution = {
     authentication?: PluginPackageAuthenticationProvider[];
     configuration?: JSONObject | JSONObject[];
     configurationDefaults?: JSONObject;
@@ -107,14 +101,14 @@ export interface PluginPackageContribution {
     mcpServerDefinitionProviders?: PluginPackageMcpServerDefinitionProviderContribution[];
 }
 
-export interface PluginPackageNotebook {
+export type PluginPackageNotebook = {
     type: string;
     displayName: string;
     selector?: readonly { filenamePattern?: string; excludeFileNamePattern?: string }[];
     priority?: string;
 }
 
-export interface PluginNotebookRendererContribution {
+export type PluginNotebookRendererContribution = {
     readonly id: string;
     readonly displayName: string;
     readonly mimeTypes: string[];
@@ -122,33 +116,33 @@ export interface PluginNotebookRendererContribution {
     readonly requiresMessaging?: 'always' | 'optional' | 'never'
 }
 
-export interface PluginPackageNotebookPreload {
+export type PluginPackageNotebookPreload = {
     type: string;
     entrypoint: string;
 }
 
-export interface PluginPackageMcpServerDefinitionProviderContribution {
+export type PluginPackageMcpServerDefinitionProviderContribution = {
     id: string;
     label: string;
     description?: string;
 }
 
-export interface PluginPackageAuthenticationProvider {
+export type PluginPackageAuthenticationProvider = {
     id: string;
     label: string;
 }
 
-export interface PluginPackageTerminalProfile {
+export type PluginPackageTerminalProfile = {
     title: string;
     id: string;
     icon?: string;
 }
 
-export interface PluginPackageTerminal {
+export type PluginPackageTerminal = {
     profiles: PluginPackageTerminalProfile[];
 }
 
-export interface PluginPackageLocalization {
+export type PluginPackageLocalization = {
     languageId: string;
     languageName?: string;
     localizedLanguageName?: string;
@@ -156,19 +150,19 @@ export interface PluginPackageLocalization {
     minimalTranslations?: { [key: string]: string };
 }
 
-export interface PluginPackageTranslation {
+export type PluginPackageTranslation = {
     id: string;
     path: string;
 }
 
-export interface PluginPackageCustomEditor {
+export type PluginPackageCustomEditor = {
     viewType: string;
     displayName: string;
     selector?: CustomEditorSelector[];
     priority?: CustomEditorPriority;
 }
 
-export interface CustomEditorSelector {
+export type CustomEditorSelector = {
     readonly filenamePattern?: string;
 }
 
@@ -178,7 +172,7 @@ export enum CustomEditorPriority {
     option = 'option',
 }
 
-export interface PluginPackageViewContainer {
+export type PluginPackageViewContainer = {
     id: string;
     title: string;
     icon: string;
@@ -189,21 +183,21 @@ export enum PluginViewType {
     Webview = 'webview'
 }
 
-export interface PluginPackageView {
+export type PluginPackageView = {
     id: string;
     name: string;
     when?: string;
     type?: string;
 }
 
-export interface PluginPackageViewWelcome {
+export type PluginPackageViewWelcome = {
     view: string;
     contents: string;
     when?: string;
     enablement?: string;
 }
 
-export interface PluginPackageCommand {
+export type PluginPackageCommand = {
     command: string;
     title: string;
     shortTitle?: string;
@@ -213,7 +207,7 @@ export interface PluginPackageCommand {
     enablement?: string;
 }
 
-export interface PluginPackageMenu {
+export type PluginPackageMenu = {
     command?: string;
     submenu?: string;
     alt?: string;
@@ -221,13 +215,13 @@ export interface PluginPackageMenu {
     when?: string;
 }
 
-export interface PluginPackageSubmenu {
+export type PluginPackageSubmenu = {
     id: string;
     label: string;
     icon: IconUrl;
 }
 
-export interface PluginPackageKeybinding {
+export type PluginPackageKeybinding = {
     key?: string;
     command: string;
     when?: string;
@@ -238,7 +232,7 @@ export interface PluginPackageKeybinding {
     args?: any;
 }
 
-export interface PluginPackageGrammarsContribution {
+export type PluginPackageGrammarsContribution = {
     language?: string;
     scopeName: string;
     path: string;
@@ -247,16 +241,16 @@ export interface PluginPackageGrammarsContribution {
     injectTo?: string[];
 }
 
-export interface ScopeMap {
+export type ScopeMap = {
     [scopeName: string]: string;
 }
 
-export interface PluginPackageSnippetsContribution {
+export type PluginPackageSnippetsContribution = {
     language?: string;
     path?: string;
 }
 
-export interface PluginColorContribution {
+export type PluginColorContribution = {
     id?: string;
     description?: string;
     defaults?: { light?: string, dark?: string, highContrast?: string };
@@ -264,7 +258,7 @@ export interface PluginColorContribution {
 
 export type PluginUiTheme = 'vs' | 'vs-dark' | 'hc-black';
 
-export interface PluginThemeContribution {
+export type PluginThemeContribution = {
     id?: string;
     label?: string;
     description?: string;
@@ -272,7 +266,7 @@ export interface PluginThemeContribution {
     uiTheme?: PluginUiTheme;
 }
 
-export interface PluginIconThemeContribution {
+export type PluginIconThemeContribution = {
     id?: string;
     label?: string;
     description?: string;
@@ -280,24 +274,21 @@ export interface PluginIconThemeContribution {
     uiTheme?: PluginUiTheme;
 }
 
-export interface PluginIconContribution {
+export type PluginIconContribution = {
     [id: string]: {
         description: string;
         default: { fontPath: string; fontCharacter: string } | string;
     };
 }
 
-export interface PlatformSpecificAdapterContribution {
+export type PlatformSpecificAdapterContribution = {
     program?: string;
     args?: string[];
     runtime?: string;
     runtimeArgs?: string[];
 }
 
-/**
- * This interface describes a package.json debuggers contribution section object.
- */
-export interface PluginPackageDebuggersContribution extends PlatformSpecificAdapterContribution {
+export type PluginPackageDebuggersContribution = PlatformSpecificAdapterContribution & {
     type: string;
     label?: string;
     languages?: string[];
@@ -313,10 +304,7 @@ export interface PluginPackageDebuggersContribution extends PlatformSpecificAdap
     linux?: PlatformSpecificAdapterContribution;
 }
 
-/**
- * This interface describes a package.json languages contribution section object.
- */
-export interface PluginPackageLanguageContribution {
+export type PluginPackageLanguageContribution = {
     id: string;
     extensions?: string[];
     filenames?: string[];
@@ -328,7 +316,7 @@ export interface PluginPackageLanguageContribution {
     icon?: IconUrl;
 }
 
-export interface PluginPackageLanguageContributionConfiguration {
+export type PluginPackageLanguageContributionConfiguration = {
     comments?: CommentRule;
     brackets?: CharacterPair[];
     autoClosingPairs?: (CharacterPair | AutoClosingPairConditional)[];
@@ -339,30 +327,27 @@ export interface PluginPackageLanguageContributionConfiguration {
     onEnterRules?: OnEnterRule[];
 }
 
-export interface PluginTaskDefinitionContribution {
+export type PluginTaskDefinitionContribution = {
     type: string;
     required: string[];
     properties?: IJSONSchema['properties'];
 }
 
-export interface PluginProblemMatcherContribution extends ProblemMatcherContribution {
+export type PluginProblemMatcherContribution = ProblemMatcherContribution & {
     name: string;
 }
 
-export interface PluginProblemPatternContribution extends ProblemPatternContribution {
+export type PluginProblemPatternContribution = ProblemPatternContribution & {
     name: string;
 }
 
-export interface PluginJsonValidationContribution {
+export type PluginJsonValidationContribution = {
     fileMatch: string | string[];
     url: string;
 }
 
 export const PluginScanner = Symbol('PluginScanner');
-/**
- * This scanner process package.json object and returns plugin metadata objects.
- */
-export interface PluginScanner {
+export type PluginScanner = {
     /**
      * The type of plugin's API (engine name)
      */
@@ -396,10 +381,7 @@ export interface PluginScanner {
  * A plugin resolver is handling how to resolve a plugin link into a local resource.
  */
 export const PluginDeployerResolver = Symbol('PluginDeployerResolver');
-/**
- * A resolver handle a set of resource
- */
-export interface PluginDeployerResolver {
+export type PluginDeployerResolver = {
 
     init?(pluginDeployerResolverInit: PluginDeployerResolverInit): void;
 
@@ -410,25 +392,25 @@ export interface PluginDeployerResolver {
 }
 
 export const PluginDeployerDirectoryHandler = Symbol('PluginDeployerDirectoryHandler');
-export interface PluginDeployerDirectoryHandler {
+export type PluginDeployerDirectoryHandler = {
     accept(pluginDeployerEntry: PluginDeployerEntry): Promise<boolean>;
 
     handle(context: PluginDeployerDirectoryHandlerContext): Promise<void>;
 }
 
 export const PluginDeployerFileHandler = Symbol('PluginDeployerFileHandler');
-export interface PluginDeployerFileHandler {
+export type PluginDeployerFileHandler = {
 
     accept(pluginDeployerEntry: PluginDeployerEntry): Promise<boolean>;
 
     handle(context: PluginDeployerFileHandlerContext): Promise<void>;
 }
 
-export interface PluginDeployerResolverInit {
+export type PluginDeployerResolverInit = {
 
 }
 
-export interface PluginDeployerResolverContext {
+export type PluginDeployerResolverContext = {
 
     addPlugin(pluginId: string, path: string): void;
 
@@ -438,23 +420,20 @@ export interface PluginDeployerResolverContext {
 
 }
 
-export interface PluginDeployerStartContext {
+export type PluginDeployerStartContext = {
     readonly userEntries: string[]
     readonly systemEntries: string[]
 }
 
 export const PluginDeployer = Symbol('PluginDeployer');
-export interface PluginDeployer {
+export type PluginDeployer = {
 
     start(): Promise<void>;
 
 }
 
 export const PluginDeployerParticipant = Symbol('PluginDeployerParticipant');
-/**
- * A participant can hook into the plugin deployer lifecycle.
- */
-export interface PluginDeployerParticipant {
+export type PluginDeployerParticipant = {
     onWillStart?(context: PluginDeployerStartContext): Promise<void>;
 }
 
@@ -475,12 +454,12 @@ export enum PluginType {
     User
 };
 
-export interface UnresolvedPluginEntry {
+export type UnresolvedPluginEntry = {
     id: string;
     type?: PluginType;
 }
 
-export interface PluginDeployerEntry {
+export type PluginDeployerEntry = {
 
     /**
      * ID (before any resolution)
@@ -544,7 +523,7 @@ export interface PluginDeployerEntry {
     rootPath: string
 }
 
-export interface PluginDeployerFileHandlerContext {
+export type PluginDeployerFileHandlerContext = {
 
     unzip(sourcePath: string, destPath: string): Promise<void>;
 
@@ -552,7 +531,7 @@ export interface PluginDeployerFileHandlerContext {
 
 }
 
-export interface PluginDeployerDirectoryHandlerContext {
+export type PluginDeployerDirectoryHandlerContext = {
 
     copy(origin: string, target: string): Promise<void>;
 
@@ -560,10 +539,7 @@ export interface PluginDeployerDirectoryHandlerContext {
 
 }
 
-/**
- * This interface describes a plugin model object, which is populated from package.json.
- */
-export interface PluginModel {
+export type PluginModel = {
     id: string;
     name: string;
     publisher: string;
@@ -587,16 +563,13 @@ export interface PluginModel {
     licenseUrl?: string;
 }
 
-export interface PluginEntryPoint {
+export type PluginEntryPoint = {
     frontend?: string;
     backend?: string;
     headless?: string;
 }
 
-/**
- * This interface describes some static plugin contributions.
- */
-export interface PluginContribution {
+export type PluginContribution = {
     activationEvents?: string[];
     authentication?: AuthenticationProviderInformation[];
     configuration?: PreferenceSchema[];
@@ -627,14 +600,14 @@ export interface PluginContribution {
     notebookRenderer?: NotebookRendererContribution[];
     notebookPreload?: notebookPreloadContribution[];
 }
-export interface NotebookContribution {
+export type NotebookContribution = {
     type: string;
     displayName: string;
     selector?: readonly { filenamePattern?: string; excludeFileNamePattern?: string }[];
     priority?: string;
 }
 
-export interface NotebookRendererContribution {
+export type NotebookRendererContribution = {
     readonly id: string;
     readonly displayName: string;
     readonly mimeTypes: string[];
@@ -642,23 +615,23 @@ export interface NotebookRendererContribution {
     readonly requiresMessaging?: 'always' | 'optional' | 'never'
 }
 
-export interface notebookPreloadContribution {
+export type notebookPreloadContribution = {
     type: string;
     entrypoint: string;
 }
 
-export interface AuthenticationProviderInformation {
+export type AuthenticationProviderInformation = {
     id: string;
     label: string;
 }
 
-export interface TerminalProfile {
+export type TerminalProfile = {
     title: string,
     id: string,
     icon?: string
 }
 
-export interface Localization {
+export type Localization = {
     languageId: string;
     languageName?: string;
     localizedLanguageName?: string;
@@ -666,13 +639,13 @@ export interface Localization {
     minimalTranslations?: { [key: string]: string };
 }
 
-export interface Translation {
+export type Translation = {
     id: string;
     path: string;
     cachedContents?: { [scope: string]: { [key: string]: string } };
 }
 
-export interface SnippetContribution {
+export type SnippetContribution = {
     uri: string
     source: string
     language?: string
@@ -680,7 +653,7 @@ export interface SnippetContribution {
 
 export type UiTheme = 'vs' | 'vs-dark' | 'hc-black';
 
-export interface ThemeContribution {
+export type ThemeContribution = {
     id?: string;
     label?: string;
     description?: string;
@@ -688,7 +661,7 @@ export interface ThemeContribution {
     uiTheme?: UiTheme;
 }
 
-export interface IconThemeContribution {
+export type IconThemeContribution = {
     id: string;
     label?: string;
     description?: string;
@@ -696,14 +669,14 @@ export interface IconThemeContribution {
     uiTheme?: UiTheme;
 }
 
-export interface IconDefinition {
+export type IconDefinition = {
     fontCharacter: string;
     location: string;
 }
 
 export type IconDefaults = ThemeIcon | IconDefinition;
 
-export interface IconContribution {
+export type IconContribution = {
     id: string;
     extensionId: string;
     description: string | undefined;
@@ -716,7 +689,7 @@ export namespace IconContribution {
     }
 }
 
-export interface GrammarsContribution {
+export type GrammarsContribution = {
     format: 'json' | 'plist';
     language?: string;
     scope: string;
@@ -729,10 +702,7 @@ export interface GrammarsContribution {
     unbalancedBracketScopes?: string[];
 }
 
-/**
- * The language contribution
- */
-export interface LanguageContribution {
+export type LanguageContribution = {
     id: string;
     extensions?: string[];
     filenames?: string[];
@@ -747,12 +717,12 @@ export interface LanguageContribution {
     icon?: IconUrl;
 }
 
-export interface RegExpOptions {
+export type RegExpOptions = {
     pattern: string;
     flags?: string;
 }
 
-export interface LanguageConfiguration {
+export type LanguageConfiguration = {
     brackets?: CharacterPair[];
     indentationRules?: IndentationRules;
     surroundingPairs?: AutoClosingPair[];
@@ -763,10 +733,7 @@ export interface LanguageConfiguration {
     onEnterRules?: OnEnterRule[];
 }
 
-/**
- * This interface describes a package.json debuggers contribution section object.
- */
-export interface DebuggerContribution extends PlatformSpecificAdapterContribution {
+export type DebuggerContribution = PlatformSpecificAdapterContribution & {
     type: string,
     label?: string,
     languages?: string[],
@@ -786,78 +753,66 @@ export interface DebuggerContribution extends PlatformSpecificAdapterContributio
     linux?: PlatformSpecificAdapterContribution;
 }
 
-export interface IndentationRules {
+export type IndentationRules = {
     increaseIndentPattern: string | RegExpOptions;
     decreaseIndentPattern: string | RegExpOptions;
     unIndentedLinePattern?: string | RegExpOptions;
     indentNextLinePattern?: string | RegExpOptions;
 }
-export interface AutoClosingPair {
+export type AutoClosingPair = {
     close: string;
     open: string;
 }
 
-export interface AutoClosingPairConditional extends AutoClosingPair {
+export type AutoClosingPairConditional = AutoClosingPair & {
     notIn?: string[];
 }
 
-export interface FoldingMarkers {
+export type FoldingMarkers = {
     start: string | RegExpOptions;
     end: string | RegExpOptions;
 }
 
-export interface FoldingRules {
+export type FoldingRules = {
     offSide?: boolean;
     markers?: FoldingMarkers;
 }
 
-export interface OnEnterRule {
+export type OnEnterRule = {
     beforeText: string | RegExpOptions;
     afterText?: string | RegExpOptions;
     previousLineText?: string | RegExpOptions;
     action: EnterAction;
 }
 
-export interface EnterAction {
+export type EnterAction = {
     indent: 'none' | 'indent' | 'outdent' | 'indentOutdent';
     appendText?: string;
     removeText?: number;
 }
 
-/**
- * Custom Editors contribution
- */
-export interface CustomEditor {
+export type CustomEditor = {
     viewType: string;
     displayName: string;
     selector: CustomEditorSelector[];
     priority: CustomEditorPriority;
 }
 
-/**
- * Views Containers contribution
- */
-export interface ViewContainer {
+export type ViewContainer = {
     id: string;
     title: string;
     iconUrl: string;
     themeIcon?: string;
 }
 
-/**
- * View contribution
- */
-export interface View {
+export type View = {
     id: string;
     name: string;
     when?: string;
     type?: string;
 }
 
-/**
- * View Welcome contribution
- */
-export interface ViewWelcome {
+export type ViewWelcome = {
     view: string;
     content: string;
     when?: string;
@@ -865,7 +820,7 @@ export interface ViewWelcome {
     order: number;
 }
 
-export interface PluginCommand {
+export type PluginCommand = {
     command: string;
     title: string;
     shortTitle?: string;
@@ -878,10 +833,7 @@ export interface PluginCommand {
 
 export type IconUrl = string | { light: string; dark: string; };
 
-/**
- * Menu contribution
- */
-export interface Menu {
+export type Menu = {
     command?: string;
     submenu?: string
     alt?: string;
@@ -889,16 +841,13 @@ export interface Menu {
     when?: string;
 }
 
-export interface Submenu {
+export type Submenu = {
     id: string;
     label: string;
     icon?: IconUrl;
 }
 
-/**
- * Keybinding contribution
- */
-export interface Keybinding {
+export type Keybinding = {
     keybinding?: string;
     command: string;
     when?: string;
@@ -909,10 +858,7 @@ export interface Keybinding {
     args?: any;
 }
 
-/**
- * This interface describes a plugin lifecycle object.
- */
-export interface PluginLifecycle {
+export type PluginLifecycle = {
     startMethod: string;
     stopMethod: string;
     /**
@@ -929,26 +875,23 @@ export interface PluginLifecycle {
     backendInitPath?: string;
 }
 
-/**
- * The export function of initialization module of backend plugin.
- */
-export interface BackendInitializationFn {
+export type BackendInitializationFn = {
     (apiFactory: PluginAPIFactory, plugin: Plugin): void;
 }
 
-export interface BackendLoadingFn {
+export type BackendLoadingFn = {
     (rpc: RPCProtocol, plugin: Plugin): void;
 }
 
-export interface PluginContext {
+export type PluginContext = {
     subscriptions: Disposable[];
 }
 
-export interface ExtensionContext {
+export type ExtensionContext = {
     subscriptions: Disposable[];
 }
 
-export interface PluginMetadata {
+export type PluginMetadata = {
     host: string;
     model: PluginModel;
     lifecycle: PluginLifecycle;
@@ -957,7 +900,7 @@ export interface PluginMetadata {
 }
 
 export const MetadataProcessor = Symbol('MetadataProcessor');
-export interface MetadataProcessor {
+export type MetadataProcessor = {
     process(pluginMetadata: PluginMetadata): void;
 }
 
@@ -970,7 +913,7 @@ export function buildFrontendModuleName(plugin: PluginPackage | PluginModel): st
 }
 
 export const HostedPluginClient = Symbol('HostedPluginClient');
-export interface HostedPluginClient {
+export type HostedPluginClient = {
     postMessage(pluginHost: string, buffer: Uint8Array): Promise<void>;
 
     log(logPart: LogPart): void;
@@ -978,7 +921,7 @@ export interface HostedPluginClient {
     onDidDeploy(): void;
 }
 
-export interface PluginDependencies {
+export type PluginDependencies = {
     metadata: PluginMetadata
     /**
      * Actual listing of plugin dependencies.
@@ -989,7 +932,7 @@ export interface PluginDependencies {
 }
 
 export const PluginDeployerHandler = Symbol('PluginDeployerHandler');
-export interface PluginDeployerHandler {
+export type PluginDeployerHandler = {
     deployFrontendPlugins(frontendPlugins: PluginDeployerEntry[]): Promise<number | undefined>;
     deployBackendPlugins(backendPlugins: PluginDeployerEntry[]): Promise<number | undefined>;
     getDeployedPluginIds(): Promise<readonly PluginIdentifiers.VersionedId[]>;
@@ -1029,7 +972,7 @@ export interface PluginDeployerHandler {
 
 }
 
-export interface DeployedPlugin {
+export type DeployedPlugin = {
     /**
      * defaults to system
      */
@@ -1039,7 +982,7 @@ export interface DeployedPlugin {
 }
 
 export const HostedPluginServer = Symbol('HostedPluginServer');
-export interface HostedPluginServer extends RpcServer<HostedPluginClient> {
+export type HostedPluginServer = RpcServer<HostedPluginClient> & {
 
     getDeployedPluginIds(): Promise<PluginIdentifiers.VersionedId[]>;
 
@@ -1059,14 +1002,14 @@ export interface HostedPluginServer extends RpcServer<HostedPluginClient> {
 
 export const PLUGIN_HOST_BACKEND = 'main';
 
-export interface WorkspaceStorageKind {
+export type WorkspaceStorageKind = {
     workspace?: string | undefined;
     roots: string[];
 }
 export type GlobalStorageKind = undefined;
 export type PluginStorageKind = GlobalStorageKind | WorkspaceStorageKind;
 
-export interface PluginDeployOptions {
+export type PluginDeployOptions = {
     version: string;
     /** Instructs the deployer to ignore any existing plugins with different versions */
     ignoreOtherVersions?: boolean;
@@ -1074,7 +1017,7 @@ export interface PluginDeployOptions {
 
 export const pluginServerJsonRpcPath = '/services/plugin-ext';
 export const PluginServer = Symbol('PluginServer');
-export interface PluginServer {
+export type PluginServer = {
 
     /**
      * Deploy a plugin.
@@ -1097,7 +1040,7 @@ export interface PluginServer {
 }
 
 export const ServerPluginRunner = Symbol('ServerPluginRunner');
-export interface ServerPluginRunner {
+export type ServerPluginRunner = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     acceptMessage(pluginHostId: string, jsonMessage: Uint8Array): boolean;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1108,6 +1051,6 @@ export interface ServerPluginRunner {
 }
 
 export const PluginHostEnvironmentVariable = Symbol('PluginHostEnvironmentVariable');
-export interface PluginHostEnvironmentVariable {
+export type PluginHostEnvironmentVariable = {
     process(env: NodeJS.ProcessEnv): void;
 }

@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2021 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,15 +14,15 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import * as React from '@theia/core/shared/react';
-import { MWLabel, MWLabelProps } from './memory-widget-components';
+import * as React from 'react';
+import { MWLabel, MWLabelProps } from './memory-widget-components.js';
 
-export interface SingleSelectItemProps {
+export type SingleSelectItemProps = {
     id: string;
     label: string;
     defaultChecked?: boolean;
 }
-interface MultiSelectBarProps {
+type MultiSelectBarProps = {
     items: SingleSelectItemProps[];
     id?: string;
     onSelectionChanged: (labelSelected: string, newSelectionState: boolean) => unknown;
@@ -46,7 +46,7 @@ export const MultiSelectBar: React.FC<MultiSelectBarProps> = ({ items, onSelecti
     );
 };
 
-interface LabeledCheckboxProps {
+type LabeledCheckboxProps = {
     label: string;
     id: string;
     onChange: React.ChangeEventHandler;

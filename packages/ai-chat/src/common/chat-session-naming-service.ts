@@ -23,12 +23,12 @@ import {
     LanguageModelService,
     PromptService,
     UserRequest
-} from '@theia/ai-core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { ChatSession } from './chat-service';
+} from '@theia/ai-core/lib/common/index.js';
+import { inject, injectable } from 'inversify';
+import { ChatSession } from './chat-service.js';
 import { generateUuid, nls } from '@theia/core';
 
-import { CHAT_SESSION_NAMING_PROMPT } from './chat-session-naming-prompt-template';
+import { CHAT_SESSION_NAMING_PROMPT } from './chat-session-naming-prompt-template.js';
 
 @injectable()
 export class ChatSessionNamingService {

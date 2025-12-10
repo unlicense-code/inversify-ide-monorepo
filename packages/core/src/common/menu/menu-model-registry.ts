@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,42 +15,16 @@
 // *****************************************************************************
 
 import { inject, injectable, named } from 'inversify';
-import { CommandMenu, CompoundMenuNode, Group, MAIN_MENU_BAR, MenuAction, MenuNode, MenuPath, MutableCompoundMenuNode, Submenu } from './menu-types';
+import { CommandMenu, CompoundMenuNode, Group, MAIN_MENU_BAR, MenuAction, MenuNode, MenuPath, MutableCompoundMenuNode, Submenu } from './menu-types.js';
 import { Event } from 'vscode-languageserver-protocol';
-import { ContributionProvider } from '../contribution-provider';
-import { Command, CommandRegistry } from '../command';
-import { Emitter } from '../event';
-import { Disposable } from '../disposable';
+import { ContributionProvider } from '../contribution-provider.js';
+import { Command, CommandRegistry } from '../command.js';
+import { Emitter } from '../event.js';
+import { Disposable } from '../disposable.js';
 
 export const MenuContribution = Symbol('MenuContribution');
 
-/**
- * Representation of a menu contribution.
- *
- * Note that there are also convenience classes which combine multiple contributions into one.
- * For example to register a view together with a menu and keybinding you could use
- * {@link AbstractViewContribution} instead.
- *
- * ### Example usage
- *
- * ```ts
- * import { MenuContribution, MenuModelRegistry, MAIN_MENU_BAR } from '@theia/core';
- *
- * @injectable()
- * export class NewMenuContribution implements MenuContribution {
- *    registerMenus(menus: MenuModelRegistry): void {
- *         const menuPath = [...MAIN_MENU_BAR, '99_mymenu'];
- *         menus.registerSubmenu(menuPath, 'My Menu');
- *
- *         menus.registerMenuAction(menuPath, {
- *            commandId: MyCommand.id,
- *            label: 'My Action'
- *         });
- *     }
- * }
- * ```
- */
-export interface MenuContribution {
+export type MenuContribution = {
     /**
      * Registers menus.
      * @param menus the menu model registry.
@@ -65,12 +39,12 @@ export enum ChangeKind {
     LINKED
 }
 
-export interface MenuChangedEvent {
+export type MenuChangedEvent = {
     kind: ChangeKind;
     path: MenuPath
 }
 
-export interface StructuralMenuChange extends MenuChangedEvent {
+export type StructuralMenuChange = MenuChangedEvent & {
     kind: ChangeKind.ADDED | ChangeKind.REMOVED | ChangeKind.LINKED;
     affectedChildId: string
 }
@@ -82,7 +56,7 @@ export namespace StructuralMenuChange {
 }
 export const MenuNodeFactory = Symbol('MenuNodeFactory');
 
-export interface MenuNodeFactory {
+export type MenuNodeFactory = {
     createGroup(id: string, orderString?: string, when?: string): Group & MutableCompoundMenuNode;
     createCommandMenu(item: MenuAction): CommandMenu;
     createSubmenu(id: string, label: string, contextKeyOverlays: Record<string, string> | undefined,

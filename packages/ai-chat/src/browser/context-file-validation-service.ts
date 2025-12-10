@@ -22,12 +22,12 @@ export enum FileValidationState {
     INVALID_NOT_FOUND = 'invalid-not-found'
 }
 
-export interface FileValidationResult {
+export type FileValidationResult = {
     state: FileValidationState;
     message?: string;
 }
 
-export interface ContextFileValidationService {
+export type ContextFileValidationService = {
     validateFile(pathOrUri: string | URI): Promise<FileValidationResult>;
 }
 

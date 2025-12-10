@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-export interface Replacement {
+export type Replacement = {
     oldContent: string;
     newContent: string;
     multiple?: boolean;
 }
 
-export interface ContentReplacer {
+export type ContentReplacer = {
     /**
      * Applies a list of replacements to the original content using a multi-step matching strategy.
      * @param originalContent The original file content.

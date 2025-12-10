@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2022 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { isOSX, isWindows, nls } from '@theia/core';
-import { PreferenceSchema, PreferenceScope } from '@theia/core/lib/common/preferences';
+import { PreferenceSchema, PreferenceScope } from '@theia/core';
 
 /* eslint-disable @typescript-eslint/quotes,max-len,no-null/no-null */
 
@@ -2916,7 +2916,7 @@ export const editorGeneratedPreferenceProperties: PreferenceSchema['properties']
     }
 };
 
-export interface GeneratedEditorPreferences {
+export type GeneratedEditorPreferences = {
     'editor.tabSize': number;
     'editor.indentSize': 'tabSize' | number;
     'editor.insertSpaces': boolean;

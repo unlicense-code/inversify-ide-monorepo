@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import { RpcProxy } from '@theia/core';
-import { IBaseTerminalServer, IBaseTerminalServerOptions } from './base-terminal-protocol';
-import { OS } from '@theia/core/lib/common/os';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/markdown-string';
+import { IBaseTerminalServer, IBaseTerminalServerOptions } from './base-terminal-protocol.js';
+import { OS } from '@theia/core/lib/common/os.js';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/markdown-string.js';
 
 export const IShellTerminalServer = Symbol('IShellTerminalServer');
 
-export interface IShellTerminalServer extends IBaseTerminalServer {
+export type IShellTerminalServer = IBaseTerminalServer & {
     hasChildProcesses(processId: number | undefined): Promise<boolean>;
     getEnvVarCollectionDescriptionsByExtension(id: number): Promise<Map<string, (string | MarkdownString | undefined)[]>>;
     getEnvVarCollections(): Promise<[string, string, boolean, SerializableEnvironmentVariableCollection][]>;
@@ -44,12 +44,12 @@ export type ShellTerminalOSPreferences<T> = {
     [key in OS.Type]: T
 };
 
-export interface IShellTerminalPreferences {
+export type IShellTerminalPreferences = {
     shell: ShellTerminalOSPreferences<string | undefined>,
     shellArgs: ShellTerminalOSPreferences<string[]>
 };
 
-export interface IShellTerminalServerOptions extends IBaseTerminalServerOptions {
+export type IShellTerminalServerOptions = IBaseTerminalServerOptions & {
     shell?: string,
     args?: string[] | string,
     rootURI?: string,
@@ -71,12 +71,12 @@ export type ShellTerminalServerProxy = RpcProxy<IShellTerminalServer>;
 
 export const NO_ROOT_URI = '<none>';
 
-export interface EnvironmentVariableCollection {
+export type EnvironmentVariableCollection = {
     readonly variableMutators: ReadonlyMap<string, EnvironmentVariableMutator>;
     readonly description: string | MarkdownString | undefined;
 }
 
-export interface EnvironmentVariableCollectionWithPersistence extends EnvironmentVariableCollection {
+export type EnvironmentVariableCollectionWithPersistence = EnvironmentVariableCollection & {
     readonly persistent: boolean;
 }
 
@@ -86,11 +86,11 @@ export enum EnvironmentVariableMutatorType {
     Prepend = 3
 }
 
-export interface EnvironmentVariableMutatorOptions {
+export type EnvironmentVariableMutatorOptions = {
     applyAtProcessCreation?: boolean;
 }
 
-export interface EnvironmentVariableMutator {
+export type EnvironmentVariableMutator = {
     readonly value: string;
     readonly type: EnvironmentVariableMutatorType;
     readonly options: EnvironmentVariableMutatorOptions;

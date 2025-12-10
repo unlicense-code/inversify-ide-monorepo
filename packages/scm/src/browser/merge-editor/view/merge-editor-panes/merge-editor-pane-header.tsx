@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { codicon, Message, onDomEvent, ReactWidget } from '@theia/core/lib/browser';
-import { LabelParser } from '@theia/core/lib/browser/label-parser';
+import { inject, injectable, postConstruct } from 'inversify';
+import * as React from 'react';
+import { codicon, Message, onDomEvent, ReactWidget } from '@theia/core/lib/browser/index.js';
+import { LabelParser } from '@theia/core/lib/browser/label-parser.js';
 
 @injectable()
 export class MergeEditorPaneHeader extends ReactWidget {
@@ -97,7 +97,7 @@ export class MergeEditorPaneHeader extends ReactWidget {
     }
 }
 
-export interface MergeEditorPaneToolbarItem {
+export type MergeEditorPaneToolbarItem = {
     readonly id: string;
     readonly label?: string;
     readonly tooltip?: string;

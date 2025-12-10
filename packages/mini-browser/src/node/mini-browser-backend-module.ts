@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider';
-import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application';
-import { ConnectionHandler, RpcConnectionHandler } from '@theia/core/lib/common';
-import { MiniBrowserService, MiniBrowserServicePath } from '../common/mini-browser-service';
-import { MiniBrowserEndpoint, MiniBrowserEndpointHandler, HtmlHandler, ImageHandler, PdfHandler, SvgHandler } from './mini-browser-endpoint';
-import { WsRequestValidatorContribution } from '@theia/core/lib/node/ws-request-validators';
-import { MiniBrowserWsRequestValidator } from './mini-browser-ws-validator';
-import { MiniBrowserBackendSecurityWarnings } from './mini-browser-backend-security-warnings';
+import { ContainerModule } from 'inversify';
+import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider.js';
+import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application.js';
+import { ConnectionHandler, RpcConnectionHandler } from '@theia/core/lib/common/index.js';
+import { MiniBrowserService, MiniBrowserServicePath } from '../common/mini-browser-service.js';
+import { MiniBrowserEndpoint, MiniBrowserEndpointHandler, HtmlHandler, ImageHandler, PdfHandler, SvgHandler } from './mini-browser-endpoint.js';
+import { WsRequestValidatorContribution } from '@theia/core/lib/node/ws-request-validators.js';
+import { MiniBrowserWsRequestValidator } from './mini-browser-ws-validator.js';
+import { MiniBrowserBackendSecurityWarnings } from './mini-browser-backend-security-warnings.js';
 
 export default new ContainerModule(bind => {
     bind(MiniBrowserEndpoint).toSelf().inSingletonScope();

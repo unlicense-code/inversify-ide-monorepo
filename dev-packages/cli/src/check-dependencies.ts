@@ -25,7 +25,7 @@ const PACKAGE_JSON = 'package.json';
 
 const logUpdate = logUpdater(process.stdout);
 
-interface CheckDependenciesOptions {
+type CheckDependenciesOptions = {
     workspaces: string[] | undefined,
     include: string[],
     exclude: string[],
@@ -36,8 +36,7 @@ interface CheckDependenciesOptions {
     suppress: boolean
 }
 
-/** NPM package */
-interface Package {
+type Package = {
     /** Name of the package, e.g. `@theia/core`. */
     name: string,
     /** Actual resolved version of the package, e.g. `1.27.0`. */
@@ -52,8 +51,7 @@ interface Package {
     isTheiaExtension?: boolean,
 }
 
-/** Issue found with a specific package. */
-interface DependencyIssue {
+type DependencyIssue = {
     /** Type of the issue. */
     issueType: 'not-hoisted' | 'multiple-versions' | 'theia-version-mix',
     /** Package with issue. */

@@ -26,9 +26,9 @@ import {
     ParsedChatRequestVariablePart,
     type ChatRequest,
     type ChatHierarchyBranch,
-} from '@theia/ai-chat';
-import { AIVariableService } from '@theia/ai-core';
-import { AIActivationService } from '@theia/ai-core/lib/browser';
+} from '@theia/ai-chat/lib/common/index.js';
+import { AIVariableService } from '@theia/ai-core/lib/common/index.js';
+import { AIActivationService } from '@theia/ai-core/lib/browser/index.js';
 import { CommandRegistry, ContributionProvider, Disposable, DisposableCollection, Emitter } from '@theia/core';
 import {
     codicon,
@@ -45,37 +45,37 @@ import {
     TreeWidget,
     Widget,
     type ReactWidget
-} from '@theia/core/lib/browser';
-import { nls } from '@theia/core/lib/common/nls';
+} from '@theia/core/lib/browser/index.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 import {
     inject,
     injectable,
     named,
     optional,
     postConstruct
-} from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { ChatNodeToolbarActionContribution } from '../chat-node-toolbar-action-contribution';
-import { ChatResponsePartRenderer } from '../chat-response-part-renderer';
-import { useMarkdownRendering } from '../chat-response-renderer/markdown-part-renderer';
-import { ProgressMessage } from '../chat-progress-message';
-import { AIChatTreeInputFactory, type AIChatTreeInputWidget } from './chat-view-tree-input-widget';
+} from 'inversify';
+import * as React from 'react';
+import { ChatNodeToolbarActionContribution } from '../chat-node-toolbar-action-contribution.js';
+import { ChatResponsePartRenderer } from '../chat-response-part-renderer.js';
+import { useMarkdownRendering } from '../chat-response-renderer/markdown-part-renderer.js';
+import { ProgressMessage } from '../chat-progress-message.js';
+import { AIChatTreeInputFactory, type AIChatTreeInputWidget } from './chat-view-tree-input-widget.js';
 
 // TODO Instead of directly operating on the ChatRequestModel we could use an intermediate view model
-export interface RequestNode extends TreeNode {
+export type RequestNode = TreeNode & {
     request: ChatRequestModel,
     branch: ChatHierarchyBranch,
     sessionId: string
 }
 export const isRequestNode = (node: TreeNode): node is RequestNode => 'request' in node;
 
-export interface EditableRequestNode extends RequestNode {
+export type EditableRequestNode = RequestNode & {
     request: EditableChatRequestModel
 }
 export const isEditableRequestNode = (node: TreeNode): node is EditableRequestNode => isRequestNode(node) && EditableChatRequestModel.is(node.request);
 
 // TODO Instead of directly operating on the ChatResponseModel we could use an intermediate view model
-export interface ResponseNode extends TreeNode {
+export type ResponseNode = TreeNode & {
     response: ChatResponseModel,
     sessionId: string
 }
@@ -86,7 +86,7 @@ export function isEnterKey(e: React.KeyboardEvent): boolean {
 }
 
 export const ChatWelcomeMessageProvider = Symbol('ChatWelcomeMessageProvider');
-export interface ChatWelcomeMessageProvider {
+export type ChatWelcomeMessageProvider = {
     renderWelcomeMessage?(): React.ReactNode;
     renderDisabledMessage?(): React.ReactNode;
 }
@@ -700,7 +700,7 @@ export class ChatViewTreeWidget extends TreeWidget {
 
 }
 
-interface WidgetContainerProps {
+type WidgetContainerProps = {
     widget: ReactWidget;
 }
 

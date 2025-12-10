@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,22 +14,22 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { FileNode, FileTreeModel } from '@theia/filesystem/lib/browser';
-import { OpenerService, open, TreeNode, ExpandableTreeNode, CompositeTreeNode, SelectableTreeNode } from '@theia/core/lib/browser';
-import { FileNavigatorTree, WorkspaceRootNode, WorkspaceNode } from './navigator-tree';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
-import { ProgressService } from '@theia/core/lib/common/progress-service';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { Disposable } from '@theia/core/lib/common/disposable';
+import { injectable, inject, postConstruct } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { FileNode, FileTreeModel } from '@theia/filesystem/lib/browser/index.js';
+import { OpenerService, open, TreeNode, ExpandableTreeNode, CompositeTreeNode, SelectableTreeNode } from '@theia/core/lib/browser/index.js';
+import { FileNavigatorTree, WorkspaceRootNode, WorkspaceNode } from './navigator-tree.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state.js';
+import { ProgressService } from '@theia/core/lib/common/progress-service.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { Disposable } from '@theia/core/lib/common/disposable.js';
 
 @injectable()
 export class FileNavigatorModel extends FileTreeModel {
 
     @inject(OpenerService) protected readonly openerService: OpenerService;
-    @inject(FileNavigatorTree) protected override readonly tree: FileNavigatorTree;
+    @inject(FileNavigatorTree) protected declare readonly tree: FileNavigatorTree;
     @inject(WorkspaceService) protected readonly workspaceService: WorkspaceService;
     @inject(FrontendApplicationStateService) protected readonly applicationState: FrontendApplicationStateService;
 

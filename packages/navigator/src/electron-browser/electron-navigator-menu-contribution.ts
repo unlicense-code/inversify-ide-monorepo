@@ -15,18 +15,18 @@
 // *****************************************************************************
 
 import { Command, CommandContribution, CommandRegistry, MenuContribution, MenuModelRegistry, SelectionService, URI } from '@theia/core';
-import { CommonCommands, KeybindingContribution, KeybindingRegistry, OpenWithService } from '@theia/core/lib/browser';
-import { WidgetManager } from '@theia/core/lib/browser/widget-manager';
-import { nls } from '@theia/core/lib/common';
-import { FileUri } from '@theia/core/lib/common/file-uri';
-import { isOSX, isWindows } from '@theia/core/lib/common/os';
-import { UriAwareCommandHandler } from '@theia/core/lib/common/uri-command-handler';
-import '@theia/core/lib/electron-common/electron-api';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { FileStatNode } from '@theia/filesystem/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { FILE_NAVIGATOR_ID, FileNavigatorWidget } from '../browser';
-import { NavigatorContextMenu, SHELL_TABBAR_CONTEXT_REVEAL } from '../browser/navigator-contribution';
+import { CommonCommands, KeybindingContribution, KeybindingRegistry, OpenWithService } from '@theia/core/lib/browser/index.js';
+import { WidgetManager } from '@theia/core/lib/browser/widget-manager.js';
+import { nls } from '@theia/core/lib/common/index.js';
+import { FileUri } from '@theia/core/lib/common/file-uri.js';
+import { isOSX, isWindows } from '@theia/core/lib/common/os.js';
+import { UriAwareCommandHandler } from '@theia/core/lib/common/uri-command-handler.js';
+import '@theia/core/lib/electron-common/electron-api.js';
+import { inject, injectable } from 'inversify';
+import { FileStatNode } from '@theia/filesystem/lib/browser/index.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { FILE_NAVIGATOR_ID, FileNavigatorWidget } from '../browser/index.js';
+import { NavigatorContextMenu, SHELL_TABBAR_CONTEXT_REVEAL } from '../browser/navigator-contribution.js';
 
 export const OPEN_CONTAINING_FOLDER = Command.toDefaultLocalizedCommand({
     id: 'revealFileInOS',
@@ -59,14 +59,14 @@ export class ElectronNavigatorMenuContribution implements MenuContribution, Comm
 
     registerCommands(commands: CommandRegistry): void {
         commands.registerCommand(OPEN_CONTAINING_FOLDER, UriAwareCommandHandler.MonoSelect(this.selectionService, {
-            execute: async uri => {
+            execute: async (uri: URI) => {
                 window.electronTheiaCore.showItemInFolder(FileUri.fsPath(uri));
             },
-            isEnabled: uri => !!this.workspaceService.getWorkspaceRootUri(uri),
-            isVisible: uri => !!this.workspaceService.getWorkspaceRootUri(uri),
+            isEnabled: (uri: URI) => !!this.workspaceService.getWorkspaceRootUri(uri),
+            isVisible: (uri: URI) => !!this.workspaceService.getWorkspaceRootUri(uri),
         }));
         commands.registerCommand(OPEN_WITH_SYSTEM_APP, UriAwareCommandHandler.MonoSelect(this.selectionService, {
-            execute: async uri => {
+            execute: async (uri: URI) => {
                 this.openWithSystemApplication(uri);
             }
         }));
@@ -75,8 +75,8 @@ export class ElectronNavigatorMenuContribution implements MenuContribution, Comm
             label: nls.localize('theia/navigator/systemEditor', 'System Editor'),
             providerName: nls.localizeByDefault('Built-in'),
             // Low priority to avoid conflicts with other open handlers.
-            canHandle: uri => (uri.scheme === 'file') ? 10 : 0,
-            open: uri => {
+            canHandle: (uri: URI) => (uri.scheme === 'file') ? 10 : 0,
+            open: (uri: URI) => {
                 this.openWithSystemApplication(uri);
                 return {};
             }

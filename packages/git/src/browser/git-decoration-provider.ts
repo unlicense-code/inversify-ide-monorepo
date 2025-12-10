@@ -14,13 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { GitFileChange, GitFileStatus, GitStatusChangeEvent } from '../common';
-import { CancellationToken, Emitter, Event, PreferenceChangeEvent } from '@theia/core/lib/common';
-import { Decoration, DecorationsProvider } from '@theia/core/lib/browser/decorations-service';
-import { GitRepositoryTracker } from './git-repository-tracker';
-import URI from '@theia/core/lib/common/uri';
-import { GitConfiguration, GitPreferences } from '../common/git-preferences';
+import { inject, injectable, postConstruct } from 'inversify';
+import { GitFileChange, GitFileStatus, GitStatusChangeEvent } from '../common/index.js';
+import { CancellationToken, Emitter, Event, PreferenceChangeEvent } from '@theia/core/lib/common/index.js';
+import {
+    Decoration, DecorationsProvider
+
+} from '@theia/core/lib/browser/decorations-service.js';
+import { GitRepositoryTracker } from './git-repository-tracker.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { GitConfiguration, GitPreferences } from '../common/git-preferences.js';
 
 @injectable()
 export class GitDecorationProvider implements DecorationsProvider {

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { TextmateRegistry } from './textmate-registry';
+import { TextmateRegistry } from './textmate-registry.js';
 import * as monaco from '@theia/monaco-editor-core';
 
 /**
  * Callback for extensions to contribute language grammar definitions
  */
 export const LanguageGrammarDefinitionContribution = Symbol('LanguageGrammarDefinitionContribution');
-export interface LanguageGrammarDefinitionContribution {
+export type LanguageGrammarDefinitionContribution = {
     registerTextmateLanguage(registry: TextmateRegistry): void;
 }
 export function getEncodedLanguageId(languageId: string): number {

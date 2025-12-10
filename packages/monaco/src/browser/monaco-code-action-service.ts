@@ -15,17 +15,17 @@
 // *****************************************************************************
 
 import { CancellationToken } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { ILanguageFeaturesService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/languageFeatures';
-import { CodeActionKind, CodeActionSet, CodeActionTriggerSource } from '@theia/monaco-editor-core/esm/vs/editor/contrib/codeAction/common/types';
-import { applyCodeAction, ApplyCodeActionReason, getCodeActions } from '@theia/monaco-editor-core/esm/vs/editor/contrib/codeAction/browser/codeAction';
-import { HierarchicalKind } from '@theia/monaco-editor-core/esm/vs/base/common/hierarchicalKind';
-import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences';
-import { ITextModel } from '@theia/monaco-editor-core/esm/vs/editor/common/model';
-import { CodeActionProvider, CodeActionTriggerType } from '@theia/monaco-editor-core/esm/vs/editor/common/languages';
-import { IProgress } from '@theia/monaco-editor-core/esm/vs/platform/progress/common/progress';
-import { IInstantiationService } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/instantiation';
+import { inject, injectable } from 'inversify';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { ILanguageFeaturesService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/languageFeatures.js';
+import { CodeActionKind, CodeActionSet, CodeActionTriggerSource } from '@theia/monaco-editor-core/esm/vs/editor/contrib/codeAction/common/types.js';
+import { applyCodeAction, ApplyCodeActionReason, getCodeActions } from '@theia/monaco-editor-core/esm/vs/editor/contrib/codeAction/browser/codeAction.js';
+import { HierarchicalKind } from '@theia/monaco-editor-core/esm/vs/base/common/hierarchicalKind.js';
+import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences.js';
+import { ITextModel } from '@theia/monaco-editor-core/esm/vs/editor/common/model.js';
+import { CodeActionProvider, CodeActionTriggerType } from '@theia/monaco-editor-core/esm/vs/editor/common/languages.js';
+import { IProgress } from '@theia/monaco-editor-core/esm/vs/platform/progress/common/progress.js';
+import { IInstantiationService } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/instantiation.js';
 
 export const MonacoCodeActionService = Symbol('MonacoCodeActionService');
 
@@ -35,7 +35,7 @@ export const MonacoCodeActionService = Symbol('MonacoCodeActionService');
  *--------------------------------------------------------------------------------------------*/
 // Partially copied from https://github.com/microsoft/vscode/blob/f66e839a38dfe39ee66a86619a790f9c2336d698/src/vs/workbench/contrib/codeEditor/browser/saveParticipants.ts#L272
 
-export interface MonacoCodeActionService {
+export type MonacoCodeActionService = {
     /**
      * Gets all code actions that should be applied on save for the given model and language identifier.
      * @param model The text model to get code actions for
@@ -173,7 +173,7 @@ export class MonacoCodeActionServiceImpl implements MonacoCodeActionService {
         const { codeActionProvider } = StandaloneServices.get(ILanguageFeaturesService);
 
         const progress: IProgress<CodeActionProvider> = {
-            report(item): void {
+            report(item: CodeActionProvider): void {
                 // empty
             },
         };

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,20 +15,20 @@
 // *****************************************************************************
 
 import * as path from 'path';
-import * as yargs from '@theia/core/shared/yargs';
-import * as fs from '@theia/core/shared/fs-extra';
+import * as yargs from 'yargs';
+import * as fs from 'fs-extra';
 import * as jsoncparser from 'jsonc-parser';
-import { injectable, inject, postConstruct, named } from '@theia/core/shared/inversify';
-import { FileUri, BackendApplicationContribution } from '@theia/core/lib/node';
-import { CliContribution } from '@theia/core/lib/node/cli';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { WorkspaceServer, UntitledWorkspaceService } from '../common';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
-import URI from '@theia/core/lib/common/uri';
+import { injectable, inject, postConstruct, named } from 'inversify';
+import { FileUri, BackendApplicationContribution } from '@theia/core/lib/node/index.js';
+import { CliContribution } from '@theia/core/lib/node/cli.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { WorkspaceServer, UntitledWorkspaceService } from '../common/index.js';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
 import { ContributionProvider, notEmpty } from '@theia/core';
 
 export const WorkspaceHandlerContribution = Symbol('workspaceHandlerContribution');
-export interface WorkspaceHandlerContribution {
+export type WorkspaceHandlerContribution = {
     canHandle(uri: URI): boolean;
     workspaceStillExists(uri: URI): Promise<boolean>;
 }
@@ -250,7 +250,7 @@ export class FileWorkspaceHandlerContribution implements WorkspaceHandlerContrib
     }
 }
 
-export interface RecentWorkspacePathsData {
+export type RecentWorkspacePathsData = {
     recentRoots: string[];
 }
 

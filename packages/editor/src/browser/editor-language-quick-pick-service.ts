@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { Language, LanguageService } from '@theia/core/lib/browser/language-service';
-import { nls, QuickInputService, QuickPickItemOrSeparator, QuickPickValue, URI } from '@theia/core';
-import { LabelProvider } from '@theia/core/lib/browser';
+import { inject, injectable } from 'inversify';
+import { Language, LanguageService } from '@theia/core/lib/browser/language-service.js';
+import { nls, QuickInputService, QuickPickItemOrSeparator, QuickPickValue, URI } from '@theia/core/lib/common/index.js';
+import { LabelProvider } from '@theia/core/lib/browser/index.js';
 
 @injectable()
 export class EditorLanguageQuickPickService {

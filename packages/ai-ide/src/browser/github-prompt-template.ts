@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *
 
-import { BasePromptFragment } from '@theia/ai-core/lib/common';
-import { CHAT_CONTEXT_DETAILS_VARIABLE_ID } from '@theia/ai-chat';
-import { MCPServerDescription } from '@theia/ai-mcp/lib/common/mcp-server-manager';
+import { BasePromptFragment } from '@theia/ai-core/lib/common/index.js';
+import { CHAT_CONTEXT_DETAILS_VARIABLE_ID } from '@theia/ai-chat/lib/common/index.js';
+import { MCPServerDescription } from '@theia/ai-mcp/lib/common/mcp-server-manager.js';
 
 export const GITHUB_REPO_NAME_VARIABLE_ID = 'githubRepoName';
 

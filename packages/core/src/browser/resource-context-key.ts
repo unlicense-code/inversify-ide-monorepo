@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { injectable, inject, postConstruct } from 'inversify';
-import URI from '../common/uri';
-import { ContextKeyService, ContextKey } from './context-key-service';
-import { LanguageService } from './language-service';
+import URI from '../common/uri.js';
+import { ContextKeyService, ContextKey } from './context-key-service.js';
+import { LanguageService } from './language-service.js';
 
 @injectable()
 export class ResourceContextKey {

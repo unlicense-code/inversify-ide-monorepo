@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,12 +18,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { injectable } from '@theia/core/shared/inversify';
-import { QuickPickValue } from '@theia/core/lib/browser';
+import { injectable } from 'inversify';
+import { QuickPickValue } from '@theia/core/lib/browser/index.js';
 import { nls } from '@theia/core';
 
-/** The representation of a task template used in the auto-generation of `tasks.json` */
-export interface TaskTemplateEntry {
+export type TaskTemplateEntry = {
     id: string;
     label: string;
     description: string;

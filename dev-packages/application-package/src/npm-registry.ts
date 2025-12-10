@@ -15,35 +15,35 @@
 // *****************************************************************************
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import * as nano from 'nano';
+import nano from 'nano';
 import { RequestContext } from '@theia/request';
-import { NodeRequestService } from '@theia/request/lib/node-request-service';
+import { NodeRequestService } from '@theia/request/lib/node-request-service.js';
 import { NpmRegistryProps } from './application-props';
 
-export interface IChangeStream {
+export type IChangeStream = {
     on(event: 'data', cb: (change: { id: string }) => void): void;
     destroy(): void;
 }
 
-export interface Author {
+export type Author = {
     name: string;
     email: string;
 }
 
-export interface Maintainer {
+export type Maintainer = {
     username: string;
     email: string;
 }
 
-export interface Dependencies {
+export type Dependencies = {
     [name: string]: string | undefined;
 }
 
-export interface PeerDependenciesMeta {
+export type PeerDependenciesMeta = {
     [name: string]: { optional: boolean } | undefined;
 }
 
-export interface NodePackage {
+export type NodePackage = {
     name?: string;
     version?: string;
     description?: string;
@@ -57,7 +57,7 @@ export interface NodePackage {
     [property: string]: any;
 }
 
-export interface PublishedNodePackage extends NodePackage {
+export type PublishedNodePackage = NodePackage & {
     name: string;
     version: string;
 }
@@ -67,7 +67,7 @@ export namespace PublishedNodePackage {
     }
 }
 
-export interface ViewResult {
+export type ViewResult = {
     'dist-tags': {
         [tag: string]: string
     }
@@ -129,7 +129,9 @@ export class NpmRegistry {
             }
             // Invalidate index with NPM registry web hooks
             this.changes = nano('https://replicate.npmjs.com').use('registry').changesReader;
-            this.changes.get({}).on('change', change => this.invalidate(change.id));
+            if (this.changes) {
+                this.changes.get({}).on('change', change => this.invalidate(change.id));
+            }
         }
     }
     protected invalidate(name: string): void {

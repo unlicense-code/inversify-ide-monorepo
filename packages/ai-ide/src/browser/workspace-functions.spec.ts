@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 let disableJSDOM = enableJSDOM();
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 FrontendApplicationConfigProvider.set({});
 
 import { expect } from 'chai';
@@ -27,16 +27,16 @@ import {
     GetWorkspaceFileList,
     FileDiagnosticProvider,
     WorkspaceFunctionScope
-} from './workspace-functions';
-import { MutableChatRequestModel, MutableChatResponseModel } from '@theia/ai-chat';
-import { Container } from '@theia/core/shared/inversify';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { URI } from '@theia/core/lib/common/uri';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { OpenerService } from '@theia/core/lib/browser';
+} from './workspace-functions.js';
+import { MutableChatRequestModel, MutableChatResponseModel } from '@theia/ai-chat/lib/common/index.js';
+import { Container } from 'inversify';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { OpenerService } from '@theia/core/lib/browser/index.js';
 import { ProblemManager } from '@theia/markers/lib/browser';
-import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service';
-import { MonacoWorkspace } from '@theia/monaco/lib/browser/monaco-workspace';
+import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service.js';
+import { MonacoWorkspace } from '@theia/monaco/lib/browser/monaco-workspace.js';
 
 disableJSDOM();
 

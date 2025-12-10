@@ -14,40 +14,39 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct, optional } from '@theia/core/shared/inversify';
+import { injectable, inject, postConstruct, optional } from 'inversify';
 import {
     ApplicationShell, ViewContainer as ViewContainerWidget, WidgetManager, QuickViewService,
     ViewContainerIdentifier, ViewContainerTitleOptions, Widget, FrontendApplicationContribution,
     StatefulWidget, CommonMenus, TreeViewWelcomeWidget, ViewContainerPart, BaseWidget,
-} from '@theia/core/lib/browser';
-import { ViewContainer, View, ViewWelcome, PluginViewType } from '../../../common';
-import { PluginSharedStyle } from '../plugin-shared-style';
-import { DebugWidget } from '@theia/debug/lib/browser/view/debug-widget';
-import { PluginViewWidget, PluginViewWidgetIdentifier } from './plugin-view-widget';
-import { SCM_VIEW_CONTAINER_ID, ScmContribution } from '@theia/scm/lib/browser/scm-contribution';
-import { EXPLORER_VIEW_CONTAINER_ID, FileNavigatorWidget, FILE_NAVIGATOR_ID } from '@theia/navigator/lib/browser';
-import { FileNavigatorContribution } from '@theia/navigator/lib/browser/navigator-contribution';
-import { DebugFrontendApplicationContribution } from '@theia/debug/lib/browser/debug-frontend-application-contribution';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { CommandRegistry } from '@theia/core/lib/common/command';
-import { MenuModelRegistry } from '@theia/core/lib/common/menu';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import { ContextKey, ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { ViewContextKeyService } from './view-context-key-service';
-import { PROBLEMS_WIDGET_ID } from '@theia/markers/lib/browser/problem/problem-widget';
-import { OutputWidget } from '@theia/output/lib/browser/output-widget';
-import { DebugConsoleContribution } from '@theia/debug/lib/browser/console/debug-console-contribution';
-import { TreeViewWidget } from './tree-view-widget';
-import { SEARCH_VIEW_CONTAINER_ID } from '@theia/search-in-workspace/lib/browser/search-in-workspace-factory';
-import { TEST_VIEW_CONTAINER_ID } from '@theia/test/lib/browser/view/test-view-contribution';
-import { WebviewView, WebviewViewResolver } from '../webview-views/webview-views';
-import { WebviewWidget, WebviewWidgetIdentifier } from '../webview/webview';
-import { CancellationToken } from '@theia/core/lib/common/cancellation';
-import { generateUuid } from '@theia/core/lib/common/uuid';
+} from '@theia/core/lib/browser/index.js';
+import { ViewContainer, View, ViewWelcome, PluginViewType } from '../../../common/index.js';
+import { PluginSharedStyle } from '../plugin-shared-style.js';
+import { DebugWidget } from '@theia/debug/lib/browser/view/debug-widget.js';
+import { PluginViewWidget, PluginViewWidgetIdentifier } from './plugin-view-widget.js';
+import { SCM_VIEW_CONTAINER_ID, ScmContribution } from '@theia/scm/lib/browser/scm-contribution.js';
+import { EXPLORER_VIEW_CONTAINER_ID, FileNavigatorWidget, FILE_NAVIGATOR_ID } from '@theia/navigator/lib/browser/index.js';
+import { FileNavigatorContribution } from '@theia/navigator/lib/browser/navigator-contribution.js';
+import { DebugFrontendApplicationContribution } from '@theia/debug/lib/browser/debug-frontend-application-contribution.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { CommandRegistry } from '@theia/core/lib/common/command.js';
+import { MenuModelRegistry } from '@theia/core/lib/common/menu/index.js';
+import { Emitter, Event } from '@theia/core/lib/common/event.js';
+import { ContextKey, ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { ViewContextKeyService } from './view-context-key-service.js';
+import { PROBLEMS_WIDGET_ID } from '@theia/markers/lib/browser/problem/problem-widget.js';
+import { OutputWidget } from '@theia/output/lib/browser/output-widget.js';
+import { DebugConsoleContribution } from '@theia/debug/lib/browser/console/debug-console-contribution.js';
+import { TreeViewWidget } from './tree-view-widget.js';
+import { SEARCH_VIEW_CONTAINER_ID } from '@theia/search-in-workspace/lib/browser/search-in-workspace-factory.js';
+import { TEST_VIEW_CONTAINER_ID } from '@theia/test/lib/browser/view/test-view-contribution.js';
+import { WebviewView, WebviewViewResolver } from '../webview-views/webview-views.js';
+import { WebviewWidget, WebviewWidgetIdentifier } from '../webview/webview.js';
+import { CancellationToken, generateUuid } from '@theia/core';
 import { nls } from '@theia/core';
-import { TheiaDockPanel } from '@theia/core/lib/browser/shell/theia-dock-panel';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { ThemeIcon } from '@theia/monaco-editor-core/esm/vs/base/common/themables';
+import { TheiaDockPanel } from '@theia/core/lib/browser/shell/theia-dock-panel.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { ThemeIcon } from '@theia/monaco-editor-core/esm/vs/base/common/themables.js';
 
 export const PLUGIN_VIEW_FACTORY_ID = 'plugin-view';
 export const PLUGIN_VIEW_CONTAINER_FACTORY_ID = 'plugin-view-container';
@@ -55,7 +54,7 @@ export const PLUGIN_VIEW_DATA_FACTORY_ID = 'plugin-view-data';
 
 export type ViewDataProvider = (params: { state?: object, viewInfo: View }) => Promise<TreeViewWidget>;
 
-export interface ViewContainerInfo {
+export type ViewContainerInfo = {
     id: string
     location: string
     options: ViewContainerTitleOptions

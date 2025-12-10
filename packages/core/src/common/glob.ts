@@ -20,17 +20,17 @@
  *--------------------------------------------------------------------------------------------*/
 'use strict';
 
-import * as strings from './strings';
-import * as paths from './paths';
-import { CharCode } from './char-code';
+import * as strings from './strings.js';
+import * as paths from './paths.js';
+import { CharCode } from './char-code.js';
 
 /* eslint-disable @typescript-eslint/no-shadow, no-null/no-null */
-export interface IExpression {
+export type IExpression = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [pattern: string]: boolean | SiblingClause | any;
 }
 
-export interface IRelativePattern {
+export type IRelativePattern = {
     base: string;
     pattern: string;
     pathToRelative(from: string, to: string): string;
@@ -40,7 +40,7 @@ export function getEmptyExpression(): IExpression {
     return Object.create(null);
 }
 
-export interface SiblingClause {
+export type SiblingClause = {
     when: string;
 }
 
@@ -272,21 +272,21 @@ export type ParsedPattern = (path: string, basename?: string) => boolean;
 // eslint-disable-next-line max-len
 export type ParsedExpression = (path: string, basename?: string, hasSibling?: (name: string) => boolean | Promise<boolean>) => string | Promise<string> /* the matching pattern */;
 
-export interface IGlobOptions {
+export type IGlobOptions = {
     /**
      * Simplify patterns for use as exclusion filters during tree traversal to skip entire subtrees. Cannot be used outside of a tree traversal.
      */
     trimForExclusions?: boolean;
 }
 
-interface ParsedStringPattern {
+type ParsedStringPattern = {
     (path: string, basename: string): string | Promise<string> /* the matching pattern */;
     basenames?: string[];
     patterns?: string[];
     allBasenames?: string[];
     allPaths?: string[];
 }
-interface ParsedExpressionPattern {
+type ParsedExpressionPattern = {
     (path: string, basename: string, name: string, hasSibling: (name: string) => boolean | Promise<boolean>): string | Promise<string> /* the matching pattern */;
     requiresSiblings?: boolean;
     allBasenames?: string[];

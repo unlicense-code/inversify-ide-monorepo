@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 import { DisposableCollection, Emitter, Event, ILogger, RecursiveReadonly } from '@theia/core';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { PreferenceService } from '@theia/core/lib/common';
-import { AISettings, AISettingsService, AgentSettings } from '../common';
+import { inject, injectable, postConstruct } from 'inversify';
+import { PreferenceService } from '@theia/core/lib/common/index.js';
+import { AISettings, AISettingsService, AgentSettings } from '../common/index.js';
 
 @injectable()
 export class AISettingsServiceImpl implements AISettingsService {

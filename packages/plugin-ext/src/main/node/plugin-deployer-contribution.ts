@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { BackendApplicationContribution } from '@theia/core/lib/node';
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { PluginDeployer } from '../../common/plugin-protocol';
+import { BackendApplicationContribution } from '@theia/core/lib/node/index.js';
+import { injectable, inject } from 'inversify';
+import { PluginDeployer } from '../../common/plugin-protocol.js';
 import { ILogger } from '@theia/core';
 
 @injectable()

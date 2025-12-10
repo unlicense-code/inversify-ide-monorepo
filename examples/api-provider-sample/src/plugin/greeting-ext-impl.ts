@@ -13,9 +13,9 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { GreetingKind, GreeterData, GreetingExt, GreetingMain, PLUGIN_RPC_CONTEXT } from '../common/plugin-api-rpc';
-import { RPCProtocol } from '@theia/plugin-ext/lib/common/rpc-protocol';
+import { inject, injectable } from 'inversify';
+import { GreetingKind, GreeterData, GreetingExt, GreetingMain, PLUGIN_RPC_CONTEXT } from '../common/plugin-api-rpc.js';
+import { RPCProtocol } from '@theia/plugin-ext/lib/common/rpc-protocol.js';
 import { Event, Emitter } from '@theia/core';
 
 type LocalGreeterData = GreeterData & {
@@ -65,7 +65,7 @@ export class GreetingExtImpl implements GreetingExt {
             data.greetingKinds.splice(index, 1);
         }
 
-        this.proxy.$updateGreeter({uuid: greeterId, greetingKinds: [...data.greetingKinds] });
+        this.proxy.$updateGreeter({ uuid: greeterId, greetingKinds: [...data.greetingKinds] });
     }
 
     onGreetingKindsChanged(greeterId: string): Event<readonly GreetingKind[]> {

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -13,8 +13,8 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { inject, injectable } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
+import { inject, injectable } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
 import {
     Command,
     CommandContribution,
@@ -27,33 +27,33 @@ import {
     MessageService,
     Mutable
 } from '@theia/core';
-import { codicon, DiffUris, Widget, open, OpenerService } from '@theia/core/lib/browser';
+import { codicon, DiffUris, Widget, open, OpenerService } from '@theia/core/lib/browser/index.js';
 import {
     TabBarToolbarAction,
     TabBarToolbarContribution,
     TabBarToolbarRegistry
-} from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { EDITOR_CONTENT_MENU, EditorContextMenu, EditorManager, EditorOpenerOptions, EditorWidget } from '@theia/editor/lib/browser';
-import { Git, GitFileChange, GitFileStatus, GitWatcher, Repository } from '../common';
-import { GitRepositoryTracker } from './git-repository-tracker';
-import { GitAction, GitQuickOpenService } from './git-quick-open-service';
-import { GitSyncService } from './git-sync-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { GitRepositoryProvider } from './git-repository-provider';
-import { GitErrorHandler } from '../browser/git-error-handler';
-import { ScmWidget } from '@theia/scm/lib/browser/scm-widget';
-import { ScmTreeWidget } from '@theia/scm/lib/browser/scm-tree-widget';
-import { ScmCommand, ScmResource } from '@theia/scm/lib/browser/scm-provider';
-import { LineRange } from '@theia/scm/lib/browser/dirty-diff/diff-computer';
-import { DirtyDiffWidget, SCM_CHANGE_TITLE_MENU } from '@theia/scm/lib/browser/dirty-diff/dirty-diff-widget';
-import { ProgressService } from '@theia/core/lib/common/progress-service';
-import { GitPreferences } from '../common/git-preferences';
-import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution';
-import { ColorRegistry } from '@theia/core/lib/browser/color-registry';
-import { ScmInputIssueType } from '@theia/scm/lib/browser/scm-input';
-import { DecorationsService } from '@theia/core/lib/browser/decorations-service';
-import { GitDecorationProvider } from './git-decoration-provider';
-import { nls } from '@theia/core/lib/common/nls';
+} from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { EDITOR_CONTENT_MENU, EditorContextMenu, EditorManager, EditorOpenerOptions, EditorWidget } from '@theia/editor/lib/browser/index.js';
+import { Git, GitFileChange, GitFileStatus, GitWatcher, Repository } from '../common/index.js';
+import { GitRepositoryTracker } from './git-repository-tracker.js';
+import { GitAction, GitQuickOpenService } from './git-quick-open-service.js';
+import { GitSyncService } from './git-sync-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { GitRepositoryProvider } from './git-repository-provider.js';
+import { GitErrorHandler } from '../browser/git-error-handler.js';
+import { ScmWidget } from '@theia/scm/lib/browser/scm-widget.js';
+import { ScmTreeWidget } from '@theia/scm/lib/browser/scm-tree-widget.js';
+import { ScmCommand, ScmResource } from '@theia/scm/lib/browser/scm-provider.js';
+import { LineRange } from '@theia/scm/lib/browser/dirty-diff/diff-computer.js';
+import { DirtyDiffWidget, SCM_CHANGE_TITLE_MENU } from '@theia/scm/lib/browser/dirty-diff/dirty-diff-widget.js';
+import { ProgressService } from '@theia/core/lib/common/progress-service.js';
+import { GitPreferences } from '../common/git-preferences.js';
+import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution.js';
+import { ColorRegistry } from '@theia/core/lib/browser/color-registry.js';
+import { ScmInputIssueType } from '@theia/scm/lib/browser/scm-input.js';
+import { DecorationsService } from '@theia/core/lib/browser/decorations-service.js';
+import { GitDecorationProvider } from './git-decoration-provider.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 export namespace GIT_COMMANDS {
 
@@ -1210,11 +1210,11 @@ export class GitContribution implements CommandContribution, MenuContribution, T
     }
 
 }
-export interface GitOpenFileOptions {
+export type GitOpenFileOptions = {
     readonly uri: URI
     readonly options?: EditorOpenerOptions
 }
-export interface GitOpenChangesOptions {
+export type GitOpenChangesOptions = {
     readonly change: GitFileChange
     readonly options?: EditorOpenerOptions
 }

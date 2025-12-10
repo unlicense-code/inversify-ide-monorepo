@@ -18,8 +18,8 @@ import {
     ChatResponseContent,
     CodeChatResponseContentImpl,
     MarkdownChatResponseContentImpl
-} from './chat-model';
-import { injectable } from '@theia/core/shared/inversify';
+} from './chat-model.js';
+import { injectable } from 'inversify';
 
 export type ResponseContentFactory = (content: string, request: MutableChatRequestModel) => ChatResponseContent;
 
@@ -39,11 +39,7 @@ export class DefaultResponseContentFactory {
     }
 }
 
-/**
- * Clients can contribute response content matchers to parse a chat response into specific
- * `ChatResponseContent` instances.
- */
-export interface ResponseContentMatcher {
+export type ResponseContentMatcher = {
     /** Regular expression for finding the start delimiter. */
     start: RegExp;
     /** Regular expression for finding the start delimiter. */
@@ -111,7 +107,7 @@ export const CodeContentMatcher: ResponseContentMatcher = {
  * @see ResponseContentMatcher
  */
 export const ResponseContentMatcherProvider = Symbol('ResponseContentMatcherProvider');
-export interface ResponseContentMatcherProvider {
+export type ResponseContentMatcherProvider = {
     readonly matchers: ResponseContentMatcher[];
 }
 

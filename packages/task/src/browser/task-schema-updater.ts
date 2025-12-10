@@ -20,21 +20,21 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as Ajv from '@theia/core/shared/ajv';
+import Ajv from 'ajv';
 import debounce = require('p-debounce');
-import { postConstruct, injectable, inject } from '@theia/core/shared/inversify';
-import { JsonSchemaContribution, JsonSchemaDataStore, JsonSchemaRegisterContext } from '@theia/core/lib/browser/json-schema-store';
-import { deepClone, Emitter, nls } from '@theia/core/lib/common';
-import { IJSONSchema } from '@theia/core/lib/common/json-schema';
-import { inputsSchema } from '@theia/variable-resolver/lib/browser/variable-input-schema';
-import URI from '@theia/core/lib/common/uri';
-import { ProblemMatcherRegistry } from './task-problem-matcher-registry';
-import { TaskDefinitionRegistry } from './task-definition-registry';
-import { TaskServer, asVariableName } from '../common';
-import { UserStorageUri } from '@theia/userstorage/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { JSONObject } from '@theia/core/shared/@lumino/coreutils';
-import { taskSchemaId } from '../common/task-preferences';
+import { postConstruct, injectable, inject } from 'inversify';
+import { JsonSchemaContribution, JsonSchemaDataStore, JsonSchemaRegisterContext } from '@theia/core/lib/browser/json-schema-store.js';
+import { deepClone, Emitter, nls } from '@theia/core/lib/common/index.js';
+import { IJSONSchema } from '@theia/core/lib/common/json-schema.js';
+import { inputsSchema } from '@theia/variable-resolver/lib/browser/variable-input-schema.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ProblemMatcherRegistry } from './task-problem-matcher-registry.js';
+import { TaskDefinitionRegistry } from './task-definition-registry.js';
+import { TaskServer, asVariableName } from '../common/index.js';
+import { UserStorageUri } from '@theia/userstorage/lib/browser/index.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { JSONObject } from '@lumino/coreutils';
+import { taskSchemaId } from '../common/task-preferences.js';
 
 @injectable()
 export class TaskSchemaUpdater implements JsonSchemaContribution {

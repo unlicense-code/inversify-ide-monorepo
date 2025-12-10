@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,17 +15,17 @@
 // *****************************************************************************
 
 import { nls } from '@theia/core';
-import * as React from '@theia/core/shared/react';
-import { codicon } from '@theia/core/lib/browser';
-import debounce = require('@theia/core/shared/lodash.debounce');
+import * as React from 'react';
+import { codicon } from '@theia/core/lib/browser/index.js';
+import debounce from  'lodash/debounce.js'
 
-export interface NotebookEditorFindMatch {
+export type NotebookEditorFindMatch = {
     selected: boolean;
     show(): void;
     replace?(value: string): void;
 }
 
-export interface NotebookEditorFindMatchOptions {
+export type NotebookEditorFindMatchOptions = {
     search: string;
     matchCase: boolean;
     wholeWord: boolean;
@@ -33,13 +33,13 @@ export interface NotebookEditorFindMatchOptions {
     activeFilters: string[];
 }
 
-export interface NotebookEditorFindFilter {
+export type NotebookEditorFindFilter = {
     id: string;
     label: string;
     active: boolean;
 }
 
-export interface NotebookEditorFindOptions {
+export type NotebookEditorFindOptions = {
     search?: string;
     jumpToMatch?: boolean;
     matchCase?: boolean;
@@ -48,7 +48,7 @@ export interface NotebookEditorFindOptions {
     modifyIndex?: (matches: NotebookEditorFindMatch[], index: number) => number;
 }
 
-export interface NotebookFindWidgetProps {
+export type NotebookFindWidgetProps = {
     hidden?: boolean;
     filters?: NotebookEditorFindFilter[];
     onClose(): void;
@@ -56,7 +56,7 @@ export interface NotebookFindWidgetProps {
     onReplace(matches: NotebookEditorFindMatch[], value: string): void;
 }
 
-export interface NotebookFindWidgetState {
+export type NotebookFindWidgetState = {
     search: string;
     replace: string;
     expanded: boolean;

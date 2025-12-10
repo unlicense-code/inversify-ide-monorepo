@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as yargs from '@theia/core/shared/yargs';
+import * as yargs from 'yargs';
 import { RpcProxyFactory } from '@theia/core';
-import { FileSystemWatcherServiceClient } from '../../common/filesystem-watcher-protocol';
-import { ParcelFileSystemWatcherService } from './parcel-filesystem-service';
-import { IPCEntryPoint } from '@theia/core/lib/node/messaging/ipc-protocol';
+import { FileSystemWatcherServiceClient } from '../../common/filesystem-watcher-protocol.js';
+import { ParcelFileSystemWatcherService } from './parcel-filesystem-service.js';
+import { IPCEntryPoint } from '@theia/core/lib/node/index.js';
+import type { Channel } from '@theia/core';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -37,7 +38,7 @@ const options: {
     })
     .argv as any;
 
-export default <IPCEntryPoint>(connection => {
+export default <IPCEntryPoint>((connection: Channel) => {
     const server = new ParcelFileSystemWatcherService(options);
     const factory = new RpcProxyFactory<FileSystemWatcherServiceClient>(server);
     server.setClient(factory.createProxy());

@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule, interfaces } from '@theia/core/shared/inversify';
-import { BrowserOnlyWorkspaceServer } from './browser-only-workspace-server';
-import { WorkspaceServer } from '../common';
+import { ContainerModule, interfaces } from 'inversify';
+import { BrowserOnlyWorkspaceServer } from './browser-only-workspace-server.js';
+import { WorkspaceServer } from '../common/index.js';
 
 export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Unbind, isBound: interfaces.IsBound, rebind: interfaces.Rebind) => {
     bind(BrowserOnlyWorkspaceServer).toSelf().inSingletonScope();

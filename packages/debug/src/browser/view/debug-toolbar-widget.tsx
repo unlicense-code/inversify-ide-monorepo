@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { inject, postConstruct, injectable } from '@theia/core/shared/inversify';
+import * as React from 'react';
+import { inject, postConstruct, injectable } from 'inversify';
 import { CommandMenu, CommandRegistry, CompoundMenuNode, Disposable, DisposableCollection, MenuModelRegistry, MenuPath } from '@theia/core';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { ReactWidget } from '@theia/core/lib/browser/widgets';
-import { DebugViewModel } from './debug-view-model';
-import { DebugState } from '../debug-session';
-import { DebugAction } from './debug-action';
-import { nls } from '@theia/core/lib/common/nls';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { ReactWidget } from '@theia/core/lib/browser/widgets/react-widget.js';
+import { DebugViewModel } from './debug-view-model.js';
+import { DebugState } from '../debug-session.js';
+import { DebugAction } from './debug-action.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 @injectable()
 export class DebugToolBar extends ReactWidget {

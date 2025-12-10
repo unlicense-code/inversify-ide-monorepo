@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 import { Command, CommandContribution, CommandRegistry, CommandService, isObject, MenuContribution, MenuModelRegistry } from '@theia/core';
-import { CommonCommands, TreeNode } from '@theia/core/lib/browser';
-import { ClipboardService } from '@theia/core/lib/browser/clipboard-service';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { CommonCommands, TreeNode } from '@theia/core/lib/browser/index.js';
+import { ClipboardService } from '@theia/core/lib/browser/clipboard-service.js';
+import { inject, injectable } from 'inversify';
 import {
     ChatViewTreeWidget, isEditableRequestNode, isRequestNode,
     isResponseNode, RequestNode, ResponseNode, type EditableRequestNode
-} from './chat-tree-view/chat-view-tree-widget';
-import { AIChatInputWidget } from './chat-input-widget';
+} from './chat-tree-view/chat-view-tree-widget.js';
+import { AIChatInputWidget } from './chat-input-widget.js';
 import { AICommandHandlerFactory, ENABLE_AI_CONTEXT_KEY } from '@theia/ai-core/lib/browser';
 
 export namespace ChatViewCommands {

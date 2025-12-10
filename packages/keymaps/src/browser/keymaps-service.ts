@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { OpenerService, open, WidgetOpenerOptions, Widget } from '@theia/core/lib/browser';
-import { KeybindingRegistry, KeybindingScope, ScopedKeybinding } from '@theia/core/lib/browser/keybinding';
-import { Keybinding, RawKeybinding } from '@theia/core/lib/common/keybinding';
-import { UserStorageUri } from '@theia/userstorage/lib/browser';
+import { inject, injectable, postConstruct } from 'inversify';
+import { OpenerService, open, WidgetOpenerOptions, Widget } from '@theia/core/lib/browser/index.js';
+import { KeybindingRegistry, KeybindingScope, ScopedKeybinding } from '@theia/core/lib/browser/keybinding.js';
+import { Keybinding, RawKeybinding } from '@theia/core/lib/common/keybinding.js';
+import { UserStorageUri } from '@theia/userstorage/lib/browser/index.js';
 import * as jsoncparser from 'jsonc-parser';
-import { Emitter } from '@theia/core/lib/common/event';
-import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service';
-import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import URI from '@theia/core/lib/common/uri';
-import { MonacoWorkspace } from '@theia/monaco/lib/browser/monaco-workspace';
-import { MessageService } from '@theia/core/lib/common/message-service';
-import { MonacoJSONCEditor } from '@theia/preferences/lib/browser/monaco-jsonc-editor';
+import { Emitter } from '@theia/core/lib/common/event.js';
+import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service.js';
+import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { MonacoWorkspace } from '@theia/monaco/lib/browser/monaco-workspace.js';
+import { MessageService } from '@theia/core/lib/common/message-service.js';
+import { MonacoJSONCEditor } from '@theia/preferences/lib/browser/monaco-jsonc-editor.js';
 
 @injectable()
 export class KeymapsService {

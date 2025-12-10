@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,6 +14,6 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { TerminalContribution } from './terminal-widget-impl';
+import { TerminalContribution } from './terminal-widget-impl.js';
 /** @deprecated @since 1.28.0 import from `terminal-widget-impl` instead. */
 export { TerminalContribution };

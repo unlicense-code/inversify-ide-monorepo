@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,13 +16,13 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { injectable } from '@theia/core/shared/inversify';
-import { generateUuid } from '@theia/core/lib/common/uuid';
-import URI from '@theia/core/lib/common/uri';
-import { Location } from '@theia/editor/lib/browser/editor';
-import { TreeDecoration, DecoratedTreeNode } from '@theia/core/lib/browser/tree/tree-decorator';
-import { TreeImpl, TreeNode, CompositeTreeNode, ExpandableTreeNode, SelectableTreeNode } from '@theia/core/lib/browser/tree';
-import { TypeHierarchyProvider, TypeHierarchyDirection, ResolveTypeHierarchyItemParams, TypeHierarchyItem } from '../typehierarchy-provider';
+import { injectable } from 'inversify';
+import { generateUuid } from '@theia/core/lib/common/uuid.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Location } from '@theia/editor/lib/browser/editor.js';
+import { TreeDecoration, DecoratedTreeNode } from '@theia/core/lib/browser/tree/tree-decorator.js';
+import { TreeImpl, TreeNode, CompositeTreeNode, ExpandableTreeNode, SelectableTreeNode } from '@theia/core/lib/browser/tree/index.js';
+import { TypeHierarchyProvider, TypeHierarchyDirection, ResolveTypeHierarchyItemParams, TypeHierarchyItem } from '../typehierarchy-provider.js';
 
 @injectable()
 export class TypeHierarchyTree extends TreeImpl {

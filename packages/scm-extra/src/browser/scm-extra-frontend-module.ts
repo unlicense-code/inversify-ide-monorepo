@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { bindScmHistoryModule } from './history/scm-history-frontend-module';
-import { ScmFileChangeLabelProvider } from './scm-file-change-label-provider';
-import { LabelProviderContribution } from '@theia/core/lib/browser';
+import { ContainerModule } from 'inversify';
+import { bindScmHistoryModule } from './history/scm-history-frontend-module.js';
+import { ScmFileChangeLabelProvider } from './scm-file-change-label-provider.js';
+import { LabelProviderContribution } from '@theia/core/lib/browser/index.js';
 
 export default new ContainerModule(bind => {
     bindScmHistoryModule(bind);

@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { AIContextVariable, AIVariableService } from '@theia/ai-core';
+import { AIContextVariable, AIVariableService } from '@theia/ai-core/lib/common/index.js';
 import { Command, CommandContribution, CommandRegistry } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { ChatService } from '../common';
+import { inject, injectable } from 'inversify';
+import { ChatService } from '../common/index.js';
 
 export const VARIABLE_ADD_CONTEXT_COMMAND: Command = Command.toLocalizedCommand({
     id: 'add-context-variable',

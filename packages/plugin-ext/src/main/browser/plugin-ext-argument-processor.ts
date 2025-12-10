@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Widget } from '@theia/core/lib/browser';
-import { injectable } from '@theia/core/shared/inversify';
-import { ArgumentProcessor } from '../../common/commands';
+import { Widget } from '@theia/core/lib/browser/index.js';
+import { injectable } from 'inversify';
+import { ArgumentProcessor } from '../../common/commands.js';
 
 /**
  * This processor handles arguments passed to commands that are contributed by plugins and available as toolbar items.

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, optional } from '@theia/core/shared/inversify';
+import { inject, injectable, optional } from 'inversify';
 import {
     codiconArray,
     QuickAccessContribution,
     QuickAccessProvider,
     QuickAccessRegistry,
     QuickInputService
-} from '@theia/core/lib/browser';
-import { CancellationToken, CommandContribution, CommandRegistry, CommandService, nls } from '@theia/core/lib/common';
-import { TerminalWidget } from './base/terminal-widget';
-import { TerminalService } from './base/terminal-service';
-import { TerminalCommands } from './terminal-frontend-contribution';
-import { filterItems, QuickPickItem, QuickPicks } from '@theia/core/lib/browser/quick-input/quick-input-service';
+} from '@theia/core/lib/browser/index.js';
+import { CancellationToken, CommandContribution, CommandRegistry, CommandService, nls } from '@theia/core/lib/common/index.js';
+import { TerminalWidget } from './base/terminal-widget.js';
+import { TerminalService } from './base/terminal-service.js';
+import { TerminalCommands } from './terminal-frontend-contribution.js';
+import { filterItems, QuickPickItem, QuickPicks } from '@theia/core/lib/browser/quick-input/quick-input-service.js';
 
 @injectable()
 export class TerminalQuickOpenService implements QuickAccessProvider {

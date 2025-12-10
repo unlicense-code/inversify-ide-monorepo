@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { LabelProviderContribution, LabelProvider } from '@theia/core/lib/browser/label-provider';
-import { TreeNode } from '@theia/core/lib/browser/tree';
-import { ScmFileChangeFolderNode, ScmFileChangeNode, ScmFileChangeGroupNode } from './scm-tree-model';
+import { inject, injectable } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { LabelProviderContribution, LabelProvider } from '@theia/core/lib/browser/label-provider.js';
+import { TreeNode } from '@theia/core/lib/browser/tree/index.js';
+import { ScmFileChangeFolderNode, ScmFileChangeNode, ScmFileChangeGroupNode } from './scm-tree-model.js';
 
 @injectable()
 export class ScmTreeLabelProvider implements LabelProviderContribution {

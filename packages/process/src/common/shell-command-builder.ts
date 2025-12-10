@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -21,17 +21,17 @@
 
 /* eslint-disable no-null/no-null */
 
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable } from 'inversify';
 import {
     createShellCommandLine, BashQuotingFunctions, PowershellQuotingFunctions, CmdQuotingFunctions, ShellQuoting, ShellQuotedString, escapeForShell, ShellQuotingFunctions
-} from '../common/shell-quoting';
+} from '../common/shell-quoting.js';
 
-export interface ProcessInfo {
+export type ProcessInfo = {
     executable: string
     arguments: string[]
 }
 
-export interface CommandLineOptions {
+export type CommandLineOptions = {
     cwd: string
     args: string[]
     env?: {

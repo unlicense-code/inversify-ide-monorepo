@@ -1,6 +1,7 @@
 {
   "name": "@theia/ai-mcp",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - MCP Integration",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.15.1",

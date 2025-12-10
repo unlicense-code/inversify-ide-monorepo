@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,37 +17,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { JSONObject, JSONValue } from '@lumino/coreutils';
-import { IJSONSchema } from '../json-schema';
-import { PreferenceScope } from './preference-scope';
-import { Event } from '../event';
-import { Disposable } from '../disposable';
+import { IJSONSchema } from '../json-schema.js';
+import { PreferenceScope } from './preference-scope.js';
+import { Event } from '../event.js';
+import { Disposable } from '../disposable.js';
 
 export const PreferenceContribution = Symbol('PreferenceContribution');
-/**
- * A {@link PreferenceContribution} allows adding additional custom preferences.
- * For this, the {@link PreferenceContribution} has to provide a valid `PrefernceSchema` specifying which preferences
- * are available including their types and description.
- *
- * ### Example usage
- * ```typescript
- * const MyPreferencesSchema: PreferenceSchema = {
- *     'scope': PreferenceScope.Folder,
- *     'properties': {
- *         'myext.decorations.enabled': {
- *             'type': 'boolean',
- *             'description': 'Show file status',
- *             'default': true
- *         },
- *         // [...]
- *     }
- * }
- * @injectable()
- * export class MyPreferenceContribution implements PreferenceContribution{
- *     schema= MyPreferencesSchema;
- * }
- * ```
- */
-export interface PreferenceContribution {
+export type PreferenceContribution = {
     readonly schema?: PreferenceSchema;
     /**
      * Allows to do additional intialisation of the preference schema, for example registering overrides
@@ -56,11 +32,11 @@ export interface PreferenceContribution {
     initSchema?(service: PreferenceSchemaService): Promise<void>
 }
 
-export interface IndexedAccess<T> {
+export type IndexedAccess<T> = {
     [name: string]: T;
 }
 
-export interface PreferenceSchema {
+export type PreferenceSchema = {
     /** The default scope for properties in this schema */
     scope?: PreferenceScope,
     /** Optional title to be used in UI */
@@ -70,7 +46,7 @@ export interface PreferenceSchema {
     properties: IndexedAccess<PreferenceDataProperty>;
 }
 
-export interface PreferenceDataProperty extends IJSONSchema {
+export type PreferenceDataProperty = IJSONSchema & {
     /**
      * Whether distinct values can be defined for language override identifers. E.g. values valid when editing typescript files vs.
      * when editing Java files
@@ -88,7 +64,7 @@ export interface PreferenceDataProperty extends IJSONSchema {
     tags?: string[]
 }
 
-export interface DefaultValueChangedEvent {
+export type DefaultValueChangedEvent = {
     /** The preference key */
     key: string;
     /** The override identifier that the default changed for */
@@ -103,7 +79,7 @@ export interface DefaultValueChangedEvent {
 
 export const PreferenceSchemaService = Symbol('PreferenceSchemaService');
 
-export interface PreferenceSchemaService {
+export type PreferenceSchemaService = {
     /**
      * Resolves after static contributions have been processed
      */

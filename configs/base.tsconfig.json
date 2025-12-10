@@ -15,16 +15,15 @@
     "importHelpers": true,
     "downlevelIteration": true,
     "resolveJsonModule": true,
-    "module": "CommonJS",
-    "moduleResolution": "Node",
-    "target": "ES2019",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ESNext",
     "jsx": "react",
     "lib": [
-      "ES2019",
-      "ES2020.Promise",
+      "ESNext",
       "DOM",
       "DOM.AsyncIterable"
     ],
-    "sourceMap": true
+    "sourceMap": false
   }
 }

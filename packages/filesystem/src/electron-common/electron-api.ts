@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-export interface FileFilter {
+export type FileFilter = {
     name: string;
     extensions: string[];
 }
 
-export interface OpenDialogOptions {
+export type OpenDialogOptions = {
     title?: string,
     maxWidth?: number,
     path: string,
@@ -31,7 +31,7 @@ export interface OpenDialogOptions {
     filters?: FileFilter[];
 }
 
-export interface SaveDialogOptions {
+export type SaveDialogOptions = {
     title?: string,
     maxWidth?: number,
     path: string,
@@ -40,7 +40,7 @@ export interface SaveDialogOptions {
     filters?: FileFilter[];
 }
 
-export interface TheiaFilesystemAPI {
+export type TheiaFilesystemAPI = {
     showOpenDialog(options: OpenDialogOptions): Promise<string[] | undefined>;
     showSaveDialog(options: SaveDialogOptions): Promise<string | undefined>;
 }

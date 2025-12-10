@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { DebugProtocol } from '@vscode/debugprotocol/lib/debugProtocol';
+import * as React from 'react';
+import { DebugProtocol } from '@vscode/debugprotocol/lib/debugProtocol.js';
 import { nls, RecursivePartial } from '@theia/core';
-import URI from '@theia/core/lib/common/uri';
-import { EditorWidget, Range } from '@theia/editor/lib/browser';
-import { TREE_NODE_INFO_CLASS, WidgetOpenerOptions } from '@theia/core/lib/browser';
-import { TreeElement } from '@theia/core/lib/browser/source-tree';
-import { SourceBreakpoint } from '../breakpoint/breakpoint-marker';
-import { DebugSource } from './debug-source';
-import { DebugBreakpoint, DebugBreakpointOptions, DebugBreakpointData, DebugBreakpointDecoration } from './debug-breakpoint';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { EditorWidget, Range } from '@theia/editor/lib/browser/index.js';
+import { TREE_NODE_INFO_CLASS, WidgetOpenerOptions } from '@theia/core/lib/browser/index.js';
+import { TreeElement } from '@theia/core/lib/browser/source-tree/tree-source.js';
+import { SourceBreakpoint } from '../breakpoint/breakpoint-marker.js';
+import { DebugSource } from './debug-source.js';
+import { DebugBreakpoint, DebugBreakpointOptions, DebugBreakpointData, DebugBreakpointDecoration } from './debug-breakpoint.js';
 
 export class DebugSourceBreakpointData extends DebugBreakpointData {
     readonly origins: SourceBreakpoint[];

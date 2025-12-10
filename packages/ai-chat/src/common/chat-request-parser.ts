@@ -19,10 +19,10 @@
  *--------------------------------------------------------------------------------------------*/
 // Partially copied from https://github.com/microsoft/vscode/blob/a2cab7255c0df424027be05d58e1b7b941f4ea60/src/vs/workbench/contrib/chat/common/chatRequestParser.ts
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { ChatAgentService } from './chat-agent-service';
-import { ChatAgentLocation } from './chat-agents';
-import { ChatContext, ChatRequest } from './chat-model';
+import { inject, injectable } from 'inversify';
+import { ChatAgentService } from './chat-agent-service.js';
+import { ChatAgentLocation } from './chat-agents.js';
+import { ChatContext, ChatRequest } from './chat-model.js';
 import {
     chatAgentLeader,
     chatFunctionLeader,
@@ -35,8 +35,8 @@ import {
     OffsetRange,
     ParsedChatRequest,
     ParsedChatRequestPart,
-} from './parsed-chat-request';
-import { AIVariable, AIVariableService, createAIResolveVariableCache, getAllResolvedAIVariables, ToolInvocationRegistry, ToolRequest } from '@theia/ai-core';
+} from './parsed-chat-request.js';
+import { AIVariable, AIVariableService, createAIResolveVariableCache, getAllResolvedAIVariables, ToolInvocationRegistry, ToolRequest } from '@theia/ai-core/lib/common/index.js';
 import { ILogger } from '@theia/core';
 
 const agentReg = /^@([\w_\-\.]+)(?=(\s|$|\b))/i; // An @-agent
@@ -46,7 +46,7 @@ const variableReg = /^#([\w_\-]+)(?::([\w_\-_\/\\.:]+))?(?=(\s|$|\b))/i; // A #-
 const commandReg = /^\/([\w_\-]+)(?:\s+(.+?))?(?=\s*$)/; // A /-command with optional arguments (/commandname arg1 arg2)
 
 export const ChatRequestParser = Symbol('ChatRequestParser');
-export interface ChatRequestParser {
+export type ChatRequestParser = {
     parseChatRequest(request: ChatRequest, location: ChatAgentLocation, context: ChatContext): Promise<ParsedChatRequest>;
 }
 

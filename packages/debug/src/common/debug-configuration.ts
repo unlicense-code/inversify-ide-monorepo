@@ -13,14 +13,11 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { isObject } from '@theia/core/lib/common';
-import { TaskIdentifier } from '@theia/task/lib/common';
+import { isObject } from '@theia/core/lib/common/index.js';
+import { TaskIdentifier } from '@theia/task/lib/common/index.js';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-/**
- * Configuration for a debug adapter session.
- */
-export interface DebugConfiguration {
+export type DebugConfiguration = {
     /**
      * The type of the debug adapter session.
      */
@@ -94,7 +91,7 @@ export namespace DebugConfiguration {
     }
 }
 
-export interface DebugSessionOptions {
+export type DebugSessionOptions = {
     lifecycleManagedByParent?: boolean;
     parentSessionId?: string;
     consoleMode?: DebugConsoleMode;

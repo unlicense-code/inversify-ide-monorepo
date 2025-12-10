@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { FrontendApplicationContribution, FrontendApplication, TreeNode } from '@theia/core/lib/browser';
-import { Range, EditorManager, EditorOpenerOptions } from '@theia/editor/lib/browser';
+import { injectable, inject } from 'inversify';
+import { FrontendApplicationContribution, FrontendApplication, TreeNode } from '@theia/core/lib/browser/index.js';
+import { Range, EditorManager, EditorOpenerOptions } from '@theia/editor/lib/browser/index.js';
 import { DisposableCollection, Disposable } from '@theia/core';
-import { OutlineViewService } from '@theia/outline-view/lib/browser/outline-view-service';
-import { OutlineSymbolInformationNode } from '@theia/outline-view/lib/browser/outline-view-widget';
-import URI from '@theia/core/lib/common/uri';
-import { MonacoEditor } from './monaco-editor';
-import debounce = require('@theia/core/shared/lodash.debounce');
+import { OutlineViewService } from '@theia/outline-view/lib/browser/outline-view-service.js';
+import { OutlineSymbolInformationNode } from '@theia/outline-view/lib/browser/outline-view-widget.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { MonacoEditor } from './monaco-editor.js';
+import debounce from  'lodash/debounce.js'
 import * as monaco from '@theia/monaco-editor-core';
-import { ILanguageFeaturesService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/languageFeatures';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { ITextModel } from '@theia/monaco-editor-core/esm/vs/editor/common/model';
-import { DocumentSymbol } from '@theia/monaco-editor-core/esm/vs/editor/common/languages';
+import { ILanguageFeaturesService } from '@theia/monaco-editor-core/esm/vs/editor/common/services/languageFeatures.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { ITextModel } from '@theia/monaco-editor-core/esm/vs/editor/common/model.js';
+import { DocumentSymbol } from '@theia/monaco-editor-core/esm/vs/editor/common/languages.js';
 
 @injectable()
 export class MonacoOutlineContribution implements FrontendApplicationContribution {
@@ -365,7 +365,7 @@ export namespace MonacoOutlineContribution {
     }
 }
 
-export interface MonacoOutlineSymbolInformationNode extends OutlineSymbolInformationNode {
+export type MonacoOutlineSymbolInformationNode = OutlineSymbolInformationNode & {
     uri: URI;
     range: Range;
     fullRange: Range;

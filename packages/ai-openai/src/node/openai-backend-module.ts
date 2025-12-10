@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { OPENAI_LANGUAGE_MODELS_MANAGER_PATH, OpenAiLanguageModelsManager } from '../common/openai-language-models-manager';
+import { ContainerModule } from 'inversify';
+import { OPENAI_LANGUAGE_MODELS_MANAGER_PATH, OpenAiLanguageModelsManager } from '../common/openai-language-models-manager.js';
 import { ConnectionHandler, PreferenceContribution, RpcConnectionHandler } from '@theia/core';
-import { OpenAiLanguageModelsManagerImpl } from './openai-language-models-manager-impl';
-import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module';
-import { OpenAiModelUtils } from './openai-language-model';
-import { OpenAiResponseApiUtils } from './openai-response-api-utils';
-import { OpenAiPreferencesSchema } from '../common/openai-preferences';
+import { OpenAiLanguageModelsManagerImpl } from './openai-language-models-manager-impl.js';
+import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module.js';
+import { OpenAiModelUtils } from './openai-language-model.js';
+import { OpenAiResponseApiUtils } from './openai-response-api-utils.js';
+import { OpenAiPreferencesSchema } from '../common/openai-preferences.js';
 
 export const OpenAiModelFactory = Symbol('OpenAiModelFactory');
 

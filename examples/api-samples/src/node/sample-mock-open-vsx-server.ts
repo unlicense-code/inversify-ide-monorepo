@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { BackendApplicationContribution } from '@theia/core/lib/node';
-import * as express from '@theia/core/shared/express';
+import { BackendApplicationContribution } from '@theia/core/lib/node/index.js';
+import * as express from 'express';
 import * as fs from 'fs';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import { OVSXMockClient, VSXExtensionRaw } from '@theia/ovsx-client';
 import * as path from 'path';
-import { SampleAppInfo } from '../common/vsx/sample-app-info';
+import { SampleAppInfo } from '../common/vsx/sample-app-info.js';
 import * as http from 'http';
 import * as https from 'https';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
 
 type VersionedId = `${string}.${string}@${string}`;
 

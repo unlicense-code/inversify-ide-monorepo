@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,31 +16,31 @@
 
 import { injectable, inject, named, postConstruct } from 'inversify';
 import { TextDocumentContentChangeEvent } from 'vscode-languageserver-protocol';
-import URI from '../common/uri';
-import { ContributionProvider } from './contribution-provider';
-import { Event, Emitter } from './event';
-import { Disposable } from './disposable';
-import { MaybePromise } from './types';
-import { CancellationToken } from './cancellation';
-import { ApplicationError } from './application-error';
-import { ReadableStream, Readable } from './stream';
-import { SyncReferenceCollection, Reference } from './reference';
-import { MarkdownString } from './markdown-rendering';
+import URI from '../common/uri.js';
+import { ContributionProvider } from './contribution-provider.js';
+import { Event, Emitter } from './event.js';
+import { Disposable } from './disposable.js';
+import { MaybePromise } from './types.js';
+import { CancellationToken } from './cancellation.js';
+import { ApplicationError } from './application-error.js';
+import { ReadableStream, Readable } from './stream.js';
+import { SyncReferenceCollection, Reference } from './reference.js';
+import { MarkdownString } from './markdown-rendering/index.js';
 
-export interface ResourceVersion {
+export type ResourceVersion = {
 }
 
-export interface ResourceReadOptions {
+export type ResourceReadOptions = {
     encoding?: string
 }
 
-export interface ResourceSaveOptions {
+export type ResourceSaveOptions = {
     encoding?: string
     overwriteEncoding?: boolean
     version?: ResourceVersion
 }
 
-export interface Resource extends Disposable {
+export type Resource = Disposable & {
     readonly uri: URI;
     /**
      * Latest read version of this resource.
@@ -179,7 +179,7 @@ export namespace ResourceError {
 }
 
 export const ResourceResolver = Symbol('ResourceResolver');
-export interface ResourceResolver {
+export type ResourceResolver = {
     /**
      * Resolvers will be ordered by descending priority.
      * Default: 0

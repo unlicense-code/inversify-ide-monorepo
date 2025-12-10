@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { nls } from '@theia/core';
-import { PreferenceSchema } from '@theia/core/lib/common';
+import { PreferenceSchema } from '@theia/core/lib/common/index.js';
 
 /**
  * These preferences are not intended to reflect real settings.

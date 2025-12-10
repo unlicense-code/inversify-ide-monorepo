@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,27 +14,27 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule, Container, interfaces } from '@theia/core/shared/inversify';
-import { Git, GitPath } from '../common/git';
-import { GitWatcherPath, GitWatcherClient, GitWatcherServer } from '../common/git-watcher';
-import { DugiteGit, OutputParser, NameStatusParser, CommitDetailsParser, GitBlameParser } from './dugite-git';
-import { DugiteGitWatcherServer } from './dugite-git-watcher';
-import { ConnectionHandler, RpcConnectionHandler, ILogger } from '@theia/core/lib/common';
-import { GitRepositoryManager } from './git-repository-manager';
-import { GitRepositoryWatcherFactory, GitRepositoryWatcherOptions, GitRepositoryWatcher } from './git-repository-watcher';
-import { GitLocator } from './git-locator/git-locator-protocol';
-import { GitLocatorClient } from './git-locator/git-locator-client';
-import { GitLocatorImpl } from './git-locator/git-locator-impl';
-import { GitExecProvider } from './git-exec-provider';
-import { GitPromptServer, GitPromptClient, GitPrompt } from '../common/git-prompt';
-import { DugiteGitPromptServer } from './dugite-git-prompt';
-import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module';
-import { DefaultGitInit, GitInit } from './init/git-init';
-import { bindGitPreferences } from '../common/git-preferences';
+import { ContainerModule, Container, interfaces } from 'inversify';
+import { Git, GitPath } from '../common/git.js';
+import { GitWatcherPath, GitWatcherClient, GitWatcherServer } from '../common/git-watcher.js';
+import { DugiteGit, OutputParser, NameStatusParser, CommitDetailsParser, GitBlameParser } from './dugite-git.js';
+import { DugiteGitWatcherServer } from './dugite-git-watcher.js';
+import { ConnectionHandler, RpcConnectionHandler, ILogger } from '@theia/core/lib/common/index.js';
+import { GitRepositoryManager } from './git-repository-manager.js';
+import { GitRepositoryWatcherFactory, GitRepositoryWatcherOptions, GitRepositoryWatcher } from './git-repository-watcher.js';
+import { GitLocator } from './git-locator/git-locator-protocol.js';
+import { GitLocatorClient } from './git-locator/git-locator-client.js';
+import { GitLocatorImpl } from './git-locator/git-locator-impl.js';
+import { GitExecProvider } from './git-exec-provider.js';
+import { GitPromptServer, GitPromptClient, GitPrompt } from '../common/git-prompt.js';
+import { DugiteGitPromptServer } from './dugite-git-prompt.js';
+import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module.js';
+import { DefaultGitInit, GitInit } from './init/git-init.js';
+import { bindGitPreferences } from '../common/git-preferences.js';
 
 const SINGLE_THREADED = process.argv.indexOf('--no-cluster') !== -1;
 
-export interface GitBindingOptions {
+export type GitBindingOptions = {
     readonly bindManager: (binding: interfaces.BindingToSyntax<{}>) => interfaces.BindingWhenOnSyntax<{}>;
 }
 

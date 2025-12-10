@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { AIVariable, AIVariableContext, AIVariableContribution, AIVariableResolutionRequest, AIVariableResolver, ResolvedAIContextVariable } from '@theia/ai-core';
+import { AIVariable, AIVariableContext, AIVariableContribution, AIVariableResolutionRequest, AIVariableResolver, ResolvedAIContextVariable } from '@theia/ai-core/lib/common/index.js';
 import { FrontendVariableService } from '@theia/ai-core/lib/browser';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { codiconArray } from '@theia/core/lib/browser';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
-import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
+import { inject, injectable } from 'inversify';
+import { codiconArray } from '@theia/core/lib/browser/index.js';
+import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor.js';
+import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
 import * as monaco from '@theia/monaco-editor-core';
 import { nls } from '@theia/core';
 

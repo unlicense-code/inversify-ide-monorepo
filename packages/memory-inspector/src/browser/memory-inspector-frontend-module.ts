@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2019 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,30 +18,30 @@ import '../../src/browser/register-widget/register-widget.css';
 import '../../src/browser/style/index.css';
 import '../../src/browser/utils/multi-select-bar.css';
 import { bindContributionProvider } from '@theia/core';
-import { bindViewContribution, FrontendApplicationContribution, WidgetFactory } from '@theia/core/lib/browser';
-import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution';
-import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { DebugFrontendContribution } from './memory-inspector-frontend-contribution';
-import { MemoryDiffOptionsWidget } from './diff-widget/memory-diff-options-widget';
-import { MemoryDiffSelectWidget } from './diff-widget/memory-diff-select-widget';
-import { MemoryDiffTableWidget, MemoryDiffWidget } from './diff-widget/memory-diff-table-widget';
-import { EditableMemoryWidget, MemoryEditableTableWidget } from './editable-widget/memory-editable-table-widget';
-import { DefaultMemoryProvider, MemoryProvider } from './memory-provider/memory-provider';
-import { MemoryProviderService } from './memory-provider/memory-provider-service';
-import { MemoryOptionsWidget } from './memory-widget/memory-options-widget';
-import { MemoryTableWidget } from './memory-widget/memory-table-widget';
-import { MemoryWidget } from './memory-widget/memory-widget';
-import { RegisterOptionsWidget } from './register-widget/register-options-widget';
-import { RegisterTableWidget } from './register-widget/register-table-widget';
-import { RegisterWidget } from './register-widget/register-widget-types';
-import { MemoryHoverRendererService } from './utils/memory-hover-renderer';
-import { MemoryWidgetManager } from './utils/memory-widget-manager';
-import { MemoryDiffWidgetData, MemoryWidgetOptions, RegisterWidgetOptions } from './utils/memory-widget-utils';
-import { MemoryDockPanel } from './wrapper-widgets/memory-dock-panel';
-import { MemoryDockpanelPlaceholder } from './wrapper-widgets/memory-dockpanel-placeholder-widget';
-import { MemoryLayoutWidget } from './wrapper-widgets/memory-layout-widget';
-import { CDTGDBMemoryProvider } from './memory-provider/cdt-gdb-memory-provider';
+import { bindViewContribution, FrontendApplicationContribution, WidgetFactory } from '@theia/core/lib/browser/index.js';
+import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution.js';
+import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { ContainerModule } from 'inversify';
+import { DebugFrontendContribution } from './memory-inspector-frontend-contribution.js';
+import { MemoryDiffOptionsWidget } from './diff-widget/memory-diff-options-widget.js';
+import { MemoryDiffSelectWidget } from './diff-widget/memory-diff-select-widget.js';
+import { MemoryDiffTableWidget, MemoryDiffWidget } from './diff-widget/memory-diff-table-widget.js';
+import { EditableMemoryWidget, MemoryEditableTableWidget } from './editable-widget/memory-editable-table-widget.js';
+import { DefaultMemoryProvider, MemoryProvider } from './memory-provider/memory-provider.js';
+import { MemoryProviderService } from './memory-provider/memory-provider-service.js';
+import { MemoryOptionsWidget } from './memory-widget/memory-options-widget.js';
+import { MemoryTableWidget } from './memory-widget/memory-table-widget.js';
+import { MemoryWidget } from './memory-widget/memory-widget.js';
+import { RegisterOptionsWidget } from './register-widget/register-options-widget.js';
+import { RegisterTableWidget } from './register-widget/register-table-widget.js';
+import { RegisterWidget } from './register-widget/register-widget-types.js';
+import { MemoryHoverRendererService } from './utils/memory-hover-renderer.js';
+import { MemoryWidgetManager } from './utils/memory-widget-manager.js';
+import { MemoryDiffWidgetData, MemoryWidgetOptions, RegisterWidgetOptions } from './utils/memory-widget-utils.js';
+import { MemoryDockPanel } from './wrapper-widgets/memory-dock-panel.js';
+import { MemoryDockpanelPlaceholder } from './wrapper-widgets/memory-dockpanel-placeholder-widget.js';
+import { MemoryLayoutWidget } from './wrapper-widgets/memory-layout-widget.js';
+import { CDTGDBMemoryProvider } from './memory-provider/cdt-gdb-memory-provider.js';
 
 export default new ContainerModule(bind => {
     bindViewContribution(bind, DebugFrontendContribution);

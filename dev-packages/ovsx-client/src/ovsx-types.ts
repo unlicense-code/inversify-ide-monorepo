@@ -16,7 +16,7 @@
 
 import { MaybePromise } from './types';
 
-export interface ExtensionLike {
+export type ExtensionLike = {
     name: string;
     namespace: string;
     version?: string;
@@ -43,7 +43,7 @@ export namespace ExtensionLike {
     }
 }
 
-export interface OVSXClient {
+export type OVSXClient = {
     /**
      * GET https://openvsx.org/api/-/search
      */
@@ -58,14 +58,7 @@ export interface OVSXClient {
 
 /** @deprecated since 1.31.0 use {@link VSXSearchOptions} instead */
 export type VSXSearchParam = VSXSearchOptions;
-/**
- * The possible options when performing a search.
- *
- * For available options, and default values consult the `swagger`: https://open-vsx.org/swagger-ui/index.html.
- *
- * Should be aligned with https://github.com/eclipse/openvsx/blob/b5694a712e07d266801394916bac30609e16d77b/server/src/main/java/org/eclipse/openvsx/RegistryAPI.java#L246-L266
- */
-export interface VSXSearchOptions {
+export type VSXSearchOptions = {
     /**
      * The query text for searching.
      */
@@ -101,22 +94,12 @@ export interface VSXSearchOptions {
     includeAllVersions?: boolean;
 }
 
-/**
- * Should be aligned with https://github.com/eclipse/openvsx/blob/e8f64fe145fc05d2de1469735d50a7a90e400bc4/server/src/main/java/org/eclipse/openvsx/json/SearchResultJson.java
- */
-export interface VSXSearchResult {
+export type VSXSearchResult = {
     offset: number;
     extensions: VSXSearchEntry[];
 }
 
-/**
- * The possible options when performing a search.
- *
- * For available options, and default values consult the `swagger`: https://open-vsx.org/swagger-ui/index.html.
- *
- * Should be aligned with https://github.com/eclipse/openvsx/blob/b5694a712e07d266801394916bac30609e16d77b/server/src/main/java/org/eclipse/openvsx/json/QueryParamJson.java#L18-L46
- */
-export interface VSXQueryOptions {
+export type VSXQueryOptions = {
     namespaceName?: string;
     extensionName?: string;
     extensionVersion?: string;
@@ -136,7 +119,7 @@ export type VSXTargetPlatform =
     'linux-x64' | 'linux-arm64' | 'linux-armhf' |
     'alpine-x64' | 'alpine-arm64' | (string & {});
 
-export interface VSXQueryResult {
+export type VSXQueryResult = {
     success?: string;
     warning?: string;
     error?: string;
@@ -145,12 +128,7 @@ export interface VSXQueryResult {
     extensions: VSXExtensionRaw[];
 }
 
-/**
- * This type describes the data as found in {@link VSXSearchEntry.allVersions}.
- *
- * Note that this type only represents one version of a given plugin, despite the name.
- */
-export interface VSXAllVersions {
+export type VSXAllVersions = {
     url: string;
     version: string;
     engines?: {
@@ -158,10 +136,7 @@ export interface VSXAllVersions {
     };
 }
 
-/**
- * Should be aligned with https://github.com/eclipse/openvsx/blob/master/server/src/main/java/org/eclipse/openvsx/json/SearchEntryJson.java
- */
-export interface VSXSearchEntry {
+export type VSXSearchEntry = {
     url: string;
     files: {
         download: string;
@@ -187,25 +162,19 @@ export interface VSXSearchEntry {
 
 export type VSXExtensionNamespaceAccess = 'public' | 'restricted';
 
-/**
- * Should be aligned with https://github.com/eclipse/openvsx/blob/master/server/src/main/java/org/eclipse/openvsx/json/UserJson.java
- */
-export interface VSXUser {
+export type VSXUser = {
     loginName: string;
     homepage?: string;
 }
 
-export interface VSXExtensionRawFiles {
+export type VSXExtensionRawFiles = {
     download: string;
     readme?: string;
     license?: string;
     icon?: string;
 }
 
-/**
- * Should be aligned with https://github.com/eclipse/openvsx/blob/master/server/src/main/java/org/eclipse/openvsx/json/ExtensionJson.java
- */
-export interface VSXExtensionRaw {
+export type VSXExtensionRaw = {
     error?: string;
     namespaceUrl: string;
     reviewsUrl: string;
@@ -253,24 +222,24 @@ export interface VSXExtensionRaw {
     };
 }
 
-export interface VSXBadge {
+export type VSXBadge = {
     url?: string;
     href?: string;
     description?: string;
 }
 
-export interface VSXExtensionReference {
+export type VSXExtensionReference = {
     url: string;
     namespace: string;
     extension: string;
 }
 
-export interface VSXTargetPlatforms {
+export type VSXTargetPlatforms = {
     version: string;
     targetPlatforms: VSXTargetPlatform[];
 }
 
-export interface VSXResponseError extends Error {
+export type VSXResponseError = Error & {
     statusCode: number;
 }
 

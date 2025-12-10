@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { nls } from '@theia/core';
-import * as React from '@theia/core/shared/react';
-import { BreakpointManager } from '../breakpoint/breakpoint-manager';
-import { InstructionBreakpoint } from '../breakpoint/breakpoint-marker';
-import { DebugBreakpoint, DebugBreakpointDecoration, DebugBreakpointOptions } from './debug-breakpoint';
+import * as React from 'react';
+import { BreakpointManager } from '../breakpoint/breakpoint-manager.js';
+import { InstructionBreakpoint } from '../breakpoint/breakpoint-marker.js';
+import { DebugBreakpoint, DebugBreakpointDecoration, DebugBreakpointOptions } from './debug-breakpoint.js';
 
 export class DebugInstructionBreakpoint extends DebugBreakpoint<InstructionBreakpoint> {
     constructor(readonly origin: InstructionBreakpoint, options: DebugBreakpointOptions) {

@@ -22,7 +22,7 @@ import { TheiaMenu } from './theia-menu';
 import { TheiaPageObject } from './theia-page-object';
 import { containsClass, isElementVisible, textContent } from './util';
 
-export interface TheiaViewData {
+export type TheiaViewData = {
     tabSelector: string;
     viewSelector: string;
     viewName?: string;

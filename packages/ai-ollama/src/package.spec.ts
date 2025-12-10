@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ToolRequest } from '@theia/ai-core';
-import { OllamaModel } from './node/ollama-language-model';
+import { ToolRequest } from '@theia/ai-core/lib/common/index.js';
+import { OllamaModel } from './node/ollama-language-model.js';
 import { Tool } from 'ollama';
 import { expect } from 'chai';
 import * as sinon from 'sinon';

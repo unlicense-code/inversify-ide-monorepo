@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { Command, isObject, MenuPath, nls } from '@theia/core';
-import { CommonCommands } from '@theia/core/lib/browser';
-import URI from '@theia/core/lib/common/uri';
-import { UserStorageUri } from '@theia/userstorage/lib/browser';
+import { CommonCommands } from '@theia/core/lib/browser/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { UserStorageUri } from '@theia/userstorage/lib/browser/index.js';
 
 export namespace ToolbarCommands {
     export const TOGGLE_TOOLBAR = Command.toLocalizedCommand({

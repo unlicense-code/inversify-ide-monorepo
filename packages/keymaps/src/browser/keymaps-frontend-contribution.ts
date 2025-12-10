@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,22 +14,22 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import {
     CommandContribution,
     Command,
     CommandRegistry,
     MenuContribution,
     MenuModelRegistry
-} from '@theia/core/lib/common';
-import { AbstractViewContribution, codicon, Widget, CommonCommands, CommonMenus } from '@theia/core/lib/browser';
-import { ClipboardService } from '@theia/core/lib/browser/clipboard-service';
-import { KeymapsService } from './keymaps-service';
-import { Keybinding } from '@theia/core/lib/common/keybinding';
-import { KeybindingRegistry } from '@theia/core/lib/browser/keybinding';
-import { KeybindingItem, KeybindingWidget } from './keybindings-widget';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { nls } from '@theia/core/lib/common/nls';
+} from '@theia/core/lib/common/index.js';
+import { AbstractViewContribution, codicon, Widget, CommonCommands, CommonMenus } from '@theia/core/lib/browser/index.js';
+import { ClipboardService } from '@theia/core/lib/browser/clipboard-service.js';
+import { KeymapsService } from './keymaps-service.js';
+import { Keybinding } from '@theia/core/lib/common/keybinding.js';
+import { KeybindingRegistry } from '@theia/core/lib/browser/keybinding.js';
+import { KeybindingItem, KeybindingWidget } from './keybindings-widget.js';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 export namespace KeymapsCommands {
     export const OPEN_KEYMAPS = Command.toDefaultLocalizedCommand({

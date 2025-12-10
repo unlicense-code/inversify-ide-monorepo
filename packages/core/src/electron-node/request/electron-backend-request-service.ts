@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2022 TypeFox and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { decorate, injectable } from 'inversify';
-import { NodeRequestOptions, NodeRequestService } from '@theia/request/lib/node-request-service';
-import { ElectronSecurityToken } from '../../electron-common/electron-token';
+import { NodeRequestOptions, NodeRequestService } from '@theia/request/lib/node-request-service.js';
+import { ElectronSecurityToken } from '../../electron-common/electron-token.js';
 
 decorate(injectable(), NodeRequestService);
 

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,8 +16,8 @@
 
 import * as http from 'http';
 import { inject, injectable } from 'inversify';
-import { BackendRemoteService } from '../../node/remote/backend-remote-service';
-import { WsRequestValidatorContribution } from '../../node/ws-request-validators';
+import { BackendRemoteService } from '../../node/remote/backend-remote-service.js';
+import { WsRequestValidatorContribution } from '../../node/ws-request-validators.js';
 
 @injectable()
 export class ElectronWsOriginValidator implements WsRequestValidatorContribution {

@@ -16,13 +16,13 @@
 
 import { expect } from 'chai';
 import { CancellationTokenSource } from '@theia/core';
-import { TaskListProvider, TaskRunnerProvider } from './workspace-task-provider';
-import { MutableChatRequestModel, MutableChatResponseModel } from '@theia/ai-chat';
-import { Container } from '@theia/core/shared/inversify';
-import { TaskService } from '@theia/task/lib/browser/task-service';
-import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
-import { TaskConfiguration, TaskInfo } from '@theia/task/lib/common';
-import { TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget';
+import { TaskListProvider, TaskRunnerProvider } from './workspace-task-provider.js';
+import { MutableChatRequestModel, MutableChatResponseModel } from '@theia/ai-chat/lib/common/index.js';
+import { Container } from 'inversify';
+import { TaskService } from '@theia/task/lib/browser/task-service.js';
+import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service.js';
+import { TaskConfiguration, TaskInfo } from '@theia/task/lib/common/index.js';
+import { TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget.js';
 
 describe('Workspace Task Provider Cancellation Tests', () => {
     let cancellationTokenSource: CancellationTokenSource;

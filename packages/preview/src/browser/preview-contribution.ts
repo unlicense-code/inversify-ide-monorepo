@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,22 +14,28 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { Widget } from '@theia/core/shared/@lumino/widgets';
-import { FrontendApplicationContribution, WidgetOpenerOptions, NavigatableWidgetOpenHandler, codicon } from '@theia/core/lib/browser';
-import { EditorManager, TextEditor, EditorWidget, EditorContextMenu } from '@theia/editor/lib/browser';
-import { DisposableCollection, CommandContribution, CommandRegistry, Command, MenuContribution, MenuModelRegistry, Disposable } from '@theia/core/lib/common';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { MiniBrowserCommands } from '@theia/mini-browser/lib/browser/mini-browser-open-handler';
-import URI from '@theia/core/lib/common/uri';
-import { Position } from '@theia/core/shared/vscode-languageserver-protocol';
-import { PreviewWidget } from './preview-widget';
-import { PreviewHandlerProvider } from './preview-handler';
-import { PreviewUri } from './preview-uri';
-import { PreviewPreferences } from '../common/preview-preferences';
-import { nls } from '@theia/core/lib/common/nls';
+import { injectable, inject } from 'inversify';
+import { Widget } from '@lumino/widgets';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { FrontendApplicationContribution, WidgetOpenerOptions, NavigatableWidgetOpenHandler, codicon } from '@theia/core/lib/browser/index.js';
+import { EditorManager, TextEditor, EditorWidget, EditorContextMenu } from '@theia/editor/lib/browser/index.js';
+import {
+    DisposableCollection, CommandContribution, CommandRegistry, Command, MenuContribution,
+    MenuModelRegistry, Disposable
+} from '@theia/core/lib/common/index.js';
+import {
+    TabBarToolbarContribution, TabBarToolbarRegistry
 
-import debounce = require('@theia/core/shared/lodash.debounce');
+} from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { MiniBrowserCommands } from '@theia/mini-browser/lib/browser/mini-browser-open-handler.js';
+import { Position } from 'vscode-languageserver-protocol';
+import { PreviewWidget } from './preview-widget.js';
+import { PreviewHandlerProvider } from './preview-handler.js';
+import { PreviewUri } from './preview-uri.js';
+import { PreviewPreferences } from '../common/preview-preferences.js';
+import { nls } from '@theia/core/lib/common/nls.js';
+
+import debounce from 'lodash/debounce.js'
 
 export namespace PreviewCommands {
     /**
@@ -47,7 +53,7 @@ export namespace PreviewCommands {
     };
 }
 
-export interface PreviewOpenerOptions extends WidgetOpenerOptions {
+export type PreviewOpenerOptions = WidgetOpenerOptions & {
     originUri?: URI;
 }
 

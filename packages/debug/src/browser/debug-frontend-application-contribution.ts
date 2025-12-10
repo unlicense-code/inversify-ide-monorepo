@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,54 +16,54 @@
 
 import {
     AbstractViewContribution, KeybindingRegistry, Widget, CompositeTreeNode, LabelProvider, codicon, OnWillStopAction, FrontendApplicationContribution, ConfirmDialog, Dialog
-} from '@theia/core/lib/browser';
-import { TreeElementNode } from '@theia/core/lib/browser/source-tree';
-import { injectable, inject } from '@theia/core/shared/inversify';
+} from '@theia/core/lib/browser/index.js';
+import { TreeElementNode } from '@theia/core/lib/browser/source-tree/source-tree.js';
+import { injectable, inject } from 'inversify';
 import * as monaco from '@theia/monaco-editor-core';
-import { MenuModelRegistry, CommandRegistry, MAIN_MENU_BAR, Command, Emitter, Mutable, URI, Event, MessageService, CancellationError } from '@theia/core/lib/common';
-import { waitForEvent } from '@theia/core/lib/common/promise-util';
-import { EDITOR_CONTEXT_MENU, EDITOR_LINENUMBER_CONTEXT_MENU, EditorManager } from '@theia/editor/lib/browser';
-import { DebugSessionManager } from './debug-session-manager';
-import { DebugWidget } from './view/debug-widget';
-import { FunctionBreakpoint, SourceBreakpoint } from './breakpoint/breakpoint-marker';
-import { BreakpointManager } from './breakpoint/breakpoint-manager';
-import { DebugConfigurationManager } from './debug-configuration-manager';
-import { DebugState, DebugSession } from './debug-session';
-import { DebugBreakpointsWidget } from './view/debug-breakpoints-widget';
-import { DebugSourceBreakpoint } from './model/debug-source-breakpoint';
-import { DebugThreadsWidget } from './view/debug-threads-widget';
-import { DebugThread } from './model/debug-thread';
-import { DebugStackFramesWidget } from './view/debug-stack-frames-widget';
-import { DebugStackFrame } from './model/debug-stack-frame';
-import { DebugVariablesWidget } from './view/debug-variables-widget';
-import { DebugVariable } from './console/debug-console-items';
-import { DebugSessionWidget } from './view/debug-session-widget';
-import { DebugEditorModel } from './editor/debug-editor-model';
-import { DebugEditorService } from './editor/debug-editor-service';
-import { DebugConsoleContribution } from './console/debug-console-contribution';
-import { DebugService } from '../common/debug-service';
-import { DebugSchemaUpdater } from './debug-schema-updater';
-import { DebugPreferences } from '../common/debug-preferences';
-import { RenderedToolbarAction, TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { DebugWatchWidget } from './view/debug-watch-widget';
-import { DebugWatchExpression } from './view/debug-watch-expression';
-import { DebugWatchManager } from './debug-watch-manager';
-import { DebugSessionOptions } from './debug-session-options';
-import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution';
-import { ColorRegistry } from '@theia/core/lib/browser/color-registry';
-import { DebugFunctionBreakpoint } from './model/debug-function-breakpoint';
-import { DebugBreakpoint } from './model/debug-breakpoint';
-import { nls } from '@theia/core/lib/common/nls';
-import { DebugInstructionBreakpoint } from './model/debug-instruction-breakpoint';
-import { DebugConfiguration } from '../common/debug-configuration';
-import { DebugExceptionBreakpoint } from './view/debug-exception-breakpoint';
-import { DebugToolBar } from './view/debug-toolbar-widget';
-import { ConsoleWidget } from '@theia/console/lib/browser/console-widget';
-import { ConsoleContentWidget } from '@theia/console/lib/browser/console-content-widget';
-import { ConsoleContextMenu } from '@theia/console/lib/browser/console-contribution';
-import { DebugHoverWidget } from './editor/debug-hover-widget';
-import { DebugExpressionProvider } from './editor/debug-expression-provider';
-import { AddOrEditDataBreakpointAddress } from './breakpoint/debug-data-breakpoint-actions';
+import { MenuModelRegistry, CommandRegistry, MAIN_MENU_BAR, Command, Emitter, Mutable, URI, Event, MessageService, CancellationError } from '@theia/core/lib/common/index.js';
+import { waitForEvent } from '@theia/core/lib/common/promise-util.js';
+import { EDITOR_CONTEXT_MENU, EDITOR_LINENUMBER_CONTEXT_MENU, EditorManager } from '@theia/editor/lib/browser/index.js';
+import { DebugSessionManager } from './debug-session-manager.js';
+import { DebugWidget } from './view/debug-widget.js';
+import { FunctionBreakpoint, SourceBreakpoint } from './breakpoint/breakpoint-marker.js';
+import { BreakpointManager } from './breakpoint/breakpoint-manager.js';
+import { DebugConfigurationManager } from './debug-configuration-manager.js';
+import { DebugState, DebugSession } from './debug-session.js';
+import { DebugBreakpointsWidget } from './view/debug-breakpoints-widget.js';
+import { DebugSourceBreakpoint } from './model/debug-source-breakpoint.js';
+import { DebugThreadsWidget } from './view/debug-threads-widget.js';
+import { DebugThread } from './model/debug-thread.js';
+import { DebugStackFramesWidget } from './view/debug-stack-frames-widget.js';
+import { DebugStackFrame } from './model/debug-stack-frame.js';
+import { DebugVariablesWidget } from './view/debug-variables-widget.js';
+import { DebugVariable } from './console/debug-console-items.js';
+import { DebugSessionWidget } from './view/debug-session-widget.js';
+import { DebugEditorModel } from './editor/debug-editor-model.js';
+import { DebugEditorService } from './editor/debug-editor-service.js';
+import { DebugConsoleContribution } from './console/debug-console-contribution.js';
+import { DebugService } from '../common/debug-service.js';
+import { DebugSchemaUpdater } from './debug-schema-updater.js';
+import { DebugPreferences } from '../common/debug-preferences.js';
+import { RenderedToolbarAction, TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { DebugWatchWidget } from './view/debug-watch-widget.js';
+import { DebugWatchExpression } from './view/debug-watch-expression.js';
+import { DebugWatchManager } from './debug-watch-manager.js';
+import { DebugSessionOptions } from './debug-session-options.js';
+import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution.js';
+import { ColorRegistry } from '@theia/core/lib/browser/color-registry.js';
+import { DebugFunctionBreakpoint } from './model/debug-function-breakpoint.js';
+import { DebugBreakpoint } from './model/debug-breakpoint.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { DebugInstructionBreakpoint } from './model/debug-instruction-breakpoint.js';
+import { DebugConfiguration } from '../common/debug-configuration.js';
+import { DebugExceptionBreakpoint } from './view/debug-exception-breakpoint.js';
+import { DebugToolBar } from './view/debug-toolbar-widget.js';
+import { ConsoleWidget } from '@theia/console/lib/browser/console-widget.js';
+import { ConsoleContentWidget } from '@theia/console/lib/browser/console-content-widget.js';
+import { ConsoleContextMenu } from '@theia/console/lib/browser/console-contribution.js';
+import { DebugHoverWidget } from './editor/debug-hover-widget.js';
+import { DebugExpressionProvider } from './editor/debug-expression-provider.js';
+import { AddOrEditDataBreakpointAddress } from './breakpoint/debug-data-breakpoint-actions.js';
 
 export namespace DebugMenus {
     export const DEBUG = [...MAIN_MENU_BAR, '6_debug'];

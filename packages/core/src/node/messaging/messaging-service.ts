@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Channel } from '../../common/message-rpc/channel';
+import { Channel } from '../../common/message-rpc/channel.js';
 
-export interface MessagingService {
+export type MessagingService = {
     /**
      * Accept a web socket channel on the given path.
      * A path supports the route syntax: https://github.com/rcs/route-parser#what-can-i-use-in-my-routes.

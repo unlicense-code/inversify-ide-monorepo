@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { CommandRegistry } from '@theia/core/lib/common/command';
-import { Emitter } from '@theia/core/lib/common/event';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { ICommandEvent, ICommandService } from '@theia/monaco-editor-core/esm/vs/platform/commands/common/commands';
-import { StandaloneCommandService, StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
+import { inject, injectable, postConstruct } from 'inversify';
+import { CommandRegistry } from '@theia/core/lib/common/command.js';
+import { Emitter } from '@theia/core/lib/common/event.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { ICommandEvent, ICommandService } from '@theia/monaco-editor-core/esm/vs/platform/commands/common/commands.js';
+import { StandaloneCommandService, StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { IInstantiationService } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/instantiation';
+import { IInstantiationService } from '@theia/monaco-editor-core/esm/vs/platform/instantiation/common/instantiation.js';
 
 @injectable()
 export class MonacoCommandService implements ICommandService, Disposable {

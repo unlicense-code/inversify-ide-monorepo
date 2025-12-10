@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { match as matchGlobPattern } from '@theia/core/lib/common/glob';
+import { match as matchGlobPattern } from '@theia/core/lib/common/glob.js';
 
-export interface RelativePattern {
+export type RelativePattern = {
     base: string;
     pattern: string;
     pathToRelative(from: string, to: string): string;
 }
 
-export interface LanguageFilter {
+export type LanguageFilter = {
     language?: string;
     scheme?: string;
     pattern?: string | RelativePattern;

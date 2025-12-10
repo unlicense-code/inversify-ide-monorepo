@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2021 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  ********************************************************************************/
 import { Disposable, DisposableCollection, Emitter, MessageService } from '@theia/core';
-import { ApplicationShell, OpenViewArguments, WidgetManager } from '@theia/core/lib/browser';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { MemoryDiffTableWidget, MemoryDiffWidget } from '../diff-widget/memory-diff-table-widget';
-import { MemoryWidget } from '../memory-widget/memory-widget';
-import { RegisterWidget } from '../register-widget/register-widget-types';
-import { MemoryDiffWidgetData, MemoryWidgetOptions } from './memory-widget-utils';
-import { nls } from '@theia/core/lib/common/nls';
-import { EditableMemoryWidget } from '../editable-widget/memory-editable-table-widget';
+import { ApplicationShell, OpenViewArguments, WidgetManager } from '@theia/core/lib/browser/index.js';
+import { injectable, inject, postConstruct } from 'inversify';
+import { MemoryDiffTableWidget, MemoryDiffWidget } from '../diff-widget/memory-diff-table-widget.js';
+import { MemoryWidget } from '../memory-widget/memory-widget.js';
+import { RegisterWidget } from '../register-widget/register-widget-types.js';
+import { MemoryDiffWidgetData, MemoryWidgetOptions } from './memory-widget-utils.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { EditableMemoryWidget } from '../editable-widget/memory-editable-table-widget.js';
 
 @injectable()
 export class MemoryWidgetManager implements Disposable {

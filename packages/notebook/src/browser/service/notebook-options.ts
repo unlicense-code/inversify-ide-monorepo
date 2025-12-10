@@ -1,6 +1,6 @@
 
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,13 +15,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { PreferenceService } from '@theia/core/lib/common';
+import { inject, injectable, postConstruct } from 'inversify';
+import { PreferenceService } from '@theia/core/lib/common/preferences/preference-service.js';
 import { Emitter } from '@theia/core';
-import { NotebookPreferences, notebookPreferenceSchema } from '../../common/notebook-preferences';
-import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences';
-import { BareFontInfo } from '@theia/monaco-editor-core/esm/vs/editor/common/config/fontInfo';
-import { PixelRatio } from '@theia/monaco-editor-core/esm/vs/base/browser/pixelRatio';
+import { NotebookPreferences, notebookPreferenceSchema } from '../../common/notebook-preferences.js';
+import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences.js';
+import { BareFontInfo } from '@theia/monaco-editor-core/esm/vs/editor/common/config/fontInfo.js';
+import { PixelRatio } from '@theia/monaco-editor-core/esm/vs/base/browser/pixelRatio.js';
 
 const notebookOutputOptionsRelevantPreferences = [
     'editor.fontSize',
@@ -35,7 +35,7 @@ const notebookOutputOptionsRelevantPreferences = [
     NotebookPreferences.OUTPUT_LINE_LIMIT
 ];
 
-export interface NotebookOutputOptions {
+export type NotebookOutputOptions = {
     // readonly outputNodePadding: number;
     readonly outputNodeLeftPadding: number;
     // readonly previewNodePadding: number;

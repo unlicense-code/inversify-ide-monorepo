@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { PluginTheiaEnvironment } from '../common/plugin-theia-environment';
-import { PluginDeployerParticipant, PluginDeployerStartContext } from '../../common/plugin-protocol';
+import { injectable, inject } from 'inversify';
+import { PluginTheiaEnvironment } from '../common/plugin-theia-environment.js';
+import { PluginDeployerParticipant, PluginDeployerStartContext } from '../../common/plugin-protocol.js';
 
 @injectable()
 export class PluginTheiaDeployerParticipant implements PluginDeployerParticipant {

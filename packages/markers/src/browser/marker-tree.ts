@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, unmanaged } from '@theia/core/shared/inversify';
-import { TreeImpl, CompositeTreeNode, TreeNode, SelectableTreeNode, ExpandableTreeNode } from '@theia/core/lib/browser';
-import { MarkerManager } from './marker-manager';
-import { Marker } from '../common/marker';
-import { UriSelection } from '@theia/core/lib/common/selection';
-import URI from '@theia/core/lib/common/uri';
-import { ProblemSelection } from './problem/problem-selection';
-import { DiagnosticSeverity } from '@theia/core/shared/vscode-languageserver-protocol';
+import { injectable, unmanaged } from 'inversify';
+import { TreeImpl, CompositeTreeNode, TreeNode, SelectableTreeNode, ExpandableTreeNode } from '@theia/core/lib/browser/index.js';
+import { MarkerManager } from './marker-manager.js';
+import { Marker } from '../common/marker.js';
+import { UriSelection } from '@theia/core/lib/common/selection.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ProblemSelection } from './problem/problem-selection.js';
+import { DiagnosticSeverity } from 'vscode-languageserver-protocol';
 
 export const MarkerOptions = Symbol('MarkerOptions');
-export interface MarkerOptions {
+export type MarkerOptions = {
     readonly kind: string;
 }
 
@@ -124,7 +124,7 @@ export abstract class MarkerTree<T extends object> extends TreeImpl {
     }
 }
 
-export interface MarkerNode extends UriSelection, SelectableTreeNode, ProblemSelection {
+export type MarkerNode = UriSelection & SelectableTreeNode & ProblemSelection & {
     marker: Marker<object>;
 }
 export namespace MarkerNode {
@@ -133,7 +133,7 @@ export namespace MarkerNode {
     }
 }
 
-export interface MarkerInfoNode extends UriSelection, SelectableTreeNode, ExpandableTreeNode {
+export type MarkerInfoNode = UriSelection & SelectableTreeNode & ExpandableTreeNode & {
     parent: MarkerRootNode;
     numberOfMarkers: number;
     severity?: DiagnosticSeverity;
@@ -144,7 +144,7 @@ export namespace MarkerInfoNode {
     }
 }
 
-export interface MarkerRootNode extends CompositeTreeNode {
+export type MarkerRootNode = CompositeTreeNode & {
     kind: string;
 }
 export namespace MarkerRootNode {

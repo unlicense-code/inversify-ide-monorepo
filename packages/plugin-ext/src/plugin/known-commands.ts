@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import * as theia from '@theia/plugin';
-import { Range as R, Position as P, Location as L } from '@theia/core/shared/vscode-languageserver-protocol';
-import { URI as TheiaURI } from '@theia/core/lib/common/uri';
-import { cloneAndChange } from '../common/objects';
-import { Position, Range, Location, CallHierarchyItem, TypeHierarchyItem, URI, TextDocumentShowOptions } from './types-impl';
+import { Range as R, Position as P, Location as L } from 'vscode-languageserver-protocol';
+import { URI as TheiaURI } from '@theia/core/lib/common/uri.js';
+import { cloneAndChange } from '../common/objects.js';
+import { Position, Range, Location, CallHierarchyItem, TypeHierarchyItem, URI, TextDocumentShowOptions } from './types-impl.js';
 import {
     fromPosition, fromRange, fromLocation,
     isModelLocation, toLocation,
@@ -26,7 +26,7 @@ import {
     isModelTypeHierarchyItem, fromTypeHierarchyItem, toTypeHierarchyItem,
     isModelCallHierarchyIncomingCall, toCallHierarchyIncomingCall,
     isModelCallHierarchyOutgoingCall, toCallHierarchyOutgoingCall, fromTextDocumentShowOptions
-} from './type-converters';
+} from './type-converters.js';
 
 // Here is a mapping of VSCode commands to monaco commands with their conversions
 export namespace KnownCommands {

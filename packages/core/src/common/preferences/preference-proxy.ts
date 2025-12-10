@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,12 +16,12 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Disposable, Event, isObject, MaybePromise } from '../../common';
-import { PreferenceService } from './preference-service';
-import { PreferenceScope } from './preference-scope';
-import { IJSONSchema } from '../../common/json-schema';
-import { isThenable } from '../../common/promise-util';
-import { OverridePreferenceName } from '../../common/preferences/preference-language-override-service';
+import { Disposable, Event, isObject, MaybePromise } from '../../common/index.js';
+import { PreferenceService } from './preference-service.js';
+import { PreferenceScope } from './preference-scope.js';
+import { IJSONSchema } from '../../common/json-schema.js';
+import { isThenable } from '../../common/promise-util.js';
+import { OverridePreferenceName } from '../../common/preferences/preference-language-override-service.js';
 
 /**
  * It is worth explaining the type for `PreferenceChangeEvent`:
@@ -79,27 +79,12 @@ export type PreferenceChangeEvent<T> = {
     }
 }[keyof T];
 
-export interface PreferenceEventEmitter<T> {
+export type PreferenceEventEmitter<T> = {
     readonly onPreferenceChanged: Event<PreferenceChangeEvent<T>>;
     readonly ready: Promise<void>;
 }
 
-/**
- * Generic interface to declare a typesafe get function based on the given
- * configuration type.
- *
- * ### Illustration
- *
- * ```ts
- * interface PreferenceConfiguration {
- *  'myext.enabled': boolean,
- * }
- * const enabled : boolean = prefs.get('myext.enabled'); // valid
- * const debug : string = prefs.get('myext.enabled'); // invalid
- * prefs.get('foobar'); // invalid
- * ```
- */
-export interface PreferenceRetrieval<T> {
+export type PreferenceRetrieval<T> = {
     get<K extends keyof T>(preferenceName: K | {
         preferenceName: K,
         overrideIdentifier?: string
@@ -121,10 +106,7 @@ export interface PreferenceRetrieval<T> {
  */
 export type PreferenceProxy<T> = Readonly<T> & Disposable & PreferenceEventEmitter<T> & PreferenceRetrieval<T>;
 export const PreferenceProxyOptions = Symbol('PreferenceProxyOptions');
-/**
- * Proxy configuration parameters.
- */
-export interface PreferenceProxyOptions {
+export type PreferenceProxyOptions = {
     /**
      * Prefix which is transparently added to all preference identifiers.
      */

@@ -1,6 +1,7 @@
 {
   "name": "@theia/toolbar",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - Toolbar",
   "keywords": [
     "theia-extension"

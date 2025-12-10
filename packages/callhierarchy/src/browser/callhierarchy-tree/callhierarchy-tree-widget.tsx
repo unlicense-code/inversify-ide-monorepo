@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
+import { injectable, inject } from 'inversify';
 import {
     ContextMenuRenderer, TreeWidget, NodeProps, TreeProps, TreeNode,
     TreeModel, DockPanel, codicon
-} from '@theia/core/lib/browser';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
-import { ItemNode, CallerNode } from './callhierarchy-tree';
-import { CallHierarchyTreeModel } from './callhierarchy-tree-model';
-import { CALLHIERARCHY_ID, CallHierarchyItem, CallHierarchyIncomingCall, CALL_HIERARCHY_LABEL } from '../callhierarchy';
-import URI from '@theia/core/lib/common/uri';
-import { Location, Range, SymbolKind, DocumentUri, SymbolTag } from '@theia/core/shared/vscode-languageserver-protocol';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { nls } from '@theia/core/lib/common/nls';
-import * as React from '@theia/core/shared/react';
+} from '@theia/core/lib/browser/index.js';
+import { LabelProvider } from '@theia/core/lib/browser/label-provider.js';
+import { ItemNode, CallerNode } from './callhierarchy-tree.js';
+import { CallHierarchyTreeModel } from './callhierarchy-tree-model.js';
+import { CALLHIERARCHY_ID, CallHierarchyItem, CallHierarchyIncomingCall, CALL_HIERARCHY_LABEL } from '../callhierarchy.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Location, Range, SymbolKind, DocumentUri, SymbolTag } from 'vscode-languageserver-protocol';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { nls } from '@theia/core/lib/common/nls.js';
+import * as React from 'react';
 
 export const HIERARCHY_TREE_CLASS = 'theia-CallHierarchyTree';
 export const DEFINITION_NODE_CLASS = 'theia-CallHierarchyTreeNode';
@@ -51,7 +51,10 @@ export class CallHierarchyTreeWidget extends TreeWidget {
         this.title.iconClass = codicon('references');
         this.title.closable = true;
         this.addClass(HIERARCHY_TREE_CLASS);
-        this.toDispose.push(this.model.onSelectionChanged(selection => {
+        this.toDispose.push(this.model.onSelectionChanged((selection: ReadonlyArray<TreeNode> | undefined) => {
+            if (!selection || selection.length === 0) {
+                return;
+            }
             const node = selection[0];
             if (node) {
                 this.openEditor(node, true);

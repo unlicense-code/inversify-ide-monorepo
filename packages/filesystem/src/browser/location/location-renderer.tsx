@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import URI from '@theia/core/lib/common/uri';
-import { LocationService } from './location-service';
-import * as React from '@theia/core/shared/react';
-import { FileService } from '../file-service';
-import { DisposableCollection, Emitter, Path } from '@theia/core/lib/common';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { FileDialogModel } from '../file-dialog/file-dialog-model';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
-import { ReactRenderer } from '@theia/core/lib/browser/widgets/react-renderer';
-import { codicon } from '@theia/core/lib/browser';
+import { URI } from '@theia/core';
+import { LocationService } from './location-service.js';
+import * as React from 'react';
+import { FileService } from '../file-service.js';
+import { DisposableCollection, Emitter, Path } from '@theia/core';
+import { injectable, inject, postConstruct } from 'inversify';
+import { FileDialogModel } from '../file-dialog/file-dialog-model.js';
+import { EnvVariablesServer } from '@theia/core';
+import { ReactRenderer } from '@theia/core/lib/browser/index.js';
+import { codicon } from '@theia/core/lib/browser/index.js';
 
-interface AutoSuggestDataEvent {
+type AutoSuggestDataEvent = {
     parent: string;
     children: string[];
 }
@@ -52,26 +52,26 @@ class ResolvedDirectoryCache {
     }
 
     protected async createResolutionPromise(directoryToResolve: string): Promise<void> {
-        return this.fileService.resolve(new URI(directoryToResolve)).then(({ children }) => {
+        return this.fileService.resolve(new URI(directoryToResolve)).then(({ children }: { children?: Array<{ isDirectory: boolean; resource: { path: { toString: () => string } } }> }) => {
             if (children) {
-                const childDirectories = children.filter(child => child.isDirectory)
-                    .map(directory => `${directory.resource.path}/`);
+                const childDirectories = children.filter((child: { isDirectory: boolean }) => child.isDirectory)
+                    .map((directory: { resource: { path: { toString: () => string } } }) => `${directory.resource.path.toString()}/`);
                 this.cachedDirectories.set(directoryToResolve, childDirectories);
                 this.directoryResolvedEmitter.fire({ parent: directoryToResolve, children: childDirectories });
             }
-        }).catch(e => {
+        }).catch((e: unknown) => {
             // no-op
         });
     }
 }
 
 export const LocationListRendererFactory = Symbol('LocationListRendererFactory');
-export interface LocationListRendererFactory {
+export type LocationListRendererFactory = {
     (options: LocationListRendererOptions): LocationListRenderer;
 }
 
 export const LocationListRendererOptions = Symbol('LocationListRendererOptions');
-export interface LocationListRendererOptions {
+export type LocationListRendererOptions = {
     model: FileDialogModel;
     host?: HTMLElement;
 }
@@ -122,8 +122,8 @@ export class LocationListRenderer extends ReactRenderer {
     }
 
     override render(): void {
-        if (!this.toDispose.disposed) {
-            this.hostRoot.render(this.doRender());
+        if (!this.toDisposeOnNewCache.disposed) {
+            super.render();
         }
     }
 
@@ -240,7 +240,7 @@ export class LocationListRenderer extends ReactRenderer {
      */
     protected collectLocations(): LocationListRenderer.Location[] {
         const location = this.service.location;
-        const locations: LocationListRenderer.Location[] = (!!location ? location.allLocations : []).map(uri => ({ uri }));
+        const locations: LocationListRenderer.Location[] = (!!location ? location.allLocations : []).map((uri: URI) => ({ uri }));
         if (this._drives) {
             const drives = this._drives.map(uri => ({ uri, isDrive: true }));
             // `URI.allLocations` returns with the URI without the trailing slash unlike `FileUri.create(fsPath)`.
@@ -272,7 +272,7 @@ export class LocationListRenderer extends ReactRenderer {
      */
     protected doLoadDrives(): void {
         if (!this._drives) {
-            this.service.drives().then(drives => {
+            this.service.drives().then((drives: URI[]) => {
                 // If the `drives` are empty, something already went wrong.
                 if (drives.length > 0) {
                     this._drives = drives;
@@ -364,7 +364,9 @@ export class LocationListRenderer extends ReactRenderer {
     }
 
     get locationList(): HTMLSelectElement | undefined {
-        const locationList = this.host.getElementsByClassName(LocationListRenderer.Styles.LOCATION_LIST_CLASS)[0];
+        const host = this.options.host;
+        if (!host) return undefined;
+        const locationList = host.getElementsByClassName(LocationListRenderer.Styles.LOCATION_LIST_CLASS)[0];
         if (locationList instanceof HTMLSelectElement) {
             return locationList;
         }
@@ -372,7 +374,9 @@ export class LocationListRenderer extends ReactRenderer {
     }
 
     get locationTextInput(): HTMLInputElement | undefined {
-        const locationTextInput = this.host.getElementsByClassName(LocationListRenderer.Styles.LOCATION_TEXT_INPUT_CLASS)[0];
+        const host = this.options.host;
+        if (!host) return undefined;
+        const locationTextInput = host.getElementsByClassName(LocationListRenderer.Styles.LOCATION_TEXT_INPUT_CLASS)[0];
         if (locationTextInput instanceof HTMLInputElement) {
             return locationTextInput;
         }

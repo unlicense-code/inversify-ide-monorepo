@@ -15,14 +15,14 @@
 // *****************************************************************************
 
 import { ConnectionHandler, RpcConnectionHandler } from '@theia/core';
-import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module';
-import { ContainerModule } from '@theia/core/shared/inversify';
+import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module.js';
+import { ContainerModule } from 'inversify';
 import {
     CODEX_SERVICE_PATH,
     CodexClient,
     CodexService
-} from '../common/codex-service';
-import { CodexServiceImpl } from './codex-service-impl';
+} from '../common/codex-service.js';
+import { CodexServiceImpl } from './codex-service-impl.js';
 
 const codexConnectionModule = ConnectionContainerModule.create(({ bind }) => {
     bind(CodexServiceImpl).toSelf().inSingletonScope();

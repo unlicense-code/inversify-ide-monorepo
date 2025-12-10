@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,23 +15,20 @@
 // *****************************************************************************
 
 const vhost = require('vhost');
-import express = require('@theia/core/shared/express');
-import * as fs from '@theia/core/shared/fs-extra';
+import express = require('express');
+import * as fs from 'fs-extra';
 import { lookup } from 'mime-types';
-import { injectable, inject, named } from '@theia/core/shared/inversify';
-import { Application, Request, Response } from '@theia/core/shared/express';
-import { FileUri } from '@theia/core/lib/common/file-uri';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { MaybePromise } from '@theia/core/lib/common/types';
-import { ContributionProvider } from '@theia/core/lib/common/contribution-provider';
-import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application';
-import { MiniBrowserService } from '../common/mini-browser-service';
-import { MiniBrowserEndpoint as MiniBrowserEndpointNS } from '../common/mini-browser-endpoint';
+import { injectable, inject, named } from 'inversify';
+import { Application, Request, Response } from 'express';
+import { FileUri } from '@theia/core/lib/common/file-uri.js';
+import { ILogger } from '@theia/core/lib/common/logger.js';
+import { MaybePromise } from '@theia/core/lib/common/types.js';
+import { ContributionProvider } from '@theia/core/lib/common/contribution-provider.js';
+import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application.js';
+import { MiniBrowserService } from '../common/mini-browser-service.js';
+import { MiniBrowserEndpoint as MiniBrowserEndpointNS } from '../common/mini-browser-endpoint.js';
 
-/**
- * The return type of the `FileSystem#resolveContent` method.
- */
-export interface FileStatWithContent {
+export type FileStatWithContent = {
 
     /**
      * The file stat.
@@ -49,7 +46,7 @@ export interface FileStatWithContent {
  * Endpoint handler contribution for the `MiniBrowserEndpoint`.
  */
 export const MiniBrowserEndpointHandler = Symbol('MiniBrowserEndpointHandler');
-export interface MiniBrowserEndpointHandler {
+export type MiniBrowserEndpointHandler = {
 
     /**
      * Returns with or resolves to the file extensions supported by the current `mini-browser` endpoint handler.

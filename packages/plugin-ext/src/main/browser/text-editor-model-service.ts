@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 import { Event, Emitter, ListenerList, Listener } from '@theia/core';
-import { MonacoEditorModel, WillSaveMonacoModelEvent } from '@theia/monaco/lib/browser/monaco-editor-model';
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service';
-import { MonacoWorkspace } from '@theia/monaco/lib/browser/monaco-workspace';
-import { Schemes } from '../../common/uri-components';
-import URI from '@theia/core/lib/common/uri';
-import { Reference } from '@theia/core/lib/common/reference';
+import { MonacoEditorModel, WillSaveMonacoModelEvent } from '@theia/monaco/lib/browser/monaco-editor-model.js';
+import { injectable, inject } from 'inversify';
+import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service.js';
+import { MonacoWorkspace } from '@theia/monaco/lib/browser/monaco-workspace.js';
+import { Schemes } from '../../common/uri-components.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Reference } from '@theia/core/lib/common/reference.js';
 
 @injectable()
 export class EditorModelService {

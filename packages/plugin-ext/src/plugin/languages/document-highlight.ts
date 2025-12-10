@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { URI } from '@theia/core/shared/vscode-uri';
+import { URI } from 'vscode-uri';
 import * as theia from '@theia/plugin';
-import { DocumentsExtImpl } from '../documents';
-import * as types from '../types-impl';
-import * as Converter from '../type-converters';
-import { Position } from '../../common/plugin-api-rpc';
-import { DocumentHighlight } from '../../common/plugin-api-rpc-model';
+import { DocumentsExtImpl } from '../documents.js';
+import * as types from '../types-impl.js';
+import * as Converter from '../type-converters.js';
+import { Position } from '../../common/plugin-api-rpc.js';
+import { DocumentHighlight } from '../../common/plugin-api-rpc-model.js';
 
 export class DocumentHighlightAdapter {
 

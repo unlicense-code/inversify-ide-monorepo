@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { bindCommonHostedBackend } from '../node/plugin-ext-hosted-backend-module';
-import { PluginScanner } from '../../common/plugin-protocol';
-import { TheiaPluginScannerElectron } from './scanner-theia-electron';
+import { interfaces } from 'inversify';
+import { bindCommonHostedBackend } from '../node/plugin-ext-hosted-backend-module.js';
+import { PluginScanner } from '../../common/plugin-protocol.js';
+import { TheiaPluginScannerElectron } from './scanner-theia-electron.js';
 
 export function bindElectronBackend(bind: interfaces.Bind): void {
     bindCommonHostedBackend(bind);

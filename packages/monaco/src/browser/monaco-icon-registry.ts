@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { IconRegistry } from '@theia/core/lib/browser/icon-registry';
-import { getIconRegistry } from '@theia/monaco-editor-core/esm/vs/platform/theme/common/iconRegistry';
-import { IconDefinition, IconFontDefinition, ThemeIcon } from '@theia/core/lib/common/theme';
+import { injectable } from 'inversify';
+import { IconRegistry } from '@theia/core/lib/browser/icon-registry.js';
+import { getIconRegistry } from '@theia/monaco-editor-core/esm/vs/platform/theme/common/iconRegistry.js';
+import { IconDefinition, IconFontDefinition, ThemeIcon } from '@theia/core/lib/common/theme.js';
 
 @injectable()
 export class MonacoIconRegistry implements IconRegistry {

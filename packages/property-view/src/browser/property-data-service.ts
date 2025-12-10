@@ -15,10 +15,7 @@
 // *****************************************************************************
 
 export const PropertyDataService = Symbol('PropertyDataService');
-/**
- * `PropertyDataService` should be implemented to provide property data for the given selection.
- */
-export interface PropertyDataService {
+export type PropertyDataService = {
 
     /**
      * A unique id for this provider.

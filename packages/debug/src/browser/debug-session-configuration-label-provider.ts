@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import URI from '@theia/core/lib/common/uri';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { type DebugSessionOptions } from './debug-session-options';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { inject, injectable } from 'inversify';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { type DebugSessionOptions } from './debug-session-options.js';
 
 /**
  * Provides a label for the debug session without the need to create the session.

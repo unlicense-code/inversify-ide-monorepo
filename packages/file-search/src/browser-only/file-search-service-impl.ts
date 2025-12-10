@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, named } from '@theia/core/shared/inversify';
-import { FileSearchService, WHITESPACE_QUERY_SEPARATOR } from '../common/file-search-service';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import * as fuzzy from '@theia/core/shared/fuzzy';
+import { injectable, inject, named } from 'inversify';
+import { FileSearchService, WHITESPACE_QUERY_SEPARATOR } from '../common/file-search-service.js';
+import { FileService } from '@theia/filesystem/lib/browser/index.js';
+import * as fuzzy from 'fuzzy';
 import { CancellationTokenSource, CancellationToken, ILogger, URI } from '@theia/core';
-import { matchesPattern, createIgnoreMatcher, getIgnorePatterns } from '@theia/filesystem/lib/browser-only/file-search';
+import { matchesPattern, createIgnoreMatcher, getIgnorePatterns } from '@theia/filesystem/lib/browser-only/file-search.js';
 
 @injectable()
 export class FileSearchServiceImpl implements FileSearchService {
@@ -176,7 +176,7 @@ export class FileSearchServiceImpl implements FileSearchService {
                     if (options.useGitIgnore) {
                         const patterns = await getIgnorePatterns(
                             currentUri,
-                            uri => this.fs.read(uri).then(content => content.value)
+                            (uri: URI) => this.fs.read(uri).then((content: { value: string }) => content.value)
                         );
 
                         matcher.add(patterns);

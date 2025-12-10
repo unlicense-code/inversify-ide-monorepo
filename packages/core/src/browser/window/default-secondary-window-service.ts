@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 import { inject, injectable, postConstruct } from 'inversify';
-import { SecondaryWindow, SecondaryWindowService } from './secondary-window-service';
-import { WindowService } from './window-service';
-import { ExtractableWidget, Widget } from '../widgets';
-import { ApplicationShell } from '../shell';
-import { Saveable } from '../saveable';
-import { Emitter, environment, Event, PreferenceService } from '../../common';
-import { SaveableService } from '../saveable-service';
-import { getAllWidgetsFromSecondaryWindow, getDefaultRestoreArea } from '../secondary-window-handler';
+import { SecondaryWindow, SecondaryWindowService } from './secondary-window-service.js';
+import { WindowService } from './window-service.js';
+import { ExtractableWidget, Widget } from '../widgets/index.js';
+import { ApplicationShell } from '../shell/index.js';
+import { Saveable } from '../saveable.js';
+import { Emitter, environment, Event, PreferenceService } from '../../common/index.js';
+import { SaveableService } from '../saveable-service.js';
+import { getAllWidgetsFromSecondaryWindow, getDefaultRestoreArea } from '../secondary-window-handler.js';
 
 @injectable()
 export class DefaultSecondaryWindowService implements SecondaryWindowService {

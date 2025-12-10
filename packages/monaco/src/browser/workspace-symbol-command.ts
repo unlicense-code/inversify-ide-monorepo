@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { environment } from '@theia/core/shared/@theia/application-package/lib/environment';
-import { KeybindingContribution, KeybindingRegistry, OpenerService, LabelProvider } from '@theia/core/lib/browser';
-import { QuickAccessContribution, QuickAccessProvider, QuickInputService, QuickAccessRegistry, QuickPicks, QuickPickItem, findMatches } from '@theia/core/lib/browser/quick-input';
+import { injectable, inject } from 'inversify';
+import { environment } from '@theia/application-package';
+import { KeybindingContribution, KeybindingRegistry, OpenerService, LabelProvider } from '@theia/core/lib/browser/index.js';
+import { QuickAccessContribution, QuickAccessProvider, QuickInputService, QuickAccessRegistry, QuickPicks, QuickPickItem, findMatches } from '@theia/core/lib/browser/quick-input/index.js';
 import {
     CommandRegistry, CommandHandler, Command, SelectionService, CancellationToken,
     CommandContribution, MenuContribution, MenuModelRegistry, nls
-} from '@theia/core/lib/common';
-import { Range, Position, SymbolInformation, WorkspaceSymbolParams } from '@theia/core/shared/vscode-languageserver-protocol';
-import { MonacoLanguages, WorkspaceSymbolProvider } from './monaco-languages';
-import URI from '@theia/core/lib/common/uri';
-import { EditorMainMenu } from '@theia/editor/lib/browser';
+} from '@theia/core/lib/common/index.js';
+import { Range, Position, SymbolInformation, WorkspaceSymbolParams } from 'vscode-languageserver-protocol';
+import { MonacoLanguages, WorkspaceSymbolProvider } from './monaco-languages.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { EditorMainMenu } from '@theia/editor/lib/browser/index.js';
 
 @injectable()
 export class WorkspaceSymbolCommand implements QuickAccessProvider, CommandContribution, KeybindingContribution, MenuContribution, CommandHandler, QuickAccessContribution {

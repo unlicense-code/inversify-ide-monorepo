@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { DisposableCollection } from '@theia/core/lib/common/disposable';
-import { Emitter, Event } from '@theia/core/lib/common/event';
+import { DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { Emitter, Event } from '@theia/core';
 import { ChildProcess } from 'child_process';
 import * as stream from 'stream';
 import * as net from 'net';
-import { DebugAdapter } from '../common/debug-model';
+import { DebugAdapter } from '../common/debug-model.js';
 
 abstract class StreamDebugAdapter extends DisposableCollection {
     private messageReceivedEmitter = new Emitter<string>();

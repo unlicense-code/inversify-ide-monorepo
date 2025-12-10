@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, postConstruct } from 'inversify';
 import {
     TreeModelImpl,
     TreeWidget,
@@ -24,22 +24,22 @@ import {
     NodeProps,
     ExpandableTreeNode,
     SelectableTreeNode,
-} from '@theia/core/lib/browser';
+} from '@theia/core/lib/browser/index.js';
 import { Emitter, PreferenceDataProperty, PreferenceSchemaService, PreferenceService } from '@theia/core';
-import { PreferencesSearchbarWidget } from './views/preference-searchbar-widget';
-import { PreferenceTreeGenerator } from './util/preference-tree-generator';
-import * as fuzzy from '@theia/core/shared/fuzzy';
-import { PreferencesScopeTabBar } from './views/preference-scope-tabbar-widget';
-import { Preference } from './util/preference-types';
-import { Event } from '@theia/core/lib/common';
-import { COMMONLY_USED_SECTION_PREFIX } from './util/preference-layout';
+import { PreferencesSearchbarWidget } from './views/preference-searchbar-widget.js';
+import { PreferenceTreeGenerator } from './util/preference-tree-generator.js';
+import * as fuzzy from 'fuzzy';
+import { PreferencesScopeTabBar } from './views/preference-scope-tabbar-widget.js';
+import { Preference } from './util/preference-types.js';
+import { Event } from '@theia/core/lib/common/index.js';
+import { COMMONLY_USED_SECTION_PREFIX } from './util/preference-layout.js';
 
-export interface PreferenceTreeNodeProps extends NodeProps {
+export type PreferenceTreeNodeProps = NodeProps & {
     visibleChildren: number;
     isExpansible?: boolean;
 }
 
-export interface PreferenceTreeNodeRow extends Readonly<TreeWidget.NodeRow>, PreferenceTreeNodeProps {
+export type PreferenceTreeNodeRow = Readonly<TreeWidget.NodeRow> & PreferenceTreeNodeProps & {
     node: Preference.TreeNode;
 }
 export enum PreferenceFilterChangeSource {
@@ -47,7 +47,7 @@ export enum PreferenceFilterChangeSource {
     Search,
     Scope,
 }
-export interface PreferenceFilterChangeEvent {
+export type PreferenceFilterChangeEvent = {
     source: PreferenceFilterChangeSource
 }
 

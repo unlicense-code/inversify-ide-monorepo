@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,25 +14,26 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import * as DOMPurify from '@theia/core/shared/dompurify';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { TreeElement, TreeElementNode } from '@theia/core/lib/browser/source-tree';
-import { OpenerService, open, OpenerOptions } from '@theia/core/lib/browser/opener-service';
-import { HostedPluginSupport } from '@theia/plugin-ext/lib/hosted/browser/hosted-plugin';
-import { PluginServer, DeployedPlugin, PluginIdentifiers, PluginDeployOptions } from '@theia/plugin-ext/lib/common/plugin-protocol';
-import { VSCodeExtensionUri } from '@theia/plugin-ext-vscode/lib/common/plugin-vscode-uri';
-import { ProgressService } from '@theia/core/lib/common/progress-service';
-import { Endpoint } from '@theia/core/lib/browser/endpoint';
-import { VSXEnvironment } from '../common/vsx-environment';
-import { VSXExtensionsSearchModel } from './vsx-extensions-search-model';
-import { CommandRegistry, MenuPath, nls } from '@theia/core/lib/common';
-import { codicon, ConfirmDialog, ContextMenuRenderer, HoverService, TreeWidget } from '@theia/core/lib/browser';
-import { VSXExtensionNamespaceAccess, VSXUser } from '@theia/ovsx-client/lib/ovsx-types';
-import { WindowService } from '@theia/core/lib/browser/window/window-service';
-import { MarkdownStringImpl } from '@theia/core/lib/common/markdown-rendering';
-import { VSXExtensionsModel } from './vsx-extensions-model';
+import * as React from 'react';
+import DOMPurify from 'dompurify';
+import { injectable, inject, postConstruct } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { TreeElement } from '@theia/core/lib/browser/source-tree/tree-source.js';
+import { TreeElementNode } from '@theia/core/lib/browser/source-tree/source-tree.js';
+import { OpenerService, open, OpenerOptions } from '@theia/core/lib/browser/opener-service.js';
+import { HostedPluginSupport } from '@theia/plugin-ext/lib/hosted/browser/hosted-plugin.js';
+import { PluginServer, DeployedPlugin, PluginIdentifiers, PluginDeployOptions } from '@theia/plugin-ext/lib/common/plugin-protocol.js';
+import { VSCodeExtensionUri } from '@theia/plugin-ext-vscode/lib/common/plugin-vscode-uri.js';
+import { ProgressService } from '@theia/core/lib/common/progress-service.js';
+import { Endpoint } from '@theia/core/lib/browser/endpoint.js';
+import { VSXEnvironment } from '../common/vsx-environment.js';
+import { VSXExtensionsSearchModel } from './vsx-extensions-search-model.js';
+import { CommandRegistry, MenuPath, nls } from '@theia/core/lib/common/index.js';
+import { codicon, ConfirmDialog, ContextMenuRenderer, HoverService, TreeWidget } from '@theia/core/lib/browser/index.js';
+import { VSXExtensionNamespaceAccess, VSXUser } from '@theia/ovsx-client/lib/ovsx-types.js';
+import { WindowService } from '@theia/core/lib/browser/window/window-service.js';
+import { MarkdownStringImpl } from '@theia/core/lib/common/markdown-rendering/markdown-string.js';
+import { VSXExtensionsModel } from './vsx-extensions-model.js';
 
 export const EXTENSIONS_CONTEXT_MENU: MenuPath = ['extensions_context_menu'];
 

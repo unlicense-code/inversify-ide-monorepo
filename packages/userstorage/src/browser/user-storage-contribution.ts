@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { DisposableCollection } from '@theia/core/lib/common/disposable';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
-import { FileSystemProvider } from '@theia/filesystem/lib/common/files';
-import { FileService, FileServiceContribution } from '@theia/filesystem/lib/browser/file-service';
-import { DelegatingFileSystemProvider } from '@theia/filesystem/lib/common/delegating-file-system-provider';
-import { UserStorageUri } from './user-storage-uri';
+import { inject, injectable } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
+import { FileSystemProvider } from '@theia/filesystem/lib/common/index.js';
+import { FileService, FileServiceContribution } from '@theia/filesystem/lib/browser/index.js';
+import { DelegatingFileSystemProvider } from '@theia/filesystem/lib/common/index.js';
+import { UserStorageUri } from './user-storage-uri.js';
 import { MaybePromise } from '@theia/core';
 
 @injectable()
@@ -31,7 +31,7 @@ export class UserStorageContribution implements FileServiceContribution {
     protected readonly environments: EnvVariablesServer;
 
     registerFileSystemProviders(service: FileService): void {
-        service.onWillActivateFileSystemProvider(event => {
+        service.onWillActivateFileSystemProvider((event: { scheme: string; waitUntil: (promise: Promise<void>) => void }) => {
             if (event.scheme === UserStorageUri.scheme) {
                 event.waitUntil((async () => {
                     const provider = await this.createProvider(service);
@@ -54,14 +54,14 @@ export class UserStorageContribution implements FileServiceContribution {
         const configDirUri = await this.getCongigDirUri();
         return new DelegatingFileSystemProvider(delegate, {
             uriConverter: {
-                to: resource => {
+                to: (resource: URI) => {
                     const relativePath = UserStorageUri.relative(resource);
                     if (relativePath) {
                         return configDirUri.resolve(relativePath).normalizePath();
                     }
                     return undefined;
                 },
-                from: resource => {
+                from: (resource: URI) => {
                     const relativePath = configDirUri.relative(resource);
                     if (relativePath) {
                         return UserStorageUri.resolve(relativePath);

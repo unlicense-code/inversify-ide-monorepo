@@ -19,29 +19,29 @@
  *--------------------------------------------------------------------------------------------*/
 // some code copied and modified from https://github.com/microsoft/vscode/blob/53eac52308c4611000a171cc7bf1214293473c78/src/vs/workbench/api/browser/mainThreadCustomEditors.ts
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { MAIN_RPC_CONTEXT, CustomEditorsMain, CustomEditorsExt, CustomTextEditorCapabilities } from '../../../common/plugin-api-rpc';
-import { RPCProtocol } from '../../../common/rpc-protocol';
-import { HostedPluginSupport } from '../../../hosted/browser/hosted-plugin';
-import { PluginCustomEditorRegistry } from './plugin-custom-editor-registry';
+import { interfaces } from 'inversify';
+import { MAIN_RPC_CONTEXT, CustomEditorsMain, CustomEditorsExt, CustomTextEditorCapabilities } from '../../../common/plugin-api-rpc.js';
+import { RPCProtocol } from '../../../common/rpc-protocol.js';
+import { HostedPluginSupport } from '../../../hosted/browser/hosted-plugin.js';
+import { PluginCustomEditorRegistry } from './plugin-custom-editor-registry.js';
 import { Emitter } from '@theia/core';
-import { UriComponents } from '../../../common/uri-components';
-import { URI } from '@theia/core/shared/vscode-uri';
-import TheiaURI from '@theia/core/lib/common/uri';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { Reference } from '@theia/core/lib/common/reference';
-import { CancellationToken, CancellationTokenSource } from '@theia/core/lib/common/cancellation';
-import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model';
-import { EditorModelService } from '../text-editor-model-service';
-import { CustomEditorService } from './custom-editor-service';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { UndoRedoService } from '@theia/editor/lib/browser/undo-redo-service';
-import { WebviewsMainImpl } from '../webviews-main';
-import { WidgetManager } from '@theia/core/lib/browser/widget-manager';
-import { ApplicationShell, LabelProvider, Saveable, SaveAsOptions, SaveOptions } from '@theia/core/lib/browser';
+import { UriComponents } from '../../../common/uri-components.js';
+import { URI } from 'vscode-uri';
+import TheiaURI from '@theia/core/lib/common/uri.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { Reference } from '@theia/core/lib/common/reference.js';
+import { CancellationToken, CancellationTokenSource } from '@theia/core';
+import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model.js';
+import { EditorModelService } from '../text-editor-model-service.js';
+import { CustomEditorService } from './custom-editor-service.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { UndoRedoService } from '@theia/editor/lib/browser/undo-redo-service.js';
+import { WebviewsMainImpl } from '../webviews-main.js';
+import { WidgetManager } from '@theia/core/lib/browser/widget-manager.js';
+import { ApplicationShell, LabelProvider, Saveable, SaveAsOptions, SaveOptions } from '@theia/core/lib/browser/index.js';
 import { WebviewPanelOptions } from '@theia/plugin';
-import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
+import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences.js';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
 
 const enum CustomEditorModelType {
     Custom,
@@ -217,7 +217,7 @@ export class CustomEditorsMainImpl implements CustomEditorsMain, Disposable {
     }
 }
 
-export interface CustomEditorModel extends Saveable, Disposable {
+export type CustomEditorModel = Saveable & Disposable & {
     readonly viewType: string;
     readonly resource: URI;
     readonly readonly: boolean;

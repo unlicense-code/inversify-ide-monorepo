@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2025 TypeFox and others.
+// Copyright (C) 2025 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,32 +16,7 @@
 
 export const TextReplacementContribution = Symbol('TextReplacementContribution');
 
-/**
- * Enables adopters to override text in the application. All `TextReplacementContribution`s need to be bound in the `frontendPreload` scope of the package.json.
- *
- * @example Create a text replacement contribution
- * ```typescript
- *          import { TextReplacementContribution } from '@theia/core/lib/browser/preload/text-replacement-contribution';
- *          export class TextSampleReplacementContribution implements TextReplacementContribution {
- *              getReplacement(locale: string): Record<string, string> {
- *                  switch (locale) {
- *                      case 'en': {
- *                          return {
- *                              'About': 'About Theia',
- *                          };
- *                      }
- *                      case 'de': {
- *                          return {
- *                              'About': 'Über Theia',
- *                          };
- *                      }
- *                  }
- *                  return {};
- *              }
- *          }
- * ```
- */
-export interface TextReplacementContribution {
+export type TextReplacementContribution = {
     /**
      * This method returns a map of **default values** and their replacement values for the specified locale.
      * **Do not** use the keys of the `nls.localization` call, but the English default values.

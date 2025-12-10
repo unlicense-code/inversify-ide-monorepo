@@ -9,11 +9,11 @@
 // SPDX-License-Identifier: MIT
 // *****************************************************************************
 
-import { BasePromptFragment } from '@theia/ai-core/lib/common';
-import { CHAT_CONTEXT_DETAILS_VARIABLE_ID } from '@theia/ai-chat';
-import { QUERY_DOM_FUNCTION_ID, LAUNCH_BROWSER_FUNCTION_ID, CLOSE_BROWSER_FUNCTION_ID, IS_BROWSER_RUNNING_FUNCTION_ID } from '../common/app-tester-chat-functions';
-import { MCPServerDescription } from '@theia/ai-mcp/lib/common/mcp-server-manager';
-import { LIST_LAUNCH_CONFIGURATIONS_FUNCTION_ID, RUN_LAUNCH_CONFIGURATION_FUNCTION_ID, STOP_LAUNCH_CONFIGURATION_FUNCTION_ID } from '../common/workspace-functions';
+import { BasePromptFragment } from '@theia/ai-core/lib/common/index.js';
+import { CHAT_CONTEXT_DETAILS_VARIABLE_ID } from '@theia/ai-chat/lib/common/index.js';
+import { QUERY_DOM_FUNCTION_ID, LAUNCH_BROWSER_FUNCTION_ID, CLOSE_BROWSER_FUNCTION_ID, IS_BROWSER_RUNNING_FUNCTION_ID } from '../common/app-tester-chat-functions.js';
+import { MCPServerDescription } from '@theia/ai-mcp/lib/common/mcp-server-manager.js';
+import { LIST_LAUNCH_CONFIGURATIONS_FUNCTION_ID, RUN_LAUNCH_CONFIGURATION_FUNCTION_ID, STOP_LAUNCH_CONFIGURATION_FUNCTION_ID } from '../common/workspace-functions.js';
 
 export const REQUIRED_MCP_SERVERS: MCPServerDescription[] = [
     {

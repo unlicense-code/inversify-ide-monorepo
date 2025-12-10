@@ -16,25 +16,25 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { injectable, optional, multiInject, inject, named } from '@theia/core/shared/inversify';
+import { injectable, optional, multiInject, inject, named } from 'inversify';
 import * as semver from 'semver';
 import {
     PluginDeployerResolver, PluginDeployerFileHandler, PluginDeployerDirectoryHandler,
     PluginDeployerEntry, PluginDeployer, PluginDeployerParticipant, PluginDeployerStartContext,
     PluginDeployerResolverInit,
     PluginDeployerEntryType, PluginDeployerHandler, PluginType, UnresolvedPluginEntry, PluginIdentifiers, PluginDeployOptions
-} from '../../common/plugin-protocol';
-import { PluginDeployerEntryImpl } from './plugin-deployer-entry-impl';
+} from '../../common/plugin-protocol.js';
+import { PluginDeployerEntryImpl } from './plugin-deployer-entry-impl.js';
 import {
     PluginDeployerResolverContextImpl,
     PluginDeployerResolverInitImpl
-} from './plugin-deployer-resolver-context-impl';
-import { ProxyPluginDeployerEntry } from './plugin-deployer-proxy-entry-impl';
-import { PluginDeployerFileHandlerContextImpl } from './plugin-deployer-file-handler-context-impl';
-import { PluginDeployerDirectoryHandlerContextImpl } from './plugin-deployer-directory-handler-context-impl';
+} from './plugin-deployer-resolver-context-impl.js';
+import { ProxyPluginDeployerEntry } from './plugin-deployer-proxy-entry-impl.js';
+import { PluginDeployerFileHandlerContextImpl } from './plugin-deployer-file-handler-context-impl.js';
+import { PluginDeployerDirectoryHandlerContextImpl } from './plugin-deployer-directory-handler-context-impl.js';
 import { ILogger, Emitter, ContributionProvider } from '@theia/core';
-import { PluginCliContribution } from './plugin-cli-contribution';
-import { Measurement, Stopwatch } from '@theia/core/lib/common';
+import { PluginCliContribution } from './plugin-cli-contribution.js';
+import { Measurement, Stopwatch } from '@theia/core/lib/common/index.js';
 
 @injectable()
 export class PluginDeployerImpl implements PluginDeployer {

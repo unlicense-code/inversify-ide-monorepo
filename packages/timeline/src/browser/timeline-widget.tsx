@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 RedHat and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Message } from '@theia/core/shared/@lumino/messaging';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
+import { Message } from '@lumino/messaging';
+import { inject, injectable, postConstruct } from 'inversify';
 import {
     ApplicationShell,
     BaseWidget,
@@ -23,15 +23,16 @@ import {
     NavigatableWidget,
     Panel,
     PanelLayout
-} from '@theia/core/lib/browser';
-import { TimelineTreeWidget } from './timeline-tree-widget';
-import { TimelineService, TimelineAggregate } from './timeline-service';
-import { CommandRegistry, SelectionService } from '@theia/core/lib/common';
-import { TimelineEmptyWidget } from './timeline-empty-widget';
-import { toArray } from '@theia/core/shared/@lumino/algorithm';
-import URI from '@theia/core/lib/common/uri';
-import { URI as CodeURI } from '@theia/core/shared/vscode-uri';
-import { nls } from '@theia/core/lib/common/nls';
+} from '@theia/core/lib/browser/index.js';
+import { TimelineTreeWidget } from './timeline-tree-widget.js';
+import { TimelineService, TimelineAggregate } from './timeline-service.js';
+import { CommandRegistry, SelectionService } from '@theia/core/lib/common/index.js';
+import { TimelineEmptyWidget } from './timeline-empty-widget.js';
+import { TimelineChangeEvent, TimelineSource } from '../common/timeline-model.js';
+import { toArray } from '@lumino/algorithm';
+import type { URI } from '@theia/core/lib/common/uri.js';
+import { URI as CodeURI } from 'vscode-uri';
+import { nls } from '@theia/core/lib/common/nls.js';
 
 @injectable()
 export class TimelineWidget extends BaseWidget {
@@ -67,7 +68,7 @@ export class TimelineWidget extends BaseWidget {
         this.containerLayout!.addWidget(this.timelineEmptyWidget);
 
         this.refresh();
-        this.toDispose.push(this.timelineService.onDidChangeTimeline(event => {
+        this.toDispose.push(this.timelineService.onDidChangeTimeline((event: TimelineChangeEvent) => {
             const currentWidgetUri = this.getCurrentWidgetUri();
             if (currentWidgetUri) {
                 this.loadTimeline(currentWidgetUri, event.reset);
@@ -116,7 +117,7 @@ export class TimelineWidget extends BaseWidget {
     }
 
     async loadTimeline(uri: URI, reset: boolean): Promise<void> {
-        for (const source of this.timelineService.getSources().map(s => s.id)) {
+        for (const source of this.timelineService.getSources().map((s: TimelineSource) => s.id)) {
             this.loadTimelineForSource(source, CodeURI.parse(uri.toString()), reset);
         }
     }

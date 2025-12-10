@@ -13,10 +13,10 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import * as React from '@theia/core/shared/react';
-import { injectable } from '@theia/core/shared/inversify';
-import { nls } from '@theia/core/lib/common/nls';
-import { AIConfigurationBaseWidget } from './ai-configuration-base-widget';
+import * as React from 'react';
+import { injectable } from 'inversify';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { AIConfigurationBaseWidget } from './ai-configuration-base-widget.js';
 
 /**
  * Base class for AI configuration widgets that follow the list-detail pattern:

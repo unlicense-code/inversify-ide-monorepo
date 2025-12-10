@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { CommandHandler } from '../../common';
-import { TabBar, Title, Widget } from '../widgets';
-import { ApplicationShell } from './application-shell';
+import { CommandHandler } from '../../common/index.js';
+import { TabBar, Title, Widget } from '../widgets/index.js';
+import { ApplicationShell } from './application-shell.js';
 
 type CurrentWidgetCommandAdapterBooleanCheck = (event: Event) => boolean;
 type CurrentWidgetCommandHandlerBooleanCheck = (title: Title<Widget> | undefined, tabbar: TabBar<Widget> | undefined, event: Event) => boolean;
 
-export interface TabBarContextMenuCommandHandler extends CommandHandler {
+export type TabBarContextMenuCommandHandler = CommandHandler & {
     execute(title: Title<Widget> | undefined, tabbar: TabBar<Widget> | undefined, event: Event): unknown;
     isEnabled?: CurrentWidgetCommandHandlerBooleanCheck;
     isVisible?: CurrentWidgetCommandHandlerBooleanCheck;

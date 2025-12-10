@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, named, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, named, postConstruct } from 'inversify';
 import {
     ChatResponseContent,
     CodeChatResponseContentImpl,
@@ -40,30 +40,13 @@ import {
     ProgressContentData,
     ErrorContentData,
     QuestionContentData
-} from './chat-model';
-import { SerializableChatResponseContentData } from './chat-model-serialization';
+} from './chat-model.js';
+import { SerializableChatResponseContentData } from './chat-model-serialization.js';
 import { ContributionProvider, ILogger, MaybePromise } from '@theia/core';
 
 export const ChatContentDeserializer = Symbol('ChatContentDeserializer');
 
-/**
- * A deserializer for a specific kind of chat response content.
- *
- * Deserializers are responsible for reconstructing `ChatResponseContent` instances
- * from their serialized data representations. Each deserializer handles a single
- * content type identified by its `kind` property.
- *
- * @template T The type of the data object that this deserializer can process.
- *
- * @example
- * ```typescript
- * const textDeserializer: ChatContentDeserializer<TextContentData> = {
- *     kind: 'text',
- *     deserialize: (data) => new TextChatResponseContentImpl(data.content)
- * };
- * ```
- */
-export interface ChatContentDeserializer<T = unknown> {
+export type ChatContentDeserializer<T = unknown> = {
     /**
      * The unique identifier for the content type this deserializer handles.
      * This must match the `kind` property of the serialized content data.
@@ -79,34 +62,7 @@ export interface ChatContentDeserializer<T = unknown> {
     deserialize(data: T): MaybePromise<ChatResponseContent>;
 }
 
-/**
- * Contribution point for registering chat content deserializers.
- *
- * Implement this interface to contribute custom deserializers for application-specific
- * or extension-specific chat response content types. Multiple contributions can be
- * registered, and all will be collected via the contribution provider pattern.
- *
- * @example
- * ```typescript
- * @injectable()
- * export class MyDeserializerContribution implements ChatContentDeserializerContribution {
- *     registerDeserializers(registry: ChatContentDeserializerRegistry): void {
- *         registry.register({
- *             kind: 'customContent',
- *             deserialize: (data: CustomContentData) =>
- *                 new CustomContentImpl(data.title, data.items)
- *         });
- *     }
- * }
- *
- * // In your module:
- * bind(ChatContentDeserializerContribution).to(MyDeserializerContribution).inSingletonScope();
- * ```
- *
- * @see {@link ChatContentDeserializerRegistry} for the registry that collects deserializers
- * @see {@link DefaultChatContentDeserializerContribution} for built-in content type deserializers
- */
-export interface ChatContentDeserializerContribution {
+export type ChatContentDeserializerContribution = {
     /**
      * Registers one or more deserializers with the provided registry.
      *
@@ -118,27 +74,7 @@ export interface ChatContentDeserializerContribution {
 }
 export const ChatContentDeserializerContribution = Symbol('ChatContentDeserializerContribution');
 
-/**
- * Registry for chat content deserializers.
- *
- * This registry maintains a collection of deserializers for different content types
- * and provides methods to register new deserializers and deserialize content data.
- *
- * @example
- * ```typescript
- * // Usage in a service:
- * @inject(ChatContentDeserializerRegistry)
- * protected deserializerRegistry: ChatContentDeserializerRegistry;
- *
- * async restoreContent(): Promise<void> {
- *     const restoredContent = this.deserializerRegistry.deserialize(serializedData);
- * }
- * ```
- *
- * @see {@link ChatContentDeserializerContribution} for how to contribute deserializers
- * @see {@link ChatContentDeserializerRegistryImpl} for the default implementation
- */
-export interface ChatContentDeserializerRegistry {
+export type ChatContentDeserializerRegistry = {
     /**
      * Registers a deserializer for a specific content kind.
      *

@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { OVSXUrlResolver } from '@theia/vsx-registry/lib/common';
-import { SampleAppInfo } from './sample-app-info';
+import { interfaces } from 'inversify';
+import { OVSXUrlResolver } from '@theia/vsx-registry/lib/common/ovsx-client-provider.js';
+import { SampleAppInfo } from './sample-app-info.js';
 
 export function rebindOVSXClientFactory(rebind: interfaces.Rebind): void {
     // rebind the OVSX client factory so that we can replace patterns like "${self}" in the configs:

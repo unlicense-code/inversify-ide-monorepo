@@ -1,6 +1,6 @@
 
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,9 +17,9 @@
 
 // TODO get rid of util files, replace with methods in a responsible class
 
-import URI from '@theia/core/lib/common/uri';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { WorkspaceService } from './workspace-service';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { inject, injectable } from 'inversify';
+import { WorkspaceService } from './workspace-service.js';
 
 /**
  * Collection of workspace utility functions

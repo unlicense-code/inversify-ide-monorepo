@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { UndoRedoHandler } from '@theia/core/lib/browser';
-import { injectable } from '@theia/core/shared/inversify';
-import { ICodeEditor } from '@theia/monaco-editor-core/esm/vs/editor/browser/editorBrowser';
-import { ICodeEditorService } from '@theia/monaco-editor-core/esm/vs/editor/browser/services/codeEditorService';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
+import { UndoRedoHandler } from '@theia/core/lib/browser/index.js';
+import { injectable } from 'inversify';
+import { ICodeEditor } from '@theia/monaco-editor-core/esm/vs/editor/browser/editorBrowser.js';
+import { ICodeEditorService } from '@theia/monaco-editor-core/esm/vs/editor/browser/services/codeEditorService.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
 
 @injectable()
 export abstract class AbstractMonacoUndoRedoHandler implements UndoRedoHandler<ICodeEditor> {

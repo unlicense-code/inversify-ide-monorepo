@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import throttle = require('@theia/core/shared/lodash.throttle');
-import { DebugProtocol } from '@vscode/debugprotocol/lib/debugProtocol';
-import { ConsoleSession, ConsoleItem } from '@theia/console/lib/browser/console-session';
-import { AnsiConsoleItem } from '@theia/console/lib/browser/ansi-console-item';
-import { DebugSession } from '../debug-session';
-import URI from '@theia/core/lib/common/uri';
-import { ExpressionContainer, ExpressionItem } from './debug-console-items';
-import { Severity } from '@theia/core/lib/common/severity';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { DebugSessionManager } from '../debug-session-manager';
+import throttle from 'lodash/throttle.js';
+import { DebugProtocol } from '@vscode/debugprotocol/lib/debugProtocol.js';
+import { ConsoleSession, ConsoleItem } from '@theia/console/lib/browser/console-session.js';
+import { AnsiConsoleItem } from '@theia/console/lib/browser/ansi-console-item.js';
+import { DebugSession } from '../debug-session.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ExpressionContainer, ExpressionItem } from './debug-console-items.js';
+import { Severity } from '@theia/core/lib/common/severity.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import { DebugSessionManager } from '../debug-session-manager.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { LanguageSelector } from '@theia/monaco-editor-core/esm/vs/editor/common/languageSelector';
+import { LanguageSelector } from '@theia/monaco-editor-core/esm/vs/editor/common/languageSelector.js';
 import { Disposable } from '@theia/core';
 
 export const DebugConsoleSessionFactory = Symbol('DebugConsoleSessionFactory');

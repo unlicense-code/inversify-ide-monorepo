@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,18 +18,18 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { StorageService } from '@theia/core/lib/browser';
-import { NotebookKernel, NotebookTextModelLike, NotebookKernelService } from './notebook-kernel-service';
+import { inject, injectable, postConstruct } from 'inversify';
+import { StorageService } from '@theia/core/lib/browser/index.js';
+import { NotebookKernel, NotebookTextModelLike, NotebookKernelService } from './notebook-kernel-service.js';
 import { CommandService, Disposable } from '@theia/core';
-import { NotebookModel } from '../view-model/notebook-model';
-import { NotebookCommands } from '../contributions/notebook-actions-contribution';
+import { NotebookModel } from '../view-model/notebook-model.js';
+import { NotebookCommands } from '../contributions/notebook-actions-contribution.js';
 
-interface KernelsList {
+type KernelsList = {
     [viewType: string]: string[];
 }
 
-interface MostRecentKernelsResult {
+type MostRecentKernelsResult = {
     selected?: NotebookKernel,
     all: NotebookKernel[]
 }

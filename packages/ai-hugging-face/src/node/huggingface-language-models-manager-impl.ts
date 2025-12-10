@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { LanguageModelRegistry, LanguageModelStatus } from '@theia/ai-core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { HuggingFaceModel } from './huggingface-language-model';
-import { HuggingFaceLanguageModelsManager, HuggingFaceModelDescription } from '../common';
+import { LanguageModelRegistry, LanguageModelStatus } from '@theia/ai-core/lib/common/index.js';
+import { inject, injectable } from 'inversify';
+import { HuggingFaceModel } from './huggingface-language-model.js';
+import { HuggingFaceLanguageModelsManager, HuggingFaceModelDescription } from '../common/index.js';
 
 @injectable()
 export class HuggingFaceLanguageModelsManagerImpl implements HuggingFaceLanguageModelsManager {

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct, interfaces, Container } from '@theia/core/shared/inversify';
+import { inject, injectable, postConstruct, interfaces, Container } from 'inversify';
 import {
     Message, ApplicationShell, Widget, BaseWidget, PanelLayout, StatefulWidget, ViewContainer, codicon, ViewContainerTitleOptions, WidgetManager
-} from '@theia/core/lib/browser';
-import { DebugThreadsWidget } from './debug-threads-widget';
-import { DebugStackFramesWidget } from './debug-stack-frames-widget';
-import { DebugBreakpointsWidget } from './debug-breakpoints-widget';
-import { DebugVariablesWidget } from './debug-variables-widget';
-import { DebugToolBar } from './debug-toolbar-widget';
-import { DebugViewModel } from './debug-view-model';
-import { DebugWatchWidget } from './debug-watch-widget';
-import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
+} from '@theia/core/lib/browser/index.js';
+import { DebugThreadsWidget } from './debug-threads-widget.js';
+import { DebugStackFramesWidget } from './debug-stack-frames-widget.js';
+import { DebugBreakpointsWidget } from './debug-breakpoints-widget.js';
+import { DebugVariablesWidget } from './debug-variables-widget.js';
+import { DebugToolBar } from './debug-toolbar-widget.js';
+import { DebugViewModel } from './debug-view-model.js';
+import { DebugWatchWidget } from './debug-watch-widget.js';
+import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state.js';
 
 export const DEBUG_VIEW_CONTAINER_TITLE_OPTIONS: ViewContainerTitleOptions = {
     label: 'debug',

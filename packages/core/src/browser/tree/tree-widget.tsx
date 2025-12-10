@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,36 +16,36 @@
 
 import { injectable, inject, postConstruct } from 'inversify';
 import { Message } from '@lumino/messaging';
-import { Disposable, MenuPath, SelectionService, Event as TheiaEvent, Emitter } from '../../common';
-import { Key, KeyCode, KeyModifier } from '../keyboard/keys';
-import { ContextMenuRenderer } from '../context-menu-renderer';
-import { StatefulWidget } from '../shell';
+import { Disposable, MenuPath, SelectionService, Event as TheiaEvent, Emitter } from '../../common/index.js';
+import { Key, KeyCode, KeyModifier } from '../keyboard/keys.js';
+import { ContextMenuRenderer } from '../context-menu-renderer.js';
+import { StatefulWidget } from '../shell/shell-layout-restorer.js';
 import {
     EXPANSION_TOGGLE_CLASS, SELECTED_CLASS, COLLAPSED_CLASS, FOCUS_CLASS, BUSY_CLASS, CODICON_TREE_ITEM_CLASSES, CODICON_LOADING_CLASSES, Widget, UnsafeWidgetUtilities,
     addEventListener
-} from '../widgets';
-import { TreeNode, CompositeTreeNode } from './tree';
-import { TreeModel } from './tree-model';
-import { ExpandableTreeNode } from './tree-expansion';
-import { SelectableTreeNode, TreeSelection } from './tree-selection';
-import { TreeDecoratorService, TreeDecoration, DecoratedTreeNode } from './tree-decorator';
-import { notEmpty } from '../../common/objects';
-import { isOSX } from '../../common/os';
-import { ReactWidget } from '../widgets/react-widget';
+} from '../widgets/widget.js';
+import { TreeNode, CompositeTreeNode } from './tree.js';
+import { TreeModel } from './tree-model.js';
+import { ExpandableTreeNode } from './tree-expansion.js';
+import { SelectableTreeNode, TreeSelection } from './tree-selection.js';
+import { TreeDecoratorService, TreeDecoration, DecoratedTreeNode } from './tree-decorator.js';
+import { notEmpty } from '../../common/objects.js';
+import { isOSX } from '../../common/os.js';
+import { ReactWidget } from '../widgets/react-widget.js';
 import * as React from 'react';
 import { Virtuoso, VirtuosoHandle, VirtuosoProps } from 'react-virtuoso';
-import { TopDownTreeIterator } from './tree-iterator';
-import { SearchBox, SearchBoxFactory, SearchBoxProps } from './search-box';
-import { TreeSearch } from './tree-search';
+import { TopDownTreeIterator } from './tree-iterator.js';
+import { SearchBox, SearchBoxFactory, SearchBoxProps } from './search-box.js';
+import { TreeSearch } from './tree-search.js';
 import { ElementExt } from '@lumino/domutils';
-import { TreeWidgetSelection } from './tree-widget-selection';
-import { MaybePromise } from '../../common/types';
-import { LabelProvider } from '../label-provider';
-import { CorePreferences } from '../../common/core-preferences';
-import { TreeFocusService } from './tree-focus-service';
+import { TreeWidgetSelection } from './tree-widget-selection.js';
+import { MaybePromise } from '../../common/types.js';
+import { LabelProvider } from '../label-provider.js';
+import { CorePreferences } from '../../common/core-preferences.js';
+import { TreeFocusService } from './tree-focus-service.js';
 import { useEffect } from 'react';
-import { PREFERENCE_NAME_TREE_INDENT } from '../../common/tree-preference';
-import { PreferenceService, PreferenceChange } from '../../common/preferences';
+import { PREFERENCE_NAME_TREE_INDENT } from '../../common/tree-preference.js';
+import { PreferenceService, PreferenceChange } from '../../common/preferences/index.js';
 
 const debounce = require('lodash.debounce');
 
@@ -68,18 +68,12 @@ export const TREE_NODE_INDENT_GUIDE_CLASS = 'theia-tree-node-indent';
  */
 export const SCROLL_BOTTOM_THRESHOLD = 30;
 
-/**
- * Tree scroll event data.
- */
-export interface TreeScrollEvent {
+export type TreeScrollEvent = {
     readonly scrollTop: number;
     readonly scrollLeft: number;
 }
 
-/**
- * Tree scroll state data.
- */
-export interface TreeScrollState {
+export type TreeScrollState = {
     readonly scrollTop: number;
     readonly isAtBottom: boolean;
     readonly scrollHeight?: number;
@@ -88,10 +82,7 @@ export interface TreeScrollState {
 
 export const TreeProps = Symbol('TreeProps');
 
-/**
- * Representation of tree properties.
- */
-export interface TreeProps {
+export type TreeProps = {
 
     /**
      * The path of the context menu that one can use to contribute context menu items to the tree widget.
@@ -141,10 +132,7 @@ export interface TreeProps {
     readonly viewProps?: VirtuosoProps<unknown, unknown>;
 }
 
-/**
- * Representation of node properties.
- */
-export interface NodeProps {
+export type NodeProps = {
 
     /**
      * A root relative number representing the hierarchical depth of the actual node. Root is `0`, its children have `1` and so on.
@@ -544,6 +532,7 @@ export class TreeWidget extends ReactWidget implements StatefulWidget {
             if (this.props.virtualized === false) {
                 return <this.ScrollingRowRenderer rows={rows} />;
             }
+            const { width: _width, height: _height, rows: _rows, ...safeViewProps } = this.props.viewProps || {};
             return <TreeWidget.View
                 ref={view => this.view = (view || undefined)}
                 width={this.node.offsetWidth}
@@ -552,7 +541,7 @@ export class TreeWidget extends ReactWidget implements StatefulWidget {
                 renderNodeRow={this.renderNodeRow}
                 scrollToRow={this.scrollToRow}
                 onScrollEmitter={this.onScrollEmitter}
-                {...this.props.viewProps}
+                {...safeViewProps}
             />;
         }
         // eslint-disable-next-line no-null/no-null
@@ -1636,7 +1625,7 @@ export namespace TreeWidget {
     /**
      * Representation of the tree view properties.
      */
-    export interface ViewProps extends VirtuosoProps<unknown, unknown> {
+    export interface ViewProps extends Omit<VirtuosoProps<unknown, unknown>, 'rows' | 'width' | 'height'> {
         /**
          * The width property.
          */

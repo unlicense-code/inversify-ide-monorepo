@@ -16,11 +16,13 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { createProxyIdentifier, RPCProtocol } from './rpc-protocol';
+/// <reference types="@theia/plugin" />
+
+import { createProxyIdentifier, RPCProtocol } from './rpc-protocol.js';
 import * as theia from '@theia/plugin';
-import { PluginLifecycle, PluginModel, PluginMetadata, PluginPackage, IconUrl, PluginJsonValidationContribution } from './plugin-protocol';
-import { QueryParameters } from './env';
-import { TextEditorCursorStyle } from './editor-options';
+import { PluginLifecycle, PluginModel, PluginMetadata, PluginPackage, IconUrl, PluginJsonValidationContribution } from './plugin-protocol.js';
+import { QueryParameters } from './env.js';
+import { TextEditorCursorStyle } from './editor-options.js';
 import {
     ConfigurationTarget,
     TextEditorLineNumbersStyle,
@@ -30,8 +32,8 @@ import {
     TextDocumentChangeReason,
     IndentAction,
     NotebookRendererScript,
-} from '../plugin/types-impl';
-import { UriComponents } from './uri-components';
+} from '../plugin/types-impl.js';
+import { UriComponents } from './uri-components.js';
 import {
     SerializedDocumentFilter,
     CompletionContext,
@@ -92,48 +94,48 @@ import {
     DocumentDropEditProviderMetadata,
     DebugStackFrameDTO,
     DebugThreadDTO
-} from './plugin-api-rpc-model';
-import { ExtPluginApi } from './plugin-ext-api-contribution';
-import { KeysToAnyValues, KeysToKeysToAnyValue } from './types';
+} from './plugin-api-rpc-model.js';
+import { ExtPluginApi } from './plugin-ext-api-contribution.js';
+import { KeysToAnyValues, KeysToKeysToAnyValue } from './types.js';
 import {
     AuthenticationProviderAuthenticationSessionsChangeEvent,
     CancellationToken,
     Progress,
     ProgressOptions,
 } from '@theia/plugin';
-import { DebuggerDescription } from '@theia/debug/lib/common/debug-service';
+import { DebuggerDescription } from '@theia/debug/lib/common/debug-service.js';
 import { DebugProtocol } from '@vscode/debugprotocol';
-import { SymbolInformation } from '@theia/core/shared/vscode-languageserver-protocol';
-import * as files from '@theia/filesystem/lib/common/files';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
-import { ResourceLabelFormatter } from '@theia/core/lib/common/label-protocol';
+import { SymbolInformation } from 'vscode-languageserver-protocol';
+import * as files from '@theia/filesystem/lib/common/files.js';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
+import { ResourceLabelFormatter } from '@theia/core/lib/common/label-protocol.js';
 import type {
     InternalTimelineOptions,
     Timeline,
     TimelineChangeEvent,
     TimelineProviderDescriptor
-} from '@theia/timeline/lib/common/timeline-model';
-import { SerializableEnvironmentVariableCollection } from '@theia/terminal/lib/common/shell-terminal-protocol';
-import { ThemeType } from '@theia/core/lib/common/theme';
-import { Disposable } from '@theia/core/lib/common/disposable';
-import { isString, isObject, QuickInputButtonHandle } from '@theia/core/lib/common';
-import { Severity } from '@theia/core/lib/common/severity';
-import { DebugConfiguration, DebugSessionOptions } from '@theia/debug/lib/common/debug-configuration';
-import * as notebookCommon from '@theia/notebook/lib/common';
-import { CellExecutionUpdateType, CellRange, NotebookCellExecutionState } from '@theia/notebook/lib/common';
-import { LanguagePackBundle } from './language-pack-service';
-import { AccessibilityInformation } from '@theia/core/lib/common/accessibility';
+} from '@theia/timeline/lib/common/timeline-model.js';
+import { SerializableEnvironmentVariableCollection } from '@theia/terminal/lib/common/shell-terminal-protocol.js';
+import { ThemeType } from '@theia/core/lib/common/theme.js';
+import { Disposable } from '@theia/core/lib/common/disposable.js';
+import { isString, isObject, QuickInputButtonHandle } from '@theia/core/lib/common/index.js';
+import { Severity } from '@theia/core/lib/common/severity.js';
+import { DebugConfiguration, DebugSessionOptions } from '@theia/debug/lib/common/debug-configuration.js';
+import * as notebookCommon from '@theia/notebook/lib/common/index.js';
+import { CellExecutionUpdateType, CellRange, NotebookCellExecutionState } from '@theia/notebook/lib/common/index.js';
+import { LanguagePackBundle } from './language-pack-service.js';
+import { AccessibilityInformation } from '@theia/core/lib/common/accessibility.js';
 
-import { TreeDelta } from '@theia/test/lib/common/tree-delta';
-import { TestItemDTO, TestOutputDTO, TestRunDTO, TestRunProfileDTO, TestRunRequestDTO, TestStateChangeDTO } from './test-types';
-import { ArgumentProcessor } from './commands';
-import { McpServerDefinitionRegistryMain, McpServerDefinitionRegistryExt } from './lm-protocol';
+import { TreeDelta } from '@theia/test/lib/common/tree-delta.js';
+import { TestItemDTO, TestOutputDTO, TestRunDTO, TestRunProfileDTO, TestRunRequestDTO, TestStateChangeDTO } from './test-types.js';
+import { ArgumentProcessor } from './commands.js';
+import { McpServerDefinitionRegistryMain, McpServerDefinitionRegistryExt } from './lm-protocol.js';
 
-export interface PreferenceData {
+export type PreferenceData = {
     [scope: number]: any;
 }
 
-export interface Plugin {
+export type Plugin = {
     pluginPath: string | undefined;
     pluginFolder: string;
     pluginUri: string;
@@ -143,7 +145,7 @@ export interface Plugin {
     isUnderDevelopment: boolean;
 }
 
-export interface ConfigStorage {
+export type ConfigStorage = {
     hostLogPath: string;
     hostStoragePath?: string;
     hostGlobalStoragePath: string;
@@ -174,7 +176,7 @@ export enum ExtensionKind {
     Workspace = 2
 }
 
-export interface EnvInit {
+export type EnvInit = {
     queryParams: QueryParameters;
     language: string;
     shell: string;
@@ -185,12 +187,12 @@ export interface EnvInit {
     appUriScheme: string;
 }
 
-export interface PluginAPI {
+export type PluginAPI = {
 
 }
 
 export const PluginManager = Symbol.for('PluginManager');
-export interface PluginManager {
+export type PluginManager = {
     getAllPlugins(): Plugin[];
     getPluginById(pluginId: string): Plugin | undefined;
     getPluginExport(pluginId: string): PluginAPI | undefined;
@@ -201,7 +203,7 @@ export interface PluginManager {
     onDidChange: theia.Event<void>;
 }
 
-export interface PluginAPIFactory {
+export type PluginAPIFactory = {
     (plugin: Plugin): typeof theia;
 }
 
@@ -245,7 +247,7 @@ export const emptyPlugin: Plugin = {
     isUnderDevelopment: false
 };
 
-export interface PluginManagerInitializeParams {
+export type PluginManagerInitializeParams = {
     preferences: PreferenceData
     globalState: KeysToKeysToAnyValue
     workspaceState: KeysToKeysToAnyValue
@@ -257,13 +259,13 @@ export interface PluginManagerInitializeParams {
     supportedActivationEvents?: string[]
 }
 
-export interface PluginManagerStartParams {
+export type PluginManagerStartParams = {
     plugins: PluginMetadata[]
     configStorage: ConfigStorage
     activationEvents: string[]
 }
 
-export interface AbstractPluginManagerExt<P extends Record<string, any>> {
+export type AbstractPluginManagerExt<P extends Record<string, any>> = {
     /** initialize the manager, should be called only once */
     $init(params: P): Promise<void>;
 
@@ -283,9 +285,9 @@ export interface AbstractPluginManagerExt<P extends Record<string, any>> {
     $activatePlugin(id: string): Promise<void>;
 }
 
-export interface PluginManagerExt extends AbstractPluginManagerExt<PluginManagerInitializeParams> { }
+export type PluginManagerExt = AbstractPluginManagerExt<PluginManagerInitializeParams> & {}
 
-export interface CommandRegistryMain {
+export type CommandRegistryMain = {
     $registerCommand(command: theia.CommandDescription): void;
     $unregisterCommand(id: string): void;
 
@@ -299,12 +301,12 @@ export interface CommandRegistryMain {
     registerArgumentProcessor(processor: ArgumentProcessor): void;
 }
 
-export interface CommandRegistryExt {
+export type CommandRegistryExt = {
     $executeCommand<T>(id: string, ...ars: any[]): PromiseLike<T | undefined>;
     registerArgumentProcessor(processor: ArgumentProcessor): void;
 }
 
-export interface TerminalServiceExt {
+export type TerminalServiceExt = {
     $startProfile(providerId: string, cancellationToken: theia.CancellationToken): Promise<string>;
     $terminalCreated(id: string, name: string): void;
     $terminalNameChanged(id: string, name: string): void;
@@ -322,24 +324,24 @@ export interface TerminalServiceExt {
     $setShell(shell: string): void;
     $reportOutputMatch(observerId: string, groups: string[]): void;
 }
-export interface OutputChannelRegistryExt {
+export type OutputChannelRegistryExt = {
     createOutputChannel(name: string, pluginInfo: PluginInfo): theia.OutputChannel,
     createOutputChannel(name: string, pluginInfo: PluginInfo, options: { log: true }): theia.LogOutputChannel
 }
 
-export interface ConnectionMain {
+export type ConnectionMain = {
     $createConnection(id: string): Promise<void>;
     $deleteConnection(id: string): Promise<void>;
     $sendMessage(id: string, message: string): void;
 }
 
-export interface ConnectionExt {
+export type ConnectionExt = {
     $createConnection(id: string): Promise<void>;
     $deleteConnection(id: string): Promise<void>
     $sendMessage(id: string, message: string): void;
 }
 
-export interface TerminalServiceMain {
+export type TerminalServiceMain = {
     /**
      * Create new Terminal with Terminal options.
      * @param options - object with parameters to create new terminal.
@@ -474,11 +476,11 @@ export interface TerminalServiceMain {
     $unregisterTerminalObserver(id: string): unknown;
 }
 
-export interface TerminalOptions extends theia.TerminalOptions {
+export type TerminalOptions = theia.TerminalOptions & {
     iconUrl?: string | { light: string; dark: string } | ThemeIcon;
 }
 
-export interface AutoFocus {
+export type AutoFocus = {
     autoFocusFirstEntry?: boolean;
     // TODO
 }
@@ -489,23 +491,23 @@ export enum MainMessageType {
     Info
 }
 
-export interface MainMessageOptions {
+export type MainMessageOptions = {
     detail?: string;
     modal?: boolean
     onCloseActionHandle?: number
 }
 
-export interface MainMessageItem {
+export type MainMessageItem = {
     title: string,
     isCloseAffordance?: boolean;
     handle?: number
 }
 
-export interface MessageRegistryMain {
+export type MessageRegistryMain = {
     $showMessage(type: MainMessageType, message: string, options: MainMessageOptions, actions: MainMessageItem[]): PromiseLike<number | undefined>;
 }
 
-export interface StatusBarMessageRegistryMain {
+export type StatusBarMessageRegistryMain = {
     $setMessage(id: string,
         name: string | undefined,
         text: string | undefined,
@@ -521,11 +523,11 @@ export interface StatusBarMessageRegistryMain {
     $dispose(id: string): void;
 }
 
-export interface StatusBarMessageRegistryExt {
+export type StatusBarMessageRegistryExt = {
     $getMessage(id: string, cancellation: CancellationToken): theia.ProviderResult<string | MarkdownString>;
 }
 
-export interface QuickOpenExt {
+export type QuickOpenExt = {
     $onItemSelected(handle: number): void;
     $validateInput(input: string): Promise<string | { content: string; severity: Severity; } | null | undefined>;
 
@@ -549,10 +551,7 @@ export interface QuickOpenExt {
     createInputBox(plugin: Plugin): theia.InputBox;
 }
 
-/**
- * Options to configure the behaviour of a file open dialog.
- */
-export interface OpenDialogOptionsMain {
+export type OpenDialogOptionsMain = {
 
     /**
      * Dialog title.
@@ -598,10 +597,7 @@ export interface OpenDialogOptionsMain {
     filters?: { [name: string]: string[] };
 }
 
-/**
- * Options to configure the behaviour of a file save dialog.
- */
-export interface SaveDialogOptionsMain {
+export type SaveDialogOptionsMain = {
 
     /**
      * Dialog title.
@@ -632,24 +628,18 @@ export interface SaveDialogOptionsMain {
     filters?: { [name: string]: string[] };
 }
 
-/**
- * Options to configure the behaviour of a file upload dialog.
- */
-export interface UploadDialogOptionsMain {
+export type UploadDialogOptionsMain = {
     /**
      * The resource, where files should be uploaded.
      */
     defaultUri?: string;
 }
 
-export interface FileUploadResultMain {
+export type FileUploadResultMain = {
     uploaded: string[]
 }
 
-/**
- * Options to configure the behaviour of the [workspace folder](#WorkspaceFolder) pick UI.
- */
-export interface WorkspaceFolderPickOptionsMain {
+export type WorkspaceFolderPickOptionsMain = {
     /**
      * An optional string to show as place holder in the input box to guide the user what to pick on.
      */
@@ -661,7 +651,7 @@ export interface WorkspaceFolderPickOptionsMain {
     ignoreFocusOut?: boolean;
 }
 
-export interface TransferQuickPickItem {
+export type TransferQuickPickItem = {
     handle: number;
     kind: 'item' | 'separator',
     label: string;
@@ -673,7 +663,7 @@ export interface TransferQuickPickItem {
     buttons?: readonly TransferQuickInputButton[];
 }
 
-export interface TransferQuickPickOptions<T extends TransferQuickPickItem> {
+export type TransferQuickPickOptions<T extends TransferQuickPickItem> = {
     title?: string;
     placeHolder?: string;
     matchOnDescription?: boolean;
@@ -687,7 +677,7 @@ export interface TransferQuickPickOptions<T extends TransferQuickPickItem> {
     onDidFocus?: (entry: T) => void;
 }
 
-export interface TransferQuickInputButton {
+export type TransferQuickInputButton = {
     handle?: number;
     readonly iconUrl?: string | { light: string; dark: string } | ThemeIcon;
     readonly tooltip?: string | undefined;
@@ -695,7 +685,7 @@ export interface TransferQuickInputButton {
 
 export type TransferQuickInput = TransferQuickPick | TransferInputBox;
 
-export interface BaseTransferQuickInput {
+export type BaseTransferQuickInput = {
     [key: string]: any;
     id: number;
     type?: 'quickPick' | 'inputBox';
@@ -704,7 +694,7 @@ export interface BaseTransferQuickInput {
     visible?: boolean;
 }
 
-export interface TransferQuickPick extends BaseTransferQuickInput {
+export type TransferQuickPick = BaseTransferQuickInput & {
     type?: 'quickPick';
     value?: string;
     placeholder?: string;
@@ -719,7 +709,7 @@ export interface TransferQuickPick extends BaseTransferQuickInput {
     sortByLabel?: boolean;
 }
 
-export interface TransferInputBox extends BaseTransferQuickInput {
+export type TransferInputBox = BaseTransferQuickInput & {
     type?: 'inputBox';
     value?: string;
     placeholder?: string;
@@ -729,7 +719,7 @@ export interface TransferInputBox extends BaseTransferQuickInput {
     validationMessage?: string;
 }
 
-export interface IInputBoxOptions {
+export type IInputBoxOptions = {
     value?: string;
     valueSelection?: [number, number];
     prompt?: string;
@@ -738,7 +728,7 @@ export interface IInputBoxOptions {
     ignoreFocusOut?: boolean;
 }
 
-export interface QuickOpenMain {
+export type QuickOpenMain = {
     $show(instance: number, options: TransferQuickPickOptions<TransferQuickPickItem>, token: CancellationToken): Promise<number | number[] | undefined>;
     $setItems(instance: number, items: TransferQuickPickItem[]): Promise<any>;
     $setError(instance: number, error: Error): Promise<void>;
@@ -750,7 +740,7 @@ export interface QuickOpenMain {
     $showInputBox(options: TransferInputBox, validateInput: boolean): Promise<string | undefined>;
 }
 
-export interface FindFilesOptions {
+export type FindFilesOptions = {
     exclude?: string;
     useDefaultExcludes?: boolean;
     useDefaultSearchExcludes?: boolean;
@@ -759,7 +749,7 @@ export interface FindFilesOptions {
     fuzzy?: boolean;
 }
 
-export interface WorkspaceMain {
+export type WorkspaceMain = {
     $pickWorkspaceFolder(options: WorkspaceFolderPickOptionsMain): Promise<theia.WorkspaceFolder | undefined>;
     $startFileSearch(includePattern: string, includeFolder: string | undefined, options: FindFilesOptions, token: theia.CancellationToken): PromiseLike<UriComponents[]>;
     $findTextInFiles(query: theia.TextSearchQuery, options: theia.FindTextInFilesOptions, searchRequestId: number,
@@ -779,7 +769,7 @@ export interface WorkspaceMain {
     $getValidEncoding(uri: UriComponents | undefined, detectedEncoding: string | undefined, opts: { encoding: string; } | undefined): Promise<string>;
 }
 
-export interface WorkspaceExt {
+export type WorkspaceExt = {
     $onWorkspaceFoldersChanged(event: WorkspaceRootsChangeEvent): void;
     $onWorkspaceLocationChanged(event: files.FileStat | undefined): void;
     $provideTextDocumentContent(uri: string): Promise<string | undefined | null>;
@@ -792,29 +782,29 @@ export interface WorkspaceExt {
     $provideCanonicalUri(uri: string, targetScheme: string, token: CancellationToken): Promise<string | undefined>;
 }
 
-export interface TimelineExt {
+export type TimelineExt = {
     $getTimeline(source: string, uri: UriComponents, options: theia.TimelineOptions, internalOptions?: InternalTimelineOptions): Promise<Timeline | undefined>;
 }
 
-export interface TimelineMain {
+export type TimelineMain = {
     $registerTimelineProvider(provider: TimelineProviderDescriptor): Promise<void>;
     $fireTimelineChanged(e: TimelineChangeEvent): Promise<void>;
     $unregisterTimelineProvider(source: string): Promise<void>;
 }
 
-export interface ThemingExt {
+export type ThemingExt = {
     $onColorThemeChange(type: ThemeType): void;
 }
-export interface ThemingMain extends Disposable {
+export type ThemingMain = Disposable & {
 }
 
-export interface DialogsMain {
+export type DialogsMain = {
     $showOpenDialog(options: OpenDialogOptionsMain): Promise<string[] | undefined>;
     $showSaveDialog(options: SaveDialogOptionsMain): Promise<string | undefined>;
     $showUploadDialog(options: UploadDialogOptionsMain): Promise<string[] | undefined>;
 }
 
-export interface RegisterTreeDataProviderOptions {
+export type RegisterTreeDataProviderOptions = {
     manageCheckboxStateManually?: boolean;
     showCollapseAll?: boolean
     canSelectMany?: boolean
@@ -822,13 +812,13 @@ export interface RegisterTreeDataProviderOptions {
     dropMimeTypes?: string[]
 }
 
-export interface TreeViewRevealOptions {
+export type TreeViewRevealOptions = {
     readonly select: boolean
     readonly focus: boolean
     readonly expand: boolean | number
 }
 
-export interface TreeViewsMain {
+export type TreeViewsMain = {
     $registerTreeDataProvider(treeViewId: string, options?: RegisterTreeDataProviderOptions): void;
     $readDroppedFile(contentId: string): Promise<BinaryBuffer>;
     $unregisterTreeDataProvider(treeViewId: string): void;
@@ -847,7 +837,7 @@ export class DataTransferFileDTO {
     }
 }
 
-export interface TreeViewsExt {
+export type TreeViewsExt = {
     $checkStateChanged(treeViewId: string, itemIds: { id: string, checked: boolean }[]): Promise<void>;
     $dragStarted(treeViewId: string, treeItemIds: string[], token: CancellationToken): Promise<UriComponents[] | undefined>;
     $dragEnd(treeViewId: string): Promise<void>;
@@ -860,13 +850,13 @@ export interface TreeViewsExt {
     $setVisible(treeViewId: string, visible: boolean): Promise<void>;
 }
 
-export interface TreeViewItemCheckboxInfo {
+export type TreeViewItemCheckboxInfo = {
     checked: boolean;
     tooltip?: string;
     accessibilityInformation?: AccessibilityInformation
 }
 
-export interface TreeViewItem {
+export type TreeViewItem = {
 
     id: string;
 
@@ -898,7 +888,7 @@ export interface TreeViewItem {
 
 }
 
-export interface TreeViewItemReference {
+export type TreeViewItemReference = {
     viewId: string
     itemId: string
 }
@@ -926,17 +916,17 @@ export enum TreeViewItemCollapsibleState {
     Expanded = 2
 }
 
-export interface WindowMain {
+export type WindowMain = {
     $openUri(uri: UriComponents): Promise<boolean>;
     $asExternalUri(uri: UriComponents): Promise<UriComponents>;
 }
 
-export interface WindowStateExt {
+export type WindowStateExt = {
     $onDidChangeWindowFocus(focused: boolean): void;
     $onDidChangeWindowActive(active: boolean): void;
 }
 
-export interface NotificationExt {
+export type NotificationExt = {
     withProgress<R>(
         options: ProgressOptions,
         task: (progress: Progress<{ message?: string; increment?: number }>, token: CancellationToken) => PromiseLike<R>
@@ -944,7 +934,7 @@ export interface NotificationExt {
     $acceptProgressCanceled(progressId: string): void;
 }
 
-export interface ScmCommandArg {
+export type ScmCommandArg = {
     sourceControlHandle: number
     resourceGroupHandle?: number
     resourceStateHandle?: number
@@ -955,7 +945,7 @@ export namespace ScmCommandArg {
     }
 }
 
-export interface ScmExt {
+export type ScmExt = {
     createSourceControl(plugin: Plugin, id: string, label: string, rootUri?: theia.Uri): theia.SourceControl;
     getLastInputBox(plugin: Plugin): theia.SourceControlInputBox | undefined;
     $onInputBoxValueChange(sourceControlHandle: number, message: string): Promise<void>;
@@ -970,26 +960,26 @@ export namespace TimelineCommandArg {
         return isObject(arg) && 'timelineHandle' in arg;
     }
 }
-export interface TimelineCommandArg {
+export type TimelineCommandArg = {
     timelineHandle: string;
     source: string;
     uri: string;
 }
 
-export interface DecorationRequest {
+export type DecorationRequest = {
     readonly id: number;
     readonly uri: UriComponents;
 }
 
 export type DecorationData = [boolean, string, string, ThemeColor];
-export interface DecorationReply { [id: number]: DecorationData; }
+export type DecorationReply = { [id: number]: DecorationData; }
 
 export namespace CommentsCommandArg {
     export function is(arg: unknown): arg is CommentsCommandArg {
         return isObject(arg) && 'commentControlHandle' in arg && 'commentThreadHandle' in arg && 'text' in arg && !('commentUniqueId' in arg);
     }
 }
-export interface CommentsCommandArg {
+export type CommentsCommandArg = {
     commentControlHandle: number;
     commentThreadHandle: number;
     text: string
@@ -1000,7 +990,7 @@ export namespace CommentsContextCommandArg {
         return isObject(arg) && 'commentControlHandle' in arg && 'commentThreadHandle' in arg && 'commentUniqueId' in arg && !('text' in arg);
     }
 }
-export interface CommentsContextCommandArg {
+export type CommentsContextCommandArg = {
     commentControlHandle: number;
     commentThreadHandle: number;
     commentUniqueId: number
@@ -1011,25 +1001,25 @@ export namespace CommentsEditCommandArg {
         return isObject(arg) && 'commentControlHandle' in arg && 'commentThreadHandle' in arg && 'commentUniqueId' in arg && 'text' in arg;
     }
 }
-export interface CommentsEditCommandArg {
+export type CommentsEditCommandArg = {
     commentControlHandle: number;
     commentThreadHandle: number;
     commentUniqueId: number
     text: string
 }
 
-export interface DecorationsExt {
+export type DecorationsExt = {
     registerFileDecorationProvider(provider: theia.FileDecorationProvider, pluginInfo: PluginInfo): theia.Disposable
     $provideDecorations(handle: number, requests: DecorationRequest[], token: CancellationToken): Promise<DecorationReply>;
 }
 
-export interface DecorationsMain {
+export type DecorationsMain = {
     $registerDecorationProvider(handle: number): Promise<void>;
     $unregisterDecorationProvider(handle: number): void;
     $onDidChange(handle: number, resources: UriComponents[] | null): void;
 }
 
-export interface ScmMain {
+export type ScmMain = {
     $registerSourceControl(sourceControlHandle: number, id: string, label: string, rootUri?: UriComponents): Promise<void>;
     $updateSourceControl(sourceControlHandle: number, features: SourceControlProviderFeatures): Promise<void>;
     $unregisterSourceControl(sourceControlHandle: number): Promise<void>;
@@ -1047,7 +1037,7 @@ export interface ScmMain {
     $setInputBoxEnabled(sourceControlHandle: number, enabled: boolean): void;
 }
 
-export interface SourceControlProviderFeatures {
+export type SourceControlProviderFeatures = {
     hasQuickDiffProvider?: boolean;
     count?: number;
     commitTemplate?: string;
@@ -1055,12 +1045,12 @@ export interface SourceControlProviderFeatures {
     statusBarCommands?: Command[];
 }
 
-export interface SourceControlGroupFeatures {
+export type SourceControlGroupFeatures = {
     hideWhenEmpty: boolean | undefined;
     contextValue: string | undefined;
 }
 
-export interface ScmRawResource {
+export type ScmRawResource = {
     handle: number,
     sourceUri: UriComponents,
     icons: (IconUrl | ThemeIcon | undefined)[], /* icons: light, dark */
@@ -1071,25 +1061,25 @@ export interface ScmRawResource {
     command: Command | undefined
 }
 
-export interface ScmRawResourceGroup {
+export type ScmRawResourceGroup = {
     handle: number,
     id: string,
     label: string,
     features: SourceControlGroupFeatures
 }
 
-export interface ScmRawResourceSplice {
+export type ScmRawResourceSplice = {
     start: number,
     deleteCount: number,
     rawResources: ScmRawResource[]
 }
 
-export interface ScmRawResourceSplices {
+export type ScmRawResourceSplices = {
     handle: number,
     splices: ScmRawResourceSplice[]
 }
 
-export interface SourceControlResourceState {
+export type SourceControlResourceState = {
     readonly handle: number
     /**
      * The uri of the underlying resource inside the workspace.
@@ -1113,11 +1103,7 @@ export interface SourceControlResourceState {
     readonly colorId?: string
 }
 
-/**
- * The decorations for a [source control resource state](#SourceControlResourceState).
- * Can be independently specified for light and dark themes.
- */
-export interface SourceControlResourceDecorations {
+export type SourceControlResourceDecorations = {
 
     /**
      * Whether the source control resource state should be striked-through in the UI.
@@ -1140,7 +1126,7 @@ export interface SourceControlResourceDecorations {
     readonly iconPath?: string;
 }
 
-export interface NotificationMain {
+export type NotificationMain = {
     $startProgress(options: NotificationMain.StartProgressOptions): Promise<string>;
     $stopProgress(id: string): void;
     $updateProgress(id: string, report: NotificationMain.ProgressReport): void;
@@ -1170,12 +1156,12 @@ export enum EditorPosition {
     NINE = 8
 }
 
-export interface Position {
+export type Position = {
     readonly lineNumber: number;
     readonly column: number;
 }
 
-export interface Selection {
+export type Selection = {
     /**
      * The line number on which the selection has started.
      */
@@ -1194,7 +1180,7 @@ export interface Selection {
     readonly positionColumn: number;
 }
 
-export interface TextEditorConfiguration {
+export type TextEditorConfiguration = {
     tabSize: number;
     indentSize: number;
     insertSpaces: boolean;
@@ -1202,7 +1188,7 @@ export interface TextEditorConfiguration {
     lineNumbers: TextEditorLineNumbersStyle;
 }
 
-export interface TextEditorConfigurationUpdate {
+export type TextEditorConfigurationUpdate = {
     tabSize?: number | 'auto';
     indentSize?: number | 'tabSize';
     insertSpaces?: boolean | 'auto';
@@ -1217,50 +1203,50 @@ export enum TextEditorRevealType {
     AtTop = 3
 }
 
-export interface SelectionChangeEvent {
+export type SelectionChangeEvent = {
     selections: Selection[];
     source?: string;
 }
 
-export interface EditorChangedPropertiesData {
+export type EditorChangedPropertiesData = {
     options?: TextEditorConfiguration;
     selections?: SelectionChangeEvent;
     visibleRanges?: Range[];
 }
 
-export interface TextEditorPositionData {
+export type TextEditorPositionData = {
     [id: string]: EditorPosition;
 }
 
-export interface TextEditorsExt {
+export type TextEditorsExt = {
     $acceptEditorPropertiesChanged(id: string, props: EditorChangedPropertiesData): void;
     $acceptEditorPositionData(data: TextEditorPositionData): void;
 }
 
-export interface SingleEditOperation {
+export type SingleEditOperation = {
     range?: Range;
     text?: string;
     forceMoveMarkers?: boolean;
 }
 
-export interface UndoStopOptions {
+export type UndoStopOptions = {
     undoStopBefore: boolean;
     undoStopAfter: boolean;
 }
 
-export interface ApplyEditsOptions extends UndoStopOptions {
+export type ApplyEditsOptions = UndoStopOptions & {
     setEndOfLine: EndOfLine | undefined;
 }
 
-export interface SnippetEditOptions extends UndoStopOptions {
+export type SnippetEditOptions = UndoStopOptions & {
     keepWhitespace?: boolean;
 }
 
-export interface ThemeColor {
+export type ThemeColor = {
     id: string;
 }
 
-export interface ThemeIcon {
+export type ThemeIcon = {
     id: string;
     color?: ThemeColor;
 }
@@ -1274,7 +1260,7 @@ export enum TrackedRangeStickiness {
     GrowsOnlyWhenTypingBefore = 2,
     GrowsOnlyWhenTypingAfter = 3,
 }
-export interface ContentDecorationRenderOptions {
+export type ContentDecorationRenderOptions = {
     contentText?: string;
     contentIconPath?: UriComponents;
 
@@ -1291,7 +1277,7 @@ export interface ContentDecorationRenderOptions {
     height?: string;
 }
 
-export interface ThemeDecorationRenderOptions {
+export type ThemeDecorationRenderOptions = {
     backgroundColor?: string | ThemeColor;
 
     outline?: string;
@@ -1323,7 +1309,7 @@ export interface ThemeDecorationRenderOptions {
     after?: ContentDecorationRenderOptions;
 }
 
-export interface DecorationRenderOptions extends ThemeDecorationRenderOptions {
+export type DecorationRenderOptions = ThemeDecorationRenderOptions & {
     isWholeLine?: boolean;
     rangeBehavior?: TrackedRangeStickiness;
     overviewRulerLane?: OverviewRulerLane;
@@ -1332,23 +1318,23 @@ export interface DecorationRenderOptions extends ThemeDecorationRenderOptions {
     dark?: ThemeDecorationRenderOptions;
 }
 
-export interface ThemeDecorationInstanceRenderOptions {
+export type ThemeDecorationInstanceRenderOptions = {
     before?: ContentDecorationRenderOptions;
     after?: ContentDecorationRenderOptions;
 }
 
-export interface DecorationInstanceRenderOptions extends ThemeDecorationInstanceRenderOptions {
+export type DecorationInstanceRenderOptions = ThemeDecorationInstanceRenderOptions & {
     light?: ThemeDecorationInstanceRenderOptions;
     dark?: ThemeDecorationInstanceRenderOptions;
 }
 
-export interface DecorationOptions {
+export type DecorationOptions = {
     range: Range;
     hoverMessage?: MarkdownString | MarkdownString[];
     renderOptions?: DecorationInstanceRenderOptions;
 }
 
-export interface TextEditorsMain {
+export type TextEditorsMain = {
     $tryShowTextDocument(uri: UriComponents, options?: TextDocumentShowOptions): Promise<void>;
     $registerTextEditorDecorationType(key: string, options: DecorationRenderOptions): void;
     $removeTextEditorDecorationType(key: string): void;
@@ -1367,7 +1353,7 @@ export interface TextEditorsMain {
     $getDiffInformation(id: string): Promise<theia.LineChange[]>;
 }
 
-export interface ModelAddedData {
+export type ModelAddedData = {
     uri: UriComponents;
     versionId: number;
     lines: string[];
@@ -1378,7 +1364,7 @@ export interface ModelAddedData {
     encoding: string;
 }
 
-export interface TextEditorAddData {
+export type TextEditorAddData = {
     id: string;
     documentUri: UriComponents;
     options: TextEditorConfiguration;
@@ -1387,7 +1373,7 @@ export interface TextEditorAddData {
     editorPosition?: EditorPosition;
 }
 
-export interface EditorsAndDocumentsDelta {
+export type EditorsAndDocumentsDelta = {
     removedDocuments?: UriComponents[];
     addedDocuments?: ModelAddedData[];
     removedEditors?: string[];
@@ -1400,17 +1386,17 @@ export interface EditorsAndDocumentsDelta {
     newActiveEditor?: string | null;
 }
 
-export interface EditorsAndDocumentsExt {
+export type EditorsAndDocumentsExt = {
     $acceptEditorsAndDocumentsDelta(delta: EditorsAndDocumentsDelta): void;
 }
 
-export interface ModelContentChange {
+export type ModelContentChange = {
     readonly range: Range;
     readonly rangeOffset: number;
     readonly rangeLength: number;
     readonly text: string;
 }
-export interface ModelChangedEvent {
+export type ModelChangedEvent = {
     readonly changes: ModelContentChange[];
 
     readonly eol: string;
@@ -1420,7 +1406,7 @@ export interface ModelChangedEvent {
     readonly reason: TextDocumentChangeReason | undefined;
 }
 
-export interface DocumentsExt {
+export type DocumentsExt = {
     $acceptModelModeChanged(startUrl: UriComponents, oldModeId: string, newModeId: string): void;
     $acceptModelSaved(strUrl: UriComponents): void;
     $acceptModelWillSave(strUrl: UriComponents, reason: theia.TextDocumentSaveReason, saveTimeout: number): Promise<SingleEditOperation[]>;
@@ -1429,19 +1415,19 @@ export interface DocumentsExt {
     $acceptModelChanged(strUrl: UriComponents, e: ModelChangedEvent, isDirty: boolean): void;
 }
 
-export interface DocumentsMain {
+export type DocumentsMain = {
     $tryCreateDocument(options?: { language?: string; content?: string; encoding?: string }): Promise<UriComponents>;
     $tryShowDocument(uri: UriComponents, options?: TextDocumentShowOptions): Promise<void>;
     $tryOpenDocument(uri: UriComponents, encoding?: string): Promise<boolean>;
     $trySaveDocument(uri: UriComponents): Promise<boolean>;
 }
 
-export interface EnvMain {
+export type EnvMain = {
     $getEnvVariable(envVarName: string): Promise<string | undefined>;
     $getClientOperatingSystem(): Promise<theia.OperatingSystem>;
 }
 
-export interface PreferenceRegistryMain {
+export type PreferenceRegistryMain = {
     $updateConfigurationOption(
         target: boolean | ConfigurationTarget | undefined,
         key: string,
@@ -1457,7 +1443,7 @@ export interface PreferenceRegistryMain {
     ): PromiseLike<void>;
 }
 
-export interface PreferenceChangeExt {
+export type PreferenceChangeExt = {
     preferenceName: string,
     newValue: any,
     /**
@@ -1466,17 +1452,17 @@ export interface PreferenceChangeExt {
     scope?: string;
 }
 
-export interface TerminalOptionsExt {
+export type TerminalOptionsExt = {
     attributes?: {
         [key: string]: string;
     }
 }
 
-export interface PreferenceRegistryExt {
+export type PreferenceRegistryExt = {
     $acceptConfigurationChanged(data: { [key: string]: any }, eventData: PreferenceChangeExt[]): void;
 }
 
-export interface OutputChannelRegistryMain {
+export type OutputChannelRegistryMain = {
     $append(channelName: string, value: string, pluginInfo: PluginInfo): PromiseLike<void>;
     $clear(channelName: string): PromiseLike<void>;
     $dispose(channelName: string): PromiseLike<void>;
@@ -1486,44 +1472,44 @@ export interface OutputChannelRegistryMain {
 
 export type CharacterPair = [string, string];
 
-export interface CommentRule {
+export type CommentRule = {
     lineComment?: string;
     blockComment?: CharacterPair;
 }
 
-export interface SerializedRegExp {
+export type SerializedRegExp = {
     pattern: string;
     flags?: string;
 }
 
-export interface SerializedIndentationRule {
+export type SerializedIndentationRule = {
     decreaseIndentPattern?: SerializedRegExp;
     increaseIndentPattern?: SerializedRegExp;
     indentNextLinePattern?: SerializedRegExp;
     unIndentedLinePattern?: SerializedRegExp;
 }
 
-export interface SerializedOnEnterRule {
+export type SerializedOnEnterRule = {
     beforeText: SerializedRegExp;
     afterText?: SerializedRegExp;
     previousLineText?: SerializedRegExp;
     action: SerializedEnterAction;
 }
 
-export interface SerializedEnterAction {
+export type SerializedEnterAction = {
     indentAction: IndentAction;
     outdentCurrentLine?: boolean;
     appendText?: string;
     removeText?: number;
 }
 
-export interface SerializedAutoClosingPair {
+export type SerializedAutoClosingPair = {
     open: string;
     close: string;
     notIn?: string[];
 }
 
-export interface SerializedLanguageConfiguration {
+export type SerializedLanguageConfiguration = {
     comments?: CommentRule;
     brackets?: CharacterPair[];
     wordPattern?: SerializedRegExp;
@@ -1532,7 +1518,7 @@ export interface SerializedLanguageConfiguration {
     autoClosingPairs?: SerializedAutoClosingPair[]
 }
 
-export interface CodeActionDto {
+export type CodeActionDto = {
     title: string;
     edit?: WorkspaceEditDto;
     diagnostics?: MarkerData[];
@@ -1542,7 +1528,7 @@ export interface CodeActionDto {
     disabled?: string;
 }
 
-export interface WorkspaceEditEntryMetadataDto {
+export type WorkspaceEditEntryMetadataDto = {
     needsConfirmation: boolean;
     label: string;
     description?: string;
@@ -1552,14 +1538,14 @@ export interface WorkspaceEditEntryMetadataDto {
     };
 }
 
-export interface WorkspaceFileEditDto {
+export type WorkspaceFileEditDto = {
     oldResource?: UriComponents;
     newResource?: UriComponents;
     options?: FileOperationOptions;
     metadata?: WorkspaceEditEntryMetadataDto;
 }
 
-export interface WorkspaceTextEditDto {
+export type WorkspaceTextEditDto = {
     resource: UriComponents;
     modelVersionId?: number;
     textEdit: TextEdit & { insertAsSnippet?: boolean, keepWhitespace?: boolean };
@@ -1574,7 +1560,7 @@ export namespace WorkspaceTextEditDto {
             && typeof arg.textEdit === 'object';
     }
 }
-export interface WorkspaceEditMetadataDto {
+export type WorkspaceEditMetadataDto = {
     isRefactoring?: boolean;
 }
 
@@ -1595,13 +1581,13 @@ export type CellEditOperationDto =
         cells: NotebookCellDataDto[];
     };
 
-export interface NotebookWorkspaceEditMetadataDto {
+export type NotebookWorkspaceEditMetadataDto = {
     needsConfirmation: boolean;
     label: string;
     description?: string;
 }
 
-export interface WorkspaceNotebookCellEditDto {
+export type WorkspaceNotebookCellEditDto = {
     metadata?: NotebookWorkspaceEditMetadataDto;
     resource: UriComponents;
     cellEdit: CellEditOperationDto;
@@ -1617,11 +1603,11 @@ export namespace WorkspaceNotebookCellEditDto {
     }
 }
 
-export interface WorkspaceEditDto {
+export type WorkspaceEditDto = {
     edits: Array<WorkspaceTextEditDto | WorkspaceFileEditDto | WorkspaceNotebookCellEditDto>;
 }
 
-export interface CommandProperties {
+export type CommandProperties = {
     command: string;
     args?: string[];
     options?: {
@@ -1631,7 +1617,7 @@ export interface CommandProperties {
 }
 
 export type TaskGroupKind = 'build' | 'test' | 'rebuild' | 'clean';
-export interface TaskDto {
+export type TaskDto = {
     type: string;
     executionType?: 'shell' | 'process' | 'customExecution'; // the task execution type
     executionId?: string,
@@ -1652,11 +1638,11 @@ export interface TaskDto {
     [key: string]: any;
 }
 
-export interface RunOptionsDTO {
+export type RunOptionsDTO = {
     reevaluateOnRerun?: boolean;
 }
 
-export interface TaskPresentationOptionsDTO {
+export type TaskPresentationOptionsDTO = {
     reveal?: number;
     focus?: boolean;
     echo?: boolean;
@@ -1666,22 +1652,22 @@ export interface TaskPresentationOptionsDTO {
     close?: boolean;
 }
 
-export interface TaskExecutionDto {
+export type TaskExecutionDto = {
     id: number;
     task: TaskDto;
 }
 
-export interface ProcessTaskDto extends TaskDto, CommandProperties {
+export type ProcessTaskDto = TaskDto & CommandProperties & {
     windows?: CommandProperties;
 }
 
-export interface PluginInfo {
+export type PluginInfo = {
     id: string;
     name: string;
     displayName?: string;
 }
 
-export interface LanguageStatus {
+export type LanguageStatus = {
     readonly id: string;
     readonly name: string;
     readonly selector: SerializedDocumentFilter[];
@@ -1694,7 +1680,7 @@ export interface LanguageStatus {
     readonly accessibilityInfo: theia.AccessibilityInformation | undefined;
 }
 
-export interface LanguagesExt {
+export type LanguagesExt = {
     $provideCompletionItems(handle: number, resource: UriComponents, position: Position,
         context: CompletionContext, token: CancellationToken): Promise<CompletionResultDto | undefined>;
     $resolveCompletionItem(handle: number, chainedId: ChainedCacheId, token: CancellationToken): Promise<Completion | undefined>;
@@ -1780,16 +1766,16 @@ export interface LanguagesExt {
 }
 
 export const LanguagesMainFactory = Symbol('LanguagesMainFactory');
-export interface LanguagesMainFactory {
+export type LanguagesMainFactory = {
     (proxy: RPCProtocol): LanguagesMain;
 }
 
 export const OutputChannelRegistryFactory = Symbol('OutputChannelRegistryFactory');
-export interface OutputChannelRegistryFactory {
+export type OutputChannelRegistryFactory = {
     (): OutputChannelRegistryMain;
 }
 
-export interface LanguagesMain {
+export type LanguagesMain = {
     $getLanguages(): Promise<string[]>;
     $changeLanguage(resource: UriComponents, languageId: string): Promise<void>;
     $setLanguageConfiguration(handle: number, languageId: string, configuration: SerializedLanguageConfiguration): void;
@@ -1839,18 +1825,18 @@ export interface LanguagesMain {
     $registerInlineCompletionsSupport(handle: number, selector: SerializedDocumentFilter[]): void;
 }
 
-export interface WebviewInitData {
+export type WebviewInitData = {
     webviewResourceRoot: string
     webviewCspSource: string
 }
 
-export interface WebviewPanelViewState {
+export type WebviewPanelViewState = {
     readonly active: boolean;
     readonly visible: boolean;
     readonly position: number;
 }
 
-export interface WebviewsExt {
+export type WebviewsExt = {
     $onMessage(handle: string, message: any): void;
     $onDidChangeWebviewPanelViewState(handle: string, newState: WebviewPanelViewState): void;
     $onDidDisposeWebviewPanel(handle: string): PromiseLike<void>;
@@ -1862,7 +1848,7 @@ export interface WebviewsExt {
         options: theia.WebviewOptions & theia.WebviewPanelOptions): PromiseLike<void>;
 }
 
-export interface WebviewsMain {
+export type WebviewsMain = {
     $createWebviewPanel(handle: string,
         viewType: string,
         title: string,
@@ -1880,7 +1866,7 @@ export interface WebviewsMain {
     $unregisterSerializer(viewType: string): void;
 }
 
-export interface WebviewViewsExt {
+export type WebviewViewsExt = {
     $resolveWebviewView(handle: string,
         viewType: string,
         title: string | undefined,
@@ -1890,7 +1876,7 @@ export interface WebviewViewsExt {
     $disposeWebviewView(handle: string): void;
 }
 
-export interface WebviewViewsMain extends Disposable {
+export type WebviewViewsMain = Disposable & {
     $registerWebviewViewProvider(viewType: string,
         options: { retainContextWhenHidden?: boolean, serializeBuffersForPostMessage: boolean }): void;
     $unregisterWebviewViewProvider(viewType: string): void;
@@ -1902,7 +1888,7 @@ export interface WebviewViewsMain extends Disposable {
     $show(handle: string, preserveFocus: boolean): void;
 }
 
-export interface CustomEditorsExt {
+export type CustomEditorsExt = {
     $resolveWebviewEditor(
         resource: UriComponents,
         newWebviewHandle: string,
@@ -1923,11 +1909,11 @@ export interface CustomEditorsExt {
     $onMoveCustomEditor(handle: string, newResource: UriComponents, viewType: string): Promise<void>;
 }
 
-export interface CustomTextEditorCapabilities {
+export type CustomTextEditorCapabilities = {
     readonly supportsMove?: boolean;
 }
 
-export interface CustomEditorsMain {
+export type CustomEditorsMain = {
     $registerTextEditorProvider(viewType: string, options: theia.WebviewPanelOptions, capabilities: CustomTextEditorCapabilities): void;
     $registerCustomEditorProvider(viewType: string, options: theia.WebviewPanelOptions, supportsMultipleEditorsPerDocument: boolean): void;
     $unregisterEditorProvider(viewType: string): void;
@@ -1935,13 +1921,13 @@ export interface CustomEditorsMain {
     $onContentChange(resource: UriComponents, viewType: string): void;
 }
 
-export interface StorageMain {
+export type StorageMain = {
     $set(key: string, value: KeysToAnyValues, isGlobal: boolean): Promise<boolean>;
     $get(key: string, isGlobal: boolean): Promise<KeysToAnyValues>;
     $getAll(isGlobal: boolean): Promise<KeysToKeysToAnyValue>;
 }
 
-export interface StorageExt {
+export type StorageExt = {
     $updatePluginsWorkspaceData(data: KeysToKeysToAnyValue): void;
 }
 
@@ -1965,7 +1951,7 @@ export enum DebugConfigurationProviderTriggerKind {
     Dynamic = 2
 }
 
-export interface DebugConfigurationProvider {
+export type DebugConfigurationProvider = {
     readonly handle: number;
     readonly type: string;
     readonly triggerKind: DebugConfigurationProviderTriggerKind;
@@ -1980,7 +1966,7 @@ export interface DebugConfigurationProvider {
     ): Promise<theia.DebugConfiguration | undefined | null>;
 }
 
-export interface DebugConfigurationProviderDescriptor {
+export type DebugConfigurationProviderDescriptor = {
     readonly handle: number,
     readonly type: string,
     readonly trigger: DebugConfigurationProviderTriggerKind,
@@ -1989,7 +1975,7 @@ export interface DebugConfigurationProviderDescriptor {
     readonly resolveDebugConfigurationWithSubstitutedVariables: boolean
 }
 
-export interface DebugExt {
+export type DebugExt = {
     $onSessionCustomEvent(sessionId: string, event: string, body?: any): void;
     $breakpointsDidChange(added: Breakpoint[], removed: string[], changed: Breakpoint[]): void;
     $sessionDidCreate(sessionId: string): void;
@@ -2015,7 +2001,7 @@ export interface DebugExt {
     $getTerminalCreationOptions(debugType: string): Promise<TerminalOptionsExt | undefined>;
 }
 
-export interface DebugMain {
+export type DebugMain = {
     $appendToDebugConsole(value: string): Promise<void>;
     $appendLineToDebugConsole(value: string): Promise<void>;
     $registerDebuggerContribution(description: DebuggerDescription): Promise<void>;
@@ -2030,7 +2016,7 @@ export interface DebugMain {
     $getDebugProtocolBreakpoint(sessionId: string, breakpointId: string): Promise<theia.DebugProtocolBreakpoint | undefined>;
 }
 
-export interface FileSystemExt {
+export type FileSystemExt = {
     $acceptProviderInfos(scheme: string, capabilities?: files.FileSystemProviderCapabilities): void;
     $stat(handle: number, resource: UriComponents): Promise<files.Stat>;
     $readdir(handle: number, resource: UriComponents): Promise<[string, files.FileType][]>;
@@ -2048,12 +2034,12 @@ export interface FileSystemExt {
     $write(handle: number, fd: number, pos: number, data: BinaryBuffer): Promise<number>;
 }
 
-export interface IFileChangeDto {
+export type IFileChangeDto = {
     resource: UriComponents;
     type: files.FileChangeType;
 }
 
-export interface FileSystemMain {
+export type FileSystemMain = {
     $registerFileSystemProvider(handle: number, scheme: string, capabilities: files.FileSystemProviderCapabilities, readonlyMessage?: MarkdownString): void;
     $unregisterProvider(handle: number): void;
     $onFileSystemChange(handle: number, resource: IFileChangeDto[]): void;
@@ -2068,31 +2054,31 @@ export interface FileSystemMain {
     $delete(resource: UriComponents, opts: files.FileDeleteOptions): Promise<void>;
 }
 
-export interface FileSystemEvents {
+export type FileSystemEvents = {
     created: UriComponents[];
     changed: UriComponents[];
     deleted: UriComponents[];
 }
 
-export interface ExtHostFileSystemEventServiceShape {
+export type ExtHostFileSystemEventServiceShape = {
     $onFileEvent(events: FileSystemEvents): void;
     $onWillRunFileOperation(operation: files.FileOperation, target: UriComponents, source: UriComponents | undefined, timeout: number, token: CancellationToken): Promise<any>;
     $onDidRunFileOperation(operation: files.FileOperation, target: UriComponents, source: UriComponents | undefined): void;
 }
 
-export interface ClipboardMain {
+export type ClipboardMain = {
     $readText(): Promise<string>;
     $writeText(value: string): Promise<void>;
 }
 
-export interface CommentsExt {
+export type CommentsExt = {
     $createCommentThreadTemplate(commentControllerHandle: number, uriComponents: UriComponents, range: Range | undefined): void;
     $updateCommentThreadTemplate(commentControllerHandle: number, threadHandle: number, range: Range): Promise<void>;
     $deleteCommentThread(commentControllerHandle: number, commentThreadHandle: number): Promise<void>;
     $provideCommentingRanges(commentControllerHandle: number, uriComponents: UriComponents, token: CancellationToken): Promise<{ ranges: Range[]; fileComments: boolean } | undefined>;
 }
 
-export interface CommentProviderFeatures {
+export type CommentProviderFeatures = {
     options?: CommentOptions;
 }
 
@@ -2106,7 +2092,7 @@ export type CommentThreadChanges = Partial<{
     canReply: boolean | theia.CommentAuthorInformation;
 }>;
 
-export interface CommentsMain {
+export type CommentsMain = {
     $registerCommentController(handle: number, id: string, label: string): void;
     $unregisterCommentController(handle: number): void;
     $updateCommentControllerFeatures(handle: number, features: CommentProviderFeatures): void;
@@ -2131,22 +2117,22 @@ export const enum TabInputKind {
     InteractiveEditorInput,
 }
 
-export interface UnknownInputDto {
+export type UnknownInputDto = {
     kind: TabInputKind.UnknownInput;
 }
 
-export interface TextInputDto {
+export type TextInputDto = {
     kind: TabInputKind.TextInput;
     uri: UriComponents;
 }
 
-export interface TextDiffInputDto {
+export type TextDiffInputDto = {
     kind: TabInputKind.TextDiffInput;
     original: UriComponents;
     modified: UriComponents;
 }
 
-export interface TextMergeInputDto {
+export type TextMergeInputDto = {
     kind: TabInputKind.TextMergeInput;
     base: UriComponents;
     input1: UriComponents;
@@ -2154,44 +2140,44 @@ export interface TextMergeInputDto {
     result: UriComponents;
 }
 
-export interface NotebookInputDto {
+export type NotebookInputDto = {
     kind: TabInputKind.NotebookInput;
     notebookType: string;
     uri: UriComponents;
 }
 
-export interface NotebookDiffInputDto {
+export type NotebookDiffInputDto = {
     kind: TabInputKind.NotebookDiffInput;
     notebookType: string;
     original: UriComponents;
     modified: UriComponents;
 }
 
-export interface CustomInputDto {
+export type CustomInputDto = {
     kind: TabInputKind.CustomEditorInput;
     viewType: string;
     uri: UriComponents;
 }
 
-export interface WebviewInputDto {
+export type WebviewInputDto = {
     kind: TabInputKind.WebviewEditorInput;
     viewType: string;
 }
 
-export interface InteractiveEditorInputDto {
+export type InteractiveEditorInputDto = {
     kind: TabInputKind.InteractiveEditorInput;
     uri: UriComponents;
     inputBoxUri: UriComponents;
 }
 
-export interface TabInputDto {
+export type TabInputDto = {
     kind: TabInputKind.TerminalEditorInput;
 }
 
 export type EditorGroupColumn = number;
 export type AnyInputDto = UnknownInputDto | TextInputDto | TextDiffInputDto | TextMergeInputDto | NotebookInputDto | NotebookDiffInputDto | CustomInputDto | WebviewInputDto | InteractiveEditorInputDto | TabInputDto;
 
-export interface TabGroupDto {
+export type TabGroupDto = {
     isActive: boolean;
     viewColumn: EditorGroupColumn;
     tabs: TabDto[];
@@ -2205,7 +2191,7 @@ export const enum TabModelOperationKind {
     TAB_MOVE
 }
 
-export interface TabOperation {
+export type TabOperation = {
     readonly kind: TabModelOperationKind.TAB_OPEN | TabModelOperationKind.TAB_CLOSE | TabModelOperationKind.TAB_UPDATE | TabModelOperationKind.TAB_MOVE;
     readonly index: number;
     readonly tabDto: TabDto;
@@ -2213,7 +2199,7 @@ export interface TabOperation {
     readonly oldIndex?: number;
 }
 
-export interface TabDto {
+export type TabDto = {
     id: string;
     label: string;
     input: AnyInputDto;
@@ -2224,22 +2210,22 @@ export interface TabDto {
     isDirty: boolean;
 }
 
-export interface TabsExt {
+export type TabsExt = {
     $acceptEditorTabModel(tabGroups: TabGroupDto[]): void;
     $acceptTabGroupUpdate(groupDto: TabGroupDto): void;
     $acceptTabOperation(operation: TabOperation): void;
 }
 
-export interface TabsMain {
+export type TabsMain = {
     $moveTab(tabId: string, index: number, viewColumn: EditorGroupColumn, preserveFocus?: boolean): void;
     $closeTab(tabIds: string[], preserveFocus?: boolean): Promise<boolean>;
     $closeGroup(groupIds: number[], preserveFocus?: boolean): Promise<boolean>;
 }
 
-export interface TelemetryMain {
+export type TelemetryMain = {
 }
 
-export interface TelemetryExt {
+export type TelemetryExt = {
 }
 
 // endregion
@@ -2251,7 +2237,7 @@ export const enum TestingResourceExt {
 }
 
 // based from https://github.com/microsoft/vscode/blob/1.72.2/src/vs/workbench/api/common/extHostTesting.ts
-export interface TestingExt {
+export type TestingExt = {
     $onCancelTestRun(controllerId: string, runId: string): void;
     /** Configures a test run config. */
     $onConfigureRunProfile(controllerId: string, profileId: string): void;
@@ -2268,24 +2254,24 @@ export interface TestingExt {
 }
 
 // based from https://github.com/microsoft/vscode/blob/1.85.1/src/vs/workbench/api/common/extHostUrls.ts
-export interface UriExt {
+export type UriExt = {
     registerUriHandler(handler: theia.UriHandler, plugin: PluginInfo): theia.Disposable;
     $handleExternalUri(uri: UriComponents): Promise<void>;
 }
 
-export interface UriMain {
+export type UriMain = {
     $registerUriHandler(extensionId: string, extensionName: string): void;
     $unregisterUriHandler(extensionId: string): void;
 }
 
-export interface TestControllerUpdate {
+export type TestControllerUpdate = {
     label: string;
     canRefresh: boolean;
     canResolve: boolean;
 }
 
 // based from https://github.com/microsoft/vscode/blob/1.72.2/src/vs/workbench/api/common/extHostTesting.ts
-export interface TestingMain {
+export type TestingMain = {
     // --- test lifecycle:
 
     /** Registers that there's a test controller with the given ID */
@@ -2406,7 +2392,7 @@ export const MAIN_RPC_CONTEXT = {
     MCP_SERVER_DEFINITION_REGISTRY_EXT: createProxyIdentifier<McpServerDefinitionRegistryExt>('McpServerDefinitionRegistryExt')
 };
 
-export interface TasksExt {
+export type TasksExt = {
     $initLoadedTasks(executions: TaskExecutionDto[]): Promise<void>;
     $provideTasks(handle: number): Promise<TaskDto[]>;
     $resolveTask(handle: number, task: TaskDto, token?: CancellationToken): Promise<TaskDto>;
@@ -2416,7 +2402,7 @@ export interface TasksExt {
     $onDidEndTaskProcess(exitCode: number | undefined, taskId: number): void;
 }
 
-export interface TasksMain {
+export type TasksMain = {
     $registerTaskProvider(handle: number, type: string): void;
     $fetchTasks(taskVersion: string | undefined, taskType: string | undefined): Promise<TaskDto[]>;
     $executeTask(taskDto: TaskDto): Promise<TaskExecutionDto | undefined>;
@@ -2426,14 +2412,14 @@ export interface TasksMain {
     $customExecutionComplete(id: number, exitCode: number | undefined): void;
 }
 
-export interface AuthenticationExt {
+export type AuthenticationExt = {
     $getSessions(providerId: string, scopes: string[] | undefined, options: theia.AuthenticationProviderSessionOptions): Promise<ReadonlyArray<theia.AuthenticationSession>>;
     $createSession(id: string, scopes: string[], options: theia.AuthenticationProviderSessionOptions): Promise<theia.AuthenticationSession>;
     $removeSession(id: string, sessionId: string): Promise<void>;
     $onDidChangeAuthenticationSessions(provider: theia.AuthenticationProviderInformation): Promise<void>;
 }
 
-export interface AuthenticationMain {
+export type AuthenticationMain = {
     $getAccounts(providerId: string): Thenable<readonly theia.AuthenticationSessionAccountInformation[]>;
     $registerAuthenticationProvider(id: string, label: string, supportsMultipleAccounts: boolean): void;
     $unregisterAuthenticationProvider(id: string): void;
@@ -2442,18 +2428,18 @@ export interface AuthenticationMain {
         options: theia.AuthenticationGetSessionOptions): Promise<theia.AuthenticationSession | undefined>;
 }
 
-export interface NotebookOutputItemDto {
+export type NotebookOutputItemDto = {
     readonly mime: string;
     readonly valueBytes: BinaryBuffer;
 }
 
-export interface NotebookOutputDto {
+export type NotebookOutputDto = {
     outputId: string;
     items: NotebookOutputItemDto[];
     metadata?: Record<string, unknown>;
 }
 
-export interface NotebookCellDataDto {
+export type NotebookCellDataDto = {
     source: string;
     language: string;
     cellKind: notebookCommon.CellKind;
@@ -2462,12 +2448,12 @@ export interface NotebookCellDataDto {
     internalMetadata?: notebookCommon.NotebookCellInternalMetadata;
 }
 
-export interface NotebookDataDto {
+export type NotebookDataDto = {
     readonly cells: NotebookCellDataDto[];
     readonly metadata: notebookCommon.NotebookDocumentMetadata;
 }
 
-export interface NotebookCellDto {
+export type NotebookCellDto = {
     handle: number;
     uri: UriComponents;
     eol: string;
@@ -2480,7 +2466,7 @@ export interface NotebookCellDto {
     internalMetadata?: notebookCommon.NotebookCellInternalMetadata;
 }
 
-export interface NotebookModelAddedData {
+export type NotebookModelAddedData = {
     uri: UriComponents;
     versionId: number;
     cells: NotebookCellDto[];
@@ -2488,15 +2474,7 @@ export interface NotebookModelAddedData {
     metadata?: notebookCommon.NotebookDocumentMetadata;
 }
 
-export interface NotebookEditorAddData {
-    id: string;
-    documentUri: UriComponents;
-    selections: CellRange[];
-    visibleRanges: CellRange[];
-    viewColumn?: number;
-}
-
-export interface NotebookDocumentsAndEditorsDelta {
+export type NotebookDocumentsAndEditorsDelta = {
     removedDocuments?: UriComponents[];
     addedDocuments?: NotebookModelAddedData[];
     removedEditors?: string[];
@@ -2507,7 +2485,7 @@ export interface NotebookDocumentsAndEditorsDelta {
 
 export type NotebookCellStatusBarEntryDto = notebookCommon.NotebookCellStatusBarItem;
 
-export interface NotebookCellStatusBarListDto {
+export type NotebookCellStatusBarListDto = {
     items: NotebookCellStatusBarEntryDto[];
     cacheId: number;
 }
@@ -2552,15 +2530,15 @@ export interface NotebookCellsChangedEventDto {
     readonly versionId: number;
 };
 
-export interface NotebookSelectionChangeEvent {
+export type NotebookSelectionChangeEvent = {
     selections: CellRange[];
 }
 
-export interface NotebookVisibleRangesEvent {
+export type NotebookVisibleRangesEvent = {
     ranges: CellRange[];
 }
 
-export interface NotebookEditorPropertiesChangeData {
+export type NotebookEditorPropertiesChangeData = {
     visibleRanges?: NotebookVisibleRangesEvent;
     selections?: NotebookSelectionChangeEvent;
 }
@@ -2572,14 +2550,14 @@ export enum NotebookEditorRevealType {
     AtTop = 3
 }
 
-export interface NotebookDocumentShowOptions {
+export type NotebookDocumentShowOptions = {
     position?: EditorGroupColumn;
     preserveFocus?: boolean;
     pinned?: boolean;
     selections?: CellRange[];
 }
 
-export interface NotebookKernelDto {
+export type NotebookKernelDto = {
     id: string;
     notebookType: string;
     extensionId: string;
@@ -2596,21 +2574,21 @@ export interface NotebookKernelDto {
 
 export type CellExecuteUpdateDto = CellExecuteOutputEditDto | CellExecuteOutputItemEditDto | CellExecutionStateUpdateDto;
 
-export interface CellExecuteOutputEditDto {
+export type CellExecuteOutputEditDto = {
     editType: CellExecutionUpdateType.Output;
     cellHandle: number;
     append?: boolean;
     outputs: NotebookOutputDto[];
 }
 
-export interface CellExecuteOutputItemEditDto {
+export type CellExecuteOutputItemEditDto = {
     editType: CellExecutionUpdateType.OutputItems;
     append?: boolean;
     outputId: string;
     items: NotebookOutputItemDto[];
 }
 
-export interface CellExecutionStateUpdateDto {
+export type CellExecutionStateUpdateDto = {
     editType: CellExecutionUpdateType.ExecutionState;
     executionOrder?: number;
     runStartTime?: number;
@@ -2618,12 +2596,12 @@ export interface CellExecutionStateUpdateDto {
     isPaused?: boolean;
 }
 
-export interface CellExecutionCompleteDto {
+export type CellExecutionCompleteDto = {
     runEndTime?: number;
     lastRunSuccess?: boolean;
 }
 
-export interface NotebookKernelSourceActionDto {
+export type NotebookKernelSourceActionDto = {
     readonly label: string;
     readonly description?: string;
     readonly detail?: string;
@@ -2631,7 +2609,7 @@ export interface NotebookKernelSourceActionDto {
     readonly documentation?: UriComponents | string;
 }
 
-export interface NotebookEditorAddData {
+export type NotebookEditorAddData = {
     id: string;
     documentUri: UriComponents;
     selections: CellRange[];
@@ -2639,7 +2617,7 @@ export interface NotebookEditorAddData {
     viewColumn?: number;
 }
 
-export interface NotebooksExt extends NotebookDocumentsAndEditorsExt {
+export type NotebooksExt = NotebookDocumentsAndEditorsExt & {
     $provideNotebookCellStatusBarItems(handle: number, uri: UriComponents, index: number, token: CancellationToken): Promise<NotebookCellStatusBarListDto | undefined>;
     $releaseNotebookCellStatusBarItems(id: number): void;
 
@@ -2647,7 +2625,7 @@ export interface NotebooksExt extends NotebookDocumentsAndEditorsExt {
     $notebookToData(handle: number, data: NotebookDataDto, token: CancellationToken): Promise<BinaryBuffer>;
 }
 
-export interface NotebooksMain extends Disposable {
+export type NotebooksMain = Disposable & {
     $registerNotebookSerializer(handle: number, viewType: string, options: notebookCommon.TransientOptions): void;
     $unregisterNotebookSerializer(handle: number): void;
 
@@ -2656,7 +2634,7 @@ export interface NotebooksMain extends Disposable {
     $emitCellStatusBarEvent(eventHandle: number): void;
 }
 
-export interface NotebookKernelsExt {
+export type NotebookKernelsExt = {
     $acceptNotebookAssociation(handle: number, uri: UriComponents, value: boolean): void;
     $executeCells(handle: number, uri: UriComponents, handles: number[]): Promise<void>;
     $cancelCells(handle: number, uri: UriComponents, handles: number[]): Promise<void>;
@@ -2665,7 +2643,7 @@ export interface NotebookKernelsExt {
     $provideKernelSourceActions(handle: number, token: CancellationToken): Promise<NotebookKernelSourceActionDto[]>;
 }
 
-export interface NotebookKernelsMain extends Disposable {
+export type NotebookKernelsMain = Disposable & {
     $postMessage(handle: number, editorId: string | undefined, message: any): Promise<boolean>;
     $addKernel(handle: number, data: NotebookKernelDto): Promise<void>;
     $updateKernel(handle: number, data: Partial<NotebookKernelDto>): void;
@@ -2688,65 +2666,65 @@ export interface NotebookKernelsMain extends Disposable {
     $emitNotebookKernelSourceActionsChangeEvent(eventHandle: number): void;
 }
 
-export interface NotebookDocumentsMain extends Disposable {
+export type NotebookDocumentsMain = Disposable & {
     $tryCreateNotebook(options: { viewType: string; content?: NotebookDataDto }): Promise<UriComponents>;
     $tryOpenNotebook(uriComponents: UriComponents): Promise<UriComponents>;
     $trySaveNotebook(uri: UriComponents): Promise<boolean>;
 }
 
-export interface NotebookDocumentsExt {
+export type NotebookDocumentsExt = {
     $acceptModelChanged(uriComponents: UriComponents, event: NotebookCellsChangedEventDto, isDirty: boolean, newMetadata?: notebookCommon.NotebookDocumentMetadata): void;
     $acceptDirtyStateChanged(uriComponents: UriComponents, isDirty: boolean): void;
     $acceptModelSaved(uriComponents: UriComponents): void;
 }
 
-export interface NotebookDocumentsAndEditorsExt {
+export type NotebookDocumentsAndEditorsExt = {
     $acceptDocumentsAndEditorsDelta(delta: NotebookDocumentsAndEditorsDelta): Promise<void>;
     $acceptActiveCellEditorChange(newActiveEditor: string | null): void;
 }
 
-export interface NotebookDocumentsAndEditorsMain extends Disposable {
+export type NotebookDocumentsAndEditorsMain = Disposable & {
 }
 
 export type NotebookEditorViewColumnInfo = Record<string, number>;
 
-export interface NotebookEditorsExt {
+export type NotebookEditorsExt = {
     $acceptEditorPropertiesChanged(id: string, data: NotebookEditorPropertiesChangeData): void;
     $acceptEditorViewColumns(data: NotebookEditorViewColumnInfo): void;
 }
 
-export interface NotebookEditorsMain extends Disposable {
+export type NotebookEditorsMain = Disposable & {
     $tryShowNotebookDocument(uriComponents: UriComponents, viewType: string, options: NotebookDocumentShowOptions): Promise<string>;
     $tryRevealRange(id: string, range: CellRange, revealType: NotebookEditorRevealType): Promise<void>;
     $trySetSelections(id: string, range: CellRange[]): void;
 }
-export interface NotebookRenderersExt {
+export type NotebookRenderersExt = {
     $postRendererMessage(editorId: string, rendererId: string, message: unknown): void;
 }
 
-export interface NotebookRenderersMain extends Disposable {
+export type NotebookRenderersMain = Disposable & {
     $postMessage(editorId: string | undefined, rendererId: string, message: unknown): Promise<boolean>;
 }
 
-export interface RawColorInfo {
+export type RawColorInfo = {
     color: [number, number, number, number];
     range: Range;
 }
 
-export interface LabelServiceExt {
+export type LabelServiceExt = {
     $registerResourceLabelFormatter(formatter: ResourceLabelFormatter): theia.Disposable;
 }
 
-export interface LabelServiceMain {
+export type LabelServiceMain = {
     $registerResourceLabelFormatter(handle: number, formatter: ResourceLabelFormatter): void;
     $unregisterResourceLabelFormatter(handle: number): void;
 }
 
-export interface SecretsExt {
+export type SecretsExt = {
     $onDidChangePassword(e: { extensionId: string, key: string }): Promise<void>;
 }
 
-export interface SecretsMain {
+export type SecretsMain = {
     $getPassword(extensionId: string, key: string): Promise<string | undefined>;
     $setPassword(extensionId: string, key: string, value: string): Promise<void>;
     $deletePassword(extensionId: string, key: string): Promise<void>;
@@ -2756,29 +2734,29 @@ export interface SecretsMain {
 export type InlayHintDto = CachedSessionItem<InlayHint>;
 export type InlayHintsDto = CachedSession<{ hints: InlayHint[] }>;
 
-export interface IdentifiableInlineCompletions extends InlineCompletions<IdentifiableInlineCompletion> {
+export type IdentifiableInlineCompletions = InlineCompletions<IdentifiableInlineCompletion> & {
     pid: number;
 }
 
-export interface IdentifiableInlineCompletion extends InlineCompletion {
+export type IdentifiableInlineCompletion = InlineCompletion & {
     idx: number;
 }
 
 export const LocalizationExt = Symbol('LocalizationExt');
-export interface LocalizationExt {
+export type LocalizationExt = {
     translateMessage(pluginId: string, details: StringDetails): string;
     getBundle(pluginId: string): Record<string, string> | undefined;
     getBundleUri(pluginId: string): theia.Uri | undefined;
     initializeLocalizedMessages(plugin: Plugin, currentLanguage: string): Promise<void>;
 }
 
-export interface StringDetails {
+export type StringDetails = {
     message: string;
     args?: Record<string | number, any>;
     comment?: string | string[];
 }
 
-export interface LocalizationMain {
+export type LocalizationMain = {
     $fetchBundle(id: string): Promise<LanguagePackBundle | undefined>;
 }
 
@@ -2790,6 +2768,6 @@ export enum LogLevel {
     Error = 5
 }
 
-export interface LoggerMain {
+export type LoggerMain = {
     $log(level: LogLevel, name: string | undefined, message: string, params: any[]): void;
 }

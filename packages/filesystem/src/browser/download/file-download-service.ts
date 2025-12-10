@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { Endpoint } from '@theia/core/lib/browser/endpoint';
-import { MessageService } from '@theia/core/lib/common/message-service';
+import { inject, injectable, named } from 'inversify';
+import { URI } from '@theia/core';
+import { ILogger } from '@theia/core';
+import { Endpoint } from '@theia/core/lib/browser/endpoint.js';
+import { MessageService } from '@theia/core';
 import { addClipboardListener } from '@theia/core/lib/browser/widgets';
 import { nls } from '@theia/core';
-import type { FileDownloadData, FileDownloadService } from '../../common/download/file-download';
+import type { FileDownloadData, FileDownloadService } from '../../common/download/file-download.js';
 
 @injectable()
 export class FileDownloadServiceImpl implements FileDownloadService {
@@ -84,7 +84,7 @@ export class FileDownloadServiceImpl implements FileDownloadService {
                 const downloadUrl = `${this.endpoint()}/download/?id=${jsonResponse.id}`;
                 if (copyLink) {
                     if (document.documentElement) {
-                        const toDispose = addClipboardListener(document.documentElement, 'copy', e => {
+                        const toDispose = addClipboardListener(document.documentElement, 'copy', (e: ClipboardEvent) => {
                             toDispose.dispose();
                             this.handleCopy(e, downloadUrl);
                         });

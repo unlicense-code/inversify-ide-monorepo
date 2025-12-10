@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,25 +16,25 @@
 
 import * as jsoncparser from 'jsonc-parser';
 import debounce = require('p-debounce');
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import { EditorManager, EditorWidget } from '@theia/editor/lib/browser';
-import { PreferenceScope, PreferenceService, DisposableCollection, PreferenceProviderProvider, nls } from '@theia/core/lib/common';
-import { QuickPickService } from '@theia/core/lib/common/quick-pick-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { TaskConfigurationModel } from './task-configuration-model';
-import { TaskTemplateSelector } from './task-templates';
-import { TaskCustomization, TaskConfiguration, TaskConfigurationScope, TaskScope } from '../common/task-protocol';
-import { WorkspaceVariableContribution } from '@theia/workspace/lib/browser/workspace-variable-contribution';
-import { FileChangeType } from '@theia/filesystem/lib/common/filesystem-watcher-protocol';
-import { PreferenceConfigurations } from '@theia/core/lib/common/preferences/preference-configurations';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { TaskSchemaUpdater } from './task-schema-updater';
-import { JSONObject } from '@theia/core/shared/@lumino/coreutils';
-import { PreferenceProvider } from '@theia/core/lib/common/preferences/preference-provider';
+import { inject, injectable, postConstruct } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Emitter, Event } from '@theia/core/lib/common/event.js';
+import { EditorManager, EditorWidget } from '@theia/editor/lib/browser/index.js';
+import { PreferenceScope, PreferenceService, DisposableCollection, PreferenceProviderProvider, nls } from '@theia/core/lib/common/index.js';
+import { QuickPickService } from '@theia/core/lib/common/quick-pick-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
+import { TaskConfigurationModel } from './task-configuration-model.js';
+import { TaskTemplateSelector } from './task-templates.js';
+import { TaskCustomization, TaskConfiguration, TaskConfigurationScope, TaskScope } from '../common/task-protocol.js';
+import { WorkspaceVariableContribution } from '@theia/workspace/lib/browser/workspace-variable-contribution.js';
+import { FileChangeType } from '@theia/filesystem/lib/common/filesystem-watcher-protocol.js';
+import { PreferenceConfigurations } from '@theia/core/lib/common/preferences/preference-configurations.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { TaskSchemaUpdater } from './task-schema-updater.js';
+import { JSONObject } from '@lumino/coreutils';
+import { PreferenceProvider } from '@theia/core/lib/common/preferences/preference-provider.js';
 
-export interface TasksChange {
+export type TasksChange = {
     scope: TaskConfigurationScope;
     type: FileChangeType;
 }

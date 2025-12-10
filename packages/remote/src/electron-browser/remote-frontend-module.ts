@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,28 +15,30 @@
 // *****************************************************************************
 
 import { bindContributionProvider, CommandContribution } from '@theia/core';
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { bindViewContribution, FrontendApplicationContribution, isRemote, WidgetFactory } from '@theia/core/lib/browser';
-import { RemoteSSHContribution } from './remote-ssh-contribution';
-import { RemoteSSHConnectionProvider, RemoteSSHConnectionProviderPath } from '../electron-common/remote-ssh-connection-provider';
-import { RemoteFrontendContribution } from './remote-frontend-contribution';
-import { RemoteRegistryContribution } from './remote-registry-contribution';
-import { RemoteService } from './remote-service';
-import { RemoteStatusService, RemoteStatusServicePath } from '../electron-common/remote-status-service';
-import { ElectronFileDialogService } from '@theia/filesystem/lib/electron-browser/file-dialog/electron-file-dialog-service';
-import { RemoteElectronFileDialogService } from './remote-electron-file-dialog-service';
-import { bindRemotePreferences } from '../electron-common/remote-preferences';
-import { PortForwardingWidget, PORT_FORWARDING_WIDGET_ID } from './port-forwarding/port-forwarding-widget';
-import { PortForwardingContribution } from './port-forwarding/port-forwading-contribution';
-import { PortForwardingService } from './port-forwarding/port-forwarding-service';
-import { RemotePortForwardingProvider, RemoteRemotePortForwardingProviderPath } from '../electron-common/remote-port-forwarding-provider';
-import { ServiceConnectionProvider } from '@theia/core/lib/browser/messaging/service-connection-provider';
+import { ContainerModule } from 'inversify';
+import { bindViewContribution, FrontendApplicationContribution, isRemote, WidgetFactory 
+
+} from '@theia/core/lib/browser/index.js';
+import { RemoteSSHContribution } from './remote-ssh-contribution.js';
+import { RemoteSSHConnectionProvider, RemoteSSHConnectionProviderPath } from '../electron-common/remote-ssh-connection-provider.js';
+import { RemoteFrontendContribution } from './remote-frontend-contribution.js';
+import { RemoteRegistryContribution } from './remote-registry-contribution.js';
+import { RemoteService } from './remote-service.js';
+import { RemoteStatusService, RemoteStatusServicePath } from '../electron-common/remote-status-service.js';
+import { ElectronFileDialogService } from '@theia/filesystem/lib/electron-browser/file-dialog/electron-file-dialog-service.js';
+import { RemoteElectronFileDialogService } from './remote-electron-file-dialog-service.js';
+import { bindRemotePreferences } from '../electron-common/remote-preferences.js';
+import { PortForwardingWidget, PORT_FORWARDING_WIDGET_ID } from './port-forwarding/port-forwarding-widget.js';
+import { PortForwardingContribution } from './port-forwarding/port-forwading-contribution.js';
+import { PortForwardingService } from './port-forwarding/port-forwarding-service.js';
+import { RemotePortForwardingProvider, RemoteRemotePortForwardingProviderPath } from '../electron-common/remote-port-forwarding-provider.js';
+import { ServiceConnectionProvider } from '@theia/core/lib/browser/messaging/service-connection-provider.js';
 import '../../src/electron-browser/style/port-forwarding-widget.css';
-import { UserStorageContribution } from '@theia/userstorage/lib/browser/user-storage-contribution';
-import { RemoteUserStorageContribution } from './remote-user-storage-provider';
-import { remoteFileSystemPath, RemoteFileSystemProxyFactory, RemoteFileSystemServer } from '@theia/filesystem/lib/common/remote-file-system-provider';
-import { LocalEnvVariablesServer, LocalRemoteFileSystemProvider, LocalRemoteFileSytemServer } from './local-backend-services';
-import { envVariablesPath, EnvVariablesServer } from '@theia/core/lib/common/env-variables';
+import { UserStorageContribution } from '@theia/userstorage/lib/browser/user-storage-contribution.js';
+import { RemoteUserStorageContribution } from './remote-user-storage-provider.js';
+import { remoteFileSystemPath, RemoteFileSystemProxyFactory, RemoteFileSystemServer } from '@theia/filesystem/lib/common/remote-file-system-provider.js';
+import { LocalEnvVariablesServer, LocalRemoteFileSystemProvider, LocalRemoteFileSytemServer } from './local-backend-services.js';
+import { envVariablesPath, EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
 
 export default new ContainerModule((bind, _, __, rebind) => {
     bind(RemoteFrontendContribution).toSelf().inSingletonScope();

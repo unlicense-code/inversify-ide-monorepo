@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { ElectronMainApplication, ElectronMainApplicationContribution } from '@theia/core/lib/electron-main/electron-main-application';
-import { SampleUpdater, SampleUpdaterClient, UpdateStatus } from '../../common/updater/sample-updater';
+import { injectable } from 'inversify';
+import { ElectronMainApplication, ElectronMainApplicationContribution } from '@theia/core/lib/electron-main/electron-main-application.js';
+import { SampleUpdater, SampleUpdaterClient, UpdateStatus } from '../../common/updater/sample-updater.js';
 
 @injectable()
 export class SampleUpdaterImpl implements SampleUpdater, ElectronMainApplicationContribution {

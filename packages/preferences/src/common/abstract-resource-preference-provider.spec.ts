@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,23 +16,23 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 const disableJSDOM = enableJSDOM();
 
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 FrontendApplicationConfigProvider.set({});
 
 import { expect } from 'chai';
-import { Container } from '@theia/core/shared/inversify';
-import { AbstractResourcePreferenceProvider, FileContentStatus, PreferenceStorage, PreferenceStorageFactory } from './abstract-resource-preference-provider';
-import { bindPreferenceService } from '@theia/core/lib/browser/frontend-application-bindings';
+import { Container } from 'inversify';
+import { AbstractResourcePreferenceProvider, FileContentStatus, PreferenceStorage, PreferenceStorageFactory } from './abstract-resource-preference-provider.js';
+import { bindPreferenceService } from '@theia/core/lib/browser/frontend-application-bindings.js';
 import { bindMockPreferenceProviders } from '@theia/core/lib/browser/preferences/test';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { Listener, MessageService, PreferenceSchemaService } from '@theia/core/lib/common';
-import { MonacoWorkspace } from '@theia/monaco/lib/browser/monaco-workspace';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { PreferenceTransactionFactory } from '../browser/preference-transaction-manager';
-import { JSONValue } from '@theia/core/shared/@lumino/coreutils';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { Listener, MessageService, PreferenceSchemaService } from '@theia/core/lib/common/index.js';
+import { MonacoWorkspace } from '@theia/monaco/lib/browser/monaco-workspace.js';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { PreferenceTransactionFactory } from '../browser/preference-transaction-manager.js';
+import { JSONValue } from '@lumino/coreutils';
 
 disableJSDOM();
 

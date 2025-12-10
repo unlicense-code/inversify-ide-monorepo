@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { injectable, interfaces, Container, postConstruct, inject } from '@theia/core/shared/inversify';
+import * as React from 'react';
+import { injectable, interfaces, postConstruct, inject } from 'inversify';
 import {
     ApplicationShell,
     codicon,
@@ -33,16 +33,16 @@ import {
     TreeWidget,
     TREE_NODE_CONTENT_CLASS,
     Widget,
-} from '@theia/core/lib/browser';
-import { OpenEditorNode, OpenEditorsModel } from './navigator-open-editors-tree-model';
-import { createFileTreeContainer, FileTreeModel, FileTreeWidget } from '@theia/filesystem/lib/browser';
-import { OpenEditorsTreeDecoratorService } from './navigator-open-editors-decorator-service';
-import { OPEN_EDITORS_CONTEXT_MENU } from './navigator-open-editors-menus';
-import { CommandService } from '@theia/core/lib/common';
-import { OpenEditorsCommands } from './navigator-open-editors-commands';
-import { nls } from '@theia/core/lib/common/nls';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { AbstractNavigatorTreeWidget } from '../abstract-navigator-tree-widget';
+} from '@theia/core/lib/browser/index.js';
+import { OpenEditorNode, OpenEditorsModel } from './navigator-open-editors-tree-model.js';
+import { createFileTreeContainer, FileTreeModel, FileTreeWidget } from '@theia/filesystem/lib/browser/index.js';
+import { OpenEditorsTreeDecoratorService } from './navigator-open-editors-decorator-service.js';
+import { OPEN_EDITORS_CONTEXT_MENU } from './navigator-open-editors-menus.js';
+import { CommandService } from '@theia/core/lib/common/index.js';
+import { OpenEditorsCommands } from './navigator-open-editors-commands.js';
+import { nls } from '@theia/core/lib/common/nls.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { AbstractNavigatorTreeWidget } from '../abstract-navigator-tree-widget.js';
 
 export const OPEN_EDITORS_PROPS: TreeProps = {
     ...defaultTreeProps,
@@ -51,7 +51,7 @@ export const OPEN_EDITORS_PROPS: TreeProps = {
     leftPadding: 22
 };
 
-export interface OpenEditorsNodeRow extends TreeWidget.NodeRow {
+export type OpenEditorsNodeRow = TreeWidget.NodeRow & {
     node: OpenEditorNode;
 }
 @injectable()
@@ -63,7 +63,7 @@ export class OpenEditorsWidget extends AbstractNavigatorTreeWidget {
     @inject(CommandService) protected readonly commandService: CommandService;
     @inject(WorkspaceService) protected readonly workspaceService: WorkspaceService;
 
-    static createContainer(parent: interfaces.Container): Container {
+    static createContainer(parent: interfaces.Container): interfaces.Container {
         const child = createFileTreeContainer(parent);
 
         child.unbind(FileTreeModel);
@@ -246,7 +246,7 @@ export class OpenEditorsWidget extends AbstractNavigatorTreeWidget {
     }
 
     protected override tapNode(node?: TreeNode): void {
-        if (OpenEditorNode.is(node)) {
+        if (OpenEditorNode.is(node) && node && 'widget' in node) {
             this.applicationShell.activateWidget(node.widget.id);
         }
         super.tapNode(node);

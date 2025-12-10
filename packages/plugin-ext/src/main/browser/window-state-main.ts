@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { URI } from '@theia/core/shared/vscode-uri';
-import CoreURI from '@theia/core/lib/common/uri';
-import { interfaces } from '@theia/core/shared/inversify';
-import { WindowStateExt, MAIN_RPC_CONTEXT, WindowMain } from '../../common/plugin-api-rpc';
-import { RPCProtocol } from '../../common/rpc-protocol';
-import { UriComponents } from '../../common/uri-components';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { open, OpenerService } from '@theia/core/lib/browser/opener-service';
-import { ExternalUriService } from '@theia/core/lib/browser/external-uri-service';
-import { WindowActivityTracker } from './window-activity-tracker';
+import { URI } from 'vscode-uri';
+import CoreURI from '@theia/core/lib/common/uri.js';
+import { interfaces } from 'inversify';
+import { WindowStateExt, MAIN_RPC_CONTEXT, WindowMain } from '../../common/plugin-api-rpc.js';
+import { RPCProtocol } from '../../common/rpc-protocol.js';
+import { UriComponents } from '../../common/uri-components.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { open, OpenerService } from '@theia/core/lib/browser/opener-service.js';
+import { ExternalUriService } from '@theia/core/lib/browser/external-uri-service.js';
+import { WindowActivityTracker } from './window-activity-tracker.js';
 
 export class WindowStateMain implements WindowMain, Disposable {
 
@@ -48,9 +48,9 @@ export class WindowStateMain implements WindowMain, Disposable {
         window.addEventListener('blur', fireDidBlur);
         this.toDispose.push(Disposable.create(() => window.removeEventListener('blur', fireDidBlur)));
 
-       const tracker = new WindowActivityTracker(window);
-       this.toDispose.push(tracker.onDidChangeActiveState(isActive => this.onActiveStateChanged(isActive)));
-       this.toDispose.push(tracker);
+        const tracker = new WindowActivityTracker(window);
+        this.toDispose.push(tracker.onDidChangeActiveState(isActive => this.onActiveStateChanged(isActive)));
+        this.toDispose.push(tracker);
     }
 
     dispose(): void {

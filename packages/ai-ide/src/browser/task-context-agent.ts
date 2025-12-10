@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Agent, LanguageModelRequirement } from '@theia/ai-core';
+import { Agent, LanguageModelRequirement } from '@theia/ai-core/lib/common/index.js';
 import { nls } from '@theia/core';
-import { injectable } from '@theia/core/shared/inversify';
-import { taskContextSystemVariants, taskContextTemplateVariants, taskContextUpdateVariants } from '../common/task-context-prompt-template';
+import { injectable } from 'inversify';
+import { taskContextSystemVariants, taskContextTemplateVariants, taskContextUpdateVariants } from '../common/task-context-prompt-template.js';
 
 @injectable()
 export class TaskContextAgent implements Agent {

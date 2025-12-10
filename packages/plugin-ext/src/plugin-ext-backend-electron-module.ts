@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { bindElectronBackend } from './hosted/node-electron/plugin-ext-hosted-electron-backend-module';
-import { bindMainBackend } from './main/node/plugin-ext-backend-module';
+import { ContainerModule } from 'inversify';
+import { bindElectronBackend } from './hosted/node-electron/plugin-ext-hosted-electron-backend-module.js';
+import { bindMainBackend } from './main/node/plugin-ext-backend-module.js';
 
 export default new ContainerModule((bind, unbind, isBound, rebind) => {
     bindMainBackend(bind, unbind, isBound, rebind);

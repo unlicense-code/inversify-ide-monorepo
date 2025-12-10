@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { URI } from '@theia/core/shared/vscode-uri';
+import { URI } from 'vscode-uri';
 import * as theia from '@theia/plugin';
-import { IdGenerator } from '../../common/id-generator';
-import * as rpc from '../../common/plugin-api-rpc';
-import * as model from '../../common/plugin-api-rpc-model';
-import { DocumentsExtImpl } from '../documents';
-import { fromRange, SymbolKind } from '../type-converters';
-import * as types from '../types-impl';
+import { IdGenerator } from '../../common/id-generator.js';
+import * as rpc from '../../common/plugin-api-rpc.js';
+import * as model from '../../common/plugin-api-rpc-model.js';
+import { DocumentsExtImpl } from '../documents.js';
+import { fromRange, SymbolKind } from '../type-converters.js';
+import * as types from '../types-impl.js';
 
 export class TypeHierarchyAdapter {
 

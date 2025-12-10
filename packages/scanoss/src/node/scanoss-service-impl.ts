@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { ScanOSSResult, ScanOSSService } from '../common';
+import { injectable } from 'inversify';
+import { ScanOSSResult, ScanOSSService } from '../common/index.js';
 
 import { Scanner, ScannerCfg, ScannerComponent } from 'scanoss';
 
 // Define our own type of what is actually returned by the scanner
-interface ScanOSSScanner {
+type ScanOSSScanner = {
     scanContents: <T extends string>(options: { content: string; key: T }) => Promise<{ [K in `/${T}`]: ScannerComponent[] } | null>;
 }
 

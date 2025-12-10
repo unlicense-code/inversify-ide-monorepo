@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { UriComponents } from '@theia/core/lib/common/uri';
-import { Range, SymbolKind, SymbolTag } from '@theia/core/shared/vscode-languageserver-protocol';
+import { UriComponents } from '@theia/core/lib/common/uri.js';
+import { Range, SymbolKind, SymbolTag } from 'vscode-languageserver-protocol';
 
-export interface TypeHierarchyItem {
+export type TypeHierarchyItem = {
     _sessionId?: string;
     _itemId?: string;
 

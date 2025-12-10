@@ -14,16 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Disposable, DisposableCollection } from '../disposable';
-import { Emitter, Event } from '../event';
-import { ReadBuffer, WriteBuffer } from './message-buffer';
+import { Disposable, DisposableCollection } from '../disposable.js';
+import { Emitter, Event } from '../event.js';
+import { ReadBuffer, WriteBuffer } from './message-buffer.js';
 
-/**
- * A channel is a bidirectional communications channel with lifecycle and
- * error signalling. Note that creation of channels is specific to particular
- * implementations and thus not part of the protocol.
- */
-export interface Channel {
+export type Channel = {
 
     /**
      * The remote side has closed the channel

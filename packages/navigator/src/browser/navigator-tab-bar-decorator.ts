@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import { TabBarDecorator } from '@theia/core/lib/browser/shell/tab-bar-decorator';
-import { ApplicationShell, FrontendApplication, FrontendApplicationContribution, Saveable, Title, ViewContainer, Widget } from '@theia/core/lib/browser';
-import { WidgetDecoration } from '@theia/core/lib/browser/widget-decoration';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { OpenEditorsWidget } from './open-editors-widget/navigator-open-editors-widget';
+import { injectable } from 'inversify';
+import { Emitter, Event } from '@theia/core/lib/common/event.js';
+import { TabBarDecorator } from '@theia/core/lib/browser/shell/tab-bar-decorator.js';
+import { ApplicationShell, FrontendApplication, FrontendApplicationContribution, Saveable, Title, ViewContainer, Widget } from '@theia/core/lib/browser/index.js';
+import { WidgetDecoration } from '@theia/core/lib/browser/widget-decoration.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { OpenEditorsWidget } from './open-editors-widget/navigator-open-editors-widget.js';
 
 @injectable()
 export class NavigatorTabBarDecorator implements TabBarDecorator, FrontendApplicationContribution {

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, postConstruct } from 'inversify';
 import {
     BaseWidget, Widget, StatefulWidget, Panel, PanelLayout, Message, MessageLoop, codicon
-} from '@theia/core/lib/browser';
-import { EditorManager, DiffNavigatorProvider } from '@theia/editor/lib/browser';
-import { GitDiffTreeModel } from './git-diff-tree-model';
-import { GitWatcher } from '../../common';
-import { GitDiffHeaderWidget } from './git-diff-header-widget';
-import { ScmService } from '@theia/scm/lib/browser/scm-service';
-import { GitRepositoryProvider } from '../git-repository-provider';
-import { ScmTreeWidget } from '@theia/scm/lib/browser/scm-tree-widget';
-import { ScmPreferences } from '@theia/scm/lib/common/scm-preferences';
+} from '@theia/core/lib/browser/index.js';
+import { EditorManager, DiffNavigatorProvider } from '@theia/editor/lib/browser/index.js';
+import { GitDiffTreeModel } from './git-diff-tree-model.js';
+import { GitWatcher } from '../../common/index.js';
+import { GitDiffHeaderWidget } from './git-diff-header-widget.js';
+import { ScmService } from '@theia/scm/lib/browser/scm-service.js';
+import { GitRepositoryProvider } from '../git-repository-provider.js';
+import { ScmTreeWidget } from '@theia/scm/lib/browser/scm-tree-widget.js';
+import { ScmPreferences } from '@theia/scm/lib/common/scm-preferences.js';
 import { nls } from '@theia/core';
 
 export const GIT_DIFF = 'git-diff';

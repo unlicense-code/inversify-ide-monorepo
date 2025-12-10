@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Emitter, Event } from '@theia/core/lib/common';
-import { TreeNode, SelectableTreeNode } from '@theia/core/lib/browser';
-import { DirNode, FileNode, FileTreeModel, FileStatNode } from '../file-tree';
-import { FileDialogTree } from './file-dialog-tree';
+import { injectable, inject, postConstruct } from 'inversify';
+import { URI } from '@theia/core';
+import { Emitter, Event } from '@theia/core';
+import { TreeNode, SelectableTreeNode } from '@theia/core/lib/browser/index.js';
+import { DirNode, FileNode, FileTreeModel, FileStatNode } from '../file-tree/index.js';
+import { FileDialogTree } from './file-dialog-tree.js';
 
 @injectable()
 export class FileDialogModel extends FileTreeModel {
 
-    @inject(FileDialogTree) override readonly tree: FileDialogTree;
+    @inject(FileDialogTree) declare readonly tree: FileDialogTree;
     protected readonly onDidOpenFileEmitter = new Emitter<void>();
     protected _initialLocation: URI | undefined;
     private _disableFileSelection: boolean = false;

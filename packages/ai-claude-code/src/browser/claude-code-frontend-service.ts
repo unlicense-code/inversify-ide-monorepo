@@ -15,14 +15,14 @@
 // *****************************************************************************
 
 import { CancellationToken, generateUuid, ILogger, PreferenceService } from '@theia/core';
-import { FileUri } from '@theia/core/lib/common/file-uri';
-import { inject, injectable, LazyServiceIdentifier } from '@theia/core/shared/inversify';
+import { FileUri } from '@theia/core/lib/common/file-uri.js';
+import { inject, injectable, LazyServiceIdentifier } from 'inversify';
 import {
     OutputChannel,
     OutputChannelManager,
     OutputChannelSeverity
-} from '@theia/output/lib/browser/output-channel';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+} from '@theia/output/lib/browser/output-channel.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
 import {
     ClaudeCodeClient,
     ClaudeCodeOptions,
@@ -31,8 +31,8 @@ import {
     SDKMessage,
     StreamMessage,
     ToolApprovalResponseMessage
-} from '../common/claude-code-service';
-import { CLAUDE_CODE_EXECUTABLE_PATH_PREF, CLAUDE_CODE_API_KEY_PREF } from '../common/claude-code-preferences';
+} from '../common/claude-code-service.js';
+import { CLAUDE_CODE_EXECUTABLE_PATH_PREF, CLAUDE_CODE_API_KEY_PREF } from '../common/claude-code-preferences.js';
 
 @injectable()
 export class ClaudeCodeClientImpl implements ClaudeCodeClient {
@@ -69,7 +69,7 @@ export class ClaudeCodeClientImpl implements ClaudeCodeClient {
     }
 }
 
-interface StreamState {
+type StreamState = {
     id: string;
     tokens: (StreamMessage | undefined)[];
     isComplete: boolean;

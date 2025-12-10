@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { MutableChatRequestModel } from '@theia/ai-chat';
-import { ToolProvider, ToolRequest } from '@theia/ai-core';
+import { MutableChatRequestModel } from '@theia/ai-chat/lib/common/index.js';
+import { ToolProvider, ToolRequest } from '@theia/ai-core/lib/common/index.js';
 import { CancellationToken } from '@theia/core';
-import { PreferenceService } from '@theia/core/lib/common/preferences/preference-service';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { SearchInWorkspaceService, SearchInWorkspaceCallbacks } from '@theia/search-in-workspace/lib/browser/search-in-workspace-service';
-import { SearchInWorkspaceResult, SearchInWorkspaceOptions } from '@theia/search-in-workspace/lib/common/search-in-workspace-interface';
-import { SEARCH_IN_WORKSPACE_FUNCTION_ID } from '../common/workspace-functions';
-import { WorkspaceFunctionScope } from './workspace-functions';
-import { SEARCH_IN_WORKSPACE_MAX_RESULTS_PREF } from '../common/workspace-preferences';
-import { optimizeSearchResults } from '../common/workspace-search-provider-util';
+import { PreferenceService } from '@theia/core/lib/common/preferences/preference-service.js';
+import { inject, injectable } from 'inversify';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { SearchInWorkspaceService, SearchInWorkspaceCallbacks } from '@theia/search-in-workspace/lib/browser/search-in-workspace-service.js';
+import { SearchInWorkspaceResult, SearchInWorkspaceOptions } from '@theia/search-in-workspace/lib/common/search-in-workspace-interface.js';
+import { SEARCH_IN_WORKSPACE_FUNCTION_ID } from '../common/workspace-functions.js';
+import { WorkspaceFunctionScope } from './workspace-functions.js';
+import { SEARCH_IN_WORKSPACE_MAX_RESULTS_PREF } from '../common/workspace-preferences.js';
+import { optimizeSearchResults } from '../common/workspace-search-provider-util.js';
 
 @injectable()
 export class WorkspaceSearchProvider implements ToolProvider {

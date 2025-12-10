@@ -15,11 +15,11 @@
 // *****************************************************************************
 
 import { ChatWelcomeMessageProvider } from '@theia/ai-chat-ui/lib/browser/chat-tree-view';
-import * as React from '@theia/core/shared/react';
-import { nls } from '@theia/core/lib/common/nls';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { CommonCommands, LocalizedMarkdown, MarkdownRenderer } from '@theia/core/lib/browser';
-import { OPEN_AI_CONFIG_VIEW } from './ai-configuration/ai-configuration-view-contribution';
+import * as React from 'react';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { inject, injectable } from 'inversify';
+import { CommonCommands, LocalizedMarkdown, MarkdownRenderer } from '@theia/core/lib/browser/index.js';
+import { OPEN_AI_CONFIG_VIEW } from './ai-configuration/ai-configuration-view-contribution.js';
 
 const TheiaIdeAiLogo = ({ width = 200, height = 200, className = '' }) =>
     <svg

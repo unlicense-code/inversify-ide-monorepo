@@ -13,7 +13,7 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { RpcServer } from '@theia/core/lib/common/messaging/proxy-factory';
+import { RpcServer } from '@theia/core/lib/common/messaging/proxy-factory.js';
 
 export enum UpdateStatus {
     InProgress = 'in-progress',
@@ -23,7 +23,7 @@ export enum UpdateStatus {
 
 export const SampleUpdaterPath = '/services/sample-updater';
 export const SampleUpdater = Symbol('SampleUpdater');
-export interface SampleUpdater extends RpcServer<SampleUpdaterClient> {
+export type SampleUpdater = RpcServer<SampleUpdaterClient> & {
     checkForUpdates(): Promise<{ status: UpdateStatus }>;
     onRestartToUpdateRequested(): void;
     disconnectClient(client: SampleUpdaterClient): void;
@@ -32,6 +32,6 @@ export interface SampleUpdater extends RpcServer<SampleUpdaterClient> {
 }
 
 export const SampleUpdaterClient = Symbol('SampleUpdaterClient');
-export interface SampleUpdaterClient {
+export type SampleUpdaterClient = {
     notifyReadyToInstall(): void;
 }

@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ConfirmDialog, Dialog, QuickInputService } from '@theia/core/lib/browser';
-import { ReactDialog } from '@theia/core/lib/browser/dialogs/react-dialog';
-import { SelectComponent } from '@theia/core/lib/browser/widgets/select-component';
+import { ConfirmDialog, Dialog, QuickInputService } from '@theia/core/lib/browser/index.js';
+import { ReactDialog } from '@theia/core/lib/browser/dialogs/react-dialog.js';
+import { SelectComponent } from '@theia/core/lib/browser/widgets/select-component.js';
 import {
     Command, CommandContribution, CommandMenu, CommandRegistry, ContextExpressionMatcher, MAIN_MENU_BAR,
     MenuContribution, MenuModelRegistry, MenuPath, MessageService
-} from '@theia/core/lib/common';
-import { inject, injectable, interfaces } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { ReactNode } from '@theia/core/shared/react';
+} from '@theia/core/lib/common/index.js';
+import { inject, injectable, interfaces } from 'inversify';
+import * as React from 'react';
+import { ReactNode } from 'react';
 
 const SampleCommand: Command = {
     id: 'sample-command',

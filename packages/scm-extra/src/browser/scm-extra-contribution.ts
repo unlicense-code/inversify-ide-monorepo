@@ -13,6 +13,6 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { EDITOR_CONTEXT_MENU } from '@theia/editor/lib/browser';
+import { EDITOR_CONTEXT_MENU } from '@theia/editor/lib/browser/index.js';
 
 export const EDITOR_CONTEXT_MENU_SCM = [...EDITOR_CONTEXT_MENU, '3_scm'];

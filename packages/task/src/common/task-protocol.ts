@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { Event } from '@theia/core';
-import { RpcServer } from '@theia/core/lib/common/messaging/proxy-factory';
-import { IJSONSchema } from '@theia/core/lib/common/json-schema';
-import { ProblemMatcher, ProblemMatch, WatchingMatcherContribution, ProblemMatcherContribution, ProblemPatternContribution } from './problem-matcher-protocol';
+import { RpcServer } from '@theia/core/lib/common/messaging/proxy-factory.js';
+import { IJSONSchema } from '@theia/core/lib/common/json-schema.js';
+import { ProblemMatcher, ProblemMatch, WatchingMatcherContribution, ProblemMatcherContribution, ProblemPatternContribution } from './problem-matcher-protocol.js';
 export { WatchingMatcherContribution, ProblemMatcherContribution, ProblemPatternContribution };
 
 export const taskPath = '/services/task';
@@ -41,7 +41,7 @@ export enum PanelKind {
     New = 'new'
 }
 
-export interface TaskOutputPresentation {
+export type TaskOutputPresentation = {
     echo?: boolean;
     focus?: boolean;
     reveal?: RevealKind;
@@ -120,7 +120,7 @@ export namespace TaskOutputPresentation {
     }
 }
 
-export interface TaskCustomization {
+export type TaskCustomization = {
     type: string;
     group?: 'build' | 'test' | 'rebuild' | 'clean' | 'none' | { kind: 'build' | 'test' | 'rebuild' | 'clean', isDefault: boolean };
     problemMatcher?: string | ProblemMatcherContribution | (string | ProblemMatcherContribution)[];
@@ -174,14 +174,14 @@ export enum TaskScope {
  */
 export type TaskConfigurationScope = string | TaskScope.Workspace | TaskScope.Global;
 
-export interface TaskConfiguration extends TaskCustomization {
+export type TaskConfiguration = TaskCustomization & {
     /** A label that uniquely identifies a task configuration per source */
     readonly label: string;
     readonly _scope: TaskConfigurationScope;
     readonly executionType?: 'shell' | 'process' | 'customExecution';
 }
 
-export interface ContributedTaskConfiguration extends TaskConfiguration {
+export type ContributedTaskConfiguration = TaskConfiguration & {
     /**
      * Source of the task configuration.
      * For a configured task, it is the name of the root folder, while for a provided task, it is the name of the provider.
@@ -190,14 +190,12 @@ export interface ContributedTaskConfiguration extends TaskConfiguration {
     readonly _source: string;
 }
 
-/** A task identifier */
-export interface TaskIdentifier {
+export type TaskIdentifier = {
     type: string;
     [name: string]: string;
 }
 
-/** Runtime information about Task. */
-export interface TaskInfo {
+export type TaskInfo = {
     /** internal unique task id */
     readonly taskId: number,
     /** terminal id. Defined if task is run as a terminal process */
@@ -211,7 +209,7 @@ export interface TaskInfo {
     readonly [key: string]: any;
 }
 
-export interface TaskServer extends RpcServer<TaskClient> {
+export type TaskServer = RpcServer<TaskClient> & {
     /** Run a task. Optionally pass a context.  */
     run(task: TaskConfiguration, ctx?: string, option?: RunTaskOption): Promise<TaskInfo>;
     /** Kill a task, by id. */
@@ -233,23 +231,22 @@ export interface TaskServer extends RpcServer<TaskClient> {
     customExecutionComplete(id: number, exitCode: number | undefined): Promise<void>
 }
 
-export interface TaskCustomizationData {
+export type TaskCustomizationData = {
     type: string;
     problemMatcher?: ProblemMatcher[];
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [name: string]: any;
 }
 
-export interface RunTaskOption {
+export type RunTaskOption = {
     customization?: TaskCustomizationData;
 }
 
-export interface RunOptions {
+export type RunOptions = {
     reevaluateOnRerun?: boolean;
 }
 
-/** Event sent when a task has concluded its execution */
-export interface TaskExitedEvent {
+export type TaskExitedEvent = {
     readonly taskId: number;
     readonly ctx?: string;
 
@@ -263,25 +260,25 @@ export interface TaskExitedEvent {
     readonly processId?: number;
 }
 
-export interface TaskOutputEvent {
+export type TaskOutputEvent = {
     readonly taskId: number;
     readonly ctx?: string;
     readonly line: string;
 }
 
-export interface TaskOutputProcessedEvent {
+export type TaskOutputProcessedEvent = {
     readonly taskId: number;
     readonly config: TaskConfiguration;
     readonly ctx?: string;
     readonly problems?: ProblemMatch[];
 }
 
-export interface BackgroundTaskEndedEvent {
+export type BackgroundTaskEndedEvent = {
     readonly taskId: number;
     readonly ctx?: string;
 }
 
-export interface TaskClient {
+export type TaskClient = {
     onTaskExit(event: TaskExitedEvent): void;
     onTaskCreated(event: TaskInfo): void;
     onDidStartTaskProcess(event: TaskInfo): void;
@@ -290,7 +287,7 @@ export interface TaskClient {
     onBackgroundTaskEnded(event: BackgroundTaskEndedEvent): void;
 }
 
-export interface TaskDefinition {
+export type TaskDefinition = {
     taskType: string;
     source: string;
     properties: {
@@ -304,12 +301,12 @@ export interface TaskDefinition {
     }
 }
 
-export interface ManagedTask {
+export type ManagedTask = {
     id: number;
     context?: string;
 }
 
-export interface ManagedTaskManager<T extends ManagedTask> {
+export type ManagedTaskManager<T extends ManagedTask> = {
     onDelete: Event<number>;
     register(task: T, context?: string): number;
     get(id: number): T | undefined;

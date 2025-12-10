@@ -13,10 +13,10 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { MainPluginApiProvider } from '@theia/plugin-ext/lib/common/plugin-ext-api-contribution';
-import { RPCProtocol } from '@theia/plugin-ext/lib/common/rpc-protocol';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { GreetingMain, PLUGIN_RPC_CONTEXT } from '../common/plugin-api-rpc';
+import { MainPluginApiProvider } from '@theia/plugin-ext/lib/common/plugin-ext-api-contribution.js';
+import { RPCProtocol } from '@theia/plugin-ext/lib/common/rpc-protocol.js';
+import { inject, injectable } from 'inversify';
+import { GreetingMain, PLUGIN_RPC_CONTEXT } from '../common/plugin-api-rpc.js';
 
 @injectable()
 export class GotdMainPluginApiProvider implements MainPluginApiProvider {

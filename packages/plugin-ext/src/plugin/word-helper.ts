@@ -19,10 +19,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-/**
- * Word inside a model.
- */
-export interface WordAtPosition {
+export type WordAtPosition = {
     /**
      * The word.
      */

@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import { CancellationToken, CancellationTokenSource, ILogger, generateUuid } from '@theia/core';
 import {
     LanguageModelMetaData,
@@ -29,8 +29,8 @@ import {
     LanguageModelRegistryClient,
     isLanguageModelParsedResponse,
     UserRequest,
-} from '../common';
-import { BackendLanguageModelRegistryImpl } from './backend-language-model-registry';
+} from '../common/index.js';
+import { BackendLanguageModelRegistryImpl } from './backend-language-model-registry.js';
 
 @injectable()
 export class LanguageModelRegistryFrontendDelegateImpl implements LanguageModelRegistryFrontendDelegate {

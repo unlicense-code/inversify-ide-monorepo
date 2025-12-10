@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 Typefox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,20 +15,20 @@
 // *****************************************************************************
 
 import { ContributionProvider, MaybePromise, URI } from '@theia/core';
-import { inject, injectable, named } from '@theia/core/shared/inversify';
+import { inject, injectable, named } from 'inversify';
 import { WorkspaceServer } from '@theia/workspace/lib/common';
-import * as fs from '@theia/core/shared/fs-extra';
+import * as fs from 'fs-extra';
 import * as Docker from 'dockerode';
-import { ContainerConnectionOptions } from '../electron-common/remote-container-connection-provider';
-import { DevContainerConfiguration } from './devcontainer-file';
-import { DevContainerFileService } from './dev-container-file-service';
-import { ContainerOutputProvider } from '../electron-common/container-output-provider';
-import { RemoteDockerContainerConnection } from './remote-container-connection-provider';
-import { DockerComposeService } from './docker-compose/compose-service';
+import { ContainerConnectionOptions } from '../electron-common/remote-container-connection-provider.js';
+import { DevContainerConfiguration } from './devcontainer-file.js';
+import { DevContainerFileService } from './dev-container-file-service.js';
+import { ContainerOutputProvider } from '../electron-common/container-output-provider.js';
+import { RemoteDockerContainerConnection } from './remote-container-connection-provider.js';
+import { DockerComposeService } from './docker-compose/compose-service.js';
 
 export const ContainerCreationContribution = Symbol('ContainerCreationContributions');
 
-export interface ContainerCreationContribution {
+export type ContainerCreationContribution = {
     handleContainerCreation?(createOptions: Docker.ContainerCreateOptions,
         containerConfig: DevContainerConfiguration,
         api: Docker,

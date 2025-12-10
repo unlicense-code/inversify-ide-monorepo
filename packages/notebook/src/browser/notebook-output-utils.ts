@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,7 +19,7 @@
  *  Copied from commit 18b2c92451b076943e5b508380e0eba66ba7d934 from file src\vs\workbench\contrib\notebook\common\notebookCommon.ts
  *--------------------------------------------------------------------------------------------*/
 
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
 
 const textDecoder = new TextDecoder();
 

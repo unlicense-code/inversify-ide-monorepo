@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017-2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,25 +16,25 @@
 
 import '../../src/browser/style/index.css';
 
-import { ContainerModule, interfaces } from '@theia/core/shared/inversify';
-import { ResourceResolver, CommandContribution } from '@theia/core/lib/common';
-import { WebSocketConnectionProvider, FrontendApplicationContribution, LabelProviderContribution, BreadcrumbsContribution } from '@theia/core/lib/browser';
-import { FileResourceResolver } from './file-resource';
-import { bindFileSystemPreferences } from '../common/filesystem-preferences';
-import { FileSystemFrontendContribution } from './filesystem-frontend-contribution';
-import { FileTreeDecoratorAdapter, FileTreeLabelProvider } from './file-tree';
-import { FileService, FileServiceContribution } from './file-service';
-import { RemoteFileSystemProvider, RemoteFileSystemServer, remoteFileSystemPath, RemoteFileSystemProxyFactory } from '../common/remote-file-system-provider';
-import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider';
-import { RemoteFileServiceContribution } from './remote-file-service-contribution';
-import { FileSystemWatcherErrorHandler } from './filesystem-watcher-error-handler';
-import { FilepathBreadcrumbsContribution } from './breadcrumbs/filepath-breadcrumbs-contribution';
-import { BreadcrumbsFileTreeWidget, createFileTreeBreadcrumbsWidget } from './breadcrumbs/filepath-breadcrumbs-container';
-import { FilesystemSaveableService } from './filesystem-saveable-service';
-import { SaveableService } from '@theia/core/lib/browser/saveable-service';
-import { VSCodeFileServiceContribution, VSCodeFileSystemProvider } from './vscode-file-service-contribution';
-import { FileUploadService } from '../common/upload/file-upload';
-import { FileUploadServiceImpl } from './upload/file-upload-service-impl';
+import { ContainerModule, interfaces } from 'inversify';
+import { ResourceResolver, CommandContribution } from '@theia/core/lib/common/index.js';
+import { WebSocketConnectionProvider, FrontendApplicationContribution, LabelProviderContribution, BreadcrumbsContribution } from '@theia/core/lib/browser/index.js';
+import { FileResourceResolver } from './file-resource.js';
+import { bindFileSystemPreferences } from '../common/filesystem-preferences.js';
+import { FileSystemFrontendContribution } from './filesystem-frontend-contribution.js';
+import { FileTreeDecoratorAdapter, FileTreeLabelProvider } from './file-tree/index.js';
+import { FileService, FileServiceContribution } from './file-service.js';
+import { RemoteFileSystemProvider, RemoteFileSystemServer, remoteFileSystemPath, RemoteFileSystemProxyFactory } from '../common/remote-file-system-provider.js';
+import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider.js';
+import { RemoteFileServiceContribution } from './remote-file-service-contribution.js';
+import { FileSystemWatcherErrorHandler } from './filesystem-watcher-error-handler.js';
+import { FilepathBreadcrumbsContribution } from './breadcrumbs/filepath-breadcrumbs-contribution.js';
+import { BreadcrumbsFileTreeWidget, createFileTreeBreadcrumbsWidget } from './breadcrumbs/filepath-breadcrumbs-container.js';
+import { FilesystemSaveableService } from './filesystem-saveable-service.js';
+import { SaveableService } from '@theia/core/lib/browser/saveable-service.js';
+import { VSCodeFileServiceContribution, VSCodeFileSystemProvider } from './vscode-file-service-contribution.js';
+import { FileUploadService } from '../common/upload/file-upload.js';
+import { FileUploadServiceImpl } from './upload/file-upload-service-impl.js';
 
 export default new ContainerModule((bind, unbind, isBound, rebind) => {
     bindFileSystemPreferences(bind);

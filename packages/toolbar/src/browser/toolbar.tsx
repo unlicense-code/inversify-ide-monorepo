@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,22 +14,22 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { Anchor, ContextMenuAccess, KeybindingRegistry, Widget, WidgetManager } from '@theia/core/lib/browser';
-import { TabBarToolbar, TabBarToolbarFactory } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
+import * as React from 'react';
+import { Anchor, ContextMenuAccess, KeybindingRegistry, Widget, WidgetManager } from '@theia/core/lib/browser/index.js';
+import { TabBarToolbar, TabBarToolbarFactory } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { injectable, inject, postConstruct } from 'inversify';
 import { DisposableCollection, MenuPath, PreferenceService, ProgressService } from '@theia/core';
-import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
-import { ProgressBarFactory } from '@theia/core/lib/browser/progress-bar-factory';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state.js';
+import { ProgressBarFactory } from '@theia/core/lib/browser/progress-bar-factory.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
 import {
     ToolbarAlignment,
     ToolbarAlignmentString,
     ToolbarItemPosition,
-} from './toolbar-interfaces';
-import { ToolbarController } from './toolbar-controller';
-import { ToolbarMenus } from './toolbar-constants';
-import { TabBarToolbarItem } from '@theia/core/lib/browser/shell/tab-bar-toolbar/tab-toolbar-item';
+} from './toolbar-interfaces.js';
+import { ToolbarController } from './toolbar-controller.js';
+import { ToolbarMenus } from './toolbar-constants.js';
+import { TabBarToolbarItem } from '@theia/core/lib/browser/shell/tab-bar-toolbar/tab-toolbar-item.js';
 
 const TOOLBAR_BACKGROUND_DATA_ID = 'toolbar-wrapper';
 export const TOOLBAR_PROGRESSBAR_ID = 'main-toolbar-progress';
@@ -65,7 +65,7 @@ export class ToolbarImpl extends TabBarToolbar {
             this.updateInlineItems();
             this.update();
         });
-        this.model.onToolbarDidChangeBusyState(isBusy => {
+        this.model.onToolbarDidChangeBusyState((isBusy: boolean) => {
             if (isBusy) {
                 this.isBusyDeferred = new Deferred<void>();
                 this.progressService.withProgress('', TOOLBAR_PROGRESSBAR_ID, async () => this.isBusyDeferred.promise);

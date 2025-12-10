@@ -16,16 +16,16 @@
 // *****************************************************************************
 
 import { CancellationToken, Emitter, Event, URI } from '@theia/core';
-import { Range, Location, CancellationTokenSource } from '@theia/core/shared/vscode-languageserver-protocol';
+import { Range, Location, CancellationTokenSource } from 'vscode-languageserver-protocol';
 
 import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
-import { SimpleObservableCollection, TreeCollection, observableProperty } from '@theia/test/lib/common/collections';
+import { SimpleObservableCollection, TreeCollection, observableProperty } from '@theia/test/lib/common/collections.js';
 import {
     TestController, TestExecutionState, TestFailure, TestItem,
     TestOutputItem, TestRun, TestRunProfile, TestState, TestStateChangedEvent
-} from '@theia/test/lib/browser/test-service';
-import { AccumulatingTreeDeltaEmitter, CollectionDelta, TreeDelta, TreeDeltaBuilder } from '@theia/test/lib/common/tree-delta';
-import { timeout } from '@theia/core/lib/common/promise-util';
+} from '@theia/test/lib/browser/test-service.js';
+import { AccumulatingTreeDeltaEmitter, CollectionDelta, TreeDelta, TreeDeltaBuilder } from '@theia/test/lib/common/tree-delta.js';
+import { timeout } from '@theia/core/lib/common/promise-util.js';
 
 export class TestItemCollection extends TreeCollection<string, TestItemImpl, TestItemImpl | TestControllerImpl> {
     override add(item: TestItemImpl): TestItemImpl | undefined {

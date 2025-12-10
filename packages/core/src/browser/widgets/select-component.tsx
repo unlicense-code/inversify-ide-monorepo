@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,13 +16,13 @@
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import * as DOMPurify from 'dompurify';
-import { codicon } from './widget';
-import { measureTextHeight, measureTextWidth } from '../browser';
+import DOMPurify from 'dompurify';
+import { codicon } from './widget.js';
+import { measureTextHeight, measureTextWidth } from '../browser.js';
 
 import '../../../src/browser/style/select-component.css';
 
-export interface SelectOption {
+export type SelectOption = {
     value?: string
     label?: string
     separator?: boolean
@@ -33,7 +33,7 @@ export interface SelectOption {
     userData?: string
 }
 
-export interface SelectComponentProps {
+export type SelectComponentProps = {
     id?: string
     className?: string
     options: readonly SelectOption[]
@@ -44,7 +44,7 @@ export interface SelectComponentProps {
     alignment?: 'left' | 'right';
 }
 
-export interface SelectComponentState {
+export type SelectComponentState = {
     dimensions?: DOMRect
     selected: number
     original: number

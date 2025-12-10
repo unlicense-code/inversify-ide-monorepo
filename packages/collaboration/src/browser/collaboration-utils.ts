@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { URI } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { CollaborationWorkspaceService } from './collaboration-workspace-service';
+import { inject, injectable } from 'inversify';
+import { CollaborationWorkspaceService } from './collaboration-workspace-service.js';
 
 @injectable()
 export class CollaborationUtils {

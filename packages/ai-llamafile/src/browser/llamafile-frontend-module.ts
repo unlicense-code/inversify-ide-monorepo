@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 import { CommandContribution } from '@theia/core';
-import { FrontendApplicationContribution, RemoteConnectionProvider, ServiceConnectionProvider } from '@theia/core/lib/browser';
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { OutputChannelManager, OutputChannelSeverity } from '@theia/output/lib/browser/output-channel';
-import { LlamafileManager, LlamafileManagerPath, LlamafileServerManagerClient } from '../common/llamafile-manager';
-import { LlamafileCommandContribution } from './llamafile-command-contribution';
-import { LlamafileFrontendApplicationContribution } from './llamafile-frontend-application-contribution';
-import { bindAILlamafilePreferences } from '../common/llamafile-preferences';
+import { FrontendApplicationContribution, RemoteConnectionProvider, ServiceConnectionProvider } from '@theia/core/lib/browser/index.js';
+import { ContainerModule } from 'inversify';
+import { OutputChannelManager, OutputChannelSeverity } from '@theia/output/lib/browser/output-channel.js';
+import { LlamafileManager, LlamafileManagerPath, LlamafileServerManagerClient } from '../common/llamafile-manager.js';
+import { LlamafileCommandContribution } from './llamafile-command-contribution.js';
+import { LlamafileFrontendApplicationContribution } from './llamafile-frontend-application-contribution.js';
+import { bindAILlamafilePreferences } from '../common/llamafile-preferences.js';
 
 export default new ContainerModule(bind => {
     bind(FrontendApplicationContribution).to(LlamafileFrontendApplicationContribution).inSingletonScope();

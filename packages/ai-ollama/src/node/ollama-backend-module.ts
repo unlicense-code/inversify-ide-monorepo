@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { OLLAMA_LANGUAGE_MODELS_MANAGER_PATH, OllamaLanguageModelsManager } from '../common/ollama-language-models-manager';
+import { ContainerModule } from 'inversify';
+import { OLLAMA_LANGUAGE_MODELS_MANAGER_PATH, OllamaLanguageModelsManager } from '../common/ollama-language-models-manager.js';
 import { ConnectionHandler, PreferenceContribution, RpcConnectionHandler } from '@theia/core';
-import { OllamaLanguageModelsManagerImpl } from './ollama-language-models-manager-impl';
-import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module';
-import { OllamaPreferencesSchema } from '../common/ollama-preferences';
+import { OllamaLanguageModelsManagerImpl } from './ollama-language-models-manager-impl.js';
+import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module.js';
+import { OllamaPreferencesSchema } from '../common/ollama-preferences.js';
 
 export const OllamaModelFactory = Symbol('OllamaModelFactory');
 

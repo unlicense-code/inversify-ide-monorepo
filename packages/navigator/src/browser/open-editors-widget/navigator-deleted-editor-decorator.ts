@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { ApplicationShell, DepthFirstTreeIterator, NavigatableWidget, Tree, TreeDecoration, TreeDecorator } from '@theia/core/lib/browser';
-import { FileSystemFrontendContribution } from '@theia/filesystem/lib/browser/filesystem-frontend-contribution';
+import { injectable, inject, postConstruct } from 'inversify';
+import { ApplicationShell, DepthFirstTreeIterator, NavigatableWidget, Tree, TreeDecoration, TreeDecorator } from '@theia/core/lib/browser/index.js';
+import { FileSystemFrontendContribution, FileStatNode } from '@theia/filesystem/lib/browser/index.js';
+import { FileChangeType } from '@theia/filesystem/lib/common/index.js';
 import { Emitter } from '@theia/core';
-import { FileStatNode } from '@theia/filesystem/lib/browser';
-import { FileChangeType } from '@theia/filesystem/lib/common/files';
 
 @injectable()
 export class NavigatorDeletedEditorDecorator implements TreeDecorator {
@@ -36,7 +35,7 @@ export class NavigatorDeletedEditorDecorator implements TreeDecorator {
 
     @postConstruct()
     init(): void {
-        this.fileSystemContribution.onDidChangeEditorFile(({ editor, type }) => {
+        this.fileSystemContribution.onDidChangeEditorFile(({ editor, type }: { editor: NavigatableWidget; type: FileChangeType }) => {
             const uri = editor.getResourceUri()?.toString();
             if (uri) {
                 if (type === FileChangeType.DELETED) {

@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { CancellationToken } from '@theia/core';
-import { SaveOptions, SaveReason } from '@theia/core/lib/browser';
-import { MonacoEditor } from './monaco-editor';
-import { SaveParticipant, SAVE_PARTICIPANT_DEFAULT_ORDER } from './monaco-editor-provider';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { MonacoCodeActionService } from './monaco-code-action-service';
+import { CancellationToken } from '@theia/core/lib/common/cancellation.js';
+import { SaveOptions, SaveReason } from '@theia/core/lib/browser/index.js';
+import { MonacoEditor } from './monaco-editor.js';
+import { SaveParticipant, SAVE_PARTICIPANT_DEFAULT_ORDER } from './monaco-editor-provider.js';
+import { inject, injectable } from 'inversify';
+import { MonacoCodeActionService } from './monaco-code-action-service.js';
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.

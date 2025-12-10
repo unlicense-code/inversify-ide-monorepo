@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { LocationListRenderer, LocationListRendererFactory, LocationListRendererOptions } from '../location';
-import { FileDialogHiddenFilesToggleRenderer, HiddenFilesToggleRendererFactory } from './file-dialog-hidden-files-renderer';
-import { DefaultFileDialogService, FileDialogService } from './file-dialog-service';
-import { FileDialogTree } from './file-dialog-tree';
-import { FileDialogTreeFiltersRenderer, FileDialogTreeFiltersRendererFactory, FileDialogTreeFiltersRendererOptions } from './file-dialog-tree-filters-renderer';
+import { ContainerModule } from 'inversify';
+import { LocationListRenderer, LocationListRendererFactory, LocationListRendererOptions } from '../location/index.js';
+import { FileDialogHiddenFilesToggleRenderer, HiddenFilesToggleRendererFactory } from './file-dialog-hidden-files-renderer.js';
+import { DefaultFileDialogService, FileDialogService } from './file-dialog-service.js';
+import { FileDialogTree } from './file-dialog-tree.js';
+import { FileDialogTreeFiltersRenderer, FileDialogTreeFiltersRendererFactory, FileDialogTreeFiltersRendererOptions } from './file-dialog-tree-filters-renderer.js';
 export default new ContainerModule(bind => {
     bind(DefaultFileDialogService).toSelf().inSingletonScope();
     bind(FileDialogService).toService(DefaultFileDialogService);

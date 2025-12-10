@@ -13,14 +13,14 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import * as React from '@theia/core/shared/react';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { LanguageModelAliasRegistry, LanguageModelAlias } from '@theia/ai-core/lib/common/language-model-alias';
-import { FrontendLanguageModelRegistry, LanguageModel, LanguageModelRegistry, LanguageModelRequirement } from '@theia/ai-core/lib/common/language-model';
-import { nls } from '@theia/core/lib/common/nls';
-import { AgentService, AISettingsService } from '@theia/ai-core';
-import { AIListDetailConfigurationWidget } from './base/ai-list-detail-configuration-widget';
-import { ConfigurationSection } from './components/configuration-section';
+import * as React from 'react';
+import { inject, injectable, postConstruct } from 'inversify';
+import { LanguageModelAliasRegistry, LanguageModelAlias } from '@theia/ai-core/lib/common/language-model-alias.js';
+import { FrontendLanguageModelRegistry, LanguageModel, LanguageModelRegistry, LanguageModelRequirement } from '@theia/ai-core/lib/common/language-model.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { AgentService, AISettingsService } from '@theia/ai-core/lib/common/index.js';
+import { AIListDetailConfigurationWidget } from './base/ai-list-detail-configuration-widget.js';
+import { ConfigurationSection } from './components/configuration-section.js';
 
 @injectable()
 export class ModelAliasesConfigurationWidget extends AIListDetailConfigurationWidget<LanguageModelAlias> {

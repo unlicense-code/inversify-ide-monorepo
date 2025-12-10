@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,22 +15,21 @@
 // *****************************************************************************
 
 import { Command, Disposable, nls } from '@theia/core';
-import { DEFAULT_SCROLL_OPTIONS, Dialog, DialogProps, Message } from '@theia/core/lib/browser';
-import { ReactDialog } from '@theia/core/lib/browser/dialogs/react-dialog';
-import { FuzzySearch } from '@theia/core/lib/browser/tree/fuzzy-search';
-import { SelectComponent, SelectOption } from '@theia/core/lib/browser/widgets/select-component';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { inject, injectable, interfaces, postConstruct } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { createRoot, Root } from '@theia/core/shared/react-dom/client';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import PerfectScrollbar from 'perfect-scrollbar';
-import { IconSetProvider } from './icons/icon-set-provider';
-import { ReactInteraction, ReactKeyboardEvent } from './toolbar-constants';
-import { IconSet } from './toolbar-interfaces';
-import debounce = require('@theia/core/shared/lodash.debounce');
+import { DEFAULT_SCROLL_OPTIONS, Dialog, DialogProps, Message } from '@theia/core/lib/browser/index.js';
+import { ReactDialog } from '@theia/core/lib/browser/dialogs/react-dialog.js';
+import { FuzzySearch } from '@theia/core/lib/browser/tree/fuzzy-search.js';
+import { SelectComponent, SelectOption } from '@theia/core/lib/browser/widgets/select-component.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { inject, injectable, interfaces, postConstruct } from 'inversify';
+import * as React from 'react';
+import { createRoot, Root } from 'react-dom/client';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { IconSetProvider } from './icons/icon-set-provider.js';
+import { ReactInteraction, ReactKeyboardEvent } from './toolbar-constants.js';
+import { IconSet } from './toolbar-interfaces.js';
+import debounce from  'lodash/debounce.js'
 
-export interface ToolbarIconDialogFactory {
+export type ToolbarIconDialogFactory = {
     (command: Command): ToolbarIconSelectorDialog;
 }
 
@@ -48,7 +47,7 @@ export class ToolbarIconSelectorDialog extends ReactDialog<string | undefined> {
 
     static ID = 'toolbar-icon-selector-dialog';
     protected deferredScrollContainer = new Deferred<HTMLDivElement>();
-    override scrollOptions: PerfectScrollbar.Options = { ...DEFAULT_SCROLL_OPTIONS };
+    override scrollOptions = { ...DEFAULT_SCROLL_OPTIONS };
     protected filterRef: HTMLInputElement;
 
     protected selectedIcon: string | undefined;

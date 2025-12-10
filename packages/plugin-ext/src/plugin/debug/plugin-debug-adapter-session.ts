@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { DebugAdapterSessionImpl } from '@theia/debug/lib/common/debug-adapter-session';
+import { DebugAdapterSessionImpl } from '@theia/debug/lib/common/debug-adapter-session.js';
 import * as theia from '@theia/plugin';
-import { DebugAdapter } from '@theia/debug/lib/common/debug-model';
-import { DebugChannel } from '@theia/debug/lib/common/debug-service';
+import { DebugAdapter } from '@theia/debug/lib/common/debug-model.js';
+import { DebugChannel } from '@theia/debug/lib/common/debug-service.js';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 

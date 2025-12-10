@@ -13,19 +13,19 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { MonacoEditorZoneWidget } from '@theia/monaco/lib/browser/monaco-editor-zone-widget';
+import { MonacoEditorZoneWidget } from '@theia/monaco/lib/browser/monaco-editor-zone-widget.js';
 import {
     Comment,
     CommentMode,
     CommentThread,
     CommentThreadState,
     CommentThreadCollapsibleState
-} from '../../../common/plugin-api-rpc-model';
-import { CommentGlyphWidget } from './comment-glyph-widget';
-import { BaseWidget, DISABLED_CLASS } from '@theia/core/lib/browser';
-import * as React from '@theia/core/shared/react';
-import { MouseTargetType } from '@theia/editor/lib/browser';
-import { CommentsService } from './comments-service';
+} from '../../../common/plugin-api-rpc-model.js';
+import { CommentGlyphWidget } from './comment-glyph-widget.js';
+import { BaseWidget, DISABLED_CLASS } from '@theia/core/lib/browser/index.js';
+import * as React from 'react';
+import { MouseTargetType } from '@theia/editor/lib/browser/index.js';
+import { CommentsService } from './comments-service.js';
 import {
     CommandMenu,
     CommandRegistry,
@@ -34,13 +34,13 @@ import {
     DisposableCollection,
     MenuModelRegistry,
     MenuPath
-} from '@theia/core/lib/common';
-import { CommentsContext } from './comments-context';
-import { RefObject } from '@theia/core/shared/react';
+} from '@theia/core/lib/common/index.js';
+import { CommentsContext } from './comments-context.js';
+import { RefObject } from 'react';
 import * as monaco from '@theia/monaco-editor-core';
-import { createRoot, Root } from '@theia/core/shared/react-dom/client';
+import { createRoot, Root } from 'react-dom/client';
 import { CommentAuthorInformation } from '@theia/plugin';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.

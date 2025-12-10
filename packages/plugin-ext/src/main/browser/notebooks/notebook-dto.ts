@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,8 +16,8 @@
 
 import { OS } from '@theia/core';
 import * as notebookCommon from '@theia/notebook/lib/common';
-import { NotebookCellModel } from '@theia/notebook/lib/browser/view-model/notebook-cell-model';
-import * as rpc from '../../../common';
+import { NotebookCellModel } from '@theia/notebook/lib/browser/view-model/notebook-cell-model.js';
+import * as rpc from '../../../common/index.js';
 import { CellExecutionUpdateType } from '@theia/notebook/lib/common';
 import { CellExecuteUpdate, CellExecutionComplete } from '@theia/notebook/lib/browser';
 

@@ -23,21 +23,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Channel, Disposable, DisposableCollection, isObject, ReadBuffer, RpcProtocol, URI, WriteBuffer } from '@theia/core';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import { MessageProvider } from '@theia/core/lib/common/message-rpc/channel';
-import { Uint8ArrayReadBuffer, Uint8ArrayWriteBuffer } from '@theia/core/lib/common/message-rpc/uint8-array-message-buffer';
-import { MsgPackExtensionManager } from '@theia/core/lib/common/message-rpc/msg-pack-extension-manager';
-import { URI as VSCodeURI } from '@theia/core/shared/vscode-uri';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
-import { Range, Position } from '../plugin/types-impl';
+import { ChannelCloseEvent } from '@theia/core/lib/common/message-rpc/channel.js';
+import { Emitter, Event } from '@theia/core';
+import { MessageProvider } from '@theia/core/lib/common/message-rpc/channel.js';
+import { Uint8ArrayReadBuffer, Uint8ArrayWriteBuffer } from '@theia/core/lib/common/message-rpc/uint8-array-message-buffer.js';
+import { MsgPackExtensionManager } from '@theia/core/lib/common/message-rpc/msg-pack-extension-manager.js';
+import { URI as VSCodeURI } from 'vscode-uri';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
+import { Range, Position } from '../plugin/types-impl.js';
 
-export interface MessageConnection {
+export type MessageConnection = {
     send(msg: string): void;
     onMessage: Event<string>;
 }
 
 export const RPCProtocol = Symbol.for('RPCProtocol');
-export interface RPCProtocol extends Disposable {
+export type RPCProtocol = Disposable & {
     /**
      * Returns a proxy to an object addressable/named in the plugin process or in the main process.
      */
@@ -62,7 +63,7 @@ export function createProxyIdentifier<T>(identifier: string): ProxyIdentifier<T>
     return new ProxyIdentifier(false, identifier);
 }
 
-export interface ConnectionClosedError extends Error {
+export type ConnectionClosedError = Error & {
     code: 'RPC_PROTOCOL_CLOSED'
 }
 export namespace ConnectionClosedError {
@@ -71,7 +72,7 @@ export namespace ConnectionClosedError {
         return Object.assign(new Error(message), { code });
     }
     export function is(error: unknown): error is ConnectionClosedError {
-        return isObject(error) && 'code' in error && (error as ConnectionClosedError).code === code;
+        return isObject(error) && 'code' in error && (error as unknown as ConnectionClosedError).code === code;
     }
 }
 
@@ -190,8 +191,10 @@ export class RPCProtocolImpl implements RPCProtocol {
  */
 export class BatchingChannel implements Channel {
     protected messagesToSend: Uint8Array[] = [];
+    protected readonly underlyingChannel: Channel;
 
-    constructor(protected underlyingChannel: Channel) {
+    constructor(underlyingChannel: Channel) {
+        this.underlyingChannel = underlyingChannel;
         underlyingChannel.onMessage(msg => this.handleMessages(msg()));
     }
 
@@ -200,8 +203,13 @@ export class BatchingChannel implements Channel {
         return this.onMessageEmitter.event;
     };
 
-    readonly onClose = this.underlyingChannel.onClose;
-    readonly onError = this.underlyingChannel.onError;
+    get onClose(): Event<ChannelCloseEvent> {
+        return this.underlyingChannel.onClose;
+    }
+
+    get onError(): Event<unknown> {
+        return this.underlyingChannel.onError;
+    }
 
     close(): void {
         this.underlyingChannel.close();

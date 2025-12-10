@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,24 +15,24 @@
 // *****************************************************************************
 
 import { inject, injectable, postConstruct } from 'inversify';
-import { Event, Emitter, WaitUntilEvent } from '../../common/event';
-import { DisposableCollection } from '../../common/disposable';
-import { CancellationToken } from '../../common/cancellation';
-import { ILogger } from '../../common/logger';
-import { SelectionProvider } from '../../common/selection-service';
-import { Tree, TreeNode, CompositeTreeNode } from './tree';
-import { TreeSelectionService, SelectableTreeNode, TreeSelection } from './tree-selection';
-import { TreeExpansionService, ExpandableTreeNode } from './tree-expansion';
-import { TreeNavigationService } from './tree-navigation';
-import { TreeIterator, BottomUpTreeIterator, TopDownTreeIterator, Iterators } from './tree-iterator';
-import { TreeSearch } from './tree-search';
-import { TreeFocusService } from './tree-focus-service';
+import { Event, Emitter, WaitUntilEvent } from '../../common/event.js';
+import { DisposableCollection } from '../../common/disposable.js';
+import { CancellationToken } from '../../common/cancellation.js';
+import { ILogger } from '../../common/logger.js';
+import { SelectionProvider } from '../../common/selection-service.js';
+import { Tree, TreeNode, CompositeTreeNode } from './tree.js';
+import { TreeSelectionService, SelectableTreeNode, TreeSelection } from './tree-selection.js';
+import { TreeExpansionService, ExpandableTreeNode } from './tree-expansion.js';
+import { TreeNavigationService } from './tree-navigation.js';
+import { TreeIterator, BottomUpTreeIterator, TopDownTreeIterator, Iterators } from './tree-iterator.js';
+import { TreeSearch } from './tree-search.js';
+import { TreeFocusService } from './tree-focus-service.js';
 
 /**
  * The tree model.
  */
 export const TreeModel = Symbol('TreeModel');
-export interface TreeModel extends Tree, TreeSelectionService, TreeExpansionService {
+export type TreeModel = Tree & TreeSelectionService & TreeExpansionService & {
 
     /**
      * Expands the given node. If the `node` argument is `undefined`, then expands the currently selected tree node.

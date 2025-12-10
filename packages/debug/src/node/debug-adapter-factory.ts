@@ -22,7 +22,7 @@
 // Some entities copied and modified from https://github.com/Microsoft/vscode-debugadapter-node/blob/master/adapter/src/protocol.ts
 
 import * as net from 'net';
-import { injectable, inject } from '@theia/core/shared/inversify';
+import { injectable, inject } from 'inversify';
 import {
     RawProcessFactory,
     ProcessManager,
@@ -37,11 +37,11 @@ import {
     DebugAdapterFactory,
     DebugAdapterForkExecutable,
     DebugAdapter
-} from '../common/debug-model';
-import { DebugAdapterSessionImpl } from '../common/debug-adapter-session';
-import { environment } from '@theia/core/shared/@theia/application-package';
-import { ProcessDebugAdapter, SocketDebugAdapter } from './stream-debug-adapter';
-import { isObject } from '@theia/core/lib/common';
+} from '../common/debug-model.js';
+import { DebugAdapterSessionImpl } from '../common/debug-adapter-session.js';
+import { environment } from '@theia/application-package';
+import { ProcessDebugAdapter, SocketDebugAdapter } from './stream-debug-adapter.js';
+import { isObject } from '@theia/core/lib/common/index.js';
 
 /**
  * [DebugAdapterFactory](#DebugAdapterFactory) implementation based on

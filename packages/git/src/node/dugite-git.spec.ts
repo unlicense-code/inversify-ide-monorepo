@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,15 +18,15 @@ import * as upath from 'upath';
 
 import * as path from 'path';
 import * as temp from 'temp';
-import * as fs from '@theia/core/shared/fs-extra';
+import * as fs from 'fs-extra';
 import { expect } from 'chai';
-import { Git } from '../common/git';
-import { git as gitExec } from 'dugite-extra/lib/core/git';
-import { FileUri } from '@theia/core/lib/common/file-uri';
-import { WorkingDirectoryStatus, Repository, GitUtils, GitFileStatus, GitFileChange } from '../common';
-import { initRepository, createTestRepository } from 'dugite-extra/lib/command/test-helper';
-import { createGit } from './test/binding-helper';
-import { isWindows } from '@theia/core/lib/common/os';
+import { Git } from '../common/git.js';
+import { git as gitExec } from 'dugite-extra/lib/core/git.js';
+import { FileUri } from '@theia/core/lib/common/file-uri.js';
+import { WorkingDirectoryStatus, Repository, GitUtils, GitFileStatus, GitFileChange } from '../common/index.js';
+import { initRepository, createTestRepository } from 'dugite-extra/lib/command/test-helper.js';
+import { createGit } from './test/binding-helper.js';
+import { isWindows } from '@theia/core/lib/common/os.js';
 
 /* eslint-disable max-len */
 
@@ -801,7 +801,7 @@ function toPathSegment(repository: Repository, uri: string): string {
     return upath.relative(FileUri.fsPath(repository.localUri), FileUri.fsPath(uri));
 }
 
-interface ChangeDelta {
+type ChangeDelta = {
     readonly pathSegment: string;
     readonly status: GitFileStatus;
 }

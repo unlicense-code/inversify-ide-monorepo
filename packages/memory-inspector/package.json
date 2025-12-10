@@ -1,6 +1,7 @@
 {
   "name": "@theia/memory-inspector",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - Memory Inspector",
   "keywords": [
     "theia-extension"

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,45 +15,11 @@
 // *****************************************************************************
 
 import { injectable, unmanaged } from 'inversify';
-import { Tree, TreeNode } from './tree';
-import { Event, Emitter, Disposable, DisposableCollection, MaybePromise } from '../../common';
-import { WidgetDecoration } from '../widget-decoration';
+import { Tree, TreeNode } from './tree.js';
+import { Event, Emitter, Disposable, DisposableCollection, MaybePromise } from '../../common/index.js';
+import { WidgetDecoration } from '../widget-decoration.js';
 
-/**
- * The {@link TreeDecorator} allows adapting the look and the style of the tree items within a widget. Changes are reflected in
- * the form of `decoration data`. This `decoration data` is a map storing {@link TreeDecoration.Data} for affected tree nodes (using the unique node id as key).
- * It is important to notice that there is no common contribution point for `TreeDecorators`. Instead, each {@link TreeDecoratorService} is
- * supposed to declare its own contribution provider for `TreeDecorators`.
- *
- * ### Example usage
- * A simple tree decorator that changes the background color of each tree node to `red`.
- *
- * ```typescript
- * @injectable()
- * export class MyTreeDecorator implements TreeDecorator {
- *     id = 'myTreeDecorator';
- *
- *     protected readonly emitter = new Emitter<(tree: Tree) => Map<string, TreeDecoration.Data>>();
- *
- *     get onDidChangeDecorations(): Event<(tree: Tree) => Map<string, TreeDecoration.Data>> {
- *         return this.emitter.event;
- *     }
- *
- *     decorations(tree: Tree): MaybePromise<Map<string, TreeDecoration.Data>> {
- *         const result = new Map();
- *
- *         if (tree.root === undefined) {
- *             return result;
- *         }
- *         for (const treeNode of new DepthFirstTreeIterator(tree.root)) {
- *             result.set(treeNode.id,<TreeDecoration.Data>{backgroundColor:'red'})
- *         }
- *         return result;
- *     }
- * }
- * ```
- */
-export interface TreeDecorator {
+export type TreeDecorator = {
 
     /**
      * The unique identifier of the decorator. Ought to be unique in the application.
@@ -78,24 +44,7 @@ export interface TreeDecorator {
 
 export const TreeDecoratorService = Symbol('TreeDecoratorService');
 
-/**
- * The {@link TreeDecoratorService} manages a set of known {link TreeDecorator}s and emits events when
- * any of the known decorators has changes. Typically, a `TreeDecoratorService` provides a contribution point that can be used to
- * register {@link TreeDecorator}s exclusively for this service.
- *
- * ### Example usage
- * ```typescript
- * export const MyTreeDecorator = Symbol('MyTreeDecorator');
- *
- * @injectable()
- * export class MyDecorationService extends AbstractTreeDecoratorService {
- *     constructor(@inject(ContributionProvider) @named(MyTreeDecorator) protected readonly contributions: ContributionProvider<TreeDecorator>) {
- *         super(contributions.getContributions());
- *     }
- * }
- * ```
- */
-export interface TreeDecoratorService extends Disposable {
+export type TreeDecoratorService = Disposable & {
 
     /**
      * Fired when any of the available tree decorators has changes.
@@ -222,7 +171,7 @@ export abstract class AbstractTreeDecoratorService implements TreeDecoratorServi
  */
 export import TreeDecoration = WidgetDecoration;
 
-export interface DecoratedTreeNode extends TreeNode {
+export type DecoratedTreeNode = TreeNode & {
     /**
      * The additional tree decoration data attached to the tree node itself.
      */

@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { Position, Range } from '@theia/core/shared/vscode-languageserver-protocol';
+import { inject, injectable, postConstruct } from 'inversify';
+import { Position, Range } from 'vscode-languageserver-protocol';
 import { CommandMenu, Disposable, Emitter, Event, MenuModelRegistry, MenuPath, URI, nls } from '@theia/core';
-import { codicon } from '@theia/core/lib/browser';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
-import { MonacoDiffEditor } from '@theia/monaco/lib/browser/monaco-diff-editor';
-import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider';
+import { codicon } from '@theia/core/lib/browser/index.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor.js';
+import { MonacoDiffEditor } from '@theia/monaco/lib/browser/monaco-diff-editor.js';
+import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider.js';
 import { MonacoEditorPeekViewWidget, peekViewBorder, peekViewTitleBackground, peekViewTitleForeground, peekViewTitleInfoForeground }
-    from '@theia/monaco/lib/browser/monaco-editor-peek-view-widget';
-import { Change, LineRange } from './diff-computer';
-import { ScmColors } from '../scm-colors';
+    from '@theia/monaco/lib/browser/monaco-editor-peek-view-widget.js';
+import { Change, LineRange } from './diff-computer.js';
+import { ScmColors } from '../scm-colors.js';
 import * as monaco from '@theia/monaco-editor-core';
 
 export const SCM_CHANGE_TITLE_MENU: MenuPath = ['scm-change-title-menu'];
@@ -33,7 +33,7 @@ export const SCM_CHANGE_TITLE_MENU: MenuPath = ['scm-change-title-menu'];
 export const PLUGIN_SCM_CHANGE_TITLE_MENU: MenuPath = ['plugin-scm-change-title-menu'];
 
 export const DirtyDiffWidgetProps = Symbol('DirtyDiffWidgetProps');
-export interface DirtyDiffWidgetProps {
+export type DirtyDiffWidgetProps = {
     readonly editor: MonacoEditor;
     readonly previousRevisionUri: URI;
 }

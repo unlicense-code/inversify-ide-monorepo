@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { nls } from '@theia/core';
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable } from 'inversify';
 
-export interface PreferenceLayout {
+export type PreferenceLayout = {
     id: string;
     label: string;
     children?: PreferenceLayout[];

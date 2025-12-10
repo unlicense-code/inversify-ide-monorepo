@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ScmProvider } from '@theia/scm/lib/browser/scm-provider';
-import { ScmHistorySupport } from './scm-history-constants';
+import { ScmProvider } from '@theia/scm/lib/browser/scm-provider.js';
+import { ScmHistorySupport } from './scm-history-constants.js';
 
-export interface ScmHistoryProvider extends ScmProvider {
+export type ScmHistoryProvider = ScmProvider & {
     historySupport?: ScmHistorySupport;
 }
 export namespace ScmHistoryProvider {

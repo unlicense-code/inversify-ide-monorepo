@@ -15,10 +15,11 @@
 // *****************************************************************************
 
 import { injectable } from 'inversify';
-import { DefaultSecondaryWindowService } from '../../browser/window/default-secondary-window-service';
-import { ApplicationShell, ExtractableWidget } from '../../browser';
-import { ElectronWindowService } from './electron-window-service';
-import { Deferred, timeout } from '../../common/promise-util';
+import { DefaultSecondaryWindowService } from '../../browser/window/default-secondary-window-service.js';
+import { ApplicationShell} from '../../browser/shell/application-shell.js';
+import { ExtractableWidget } from '../../browser/widgets/extractable-widget.js';
+import { ElectronWindowService } from './electron-window-service.js';
+import { Deferred, timeout } from '../../common/promise-util.js';
 
 @injectable()
 export class ElectronSecondaryWindowService extends DefaultSecondaryWindowService {

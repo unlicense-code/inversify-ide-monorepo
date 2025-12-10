@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { createRoot, Root } from '@theia/core/shared/react-dom/client';
+import * as React from 'react';
+import { createRoot, Root } from 'react-dom/client';
 import * as monaco from '@theia/monaco-editor-core';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { MonacoEditorZoneWidget } from '@theia/monaco/lib/browser/monaco-editor-zone-widget';
-import { DebugEditor } from './debug-editor';
-import { DebugExceptionInfo } from '../model/debug-thread';
-import { nls } from '@theia/core/lib/common/nls';
+import { injectable, inject, postConstruct } from 'inversify';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { MonacoEditorZoneWidget } from '@theia/monaco/lib/browser/monaco-editor-zone-widget.js';
+import { DebugEditor } from './debug-editor.js';
+import { DebugExceptionInfo } from '../model/debug-thread.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 import { codicon } from '@theia/core/lib/browser/widgets';
 
-export interface ShowDebugExceptionParams {
+export type ShowDebugExceptionParams = {
     info: DebugExceptionInfo
     lineNumber: number
     column: number

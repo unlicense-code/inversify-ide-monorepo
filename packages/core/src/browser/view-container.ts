@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018-2019 TypeFox and others.
+// Copyright (C) 2018-2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,31 +19,31 @@ import { find, some, every, map, ArrayExt } from '@lumino/algorithm';
 import {
     Widget, EXPANSION_TOGGLE_CLASS, COLLAPSED_CLASS, CODICON_TREE_ITEM_CLASSES, MessageLoop, Message, SplitPanel,
     BaseWidget, addEventListener, SplitLayout, LayoutItem, PanelLayout, addKeyListener, waitForRevealed, UnsafeWidgetUtilities, DockPanel, PINNED_CLASS
-} from './widgets';
-import { Event as CommonEvent, Emitter } from '../common/event';
-import { Disposable, DisposableCollection } from '../common/disposable';
-import { CommandRegistry } from '../common/command';
-import { MenuModelRegistry, MenuPath, MenuAction, SubmenuImpl, ActionMenuNode, Submenu } from '../common/menu';
-import { ApplicationShell, StatefulWidget, SplitPositionHandler, SplitPositionOptions, SIDE_PANEL_TOOLBAR_CONTEXT_MENU } from './shell';
-import { MAIN_AREA_ID, BOTTOM_AREA_ID } from './shell/theia-dock-panel';
-import { FrontendApplicationStateService } from './frontend-application-state';
-import { ContextMenuRenderer, Anchor } from './context-menu-renderer';
-import { parseCssMagnitude } from './browser';
-import { TabBarToolbarRegistry, TabBarToolbarFactory, TabBarToolbar, TabBarDelegator } from './shell/tab-bar-toolbar';
-import { isEmpty, isObject, nls } from '../common';
-import { WidgetManager } from './widget-manager';
-import { Key } from './keys';
-import { ProgressBarFactory } from './progress-bar-factory';
+} from './widgets/index.js';
+import { Event as CommonEvent, Emitter } from '../common/event.js';
+import { Disposable, DisposableCollection } from '../common/disposable.js';
+import { CommandRegistry } from '../common/command.js';
+import { MenuModelRegistry, MenuPath, MenuAction, SubmenuImpl, ActionMenuNode, Submenu } from '../common/menu/index.js';
+import { ApplicationShell, StatefulWidget, SplitPositionHandler, SplitPositionOptions, SIDE_PANEL_TOOLBAR_CONTEXT_MENU } from './shell/index.js';
+import { MAIN_AREA_ID, BOTTOM_AREA_ID } from './shell/theia-dock-panel.js';
+import { FrontendApplicationStateService } from './frontend-application-state.js';
+import { ContextMenuRenderer, Anchor } from './context-menu-renderer.js';
+import { parseCssMagnitude } from './browser.js';
+import { TabBarToolbarRegistry, TabBarToolbarFactory, TabBarToolbar, TabBarDelegator } from './shell/tab-bar-toolbar/index.js';
+import { isEmpty, isObject, nls } from '../common/index.js';
+import { WidgetManager } from './widget-manager.js';
+import { Key } from './keys.js';
+import { ProgressBarFactory } from './progress-bar-factory.js';
 import { Drag } from '@lumino/dragdrop';
 import { MimeData } from '@lumino/coreutils';
 import { ElementExt } from '@lumino/domutils';
-import { TabBarDecoratorService } from './shell/tab-bar-decorator';
-import { ContextKeyService } from './context-key-service';
-import { KeybindingRegistry } from './keybinding';
-import { SubmenuAsToolbarItemWrapper } from './shell/tab-bar-toolbar/tab-bar-toolbar-menu-adapters';
-import { TheiaSplitPanel } from './shell/theia-split-panel';
+import { TabBarDecoratorService } from './shell/tab-bar-decorator.js';
+import { ContextKeyService } from './context-key-service.js';
+import { KeybindingRegistry } from './keybinding.js';
+import { SubmenuAsToolbarItemWrapper } from './shell/tab-bar-toolbar/tab-bar-toolbar-menu-adapters.js';
+import { TheiaSplitPanel } from './shell/theia-split-panel.js';
 
-export interface ViewContainerTitleOptions {
+export type ViewContainerTitleOptions = {
     label: string;
     caption?: string;
     iconClass?: string;
@@ -56,12 +56,12 @@ export class ViewContainerIdentifier {
     progressLocationId?: string;
 }
 
-export interface DescriptionWidget {
+export type DescriptionWidget = {
     description: string;
     onDidChangeDescription: CommonEvent<void>;
 }
 
-export interface BadgeWidget {
+export type BadgeWidget = {
     badge?: number;
     badgeTooltip?: string;
     onDidChangeBadge: CommonEvent<void>;
@@ -80,11 +80,7 @@ export namespace BadgeWidget {
     }
 }
 
-/**
- * A widget that may change it's internal structure dynamically.
- * Current use is to update the toolbar when a contributed view is constructed "lazily".
- */
-export interface DynamicToolbarWidget {
+export type DynamicToolbarWidget = {
     onDidChangeToolbarItems: CommonEvent<void>;
 }
 

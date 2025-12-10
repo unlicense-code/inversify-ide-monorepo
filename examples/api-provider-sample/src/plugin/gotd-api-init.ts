@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { RPCProtocol } from '@theia/plugin-ext/lib/common/rpc-protocol';
-import { Plugin } from '@theia/plugin-ext/lib/common/plugin-api-rpc';
-import type * as gotd from '../gotd';
-import { GreetingKind, GreetingExt, MAIN_RPC_CONTEXT } from '../common/plugin-api-rpc';
-import { GreetingExtImpl } from './greeting-ext-impl';
+import { inject, injectable, postConstruct } from 'inversify';
+import { RPCProtocol } from '@theia/plugin-ext/lib/common/rpc-protocol.js';
+import { Plugin } from '@theia/plugin-ext/lib/common/plugin-api-rpc.js';
+import type * as gotd from '../gotd.js';
+import { GreetingKind, GreetingExt, MAIN_RPC_CONTEXT } from '../common/plugin-api-rpc.js';
+import { GreetingExtImpl } from './greeting-ext-impl.js';
 import { Disposable, DisposableCollection } from '@theia/core';
-import { PluginContainerModule } from '@theia/plugin-ext/lib/plugin/node/plugin-container-module';
+import { PluginContainerModule } from '@theia/plugin-ext/lib/plugin/node/plugin-container-module.js';
 
 // This script is responsible for creating and returning the extension's
 // custom API object when a plugin's module imports it. Keep in mind that

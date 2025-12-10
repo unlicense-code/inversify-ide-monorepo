@@ -20,7 +20,7 @@ import { getProxyAgent, ProxyAgent } from './proxy';
 import { Headers, RequestConfiguration, RequestContext, RequestOptions, RequestService, CancellationToken } from './common-request-service';
 import { createGunzip } from 'zlib';
 
-export interface RawRequestFunction {
+export type RawRequestFunction = {
     (options: http.RequestOptions, callback?: (res: http.IncomingMessage) => void): http.ClientRequest;
 }
 

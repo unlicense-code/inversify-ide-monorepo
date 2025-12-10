@@ -15,12 +15,9 @@
 // *****************************************************************************
 
 import { load } from 'js-yaml';
-import { CommandPromptFragmentMetadata } from '../common';
+import { CommandPromptFragmentMetadata } from '../common/index.js';
 
-/**
- * Result of parsing a template file that may contain YAML front matter
- */
-export interface ParsedTemplate {
+export type ParsedTemplate = {
     /** The template content (without front matter) */
     template: string;
 

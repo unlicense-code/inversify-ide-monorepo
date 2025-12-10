@@ -19,13 +19,13 @@
  *--------------------------------------------------------------------------------------------*/
 // Partially copied from https://github.com/microsoft/vscode/blob/a2cab7255c0df424027be05d58e1b7b941f4ea60/src/vs/workbench/contrib/chat/common/chatService.ts
 
-import { AIVariableResolutionRequest, AIVariableService, ResolvedAIContextVariable } from '@theia/ai-core';
+import { AIVariableResolutionRequest, AIVariableService, ResolvedAIContextVariable } from '@theia/ai-core/lib/common/index.js';
 import { Emitter, ILogger, URI, generateUuid } from '@theia/core';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { inject, injectable, optional } from '@theia/core/shared/inversify';
-import { Event } from '@theia/core/shared/vscode-languageserver-protocol';
-import { ChatAgentService } from './chat-agent-service';
-import { ChatAgent, ChatAgentLocation, ChatSessionContext } from './chat-agents';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { inject, injectable, optional } from 'inversify';
+import { Event } from 'vscode-languageserver-protocol';
+import { ChatAgentService } from './chat-agent-service.js';
+import { ChatAgent, ChatAgentLocation, ChatSessionContext } from './chat-agents.js';
 import {
     ChangeSetElement,
     ChangeSetImpl,
@@ -37,17 +37,17 @@ import {
     ErrorChatResponseModel,
     MutableChatModel,
     MutableChatRequestModel,
-} from './chat-model';
-import { ChatRequestParser } from './chat-request-parser';
-import { ChatSessionNamingService } from './chat-session-naming-service';
-import { ParsedChatRequest, ParsedChatRequestAgentPart } from './parsed-chat-request';
-import { ChatSessionIndex, ChatSessionStore } from './chat-session-store';
-import { ChatContentDeserializerRegistry } from './chat-content-deserializer';
-import { ChangeSetDeserializationContext, ChangeSetElementDeserializerRegistry } from './change-set-element-deserializer';
-import { SerializableChangeSetElement, SerializedChatModel } from './chat-model-serialization';
-import debounce = require('@theia/core/shared/lodash.debounce');
+} from './chat-model.js';
+import { ChatRequestParser } from './chat-request-parser.js';
+import { ChatSessionNamingService } from './chat-session-naming-service.js';
+import { ParsedChatRequest, ParsedChatRequestAgentPart } from './parsed-chat-request.js';
+import { ChatSessionIndex, ChatSessionStore } from './chat-session-store.js';
+import { ChatContentDeserializerRegistry } from './chat-content-deserializer.js';
+import { ChangeSetDeserializationContext, ChangeSetElementDeserializerRegistry } from './change-set-element-deserializer.js';
+import { SerializableChangeSetElement, SerializedChatModel } from './chat-model-serialization.js';
+import debounce from 'lodash/debounce.js'
 
-export interface ChatRequestInvocation {
+export type ChatRequestInvocation = {
     /**
      * Promise which completes once the request preprocessing is complete.
      */
@@ -62,7 +62,7 @@ export interface ChatRequestInvocation {
     responseCompleted: Promise<ChatResponseModel>;
 }
 
-export interface ChatSession {
+export type ChatSession = {
     id: string;
     title?: string;
     lastInteraction?: Date;
@@ -71,7 +71,7 @@ export interface ChatSession {
     pinnedAgent?: ChatAgent;
 }
 
-export interface ActiveSessionChangedEvent {
+export type ActiveSessionChangedEvent = {
     type: 'activeChange';
     sessionId: string | undefined;
     focus?: boolean;
@@ -82,7 +82,7 @@ export function isActiveSessionChangedEvent(obj: unknown): obj is ActiveSessionC
     return typeof obj === 'object' && obj !== null && 'type' in obj && obj.type === 'activeChange';
 }
 
-export interface SessionCreatedEvent {
+export type SessionCreatedEvent = {
     type: 'created';
     sessionId: string;
 }
@@ -92,7 +92,7 @@ export function isSessionCreatedEvent(obj: unknown): obj is SessionCreatedEvent 
     return typeof obj === 'object' && obj !== null && 'type' in obj && obj.type === 'created';
 }
 
-export interface SessionDeletedEvent {
+export type SessionDeletedEvent = {
     type: 'deleted';
     sessionId: string;
 }
@@ -102,7 +102,7 @@ export function isSessionDeletedEvent(obj: unknown): obj is SessionDeletedEvent 
     return typeof obj === 'object' && obj !== null && 'type' in obj && obj.type === 'deleted';
 }
 
-export interface SessionOptions {
+export type SessionOptions = {
     focus?: boolean;
 }
 
@@ -110,7 +110,7 @@ export interface SessionOptions {
  * The default chat agent to invoke
  */
 export const DefaultChatAgentId = Symbol('DefaultChatAgentId');
-export interface DefaultChatAgentId {
+export type DefaultChatAgentId = {
     id: string;
 }
 
@@ -118,7 +118,7 @@ export interface DefaultChatAgentId {
  * In case no fitting chat agent is available, this one will be used (if it is itself available)
  */
 export const FallbackChatAgentId = Symbol('FallbackChatAgentId');
-export interface FallbackChatAgentId {
+export type FallbackChatAgentId = {
     id: string;
 }
 
@@ -127,7 +127,7 @@ export type PinChatAgent = boolean;
 
 export const ChatService = Symbol('ChatService');
 export const ChatServiceFactory = Symbol('ChatServiceFactory');
-export interface ChatService {
+export type ChatService = {
     onSessionEvent: Event<ActiveSessionChangedEvent | SessionCreatedEvent | SessionDeletedEvent>
 
     getSession(id: string): ChatSession | undefined;
@@ -159,7 +159,7 @@ export interface ChatService {
     getPersistedSessions(): Promise<ChatSessionIndex>;
 }
 
-interface ChatSessionInternal extends ChatSession {
+type ChatSessionInternal = ChatSession & {
     model: MutableChatModel;
 }
 
@@ -321,7 +321,11 @@ export class ChatServiceImpl implements ChatService {
     protected cancelIncompleteRequests(session: ChatSessionInternal): void {
         for (const pastRequest of session.model.getRequests()) {
             if (!pastRequest.response.isComplete) {
-                pastRequest.cancel();
+                if ('cancel' in pastRequest && typeof pastRequest.cancel === 'function') {
+                    pastRequest.cancel();
+                } else if ('cancel' in pastRequest.response && typeof pastRequest.response.cancel === 'function') {
+                    pastRequest.response.cancel();
+                }
             }
         }
     }

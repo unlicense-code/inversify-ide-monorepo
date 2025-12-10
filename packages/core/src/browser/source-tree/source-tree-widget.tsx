@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,16 +15,16 @@
 // *****************************************************************************
 
 import * as React from 'react';
-import { injectable, postConstruct, interfaces, Container } from 'inversify';
-import { DisposableCollection } from '../../common/disposable';
-import { TreeWidget, TreeNode, createTreeContainer, TreeProps, TreeModel, TREE_NODE_SEGMENT_GROW_CLASS } from '../tree';
-import { TreeSource, TreeElement } from './tree-source';
-import { SourceTree, TreeElementNode, TreeSourceNode } from './source-tree';
+import { injectable, postConstruct, interfaces } from 'inversify';
+import { DisposableCollection } from '../../common/disposable.js';
+import { TreeWidget, TreeNode, createTreeContainer, TreeProps, TreeModel, TREE_NODE_SEGMENT_GROW_CLASS } from '../tree/index.js';
+import { TreeSource, TreeElement } from './tree-source.js';
+import { SourceTree, TreeElementNode, TreeSourceNode } from './source-tree.js';
 
 @injectable()
 export class SourceTreeWidget extends TreeWidget {
 
-    static createContainer(parent: interfaces.Container, props?: Partial<TreeProps>): Container {
+    static createContainer(parent: interfaces.Container, props?: Partial<TreeProps>): interfaces.Container {
         const child = createTreeContainer(parent, {
             props,
             tree: SourceTree,

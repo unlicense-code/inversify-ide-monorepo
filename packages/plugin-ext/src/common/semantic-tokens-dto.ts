@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -20,7 +20,7 @@
 
 // copied and modified from https://github.com/microsoft/vscode/blob/0eb3a02ca2bcfab5faa3dc6e52d7c079efafcab0/src/vs/workbench/api/common/shared/semanticTokensDto.ts
 
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
 
 let _isLittleEndian = true;
 let _isLittleEndianComputed = false;
@@ -36,13 +36,13 @@ function isLittleEndian(): boolean {
     return _isLittleEndian;
 }
 
-export interface IFullSemanticTokensDto {
+export type IFullSemanticTokensDto = {
     id: number;
     type: 'full';
     data: Uint32Array;
 }
 
-export interface IDeltaSemanticTokensDto {
+export type IDeltaSemanticTokensDto = {
     id: number;
     type: 'delta';
     deltas: { start: number; deleteCount: number; data?: Uint32Array; }[];

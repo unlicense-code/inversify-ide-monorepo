@@ -15,15 +15,15 @@
 // *****************************************************************************
 
 import { nls, CommandHandler, DisposableCollection, MessageService, QuickInputService, Disposable } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { DebugViewModel } from '../view/debug-view-model';
-import { TreeElementNode } from '@theia/core/lib/browser/source-tree';
-import { DebugDataBreakpoint } from '../model/debug-data-breakpoint';
-import { DataBreakpoint, DataBreakpointSource, DataBreakpointSourceType } from './breakpoint-marker';
+import { inject, injectable } from 'inversify';
+import { DebugViewModel } from '../view/debug-view-model.js';
+import { TreeElementNode } from '@theia/core/lib/browser/source-tree/source-tree.js';
+import { DebugDataBreakpoint } from '../model/debug-data-breakpoint.js';
+import { DataBreakpoint, DataBreakpointSource, DataBreakpointSourceType } from './breakpoint-marker.js';
 import { DebugProtocol } from '@vscode/debugprotocol';
-import { BreakpointManager } from './breakpoint-manager';
-import { TreeNode, Widget } from '@theia/core/lib/browser';
-import { DebugBreakpointsWidget } from '../view/debug-breakpoints-widget';
+import { BreakpointManager } from './breakpoint-manager.js';
+import { TreeNode, Widget } from '@theia/core/lib/browser/index.js';
+import { DebugBreakpointsWidget } from '../view/debug-breakpoints-widget.js';
 
 // Adapted from https://github.com/microsoft/vscode/blob/9c883243a89e7ec3b730d3746fbb1e836d5e4f52/src/vs/workbench/contrib/debug/browser/breakpointsView.ts#L1506-L1625
 

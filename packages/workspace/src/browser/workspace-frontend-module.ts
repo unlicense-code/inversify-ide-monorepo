@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule, interfaces } from '@theia/core/shared/inversify';
-import { CommandContribution, MenuContribution, bindContributionProvider } from '@theia/core/lib/common';
-import { WebSocketConnectionProvider, FrontendApplicationContribution, KeybindingContribution } from '@theia/core/lib/browser';
+import { ContainerModule, interfaces } from 'inversify';
+import { CommandContribution, MenuContribution, bindContributionProvider } from '@theia/core/lib/common/index.js';
+import { WebSocketConnectionProvider, FrontendApplicationContribution, KeybindingContribution } from '@theia/core/lib/browser/index.js';
 import {
     OpenFileDialogFactory,
     SaveFileDialogFactory,
@@ -26,35 +26,35 @@ import {
     createSaveFileDialogContainer,
     OpenFileDialog,
     SaveFileDialog,
-} from '@theia/filesystem/lib/browser';
-import { StorageService } from '@theia/core/lib/browser/storage-service';
-import { LabelProviderContribution } from '@theia/core/lib/browser/label-provider';
+} from '@theia/filesystem/lib/browser/index.js';
+import { StorageService } from '@theia/core/lib/browser/storage-service.js';
+import { LabelProviderContribution } from '@theia/core/lib/browser/label-provider.js';
 import { VariableContribution } from '@theia/variable-resolver/lib/browser';
-import { WorkspaceServer, workspacePath, UntitledWorkspaceService, WorkspaceFileService } from '../common';
-import { WorkspaceFrontendContribution } from './workspace-frontend-contribution';
-import { WorkspaceOpenHandlerContribution, WorkspaceService } from './workspace-service';
-import { WorkspaceCommandContribution, FileMenuContribution, EditMenuContribution } from './workspace-commands';
-import { WorkspaceVariableContribution } from './workspace-variable-contribution';
-import { WorkspaceStorageService } from './workspace-storage-service';
-import { WorkspaceUriLabelProviderContribution } from './workspace-uri-contribution';
-import { bindWorkspacePreferences } from '../common/workspace-preferences';
-import { QuickOpenWorkspace } from './quick-open-workspace';
-import { WorkspaceDeleteHandler } from './workspace-delete-handler';
-import { WorkspaceDuplicateHandler } from './workspace-duplicate-handler';
-import { WorkspaceUtils } from './workspace-utils';
-import { WorkspaceCompareHandler } from './workspace-compare-handler';
-import { DiffService } from './diff-service';
-import { JsonSchemaContribution } from '@theia/core/lib/browser/json-schema-store';
-import { WorkspaceSchemaUpdater } from './workspace-schema-updater';
-import { WorkspaceBreadcrumbsContribution } from './workspace-breadcrumbs-contribution';
-import { FilepathBreadcrumbsContribution } from '@theia/filesystem/lib/browser/breadcrumbs/filepath-breadcrumbs-contribution';
-import { WorkspaceTrustService } from './workspace-trust-service';
-import { bindWorkspaceTrustPreferences } from '../common/workspace-trust-preferences';
-import { UserWorkingDirectoryProvider } from '@theia/core/lib/browser/user-working-directory-provider';
-import { WorkspaceUserWorkingDirectoryProvider } from './workspace-user-working-directory-provider';
-import { WindowTitleUpdater } from '@theia/core/lib/browser/window/window-title-updater';
-import { WorkspaceWindowTitleUpdater } from './workspace-window-title-updater';
-import { CanonicalUriService } from './canonical-uri-service';
+import { WorkspaceServer, workspacePath, UntitledWorkspaceService, WorkspaceFileService } from '../common/index.js';
+import { WorkspaceFrontendContribution } from './workspace-frontend-contribution.js';
+import { WorkspaceOpenHandlerContribution, WorkspaceService } from './workspace-service.js';
+import { WorkspaceCommandContribution, FileMenuContribution, EditMenuContribution } from './workspace-commands.js';
+import { WorkspaceVariableContribution } from './workspace-variable-contribution.js';
+import { WorkspaceStorageService } from './workspace-storage-service.js';
+import { WorkspaceUriLabelProviderContribution } from './workspace-uri-contribution.js';
+import { bindWorkspacePreferences } from '../common/workspace-preferences.js';
+import { QuickOpenWorkspace } from './quick-open-workspace.js';
+import { WorkspaceDeleteHandler } from './workspace-delete-handler.js';
+import { WorkspaceDuplicateHandler } from './workspace-duplicate-handler.js';
+import { WorkspaceUtils } from './workspace-utils.js';
+import { WorkspaceCompareHandler } from './workspace-compare-handler.js';
+import { DiffService } from './diff-service.js';
+import { JsonSchemaContribution } from '@theia/core/lib/browser/json-schema-store.js';
+import { WorkspaceSchemaUpdater } from './workspace-schema-updater.js';
+import { WorkspaceBreadcrumbsContribution } from './workspace-breadcrumbs-contribution.js';
+import { FilepathBreadcrumbsContribution } from '@theia/filesystem/lib/browser/index.js';
+import { WorkspaceTrustService } from './workspace-trust-service.js';
+import { bindWorkspaceTrustPreferences } from '../common/workspace-trust-preferences.js';
+import { UserWorkingDirectoryProvider } from '@theia/core/lib/browser/user-working-directory-provider.js';
+import { WorkspaceUserWorkingDirectoryProvider } from './workspace-user-working-directory-provider.js';
+import { WindowTitleUpdater } from '@theia/core/lib/browser/window/window-title-updater.js';
+import { WorkspaceWindowTitleUpdater } from './workspace-window-title-updater.js';
+import { CanonicalUriService } from './canonical-uri-service.js';
 
 export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Unbind, isBound: interfaces.IsBound, rebind: interfaces.Rebind) => {
     bindWorkspacePreferences(bind);

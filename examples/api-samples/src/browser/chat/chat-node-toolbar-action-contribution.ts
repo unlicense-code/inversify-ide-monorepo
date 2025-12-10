@@ -16,13 +16,13 @@
 
 import {
     ChatNodeToolbarActionContribution
-} from '@theia/ai-chat-ui/lib/browser/chat-node-toolbar-action-contribution';
+} from '@theia/ai-chat-ui/lib/browser/chat-node-toolbar-action-contribution.js';
 import {
     isResponseNode,
     RequestNode,
     ResponseNode
 } from '@theia/ai-chat-ui/lib/browser/chat-tree-view';
-import { interfaces } from '@theia/core/shared/inversify';
+import { interfaces } from 'inversify';
 
 export function bindChatNodeToolbarActionContribution(bind: interfaces.Bind): void {
     bind(ChatNodeToolbarActionContribution).toDynamicValue(context => ({

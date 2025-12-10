@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { DisposableCollection } from '@theia/core/lib/common';
-import URI from '@theia/core/lib/common/uri';
-import { ScmTreeModel } from '@theia/scm/lib/browser/scm-tree-model';
-import { Git, GitFileStatus } from '../../common';
-import { ScmService } from '@theia/scm/lib/browser/scm-service';
-import { GitScmProvider, GitScmFileChange } from '../git-scm-provider';
-import { ScmResourceGroup, ScmResource } from '@theia/scm/lib/browser/scm-provider';
-import { ScmFileChange } from '@theia/scm-extra/lib/browser/scm-file-change-node';
-import { GitResourceOpener } from './git-resource-opener';
+import { inject, injectable } from 'inversify';
+import { DisposableCollection } from '@theia/core/lib/common/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ScmTreeModel } from '@theia/scm/lib/browser/scm-tree-model.js';
+import { Git, GitFileStatus } from '../../common/index.js';
+import { ScmService } from '@theia/scm/lib/browser/scm-service.js';
+import { GitScmProvider, GitScmFileChange } from '../git-scm-provider.js';
+import { ScmResourceGroup, ScmResource } from '@theia/scm/lib/browser/scm-provider.js';
+import { ScmFileChange } from '@theia/scm-extra/lib/browser/scm-file-change-node.js';
+import { GitResourceOpener } from './git-resource-opener.js';
 
 @injectable()
 export class GitDiffTreeModel extends ScmTreeModel {
@@ -65,7 +65,7 @@ export class GitDiffTreeModel extends ScmTreeModel {
 
         const gitFileChanges = await this.git.diff(repository, this.diffOptions);
 
-        const group: ScmResourceGroup = { id: 'changes', label: 'Files Changed', resources: [], provider, dispose: () => {} };
+        const group: ScmResourceGroup = { id: 'changes', label: 'Files Changed', resources: [], provider, dispose: () => { } };
         const resources: ScmResource[] = gitFileChanges
             .map(change => new GitScmFileChange(change, provider, this.diffOptions.range))
             .map(change => ({
@@ -79,7 +79,7 @@ export class GitDiffTreeModel extends ScmTreeModel {
                 group,
             }));
         const changesGroup = { ...group, resources };
-        this._groups = [ changesGroup ];
+        this._groups = [changesGroup];
 
         this.root = this.createTree();
     }

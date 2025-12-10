@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { SelectionService } from '@theia/core/lib/common/selection-service';
-import { CommandContribution, CommandRegistry } from '@theia/core/lib/common/command';
-import { UriAwareCommandHandler } from '@theia/core/lib/common/uri-command-handler';
-import { FileDownloadService } from '../../common/download/file-download';
-import { FileDownloadCommands } from '../../browser/download/file-download-command-contribution';
+import { inject, injectable } from 'inversify';
+import { URI } from '@theia/core';
+import { SelectionService } from '@theia/core';
+import { CommandContribution, CommandRegistry } from '@theia/core';
+import { UriAwareCommandHandler } from '@theia/core';
+import { FileDownloadService } from '../../common/download/file-download.js';
+import { FileDownloadCommands } from '../../browser/download/file-download-command-contribution.js';
 
 @injectable()
 export class FileDownloadCommandContribution implements CommandContribution {
@@ -35,9 +35,9 @@ export class FileDownloadCommandContribution implements CommandContribution {
         registry.registerCommand(
             FileDownloadCommands.DOWNLOAD,
             UriAwareCommandHandler.MultiSelect(this.selectionService, {
-                execute: uris => this.executeDownload(uris),
-                isEnabled: uris => this.isDownloadEnabled(uris),
-                isVisible: uris => this.isDownloadVisible(uris),
+                execute: (uris: URI[]) => this.executeDownload(uris),
+                isEnabled: (uris: URI[]) => this.isDownloadEnabled(uris),
+                isVisible: (uris: URI[]) => this.isDownloadVisible(uris),
             })
         );
     }

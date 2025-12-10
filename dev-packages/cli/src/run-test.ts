@@ -20,7 +20,7 @@ import * as net from 'net';
 import * as puppeteer from 'puppeteer-core';
 import newTestPage, { TestFileOptions } from './test-page';
 
-export interface TestOptions {
+export type TestOptions = {
     start: () => Promise<net.AddressInfo>
     launch?: puppeteer.PuppeteerLaunchOptions
     files?: Partial<TestFileOptions>

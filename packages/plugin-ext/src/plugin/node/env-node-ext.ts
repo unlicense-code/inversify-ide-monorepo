@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable } from 'inversify';
 import * as mac from 'macaddress';
-import { EnvExtImpl } from '../env';
+import { EnvExtImpl } from '../env.js';
 import { createHash } from 'crypto';
-import { generateUuid } from '@theia/core/lib/common/uuid';
+import { generateUuid } from '@theia/core';
 import fs = require('fs');
 
 /**

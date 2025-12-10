@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
+import * as React from 'react';
 import { DisposableCollection } from '@theia/core';
-import { NotificationManager, NotificationUpdateEvent } from './notifications-manager';
-import { NotificationComponent } from './notification-component';
-import { codicon } from '@theia/core/lib/browser';
-import { nls } from '@theia/core/lib/common/nls';
+import { NotificationManager, NotificationUpdateEvent } from './notifications-manager.js';
+import { NotificationComponent } from './notification-component.js';
+import { codicon } from '@theia/core/lib/browser/index.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
-const PerfectScrollbar = require('react-perfect-scrollbar');
+import PerfectScrollbarLib from 'react-perfect-scrollbar';
+const PerfectScrollbar = PerfectScrollbarLib as any as React.ComponentType<React.HTMLAttributes<HTMLDivElement>>;
 
-export interface NotificationCenterComponentProps {
+export type NotificationCenterComponentProps = {
     readonly manager: NotificationManager;
 }
 

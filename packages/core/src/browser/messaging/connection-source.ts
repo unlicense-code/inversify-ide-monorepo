@@ -14,13 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Channel, Event } from '../../common';
+import { Channel, Event } from '../../common/index.js';
 
 export const ConnectionSource = Symbol('ConnectionSource');
 
-/**
- * A ConnectionSource creates a Channel. The channel is valid until it sends a close event.
- */
-export interface ConnectionSource {
+export type ConnectionSource = {
     onConnectionDidOpen: Event<Channel>;
 }

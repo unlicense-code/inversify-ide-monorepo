@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { URI } from '@theia/core';
-import { inject, injectable, interfaces } from '@theia/core/shared/inversify';
-import { EncodingService } from '@theia/core/lib/common/encoding-service';
-import { OPFSInitialization, DefaultOPFSInitialization } from '@theia/filesystem/lib/browser-only/opfs-filesystem-initialization';
-import { OPFSFileSystemProvider } from '@theia/filesystem/lib/browser-only/opfs-filesystem-provider';
+import { inject, injectable, interfaces } from 'inversify';
+import { EncodingService } from '@theia/core/lib/common/encoding-service.js';
+import { OPFSInitialization, DefaultOPFSInitialization } from '@theia/filesystem/lib/browser-only/opfs-filesystem-initialization.js';
+import { OPFSFileSystemProvider } from '@theia/filesystem/lib/browser-only/opfs-filesystem-provider.js';
 
 @injectable()
 export class ExampleOPFSInitialization extends DefaultOPFSInitialization {

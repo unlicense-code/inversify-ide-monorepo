@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { createPreferenceProxy, PreferenceProxy, PreferenceScope, PreferenceService, PreferenceContribution, PreferenceSchema } from '@theia/core/lib/common/preferences';
-import { nls } from '@theia/core/lib/common/nls';
-import { interfaces } from '@theia/core/shared/inversify';
+import { createPreferenceProxy, PreferenceProxy, PreferenceScope, PreferenceService, PreferenceContribution, PreferenceSchema } from '@theia/core/lib/common/index.js';
+import { nls } from '@theia/core/lib/common/nls.js';
+import { interfaces } from 'inversify';
 
 export const WORKSPACE_TRUST_ENABLED = 'security.workspace.trust.enabled';
 export const WORKSPACE_TRUST_STARTUP_PROMPT = 'security.workspace.trust.startupPrompt';
@@ -49,7 +49,7 @@ export const workspaceTrustPreferenceSchema: PreferenceSchema = {
     }
 };
 
-export interface WorkspaceTrustConfiguration {
+export type WorkspaceTrustConfiguration = {
     [WORKSPACE_TRUST_ENABLED]: boolean,
     [WORKSPACE_TRUST_STARTUP_PROMPT]: WorkspaceTrustPrompt;
     [WORKSPACE_TRUST_EMPTY_WINDOW]: boolean;

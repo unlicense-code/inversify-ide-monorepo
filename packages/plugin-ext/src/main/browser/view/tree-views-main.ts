@@ -14,22 +14,22 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { MAIN_RPC_CONTEXT, TreeViewsMain, TreeViewsExt, TreeViewRevealOptions, RegisterTreeDataProviderOptions } from '../../../common/plugin-api-rpc';
-import { RPCProtocol } from '../../../common/rpc-protocol';
-import { PluginViewRegistry, PLUGIN_VIEW_DATA_FACTORY_ID } from './plugin-view-registry';
+import { interfaces } from 'inversify';
+import { MAIN_RPC_CONTEXT, TreeViewsMain, TreeViewsExt, TreeViewRevealOptions, RegisterTreeDataProviderOptions } from '../../../common/plugin-api-rpc.js';
+import { RPCProtocol } from '../../../common/rpc-protocol.js';
+import { PluginViewRegistry, PLUGIN_VIEW_DATA_FACTORY_ID } from './plugin-view-registry.js';
 import {
     SelectableTreeNode,
     ExpandableTreeNode,
     CompositeTreeNode,
     WidgetManager,
     BadgeService
-} from '@theia/core/lib/browser';
+} from '@theia/core/lib/browser/index.js';
 import { Disposable, DisposableCollection } from '@theia/core';
-import { TreeViewWidget, TreeViewNode, PluginTreeModel, TreeViewWidgetOptions } from './tree-view-widget';
-import { PluginViewWidget } from './plugin-view-widget';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
-import { DnDFileContentStore } from './dnd-file-content-store';
+import { TreeViewWidget, TreeViewNode, PluginTreeModel, TreeViewWidgetOptions } from './tree-view-widget.js';
+import { PluginViewWidget } from './plugin-view-widget.js';
+import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
+import { DnDFileContentStore } from './dnd-file-content-store.js';
 import { ViewBadge } from '@theia/plugin';
 
 export class TreeViewsMainImpl implements TreeViewsMain, Disposable {
@@ -196,7 +196,9 @@ export class TreeViewsMainImpl implements TreeViewsMain, Disposable {
         }));
 
         this.toDispose.push(treeViewWidget.model.onSelectionChanged(event => {
-            this.proxy.$setSelection(treeViewId, event.map((node: TreeViewNode) => node.id));
+            if (event) {
+                this.proxy.$setSelection(treeViewId, event.map((node: TreeViewNode) => node.id));
+            }
         }));
 
         const updateVisible = () => this.proxy.$setVisible(treeViewId, treeViewWidget.isVisible);

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 RedHat and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as fs from '@theia/core/shared/fs-extra';
-import { injectable, inject } from '@theia/core/shared/inversify';
+import * as fs from 'fs-extra';
+import { injectable, inject } from 'inversify';
 import { ILogger } from '@theia/core';
 import {
     PluginDeployerHandler, PluginDeployerEntry, PluginEntryPoint, DeployedPlugin,
     PluginDependencies, PluginType, PluginIdentifiers
-} from '../../common/plugin-protocol';
-import { HostedPluginReader } from './plugin-reader';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { HostedPluginLocalizationService } from './hosted-plugin-localization-service';
-import { Stopwatch } from '@theia/core/lib/common';
-import { PluginUninstallationManager } from '../../main/node/plugin-uninstallation-manager';
+} from '../../common/plugin-protocol.js';
+import { HostedPluginReader } from './plugin-reader.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { HostedPluginLocalizationService } from './hosted-plugin-localization-service.js';
+import { Stopwatch } from '@theia/core/lib/common/index.js';
+import { PluginUninstallationManager } from '../../main/node/plugin-uninstallation-manager.js';
 
 @injectable()
 export class PluginDeployerHandlerImpl implements PluginDeployerHandler {

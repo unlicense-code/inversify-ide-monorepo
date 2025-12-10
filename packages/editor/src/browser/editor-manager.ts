@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,24 +14,24 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, postConstruct, inject, named } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { RecursivePartial, Emitter, Event, CommandService, nls, ContributionProvider, Prioritizeable, Disposable } from '@theia/core/lib/common';
+import { injectable, postConstruct, inject, named } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { RecursivePartial, Emitter, Event, CommandService, nls, ContributionProvider, Prioritizeable, Disposable } from '@theia/core/lib/common/index.js';
 import {
     WidgetOpenerOptions, NavigatableWidgetOpenHandler, NavigatableWidgetOptions, CommonCommands, getDefaultHandler, defaultHandlerPriority, DiffUris
-} from '@theia/core/lib/browser';
-import { EditorWidget } from './editor-widget';
-import { Range, Position, Location, TextEditor } from './editor';
-import { EditorWidgetFactory } from './editor-widget-factory';
-import { NavigationLocationService } from './navigation/navigation-location-service';
-import { PreferenceService } from '@theia/core/lib/common/preferences';
+} from '@theia/core/lib/browser/index.js';
+import { EditorWidget } from './editor-widget.js';
+import { Range, Position, Location, TextEditor } from './editor.js';
+import { EditorWidgetFactory } from './editor-widget-factory.js';
+import { NavigationLocationService } from './navigation/navigation-location-service.js';
+import { PreferenceService } from '@theia/core';
 
-export interface WidgetId {
+export type WidgetId = {
     id: number;
     uri: string;
 }
 
-export interface EditorOpenerOptions extends WidgetOpenerOptions {
+export type EditorOpenerOptions = WidgetOpenerOptions & {
     selection?: RecursivePartial<Range>;
     revealOption?: 'auto' | 'center' | 'centerIfOutsideViewport'; // defaults to 'center'
     preview?: boolean;
@@ -39,7 +39,7 @@ export interface EditorOpenerOptions extends WidgetOpenerOptions {
 }
 
 export const EditorSelectionResolver = Symbol('EditorSelectionResolver');
-export interface EditorSelectionResolver {
+export type EditorSelectionResolver = {
     priority?: number;
     resolveSelection(widget: EditorWidget, options: EditorOpenerOptions, uri?: URI): Promise<RecursivePartial<Range> | undefined>;
 }

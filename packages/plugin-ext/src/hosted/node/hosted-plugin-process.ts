@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ConnectionErrorHandler, ContributionProvider, ILogger, MessageService } from '@theia/core/lib/common';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { BinaryMessagePipe } from '@theia/core/lib/node/messaging/binary-message-pipe';
-import { createIpcEnv } from '@theia/core/lib/node/messaging/ipc-protocol';
-import { inject, injectable, named } from '@theia/core/shared/inversify';
+import { ConnectionErrorHandler, ContributionProvider, ILogger, MessageService } from '@theia/core/lib/common/index.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { BinaryMessagePipe } from '@theia/core/lib/node/messaging/binary-message-pipe.js';
+import { createIpcEnv } from '@theia/core/lib/node/messaging/ipc-protocol.js';
+import { inject, injectable, named } from 'inversify';
 import * as cp from 'child_process';
 import { Duplex } from 'stream';
-import { HostedPluginClient, PLUGIN_HOST_BACKEND, PluginHostEnvironmentVariable, ServerPluginRunner } from '../../common/plugin-protocol';
-import { HostedPluginCliContribution } from './hosted-plugin-cli-contribution';
-import { HostedPluginLocalizationService } from './hosted-plugin-localization-service';
-import { ProcessTerminateMessage, ProcessTerminatedMessage } from './hosted-plugin-protocol';
-import { ProcessUtils } from '@theia/core/lib/node/process-utils';
+import { HostedPluginClient, PLUGIN_HOST_BACKEND, PluginHostEnvironmentVariable, ServerPluginRunner } from '../../common/plugin-protocol.js';
+import { HostedPluginCliContribution } from './hosted-plugin-cli-contribution.js';
+import { HostedPluginLocalizationService } from './hosted-plugin-localization-service.js';
+import { ProcessTerminateMessage, ProcessTerminatedMessage } from './hosted-plugin-protocol.js';
+import { ProcessUtils } from '@theia/core/lib/node/process-utils.js';
 
-export interface IPCConnectionOptions {
+export type IPCConnectionOptions = {
     readonly serverName: string;
     readonly logger: ILogger;
     readonly args: string[];
@@ -35,7 +35,7 @@ export interface IPCConnectionOptions {
 }
 
 export const HostedPluginProcessConfiguration = Symbol('HostedPluginProcessConfiguration');
-export interface HostedPluginProcessConfiguration {
+export type HostedPluginProcessConfiguration = {
     readonly path: string
 }
 

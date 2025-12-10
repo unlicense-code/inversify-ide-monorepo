@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
+import * as React from 'react';
 import { CommandService, Emitter } from '@theia/core';
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { ContextMenuRenderer, KeybindingRegistry } from '@theia/core/lib/browser';
-import { DeflatedContributedToolbarItem, ToolbarContribution } from './toolbar-interfaces';
+import { injectable, inject } from 'inversify';
+import { ContextMenuRenderer, KeybindingRegistry } from '@theia/core/lib/browser/index.js';
+import { DeflatedContributedToolbarItem, ToolbarContribution } from './toolbar-interfaces.js';
 
 @injectable()
 export abstract class AbstractToolbarContribution implements ToolbarContribution {

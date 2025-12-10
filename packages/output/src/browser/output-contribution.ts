@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,21 +14,21 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Widget } from '@theia/core/lib/browser/widgets/widget';
-import { MaybePromise } from '@theia/core/lib/common/types';
-import { CommonCommands, quickCommand, OpenHandler, open, OpenerOptions, OpenerService, QuickPickItem, QuickPickValue } from '@theia/core/lib/browser';
-import { CommandRegistry, MenuModelRegistry, CommandService } from '@theia/core/lib/common';
-import { AbstractViewContribution } from '@theia/core/lib/browser/shell/view-contribution';
-import { OutputWidget } from './output-widget';
-import { OutputContextMenu } from './output-context-menu';
-import { OutputUri } from '../common/output-uri';
-import { ClipboardService } from '@theia/core/lib/browser/clipboard-service';
-import { OutputChannelManager, OutputChannel } from './output-channel';
-import { OutputCommands } from './output-commands';
-import { QuickPickSeparator, QuickPickService } from '@theia/core/lib/common/quick-pick-service';
-import { nls } from '@theia/core/lib/common/nls';
+import { injectable, inject, postConstruct } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Widget } from '@theia/core/lib/browser/widgets/widget.js';
+import { MaybePromise } from '@theia/core/lib/common/types.js';
+import { CommonCommands, quickCommand, OpenHandler, open, OpenerOptions, OpenerService, QuickPickItem, QuickPickValue } from '@theia/core/lib/browser/index.js';
+import { CommandRegistry, MenuModelRegistry, CommandService } from '@theia/core/lib/common/index.js';
+import { AbstractViewContribution } from '@theia/core/lib/browser/shell/view-contribution.js';
+import { OutputWidget } from './output-widget.js';
+import { OutputContextMenu } from './output-context-menu.js';
+import { OutputUri } from '../common/output-uri.js';
+import { ClipboardService } from '@theia/core/lib/browser/clipboard-service.js';
+import { OutputChannelManager, OutputChannel } from './output-channel.js';
+import { OutputCommands } from './output-commands.js';
+import { QuickPickSeparator, QuickPickService } from '@theia/core/lib/common/quick-pick-service.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 @injectable()
 export class OutputContribution extends AbstractViewContribution<OutputWidget> implements OpenHandler {

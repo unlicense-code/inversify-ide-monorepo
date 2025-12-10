@@ -23,7 +23,7 @@ import {
     LanguageModelTextResponse,
     MessageActor,
     LanguageModelStatus
-} from '@theia/ai-core';
+} from '@theia/ai-core/lib/common/index.js';
 import { CancellationToken } from '@theia/core';
 import { HfInference } from '@huggingface/inference';
 

@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { Command, CommandContribution, CommandRegistry } from '@theia/core';
-import { CommonCommands, codicon } from '@theia/core/lib/browser';
-import { AICommandHandlerFactory } from './ai-command-handler-factory';
-import { injectable, inject } from '@theia/core/shared/inversify';
+import { CommonCommands, codicon } from '@theia/core/lib/browser/index.js';
+import { AICommandHandlerFactory } from './ai-command-handler-factory.js';
+import { injectable, inject } from 'inversify';
 
 export const AI_SHOW_SETTINGS_COMMAND: Command = Command.toLocalizedCommand({
     id: 'ai-chat-ui.show-settings',

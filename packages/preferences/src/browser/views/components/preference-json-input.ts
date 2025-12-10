@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { PreferenceLeafNodeRenderer, PreferenceNodeRenderer } from './preference-node-renderer';
-import { injectable, inject, interfaces } from '@theia/core/shared/inversify';
-import { CommandService, nls } from '@theia/core/lib/common';
-import { Preference, PreferencesCommands } from '../../util/preference-types';
-import { JSONValue } from '@theia/core/shared/@lumino/coreutils';
-import { PreferenceLeafNodeRendererContribution } from './preference-node-renderer-creator';
+import { PreferenceLeafNodeRenderer, PreferenceNodeRenderer } from './preference-node-renderer.js';
+import { injectable, inject, interfaces } from 'inversify';
+import { CommandService, nls } from '@theia/core/lib/common/index.js';
+import { Preference, PreferencesCommands } from '../../util/preference-types.js';
+import { JSONValue } from '@lumino/coreutils';
+import { PreferenceLeafNodeRendererContribution } from './preference-node-renderer-creator.js';
 
 @injectable()
 export class PreferenceJSONLinkRenderer extends PreferenceLeafNodeRenderer<JSONValue, HTMLAnchorElement> {

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { DEFAULT_SUPPORTED_API_VERSION } from '@theia/core/shared/@theia/application-package/lib/api';
+import { DEFAULT_SUPPORTED_API_VERSION } from '@theia/application-package';
 
 export const VSCODE_DEFAULT_API_VERSION = DEFAULT_SUPPORTED_API_VERSION;
 export const VSX_REGISTRY_URL_DEFAULT = 'https://open-vsx.org';

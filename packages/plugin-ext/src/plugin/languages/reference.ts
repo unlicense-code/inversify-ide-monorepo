@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { URI } from '@theia/core/shared/vscode-uri';
+import { URI } from 'vscode-uri';
 import * as theia from '@theia/plugin';
-import { DocumentsExtImpl } from '../documents';
-import { ReferenceContext, Location } from '../../common/plugin-api-rpc-model';
-import * as Converter from '../type-converters';
-import { Position } from '../../common/plugin-api-rpc';
-import { isLocationArray } from './util';
+import { DocumentsExtImpl } from '../documents.js';
+import { ReferenceContext, Location } from '../../common/plugin-api-rpc-model.js';
+import * as Converter from '../type-converters.js';
+import { Position } from '../../common/plugin-api-rpc.js';
+import { isLocationArray } from './util.js';
 
 export class ReferenceAdapter {
 

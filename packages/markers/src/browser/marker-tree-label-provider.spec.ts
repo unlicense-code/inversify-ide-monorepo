@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,30 +14,29 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 
 let disableJSDOM = enableJSDOM();
 
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 FrontendApplicationConfigProvider.set({});
 
-import URI from '@theia/core/lib/common/uri';
+import { URI } from '@theia/core/lib/common/uri.js';
 import { expect } from 'chai';
-import { Container } from '@theia/core/shared/inversify';
-import { ContributionProvider, Event } from '@theia/core/lib/common';
-import { LabelProvider, LabelProviderContribution, DefaultUriLabelProviderContribution, ApplicationShell, WidgetManager } from '@theia/core/lib/browser';
-import { MarkerInfoNode } from './marker-tree';
-import { MarkerTreeLabelProvider } from './marker-tree-label-provider';
-import { TreeLabelProvider } from '@theia/core/lib/browser/tree/tree-label-provider';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { WorkspaceUriLabelProviderContribution } from '@theia/workspace/lib/browser/workspace-uri-contribution';
-import { WorkspaceVariableContribution } from '@theia/workspace/lib/browser/workspace-variable-contribution';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileStat } from '@theia/filesystem/lib/common/files';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
-import { MockEnvVariablesServerImpl } from '@theia/core/lib/browser/test/mock-env-variables-server';
-import { FileUri } from '@theia/core/lib/node';
-import { OS } from '@theia/core/lib/common/os';
+import { Container } from 'inversify';
+import { ContributionProvider, Event } from '@theia/core/lib/common/index.js';
+import { LabelProvider, LabelProviderContribution, DefaultUriLabelProviderContribution, ApplicationShell, WidgetManager } from '@theia/core/lib/browser/index.js';
+import { MarkerInfoNode } from './marker-tree.js';
+import { MarkerTreeLabelProvider } from './marker-tree-label-provider.js';
+import { TreeLabelProvider } from '@theia/core/lib/browser/tree/tree-label-provider.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { WorkspaceUriLabelProviderContribution, WorkspaceVariableContribution } from '@theia/workspace/lib/browser/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/index.js';
+import { FileStat } from '@theia/filesystem/lib/common/index.js';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
+import { MockEnvVariablesServerImpl } from '@theia/core/lib/browser/test/mock-env-variables-server.js';
+import { FileUri } from '@theia/core/lib/node/index.js';
+import { OS } from '@theia/core/lib/common/os.js';
 import * as temp from 'temp';
 
 disableJSDOM();

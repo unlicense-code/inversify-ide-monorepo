@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -33,10 +33,7 @@ export class TokenizerState implements monaco.languages.IState {
 
 }
 
-/**
- * Options for the TextMate tokenizer.
- */
-export interface TokenizerOption {
+export type TokenizerOption = {
 
     /**
      * Maximum line length that will be handled by the TextMate tokenizer. If the length of the actual line exceeds this

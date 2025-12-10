@@ -16,8 +16,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Packr as MsgPack } from 'msgpackr';
-import { ReadBuffer, WriteBuffer } from './message-buffer';
-import { MsgPackExtensionManager } from './msg-pack-extension-manager';
+import { ReadBuffer, WriteBuffer } from './message-buffer.js';
+import { MsgPackExtensionManager } from './msg-pack-extension-manager.js';
 
 /**
  * This code lets you encode rpc protocol messages (request/reply/notification/error/cancel)
@@ -37,38 +37,38 @@ export const enum RpcMessageType {
     Cancel = 5,
 }
 
-export interface CancelMessage {
+export type CancelMessage = {
     type: RpcMessageType.Cancel;
     id: number;
 }
 
-export interface RequestMessage {
+export type RequestMessage = {
     type: RpcMessageType.Request;
     id: number;
     method: string;
     args: any[];
 }
 
-export interface NotificationMessage {
+export type NotificationMessage = {
     type: RpcMessageType.Notification;
     id?: number;
     method: string;
     args: any[];
 }
 
-export interface ReplyMessage {
+export type ReplyMessage = {
     type: RpcMessageType.Reply;
     id: number;
     res: any;
 }
 
-export interface ReplyErrMessage {
+export type ReplyErrMessage = {
     type: RpcMessageType.ReplyErr;
     id: number;
     err: any;
 }
 
-export interface SerializedError {
+export type SerializedError = {
     readonly $isError: true;
     readonly name: string;
     readonly message: string;
@@ -91,24 +91,16 @@ export class ResponseError extends Error {
  * object could not be written to the given {@link WriteBuffer}
  */
 export class EncodingError extends Error {
-    constructor(msg: string, public cause?: Error) {
+    constructor(msg: string, public override cause?: Error) {
         super(msg);
     }
 }
 
-/**
- * A `RpcMessageDecoder` parses a a binary message received via {@link ReadBuffer} into a {@link RpcMessage}
- */
-export interface RpcMessageDecoder {
+export type RpcMessageDecoder = {
     parse(buffer: ReadBuffer): RpcMessage;
 }
 
-/**
- * A `RpcMessageEncoder` writes {@link RpcMessage} objects to a {@link WriteBuffer}. Note that it is
- * up to clients to commit the message. This allows for multiple messages being
- * encoded before sending.
- */
-export interface RpcMessageEncoder {
+export type RpcMessageEncoder = {
     cancel(buf: WriteBuffer, requestId: number): void;
 
     notification(buf: WriteBuffer, method: string, args: any[], id?: number): void

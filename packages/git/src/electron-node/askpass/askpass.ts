@@ -5,21 +5,18 @@
  *--------------------------------------------------------------------------------------------*/
 // Based on: https://github.com/Microsoft/vscode/blob/dd3e2d94f81139f9d18ba15a24c16c6061880b93/extensions/git/src/askpass.ts
 
-import { injectable, postConstruct, inject } from '@theia/core/shared/inversify';
+import { injectable, postConstruct, inject } from 'inversify';
 import * as path from 'path';
 import * as http from 'http';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { Disposable } from '@theia/core/lib/common/disposable';
-import { MaybePromise } from '@theia/core/lib/common/types';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { GitPrompt } from '../../common/git-prompt';
-import { DugiteGitPromptServer } from '../../node/dugite-git-prompt';
+import { ILogger } from '@theia/core/lib/common/logger.js';
+import { Disposable } from '@theia/core/lib/common/disposable.js';
+import { MaybePromise } from '@theia/core/lib/common/types.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { GitPrompt } from '../../common/git-prompt.js';
+import { DugiteGitPromptServer } from '../../node/dugite-git-prompt.js';
 import { AddressInfo } from 'net';
 
-/**
- * Environment for the Git askpass helper.
- */
-export interface AskpassEnvironment {
+export type AskpassEnvironment = {
 
     /**
      * The path to the external script to run by Git when authentication is required.
@@ -48,7 +45,7 @@ export interface AskpassEnvironment {
 
 }
 
-export interface Address {
+export type Address = {
     readonly port: number;
     readonly family: string;
     readonly address: string;

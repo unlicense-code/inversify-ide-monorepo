@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ReactWidget } from '@theia/core/lib/browser';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { HoverService } from '@theia/core/lib/browser/hover-service';
+import { ReactWidget } from '@theia/core/lib/browser/index.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import * as React from 'react';
+import { HoverService } from '@theia/core/lib/browser/hover-service.js';
 import {
     isLocalMCPServerDescription,
     isRemoteMCPServerDescription,
@@ -25,9 +25,9 @@ import {
     MCPFrontendService,
     MCPServerDescription,
     MCPServerStatus
-} from '@theia/ai-mcp/lib/common/mcp-server-manager';
+} from '@theia/ai-mcp/lib/common/mcp-server-manager.js';
 import { MessageService, nls } from '@theia/core';
-import { PROMPT_VARIABLE } from '@theia/ai-core/lib/common/prompt-variable-contribution';
+import { PROMPT_VARIABLE } from '@theia/ai-core/lib/common/prompt-variable-contribution.js';
 
 @injectable()
 export class AIMCPConfigurationWidget extends ReactWidget {

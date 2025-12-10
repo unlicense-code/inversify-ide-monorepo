@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,38 +19,38 @@
  *--------------------------------------------------------------------------------------------*/
 // code copied and modified from https://github.com/Microsoft/vscode/blob/main/src/vs/platform/theme/common/iconRegistry.ts
 
-import { ThemeIcon } from '../common/theme';
+import { ThemeIcon } from '../common/theme.js';
 import { URI } from 'vscode-uri';
 
-export interface IconDefinition {
+export type IconDefinition = {
     font?: IconFontContribution;
     fontCharacter: string;
 }
 
-export interface IconContribution {
+export type IconContribution = {
     readonly id: string;
     description: string | undefined;
     deprecationMessage?: string;
     readonly defaults: ThemeIcon | IconDefinition;
 }
 
-export interface IconFontContribution {
+export type IconFontContribution = {
     readonly id: string;
     readonly definition: IconFontDefinition;
 }
 
-export interface IconFontDefinition {
+export type IconFontDefinition = {
     readonly weight?: string;
     readonly style?: string;
     readonly src: IconFontSource[];
 }
 
-export interface IconFontSource {
+export type IconFontSource = {
     readonly location: URI;
     readonly format: string;
 }
 export const IconRegistry = Symbol('IconRegistry');
-export interface IconRegistry {
+export type IconRegistry = {
     /**
      * Register a icon to the registry.
      * @param id The icon id

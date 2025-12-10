@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { Event, Emitter, Resource, ResourceReadOptions, ResourceResolver, URI } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
-import { CellUri } from '../common';
-import { NotebookService } from './service/notebook-service';
-import { NotebookCellModel } from './view-model/notebook-cell-model';
-import { NotebookModel } from './view-model/notebook-model';
+import { CellUri } from '../common/index.js';
+import { NotebookService } from './service/notebook-service.js';
+import { NotebookCellModel } from './view-model/notebook-cell-model.js';
+import { NotebookModel } from './view-model/notebook-model.js';
 
 export class NotebookCellResource implements Resource {
 

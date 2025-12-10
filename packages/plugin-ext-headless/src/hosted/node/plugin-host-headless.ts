@@ -13,12 +13,12 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import '@theia/core/shared/reflect-metadata';
-import { Container } from '@theia/core/shared/inversify';
-import { ConnectionClosedError, RPCProtocol } from '@theia/plugin-ext/lib/common/rpc-protocol';
-import { ProcessTerminatedMessage, ProcessTerminateMessage } from '@theia/plugin-ext/lib/hosted/node/hosted-plugin-protocol';
-import { HeadlessPluginHostRPC } from './plugin-host-headless-rpc';
-import pluginHostModule from './plugin-host-headless-module';
+import 'reflect-metadata';
+import { Container } from 'inversify';
+import { ConnectionClosedError, RPCProtocol } from '@theia/plugin-ext/lib/common/rpc-protocol.js';
+import { ProcessTerminatedMessage, ProcessTerminateMessage } from '@theia/plugin-ext/lib/hosted/node/hosted-plugin-protocol.js';
+import { HeadlessPluginHostRPC } from './plugin-host-headless-rpc.js';
+import pluginHostModule from './plugin-host-headless-module.js';
 
 const banner = `HEADLESS_PLUGIN_HOST(${process.pid}):`;
 console.log(banner, 'Starting instance');

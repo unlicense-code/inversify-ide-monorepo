@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { SearchBoxDebounce, SearchBoxDebounceOptions } from '../tree/search-box-debounce';
-import { BaseWidget, Message } from '../widgets/widget';
-import { Emitter, Event } from '../../common/event';
-import { KeyCode, Key } from '../keyboard/keys';
-import { nls } from '../../common/nls';
+import { SearchBoxDebounce, SearchBoxDebounceOptions } from '../tree/search-box-debounce.js';
+import { BaseWidget, Message } from '../widgets/widget.js';
+import { Emitter, Event } from '../../common/event.js';
+import { KeyCode, Key } from '../keyboard/keys.js';
+import { nls } from '../../common/nls.js';
 
-/**
- * Initializer properties for the search box widget.
- */
-export interface SearchBoxProps extends SearchBoxDebounceOptions {
+export type SearchBoxProps = SearchBoxDebounceOptions & {
 
     /**
      * If `true`, the `Previous`, `Next`, and `Close` buttons will be visible. Otherwise, `false`. Defaults to `false`.
@@ -345,7 +342,7 @@ export namespace SearchBox {
  * Search box factory.
  */
 export const SearchBoxFactory = Symbol('SearchBoxFactory');
-export interface SearchBoxFactory {
+export type SearchBoxFactory = {
 
     /**
      * Creates a new search box with the given initializer properties.

@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { AI_CORE_PREFERENCES_TITLE } from '@theia/ai-core/lib/common/ai-core-preferences';
+import { AI_CORE_PREFERENCES_TITLE } from '@theia/ai-core/lib/common/ai-core-preferences.js';
 import { nls } from '@theia/core';
 import {
     createPreferenceProxy,
@@ -22,8 +22,8 @@ import {
     PreferenceProxy,
     PreferenceSchema,
     PreferenceService,
-} from '@theia/core/lib/common/preferences';
-import { interfaces } from '@theia/core/shared/inversify';
+} from '@theia/core/lib/common/index.js';
+import { interfaces } from 'inversify';
 
 export type ChatToolPreferences = PreferenceProxy<ChatToolConfiguration>;
 
@@ -77,6 +77,6 @@ export const chatToolPreferences: PreferenceSchema = {
     }
 };
 
-export interface ChatToolConfiguration {
+export type ChatToolConfiguration = {
     [TOOL_CONFIRMATION_PREFERENCE]: { [toolId: string]: ToolConfirmationMode };
 }

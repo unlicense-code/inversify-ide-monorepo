@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { isObject } from './types';
+import { isObject } from './types.js';
 
-/**
- * A Keybinding binds a specific key sequence ({@link Keybinding#keybinding}) to trigger a command ({@link Keybinding#command}). A Keybinding optionally may
- * define a "when clause" ({@link Keybinding#when}) to specify in which context it becomes active.
- * @see KeyBindingRegistry
- */
-export interface Keybinding {
+export type Keybinding = {
     /**
      * Unique command identifier of the command to be triggered by this keybinding.
      */
@@ -135,13 +130,7 @@ export namespace Keybinding {
     }
 }
 
-/**
- * @internal
- *
- * Optional representation of key sequence as found in `keymaps.json` file.
- * Use `keybinding` as the official representation.
- */
-export interface RawKeybinding extends Omit<Keybinding, 'keybinding'> {
+export type RawKeybinding = Omit<Keybinding, 'keybinding'> & {
     key: string;
 }
 

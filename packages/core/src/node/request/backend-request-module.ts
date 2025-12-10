@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2022 TypeFox and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,7 +16,7 @@
 
 import { ContainerModule, decorate, injectable } from 'inversify';
 import { RequestService } from '@theia/request';
-import { NodeRequestService } from '@theia/request/lib/node-request-service';
+import { NodeRequestService } from '@theia/request/lib/node-request-service.js';
 
 decorate(injectable(), NodeRequestService);
 

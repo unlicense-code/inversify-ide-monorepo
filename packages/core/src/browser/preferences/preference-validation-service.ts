@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,21 +14,21 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { JSONObject, JSONValue } from '../../../shared/@lumino/coreutils';
-import { inject, injectable } from '../../../shared/inversify';
-import { IJSONSchema, JsonType } from '../../common/json-schema';
-import { deepClone, unreachable } from '../../common';
-import { PreferenceLanguageOverrideService } from '../../common/preferences/preference-language-override-service';
-import { PreferenceSchemaService, PreferenceScope, PreferenceUtils, PreferenceDataProperty } from '../../common/preferences';
+import { JSONObject, JSONValue } from '@lumino/coreutils';
+import { inject, injectable } from 'inversify';
+import { IJSONSchema, JsonType } from '../../common/json-schema.js';
+import { deepClone, unreachable } from '../../common/index.js';
+import { PreferenceLanguageOverrideService } from '../../common/preferences/preference-language-override-service.js';
+import { PreferenceSchemaService, PreferenceScope, PreferenceUtils, PreferenceDataProperty } from '../../common/preferences/index.js';
 
-export interface PreferenceValidator<T> {
+export type PreferenceValidator<T> = {
     name: string;
     validate(value: unknown): T;
 }
 
 export type ValueValidator = (value: JSONValue) => JSONValue;
 
-export interface PreferenceValidationResult<T extends JSONValue> {
+export type PreferenceValidationResult<T extends JSONValue> = {
     original: JSONValue | undefined;
     valid: T;
     messages: string[];

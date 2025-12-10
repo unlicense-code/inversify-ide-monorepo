@@ -16,9 +16,9 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { PluginIdentifiers, PluginModel, PluginPackage } from '../../../common/plugin-protocol';
-import { Endpoint } from '@theia/core/lib/browser/endpoint';
-import URI from '@theia/core/lib/common/uri';
+import { PluginIdentifiers, PluginModel, PluginPackage } from '../../../common/plugin-protocol.js';
+import { Endpoint } from '@theia/core/lib/browser/endpoint.js';
+import { URI } from '@theia/core/lib/common/uri.js';
 
 const NLS_REGEX = /^%([\w\d.-]+)%$/i;
 

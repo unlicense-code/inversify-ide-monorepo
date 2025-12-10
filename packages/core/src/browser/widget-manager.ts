@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,35 +16,13 @@
 
 import { inject, named, injectable } from 'inversify';
 import { Widget } from '@lumino/widgets';
-import { ILogger, Emitter, Event, ContributionProvider, MaybePromise, WaitUntilEvent } from '../common';
+import { ILogger, Emitter, Event, ContributionProvider, MaybePromise, WaitUntilEvent } from '../common/index.js';
 import stableJsonStringify = require('fast-json-stable-stringify');
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const WidgetFactory = Symbol('WidgetFactory');
 
-/**
- * A {@link WidgetFactory} is used to create new widgets. Factory-specific information (options) can be passed as serializable JSON data.
- * The common {@link WidgetManager} collects  `WidgetFactory` contributions and delegates to the corresponding factory when
- * a widget should be created or restored. To identify widgets the `WidgetManager` uses a description composed of the factory id and the options.
- * The `WidgetFactory` does support both, synchronous and asynchronous widget creation.
- *
- * ### Example usage
- *
- * ```typescript
- * export class MyWidget extends BaseWidget {
- * }
- *
- * @injectable()
- * export class MyWidgetFactory implements WidgetFactory {
- *     id = 'myWidgetFactory';
- *
- *     createWidget(): MaybePromise<Widget> {
- *         return new MyWidget();
- *    }
- * }
- * ```
- */
-export interface WidgetFactory {
+export type WidgetFactory = {
 
     /**
      * The factory id.
@@ -60,11 +38,7 @@ export interface WidgetFactory {
     createWidget(options?: any): MaybePromise<Widget>;
 }
 
-/**
- * Representation of the `WidgetConstructionOptions`.
- * Defines a serializable description to create widgets.
- */
-export interface WidgetConstructionOptions {
+export type WidgetConstructionOptions = {
     /**
      * The id of the widget factory to use.
      */
@@ -76,10 +50,7 @@ export interface WidgetConstructionOptions {
     options?: any
 }
 
-/**
- * Representation of a `willCreateWidgetEvent`.
- */
-export interface WillCreateWidgetEvent extends WaitUntilEvent {
+export type WillCreateWidgetEvent = WaitUntilEvent & {
     /**
      * The widget which will be created.
      */
@@ -90,10 +61,7 @@ export interface WillCreateWidgetEvent extends WaitUntilEvent {
     readonly factoryId: string;
 }
 
-/**
- * Representation of a `didCreateWidgetEvent`.
- */
-export interface DidCreateWidgetEvent {
+export type DidCreateWidgetEvent = {
     /**
      * The widget which was created.
      */

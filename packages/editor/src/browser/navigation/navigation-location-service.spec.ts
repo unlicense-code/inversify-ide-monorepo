@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -13,22 +13,22 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 
 let disableJSDOM = enableJSDOM();
 
 import { expect } from 'chai';
-import { Container } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { MockLogger } from '@theia/core/lib/common/test/mock-logger';
-import { OpenerService } from '@theia/core/lib/browser/opener-service';
-import { MockOpenerService } from '@theia/core/lib/browser/test/mock-opener-service';
-import { NavigationLocationUpdater } from './navigation-location-updater';
-import { NoopNavigationLocationUpdater } from './test/mock-navigation-location-updater';
-import { NavigationLocationSimilarity } from './navigation-location-similarity';
-import { CursorLocation, Position, NavigationLocation, RecentlyClosedEditor } from './navigation-location';
-import { NavigationLocationService } from './navigation-location-service';
+import { Container } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ILogger } from '@theia/core/lib/common/logger.js';
+import { MockLogger } from '@theia/core/lib/common/test/mock-logger.js';
+import { OpenerService } from '@theia/core/lib/browser/opener-service.js';
+import { MockOpenerService } from '@theia/core/lib/browser/test/mock-opener-service.js';
+import { NavigationLocationUpdater } from './navigation-location-updater.js';
+import { NoopNavigationLocationUpdater } from './test/mock-navigation-location-updater.js';
+import { NavigationLocationSimilarity } from './navigation-location-similarity.js';
+import { CursorLocation, Position, NavigationLocation, RecentlyClosedEditor } from './navigation-location.js';
+import { NavigationLocationService } from './navigation-location-service.js';
 
 disableJSDOM();
 

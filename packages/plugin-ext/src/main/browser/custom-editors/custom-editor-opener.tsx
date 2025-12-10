@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import URI from '@theia/core/lib/common/uri';
+import { URI } from '@theia/core/lib/common/uri.js';
 import {
     ApplicationShell, DiffUris, OpenHandler, OpenerOptions, SplitWidget, Widget, WidgetManager, WidgetOpenerOptions, getDefaultHandler, defaultHandlerPriority
-} from '@theia/core/lib/browser';
-import { CustomEditor, CustomEditorPriority, CustomEditorSelector } from '../../../common';
-import { CustomEditorWidget } from './custom-editor-widget';
-import { PluginCustomEditorRegistry } from './plugin-custom-editor-registry';
-import { generateUuid } from '@theia/core/lib/common/uuid';
+} from '@theia/core/lib/browser/index.js';
+import { CustomEditor, CustomEditorPriority, CustomEditorSelector } from '../../../common/index.js';
+import { CustomEditorWidget } from './custom-editor-widget.js';
+import { PluginCustomEditorRegistry } from './plugin-custom-editor-registry.js';
+import { generateUuid } from '@theia/core';
 import { DisposableCollection, Emitter, PreferenceService } from '@theia/core';
-import { match } from '@theia/core/lib/common/glob';
+import { match } from '@theia/core/lib/common/glob.js';
 
 export class CustomEditorOpener implements OpenHandler {
 

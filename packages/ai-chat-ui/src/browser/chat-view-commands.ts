@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { Command, nls } from '@theia/core';
-import { codicon } from '@theia/core/lib/browser';
+import { codicon } from '@theia/core/lib/browser/index.js';
 
 export namespace ChatCommands {
     export const CHAT_CATEGORY = 'Chat';

@@ -14,19 +14,19 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 let disableJSDOM = enableJSDOM();
 FrontendApplicationConfigProvider.set({});
 
-import { PreferenceService } from '@theia/core/lib/common';
-import { Container } from '@theia/core/shared/inversify';
-import { editor, languages, Uri } from '@theia/monaco-editor-core/esm/vs/editor/editor.api';
+import { PreferenceService } from '@theia/core/lib/common/index.js';
+import { Container } from 'inversify';
+import { editor, languages, Uri } from '@theia/monaco-editor-core/esm/vs/editor/editor.api.js';
 import { expect } from 'chai';
 import * as sinon from 'sinon';
-import { CodeCompletionVariableContext } from './code-completion-variable-context';
-import { CodeCompletionVariableContribution } from './code-completion-variable-contribution';
-import { FILE, LANGUAGE, PREFIX, SUFFIX } from './code-completion-variables';
+import { CodeCompletionVariableContext } from './code-completion-variable-context.js';
+import { CodeCompletionVariableContribution } from './code-completion-variable-contribution.js';
+import { FILE, LANGUAGE, PREFIX, SUFFIX } from './code-completion-variables.js';
 
 disableJSDOM();
 

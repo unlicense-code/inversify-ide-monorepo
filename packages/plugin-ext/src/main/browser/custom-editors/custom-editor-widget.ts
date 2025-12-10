@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { FileOperation } from '@theia/filesystem/lib/common/files';
-import { ApplicationShell, DelegatingSaveable, NavigatableWidget, Saveable, SaveableSource } from '@theia/core/lib/browser';
-import { SaveableService } from '@theia/core/lib/browser/saveable-service';
-import { Reference } from '@theia/core/lib/common/reference';
-import { WebviewWidget } from '../webview/webview';
-import { CustomEditorModel } from './custom-editors-main';
-import { CustomEditorWidget as CustomEditorWidgetShape } from '@theia/editor/lib/browser';
+import { injectable, inject, postConstruct } from 'inversify';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { FileOperation } from '@theia/filesystem/lib/common/files.js';
+import { ApplicationShell, DelegatingSaveable, NavigatableWidget, Saveable, SaveableSource } from '@theia/core/lib/browser/index.js';
+import { SaveableService } from '@theia/core/lib/browser/saveable-service.js';
+import { Reference } from '@theia/core/lib/common/reference.js';
+import { WebviewWidget } from '../webview/webview.js';
+import { CustomEditorModel } from './custom-editors-main.js';
+import { CustomEditorWidget as CustomEditorWidgetShape } from '@theia/editor/lib/browser/index.js';
 
 @injectable()
 export class CustomEditorWidget extends WebviewWidget implements CustomEditorWidgetShape, SaveableSource, NavigatableWidget {

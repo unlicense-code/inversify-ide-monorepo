@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { TreeNode, CompositeTreeNode, SelectableTreeNode, ExpandableTreeNode, TreeImpl } from '@theia/core/lib/browser';
-import { UriSelection } from '@theia/core/lib/common/selection';
-import { BulkEditNodeSelection } from './bulk-edit-node-selection';
-import URI from '@theia/core/lib/common/uri';
-import { ResourceFileEdit, ResourceTextEdit } from '@theia/monaco/lib/browser/monaco-workspace';
+import { injectable } from 'inversify';
+import { TreeNode, CompositeTreeNode, SelectableTreeNode, ExpandableTreeNode, TreeImpl } from '@theia/core/lib/browser/index.js';
+import { UriSelection } from '@theia/core/lib/common/selection.js';
+import { BulkEditNodeSelection } from './bulk-edit-node-selection.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ResourceFileEdit, ResourceTextEdit } from '@theia/monaco/lib/browser/monaco-workspace.js';
 import {
     ResourceEdit, ResourceFileEdit as MonacoResourceFileEdit, ResourceTextEdit as MonacoResourceTextEdit
-} from '@theia/monaco-editor-core/esm/vs/editor/browser/services/bulkEditService';
+} from '@theia/monaco-editor-core/esm/vs/editor/browser/services/bulkEditService.js';
 
 @injectable()
 export class BulkEditTree extends TreeImpl {
@@ -93,7 +93,7 @@ export class BulkEditTree extends TreeImpl {
     }
 }
 
-export interface BulkEditNode extends UriSelection, SelectableTreeNode {
+export type BulkEditNode = UriSelection & SelectableTreeNode & {
     parent: CompositeTreeNode;
     bulkEdit: MonacoResourceFileEdit | MonacoResourceTextEdit;
 }
@@ -103,7 +103,7 @@ export namespace BulkEditNode {
     }
 }
 
-export interface BulkEditInfoNode extends UriSelection, SelectableTreeNode, ExpandableTreeNode {
+export type BulkEditInfoNode = UriSelection & SelectableTreeNode & ExpandableTreeNode & {
     parent: CompositeTreeNode;
     fileContents?: string;
 }

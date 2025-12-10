@@ -18,15 +18,15 @@ import * as http from 'http';
 import * as path from 'path';
 import * as url from 'url';
 const vhost = require('vhost');
-import * as express from '@theia/core/shared/express';
-import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { WebviewExternalEndpoint } from '../common/webview-protocol';
-import { environment } from '@theia/core/shared/@theia/application-package/lib/environment';
-import { WsRequestValidatorContribution } from '@theia/core/lib/node/ws-request-validators';
-import { MaybePromise } from '@theia/core/lib/common';
-import { ApplicationPackage } from '@theia/core/shared/@theia/application-package';
-import { BackendRemoteService } from '@theia/core/lib/node/remote/backend-remote-service';
+import * as express from 'express';
+import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import { WebviewExternalEndpoint } from '../common/webview-protocol.js';
+import { environment } from '@theia/application-package';
+import { WsRequestValidatorContribution } from '@theia/core/lib/node/ws-request-validators.js';
+import { MaybePromise } from '@theia/core/lib/common/index.js';
+import { ApplicationPackage } from '@theia/application-package';
+import { BackendRemoteService } from '@theia/core/lib/node/remote/backend-remote-service.js';
 
 @injectable()
 export class PluginApiContribution implements BackendApplicationContribution, WsRequestValidatorContribution {
@@ -49,7 +49,7 @@ export class PluginApiContribution implements BackendApplicationContribution, Ws
     }
 
     configure(app: express.Application): void {
-        const webviewApp = express();
+        const webviewApp = express.default();
         webviewApp.use('/webview', express.static(path.join(this.applicationPackage.projectPath, 'lib', 'webview', 'pre')));
         if (this.remoteService.isRemoteServer()) {
             // Any request to `subdomain.localhost:port/webview/...` will get redirected to the remote system.

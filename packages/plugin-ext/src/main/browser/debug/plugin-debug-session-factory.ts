@@ -14,26 +14,26 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { DefaultDebugSessionFactory } from '@theia/debug/lib/browser/debug-session-contribution';
-import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
-import { EditorManager } from '@theia/editor/lib/browser/editor-manager';
-import { BreakpointManager } from '@theia/debug/lib/browser/breakpoint/breakpoint-manager';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
-import { MessageClient } from '@theia/core/lib/common/message-service-protocol';
-import { OutputChannelManager } from '@theia/output/lib/browser/output-channel';
-import { DebugPreferences } from '@theia/debug/lib/common/debug-preferences';
-import { DebugConfigurationSessionOptions, TestRunReference } from '@theia/debug/lib/browser/debug-session-options';
-import { DebugSession } from '@theia/debug/lib/browser/debug-session';
-import { DebugSessionConnection } from '@theia/debug/lib/browser/debug-session-connection';
-import { TerminalWidgetOptions, TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget';
-import { TerminalOptionsExt } from '../../../common/plugin-api-rpc';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { DebugContribution } from '@theia/debug/lib/browser/debug-contribution';
-import { ContributionProvider } from '@theia/core/lib/common/contribution-provider';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { PluginChannel } from '../../../common/connection';
-import { TestService } from '@theia/test/lib/browser/test-service';
-import { DebugSessionManager } from '@theia/debug/lib/browser/debug-session-manager';
+import { DefaultDebugSessionFactory } from '@theia/debug/lib/browser/debug-session-contribution.js';
+import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service.js';
+import { EditorManager } from '@theia/editor/lib/browser/editor-manager.js';
+import { BreakpointManager } from '@theia/debug/lib/browser/breakpoint/breakpoint-manager.js';
+import { LabelProvider } from '@theia/core/lib/browser/label-provider.js';
+import { MessageClient } from '@theia/core/lib/common/message-service-protocol.js';
+import { OutputChannelManager } from '@theia/output/lib/browser/output-channel.js';
+import { DebugPreferences } from '@theia/debug/lib/common/debug-preferences.js';
+import { DebugConfigurationSessionOptions, TestRunReference } from '@theia/debug/lib/browser/debug-session-options.js';
+import { DebugSession } from '@theia/debug/lib/browser/debug-session.js';
+import { DebugSessionConnection } from '@theia/debug/lib/browser/debug-session-connection.js';
+import { TerminalWidgetOptions, TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget.js';
+import { TerminalOptionsExt } from '../../../common/plugin-api-rpc.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { DebugContribution } from '@theia/debug/lib/browser/debug-contribution.js';
+import { ContributionProvider } from '@theia/core/lib/common/contribution-provider.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { PluginChannel } from '../../../common/connection.js';
+import { TestService } from '@theia/test/lib/browser/test-service.js';
+import { DebugSessionManager } from '@theia/debug/lib/browser/debug-session-manager.js';
 
 export class PluginDebugSession extends DebugSession {
     constructor(

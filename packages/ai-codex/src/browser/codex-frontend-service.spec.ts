@@ -14,22 +14,22 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 let disableJSDOM = enableJSDOM();
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 FrontendApplicationConfigProvider.set({});
 import * as path from 'path';
 
 import { expect } from 'chai';
 import * as sinon from 'sinon';
-import { Container, interfaces } from '@theia/core/shared/inversify';
+import { Container, interfaces } from 'inversify';
 import { PreferenceService } from '@theia/core';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { URI } from '@theia/core/lib/common/uri';
-import { CODEX_API_KEY_PREF, CodexService, CodexBackendRequest } from '../common';
-import { API_KEY_PREF } from '@theia/ai-openai/lib/common/openai-preferences';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { CODEX_API_KEY_PREF, CodexService, CodexBackendRequest } from '../common/index.js';
+import { API_KEY_PREF } from '@theia/ai-openai/lib/common/openai-preferences.js';
 
-import type { CodexFrontendService, CodexClientImpl } from './codex-frontend-service';
+import type { CodexFrontendService, CodexClientImpl } from './codex-frontend-service.js';
 
 disableJSDOM();
 
@@ -43,7 +43,7 @@ describe('CodexFrontendService', () => {
     before(async () => {
         disableJSDOM = enableJSDOM();
 
-        const serviceModule = await import('./codex-frontend-service');
+        const serviceModule = await import('./codex-frontend-service.js');
         CodexFrontendServiceConstructor = serviceModule.CodexFrontendService;
         CodexClientImplConstructor = serviceModule.CodexClientImpl;
     });

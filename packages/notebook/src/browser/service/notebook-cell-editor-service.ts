@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 Typefox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { Emitter, URI } from '@theia/core';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { SimpleMonacoEditor } from '@theia/monaco/lib/browser/simple-monaco-editor';
-import { NotebookEditorWidgetService } from './notebook-editor-widget-service';
-import { CellUri } from '../../common';
-import { ActiveMonacoEditorContribution, MonacoEditorService } from '@theia/monaco/lib/browser/monaco-editor-service';
-import { ICodeEditor } from '@theia/monaco-editor-core/esm/vs/editor/browser/editorBrowser';
+import { inject, injectable, postConstruct } from 'inversify';
+import { SimpleMonacoEditor } from '@theia/monaco/lib/browser/simple-monaco-editor.js';
+import { NotebookEditorWidgetService } from './notebook-editor-widget-service.js';
+import { CellUri } from '../../common/index.js';
+import { ActiveMonacoEditorContribution, MonacoEditorService } from '@theia/monaco/lib/browser/monaco-editor-service.js';
+import { ICodeEditor } from '@theia/monaco-editor-core/esm/vs/editor/browser/editorBrowser.js';
 
 @injectable()
 export class NotebookCellEditorService implements ActiveMonacoEditorContribution {

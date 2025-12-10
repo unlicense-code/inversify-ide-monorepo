@@ -1,6 +1,7 @@
 {
   "name": "@theia/ai-vercel-ai",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - Vercel AI SDK Integration",
   "dependencies": {
     "@theia/ai-core": "1.66.0",

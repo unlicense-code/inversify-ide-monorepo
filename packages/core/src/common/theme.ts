@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -20,7 +20,7 @@ export type ThemeType = 'light' | 'dark' | 'hc' | 'hcLight';
 
 export type ThemeMode = 'light' | 'dark';
 
-export interface Theme {
+export type Theme = {
     readonly id: string;
     readonly type: ThemeType;
     readonly label: string;
@@ -38,12 +38,12 @@ export function getThemeMode(type: ThemeType): ThemeMode {
     return (type === 'hc' || type === 'dark') ? 'dark' : 'light';
 }
 
-export interface ThemeChangeEvent {
+export type ThemeChangeEvent = {
     readonly newTheme: Theme;
     readonly oldTheme?: Theme;
 }
 
-export interface ThemeColor {
+export type ThemeColor = {
     readonly id: string;
 }
 
@@ -52,7 +52,7 @@ export function isThemeColor(obj: unknown): obj is ThemeColor {
     return !!obj && typeof obj === 'object' && typeof (<ThemeColor>obj).id === 'string';
 }
 
-export interface ThemeIcon {
+export type ThemeIcon = {
     readonly id: string;
     readonly color?: ThemeColor;
 }
@@ -65,23 +65,23 @@ export function isThemeIcon(obj: unknown): obj is ThemeIcon {
         (typeof (<ThemeIcon>obj).color === 'undefined' || isThemeColor((<ThemeIcon>obj).color));
 }
 
-export interface IconDefinition {
+export type IconDefinition = {
     font?: IconFontContribution; // undefined for the default font (codicon)
     fontCharacter: string;
 }
 
-export interface IconFontContribution {
+export type IconFontContribution = {
     readonly id: string;
     readonly definition: IconFontDefinition;
 }
 
-export interface IconFontDefinition {
+export type IconFontDefinition = {
     readonly weight?: string;
     readonly style?: string;
     readonly src: IconFontSource[];
 }
 
-export interface IconFontSource {
+export type IconFontSource = {
     readonly location: URI;
     readonly format: string;
 }

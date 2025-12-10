@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,19 +15,16 @@
 // *****************************************************************************
 
 import { injectable } from 'inversify';
-import { Event, Emitter, WaitUntilEvent } from '../../common/event';
-import { Disposable, DisposableCollection } from '../../common/disposable';
-import { CancellationToken, CancellationTokenSource } from '../../common/cancellation';
-import { timeout } from '../../common/promise-util';
-import { isObject, Mutable } from '../../common';
-import { AccessibilityInformation } from '../../common/accessibility';
+import { Event, Emitter, WaitUntilEvent } from '../../common/event.js';
+import { Disposable, DisposableCollection } from '../../common/disposable.js';
+import { CancellationToken, CancellationTokenSource } from '../../common/cancellation.js';
+import { timeout } from '../../common/promise-util.js';
+import { isObject, Mutable } from '../../common/index.js';
+import { AccessibilityInformation } from '../../common/accessibility.js';
 
 export const Tree = Symbol('Tree');
 
-/**
- * The tree - an abstract data type.
- */
-export interface Tree extends Disposable {
+export type Tree = Disposable & {
     /**
      * A root node of this tree.
      * Undefined if there is no root node.
@@ -80,16 +77,13 @@ export interface Tree extends Disposable {
     markAsChecked(node: TreeNode, checked: boolean): void;
 }
 
-export interface TreeViewItemCheckboxInfo {
+export type TreeViewItemCheckboxInfo = {
     checked: boolean;
     tooltip?: string;
     accessibilityInformation?: AccessibilityInformation
 }
 
-/**
- * The tree node.
- */
-export interface TreeNode {
+export type TreeNode = {
     /**
      * An unique id of this node.
      */
@@ -155,10 +149,7 @@ export namespace TreeNode {
     }
 }
 
-/**
- * The composite tree node.
- */
-export interface CompositeTreeNode extends TreeNode {
+export type CompositeTreeNode = TreeNode & {
     /**
      * Child nodes of this tree node.
      */

@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { HuggingFaceLanguageModelsManager, HuggingFaceModelDescription } from '../common';
-import { API_KEY_PREF, MODELS_PREF } from '../common/huggingface-preferences';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
+import { inject, injectable } from 'inversify';
+import { HuggingFaceLanguageModelsManager, HuggingFaceModelDescription } from '../common/index.js';
+import { API_KEY_PREF, MODELS_PREF } from '../common/huggingface-preferences.js';
 import { PreferenceService } from '@theia/core';
 
 const HUGGINGFACE_PROVIDER_ID = 'huggingface';

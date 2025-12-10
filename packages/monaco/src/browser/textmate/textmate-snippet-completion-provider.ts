@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import * as monaco from '@theia/monaco-editor-core';
-import { SnippetParser } from '@theia/monaco-editor-core/esm/vs/editor/contrib/snippet/browser/snippetParser';
+import { SnippetParser } from '@theia/monaco-editor-core/esm/vs/editor/contrib/snippet/browser/snippetParser.js';
 
 /**
  * @deprecated use MonacoSnippetSuggestProvider instead
@@ -56,17 +56,11 @@ export class TextmateSnippetCompletionProvider implements monaco.languages.Compl
     }
 }
 
-/**
- * @deprecated use JsonSerializedSnippets & MonacoSnippetSuggestProvider instead
- */
-export interface TextmateSnippets {
+export type TextmateSnippets = {
     [name: string]: TextmateSnippet;
 }
 
-/**
- * @deprecated use JsonSerializedSnippet & MonacoSnippetSuggestProvider instead
- */
-export interface TextmateSnippet {
+export type TextmateSnippet = {
     readonly prefix: string,
     readonly body: string[],
     readonly description: string

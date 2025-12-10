@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as fs from '@theia/core/shared/fs-extra';
+import * as fs from 'fs-extra';
 import * as path from 'path';
-import { GitLocator, GitLocateOptions } from './git-locator-protocol';
+import { GitLocator, GitLocateOptions } from './git-locator-protocol.js';
 
 export type FindGitRepositories = (path: string, progressCb: (repos: string[]) => void) => Promise<string[]>;
 const findGitRepositories: FindGitRepositories = require('find-git-repositories');
 
-export interface GitLocateContext {
+export type GitLocateContext = {
     maxCount: number
     readonly visited: Map<string, boolean>
 }

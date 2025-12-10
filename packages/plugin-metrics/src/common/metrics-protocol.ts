@@ -19,7 +19,7 @@
  */
 export const metricsJsonRpcPath = '/services/plugin-ext/metrics';
 export const PluginMetrics = Symbol('PluginMetrics');
-export interface PluginMetrics {
+export type PluginMetrics = {
     setMetrics(metrics: string): void;
     getMetrics(): string;
 }

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { injectable } from 'inversify';
-import { Disposable, Emitter, Event } from '../common';
+import { Disposable, Emitter, Event } from '../common/index.js';
 
-export interface Language {
+export type Language = {
     readonly id: string;
     readonly name: string;
     readonly extensions: Set<string>;
@@ -72,6 +72,6 @@ export class LanguageService {
     }
 }
 
-export interface DidChangeIconEvent {
+export type DidChangeIconEvent = {
     languageId: string;
 }

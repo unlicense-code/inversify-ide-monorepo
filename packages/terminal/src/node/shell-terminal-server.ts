@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,30 +15,30 @@
 // *****************************************************************************
 import { exec } from 'child_process';
 
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { EnvironmentUtils } from '@theia/core/lib/node/environment-utils';
-import { BaseTerminalServer } from './base-terminal-server';
-import { ShellProcessFactory, getRootPath } from './shell-process';
+import { inject, injectable, named } from 'inversify';
+import { ILogger } from '@theia/core/lib/common/logger.js';
+import { EnvironmentUtils } from '@theia/core/lib/node/environment-utils.js';
+import { BaseTerminalServer } from './base-terminal-server.js';
+import { ShellProcessFactory, getRootPath } from './shell-process.js';
 import { ProcessManager, TerminalProcess } from '@theia/process/lib/node';
-import { isWindows } from '@theia/core/lib/common/os';
+import { isWindows } from '@theia/core/lib/common/os.js';
 import * as cp from 'child_process';
 import {
     EnvironmentVariableCollectionWithPersistence, EnvironmentVariableMutatorType, NO_ROOT_URI, SerializableEnvironmentVariableCollection,
     IShellTerminalServer, IShellTerminalServerOptions
 }
-    from '../common/shell-terminal-protocol';
-import { URI } from '@theia/core';
-import { MultiKeyMap } from '@theia/core/lib/common/collections';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/markdown-string';
+    from '../common/shell-terminal-protocol.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { MultiKeyMap } from '@theia/core/lib/common/collections.js';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/markdown-string.js';
 
-interface SerializedExtensionEnvironmentVariableCollection {
+type SerializedExtensionEnvironmentVariableCollection = {
     extensionIdentifier: string,
     rootUri: string,
     collection: SerializableEnvironmentVariableCollection,
 }
 
-interface WindowsProcess {
+type WindowsProcess = {
     ProcessId: number;
     ParentProcessId: number;
 }
@@ -60,7 +60,7 @@ export class ShellTerminalServer extends BaseTerminalServer implements IShellTer
         try {
             if (options.strictEnv !== true) {
                 options.env = this.environmentUtils.mergeProcessEnv(options.env);
-                this.applyToProcessEnvironment(URI.fromFilePath(getRootPath(options.rootURI)), options.env);
+                this.applyToProcessEnvironment(URI.fromFilePath(getRootPath(options.rootURI)), options.env ?? {});
             }
             const term = this.shellFactory(options);
             this.postCreate(term);
@@ -139,7 +139,7 @@ export class ShellTerminalServer extends BaseTerminalServer implements IShellTer
             lowerToActualVariableNames = {};
             Object.keys(env).forEach(e => lowerToActualVariableNames![e.toLowerCase()] = e);
         }
-        this.collections.forEach((mutators, [extensionIdentifier, rootUri]) => {
+        this.collections.forEach((mutators: EnvironmentVariableCollectionWithPersistence, [extensionIdentifier, rootUri]: [string, string]) => {
             if (rootUri === NO_ROOT_URI || this.matchesRootUri(cwdUri, rootUri)) {
                 mutators.variableMutators.forEach((mutator, variable) => {
                     const actualVariable = isWindows ? lowerToActualVariableNames![variable.toLowerCase()] || variable : variable;
@@ -201,7 +201,7 @@ export class ShellTerminalServer extends BaseTerminalServer implements IShellTer
 
     protected persistCollections(): void {
         const collectionsJson: SerializedExtensionEnvironmentVariableCollection[] = [];
-        this.collections.forEach((collection, [extensionIdentifier, rootUri]) => {
+        this.collections.forEach((collection: EnvironmentVariableCollectionWithPersistence, [extensionIdentifier, rootUri]: [string, string]) => {
             if (collection.persistent) {
                 collectionsJson.push({
                     extensionIdentifier,
@@ -225,7 +225,7 @@ export class ShellTerminalServer extends BaseTerminalServer implements IShellTer
             throw new Error(`terminal "${id}" does not exist`);
         }
         const result = new Map<string, (string | MarkdownString | undefined)[]>();
-        this.collections.forEach((value, key) => {
+        this.collections.forEach((value: EnvironmentVariableCollectionWithPersistence, key: [string, string]) => {
             const prev = result.get(key[0]) || [];
             prev.push(value.description);
             result.set(key[0], prev);
@@ -236,7 +236,7 @@ export class ShellTerminalServer extends BaseTerminalServer implements IShellTer
     async getEnvVarCollections(): Promise<[string, string, boolean, SerializableEnvironmentVariableCollection][]> {
         const result: [string, string, boolean, SerializableEnvironmentVariableCollection][] = [];
 
-        this.collections.forEach((value, [extensionIdentifier, rootUri]) => {
+        this.collections.forEach((value: EnvironmentVariableCollectionWithPersistence, [extensionIdentifier, rootUri]: [string, string]) => {
             result.push([extensionIdentifier, rootUri, value.persistent, { description: value.description, mutators: [...value.variableMutators.entries()] }]);
         });
 

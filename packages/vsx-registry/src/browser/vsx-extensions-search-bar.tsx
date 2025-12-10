@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import { injectable, postConstruct, inject } from '@theia/core/shared/inversify';
-import { ReactWidget, Message, codicon } from '@theia/core/lib/browser/widgets';
-import { PreferenceService } from '@theia/core/lib/common/preferences/preference-service';
-import { VSXExtensionsSearchModel } from './vsx-extensions-search-model';
-import { VSXExtensionsModel } from './vsx-extensions-model';
-import { nls } from '@theia/core/lib/common/nls';
+import * as React from 'react';
+import { injectable, postConstruct, inject } from 'inversify';
+import { ReactWidget, Message, codicon } from '@theia/core/lib/browser/index.js';
+import { PreferenceService } from '@theia/core/lib/common/preferences/preference-service.js';
+import { VSXExtensionsSearchModel } from './vsx-extensions-search-model.js';
+import { VSXExtensionsModel } from './vsx-extensions-model.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 @injectable()
 export class VSXExtensionsSearchBar extends ReactWidget {

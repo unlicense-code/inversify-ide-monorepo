@@ -21,38 +21,38 @@
 // copied and modified from https://github.com/microsoft/vscode/blob/ba40bd16433d5a817bfae15f3b4350e18f144af4/src/vs/workbench/contrib/webview/browser/webviewElement.ts#
 
 import * as mime from 'mime';
-import { JSONExt } from '@theia/core/shared/@lumino/coreutils';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
+import { JSONExt } from '@lumino/coreutils';
+import { injectable, inject, postConstruct } from 'inversify';
 import { WebviewPanelOptions, WebviewPortMapping } from '@theia/plugin';
-import { BaseWidget, Message } from '@theia/core/lib/browser/widgets/widget';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { ApplicationShellMouseTracker } from '@theia/core/lib/browser/shell/application-shell-mouse-tracker';
-import { StatefulWidget } from '@theia/core/lib/browser/shell/shell-layout-restorer';
-import { WebviewPanelViewState } from '../../../common/plugin-api-rpc';
-import { IconUrl } from '../../../common/plugin-protocol';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { WebviewEnvironment } from './webview-environment';
-import URI from '@theia/core/lib/common/uri';
-import { Emitter } from '@theia/core/lib/common/event';
-import { open, OpenerService } from '@theia/core/lib/browser/opener-service';
-import { KeybindingRegistry } from '@theia/core/lib/browser/keybinding';
-import { Schemes } from '../../../common/uri-components';
-import { PluginSharedStyle } from '../plugin-shared-style';
-import { WebviewThemeDataProvider } from './webview-theme-data-provider';
-import { ExternalUriService } from '@theia/core/lib/browser/external-uri-service';
-import { OutputChannelManager } from '@theia/output/lib/browser/output-channel';
-import { WebviewResourceCache } from './webview-resource-cache';
-import { Endpoint } from '@theia/core/lib/browser/endpoint';
-import { isFirefox } from '@theia/core/lib/browser/browser';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileOperationError, FileOperationResult } from '@theia/filesystem/lib/common/files';
-import { BinaryBufferReadableStream } from '@theia/core/lib/common/buffer';
-import { ExtractableWidget } from '@theia/core/lib/browser/widgets/extractable-widget';
+import { BaseWidget, Message } from '@theia/core/lib/browser/widgets/widget.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { ApplicationShellMouseTracker } from '@theia/core/lib/browser/shell/application-shell-mouse-tracker.js';
+import { StatefulWidget } from '@theia/core/lib/browser/shell/shell-layout-restorer.js';
+import { WebviewPanelViewState } from '../../../common/plugin-api-rpc.js';
+import { IconUrl } from '../../../common/plugin-protocol.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { WebviewEnvironment } from './webview-environment.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Emitter } from '@theia/core';
+import { open, OpenerService } from '@theia/core/lib/browser/opener-service.js';
+import { KeybindingRegistry } from '@theia/core/lib/browser/keybinding.js';
+import { Schemes } from '../../../common/uri-components.js';
+import { PluginSharedStyle } from '../plugin-shared-style.js';
+import { WebviewThemeDataProvider } from './webview-theme-data-provider.js';
+import { ExternalUriService } from '@theia/core/lib/browser/external-uri-service.js';
+import { OutputChannelManager } from '@theia/output/lib/browser/output-channel.js';
+import { WebviewResourceCache } from './webview-resource-cache.js';
+import { Endpoint } from '@theia/core/lib/browser/endpoint.js';
+import { isFirefox } from '@theia/core/lib/browser/browser.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { FileOperationError, FileOperationResult } from '@theia/filesystem/lib/common/files.js';
+import { BinaryBufferReadableStream } from '@theia/core/lib/common/buffer.js';
+import { ExtractableWidget } from '@theia/core/lib/browser/widgets/extractable-widget.js';
 import { MenuPath } from '@theia/core';
-import { ContextMenuRenderer } from '@theia/core/lib/browser';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { PluginViewWidget } from '../view/plugin-view-widget';
-import { WebviewPreferences } from '../../common/webview-preferences';
+import { ContextMenuRenderer } from '@theia/core/lib/browser/index.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { PluginViewWidget } from '../view/plugin-view-widget.js';
+import { WebviewPreferences } from '../../common/webview-preferences.js';
 
 // Style from core
 const TRANSPARENT_OVERLAY_STYLE = 'theia-transparent-overlay';
@@ -78,7 +78,7 @@ export const enum WebviewMessageChannels {
     didcontextmenu = 'did-context-menu'
 }
 
-export interface WebviewContentOptions {
+export type WebviewContentOptions = {
     readonly allowScripts?: boolean;
     readonly allowForms?: boolean;
     readonly localResourceRoots?: ReadonlyArray<string>;
@@ -86,7 +86,7 @@ export interface WebviewContentOptions {
     readonly enableCommandUris?: boolean | readonly string[];
 }
 
-export interface WebviewConsoleLog {
+export type WebviewConsoleLog = {
     level: Extract<keyof typeof console, 'log' | 'info' | 'warn' | 'error' | 'trace' | 'debug'>;
     message?: string;
     optionalParams?: string;

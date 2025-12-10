@@ -16,20 +16,20 @@
 
 import '../../../src/browser/style/merge-editor.css';
 
-import { Container, interfaces } from '@theia/core/shared/inversify';
+import { Container, interfaces } from 'inversify';
 import { CommandContribution, DisposableCollection, MenuContribution, URI } from '@theia/core';
-import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { FrontendApplicationContribution, KeybindingContribution, NavigatableWidgetOptions, OpenHandler, WidgetFactory } from '@theia/core/lib/browser';
-import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution';
-import { EditorManager, EditorWidget } from '@theia/editor/lib/browser';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
-import { MergeEditorModel, MergeEditorModelProps } from './model/merge-editor-model';
-import { MergeEditorBasePane, MergeEditorPaneHeader, MergeEditorResultPane, MergeEditorSide1Pane, MergeEditorSide2Pane } from './view/merge-editor-panes';
-import { DiffSpacerService } from './view/diff-spacers';
-import { MergeEditorViewZoneComputer } from './view/merge-editor-view-zones';
-import { MergeEditor, MergeEditorOpenHandler, MergeEditorSettings, MergeEditorUri, MergeUris } from './merge-editor';
-import { MergeEditorContribution } from './merge-editor-contribution';
-import { MergeEditorDevContribution } from './merge-editor-dev-contribution';
+import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { FrontendApplicationContribution, KeybindingContribution, NavigatableWidgetOptions, OpenHandler, WidgetFactory } from '@theia/core/lib/browser/index.js';
+import { ColorContribution } from '@theia/core/lib/browser/color-application-contribution.js';
+import { EditorManager, EditorWidget } from '@theia/editor/lib/browser/index.js';
+import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor.js';
+import { MergeEditorModel, MergeEditorModelProps } from './model/merge-editor-model.js';
+import { MergeEditorBasePane, MergeEditorPaneHeader, MergeEditorResultPane, MergeEditorSide1Pane, MergeEditorSide2Pane } from './view/merge-editor-panes/index.js';
+import { DiffSpacerService } from './view/diff-spacers.js';
+import { MergeEditorViewZoneComputer } from './view/merge-editor-view-zones.js';
+import { MergeEditor, MergeEditorOpenHandler, MergeEditorSettings, MergeEditorUri, MergeUris } from './merge-editor.js';
+import { MergeEditorContribution } from './merge-editor-contribution.js';
+import { MergeEditorDevContribution } from './merge-editor-dev-contribution.js';
 
 export function bindMergeEditor(bind: interfaces.Bind): void {
     bind(MergeEditorSettings).toSelf().inSingletonScope();
@@ -123,7 +123,7 @@ export class MergeEditorFactory {
     }
 }
 
-export interface MergeEditorContainerProps {
+export type MergeEditorContainerProps = {
     baseEditorWidget: EditorWidget;
     side1EditorWidget: EditorWidget;
     side2EditorWidget: EditorWidget;

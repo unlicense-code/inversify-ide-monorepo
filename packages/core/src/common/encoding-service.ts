@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -24,9 +24,9 @@
 import * as iconv from 'iconv-lite';
 import { Buffer } from 'safer-buffer';
 import { injectable } from 'inversify';
-import { BinaryBuffer, BinaryBufferReadableStream, BinaryBufferReadable } from './buffer';
-import { UTF8, UTF8_with_bom, UTF16be, UTF16le, UTF16be_BOM, UTF16le_BOM, UTF8_BOM } from './encodings';
-import { newWriteableStream, ReadableStream, Readable } from './stream';
+import { BinaryBuffer, BinaryBufferReadableStream, BinaryBufferReadable } from './buffer.js';
+import { UTF8, UTF8_with_bom, UTF16be, UTF16le, UTF16be_BOM, UTF16le_BOM, UTF8_BOM } from './encodings.js';
+import { newWriteableStream, ReadableStream, Readable } from './stream.js';
 
 const ZERO_BYTE_DETECTION_BUFFER_MAX_LEN = 512;   // number of bytes to look at to decide about a file being binary or not
 const NO_ENCODING_GUESS_MIN_BYTES = 512;          // when not auto guessing the encoding, small number of bytes are enough
@@ -40,23 +40,23 @@ const AUTO_ENCODING_GUESS_MAX_BYTES = 512 * 128;  // set an upper limit for the 
 // - UTF-32: we do not support this encoding in VSCode
 const IGNORE_ENCODINGS = ['ascii', 'utf-16', 'utf-32'];
 
-export interface ResourceEncoding {
+export type ResourceEncoding = {
     encoding: string
     hasBOM: boolean
 }
 
-export interface DetectedEncoding {
+export type DetectedEncoding = {
     encoding?: string
     seemsBinary?: boolean
 }
 
-export interface DecodeStreamOptions {
+export type DecodeStreamOptions = {
     guessEncoding?: boolean;
     minBytesRequiredForDetection?: number;
 
     overwriteEncoding(detectedEncoding: string | undefined): Promise<string>;
 }
-export interface DecodeStreamResult {
+export type DecodeStreamResult = {
     stream: ReadableStream<string>;
     detected: DetectedEncoding;
 }

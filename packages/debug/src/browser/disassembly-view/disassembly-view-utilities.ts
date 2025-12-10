@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { IDisposable, IEvent } from '@theia/monaco-editor-core';
-import { BareFontInfo } from '@theia/monaco-editor-core/esm/vs/editor/common/config/fontInfo';
+import { BareFontInfo } from '@theia/monaco-editor-core/esm/vs/editor/common/config/fontInfo.js';
 import { DebugProtocol } from '@vscode/debugprotocol';
 
-export interface DisassemblyViewRendererReference {
+export type DisassemblyViewRendererReference = {
     onDidChangeStackFrame: IEvent<void>;
     isSourceCodeRender: boolean;
     currentInstructionAddresses: Array<string | undefined>;
@@ -29,7 +29,7 @@ export interface DisassemblyViewRendererReference {
 }
 
 // The rest of the file is adapted from https://github.com/microsoft/vscode/blob/c061ce5c24fc480342fbc5f23244289d633c56eb/src/vs/workbench/contrib/debug/browser/disassemblyView.ts
-export interface DisassembledInstructionEntry {
+export type DisassembledInstructionEntry = {
     allowBreakpoint: boolean;
     isBreakpointSet: boolean;
     isBreakpointEnabled: boolean;
@@ -37,7 +37,7 @@ export interface DisassembledInstructionEntry {
     instructionAddress?: bigint;
 }
 
-export interface InstructionColumnTemplateData {
+export type InstructionColumnTemplateData = {
     currentElement: { element?: DisassembledInstructionEntry };
     // TODO: hover widget?
     instruction: HTMLElement;
@@ -48,7 +48,7 @@ export interface InstructionColumnTemplateData {
     disposables: IDisposable[];
 }
 
-export interface BreakpointColumnTemplateData {
+export type BreakpointColumnTemplateData = {
     currentElement: { element?: DisassembledInstructionEntry };
     icon: HTMLElement;
     disposables: IDisposable[];

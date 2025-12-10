@@ -1,6 +1,7 @@
 {
   "name": "@theia/variable-resolver",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - Variable Resolver Extension",
   "dependencies": {
     "@theia/core": "1.66.0",

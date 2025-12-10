@@ -1,6 +1,7 @@
 {
   "name": "@theia/ai-google",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - Google AI Integration",
   "dependencies": {
     "@google/genai": "^1.16.0",

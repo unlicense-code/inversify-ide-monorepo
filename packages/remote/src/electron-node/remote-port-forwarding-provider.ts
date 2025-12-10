@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { ForwardedPort, RemotePortForwardingProvider } from '../electron-common/remote-port-forwarding-provider';
+import { inject, injectable } from 'inversify';
+import { ForwardedPort, RemotePortForwardingProvider } from '../electron-common/remote-port-forwarding-provider.js';
 import { createServer, Server } from 'net';
-import { RemoteConnectionService } from './remote-connection-service';
-import { RemoteConnection } from './remote-types';
+import { RemoteConnectionService } from './remote-connection-service.js';
+import { RemoteConnection } from './remote-types.js';
 
-interface ForwardInfo {
+type ForwardInfo = {
     connection: RemoteConnection
     port: ForwardedPort
     server: Server

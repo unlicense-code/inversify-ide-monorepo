@@ -14,28 +14,28 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, named, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, named, postConstruct } from 'inversify';
 import { ContributionProvider, MaybePromise, URI } from '@theia/core';
-import { ChangeSetElement } from './change-set';
-import { SerializableChangeSetElement } from './chat-model-serialization';
+import { ChangeSetElement } from './change-set.js';
+import { SerializableChangeSetElement } from './chat-model-serialization.js';
 
 export const ChangeSetElementDeserializer = Symbol('ChangeSetElementDeserializer');
 
-export interface ChangeSetElementDeserializer<T = unknown> {
+export type ChangeSetElementDeserializer<T = unknown> = {
     readonly kind: string;
     deserialize(serialized: SerializableChangeSetElement, context: ChangeSetDeserializationContext): ChangeSetElement | Promise<ChangeSetElement>;
 }
 
-export interface ChangeSetDeserializationContext {
+export type ChangeSetDeserializationContext = {
     chatSessionId: string;
     requestId: string;
 }
 
-export interface ChangeSetElementDeserializerContribution {
+export type ChangeSetElementDeserializerContribution = {
     registerDeserializers(registry: ChangeSetElementDeserializerRegistry): void;
 }
 export const ChangeSetElementDeserializerContribution = Symbol('ChangeSetElementDeserializerContribution');
-export interface ChangeSetElementDeserializerRegistry {
+export type ChangeSetElementDeserializerRegistry = {
     register(deserializer: ChangeSetElementDeserializer): void;
     deserialize(serialized: SerializableChangeSetElement, context: ChangeSetDeserializationContext): MaybePromise<ChangeSetElement>;
 }

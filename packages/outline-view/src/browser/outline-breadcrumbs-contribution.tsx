@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { LabelProvider, BreadcrumbsService, Widget, TreeNode, OpenerService, open, SelectableTreeNode, BreadcrumbsContribution, Breadcrumb } from '@theia/core/lib/browser';
-import URI from '@theia/core/lib/common/uri';
-import { OutlineViewService } from './outline-view-service';
-import { OutlineSymbolInformationNode, OutlineViewWidget } from './outline-view-widget';
-import { Disposable, DisposableCollection, Emitter, Event, UriSelection } from '@theia/core/lib/common';
+import { injectable, inject, postConstruct } from 'inversify';
+import { LabelProvider, BreadcrumbsService, Widget, TreeNode, OpenerService, open, SelectableTreeNode, BreadcrumbsContribution, Breadcrumb } from '@theia/core/lib/browser/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { OutlineViewService } from './outline-view-service.js';
+import { OutlineSymbolInformationNode, OutlineViewWidget } from './outline-view-widget.js';
+import { Disposable, DisposableCollection, Emitter, Event, UriSelection } from '@theia/core/lib/common/index.js';
 
 export const OutlineBreadcrumbType = Symbol('OutlineBreadcrumb');
 export const BreadcrumbPopupOutlineViewFactory = Symbol('BreadcrumbPopupOutlineViewFactory');
 export const OUTLINE_BREADCRUMB_CONTAINER_CLASS = 'outline-element';
-export interface BreadcrumbPopupOutlineViewFactory {
+export type BreadcrumbPopupOutlineViewFactory = {
     (): BreadcrumbPopupOutlineView;
 }
 export class BreadcrumbPopupOutlineView extends OutlineViewWidget {

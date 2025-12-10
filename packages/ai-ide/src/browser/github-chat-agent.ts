@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { AbstractStreamParsingChatAgent } from '@theia/ai-chat/lib/common/chat-agents';
-import { ErrorChatResponseContentImpl, MarkdownChatResponseContentImpl, MutableChatRequestModel, QuestionResponseContentImpl } from '@theia/ai-chat/lib/common/chat-model';
-import { LanguageModelRequirement } from '@theia/ai-core/lib/common';
-import { MCPFrontendService, MCPServerDescription } from '@theia/ai-mcp/lib/common/mcp-server-manager';
+import { AbstractStreamParsingChatAgent } from '@theia/ai-chat/lib/common/chat-agents.js';
+import { ErrorChatResponseContentImpl, MarkdownChatResponseContentImpl, MutableChatRequestModel, QuestionResponseContentImpl } from '@theia/ai-chat/lib/common/chat-model.js';
+import { LanguageModelRequirement } from '@theia/ai-core/lib/common/index.js';
+import { MCPFrontendService, MCPServerDescription } from '@theia/ai-mcp/lib/common/mcp-server-manager.js';
 import { nls, CommandService } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { MCP_SERVERS_PREF } from '@theia/ai-mcp/lib/common/mcp-preferences';
-import { PreferenceScope, PreferenceService } from '@theia/core/lib/common';
-import { PreferencesCommands } from '@theia/preferences/lib/browser/util/preference-types';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { githubTemplate, REQUIRED_GITHUB_MCP_SERVERS } from './github-prompt-template';
+import { inject, injectable } from 'inversify';
+import { MCP_SERVERS_PREF } from '@theia/ai-mcp/lib/common/mcp-preferences.js';
+import { PreferenceScope, PreferenceService } from '@theia/core/lib/common/index.js';
+import { PreferencesCommands } from '@theia/preferences/lib/browser/util/preference-types.js';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { githubTemplate, REQUIRED_GITHUB_MCP_SERVERS } from './github-prompt-template.js';
 
 export const GitHubChatAgentId = 'GitHub';
 

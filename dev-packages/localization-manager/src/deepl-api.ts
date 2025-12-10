@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as bent from 'bent';
+import bent from 'bent';
 import { RateLimiter } from 'limiter';
 
 const post = bent('POST', 'json', 200);
@@ -163,7 +163,7 @@ export function isSupportedLanguage(language: string): language is DeeplLanguage
     return supportedLanguages.includes(language.toUpperCase());
 }
 
-export interface DeeplParameters {
+export type DeeplParameters = {
     free_api: Boolean
     auth_key: string
     text: string[]
@@ -179,11 +179,11 @@ export interface DeeplParameters {
     ignore_tags?: string[]
 }
 
-export interface DeeplResponse {
+export type DeeplResponse = {
     translations: DeeplTranslation[]
 }
 
-export interface DeeplTranslation {
+export type DeeplTranslation = {
     detected_source_language: string
     text: string
 }

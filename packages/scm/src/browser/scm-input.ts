@@ -16,11 +16,11 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import * as debounce from 'p-debounce';
-import { Disposable, DisposableCollection, Emitter } from '@theia/core/lib/common';
-import { JSONExt, JSONObject } from '@theia/core/shared/@lumino/coreutils';
+import debounce from 'p-debounce';
+import { Disposable, DisposableCollection, Emitter } from '@theia/core/lib/common/index.js';
+import { JSONExt, JSONObject } from '@lumino/coreutils';
 
-export interface ScmInputIssue {
+export type ScmInputIssue = {
     message: string;
     type: ScmInputIssueType;
 }
@@ -31,18 +31,18 @@ export enum ScmInputIssueType {
     Information = 2
 }
 
-export interface ScmInputValidator {
+export type ScmInputValidator = {
     (value: string): Promise<ScmInputIssue | undefined>;
 }
 
-export interface ScmInputOptions {
+export type ScmInputOptions = {
     placeholder?: string;
     validator?: ScmInputValidator;
     visible?: boolean;
     enabled?: boolean;
 }
 
-export interface ScmInputData {
+export type ScmInputData = {
     value?: string;
     issue?: ScmInputIssue;
 }
@@ -63,15 +63,21 @@ export class ScmInput implements Disposable {
         this.onDidFocusEmitter
     );
 
+    protected _placeholder: string | undefined;
+    protected _visible: boolean;
+    protected _enabled: boolean;
+
     constructor(
         protected readonly options: ScmInputOptions = {}
-    ) { }
+    ) {
+        this._placeholder = this.options.placeholder;
+        this._visible = this.options.visible ?? true;
+        this._enabled = this.options.enabled ?? true;
+    }
 
     dispose(): void {
         this.toDispose.dispose();
     }
-
-    protected _placeholder = this.options.placeholder;
     get placeholder(): string | undefined {
         return this._placeholder;
     }
@@ -96,9 +102,8 @@ export class ScmInput implements Disposable {
         this.validate();
     }
 
-    protected _visible = this.options.visible;
     get visible(): boolean {
-        return this._visible ?? true;
+        return this._visible;
     }
     set visible(visible: boolean) {
         if (this.visible === visible) {
@@ -109,7 +114,6 @@ export class ScmInput implements Disposable {
         this.validate();
     }
 
-    protected _enabled = this.options.enabled ?? true;
     get enabled(): boolean {
         return this._enabled;
     }

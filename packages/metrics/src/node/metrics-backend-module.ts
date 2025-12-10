@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017-2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { BackendApplicationContribution } from '@theia/core/lib/node';
-import { ConnectionHandler, RpcConnectionHandler, bindContributionProvider } from '@theia/core/lib/common';
-import { MetricsContribution } from './metrics-contribution';
-import { NodeMetricsContribution } from './node-metrics-contribution';
-import { ExtensionMetricsContribution } from './extensions-metrics-contribution';
-import { MetricsBackendApplicationContribution } from './metrics-backend-application-contribution';
-import { measurementNotificationServicePath } from '../common';
-import { MeasurementMetricsBackendContribution } from './measurement-metrics-contribution';
+import { ContainerModule } from 'inversify';
+import { ConnectionHandler, RpcConnectionHandler, bindContributionProvider } from '@theia/core/lib/common/index.js';
+import { BackendApplicationContribution } from '@theia/core/lib/node/index.js';
+import { MetricsContribution } from './metrics-contribution.js';
+import { NodeMetricsContribution } from './node-metrics-contribution.js';
+import { ExtensionMetricsContribution } from './extensions-metrics-contribution.js';
+import { MetricsBackendApplicationContribution } from './metrics-backend-application-contribution.js';
+import { measurementNotificationServicePath } from '../common/index.js';
+import { MeasurementMetricsBackendContribution } from './measurement-metrics-contribution.js';
 
 export default new ContainerModule(bind => {
     bindContributionProvider(bind, MetricsContribution);

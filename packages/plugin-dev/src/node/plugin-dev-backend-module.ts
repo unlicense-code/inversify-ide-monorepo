@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { HostedInstanceManager, NodeHostedPluginRunner } from './hosted-instance-manager';
-import { HostedPluginUriPostProcessorSymbolName } from './hosted-plugin-uri-postprocessor';
-import { HostedPluginsManager, HostedPluginsManagerImpl } from './hosted-plugins-manager';
-import { ContainerModule, interfaces } from '@theia/core/shared/inversify';
-import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module';
-import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider';
-import { PluginDevServerImpl } from './plugin-dev-service';
-import { PluginDevServer, PluginDevClient, pluginDevServicePath } from '../common/plugin-dev-protocol';
-import { HostedPluginReader } from './hosted-plugin-reader';
-import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application';
-import { bindHostedPluginPreferences } from '../common/hosted-plugin-preferences';
+import { HostedInstanceManager, NodeHostedPluginRunner } from './hosted-instance-manager.js';
+import { HostedPluginUriPostProcessorSymbolName } from './hosted-plugin-uri-postprocessor.js';
+import { HostedPluginsManager, HostedPluginsManagerImpl } from './hosted-plugins-manager.js';
+import { ContainerModule, interfaces } from 'inversify';
+import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module.js';
+import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider.js';
+import { PluginDevServerImpl } from './plugin-dev-service.js';
+import { PluginDevServer, PluginDevClient, pluginDevServicePath } from '../common/plugin-dev-protocol.js';
+import { HostedPluginReader } from './hosted-plugin-reader.js';
+import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application.js';
+import { bindHostedPluginPreferences } from '../common/hosted-plugin-preferences.js';
 
 const commonHostedConnectionModule = ConnectionContainerModule.create(({ bind, bindBackendService }) => {
     bind(HostedPluginsManagerImpl).toSelf().inSingletonScope();

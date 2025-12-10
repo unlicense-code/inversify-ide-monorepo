@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -13,19 +13,19 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import * as React from '@theia/core/shared/react';
-import { CellEditType, CellKind, NotebookCellsChangeType } from '../../common';
-import { NotebookCellModel } from '../view-model/notebook-cell-model';
-import { NotebookModel } from '../view-model/notebook-model';
-import { NotebookCellToolbarFactory } from './notebook-cell-toolbar-factory';
-import { animationFrame, onDomEvent } from '@theia/core/lib/browser';
+import * as React from 'react';
+import { CellEditType, CellKind, NotebookCellsChangeType } from '../../common/index.js';
+import { NotebookCellModel } from '../view-model/notebook-cell-model.js';
+import { NotebookModel } from '../view-model/notebook-model.js';
+import { NotebookCellToolbarFactory } from './notebook-cell-toolbar-factory.js';
+import { animationFrame, onDomEvent } from '@theia/core/lib/browser/index.js';
 import { CommandMenu, CommandRegistry, DisposableCollection, MenuModelRegistry, nls } from '@theia/core';
-import { NotebookCommands, NotebookMenus } from '../contributions/notebook-actions-contribution';
-import { NotebookCellActionContribution } from '../contributions/notebook-cell-actions-contribution';
-import { NotebookContextManager } from '../service/notebook-context-manager';
-import { NotebookViewModel } from '../view-model/notebook-view-model';
+import { NotebookCommands, NotebookMenus } from '../contributions/notebook-actions-contribution.js';
+import { NotebookCellActionContribution } from '../contributions/notebook-cell-actions-contribution.js';
+import { NotebookContextManager } from '../service/notebook-context-manager.js';
+import { NotebookViewModel } from '../view-model/notebook-view-model.js';
 
-export interface CellRenderer {
+export type CellRenderer = {
     render(notebookData: NotebookModel, cell: NotebookCellModel, index: number): React.ReactNode
     renderSidebar(notebookModel: NotebookModel, cell: NotebookCellModel): React.ReactNode
     renderDragImage(cell: NotebookCellModel): HTMLElement
@@ -40,7 +40,7 @@ export function observeCellHeight(ref: HTMLDivElement | null, cell: NotebookCell
     }
 }
 
-interface CellListProps {
+type CellListProps = {
     renderers: Map<CellKind, CellRenderer>;
     notebookModel: NotebookModel;
     notebookViewModel: NotebookViewModel;
@@ -50,7 +50,7 @@ interface CellListProps {
     menuRegistry: MenuModelRegistry;
 }
 
-interface NotebookCellListState {
+type NotebookCellListState = {
     selectedCell?: NotebookCellModel;
     scrollIntoView: boolean;
     dragOverIndicator: { cell: NotebookCellModel, position: 'top' | 'bottom' } | undefined;
@@ -277,7 +277,7 @@ export class NotebookCellListView extends React.Component<CellListProps, Noteboo
 
 }
 
-export interface NotebookCellDividerProps {
+export type NotebookCellDividerProps = {
     isVisible: () => boolean;
     onAddNewCell: (createCommand: (...args: unknown[]) => void) => void;
     onDrop: (event: React.DragEvent<HTMLLIElement>) => void;

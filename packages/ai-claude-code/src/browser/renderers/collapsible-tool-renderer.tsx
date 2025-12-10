@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { codicon } from '@theia/core/lib/browser';
-import * as React from '@theia/core/shared/react';
-import { ReactNode } from '@theia/core/shared/react';
+import { codicon } from '@theia/core/lib/browser/index.js';
+import * as React from 'react';
+import { ReactNode } from 'react';
 
-interface CollapsibleToolRendererProps {
+type CollapsibleToolRendererProps = {
     compactHeader: ReactNode;
     expandedContent?: ReactNode;
     onHeaderClick?: () => void;

@@ -33,7 +33,7 @@ describe('Undo, Redo and Select All', function () {
     const { MonacoEditor } = require('@theia/monaco/lib/browser/monaco-editor');
     const { ScmContribution } = require('@theia/scm/lib/browser/scm-contribution');
     const { Range } = require('@theia/monaco-editor-core/esm/vs/editor/common/core/range');
-    const { PreferenceService, PreferenceScope } = require('@theia/core/lib/browser');
+    const { PreferenceService, PreferenceScope } = require('@theia/core/lib/browser/index.js');
 
     const container = window.theia.container;
     const editorManager = container.get(EditorManager);

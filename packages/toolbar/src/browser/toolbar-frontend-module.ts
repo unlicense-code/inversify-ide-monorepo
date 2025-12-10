@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import '../../src/browser/style/toolbar.css';
-import { ContainerModule, interfaces } from '@theia/core/shared/inversify';
-import { bindToolbarApplicationShell } from './application-shell-with-toolbar-override';
-import { bindToolbar } from './toolbar-command-contribution';
-import { bindToolbarContentHoverWidgetPatcher } from './toolbar-content-hover-widget-patcher';
+import { ContainerModule, interfaces } from 'inversify';
+import { bindToolbarApplicationShell } from './application-shell-with-toolbar-override.js';
+import { bindToolbar } from './toolbar-command-contribution.js';
+import { bindToolbarContentHoverWidgetPatcher } from './toolbar-content-hover-widget-patcher.js';
 
 export default new ContainerModule((
     bind: interfaces.Bind,

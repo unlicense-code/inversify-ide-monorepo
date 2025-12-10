@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { ITheme } from 'xterm';
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { ColorRegistry } from '@theia/core/lib/browser/color-registry';
-import { ThemeService } from '@theia/core/lib/browser/theming';
-import { ThemeChangeEvent } from '@theia/core/lib/common/theme';
+import { injectable, inject } from 'inversify';
+import { ColorRegistry } from '@theia/core/lib/browser/color-registry.js';
+import { ThemeService } from '@theia/core/lib/browser/theming.js';
+import { ThemeChangeEvent } from '@theia/core/lib/common/theme.js';
 import { Event } from '@theia/core';
-import { terminalAnsiColorMap } from '../common/terminal-preferences';
+import { terminalAnsiColorMap } from '../common/terminal-preferences.js';
 
 @injectable()
 export class TerminalThemeService {

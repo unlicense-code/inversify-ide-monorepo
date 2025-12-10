@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,17 +19,17 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { Event, Emitter, nls } from '@theia/core/lib/common';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
+import { inject, injectable, postConstruct } from 'inversify';
+import { Event, Emitter, nls } from '@theia/core/lib/common/index.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
 import {
     ApplyToKind, FileLocationKind, NamedProblemMatcher,
     ProblemPattern, ProblemMatcher, ProblemMatcherContribution, WatchingMatcher,
     fromVariableName
-} from '../common';
-import { ProblemPatternRegistry } from './task-problem-pattern-registry';
-import { Severity } from '@theia/core/lib/common/severity';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+} from '../common/index.js';
+import { ProblemPatternRegistry } from './task-problem-pattern-registry.js';
+import { Severity } from '@theia/core/lib/common/severity.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
 
 @injectable()
 export class ProblemMatcherRegistry {

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,17 +18,17 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import { CellExecution, NotebookExecutionStateService } from '../service/notebook-execution-state-service';
-import { CellKind, NotebookCellExecutionState } from '../../common';
-import { NotebookCellModel } from '../view-model/notebook-cell-model';
-import { NotebookModel } from '../view-model/notebook-model';
-import { NotebookKernelService } from './notebook-kernel-service';
+import { inject, injectable, named } from 'inversify';
+import { CellExecution, NotebookExecutionStateService } from '../service/notebook-execution-state-service.js';
+import { CellKind, NotebookCellExecutionState } from '../../common/index.js';
+import { NotebookCellModel } from '../view-model/notebook-cell-model.js';
+import { NotebookModel } from '../view-model/notebook-model.js';
+import { NotebookKernelService } from './notebook-kernel-service.js';
 import { CommandService, Disposable, ILogger } from '@theia/core';
-import { NotebookKernelQuickPickService } from './notebook-kernel-quick-pick-service';
-import { NotebookKernelHistoryService } from './notebook-kernel-history-service';
+import { NotebookKernelQuickPickService } from './notebook-kernel-quick-pick-service.js';
+import { NotebookKernelHistoryService } from './notebook-kernel-history-service.js';
 
-export interface CellExecutionParticipant {
+export type CellExecutionParticipant = {
     onWillExecuteCell(executions: CellExecution[]): Promise<void>;
 }
 

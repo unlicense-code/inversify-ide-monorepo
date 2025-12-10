@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { ContributionProvider, Prioritizeable } from '@theia/core';
-import { inject, injectable, named, postConstruct } from '@theia/core/shared/inversify';
-import { EmptyPropertyViewWidgetProvider } from './empty-property-view-widget-provider';
-import { PropertyViewWidgetProvider } from './property-view-widget-provider';
+import { inject, injectable, named, postConstruct } from 'inversify';
+import { EmptyPropertyViewWidgetProvider } from './empty-property-view-widget-provider.js';
+import { PropertyViewWidgetProvider } from './property-view-widget-provider.js';
 
 /**
  * `PropertyViewService` provides an access to existing property view widget providers.

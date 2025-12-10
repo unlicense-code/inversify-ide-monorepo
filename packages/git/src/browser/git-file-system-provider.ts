@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import { Event, URI, Disposable } from '@theia/core';
 import {
     FileChange,
@@ -26,9 +26,9 @@ import {
     FileWriteOptions,
     Stat,
     WatchOptions
-} from '@theia/filesystem/lib/common/files';
-import { GitResourceResolver } from './git-resource-resolver';
-import { EncodingService } from '@theia/core/lib/common/encoding-service';
+} from '@theia/filesystem/lib/common/files.js';
+import { GitResourceResolver } from './git-resource-resolver.js';
+import { EncodingService } from '@theia/core/lib/common/encoding-service.js';
 
 @injectable()
 export class GitFileSystemProvider implements FileSystemProvider {

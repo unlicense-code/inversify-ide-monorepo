@@ -26,12 +26,12 @@ import {
     TabBar,
     Title,
     Widget
-} from '@theia/core/lib/browser';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { ApplicationShellMouseTracker } from '@theia/core/lib/browser/shell/application-shell-mouse-tracker';
-import { CommandService } from '@theia/core/lib/common/command';
-import TheiaURI from '@theia/core/lib/common/uri';
-import { EditorManager, EditorCommands } from '@theia/editor/lib/browser';
+} from '@theia/core/lib/browser/index.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { ApplicationShellMouseTracker } from '@theia/core/lib/browser/shell/application-shell-mouse-tracker.js';
+import { CommandService } from '@theia/core';
+import TheiaURI from '@theia/core/lib/common/uri.js';
+import { EditorManager, EditorCommands } from '@theia/editor/lib/browser/index.js';
 import {
     TextDocumentShowOptions,
     Location,
@@ -43,48 +43,48 @@ import {
     TextEdit,
     FormattingOptions,
     DocumentHighlight
-} from '@theia/plugin-ext/lib/common/plugin-api-rpc-model';
-import { DocumentsMainImpl } from '@theia/plugin-ext/lib/main/browser/documents-main';
-import { isUriComponents, toMergedSymbol, toPosition } from '@theia/plugin-ext/lib/plugin/type-converters';
-import { ViewColumn } from '@theia/plugin-ext/lib/plugin/types-impl';
-import { WorkspaceCommands } from '@theia/workspace/lib/browser';
-import { WorkspaceService, WorkspaceInput } from '@theia/workspace/lib/browser/workspace-service';
-import { DiffService } from '@theia/workspace/lib/browser/diff-service';
-import { inject, injectable, optional } from '@theia/core/shared/inversify';
-import { Position } from '@theia/plugin-ext/lib/common/plugin-api-rpc';
-import { URI } from '@theia/core/shared/vscode-uri';
-import { PluginDeployOptions, PluginIdentifiers, PluginServer } from '@theia/plugin-ext/lib/common/plugin-protocol';
-import { TerminalFrontendContribution } from '@theia/terminal/lib/browser/terminal-frontend-contribution';
-import { QuickOpenWorkspace } from '@theia/workspace/lib/browser/quick-open-workspace';
-import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
+} from '@theia/plugin-ext/lib/common/plugin-api-rpc-model.js';
+import { DocumentsMainImpl } from '@theia/plugin-ext/lib/main/browser/documents-main.js';
+import { isUriComponents, toMergedSymbol, toPosition } from '@theia/plugin-ext/lib/plugin/type-converters.js';
+import { ViewColumn } from '@theia/plugin-ext/lib/plugin/types-impl.js';
+import { WorkspaceCommands } from '@theia/workspace/lib/browser/index.js';
+import { WorkspaceService, WorkspaceInput } from '@theia/workspace/lib/browser/workspace-service.js';
+import { DiffService } from '@theia/workspace/lib/browser/diff-service.js';
+import { inject, injectable, optional } from 'inversify';
+import { Position } from '@theia/plugin-ext/lib/common/plugin-api-rpc.js';
+import { URI } from 'vscode-uri';
+import { PluginDeployOptions, PluginIdentifiers, PluginServer } from '@theia/plugin-ext/lib/common/plugin-protocol.js';
+import { TerminalFrontendContribution } from '@theia/terminal/lib/browser/terminal-frontend-contribution.js';
+import { QuickOpenWorkspace } from '@theia/workspace/lib/browser/quick-open-workspace.js';
+import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service.js';
 import {
     FileNavigatorCommands,
     FILE_NAVIGATOR_TOGGLE_COMMAND_ID
-} from '@theia/navigator/lib/browser/navigator-contribution';
+} from '@theia/navigator/lib/browser/navigator-contribution.js';
 import { FILE_NAVIGATOR_ID, FileNavigatorWidget } from '@theia/navigator/lib/browser';
-import { SelectableTreeNode } from '@theia/core/lib/browser/tree/tree-selection';
-import { UriComponents } from '@theia/plugin-ext/lib/common/uri-components';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
+import { SelectableTreeNode } from '@theia/core/lib/browser/tree/tree-selection.js';
+import { UriComponents } from '@theia/plugin-ext/lib/common/uri-components.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
 import { CallHierarchyServiceProvider, CallHierarchyService } from '@theia/callhierarchy/lib/browser';
 import { TypeHierarchyServiceProvider, TypeHierarchyService } from '@theia/typehierarchy/lib/browser';
-import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service';
+import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service.js';
 import {
     fromCallHierarchyCalleeToModelCallHierarchyOutgoingCall,
     fromCallHierarchyCallerToModelCallHierarchyIncomingCall,
     fromItemHierarchyDefinition,
     toItemHierarchyDefinition
-} from '@theia/plugin-ext/lib/main/browser/hierarchy/hierarchy-types-converters';
-import { CustomEditorOpener } from '@theia/plugin-ext/lib/main/browser/custom-editors/custom-editor-opener';
-import { nls } from '@theia/core/lib/common/nls';
-import { WindowService } from '@theia/core/lib/browser/window/window-service';
+} from '@theia/plugin-ext/lib/main/browser/hierarchy/hierarchy-types-converters.js';
+import { CustomEditorOpener } from '@theia/plugin-ext/lib/main/browser/custom-editors/custom-editor-opener.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { WindowService } from '@theia/core/lib/browser/window/window-service.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { VSCodeExtensionUri } from '../common/plugin-vscode-uri';
-import { CodeEditorWidgetUtil } from '@theia/plugin-ext/lib/main/browser/menus/vscode-theia-menu-mappings';
-import { OutlineViewContribution } from '@theia/outline-view/lib/browser/outline-view-contribution';
+import { VSCodeExtensionUri } from '../common/plugin-vscode-uri.js';
+import { CodeEditorWidgetUtil } from '@theia/plugin-ext/lib/main/browser/menus/vscode-theia-menu-mappings.js';
+import { OutlineViewContribution } from '@theia/outline-view/lib/browser/outline-view-contribution.js';
 import { CompletionList, Range, Position as PluginPosition } from '@theia/plugin';
-import { MonacoLanguages } from '@theia/monaco/lib/browser/monaco-languages';
-import { ScmContribution } from '@theia/scm/lib/browser/scm-contribution';
-import { MergeEditorOpenerOptions, MergeEditorUri } from '@theia/scm/lib/browser/merge-editor/merge-editor';
+import { MonacoLanguages } from '@theia/monaco/lib/browser/monaco-languages.js';
+import { ScmContribution } from '@theia/scm/lib/browser/scm-contribution.js';
+import { MergeEditorOpenerOptions, MergeEditorUri } from '@theia/scm/lib/browser/merge-editor/merge-editor.js';
 
 export namespace VscodeCommands {
 
@@ -125,7 +125,7 @@ export namespace VscodeCommands {
 
 // https://wicg.github.io/webusb/
 
-export interface UsbDeviceData {
+export type UsbDeviceData = {
     readonly deviceClass: number;
     readonly deviceProtocol: number;
     readonly deviceSubclass: number;
@@ -144,14 +144,14 @@ export interface UsbDeviceData {
 
 // https://wicg.github.io/serial/
 
-export interface SerialPortData {
+export type SerialPortData = {
     readonly usbVendorId?: number | undefined;
     readonly usbProductId?: number | undefined;
 }
 
 // https://wicg.github.io/webhid/
 
-export interface HidDeviceData {
+export type HidDeviceData = {
     readonly opened: boolean;
     readonly vendorId: number;
     readonly productId: number;

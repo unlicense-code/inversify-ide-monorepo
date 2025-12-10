@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { MaybePromise, Event } from '../../common';
-import { Disposable } from '../../../shared/vscode-languageserver-protocol';
-import URI from '../../common/uri';
+import { MaybePromise, Event } from '../../common/index.js';
+import { Disposable } from '../../common/disposable.js';
+import URI from '../../common/uri.js';
 
 export namespace Styles {
     export const BREADCRUMBS = 'theia-breadcrumbs';
@@ -26,8 +26,7 @@ export namespace Styles {
     export const BREADCRUMB_ITEM_HAS_POPUP = 'theia-breadcrumb-item-haspopup';
 }
 
-/** A single breadcrumb in the breadcrumbs bar. */
-export interface Breadcrumb {
+export type Breadcrumb = {
 
     /** An ID of this breadcrumb that should be unique in the breadcrumbs bar. */
     readonly id: string;
@@ -49,7 +48,7 @@ export interface Breadcrumb {
 }
 
 export const BreadcrumbsContribution = Symbol('BreadcrumbsContribution');
-export interface BreadcrumbsContribution {
+export type BreadcrumbsContribution = {
 
     /**
      * The breadcrumb type. Breadcrumbs returned by `#computeBreadcrumbs(uri)` should have this as `Breadcrumb#type`.

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,15 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, unmanaged } from '@theia/core/shared/inversify';
-import { EditorManager, TextEditor, EditorDecoration, EditorDecorationOptions, Range, Position, EditorDecorationStyle } from '@theia/editor/lib/browser';
-import { GitFileBlame } from '../../common';
+import { inject, injectable, unmanaged } from 'inversify';
+import {
+    EditorManager, TextEditor, EditorDecoration, EditorDecorationOptions,
+    Range, Position, EditorDecorationStyle
+} from '@theia/editor/lib/browser/index.js';
+import { GitFileBlame } from '../../common/index.js';
 import { Disposable, DisposableCollection, nls } from '@theia/core';
 import { DateTime } from 'luxon';
-import URI from '@theia/core/lib/common/uri';
-import { DecorationStyle } from '@theia/core/lib/browser';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { DecorationStyle } from '@theia/core/lib/browser/index.js';
 import * as monaco from '@theia/monaco-editor-core';
-import { LanguageSelector } from '@theia/monaco-editor-core/esm/vs/editor/common/languageSelector';
+import { LanguageSelector } from '@theia/monaco-editor-core/esm/vs/editor/common/languageSelector.js';
 
 @injectable()
 export class BlameDecorator implements monaco.languages.HoverProvider {
@@ -230,7 +233,7 @@ export namespace BlameDecorator {
     };
 }
 
-export interface BlameDecorations {
+export type BlameDecorations = {
     editorDecorations: EditorDecoration[]
     styles: EditorDecorationStyle[]
 }

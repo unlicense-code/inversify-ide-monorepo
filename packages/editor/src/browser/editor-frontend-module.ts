@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,30 +17,30 @@
 import '../../src/browser/style/index.css';
 import '../../src/browser/language-status/editor-language-status.css';
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { bindContributionProvider, CommandContribution, MenuContribution } from '@theia/core/lib/common';
-import { OpenHandler, WidgetFactory, FrontendApplicationContribution, KeybindingContribution, WidgetStatusBarContribution } from '@theia/core/lib/browser';
-import { VariableContribution } from '@theia/variable-resolver/lib/browser';
-import { EditorManager, EditorAccess, ActiveEditorAccess, CurrentEditorAccess, EditorSelectionResolver } from './editor-manager';
-import { EditorContribution } from './editor-contribution';
-import { EditorMenuContribution } from './editor-menu';
-import { EditorCommandContribution } from './editor-command';
-import { EditorKeybindingContribution } from './editor-keybinding';
-import { bindEditorPreferences } from '../common/editor-preferences';
-import { EditorWidgetFactory } from './editor-widget-factory';
-import { EditorNavigationContribution } from './editor-navigation-contribution';
-import { NavigationLocationUpdater } from './navigation/navigation-location-updater';
-import { NavigationLocationService } from './navigation/navigation-location-service';
-import { NavigationLocationSimilarity } from './navigation/navigation-location-similarity';
-import { EditorVariableContribution } from './editor-variable-contribution';
-import { QuickAccessContribution } from '@theia/core/lib/browser/quick-input/quick-access';
-import { QuickEditorService } from './quick-editor-service';
-import { EditorLanguageStatusService } from './language-status/editor-language-status-service';
-import { EditorLineNumberContribution } from './editor-linenumber-contribution';
-import { UndoRedoService } from './undo-redo-service';
-import { EditorLanguageQuickPickService } from './editor-language-quick-pick-service';
-import { SplitEditorContribution } from './split-editor-contribution';
-import { TextEditorSplitContribution } from './text-editor-split-contribution';
+import { ContainerModule } from 'inversify';
+import { bindContributionProvider, CommandContribution, MenuContribution } from '@theia/core/lib/common/index.js';
+import { OpenHandler, WidgetFactory, FrontendApplicationContribution, KeybindingContribution, WidgetStatusBarContribution } from '@theia/core/lib/browser/index.js';
+import { VariableContribution } from '@theia/variable-resolver/lib/browser/index.js';
+import { EditorManager, EditorAccess, ActiveEditorAccess, CurrentEditorAccess, EditorSelectionResolver } from './editor-manager.js';
+import { EditorContribution } from './editor-contribution.js';
+import { EditorMenuContribution } from './editor-menu.js';
+import { EditorCommandContribution } from './editor-command.js';
+import { EditorKeybindingContribution } from './editor-keybinding.js';
+import { bindEditorPreferences } from '../common/editor-preferences.js';
+import { EditorWidgetFactory } from './editor-widget-factory.js';
+import { EditorNavigationContribution } from './editor-navigation-contribution.js';
+import { NavigationLocationUpdater } from './navigation/navigation-location-updater.js';
+import { NavigationLocationService } from './navigation/navigation-location-service.js';
+import { NavigationLocationSimilarity } from './navigation/navigation-location-similarity.js';
+import { EditorVariableContribution } from './editor-variable-contribution.js';
+import { QuickAccessContribution } from '@theia/core/lib/browser/quick-input/quick-access.js';
+import { QuickEditorService } from './quick-editor-service.js';
+import { EditorLanguageStatusService } from './language-status/editor-language-status-service.js';
+import { EditorLineNumberContribution } from './editor-linenumber-contribution.js';
+import { UndoRedoService } from './undo-redo-service.js';
+import { EditorLanguageQuickPickService } from './editor-language-quick-pick-service.js';
+import { SplitEditorContribution } from './split-editor-contribution.js';
+import { TextEditorSplitContribution } from './text-editor-split-contribution.js';
 
 export default new ContainerModule(bind => {
     bindEditorPreferences(bind);

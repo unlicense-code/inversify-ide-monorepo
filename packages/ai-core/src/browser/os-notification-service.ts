@@ -14,14 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { nls } from '@theia/core/lib/common/nls';
+import { injectable } from 'inversify';
+import { nls } from '@theia/core/lib/common/nls.js'
 import { environment } from '@theia/core';
 
-/**
- * Configuration options for OS notifications
- */
-export interface OSNotificationOptions {
+export type OSNotificationOptions = {
     /** The notification body text */
     body?: string;
     /** Icon to display with the notification */
@@ -36,10 +33,7 @@ export interface OSNotificationOptions {
     data?: unknown;
 }
 
-/**
- * Result of an OS notification attempt
- */
-export interface OSNotificationResult {
+export type OSNotificationResult = {
     /** Whether the notification was successfully shown */
     success: boolean;
     /** Error message if the notification failed */

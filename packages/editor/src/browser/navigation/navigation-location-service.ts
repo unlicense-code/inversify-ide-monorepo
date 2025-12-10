@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { OpenerService, OpenerOptions, open } from '@theia/core/lib/browser/opener-service';
-import { EditorOpenerOptions } from '../editor-manager';
-import { NavigationLocationUpdater } from './navigation-location-updater';
-import { NavigationLocationSimilarity } from './navigation-location-similarity';
-import { NavigationLocation, Range, ContentChangeLocation, RecentlyClosedEditor } from './navigation-location';
-import URI from '@theia/core/lib/common/uri';
+import { inject, injectable, named } from 'inversify';
+import { ILogger } from '@theia/core/lib/common/logger.js';
+import { OpenerService, OpenerOptions, open } from '@theia/core/lib/browser/opener-service.js';
+import { EditorOpenerOptions } from '../editor-manager.js';
+import { NavigationLocationUpdater } from './navigation-location-updater.js';
+import { NavigationLocationSimilarity } from './navigation-location-similarity.js';
+import { NavigationLocation, Range, ContentChangeLocation, RecentlyClosedEditor } from './navigation-location.js';
+import { URI } from '@theia/core/lib/common/uri.js';
 
 /**
  * The navigation location service.

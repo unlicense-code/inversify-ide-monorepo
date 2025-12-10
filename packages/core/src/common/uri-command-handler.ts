@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,13 +16,13 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { SelectionService } from '../common/selection-service';
-import { UriSelection } from '../common/selection';
-import { CommandHandler } from './command';
-import URI from './uri';
-import { isArray, MaybeArray } from './types';
+import { SelectionService } from '../common/selection-service.js';
+import { UriSelection } from '../common/selection.js';
+import { CommandHandler } from './command.js';
+import URI from './uri.js';
+import { isArray, MaybeArray } from './types.js';
 
-export interface UriCommandHandler<T extends MaybeArray<URI>> extends CommandHandler {
+export type UriCommandHandler<T extends MaybeArray<URI>> = CommandHandler & {
 
     execute(uri: T, ...args: any[]): any;
 
@@ -32,17 +32,11 @@ export interface UriCommandHandler<T extends MaybeArray<URI>> extends CommandHan
 
 }
 
-/**
- * Handler for a single URI-based selection.
- */
-export interface SingleUriCommandHandler extends UriCommandHandler<URI> {
+export type SingleUriCommandHandler = UriCommandHandler<URI> & {
 
 }
 
-/**
- * Handler for multiple URIs.
- */
-export interface MultiUriCommandHandler extends UriCommandHandler<URI[]> {
+export type MultiUriCommandHandler = UriCommandHandler<URI[]> & {
 
 }
 

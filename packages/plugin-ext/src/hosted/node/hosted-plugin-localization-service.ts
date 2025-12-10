@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,18 +15,18 @@
 // *****************************************************************************
 
 import * as path from 'path';
-import * as fs from '@theia/core/shared/fs-extra';
-import { LazyLocalization, LocalizationProvider } from '@theia/core/lib/node/i18n/localization-provider';
-import { Localization } from '@theia/core/lib/common/i18n/localization';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { DeployedPlugin, Localization as PluginLocalization, PluginIdentifiers, Translation } from '../../common';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
-import { BackendApplicationContribution } from '@theia/core/lib/node';
+import * as fs from 'fs-extra';
+import { LazyLocalization, LocalizationProvider } from '@theia/core/lib/node/i18n/localization-provider.js';
+import { Localization } from '@theia/core/lib/common/i18n/localization.js';
+import { inject, injectable } from 'inversify';
+import { DeployedPlugin, Localization as PluginLocalization, PluginIdentifiers, Translation } from '../../common/index.js';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
+import { BackendApplicationContribution } from '@theia/core/lib/node/index.js';
 import { Disposable, DisposableCollection, isObject, MaybePromise, nls, Path, URI } from '@theia/core';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { LanguagePackBundle, LanguagePackService } from '../../common/language-pack-service';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { LanguagePackBundle, LanguagePackService } from '../../common/language-pack-service.js';
 
-export interface VSCodeNlsConfig {
+export type VSCodeNlsConfig = {
     locale: string
     availableLanguages: Record<string, string>
     _languagePackSupport?: boolean
@@ -329,7 +329,7 @@ function buildTranslationKey(pluginId: string, scope: string, key: string): stri
 // Extensions can use `package.nls.json` files to store translations for values in their package.json
 // This logic has not changed with the introduction of the vscode.l10n API
 
-interface PackageTranslation {
+type PackageTranslation = {
     translation?: Record<string, string>
     default?: Record<string, string>
 }
@@ -355,7 +355,7 @@ async function loadPackageTranslations(pluginPath: string, locale: string): Prom
     }
 }
 
-interface LocalizeInfo {
+type LocalizeInfo = {
     message: string
     comment?: string
 }

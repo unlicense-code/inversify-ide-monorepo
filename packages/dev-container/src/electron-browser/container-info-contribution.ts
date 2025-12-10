@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 Typefox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { WindowTitleContribution } from '@theia/core/lib/browser/window/window-title-service';
-import { RemoteStatus, RemoteStatusService } from '@theia/remote/lib/electron-common/remote-status-service';
-import { FrontendApplicationContribution, LabelProviderContribution } from '@theia/core/lib/browser';
+import { inject, injectable } from 'inversify';
+import { WindowTitleContribution } from '@theia/core/lib/browser/window/window-title-service.js';
+import { RemoteStatus, RemoteStatusService } from '@theia/remote/lib/electron-common/remote-status-service.js';
+import { FrontendApplicationContribution, LabelProviderContribution } from '@theia/core/lib/browser/index.js';
 import type { ContainerInspectInfo } from 'dockerode';
-import { RemoteContainerConnectionProvider } from '../electron-common/remote-container-connection-provider';
-import { PortForwardingService } from '@theia/remote/lib/electron-browser/port-forwarding/port-forwarding-service';
-import { DEV_CONTAINER_PATH_QUERY } from '../electron-common/dev-container-workspaces';
+import { RemoteContainerConnectionProvider } from '../electron-common/remote-container-connection-provider.js';
+import { PortForwardingService } from '@theia/remote/lib/electron-browser/port-forwarding/port-forwarding-service.js';
+import { DEV_CONTAINER_PATH_QUERY } from '../electron-common/dev-container-workspaces.js';
 import { URI } from '@theia/core';
 
 @injectable()

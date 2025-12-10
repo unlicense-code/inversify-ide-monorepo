@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { ArrayUtils, Disposable, Emitter, Event, nls, URI } from '@theia/core';
-import { SerializableChangeSetElement } from './chat-model-serialization';
+import { SerializableChangeSetElement } from './chat-model-serialization.js';
 
-export interface ChangeSetElement {
+export type ChangeSetElement = {
     readonly uri: URI;
 
     onDidChange?: Event<void>
@@ -47,13 +47,13 @@ export interface ChangeSetElement {
     toSerializable?(): SerializableChangeSetElement;
 }
 
-export interface ChatUpdateChangeSetEvent {
+export type ChatUpdateChangeSetEvent = {
     kind: 'updateChangeSet';
     elements?: ChangeSetElement[];
     title?: string;
 }
 
-export interface ChangeSetChangeEvent {
+export type ChangeSetChangeEvent = {
     title?: string;
     added?: URI[],
     removed?: URI[],
@@ -62,7 +62,7 @@ export interface ChangeSetChangeEvent {
     state?: URI[],
 }
 
-export interface ChangeSet extends Disposable {
+export type ChangeSet = Disposable & {
     onDidChange: Event<ChatUpdateChangeSetEvent>;
     readonly title: string;
     setTitle(title: string): void;

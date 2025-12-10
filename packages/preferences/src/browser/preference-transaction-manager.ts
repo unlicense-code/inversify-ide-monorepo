@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,16 +15,16 @@
 // *****************************************************************************
 
 import { CancellationError, Listener, ListenerList, MaybePromise, MessageService, nls } from '@theia/core';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { inject, injectable, interfaces, postConstruct } from '@theia/core/shared/inversify';
-import { PreferenceScope } from '@theia/core/lib/common/preferences/preference-scope';
-import URI from '@theia/core/lib/common/uri';
-import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { inject, injectable, interfaces, postConstruct } from 'inversify';
+import { PreferenceScope } from '@theia/core/lib/common/preferences/preference-scope.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model.js';
 import { Mutex, MutexInterface } from 'async-mutex';
-import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service';
-import { MonacoJSONCEditor } from './monaco-jsonc-editor';
-import { EditorManager } from '@theia/editor/lib/browser/editor-manager';
-import { IReference } from '@theia/monaco-editor-core/esm/vs/base/common/lifecycle';
+import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service.js';
+import { MonacoJSONCEditor } from './monaco-jsonc-editor.js';
+import { EditorManager } from '@theia/editor/lib/browser/editor-manager.js';
+import { IReference } from '@theia/monaco-editor-core/esm/vs/base/common/lifecycle.js';
 
 @injectable()
 /**
@@ -168,7 +168,7 @@ export abstract class Transaction<Arguments extends unknown[], Result = unknown,
     protected abstract tearDown(): MaybePromise<Result>;
 }
 
-export interface PreferenceContext {
+export type PreferenceContext = {
     getConfigUri(): URI;
     getScope(): PreferenceScope;
 }
@@ -267,7 +267,7 @@ export class PreferenceTransaction extends Transaction<[string, string[], unknow
     }
 }
 
-export interface PreferenceTransactionFactory {
+export type PreferenceTransactionFactory = {
     (context: PreferenceContext, waitFor?: Promise<unknown>): PreferenceTransaction;
 }
 export const PreferenceTransactionFactory = Symbol('PreferenceTransactionFactory');

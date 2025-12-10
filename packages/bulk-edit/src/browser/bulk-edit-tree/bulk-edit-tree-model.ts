@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { BulkEditNode, BulkEditTree } from './bulk-edit-tree';
-import { TreeModelImpl, OpenerService, open, TreeNode } from '@theia/core/lib/browser';
-import { ResourceEdit } from '@theia/monaco-editor-core/esm/vs/editor/browser/services/bulkEditService';
+import { injectable, inject } from 'inversify';
+import { BulkEditNode, BulkEditTree } from './bulk-edit-tree.js';
+import { TreeModelImpl, OpenerService, open, TreeNode } from '@theia/core/lib/browser/index.js';
+import { ResourceEdit } from '@theia/monaco-editor-core/esm/vs/editor/browser/services/bulkEditService.js';
 
 @injectable()
 export class BulkEditTreeModel extends TreeModelImpl {
-    @inject(BulkEditTree) protected override readonly tree: BulkEditTree;
+    @inject(BulkEditTree) protected declare readonly tree: BulkEditTree;
     @inject(OpenerService) protected readonly openerService: OpenerService;
 
     protected override doOpenNode(node: TreeNode): void {

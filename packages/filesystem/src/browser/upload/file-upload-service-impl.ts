@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,24 +16,24 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { CancellationTokenSource, CancellationToken, checkCancelled, cancelled, isCancelled } from '@theia/core/lib/common/cancellation';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { MessageService } from '@theia/core/lib/common/message-service';
-import { Progress } from '@theia/core/lib/common/message-service-protocol';
-import { Endpoint } from '@theia/core/lib/browser/endpoint';
-import throttle = require('@theia/core/shared/lodash.throttle');
-import { HTTP_FILE_UPLOAD_PATH } from '../../common/file-upload';
+import { injectable, inject, postConstruct } from 'inversify';
+import { URI } from '@theia/core';
+import { CancellationTokenSource, CancellationToken, checkCancelled, cancelled, isCancelled } from '@theia/core';
+import { Deferred } from '@theia/core';
+import { MessageService } from '@theia/core';
+import { Progress } from '@theia/core';
+import { Endpoint } from '@theia/core/lib/browser/endpoint.js';
+import throttle from 'lodash.throttle';
+import { HTTP_FILE_UPLOAD_PATH } from '../../common/file-upload.js';
 import { Semaphore } from 'async-mutex';
-import { FileSystemPreferences } from '../../common/filesystem-preferences';
-import { FileService } from '../file-service';
-import { ConfirmDialog, Dialog } from '@theia/core/lib/browser';
-import { nls } from '@theia/core/lib/common/nls';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import type { CustomDataTransfer, FileUploadService } from '../../common/upload/file-upload';
+import { FileSystemPreferences } from '../../common/filesystem-preferences.js';
+import { FileService } from '../file-service.js';
+import { ConfirmDialog, Dialog } from '@theia/core/lib/browser/index.js';
+import { nls } from '@theia/core';
+import { Emitter, Event } from '@theia/core/lib/common/index.js';
+import type { CustomDataTransfer, FileUploadService } from '../../common/upload/file-upload.js';
 
-interface UploadFilesParams {
+type UploadFilesParams = {
     source: FileUploadService.Source,
     progress: Progress,
     token: CancellationToken,

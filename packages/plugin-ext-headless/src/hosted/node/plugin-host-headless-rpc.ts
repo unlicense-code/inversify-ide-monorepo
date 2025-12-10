@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { dynamicRequire } from '@theia/core/lib/node/dynamic-require';
-import { ContainerModule, injectable, inject } from '@theia/core/shared/inversify';
-import { EnvExtImpl } from '@theia/plugin-ext/lib/plugin/env';
+import { dynamicRequire } from '@theia/core/lib/node/dynamic-require.js';
+import { ContainerModule, injectable, inject } from 'inversify';
+import { EnvExtImpl } from '@theia/plugin-ext/lib/plugin/env.js';
 import { LocalizationExt } from '@theia/plugin-ext';
-import { LocalizationExtImpl } from '@theia/plugin-ext/lib/plugin/localization-ext';
-import { HEADLESSMAIN_RPC_CONTEXT } from '../../common/headless-plugin-rpc';
-import { HeadlessPluginManagerExtImpl } from '../../plugin/headless-plugin-manager';
-import { AbstractPluginHostRPC, ExtInterfaces } from '@theia/plugin-ext/lib/hosted/node/plugin-host-rpc';
-import { PluginModel } from '@theia/plugin-ext/lib/common/plugin-protocol';
-import { ExtPluginApi, ExtPluginApiHeadlessInitializationFn } from '../../common/plugin-ext-headless-api-contribution';
+import { LocalizationExtImpl } from '@theia/plugin-ext/lib/plugin/localization-ext.js';
+import { HEADLESSMAIN_RPC_CONTEXT } from '../../common/headless-plugin-rpc.js';
+import { HeadlessPluginManagerExtImpl } from '../../plugin/headless-plugin-manager.js';
+import { AbstractPluginHostRPC, ExtInterfaces } from '@theia/plugin-ext/lib/hosted/node/plugin-host-rpc.js';
+import { PluginModel } from '@theia/plugin-ext/lib/common/plugin-protocol.js';
+import { ExtPluginApi, ExtPluginApiHeadlessInitializationFn } from '../../common/plugin-ext-headless-api-contribution.js';
 
 type HeadlessExtInterfaces = Pick<ExtInterfaces, 'envExt'|'localizationExt'>;
 
@@ -62,7 +62,7 @@ export class HeadlessPluginHostRPC extends AbstractPluginHostRPC<HeadlessPluginM
         return pluginModel.entryPoint.headless;
     }
 
-    protected initExtApi(extApi: ExtPluginApi): void {
+    protected override initExtApi(extApi: ExtPluginApi): void {
         interface PluginExports {
             containerModule?: ContainerModule;
             provideApi?: ExtPluginApiHeadlessInitializationFn;

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017-2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Container } from '@theia/core/shared/inversify';
+import { Container } from 'inversify';
 import { ILogger, isWindows } from '@theia/core';
-import { FileUri } from '@theia/core/lib/common/file-uri';
-import { MockLogger } from '@theia/core/lib/common/test/mock-logger';
-import { RawProcessFactory, RawProcessOptions, RawProcess, ProcessManager } from '@theia/process/lib/node';
-import { RipgrepSearchInWorkspaceServer, RgPath } from './ripgrep-search-in-workspace-server';
-import { SearchInWorkspaceClient, SearchInWorkspaceResult } from '../common/search-in-workspace-interface';
+import { FileUri } from '@theia/core/lib/common/file-uri.js';
+import { MockLogger } from '@theia/core/lib/common/test/mock-logger.js';
+import { RawProcessFactory, RawProcessOptions, RawProcess, ProcessManager } from '@theia/process/lib/node/index.js';
+import { RipgrepSearchInWorkspaceServer, RgPath } from './ripgrep-search-in-workspace-server.js';
+import { SearchInWorkspaceClient, SearchInWorkspaceResult } from '../common/search-in-workspace-interface.js';
 import * as path from 'path';
 import * as temp from 'temp';
 import * as fs from 'fs';
@@ -226,7 +226,7 @@ after(() => {
     }
 });
 
-interface SearchInWorkspaceExpectation {
+type SearchInWorkspaceExpectation = {
     root: string, fileUri: string, line: number, character: number, length: number, lineText: string
 }
 

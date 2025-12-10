@@ -20,7 +20,7 @@ import * as path from 'path';
 import { Localization, sortLocalization } from './common';
 import { deepl, DeeplLanguage, DeeplParameters, defaultLanguages, isSupportedLanguage } from './deepl-api';
 
-export interface LocalizationOptions {
+export type LocalizationOptions = {
     freeApi: Boolean
     authKey: string
     sourceFile: string
@@ -162,7 +162,7 @@ export class LocalizationManager {
     }
 }
 
-export interface LocalizationMap {
+export type LocalizationMap = {
     text: string[]
     localize: (index: number, value: string) => void
 }

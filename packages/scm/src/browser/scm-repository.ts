@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Disposable, DisposableCollection, Emitter } from '@theia/core/lib/common';
-import { ScmInput, ScmInputOptions } from './scm-input';
-import { ScmProvider } from './scm-provider';
+import { Disposable, DisposableCollection, Emitter } from '@theia/core/lib/common/index.js';
+import { ScmInput, ScmInputOptions } from './scm-input.js';
+import { ScmProvider } from './scm-provider.js';
 
-export interface ScmProviderOptions {
+export type ScmProviderOptions = {
     input?: ScmInputOptions
 }
 

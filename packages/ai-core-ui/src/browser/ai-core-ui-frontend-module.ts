@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { PreferenceContribution } from '@theia/core';
-import { AgentSettingsPreferenceSchema } from '@theia/ai-core/lib/common/agent-preferences';
-import { aiCorePreferenceSchema } from '@theia/ai-core/lib/common/ai-core-preferences';
+import { ContainerModule } from 'inversify';
+import { PreferenceContribution } from '@theia/core/lib/common/index.js';
+import { AgentSettingsPreferenceSchema } from '@theia/ai-core/lib/common/agent-preferences.js';
+import { aiCorePreferenceSchema } from '@theia/ai-core/lib/common/ai-core-preferences.js';
 
 export default new ContainerModule(bind => {
     bind(PreferenceContribution).toConstantValue({ schema: AgentSettingsPreferenceSchema });

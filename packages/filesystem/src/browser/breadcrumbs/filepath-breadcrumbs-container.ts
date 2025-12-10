@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Container, interfaces, injectable, inject } from '@theia/core/shared/inversify';
-import { TreeProps, ContextMenuRenderer, TreeNode, open, NodeProps, defaultTreeProps } from '@theia/core/lib/browser';
-import { FileTreeModel, FileStatNode, createFileTreeContainer, FileTreeWidget } from '../file-tree';
+import { interfaces, injectable, inject } from 'inversify';
+import { TreeProps, ContextMenuRenderer, TreeNode, open, NodeProps, defaultTreeProps } from '@theia/core/lib/browser/index.js';
+import { FileTreeModel, FileStatNode, createFileTreeContainer, FileTreeWidget } from '../file-tree/index.js';
 
 const BREADCRUMBS_FILETREE_CLASS = 'theia-FilepathBreadcrumbFileTree';
 
-export function createFileTreeBreadcrumbsContainer(parent: interfaces.Container): Container {
+export function createFileTreeBreadcrumbsContainer(parent: interfaces.Container) {
     const child = createFileTreeContainer(parent);
     child.unbind(FileTreeWidget);
     child.rebind(TreeProps).toConstantValue({ ...defaultTreeProps, virtualized: false });

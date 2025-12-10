@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 EclipseSource and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, postConstruct } from 'inversify';
 import {
     FileChange, FileChangeType, FileDeleteOptions,
     FileOverwriteOptions, FileSystemProviderCapabilities,
@@ -26,17 +26,55 @@ import {
     FileType, FileWriteOptions, Stat, WatchOptions, createFileSystemProviderError,
     FileOpenOptions, FileUpdateOptions, FileUpdateResult,
     type FileReadStreamOptions
-} from '../common/files';
+} from '../common/files.js';
 import { Emitter, Event, URI, Disposable, DisposableCollection, type CancellationToken } from '@theia/core';
-import { EncodingService } from '@theia/core/lib/common/encoding-service';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
-import { TextDocumentContentChangeEvent } from '@theia/core/shared/vscode-languageserver-protocol';
+import { EncodingService } from '@theia/core';
+import { BinaryBuffer } from '@theia/core';
+import { TextDocumentContentChangeEvent } from 'vscode-languageserver-protocol';
 import { TextDocument } from 'vscode-languageserver-textdocument';
-import { OPFSFileSystem, WatchEventType, type FileStat, type OPFSError, type WatchEvent } from 'opfs-worker';
-import { OPFSInitialization } from './opfs-filesystem-initialization';
-import { ReadableStreamEvents, newWriteableStream } from '@theia/core/lib/common/stream';
-import { readFileIntoStream } from '../common/io';
-import { FileUri } from '@theia/core/lib/common/file-uri';
+// TypeScript with NodeNext doesn't resolve re-exports properly from opfs-worker
+// We'll use createWorker instead of new OPFSFileSystem() and define types locally
+import { createWorker } from 'opfs-worker';
+// Define types locally based on opfs-worker's type definitions
+type FileStat = {
+    kind: 'file' | 'directory';
+    size: number;
+    mtime: string;
+    ctime: string;
+    isFile: boolean;
+    isDirectory: boolean;
+    hash?: string;
+};
+type DirentData = {
+    name: string;
+    kind: 'file' | 'directory';
+    isFile: boolean;
+    isDirectory: boolean;
+};
+type WatchEvent = {
+    namespace: string;
+    path: string;
+    type: 'added' | 'changed' | 'removed';
+    isDirectory: boolean;
+    timestamp: string;
+    hash?: string;
+};
+enum WatchEventType {
+    Added = 'added',
+    Changed = 'changed',
+    Removed = 'removed'
+}
+type OPFSError = Error & {
+    errno: number;
+    syscall?: string;
+    path?: string;
+};
+// Get the instance type from createWorker
+type OPFSFileSystem = Awaited<ReturnType<typeof createWorker>>;
+import { OPFSInitialization } from './opfs-filesystem-initialization.js';
+import { ReadableStreamEvents, newWriteableStream } from '@theia/core';
+import { readFileIntoStream } from '../common/io.js';
+import { FileUri } from '@theia/core/lib/node/index.js';
 
 @injectable()
 export class OPFSFileSystemProvider implements Disposable,
@@ -84,8 +122,9 @@ export class OPFSFileSystemProvider implements Disposable,
             // Set up file change listening via BroadcastChannel
             broadcastChannel.onmessage = this.handleFileSystemChange.bind(this);
 
-            // Initialize the file system
-            this.fs = new OPFSFileSystem({
+            // Initialize the file system using createWorker instead of new OPFSFileSystem()
+            // (TypeScript with NodeNext doesn't resolve the re-export properly)
+            this.fs = await createWorker({
                 root,
                 broadcastChannel,
                 hashAlgorithm: false,
@@ -229,7 +268,7 @@ export class OPFSFileSystemProvider implements Disposable,
             const path = formatPath(resource);
             const entries = await this.fs.readDir(path);
 
-            return entries.map(entry => [
+            return entries.map((entry: DirentData) => [
                 entry.name,
                 entry.isFile ? FileType.File : FileType.Directory
             ]);
@@ -323,9 +362,9 @@ export class OPFSFileSystemProvider implements Disposable,
      * Reads file content as a stream
      */
     readFileStream(resource: URI, opts: FileReadStreamOptions, token: CancellationToken): ReadableStreamEvents<Uint8Array> {
-        const stream = newWriteableStream<Uint8Array>(chunks => BinaryBuffer.concat(chunks.map(chunk => BinaryBuffer.wrap(chunk))).buffer);
+        const stream = newWriteableStream<Uint8Array>((chunks: Uint8Array[]) => BinaryBuffer.concat(chunks.map((chunk: Uint8Array) => BinaryBuffer.wrap(chunk))).buffer);
 
-        readFileIntoStream(this, resource, stream, data => data.buffer, {
+        readFileIntoStream(this, resource, stream, (data: BinaryBuffer) => data.buffer, {
             ...opts,
             bufferSize: this.BUFFER_SIZE
         }, token);

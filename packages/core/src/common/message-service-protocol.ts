@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { injectable } from 'inversify';
-import { CancellationToken } from './cancellation';
-import { nls } from './nls';
+import { CancellationToken } from './cancellation.js';
+import { nls } from './nls.js';
 
 export const messageServicePath = '/services/messageService';
 
@@ -28,7 +28,7 @@ export enum MessageType {
     Progress = 5
 }
 
-export interface Message {
+export type Message = {
     /**
      * Type of the message, i.e. error, warning, info, etc.
      */
@@ -48,7 +48,7 @@ export interface Message {
     readonly source?: string;
 }
 
-export interface ProgressMessage extends Message {
+export type ProgressMessage = Message & {
     readonly type?: MessageType.Progress;
     readonly options?: ProgressMessageOptions;
 }
@@ -59,7 +59,7 @@ export namespace ProgressMessage {
     }
 }
 
-export interface MessageOptions {
+export type MessageOptions = {
     /**
      * Timeout in milliseconds.
      * `0` and negative values are treated as no timeout.
@@ -67,7 +67,7 @@ export interface MessageOptions {
     readonly timeout?: number;
 }
 
-export interface ProgressMessageOptions extends MessageOptions {
+export type ProgressMessageOptions = MessageOptions & {
     /**
      * Default: `false`
      */
@@ -78,7 +78,7 @@ export interface ProgressMessageOptions extends MessageOptions {
     readonly location?: string;
 }
 
-export interface Progress {
+export type Progress = {
     /**
      * Unique progress id.
      */
@@ -101,7 +101,7 @@ export interface Progress {
     readonly result: Promise<string | undefined>;
 }
 
-export interface ProgressUpdate {
+export type ProgressUpdate = {
     /**
      * Updated message for the progress.
      */

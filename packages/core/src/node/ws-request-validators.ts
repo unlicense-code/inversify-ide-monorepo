@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,13 +16,13 @@
 
 import { inject, injectable, named } from 'inversify';
 import * as http from 'http';
-import { ContributionProvider, MaybePromise } from '../common';
+import { ContributionProvider, MaybePromise } from '../common/index.js';
 
 /**
  * Bind components to this symbol to filter WebSocket connections.
  */
 export const WsRequestValidatorContribution = Symbol('RequestValidatorContribution');
-export interface WsRequestValidatorContribution {
+export type WsRequestValidatorContribution = {
     /**
      * Return `false` to prevent the protocol upgrade from going through, blocking the WebSocket connection.
      *

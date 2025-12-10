@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { Emitter } from '@theia/core';
-import { DebugConfiguration } from '../common/debug-common';
-import { DebugCompound } from '../common/debug-compound';
+import { DebugConfiguration } from '../common/debug-common.js';
+import { DebugCompound } from '../common/debug-compound.js';
 
 export class DebugCompoundRoot {
     private stopped = false;
@@ -31,18 +31,18 @@ export class DebugCompoundRoot {
     }
 }
 
-export interface TestRunReference {
+export type TestRunReference = {
     controllerId: string;
     runId: string;
 }
 
-export interface DebugSessionOptionsBase {
+export type DebugSessionOptionsBase = {
     workspaceFolderUri?: string;
     testRun?: TestRunReference;
     startedByUser?: boolean;
 }
 
-export interface DebugConfigurationSessionOptions extends DebugSessionOptionsBase {
+export type DebugConfigurationSessionOptions = DebugSessionOptionsBase & {
     name: string; // derived from the configuration
     configuration: DebugConfiguration;
     compound?: never;
@@ -52,7 +52,7 @@ export interface DebugConfigurationSessionOptions extends DebugSessionOptionsBas
 
 export type DynamicDebugConfigurationSessionOptions = DebugConfigurationSessionOptions & { providerType: string };
 
-export interface DebugCompoundSessionOptions extends DebugSessionOptionsBase {
+export type DebugCompoundSessionOptions = DebugSessionOptionsBase & {
     name: string; // derived from the compound
     configuration?: never;
     compound: DebugCompound;

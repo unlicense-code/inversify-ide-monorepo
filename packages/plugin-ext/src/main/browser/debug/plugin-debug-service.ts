@@ -14,21 +14,21 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { DebuggerDescription, DebugPath, DebugService } from '@theia/debug/lib/common/debug-service';
-import debounce = require('@theia/core/shared/lodash.debounce');
+import { DebuggerDescription, DebugPath, DebugService } from '@theia/debug/lib/common/debug-service.js';
+import debounce from  'lodash/debounce.js'
 import { deepClone, Emitter, Event, nls } from '@theia/core';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { DebugConfiguration } from '@theia/debug/lib/common/debug-configuration';
-import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema';
-import { PluginDebugAdapterContribution } from './plugin-debug-adapter-contribution';
-import { PluginDebugConfigurationProvider } from './plugin-debug-configuration-provider';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { WebSocketConnectionProvider } from '@theia/core/lib/browser/messaging/ws-connection-provider';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { CommandIdVariables } from '@theia/variable-resolver/lib/common/variable-types';
-import { DebugConfigurationProviderTriggerKind } from '../../../common/plugin-api-rpc';
-import { DebuggerContribution } from '../../../common/plugin-protocol';
-import { DebugRequestTypes } from '@theia/debug/lib/browser/debug-session-connection';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { DebugConfiguration } from '@theia/debug/lib/common/debug-configuration.js';
+import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema.js';
+import { PluginDebugAdapterContribution } from './plugin-debug-adapter-contribution.js';
+import { PluginDebugConfigurationProvider } from './plugin-debug-configuration-provider.js';
+import { injectable, inject, postConstruct } from 'inversify';
+import { WebSocketConnectionProvider } from '@theia/core/lib/browser/messaging/ws-connection-provider.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { CommandIdVariables } from '@theia/variable-resolver/lib/common/variable-types.js';
+import { DebugConfigurationProviderTriggerKind } from '../../../common/plugin-api-rpc.js';
+import { DebuggerContribution } from '../../../common/plugin-protocol.js';
+import { DebugRequestTypes } from '@theia/debug/lib/browser/debug-session-connection.js';
 import * as theia from '@theia/plugin';
 
 /**

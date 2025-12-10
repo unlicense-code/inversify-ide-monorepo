@@ -14,13 +14,13 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { inject, injectable, interfaces, named } from '@theia/core/shared/inversify';
-import { AbstractTreeDecoratorService, TreeDecorator } from '@theia/core/lib/browser/tree/tree-decorator';
+import { inject, injectable, interfaces, named } from 'inversify';
+import { AbstractTreeDecoratorService, TreeDecorator } from '@theia/core/lib/browser/tree/tree-decorator.js';
 import { bindContributionProvider, ContributionProvider, isObject } from '@theia/core';
-import { TreeNode } from '@theia/core/lib/browser';
+import { TreeNode } from '@theia/core/lib/browser/index.js';
 import { TreeItem } from '@theia/plugin';
-import URI from '@theia/core/lib/common/uri';
-import { FileTreeDecoratorAdapter } from '@theia/filesystem/lib/browser';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { FileTreeDecoratorAdapter } from '@theia/filesystem/lib/browser/index.js';
 
 export const TreeViewDecorator = Symbol('TreeViewDecorator');
 

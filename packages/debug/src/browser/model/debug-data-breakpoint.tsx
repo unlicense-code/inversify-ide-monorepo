@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { nls } from '@theia/core';
-import * as React from '@theia/core/shared/react';
-import { BreakpointManager } from '../breakpoint/breakpoint-manager';
-import { DataBreakpoint } from '../breakpoint/breakpoint-marker';
-import { DebugBreakpoint, DebugBreakpointDecoration, DebugBreakpointOptions } from './debug-breakpoint';
+import * as React from 'react';
+import { BreakpointManager } from '../breakpoint/breakpoint-manager.js';
+import { DataBreakpoint } from '../breakpoint/breakpoint-marker.js';
+import { DebugBreakpoint, DebugBreakpointDecoration, DebugBreakpointOptions } from './debug-breakpoint.js';
 
 export class DebugDataBreakpoint extends DebugBreakpoint<DataBreakpoint> {
     constructor(readonly origin: DataBreakpoint, options: DebugBreakpointOptions) {

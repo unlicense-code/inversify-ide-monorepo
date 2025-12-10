@@ -13,13 +13,13 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { Agent, AgentService, LanguageModelService, SessionEvent } from '@theia/ai-core';
-import { LanguageModelExchange } from '@theia/ai-core/lib/common/language-model-interaction-model';
-import { codicon, ReactWidget, StatefulWidget } from '@theia/core/lib/browser';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { ExchangeCard } from './ai-history-exchange-card';
-import { SelectComponent, SelectOption } from '@theia/core/lib/browser/widgets/select-component';
+import { Agent, AgentService, LanguageModelService, SessionEvent } from '@theia/ai-core/lib/common/index.js';
+import { LanguageModelExchange } from '@theia/ai-core/lib/common/language-model-interaction-model.js';
+import { codicon, ReactWidget, StatefulWidget } from '@theia/core/lib/browser/index.js';
+import { inject, injectable, postConstruct } from 'inversify';
+import * as React from 'react';
+import { ExchangeCard } from './ai-history-exchange-card.js';
+import { SelectComponent, SelectOption } from '@theia/core/lib/browser/widgets/select-component.js';
 import { deepClone, nls } from '@theia/core';
 
 namespace AIHistoryView {

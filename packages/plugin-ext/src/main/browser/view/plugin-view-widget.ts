@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { Panel, Widget } from '@theia/core/shared/@lumino/widgets';
-import { MenuModelRegistry } from '@theia/core/lib/common/menu';
-import { CommandRegistry } from '@theia/core/lib/common/command';
-import { StatefulWidget } from '@theia/core/lib/browser/shell/shell-layout-restorer';
-import { Message } from '@theia/core/shared/@lumino/messaging';
-import { TreeViewWidget } from './tree-view-widget';
-import { DescriptionWidget, DynamicToolbarWidget } from '@theia/core/lib/browser/view-container';
-import { DisposableCollection, Emitter, Event } from '@theia/core/lib/common';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
+import { injectable, inject, postConstruct } from 'inversify';
+import { Panel, Widget } from '@lumino/widgets';
+import { MenuModelRegistry } from '@theia/core/lib/common/menu/index.js';
+import { CommandRegistry } from '@theia/core/lib/common/command.js';
+import { StatefulWidget } from '@theia/core/lib/browser/shell/shell-layout-restorer.js';
+import { Message } from '@lumino/messaging';
+import { TreeViewWidget } from './tree-view-widget.js';
+import { DescriptionWidget, DynamicToolbarWidget } from '@theia/core/lib/browser/view-container.js';
+import { DisposableCollection, Emitter, Event } from '@theia/core/lib/common/index.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
 
 @injectable()
 export class PluginViewWidgetIdentifier {

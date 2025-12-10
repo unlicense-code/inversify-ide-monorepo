@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { Emitter } from '@theia/monaco-editor-core/esm/vs/base/common/event';
-import { URI } from '@theia/monaco-editor-core/esm/vs/base/common/uri';
+import { injectable } from 'inversify';
+import { Emitter } from '@theia/monaco-editor-core/esm/vs/base/common/event.js';
+import { URI } from '@theia/monaco-editor-core/esm/vs/base/common/uri.js';
 import {
     ISingleFolderWorkspaceIdentifier,
     IWorkspace,
@@ -27,7 +27,7 @@ import {
     IWorkspaceIdentifier,
     UNKNOWN_EMPTY_WINDOW_WORKSPACE,
     WorkbenchState
-} from '@theia/monaco-editor-core/esm/vs/platform/workspace/common/workspace';
+} from '@theia/monaco-editor-core/esm/vs/platform/workspace/common/workspace.js';
 
 /**
  * A minimal implementation of {@link IWorkspaceContextService} to replace the `StandaloneWorkspaceContextService` in Monaco

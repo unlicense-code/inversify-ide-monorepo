@@ -14,17 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { TreeWidget, TreeModel, TreeProps, CompositeTreeNode, TreeNode, TreeImpl, NodeProps, SelectableTreeNode } from '@theia/core/lib/browser/tree';
-import { ContextMenuRenderer, codicon } from '@theia/core/lib/browser';
-import { IconThemeService } from '@theia/core/lib/browser/icon-theme-service';
-import { ThemeService } from '@theia/core/lib/browser/theming';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { TestController, TestExecutionState, TestFailure, TestItem, TestMessage, TestOutputItem, TestRun, TestService } from '../test-service';
-import * as React from '@theia/core/shared/react';
+import { injectable, inject, postConstruct } from 'inversify';
+import { TreeWidget, TreeModel, TreeProps, CompositeTreeNode,
+    TreeNode, TreeImpl, NodeProps, SelectableTreeNode } from '@theia/core/lib/browser/index.js';
+import { ContextMenuRenderer, codicon } from '@theia/core/lib/browser/index.js';
+import { IconThemeService } from '@theia/core/lib/browser/icon-theme-service.js';
+import { ThemeService } from '@theia/core/lib/browser/theming.js';
+import { ContextKeyService } from '@theia/core/lib/browser/context-key-service.js';
+import { TestController, TestExecutionState, TestFailure, TestItem, TestMessage, TestOutputItem,
+    TestRun, TestService } from '../test-service.js';
+import { CollectionDelta } from '../../common/tree-delta.js';
+import * as React from 'react';
 import { Disposable, DisposableCollection, Event, nls } from '@theia/core';
-import { TestExecutionStateManager } from './test-execution-state-manager';
-import { TestOutputUIModel } from './test-output-ui-model';
+import { TestExecutionStateManager } from './test-execution-state-manager.js';
+import { TestOutputUIModel } from './test-output-ui-model.js';
 
 class TestRunNode implements TreeNode, SelectableTreeNode {
     constructor(readonly counter: number, readonly id: string, readonly run: TestRun, readonly parent: CompositeTreeNode) { }
@@ -47,7 +50,7 @@ class TestItemNode implements TreeNode, SelectableTreeNode {
     }
 }
 
-interface RunInfo {
+type RunInfo = {
     node: TestRunNode;
     disposable: Disposable;
     tests: Map<TestItem, TestItemNode>;
@@ -77,7 +80,7 @@ export class TestRunTree extends TreeImpl {
             this.addController(controller);
         });
 
-        this.testService.onControllersChanged(controllerDelta => {
+        this.testService.onControllersChanged((controllerDelta: CollectionDelta<string, TestController>) => {
             controllerDelta.removed?.forEach(controller => {
                 this.controllerListeners.get(controller)?.dispose();
             });

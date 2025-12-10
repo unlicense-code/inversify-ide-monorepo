@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,16 +19,16 @@
  *--------------------------------------------------------------------------------------------*/
 // copied and modified from https://github.com/microsoft/vscode/blob/ba40bd16433d5a817bfae15f3b4350e18f144af4/src/vs/workbench/contrib/webview/common/themeing.ts
 
-import { inject, postConstruct, injectable } from '@theia/core/shared/inversify';
-import { Emitter } from '@theia/core/lib/common/event';
-import { EditorPreferences, EditorConfiguration } from '@theia/editor/lib/common/editor-preferences';
-import { ThemeService } from '@theia/core/lib/browser/theming';
-import { Theme } from '@theia/core/lib/common/theme';
-import { ColorRegistry } from '@theia/core/lib/browser/color-registry';
-import { ColorApplicationContribution } from '@theia/core/lib/browser/color-application-contribution';
+import { inject, postConstruct, injectable } from 'inversify';
+import { Emitter } from '@theia/core/lib/common/event.js';
+import { EditorPreferences, EditorConfiguration } from '@theia/editor/lib/common/editor-preferences.js';
+import { ThemeService } from '@theia/core/lib/browser/theming.js';
+import { Theme } from '@theia/core/lib/common/theme.js';
+import { ColorRegistry } from '@theia/core/lib/browser/color-registry.js';
+import { ColorApplicationContribution } from '@theia/core/lib/browser/color-application-contribution.js';
 
 export type WebviewThemeType = 'vscode-light' | 'vscode-dark' | 'vscode-high-contrast';
-export interface WebviewThemeData {
+export type WebviewThemeData = {
     readonly activeThemeName: string;
     readonly activeThemeType: WebviewThemeType;
     readonly styles: { readonly [key: string]: string | number; };

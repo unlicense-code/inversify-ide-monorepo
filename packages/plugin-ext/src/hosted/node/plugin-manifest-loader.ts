@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import * as path from 'path';
-import * as fs from '@theia/core/shared/fs-extra';
-import { PluginIdentifiers, PluginPackage } from '../../common';
-import { updateActivationEvents } from './plugin-activation-events';
+import * as fs from 'fs-extra';
+import { PluginIdentifiers, PluginPackage } from '../../common/index.js';
+import { updateActivationEvents } from './plugin-activation-events.js';
 
 export async function loadManifest(pluginPath: string): Promise<PluginPackage> {
     const manifest = await fs.readJson(path.join(pluginPath, 'package.json'));

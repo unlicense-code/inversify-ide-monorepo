@@ -18,28 +18,23 @@ import {
     CodeChatResponseContent,
 } from '@theia/ai-chat/lib/common';
 import { ContributionProvider, UntitledResourceResolver, URI } from '@theia/core';
-import { ContextMenuRenderer, TreeNode } from '@theia/core/lib/browser';
-import { ClipboardService } from '@theia/core/lib/browser/clipboard-service';
-import { inject, injectable, named } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { ReactNode } from '@theia/core/shared/react';
-import { nls } from '@theia/core/lib/common/nls';
-import { Position } from '@theia/core/shared/vscode-languageserver-protocol';
-import { EditorManager, EditorWidget } from '@theia/editor/lib/browser';
-import { SimpleMonacoEditor } from '@theia/monaco/lib/browser/simple-monaco-editor';
-import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider';
-import { MonacoLanguages } from '@theia/monaco/lib/browser/monaco-languages';
-import { ChatResponsePartRenderer } from '../chat-response-part-renderer';
-import { ChatViewTreeWidget, ResponseNode } from '../chat-tree-view/chat-view-tree-widget';
+import { ContextMenuRenderer, TreeNode } from '@theia/core/lib/browser/index.js';
+import { ClipboardService } from '@theia/core/lib/browser/clipboard-service.js';
+import { inject, injectable, named } from 'inversify';
+import * as React from 'react';
+import { ReactNode } from 'react';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { Position } from 'vscode-languageserver-protocol';
+import { EditorManager, EditorWidget } from '@theia/editor/lib/browser/index.js';
+import { SimpleMonacoEditor } from '@theia/monaco/lib/browser/simple-monaco-editor.js';
+import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider.js';
+import { MonacoLanguages } from '@theia/monaco/lib/browser/monaco-languages.js';
+import { ChatResponsePartRenderer } from '../chat-response-part-renderer.js';
+import { ChatViewTreeWidget, ResponseNode } from '../chat-tree-view/chat-view-tree-widget.js';
 import { IMouseEvent } from '@theia/monaco-editor-core';
 
 export const CodePartRendererAction = Symbol('CodePartRendererAction');
-/**
- * The CodePartRenderer offers to contribute arbitrary React nodes to the rendered code part.
- * Technically anything can be rendered, however it is intended to be used for actions, like
- * "Copy to Clipboard" or "Insert at Cursor".
- */
-export interface CodePartRendererAction {
+export type CodePartRendererAction = {
     render(response: CodeChatResponseContent, parentNode: ResponseNode): ReactNode;
     /**
      * Determines if the action should be rendered for the given response.

@@ -14,30 +14,31 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import { MaybePromise, ProgressService, URI, generateUuid, Event, EOL, nls } from '@theia/core';
-import { ChatAgent, ChatAgentLocation, ChatService, ChatSession, MutableChatModel, MutableChatRequestModel, ParsedChatRequestTextPart } from '../common';
-import { PreferenceService } from '@theia/core/lib/common';
-import { ChatSessionSummaryAgent } from '../common/chat-session-summary-agent';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { AgentService, PromptService, ResolvedPromptFragment } from '@theia/ai-core';
-import { CHAT_SESSION_SUMMARY_PROMPT } from '../common/chat-session-summary-agent-prompt';
-import { ChangeSetFileElementFactory } from './change-set-file-element';
+import { ChatAgent, ChatAgentLocation, ChatService, ChatSession, MutableChatModel,
+     MutableChatRequestModel, ParsedChatRequestTextPart } from '../common/index.js';
+import { PreferenceService } from '@theia/core/lib/common/index.js';
+import { ChatSessionSummaryAgent } from '../common/chat-session-summary-agent.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { AgentService, PromptService, ResolvedPromptFragment } from '@theia/ai-core/lib/common/index.js';
+import { CHAT_SESSION_SUMMARY_PROMPT } from '../common/chat-session-summary-agent-prompt.js';
+import { ChangeSetFileElementFactory } from './change-set-file-element.js';
 import * as yaml from 'js-yaml';
 
-export interface SummaryMetadata {
+export type SummaryMetadata = {
     label: string;
     uri?: URI;
     sessionId?: string;
 }
 
-export interface Summary extends SummaryMetadata {
+export type Summary = SummaryMetadata & {
     summary: string;
     id: string;
 }
 
 export const TaskContextStorageService = Symbol('TaskContextStorageService');
-export interface TaskContextStorageService {
+export type TaskContextStorageService = {
     onDidChange: Event<void>;
     store(summary: Summary): MaybePromise<void>;
     getAll(): Summary[];

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,23 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ApplicationShell, CommonCommands, KeybindingContribution, KeybindingRegistry, SHELL_TABBAR_CONTEXT_PIN, Widget } from '@theia/core/lib/browser';
-import { nls } from '@theia/core/lib/common/nls';
-import { Command, CommandContribution, CommandRegistry, MenuContribution, MenuModelRegistry } from '@theia/core/lib/common';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { EditorPreviewWidget } from './editor-preview-widget';
-import { CurrentWidgetCommandAdapter } from '@theia/core/lib/browser/shell/current-widget-command-adapter';
+import { 
+    ApplicationShell,
+    CommonCommands,
+    KeybindingContribution,
+    KeybindingRegistry,
+    SHELL_TABBAR_CONTEXT_PIN,
+    Widget
+ } from '@theia/core/lib/browser/index.js';
+import { nls } from '@theia/core/lib/common/nls.js';
+import { Command,
+    CommandContribution, CommandRegistry, MenuContribution, MenuModelRegistry 
+} from '@theia/core/lib/common/index.js';
+import { inject, injectable } from 'inversify';
+import { EditorPreviewWidget } from './editor-preview-widget.js';
+import { CurrentWidgetCommandAdapter 
+    
+} from '@theia/core/lib/browser/shell/current-widget-command-adapter.js';
 
 export namespace EditorPreviewCommands {
     export const PIN_PREVIEW_COMMAND = Command.toDefaultLocalizedCommand({

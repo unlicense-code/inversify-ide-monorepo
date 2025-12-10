@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,17 +16,17 @@
 
 /* eslint-disable no-unsanitized/property */
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 
 let disableJSDOM = enableJSDOM();
 
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 FrontendApplicationConfigProvider.set({});
 
 import * as chai from 'chai';
 import { expect } from 'chai';
-import URI from '@theia/core/lib/common/uri';
-import { MarkdownPreviewHandler } from './markdown-preview-handler';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { MarkdownPreviewHandler } from './markdown-preview-handler.js';
 
 disableJSDOM();
 

@@ -21,26 +21,26 @@ import type {
 
 export const CODEX_SERVICE_PATH = '/services/codex';
 
-export interface CodexRequest {
+export type CodexRequest = {
     prompt: string;
     options?: Partial<ThreadOptions>;
     sessionId?: string;
     sandboxMode?: 'read-only' | 'workspace-write' | 'danger-full-access';
 }
 
-export interface CodexBackendRequest extends CodexRequest {
+export type CodexBackendRequest = CodexRequest & {
     apiKey?: string;
     sessionId?: string;
 }
 
 export const CodexClient = Symbol('CodexClient');
-export interface CodexClient {
+export type CodexClient = {
     sendToken(streamId: string, token?: ThreadEvent): void;
     sendError(streamId: string, error: Error): void;
 }
 
 export const CodexService = Symbol('CodexService');
-export interface CodexService {
+export type CodexService = {
     send(request: CodexBackendRequest, streamId: string): Promise<void>;
     cancel(streamId: string): void;
 }

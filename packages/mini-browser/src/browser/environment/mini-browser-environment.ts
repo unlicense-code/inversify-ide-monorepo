@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Endpoint, FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
-import { environment } from '@theia/core/shared/@theia/application-package/lib/environment';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { generateUuid } from '@theia/core/lib/common/uuid';
-import { MiniBrowserEndpoint } from '../../common/mini-browser-endpoint';
+import { Endpoint, FrontendApplicationContribution } from '@theia/core/lib/browser/index.js';
+import { EnvVariablesServer, EnvVariable } from '@theia/core/lib/common/env-variables/index.js';
+import { environment } from '@theia/application-package';
+import { inject, injectable, postConstruct } from 'inversify';
+import { generateUuid } from '@theia/core/lib/common/uuid.js';
+import { MiniBrowserEndpoint } from '../../common/mini-browser-endpoint.js';
 
 /**
  * Fetch values from the backend's environment and caches them locally.
@@ -78,7 +78,7 @@ export class MiniBrowserEnvironment implements FrontendApplicationContribution {
         return environment.electron.is()
             ? MiniBrowserEndpoint.HOST_PATTERN_DEFAULT
             : this.environment.getValue(MiniBrowserEndpoint.HOST_PATTERN_ENV)
-                .then(envVar => envVar?.value || MiniBrowserEndpoint.HOST_PATTERN_DEFAULT);
+                .then((envVar: EnvVariable | undefined) => envVar?.value || MiniBrowserEndpoint.HOST_PATTERN_DEFAULT);
     }
 
     protected getDefaultHostname(): string {

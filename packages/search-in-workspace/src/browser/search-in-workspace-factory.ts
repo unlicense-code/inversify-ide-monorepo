@@ -14,16 +14,16 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import {
     codicon,
     ViewContainer,
     ViewContainerTitleOptions,
     WidgetFactory,
     WidgetManager
-} from '@theia/core/lib/browser';
-import { SearchInWorkspaceWidget } from './search-in-workspace-widget';
-import { nls } from '@theia/core/lib/common/nls';
+} from '@theia/core/lib/browser/index.js';
+import { SearchInWorkspaceWidget } from './search-in-workspace-widget.js';
+import { nls } from '@theia/core/lib/common/nls.js';
 
 export const SEARCH_VIEW_CONTAINER_ID = 'search-view-container';
 export const SEARCH_VIEW_CONTAINER_TITLE_OPTIONS: ViewContainerTitleOptions = {

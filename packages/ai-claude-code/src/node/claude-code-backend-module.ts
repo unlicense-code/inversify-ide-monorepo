@@ -15,14 +15,14 @@
 // *****************************************************************************
 
 import { ConnectionHandler, RpcConnectionHandler } from '@theia/core';
-import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module';
-import { ContainerModule } from '@theia/core/shared/inversify';
+import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module.js';
+import { ContainerModule } from 'inversify';
 import {
     CLAUDE_CODE_SERVICE_PATH,
     ClaudeCodeClient,
     ClaudeCodeService
-} from '../common/claude-code-service';
-import { ClaudeCodeServiceImpl } from './claude-code-service-impl';
+} from '../common/claude-code-service.js';
+import { ClaudeCodeServiceImpl } from './claude-code-service-impl.js';
 
 const claudeCodeConnectionModule = ConnectionContainerModule.create(({ bind }) => {
     bind(ClaudeCodeServiceImpl).toSelf().inSingletonScope();

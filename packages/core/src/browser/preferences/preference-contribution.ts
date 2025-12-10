@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,16 +15,16 @@
 // *****************************************************************************
 
 import { interfaces } from 'inversify';
-import { bindContributionProvider, PreferenceProvider } from '../../common';
-import { PreferenceScope, ValidPreferenceScopes } from '../../common/preferences/preference-scope';
-import { FrontendApplicationConfig } from '@theia/application-package/lib/application-props';
-import { isObject } from '../../common/types';
-import { PreferenceSchemaServiceImpl } from '../../common/preferences/preference-schema-service';
-import { PreferenceContribution, PreferenceSchemaService } from '../../common/preferences/preference-schema';
-import { DefaultsPreferenceProvider } from '../../common/preferences/defaults-preference-provider';
-import { PreferenceLanguageOverrideService } from '../../common/preferences/preference-language-override-service';
-import { FrontendConfigPreferenceContribution } from './frontend-config-preference-contributions';
-import { bindPreferenceConfigurations } from '../../common/preferences/preference-configurations';
+import { bindContributionProvider, PreferenceProvider } from '../../common/index.js';
+import { PreferenceScope, ValidPreferenceScopes } from '../../common/preferences/preference-scope.js';
+import { FrontendApplicationConfig } from '@theia/application-package/lib/application-props.js';
+import { isObject } from '../../common/types.js';
+import { PreferenceSchemaServiceImpl } from '../../common/preferences/preference-schema-service.js';
+import { PreferenceContribution, PreferenceSchemaService } from '../../common/preferences/preference-schema.js';
+import { DefaultsPreferenceProvider } from '../../common/preferences/defaults-preference-provider.js';
+import { PreferenceLanguageOverrideService } from '../../common/preferences/preference-language-override-service.js';
+import { FrontendConfigPreferenceContribution } from './frontend-config-preference-contributions.js';
+import { bindPreferenceConfigurations } from '../../common/preferences/preference-configurations.js';
 
 export function bindPreferenceSchemaProvider(bind: interfaces.Bind): void {
     bindPreferenceConfigurations(bind);
@@ -37,11 +37,7 @@ export function bindPreferenceSchemaProvider(bind: interfaces.Bind): void {
     bind(PreferenceContribution).to(FrontendConfigPreferenceContribution).inSingletonScope();
 }
 
-/**
- * Specialized {@link FrontendApplicationConfig} to configure default
- * preference values for the {@link PreferenceSchemaProvider}.
- */
-export interface FrontendApplicationPreferenceConfig extends FrontendApplicationConfig {
+export type FrontendApplicationPreferenceConfig = FrontendApplicationConfig & {
     preferences: {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         [preferenceName: string]: any

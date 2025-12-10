@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { Widget } from '@theia/core/shared/@lumino/widgets';
-import { EditorManager } from '@theia/editor/lib/browser/editor-manager';
-import { GitResourceOpener } from '../diff/git-resource-opener';
-import URI from '@theia/core/lib/common/uri';
+import { inject, injectable } from 'inversify';
+import { Widget } from '@lumino/widgets';
+import { EditorManager } from '@theia/editor/lib/browser/editor-manager.js';
+import { GitResourceOpener } from '../diff/git-resource-opener.js';
+import { URI } from '@theia/core/lib/common/uri.js';
 
 @injectable()
 export class GitOpenerInSecondaryArea implements GitResourceOpener {

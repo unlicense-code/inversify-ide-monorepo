@@ -13,10 +13,10 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { MCPFrontendService, MCPServerDescription, MCPServerManager } from '../common/mcp-server-manager';
-import { ToolInvocationRegistry, ToolRequest, PromptService, ToolCallContent, ToolCallContentResult } from '@theia/ai-core';
-import { ListToolsResult, TextContent } from '@modelcontextprotocol/sdk/types';
+import { injectable, inject } from 'inversify';
+import { MCPFrontendService, MCPServerDescription, MCPServerManager } from '../common/mcp-server-manager.js';
+import { ToolInvocationRegistry, ToolRequest, PromptService, ToolCallContent, ToolCallContentResult } from '@theia/ai-core/lib/common/index.js';
+import { ListToolsResult, TextContent } from '@modelcontextprotocol/sdk/types.js';
 
 @injectable()
 export class MCPFrontendServiceImpl implements MCPFrontendService {

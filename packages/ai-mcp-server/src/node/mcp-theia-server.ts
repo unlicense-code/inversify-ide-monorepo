@@ -14,15 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContributionProvider } from '@theia/core/lib/common/contribution-provider';
+import { ContributionProvider } from '@theia/core/lib/common/contribution-provider.js';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 
 export const MCPTheiaServer = Symbol('MCPTheiaServer');
 
-/**
- * Main interface for the Theia MCP server (backend only)
- */
-export interface MCPTheiaServer {
+export type MCPTheiaServer = {
     /**
      * Start the MCP server with the given configuration
      */
@@ -51,10 +48,7 @@ export interface MCPTheiaServer {
 
 export const MCPBackendContribution = Symbol('MCPBackendContribution');
 
-/**
- * Contribution interface for extending the MCP server with backend-only contributions
- */
-export interface MCPBackendContribution {
+export type MCPBackendContribution = {
     /**
      * Configure MCP server (for backend contributions)
      * @param server The MCP server instance to configure
@@ -63,4 +57,4 @@ export interface MCPBackendContribution {
 }
 
 export const MCPBackendContributionProvider = Symbol('MCPBackendContributionProvider');
-export interface MCPBackendContributionProvider extends ContributionProvider<MCPBackendContribution> { }
+export type MCPBackendContributionProvider = ContributionProvider<MCPBackendContribution> & { }

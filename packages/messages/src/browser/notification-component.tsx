@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as React from '@theia/core/shared/react';
-import * as DOMPurify from '@theia/core/shared/dompurify';
-import { NotificationManager, Notification } from './notifications-manager';
-import { codicon } from '@theia/core/lib/browser';
-import { nls } from '@theia/core/lib/common/nls';
+import * as React from 'react';
+import DOMPurify from 'dompurify';
+import { NotificationManager, Notification } from './notifications-manager.js';
+import { codicon } from '@theia/core/lib/browser/index.js';
+import { nls } from '@theia/core/lib/common/nls.js'
 
-export interface NotificationComponentProps {
+export type NotificationComponentProps = {
     readonly manager: NotificationManager;
     readonly notification: Notification;
 }

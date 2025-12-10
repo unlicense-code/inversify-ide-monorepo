@@ -13,11 +13,11 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { ILogger } from '@theia/core/lib/common/logger';
+import { injectable, inject } from 'inversify';
+import { ILogger } from '@theia/core';
 import { rimraf } from 'rimraf';
 
-export interface DownloadStorageItem {
+export type DownloadStorageItem = {
     file: string;
     root?: string;
     size: number;

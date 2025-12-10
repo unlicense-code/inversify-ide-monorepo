@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 // Reexporting here for backwards compatibility.
-// Please import from '@theia/core/lib/browser' or '@theia/core/lib/browser/keyboard' instead of this module.
+// Please import from '@theia/core/lib/browser/index.js' or '@theia/core/lib/browser/keyboard' instead of this module.
 // This module might be removed in future releases.
-import { KeySequence, Keystroke, KeyCode, KeyModifier, Key, SpecialCases, KeysOrKeyCodes } from './keyboard/keys';
+import { KeySequence, Keystroke, KeyCode, KeyModifier, Key, SpecialCases, KeysOrKeyCodes } from './keyboard/keys.js';
 export { KeySequence, Keystroke, KeyCode, KeyModifier, Key, SpecialCases, KeysOrKeyCodes };

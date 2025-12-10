@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { LinePreview, SearchInWorkspaceResult } from '@theia/search-in-workspace/lib/common/search-in-workspace-interface';
+import { LinePreview, SearchInWorkspaceResult } from '@theia/search-in-workspace/lib/common/search-in-workspace-interface.js';
 import { URI } from '@theia/core';
 
 /**

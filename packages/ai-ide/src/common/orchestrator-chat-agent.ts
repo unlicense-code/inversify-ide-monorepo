@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { AIVariableContext, getJsonOfText, getTextOfResponse, LanguageModel, LanguageModelMessage, LanguageModelRequirement, LanguageModelResponse } from '@theia/ai-core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { ChatAgentService } from '@theia/ai-chat/lib/common/chat-agent-service';
-import { ChatToolRequest } from '@theia/ai-chat/lib/common/chat-tool-request-service';
-import { AbstractStreamParsingChatAgent, SystemMessageDescription } from '@theia/ai-chat/lib/common/chat-agents';
-import { MutableChatRequestModel, InformationalChatResponseContentImpl } from '@theia/ai-chat/lib/common/chat-model';
+import { AIVariableContext, getJsonOfText, getTextOfResponse, LanguageModel, LanguageModelMessage, LanguageModelRequirement, LanguageModelResponse } from '@theia/ai-core/lib/common/index.js';
+import { inject, injectable } from 'inversify';
+import { ChatAgentService } from '@theia/ai-chat/lib/common/chat-agent-service.js';
+import { ChatToolRequest } from '@theia/ai-chat/lib/common/chat-tool-request-service.js';
+import { AbstractStreamParsingChatAgent, SystemMessageDescription } from '@theia/ai-chat/lib/common/chat-agents.js';
+import { MutableChatRequestModel, InformationalChatResponseContentImpl } from '@theia/ai-chat/lib/common/chat-model.js';
 import { generateUuid, nls, PreferenceService } from '@theia/core';
-import { orchestratorTemplate } from './orchestrator-prompt-template';
-import { PREFERENCE_NAME_ORCHESTRATOR_EXCLUSION_LIST } from './ai-ide-preferences';
+import { orchestratorTemplate } from './orchestrator-prompt-template.js';
+import { PREFERENCE_NAME_ORCHESTRATOR_EXCLUSION_LIST } from './ai-ide-preferences.js';
 
 export const OrchestratorChatAgentId = 'Orchestrator';
 const OrchestratorRequestIdKey = 'orchestratorRequestIdKey';

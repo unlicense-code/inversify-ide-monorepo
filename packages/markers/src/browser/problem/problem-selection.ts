@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { SelectionService } from '@theia/core/lib/common/selection-service';
-import { SelectionCommandHandler } from '@theia/core/lib/common/selection-command-handler';
-import { isObject } from '@theia/core/lib/common';
-import { Marker } from '../../common/marker';
-import { ProblemMarker } from '../../common/problem-marker';
+import { SelectionService } from '@theia/core/lib/common/selection-service.js';
+import { SelectionCommandHandler } from '@theia/core/lib/common/selection-command-handler.js';
+import { isObject } from '@theia/core/lib/common/index.js';
+import { Marker } from '../../common/marker.js';
+import { ProblemMarker } from '../../common/problem-marker.js';
 
-export interface ProblemSelection {
+export type ProblemSelection = {
     marker: Marker<object>;
 }
 export namespace ProblemSelection {
@@ -36,7 +36,7 @@ export namespace ProblemSelection {
         ) {
             super(
                 selectionService,
-                arg => ProblemSelection.is(arg) ? arg : undefined,
+                (arg: unknown) => ProblemSelection.is(arg) ? arg : undefined,
                 options
             );
         }

@@ -27,13 +27,13 @@ import {
     ImageContent,
     ToolCallResult,
     LanguageModelStatus
-} from '@theia/ai-core';
+} from '@theia/ai-core/lib/common/index.js';
 import { CancellationToken } from '@theia/core';
 import { GoogleGenAI, FunctionCallingConfigMode, FunctionDeclaration, Content, Schema, Part, Modality, FunctionResponse, ToolConfig } from '@google/genai';
-import { wait } from '@theia/core/lib/common/promise-util';
-import { GoogleLanguageModelRetrySettings } from './google-language-models-manager-impl';
+import { wait } from '@theia/core/lib/common/promise-util.js';
+import { GoogleLanguageModelRetrySettings } from './google-language-models-manager-impl.js';
 
-interface ToolCallback {
+type ToolCallback = {
     readonly name: string;
     readonly id: string;
     readonly index: number;

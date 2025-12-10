@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
+import { injectable, inject, postConstruct } from 'inversify';
 import {
     PLUGIN_RPC_CONTEXT,
     AbstractPluginManagerExt,
@@ -31,25 +31,25 @@ import {
     TerminalServiceExt,
     LocalizationExt,
     ExtensionKind
-} from '../common/plugin-api-rpc';
-import { PluginMetadata, PluginJsonValidationContribution } from '../common/plugin-protocol';
+} from '../common/plugin-api-rpc.js';
+import { PluginMetadata, PluginJsonValidationContribution } from '../common/plugin-protocol.js';
 import * as theia from '@theia/plugin';
-import * as types from './types-impl';
-import { join } from './path';
-import { EnvExtImpl } from './env';
-import { PreferenceRegistryExtImpl } from './preference-registry';
-import { InternalStorageExt, Memento, GlobalState } from './plugin-storage';
-import { ExtPluginApi } from '../common/plugin-ext-api-contribution';
-import { RPCProtocol } from '../common/rpc-protocol';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import { WebviewsExtImpl } from './webviews';
-import { URI as Uri } from './types-impl';
-import { InternalSecretsExt, SecretStorageExt } from '../plugin/secrets-ext';
-import { PluginExt } from './plugin-context';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { PluginLogger } from './logger';
+import * as types from './types-impl.js';
+import { join } from './path.js';
+import { EnvExtImpl } from './env.js';
+import { PreferenceRegistryExtImpl } from './preference-registry.js';
+import { InternalStorageExt, Memento, GlobalState } from './plugin-storage.js';
+import { ExtPluginApi } from '../common/plugin-ext-api-contribution.js';
+import { RPCProtocol } from '../common/rpc-protocol.js';
+import { Emitter, Event } from '@theia/core';
+import { WebviewsExtImpl } from './webviews.js';
+import { URI as Uri } from './types-impl.js';
+import { InternalSecretsExt, SecretStorageExt } from '../plugin/secrets-ext.js';
+import { PluginExt } from './plugin-context.js';
+import { Deferred } from '@theia/core/lib/common/promise-util.js';
+import { PluginLogger } from './logger.js';
 
-export interface PluginHost {
+export type PluginHost = {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     loadPlugin(plugin: Plugin): any;
@@ -61,11 +61,11 @@ export interface PluginHost {
     loadTests?(): Promise<void>;
 }
 
-interface StopFn {
+type StopFn = {
     (): void | Promise<void>;
 }
 
-interface StopOptions {
+type StopOptions = {
     /**
      * if terminating then stopping will ignore all errors,
      * since the main side is already gone and any requests are likely to fail

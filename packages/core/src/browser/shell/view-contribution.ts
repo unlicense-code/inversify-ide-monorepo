@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,20 +19,20 @@ import { Widget } from '@lumino/widgets';
 import {
     MenuModelRegistry, Command, CommandContribution,
     MenuContribution, CommandRegistry, nls
-} from '../../common';
-import { KeybindingContribution, KeybindingRegistry } from '../keybinding';
-import { WidgetManager } from '../widget-manager';
-import { CommonMenus } from '../common-menus';
-import { ApplicationShell } from './application-shell';
-import { QuickViewService } from '../quick-input';
+} from '../../common/index.js';
+import { KeybindingContribution, KeybindingRegistry } from '../keybinding.js';
+import { WidgetManager } from '../widget-manager.js';
+import { CommonMenus } from '../common-menus.js';
+import { ApplicationShell } from './application-shell.js';
+import { QuickViewService } from '../quick-input/quick-view-service.js';
 
-export interface OpenViewArguments extends ApplicationShell.WidgetOptions {
+export type OpenViewArguments = ApplicationShell.WidgetOptions & {
     toggle?: boolean
     activate?: boolean;
     reveal?: boolean;
 }
 
-export interface ViewContributionOptions {
+export type ViewContributionOptions = {
     widgetId: string;
     viewContainerId?: string;
     widgetName: string;

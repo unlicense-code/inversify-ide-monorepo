@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,7 +19,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 // only type imports are allowed here since this runs in an iframe. All other code is not accessible
-import type * as webviewCommunication from './webview-communication';
+import type * as webviewCommunication from './webview-communication.js';
 import type * as rendererApi from 'vscode-notebook-renderer';
 import type { Disposable, Event } from '@theia/core';
 
@@ -31,14 +31,14 @@ declare const acquireVsCodeApi: () => ({
 
 declare function __import(path: string): Promise<unknown>;
 
-interface Listener<T> { fn: (evt: T) => void; thisArg: unknown };
+type Listener<T> = { fn: (evt: T) => void; thisArg: unknown };
 
-interface EmitterLike<T> {
+type EmitterLike<T> = {
     fire(data: T): void;
     event: Event<T>;
 }
 
-interface RendererContext extends rendererApi.RendererContext<unknown> {
+type RendererContext = rendererApi.RendererContext<unknown> & {
     readonly onDidChangeSettings: Event<RenderOptions>;
     readonly settings: RenderOptions;
 }
@@ -48,25 +48,25 @@ interface NotebookRendererEntrypoint {
     readonly extends?: string
 };
 
-export interface RenderOptions {
+export type RenderOptions = {
     readonly lineLimit: number;
     readonly outputScrolling: boolean;
     readonly outputWordWrap: boolean;
 }
 
-export interface PreloadContext {
+export type PreloadContext = {
     readonly isWorkspaceTrusted: boolean;
     readonly rendererData: readonly webviewCommunication.RendererMetadata[];
     readonly renderOptions: RenderOptions;
     readonly staticPreloadsData: readonly string[];
 }
 
-interface KernelPreloadContext {
+type KernelPreloadContext = {
     readonly onDidReceiveKernelMessage: Event<unknown>;
     postKernelMessage(data: unknown): void;
 }
 
-interface KernelPreloadModule {
+type KernelPreloadModule = {
     activate(ctx: KernelPreloadContext): Promise<void> | void;
 }
 

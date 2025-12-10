@@ -41,17 +41,17 @@ import {
     TextMessage,
     ToolCall,
     ToolRequest,
-} from '@theia/ai-core';
+} from '@theia/ai-core/lib/common/index.js';
 import {
     Agent,
     isLanguageModelStreamResponse,
     isLanguageModelTextResponse,
     LanguageModelRegistry,
     LanguageModelStreamResponsePart
-} from '@theia/ai-core/lib/common';
+} from '@theia/ai-core/lib/common/index.js';
 import { ContributionProvider, ILogger, isArray, nls } from '@theia/core';
-import { inject, injectable, named, postConstruct } from '@theia/core/shared/inversify';
-import { ChatAgentService } from './chat-agent-service';
+import { inject, injectable, named, postConstruct } from 'inversify';
+import { ChatAgentService } from './chat-agent-service.js';
 import {
     ChatModel,
     ChatRequestModel,
@@ -63,16 +63,13 @@ import {
     ToolCallChatResponseContentImpl,
     ErrorChatResponseContent,
     InformationalChatResponseContent,
-} from './chat-model';
-import { ChatToolRequest, ChatToolRequestService } from './chat-tool-request-service';
-import { parseContents } from './parse-contents';
-import { DefaultResponseContentFactory, ResponseContentMatcher, ResponseContentMatcherProvider } from './response-content-matcher';
-import { ImageContextVariable } from './image-context-variable';
+} from './chat-model.js';
+import { ChatToolRequest, ChatToolRequestService } from './chat-tool-request-service.js';
+import { parseContents } from './parse-contents.js';
+import { DefaultResponseContentFactory, ResponseContentMatcher, ResponseContentMatcherProvider } from './response-content-matcher.js';
+import { ImageContextVariable } from './image-context-variable.js';
 
-/**
- * System message content, enriched with function descriptions.
- */
-export interface SystemMessageDescription {
+export type SystemMessageDescription = {
     text: string;
     /** All functions references in the system message. */
     functionDescriptions?: Map<string, ToolRequest>;
@@ -86,7 +83,7 @@ export namespace SystemMessageDescription {
     }
 }
 
-export interface ChatSessionContext extends AIVariableContext {
+export type ChatSessionContext = AIVariableContext & {
     request?: ChatRequestModel;
     model: ChatModel;
 }
@@ -126,19 +123,13 @@ export namespace ChatAgentLocation {
     }
 }
 
-/**
- * Represents a mode that a chat agent can operate in.
- */
-export interface ChatMode {
+export type ChatMode = {
     readonly id: string;
     readonly name: string;
 }
 
 export const ChatAgent = Symbol('ChatAgent');
-/**
- * A chat agent is a specialized agent with a common interface for its invocation.
- */
-export interface ChatAgent extends Agent {
+export type ChatAgent = Agent & {
     locations: ChatAgentLocation[];
     iconClass?: string;
     modes?: ChatMode[];

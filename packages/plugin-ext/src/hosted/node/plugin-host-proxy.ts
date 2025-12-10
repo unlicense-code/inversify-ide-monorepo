@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2022 TypeFox and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -19,8 +19,8 @@ import * as https from 'https';
 import * as tls from 'tls';
 
 import { createHttpPatch, createProxyResolver, createTlsPatch, ProxySupportSetting } from '@vscode/proxy-agent';
-import { PreferenceRegistryExtImpl } from '../../plugin/preference-registry';
-import { WorkspaceExtImpl } from '../../plugin/workspace';
+import { PreferenceRegistryExtImpl } from '../../plugin/preference-registry.js';
+import { WorkspaceExtImpl } from '../../plugin/workspace.js';
 
 export function connectProxyResolver(workspaceExt: WorkspaceExtImpl, configProvider: PreferenceRegistryExtImpl): void {
     const resolveProxy = createProxyResolver({
@@ -36,7 +36,7 @@ export function connectProxyResolver(workspaceExt: WorkspaceExtImpl, configProvi
     configureModuleLoading(lookup);
 }
 
-interface PatchedModules {
+type PatchedModules = {
     http: typeof http;
     https: typeof https;
     tls: typeof tls;

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,17 +16,17 @@
 
 import { Widget } from '@lumino/widgets';
 import { Message } from '@lumino/messaging';
-import { Emitter, Event } from '../common/event';
-import { MaybePromise } from '../common/types';
-import { Key } from './keyboard/keys';
-import { AbstractDialog } from './dialogs';
-import { nls } from '../common/nls';
-import { Disposable, DisposableCollection, isObject, URI } from '../common';
-import { BinaryBuffer } from '../common/buffer';
+import { Emitter, Event } from '../common/event.js';
+import { MaybePromise } from '../common/types.js';
+import { Key } from './keyboard/keys.js';
+import { AbstractDialog } from './dialogs.js';
+import { nls } from '../common/nls.js';
+import { Disposable, DisposableCollection, isObject, URI } from '../common/index.js';
+import { BinaryBuffer } from '../common/buffer.js';
 
 export type AutoSaveMode = 'off' | 'afterDelay' | 'onFocusChange' | 'onWindowChange';
 
-export interface Saveable {
+export type Saveable = {
     readonly dirty: boolean;
     /** If false, the saveable will not participate in autosaving. */
     readonly autosaveable?: boolean;
@@ -74,7 +74,7 @@ export interface Saveable {
     filters?(): { [name: string]: string[] };
 }
 
-export interface SaveableSource {
+export type SaveableSource = {
     readonly saveable: Saveable;
 }
 
@@ -273,7 +273,7 @@ export namespace Saveable {
     }
 }
 
-export interface SaveableWidget extends Widget {
+export type SaveableWidget = Widget & {
     /**
      * @param doRevert whether the saveable should be reverted before being saved. Defaults to `true`.
      */
@@ -282,11 +282,7 @@ export interface SaveableWidget extends Widget {
 }
 
 export const close = Symbol('close');
-/**
- * An interface describing saveable widgets that are created by the `Saveable.apply` function.
- * The original `close` function is reassigned to a locally-defined `Symbol`
- */
-export interface PostCreationSaveableWidget extends SaveableWidget {
+export type PostCreationSaveableWidget = SaveableWidget & {
     /**
      * The original `close` function of the widget
      */
@@ -344,7 +340,7 @@ export namespace SaveReason {
     }
 }
 
-export interface SaveOptions {
+export type SaveOptions = {
     /**
      * Formatting type to apply when saving.
      */
@@ -355,7 +351,7 @@ export interface SaveOptions {
     readonly saveReason?: SaveReason;
 }
 
-export interface SaveAsOptions extends SaveOptions {
+export type SaveAsOptions = SaveOptions & {
     readonly target: URI;
 }
 

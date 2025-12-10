@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -29,14 +29,14 @@
 /* eslint-disable @typescript-eslint/tslint/config */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { injectable, inject, named, postConstruct } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { timeout, Deferred } from '@theia/core/lib/common/promise-util';
-import { CancellationToken, CancellationTokenSource } from '@theia/core/lib/common/cancellation';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { WaitUntilEvent, Emitter, AsyncEmitter, Event } from '@theia/core/lib/common/event';
-import { ContributionProvider } from '@theia/core/lib/common/contribution-provider';
-import { TernarySearchTree } from '@theia/core/lib/common/ternary-search-tree';
+import { injectable, inject, named, postConstruct } from 'inversify';
+import { URI } from '@theia/core';
+import { timeout, Deferred } from '@theia/core';
+import { CancellationToken, CancellationTokenSource } from '@theia/core';
+import { Disposable, DisposableCollection } from '@theia/core';
+import { WaitUntilEvent, Emitter, AsyncEmitter, Event } from '@theia/core';
+import { ContributionProvider } from '@theia/core/lib/common/contribution-provider.js';
+import { TernarySearchTree } from '@theia/core/lib/common/ternary-search-tree.js';
 import {
     ensureFileSystemProviderError, etag, ETAG_DISABLED,
     FileChangesEvent,
@@ -52,25 +52,25 @@ import {
     ResolveFileResult, ResolveFileResultWithMetadata,
     MoveFileOptions, CopyFileOptions, BaseStatWithMetadata, FileDeleteOptions, FileOperationOptions, hasAccessCapability, hasUpdateCapability,
     hasFileReadStreamCapability, FileSystemProviderWithFileReadStreamCapability, ReadOnlyMessageFileSystemProvider
-} from '../common/files';
-import { BinaryBuffer, BinaryBufferReadable, BinaryBufferReadableStream, BinaryBufferReadableBufferedStream, BinaryBufferWriteableStream } from '@theia/core/lib/common/buffer';
-import { ReadableStream, isReadableStream, isReadableBufferedStream, transform, consumeStream, peekStream, peekReadable, Readable } from '@theia/core/lib/common/stream';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
-import { FileSystemPreferences } from '../common/filesystem-preferences';
-import { ProgressService } from '@theia/core/lib/common/progress-service';
-import { DelegatingFileSystemProvider } from '../common/delegating-file-system-provider';
-import type { TextDocumentContentChangeEvent } from '@theia/core/shared/vscode-languageserver-protocol';
-import { EncodingRegistry } from '@theia/core/lib/browser/encoding-registry';
-import { UTF8, UTF8_with_bom } from '@theia/core/lib/common/encodings';
-import { EncodingService, ResourceEncoding, DecodeStreamResult } from '@theia/core/lib/common/encoding-service';
-import { Mutable } from '@theia/core/lib/common/types';
-import { readFileIntoStream } from '../common/io';
-import { FileSystemWatcherErrorHandler } from './filesystem-watcher-error-handler';
-import { FileSystemUtils } from '../common/filesystem-utils';
+} from '../common/files.js';
+import { BinaryBuffer, BinaryBufferReadable, BinaryBufferReadableStream, BinaryBufferReadableBufferedStream, BinaryBufferWriteableStream } from '@theia/core';
+import { ReadableStream, isReadableStream, isReadableBufferedStream, transform, consumeStream, peekStream, peekReadable, Readable } from '@theia/core';
+import { LabelProvider } from '@theia/core/lib/browser/label-provider.js';
+import { FileSystemPreferences } from '../common/filesystem-preferences.js';
+import { ProgressService } from '@theia/core/lib/common/progress-service.js';
+import { DelegatingFileSystemProvider } from '../common/delegating-file-system-provider.js';
+import type { TextDocumentContentChangeEvent } from 'vscode-languageserver-protocol';
+import { EncodingRegistry } from '@theia/core/lib/browser/encoding-registry.js';
+import { UTF8, UTF8_with_bom } from '@theia/core/lib/common/encodings.js';
+import { EncodingService, ResourceEncoding, DecodeStreamResult } from '@theia/core';
+import { Mutable } from '@theia/core';
+import { readFileIntoStream } from '../common/io.js';
+import { FileSystemWatcherErrorHandler } from './filesystem-watcher-error-handler.js';
+import { FileSystemUtils } from '../common/filesystem-utils.js';
 import { nls } from '@theia/core';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownString } from '@theia/core';
 
-export interface FileOperationParticipant {
+export type FileOperationParticipant = {
 
     /**
      * Participate in a file operation of a working copy. Allows to
@@ -85,7 +85,7 @@ export interface FileOperationParticipant {
     ): Promise<void>;
 }
 
-export interface ReadEncodingOptions {
+export type ReadEncodingOptions = {
 
     /**
      * The optional encoding parameter allows to specify the desired encoding when resolving
@@ -99,7 +99,7 @@ export interface ReadEncodingOptions {
     autoGuessEncoding?: boolean;
 }
 
-export interface WriteEncodingOptions {
+export type WriteEncodingOptions = {
 
     /**
      * The encoding to use when updating a file.
@@ -112,7 +112,7 @@ export interface WriteEncodingOptions {
     overwriteEncoding?: boolean;
 }
 
-export interface ReadTextFileOptions extends ReadEncodingOptions, ReadFileOptions {
+export type ReadTextFileOptions = ReadEncodingOptions & ReadFileOptions & {
     /**
      * The optional acceptTextOnly parameter allows to fail this request early if the file
      * contents are not textual.
@@ -120,7 +120,7 @@ export interface ReadTextFileOptions extends ReadEncodingOptions, ReadFileOption
     acceptTextOnly?: boolean;
 }
 
-interface BaseTextFileContent extends BaseStatWithMetadata {
+type BaseTextFileContent = BaseStatWithMetadata & {
 
     /**
      * The encoding of the content if known.
@@ -128,7 +128,7 @@ interface BaseTextFileContent extends BaseStatWithMetadata {
     encoding: string;
 }
 
-export interface TextFileContent extends BaseTextFileContent {
+export type TextFileContent = BaseTextFileContent & {
 
     /**
      * The content of a text file.
@@ -136,7 +136,7 @@ export interface TextFileContent extends BaseTextFileContent {
     value: string;
 }
 
-export interface TextFileStreamContent extends BaseTextFileContent {
+export type TextFileStreamContent = BaseTextFileContent & {
 
     /**
      * The line grouped content of a text file.
@@ -144,15 +144,15 @@ export interface TextFileStreamContent extends BaseTextFileContent {
     value: ReadableStream<string>;
 }
 
-export interface CreateTextFileOptions extends WriteEncodingOptions, CreateFileOptions { }
+export type CreateTextFileOptions = WriteEncodingOptions & CreateFileOptions & {}
 
-export interface WriteTextFileOptions extends WriteEncodingOptions, WriteFileOptions { }
+export type WriteTextFileOptions = WriteEncodingOptions & WriteFileOptions & {}
 
-export interface UpdateTextFileOptions extends WriteEncodingOptions, WriteFileOptions {
+export type UpdateTextFileOptions = WriteEncodingOptions & WriteFileOptions & {
     readEncoding: string
 }
 
-export interface UserFileOperationEvent extends WaitUntilEvent {
+export type UserFileOperationEvent = WaitUntilEvent & {
 
     /**
      * An identifier to correlate the operation through the
@@ -178,31 +178,7 @@ export interface UserFileOperationEvent extends WaitUntilEvent {
 
 export const FileServiceContribution = Symbol('FileServiceContribution');
 
-/**
- * A {@link FileServiceContribution} can be used to add custom {@link FileSystemProvider}s.
- * For this, the contribution has to listen to the {@link FileSystemProviderActivationEvent} and register
- * the custom {@link FileSystemProvider}s according to the scheme when this event is fired.
- *
- * ### Example usage
- * ```ts
- * export class MyFileServiceContribution implements FileServiceContribution {
- *     registerFileSystemProviders(service: FileService): void {
- *         service.onWillActivateFileSystemProvider(event => {
- *             if (event.scheme === 'mySyncProviderScheme') {
- *                 service.registerProvider('mySyncProviderScheme', this.mySyncProvider);
- *             }
- *             if (event.scheme === 'myAsyncProviderScheme') {
- *                 event.waitUntil((async () => {
- *                     const myAsyncProvider = await this.createAsyncProvider();
- *                     service.registerProvider('myAsyncProviderScheme', myAsyncProvider);
- *                 })());
- *             }
- *         });
- *
- *     }
- *```
- */
-export interface FileServiceContribution {
+export type FileServiceContribution = {
     /**
      * Register custom file system providers for the given {@link FileService}.
      * @param service The file service for which the providers should be registered.
@@ -210,12 +186,7 @@ export interface FileServiceContribution {
     registerFileSystemProviders(service: FileService): void;
 }
 
-/**
- * Represents the `FileSystemProviderRegistration` event.
- * This event is fired by the {@link FileService} if a {@link FileSystemProvider} is
- * registered to or unregistered from the service.
- */
-export interface FileSystemProviderRegistrationEvent {
+export type FileSystemProviderRegistrationEvent = {
     /** `True` if a new provider has been registered, `false` if a provider has been unregistered. */
     added: boolean;
     /** The (uri) scheme for which the provider was (previously) registered */
@@ -224,19 +195,14 @@ export interface FileSystemProviderRegistrationEvent {
     provider?: FileSystemProvider;
 }
 
-/**
- * Represents the `FileSystemProviderCapabilitiesChange` event.
- * This event is fired by the {@link FileService} if the capabilities of one of its managed
- * {@link FileSystemProvider}s have changed.
- */
-export interface FileSystemProviderCapabilitiesChangeEvent {
+export type FileSystemProviderCapabilitiesChangeEvent = {
     /** The affected file system provider for which this event was fired. */
     provider: FileSystemProvider;
     /** The (uri) scheme for which the provider is registered */
     scheme: string;
 }
 
-export interface FileSystemProviderReadOnlyMessageChangeEvent {
+export type FileSystemProviderReadOnlyMessageChangeEvent = {
     /** The affected file system provider for which this event was fired. */
     provider: FileSystemProvider;
     /** The uri for which the provider is registered */
@@ -245,12 +211,7 @@ export interface FileSystemProviderReadOnlyMessageChangeEvent {
     message: MarkdownString | undefined;
 }
 
-/**
- * Represents the `FileSystemProviderActivation` event.
- * This event is fired by the {@link FileService} if it wants to activate the
- * {@link FileSystemProvider} for a specific scheme.
- */
-export interface FileSystemProviderActivationEvent extends WaitUntilEvent {
+export type FileSystemProviderActivationEvent = WaitUntilEvent & {
     /** The (uri) scheme for which the provider should be activated */
     scheme: string;
 }

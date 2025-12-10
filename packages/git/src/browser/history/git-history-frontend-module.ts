@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces, Container } from '@theia/core/shared/inversify';
-import { WidgetFactory, OpenHandler, TreeModel } from '@theia/core/lib/browser';
-import { GitCommitDetailWidgetOptions } from './git-commit-detail-widget-options';
-import { GitCommitDetailWidget } from './git-commit-detail-widget';
-import { GitCommitDetailHeaderWidget } from './git-commit-detail-header-widget';
-import { GitDiffTreeModel } from '../diff/git-diff-tree-model';
-import { GitCommitDetailOpenHandler } from './git-commit-detail-open-handler';
-import { GitScmProvider } from '../git-scm-provider';
-import { createScmTreeContainer } from '@theia/scm/lib/browser/scm-frontend-module';
-import { GitResourceOpener } from '../diff/git-resource-opener';
-import { GitOpenerInSecondaryArea } from './git-opener-in-secondary-area';
+import { interfaces } from 'inversify';
+import { WidgetFactory, OpenHandler, TreeModel } from '@theia/core/lib/browser/index.js';
+import { GitCommitDetailWidgetOptions } from './git-commit-detail-widget-options.js';
+import { GitCommitDetailWidget } from './git-commit-detail-widget.js';
+import { GitCommitDetailHeaderWidget } from './git-commit-detail-header-widget.js';
+import { GitDiffTreeModel } from '../diff/git-diff-tree-model.js';
+import { GitCommitDetailOpenHandler } from './git-commit-detail-open-handler.js';
+import { GitScmProvider } from '../git-scm-provider.js';
+import { createScmTreeContainer } from '@theia/scm/lib/browser/scm-frontend-module.js';
+import { GitResourceOpener } from '../diff/git-resource-opener.js';
+import { GitOpenerInSecondaryArea } from './git-opener-in-secondary-area.js';
 import '../../../src/browser/style/git-icons.css';
 
 export function bindGitHistoryModule(bind: interfaces.Bind): void {
@@ -42,7 +42,7 @@ export function bindGitHistoryModule(bind: interfaces.Bind): void {
 
 }
 
-export function createGitCommitDetailWidgetContainer(parent: interfaces.Container, options: GitCommitDetailWidgetOptions): Container {
+export function createGitCommitDetailWidgetContainer(parent: interfaces.Container, options: GitCommitDetailWidgetOptions): interfaces.Container {
     const child = createScmTreeContainer(parent);
     child.bind(GitCommitDetailWidget).toSelf();
     child.bind(GitCommitDetailHeaderWidget).toSelf();

@@ -33,7 +33,7 @@ function getSystemProxyURI(requestURL: Url, env: NodeJS.ProcessEnv): string | un
     return undefined;
 }
 
-export interface ProxySettings {
+export type ProxySettings = {
     proxyUrl?: string;
     strictSSL?: boolean;
 }

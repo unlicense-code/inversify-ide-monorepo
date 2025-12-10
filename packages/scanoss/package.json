@@ -1,6 +1,7 @@
 {
   "name": "@theia/scanoss",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - SCANOSS Integration",
   "dependencies": {
     "@theia/core": "1.66.0",

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule, interfaces } from '@theia/core/shared/inversify';
-import { OutlineViewService } from './outline-view-service';
-import { OutlineViewContribution } from './outline-view-contribution';
-import { WidgetFactory } from '@theia/core/lib/browser/widget-manager';
+import { ContainerModule, interfaces } from 'inversify';
+import { OutlineViewService } from './outline-view-service.js';
+import { OutlineViewContribution } from './outline-view-contribution.js';
+import { WidgetFactory } from '@theia/core/lib/browser/widget-manager.js';
 import {
     FrontendApplicationContribution,
     createTreeContainer,
@@ -25,14 +25,14 @@ import {
     TreeProps,
     defaultTreeProps,
     BreadcrumbsContribution
-} from '@theia/core/lib/browser';
-import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { OutlineViewWidgetFactory, OutlineViewWidget } from './outline-view-widget';
+} from '@theia/core/lib/browser/index.js';
+import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { OutlineViewWidgetFactory, OutlineViewWidget } from './outline-view-widget.js';
 import '../../src/browser/styles/index.css';
-import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider';
-import { OutlineDecoratorService, OutlineTreeDecorator } from './outline-decorator-service';
-import { OutlineViewTreeModel } from './outline-view-tree-model';
-import { BreadcrumbPopupOutlineView, BreadcrumbPopupOutlineViewFactory, OutlineBreadcrumbsContribution } from './outline-breadcrumbs-contribution';
+import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider.js';
+import { OutlineDecoratorService, OutlineTreeDecorator } from './outline-decorator-service.js';
+import { OutlineViewTreeModel } from './outline-view-tree-model.js';
+import { BreadcrumbPopupOutlineView, BreadcrumbPopupOutlineViewFactory, OutlineBreadcrumbsContribution } from './outline-breadcrumbs-contribution.js';
 
 export default new ContainerModule(bind => {
     bind(OutlineViewWidgetFactory).toFactory(ctx =>

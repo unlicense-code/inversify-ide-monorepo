@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,15 +14,15 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { ColorRegistry } from '@theia/core/lib/browser/color-registry';
-import { Color, ColorDefaults as TheiaColorDefaults, ColorDefinition } from '@theia/core/lib/common/color';
-import { Disposable } from '@theia/core/lib/common/disposable';
-import { ColorDefaults, ColorValue, getColorRegistry } from '@theia/monaco-editor-core/esm/vs/platform/theme/common/colorRegistry';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { IStandaloneThemeService } from '@theia/monaco-editor-core/esm/vs/editor/standalone/common/standaloneTheme';
-import { Color as MonacoColor, HSLA, RGBA } from '@theia/monaco-editor-core/esm/vs/base/common/color';
-import * as Colors from '@theia/monaco-editor-core/esm/vs/platform/theme/common/colorRegistry';
+import { injectable } from 'inversify';
+import { ColorRegistry } from '@theia/core/lib/browser/color-registry.js';
+import { Color, ColorDefaults as TheiaColorDefaults, ColorDefinition } from '@theia/core/lib/common/color.js';
+import { Disposable } from '@theia/core/lib/common/disposable.js';
+import { ColorDefaults, ColorValue, getColorRegistry } from '@theia/monaco-editor-core/esm/vs/platform/theme/common/colorRegistry.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { IStandaloneThemeService } from '@theia/monaco-editor-core/esm/vs/editor/standalone/common/standaloneTheme.js';
+import { Color as MonacoColor, HSLA, RGBA } from '@theia/monaco-editor-core/esm/vs/base/common/color.js';
+import * as Colors from '@theia/monaco-editor-core/esm/vs/platform/theme/common/colorRegistry.js';
 
 @injectable()
 export class MonacoColorRegistry extends ColorRegistry {

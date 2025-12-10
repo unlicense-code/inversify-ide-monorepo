@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,20 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, named } from '@theia/core/shared/inversify';
+import { injectable, inject, named } from 'inversify';
 import { Disposable, DisposableCollection, Emitter, Event, isWindows } from '@theia/core';
-import { ILogger } from '@theia/core/lib/common';
-import { Process, ProcessType, ProcessOptions, /* ProcessErrorEvent */ } from './process';
-import { ProcessManager } from './process-manager';
+import { ILogger } from '@theia/core/lib/common/index.js';
+import { Process, ProcessType, ProcessOptions, /* ProcessErrorEvent */ } from './process.js';
+import { ProcessManager } from './process-manager.js';
 import { IPty, spawn } from 'node-pty';
-import { MultiRingBuffer, MultiRingBufferReadableStream } from './multi-ring-buffer';
-import { DevNullStream } from './dev-null-stream';
-import { signame } from './utils';
-import { PseudoPty } from './pseudo-pty';
+import { MultiRingBuffer, MultiRingBufferReadableStream } from './multi-ring-buffer.js';
+import { DevNullStream } from './dev-null-stream.js';
+import { signame } from './utils.js';
+import { PseudoPty } from './pseudo-pty.js';
 import { Writable } from 'stream';
 
 export const TerminalProcessOptions = Symbol('TerminalProcessOptions');
-export interface TerminalProcessOptions extends ProcessOptions {
+export type TerminalProcessOptions = ProcessOptions & {
     /**
      * Windows only. Allow passing complex command lines already escaped for CommandLineToArgvW.
      */
@@ -36,7 +36,7 @@ export interface TerminalProcessOptions extends ProcessOptions {
 }
 
 export const TerminalProcessFactory = Symbol('TerminalProcessFactory');
-export interface TerminalProcessFactory {
+export type TerminalProcessFactory = {
     (options: TerminalProcessOptions): TerminalProcess;
 }
 

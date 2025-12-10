@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2022 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { codicon, StatusBar, StatusBarAlignment, StatusBarEntry } from '@theia/core/lib/browser';
-import { LanguageService } from '@theia/core/lib/browser/language-service';
+import { injectable, inject } from 'inversify';
+import { codicon, StatusBar, StatusBarAlignment, StatusBarEntry } from '@theia/core/lib/browser/index.js';
+import { LanguageService } from '@theia/core/lib/browser/language-service.js';
 import { CommandRegistry, nls } from '@theia/core';
-import { TextEditor } from '../editor';
-import { EditorCommands } from '../editor-command';
-import { LanguageSelector, score } from '../../common/language-selector';
-import { AccessibilityInformation } from '@theia/core/lib/common/accessibility';
-import URI from '@theia/core/lib/common/uri';
-import { CurrentEditorAccess } from '../editor-manager';
-import { Severity } from '@theia/core/lib/common/severity';
-import { LabelParser } from '@theia/core/lib/browser/label-parser';
+import { TextEditor } from '../editor.js';
+import { EditorCommands } from '../editor-command.js';
+import { LanguageSelector, score } from '../../common/language-selector.js';
+import { AccessibilityInformation } from '@theia/core/lib/common/accessibility.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { CurrentEditorAccess } from '../editor-manager.js';
+import { Severity } from '@theia/core/lib/common/severity.js';
+import { LabelParser } from '@theia/core/lib/browser/label-parser.js';
 
 /**
  * Represents the severity of a language status item.
@@ -36,10 +36,7 @@ export enum LanguageStatusSeverity {
     Error = 2
 }
 
-/**
- * Command represents a particular invocation of a registered command.
- */
-export interface Command {
+export type Command = {
     /**
      * The identifier of the actual command handler.
      */
@@ -59,11 +56,7 @@ export interface Command {
     arguments?: unknown[];
 }
 
-/**
- * A language status item is the preferred way to present language status reports for the active text editors,
- * such as selected linter or notifying about a configuration problem.
- */
-export interface LanguageStatus {
+export type LanguageStatus = {
     readonly id: string;
     readonly name: string;
     readonly selector: LanguageSelector;

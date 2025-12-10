@@ -13,23 +13,23 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import '@theia/core/shared/reflect-metadata';
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { RPCProtocol, RPCProtocolImpl } from '@theia/plugin-ext/lib/common/rpc-protocol';
-import { AbstractPluginHostRPC, PluginContainerModuleLoader } from '@theia/plugin-ext/lib/hosted/node/plugin-host-rpc';
-import { AbstractPluginManagerExtImpl, MinimalTerminalServiceExt } from '@theia/plugin-ext/lib/plugin/plugin-manager';
-import { HeadlessPluginHostRPC } from './plugin-host-headless-rpc';
-import { HeadlessPluginManagerExtImpl } from '../../plugin/headless-plugin-manager';
-import { IPCChannel } from '@theia/core/lib/node';
-import { InternalPluginContainerModule } from '@theia/plugin-ext/lib/plugin/node/plugin-container-module';
+import 'reflect-metadata';
+import { ContainerModule } from 'inversify';
+import { RPCProtocol, RPCProtocolImpl } from '@theia/plugin-ext/lib/common/rpc-protocol.js';
+import { AbstractPluginHostRPC, PluginContainerModuleLoader } from '@theia/plugin-ext/lib/hosted/node/plugin-host-rpc.js';
+import { AbstractPluginManagerExtImpl, MinimalTerminalServiceExt } from '@theia/plugin-ext/lib/plugin/plugin-manager.js';
+import { HeadlessPluginHostRPC } from './plugin-host-headless-rpc.js';
+import { HeadlessPluginManagerExtImpl } from '../../plugin/headless-plugin-manager.js';
+import { IPCChannel } from '@theia/core/lib/node/index.js';
+import { InternalPluginContainerModule } from '@theia/plugin-ext/lib/plugin/node/plugin-container-module.js';
 
-import { EnvExtImpl } from '@theia/plugin-ext/lib/plugin/env';
-import { EnvNodeExtImpl } from '@theia/plugin-ext/lib/plugin/node/env-node-ext';
+import { EnvExtImpl } from '@theia/plugin-ext/lib/plugin/env.js';
+import { EnvNodeExtImpl } from '@theia/plugin-ext/lib/plugin/node/env-node-ext.js';
 import { LocalizationExt } from '@theia/plugin-ext';
-import { LocalizationExtImpl } from '@theia/plugin-ext/lib/plugin/localization-ext';
-import { InternalStorageExt } from '@theia/plugin-ext/lib/plugin/plugin-storage';
-import { InternalSecretsExt } from '@theia/plugin-ext/lib/plugin/secrets-ext';
-import { EnvironmentVariableCollectionImpl } from '@theia/plugin-ext/lib/plugin/terminal-ext';
+import { LocalizationExtImpl } from '@theia/plugin-ext/lib/plugin/localization-ext.js';
+import { InternalStorageExt } from '@theia/plugin-ext/lib/plugin/plugin-storage.js';
+import { InternalSecretsExt } from '@theia/plugin-ext/lib/plugin/secrets-ext.js';
+import { EnvironmentVariableCollectionImpl } from '@theia/plugin-ext/lib/plugin/terminal-ext.js';
 import { Disposable } from '@theia/core';
 
 export default new ContainerModule(bind => {

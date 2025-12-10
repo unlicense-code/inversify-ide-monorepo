@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { injectable } from 'inversify';
-import { FrontendApplicationContribution } from '../../browser/frontend-application-contribution';
-import { WebSocketConnectionSource } from '../../browser/messaging/ws-connection-source';
+import { FrontendApplicationContribution } from '../../browser/frontend-application-contribution.js';
+import { WebSocketConnectionSource } from '../../browser/messaging/ws-connection-source.js';
 
 /**
  * Customized connection provider between the frontend and the backend in electron environment.

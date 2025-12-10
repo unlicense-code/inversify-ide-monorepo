@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Container, ContainerModule } from '@theia/core/shared/inversify';
-import { MockEnvVariablesServerImpl } from '@theia/core/lib/browser/test/mock-env-variables-server';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
-import URI from '@theia/core/lib/common/uri';
-import { FileUri } from '@theia/core/lib/node';
-import { WorkspaceFileService, UntitledWorkspaceService } from '../common';
-import { DefaultWorkspaceServer, FileWorkspaceHandlerContribution, WorkspaceCliContribution, WorkspaceHandlerContribution } from './default-workspace-server';
+import { Container, ContainerModule } from 'inversify';
+import { MockEnvVariablesServerImpl } from '@theia/core/lib/browser/test/mock-env-variables-server.js';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { FileUri } from '@theia/core/lib/node/index.js';
+import { WorkspaceFileService, UntitledWorkspaceService } from '../common/index.js';
+import { DefaultWorkspaceServer, FileWorkspaceHandlerContribution, WorkspaceCliContribution, WorkspaceHandlerContribution } from './default-workspace-server.js';
 import { expect } from 'chai';
 import * as temp from 'temp';
 import * as fs from 'fs';
 import { ILogger, bindContributionProvider } from '@theia/core';
-import { MockLogger } from '@theia/core/lib/common/test/mock-logger';
+import { MockLogger } from '@theia/core/lib/common/test/mock-logger.js';
 
 describe('DefaultWorkspaceServer', function (): void {
 

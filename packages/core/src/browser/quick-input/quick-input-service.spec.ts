@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import * as chai from 'chai';
-import { filterItems, findMatches, QuickPickItem } from './quick-input-service';
+import { filterItems, findMatches, QuickPickItem } from './quick-input-service.js';
 
 const expect = chai.expect;
 

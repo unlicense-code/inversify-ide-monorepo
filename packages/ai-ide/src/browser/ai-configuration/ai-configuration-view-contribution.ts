@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 import { Command, CommandRegistry, nls } from '@theia/core';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
 import { AIViewContribution } from '@theia/ai-core/lib/browser';
-import { ChatViewWidget } from '@theia/ai-chat-ui/lib/browser/chat-view-widget';
-import { FrontendApplication } from '@theia/core/lib/browser';
-import { injectable } from '@theia/core/shared/inversify';
-import { AIConfigurationContainerWidget } from './ai-configuration-widget';
+import { ChatViewWidget } from '@theia/ai-chat-ui/lib/browser/chat-view-widget.js';
+import { FrontendApplication } from '@theia/core/lib/browser/index.js';
+import { injectable } from 'inversify';
+import { AIConfigurationContainerWidget } from './ai-configuration-widget.js';
 
 export const AI_CONFIGURATION_TOGGLE_COMMAND_ID = 'aiConfiguration:toggle';
 export const OPEN_AI_CONFIG_VIEW = Command.toLocalizedCommand({

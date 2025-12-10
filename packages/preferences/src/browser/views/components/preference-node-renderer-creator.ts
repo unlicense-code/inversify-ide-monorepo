@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { ContributionProvider, Disposable, Emitter, Event, Prioritizeable } from '@theia/core';
-import { inject, injectable, interfaces, named } from '@theia/core/shared/inversify';
-import { Preference } from '../../util/preference-types';
-import { PreferenceHeaderRenderer, PreferenceNodeRenderer } from './preference-node-renderer';
+import { inject, injectable, interfaces, named } from 'inversify';
+import { Preference } from '../../util/preference-types.js';
+import { PreferenceHeaderRenderer, PreferenceNodeRenderer } from './preference-node-renderer.js';
 
 export const PreferenceNodeRendererCreatorRegistry = Symbol('PreferenceNodeRendererCreatorRegistry');
-export interface PreferenceNodeRendererCreatorRegistry {
+export type PreferenceNodeRendererCreatorRegistry = {
     registerPreferenceNodeRendererCreator(creator: PreferenceNodeRendererCreator): Disposable;
     unregisterPreferenceNodeRendererCreator(creator: PreferenceNodeRendererCreator): void;
     getPreferenceNodeRendererCreator(node: Preference.TreeNode): PreferenceNodeRendererCreator;
@@ -28,12 +28,12 @@ export interface PreferenceNodeRendererCreatorRegistry {
 }
 
 export const PreferenceNodeRendererContribution = Symbol('PreferenceNodeRendererContribution');
-export interface PreferenceNodeRendererContribution {
+export type PreferenceNodeRendererContribution = {
     registerPreferenceNodeRendererCreator(registry: PreferenceNodeRendererCreatorRegistry): void;
 }
 
 export const PreferenceNodeRendererCreator = Symbol('PreferenceNodeRendererCreator');
-export interface PreferenceNodeRendererCreator {
+export type PreferenceNodeRendererCreator = {
     id: string;
     canHandle(node: Preference.TreeNode): number;
     createRenderer(node: Preference.TreeNode, container: interfaces.Container): PreferenceNodeRenderer;

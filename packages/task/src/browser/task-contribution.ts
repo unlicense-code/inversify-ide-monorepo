@@ -14,32 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, postConstruct } from '@theia/core/shared/inversify';
-import { Disposable } from '@theia/core/lib/common/disposable';
-import { TaskConfiguration } from '../common/task-protocol';
-import { WaitUntilEvent, Emitter } from '@theia/core/lib/common/event';
+import { injectable, postConstruct } from 'inversify';
+import { Disposable } from '@theia/core/lib/common/disposable.js';
+import { TaskConfiguration } from '../common/task-protocol.js';
+import { WaitUntilEvent, Emitter } from '@theia/core/lib/common/event.js';
 
 export const TaskContribution = Symbol('TaskContribution');
 
-/**
- * A {@link TaskContribution} allows to contribute custom {@link TaskResolver}s and/or {@link TaskProvider}s.
- *
- *  ### Example usage
- * ```typescript
- * @injectable()
- * export class ProcessTaskContribution implements TaskContribution {
- *
- *     @inject(ProcessTaskResolver)
- *     protected readonly processTaskResolver: ProcessTaskResolver;
- *
- *     registerResolvers(resolvers: TaskResolverRegistry): void {
- *         resolvers.register('process', this.processTaskResolver);
- *         resolvers.register('shell', this.processTaskResolver);
- *     }
- * }
- * ```
- */
-export interface TaskContribution {
+export type TaskContribution = {
     /**
      * Register task resolvers using the given `TaskResolverRegistry`.
      * @param resolvers the task resolver registry.
@@ -52,12 +34,7 @@ export interface TaskContribution {
     registerProviders?(providers: TaskProviderRegistry): void;
 }
 
-/**
- * A {@link TaskResolver} is used to preprocess/resolve a task before sending
- * it to the Task Server. For instance, the resolver can be used to add missing information to the configuration
- * (e.g default values for optional parameters).
- */
-export interface TaskResolver {
+export type TaskResolver = {
     /**
      * Resolves a `TaskConfiguration` before sending it for execution to the `TaskServer` (Backend).
      * @param taskConfig the configuration that should be resolved.
@@ -68,11 +45,7 @@ export interface TaskResolver {
     resolveTask(taskConfig: TaskConfiguration): Promise<TaskConfiguration>;
 }
 
-/**
- * A {@link TaskProvider} can be used to define the set of tasks that should
- * be provided to the system. i.e. that are available for the user to run.
- */
-export interface TaskProvider {
+export type TaskProvider = {
     /**
      * Retrieves the task configurations which are provided programmatically to the system.
      *
@@ -81,7 +54,7 @@ export interface TaskProvider {
     provideTasks(): Promise<TaskConfiguration[]>;
 }
 
-export interface WillResolveTaskProvider extends WaitUntilEvent {
+export type WillResolveTaskProvider = WaitUntilEvent & {
     taskType?: string
 }
 

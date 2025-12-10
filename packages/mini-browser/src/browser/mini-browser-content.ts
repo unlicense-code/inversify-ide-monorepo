@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,23 +15,23 @@
 // *****************************************************************************
 
 import * as PDFObject from 'pdfobject';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { Message } from '@theia/core/shared/@lumino/messaging';
-import URI from '@theia/core/lib/common/uri';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { Emitter } from '@theia/core/lib/common/event';
-import { KeybindingRegistry } from '@theia/core/lib/browser/keybinding';
-import { WindowService } from '@theia/core/lib/browser/window/window-service';
-import { parseCssTime, Key, KeyCode } from '@theia/core/lib/browser';
-import { DisposableCollection, Disposable } from '@theia/core/lib/common/disposable';
-import { BaseWidget, addEventListener, codiconArray } from '@theia/core/lib/browser/widgets/widget';
-import { LocationMapperService } from './location-mapper-service';
-import { ApplicationShellMouseTracker } from '@theia/core/lib/browser/shell/application-shell-mouse-tracker';
+import { inject, injectable, postConstruct } from 'inversify';
+import { Message } from '@lumino/messaging';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { ILogger } from '@theia/core/lib/common/logger.js';
+import { Emitter } from '@theia/core/lib/common/event.js';
+import { KeybindingRegistry } from '@theia/core/lib/browser/keybinding.js';
+import { WindowService } from '@theia/core/lib/browser/window/window-service.js';
+import { parseCssTime, Key, KeyCode } from '@theia/core/lib/browser/index.js';
+import { DisposableCollection, Disposable } from '@theia/core/lib/common/disposable.js';
+import { BaseWidget, addEventListener, codiconArray } from '@theia/core/lib/browser/widgets/widget.js';
+import { LocationMapperService } from './location-mapper-service.js';
+import { ApplicationShellMouseTracker } from '@theia/core/lib/browser/shell/application-shell-mouse-tracker.js';
 
-import debounce = require('@theia/core/shared/lodash.debounce');
-import { MiniBrowserContentStyle } from './mini-browser-content-style';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileChangesEvent, FileChangeType } from '@theia/filesystem/lib/common/files';
+import debounce from 'lodash/debounce.js'
+import { MiniBrowserContentStyle } from './mini-browser-content-style.js';
+import { FileService } from '@theia/filesystem/lib/browser/index.js';
+import { FileChangesEvent, FileChangeType } from '@theia/filesystem/lib/common/index.js';
 
 /**
  * Initializer properties for the embedded browser widget.
@@ -223,12 +223,12 @@ export class MiniBrowserContent extends BaseWidget {
 
     @postConstruct()
     protected init(): void {
-        this.toDispose.push(this.mouseTracker.onMousedown(e => {
+        this.toDispose.push(this.mouseTracker.onMousedown((e: MouseEvent) => {
             if (this.frame.style.display !== 'none') {
                 this.transparentOverlay.style.display = 'block';
             }
         }));
-        this.toDispose.push(this.mouseTracker.onMouseup(e => {
+        this.toDispose.push(this.mouseTracker.onMouseup((e: MouseEvent) => {
             if (this.frame.style.display !== 'none') {
                 this.transparentOverlay.style.display = 'none';
             }
@@ -297,7 +297,7 @@ export class MiniBrowserContent extends BaseWidget {
         const errorBar = this.createErrorBar();
 
         const frame = this.createIFrame();
-        this.submitInputEmitter.event(input => this.go(input, {
+        this.submitInputEmitter.event((input: string) => this.go(input, {
             preserveFocus: false
         }));
         this.navigateBackEmitter.event(this.handleBack.bind(this));

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ContainerModule } from '@theia/core/shared/inversify';
-import { OVSXClientProvider, OVSXUrlResolver } from '../common';
-import { RequestService } from '@theia/core/shared/@theia/request';
+import { ContainerModule } from 'inversify';
+import { OVSXClientProvider, OVSXUrlResolver } from '../common/index.js';
+import { RequestService } from '@theia/request';
 import {
     ExtensionIdMatchesFilterFactory, OVSXApiFilter, OVSXApiFilterImpl, OVSXApiFilterProvider, OVSXClient, OVSXHttpClient, OVSXRouterClient, RequestContainsFilterFactory
 } from '@theia/ovsx-client';
-import { VSXEnvironment } from './vsx-environment';
+import { VSXEnvironment } from './vsx-environment.js';
 import { RateLimiter } from 'limiter';
 
 export default new ContainerModule(bind => {

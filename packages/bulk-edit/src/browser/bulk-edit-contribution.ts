@@ -14,24 +14,20 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, optional, postConstruct } from '@theia/core/shared/inversify';
-import { Widget } from '@theia/core/lib/browser/widgets/widget';
-import { CommandRegistry } from '@theia/core/lib/common';
-import { AbstractViewContribution } from '@theia/core/lib/browser/shell/view-contribution';
-import { BulkEditCommands } from './bulk-edit-commands';
-import { MonacoBulkEditService } from '@theia/monaco/lib/browser/monaco-bulk-edit-service';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { BulkEditTreeWidget, BULK_EDIT_TREE_WIDGET_ID, BULK_EDIT_WIDGET_NAME } from './bulk-edit-tree';
-import { QuickViewService } from '@theia/core/lib/browser';
-import { nls } from '@theia/core/lib/common/nls';
-import { ResourceEdit } from '@theia/monaco-editor-core/esm/vs/editor/browser/services/bulkEditService';
+import { injectable, inject, postConstruct } from 'inversify';
+import { Widget } from '@theia/core/lib/browser/widgets/widget.js';
+import { CommandRegistry } from '@theia/core/lib/common/index.js';
+import { AbstractViewContribution } from '@theia/core/lib/browser/shell/view-contribution.js';
+import { BulkEditCommands } from './bulk-edit-commands.js';
+import { MonacoBulkEditService } from '@theia/monaco/lib/browser/monaco-bulk-edit-service.js';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar/index.js';
+import { BulkEditTreeWidget, BULK_EDIT_TREE_WIDGET_ID, BULK_EDIT_WIDGET_NAME } from './bulk-edit-tree/index.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { ResourceEdit } from '@theia/monaco-editor-core/esm/vs/editor/browser/services/bulkEditService.js';
 
 @injectable()
 export class BulkEditContribution extends AbstractViewContribution<BulkEditTreeWidget> implements TabBarToolbarContribution {
     protected edits: ResourceEdit[];
-
-    @inject(QuickViewService) @optional()
-    protected override readonly quickView: QuickViewService;
 
     @inject(MonacoBulkEditService)
     protected readonly bulkEditService: MonacoBulkEditService;

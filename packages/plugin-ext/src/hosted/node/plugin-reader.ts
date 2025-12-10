@@ -15,15 +15,15 @@
 // *****************************************************************************
 
 import * as path from 'path';
-import * as express from '@theia/core/shared/express';
-import * as escape_html from 'escape-html';
+import * as express from 'express';
+import escape_html from 'escape-html';
 import { realpath } from 'fs/promises';
 import { ILogger } from '@theia/core';
-import { inject, injectable, optional, multiInject } from '@theia/core/shared/inversify';
-import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application';
-import { PluginMetadata, getPluginId, MetadataProcessor, PluginPackage, PluginContribution } from '../../common/plugin-protocol';
-import { MetadataScanner } from './metadata-scanner';
-import { loadManifest } from './plugin-manifest-loader';
+import { inject, injectable, optional, multiInject } from 'inversify';
+import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application.js';
+import { PluginMetadata, getPluginId, MetadataProcessor, PluginPackage, PluginContribution } from '../../common/plugin-protocol.js';
+import { MetadataScanner } from './metadata-scanner.js';
+import { loadManifest } from './plugin-manifest-loader.js';
 
 @injectable()
 export class HostedPluginReader implements BackendApplicationContribution {

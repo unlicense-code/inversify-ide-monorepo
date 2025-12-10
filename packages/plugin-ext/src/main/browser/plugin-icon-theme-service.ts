@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -20,29 +20,29 @@
 // some code is copied and modified from:
 // https://github.com/microsoft/vscode/blob/7cf4cca47aa025a590fc939af54932042302be63/src/vs/workbench/services/themes/browser/fileIconThemeData.ts
 
-import debounce = require('@theia/core/shared/lodash.debounce');
+import debounce from 'lodash/debounce.js'
 import * as jsoncparser from 'jsonc-parser';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { IconThemeService, IconTheme, IconThemeDefinition } from '@theia/core/lib/browser/icon-theme-service';
-import { IconThemeContribution, DeployedPlugin, UiTheme, getPluginId } from '../../common/plugin-protocol';
-import URI from '@theia/core/lib/common/uri';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { Emitter } from '@theia/core/lib/common/event';
-import { RecursivePartial } from '@theia/core/lib/common/types';
-import { LabelProviderContribution, DidChangeLabelEvent, LabelProvider, URIIconReference } from '@theia/core/lib/browser/label-provider';
-import { ThemeType } from '@theia/core/lib/common/theme';
-import { FileStatNode, DirNode } from '@theia/filesystem/lib/browser';
-import { WorkspaceRootNode } from '@theia/navigator/lib/browser/navigator-tree';
-import { Endpoint } from '@theia/core/lib/browser/endpoint';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileStat, FileChangeType } from '@theia/filesystem/lib/common/files';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { ILanguageService } from '@theia/monaco-editor-core/esm/vs/editor/common/languages/language';
-import { LanguageService } from '@theia/core/lib/browser/language-service';
-import { DEFAULT_ICON_SIZE, PLUGIN_FILE_ICON_CLASS } from './plugin-shared-style';
+import { injectable, inject, postConstruct } from 'inversify';
+import { IconThemeService, IconTheme, IconThemeDefinition } from '@theia/core/lib/browser/icon-theme-service.js';
+import { IconThemeContribution, DeployedPlugin, UiTheme, getPluginId } from '../../common/plugin-protocol.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { Emitter } from '@theia/core';
+import { RecursivePartial } from '@theia/core/lib/common/types.js';
+import { LabelProviderContribution, DidChangeLabelEvent, LabelProvider, URIIconReference } from '@theia/core/lib/browser/label-provider.js';
+import { ThemeType } from '@theia/core/lib/common/theme.js';
+import { FileStatNode, DirNode } from '@theia/filesystem/lib/browser/index.js';
+import { WorkspaceRootNode } from '@theia/navigator/lib/browser/navigator-tree.js';
+import { Endpoint } from '@theia/core/lib/browser/endpoint.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { FileStat, FileChangeType } from '@theia/filesystem/lib/common/files.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { StandaloneServices } from '@theia/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { ILanguageService } from '@theia/monaco-editor-core/esm/vs/editor/common/languages/language.js';
+import { LanguageService } from '@theia/core/lib/browser/language-service.js';
+import { DEFAULT_ICON_SIZE, PLUGIN_FILE_ICON_CLASS } from './plugin-shared-style.js';
 
-export interface PluginIconDefinition {
+export type PluginIconDefinition = {
     iconPath: string;
     fontColor: string;
     fontCharacter: string;
@@ -50,7 +50,7 @@ export interface PluginIconDefinition {
     fontId: string;
 }
 
-export interface PluginFontDefinition {
+export type PluginFontDefinition = {
     id: string;
     weight: string;
     style: string;
@@ -58,7 +58,7 @@ export interface PluginFontDefinition {
     src: { path: string; format: string; }[];
 }
 
-export interface PluginIconsAssociation {
+export type PluginIconsAssociation = {
     folder?: string;
     file?: string;
     folderExpanded?: string;
@@ -71,11 +71,11 @@ export interface PluginIconsAssociation {
     languageIds?: { [languageId: string]: string; };
 }
 
-export interface PluginIconDefinitions {
+export type PluginIconDefinitions = {
     [key: string]: PluginIconDefinition
 }
 
-export interface PluginIconThemeDocument extends PluginIconsAssociation {
+export type PluginIconThemeDocument = PluginIconsAssociation & {
     iconDefinitions: PluginIconDefinitions;
     fonts: PluginFontDefinition[];
     light?: PluginIconsAssociation;

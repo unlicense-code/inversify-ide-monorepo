@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,9 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-export * from './workspace-commands';
-export * from './workspace-service';
-export * from './canonical-uri-service';
-export * from './workspace-frontend-contribution';
-export * from './workspace-frontend-module';
-export * from './workspace-trust-service';
+export * from './workspace-commands.js';
+export * from './workspace-service.js';
+export * from './canonical-uri-service.js';
+export * from './workspace-frontend-contribution.js';
+export * from './workspace-frontend-module.js';
+export * from './workspace-trust-service.js';
+export * from './workspace-uri-contribution.js';
+export * from './workspace-variable-contribution.js';

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,14 +14,14 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { FileServiceContribution, FileService } from './file-service';
+import { inject, injectable } from 'inversify';
+import { FileServiceContribution, FileService } from './file-service.js';
 import {
     FileChange, FileDeleteOptions, FileOverwriteOptions, FilePermission, FileSystemProvider, FileSystemProviderCapabilities, FileType, FileWriteOptions, Stat, WatchOptions
-} from '../common/files';
+} from '../common/files.js';
 import { Event, URI, Disposable, Emitter } from '@theia/core';
-import { JsonSchemaDataStore } from '@theia/core/lib/browser/json-schema-store';
-import { BinaryBuffer } from '@theia/core/lib/common/buffer';
+import { JsonSchemaDataStore } from '@theia/core/lib/browser/json-schema-store.js';
+import { BinaryBuffer } from '@theia/core';
 
 @injectable()
 export class VSCodeFileSystemProvider implements FileSystemProvider {

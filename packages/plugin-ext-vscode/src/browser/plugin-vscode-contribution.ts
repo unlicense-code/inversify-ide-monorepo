@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable } from '@theia/core/shared/inversify';
-import { UserStorageUri } from '@theia/userstorage/lib/browser/user-storage-uri';
-import { FileServiceContribution, FileService } from '@theia/filesystem/lib/browser/file-service';
-import { Schemes } from '@theia/plugin-ext/lib/common/uri-components';
-import { DelegatingFileSystemProvider } from '@theia/filesystem/lib/common/delegating-file-system-provider';
+import { injectable } from 'inversify';
+import { UserStorageUri } from '@theia/userstorage/lib/browser/user-storage-uri.js';
+import { FileServiceContribution, FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { Schemes } from '@theia/plugin-ext/lib/common/uri-components.js';
+import { DelegatingFileSystemProvider } from '@theia/filesystem/lib/common/delegating-file-system-provider.js';
 
 @injectable()
 export class PluginVSCodeContribution implements FileServiceContribution {

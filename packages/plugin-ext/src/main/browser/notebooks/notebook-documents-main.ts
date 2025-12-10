@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,17 +15,17 @@
 // *****************************************************************************
 
 import { DisposableCollection, Event } from '@theia/core';
-import { URI, UriComponents } from '@theia/core/lib/common/uri';
-import { interfaces } from '@theia/core/shared/inversify';
+import { URI, UriComponents } from '@theia/core/lib/common/uri.js';
+import { interfaces } from 'inversify';
 import { NotebookModelResolverService } from '@theia/notebook/lib/browser';
-import { NotebookModel } from '@theia/notebook/lib/browser/view-model/notebook-model';
+import { NotebookModel } from '@theia/notebook/lib/browser/view-model/notebook-model.js';
 import { NotebookCellsChangeType } from '@theia/notebook/lib/common';
-import { NotebookMonacoTextModelService } from '@theia/notebook/lib/browser/service/notebook-monaco-text-model-service';
-import { MAIN_RPC_CONTEXT, NotebookCellsChangedEventDto, NotebookDataDto, NotebookDocumentsExt, NotebookDocumentsMain, NotebookRawContentEventDto } from '../../../common';
-import { RPCProtocol } from '../../../common/rpc-protocol';
-import { NotebookDto } from './notebook-dto';
-import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model';
-import { NotebookOpenHandler } from '@theia/notebook/lib/browser/notebook-open-handler';
+import { NotebookMonacoTextModelService } from '@theia/notebook/lib/browser/service/notebook-monaco-text-model-service.js';
+import { MAIN_RPC_CONTEXT, NotebookCellsChangedEventDto, NotebookDataDto, NotebookDocumentsExt, NotebookDocumentsMain, NotebookRawContentEventDto } from '../../../common/index.js';
+import { RPCProtocol } from '../../../common/rpc-protocol.js';
+import { NotebookDto } from './notebook-dto.js';
+import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model.js';
+import { NotebookOpenHandler } from '@theia/notebook/lib/browser/notebook-open-handler.js';
 
 export class NotebookDocumentsMainImpl implements NotebookDocumentsMain {
 

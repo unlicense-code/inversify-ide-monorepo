@@ -1,6 +1,7 @@
 {
   "name": "@theia/workspace",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - Workspace Extension",
   "dependencies": {
     "@theia/core": "1.66.0",

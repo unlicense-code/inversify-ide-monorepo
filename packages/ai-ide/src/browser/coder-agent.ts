@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 import { AbstractStreamParsingChatAgent, ChatRequestModel, ChatService, ChatSession, MutableChatModel, MutableChatRequestModel } from '@theia/ai-chat/lib/common';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import { CODER_SYSTEM_PROMPT_ID, getCoderAgentModePromptTemplate, getCoderPromptTemplateEdit, getCoderPromptTemplateEditNext, getCoderPromptTemplateSimpleEdit }
-    from '../common/coder-replace-prompt-template';
-import { LanguageModelRequirement, PromptVariantSet } from '@theia/ai-core';
+    from '../common/coder-replace-prompt-template.js';
+import { LanguageModelRequirement, PromptVariantSet } from '@theia/ai-core/lib/common/index.js';
 import { nls } from '@theia/core';
 import { MarkdownStringImpl } from '@theia/core/lib/common/markdown-rendering';
-import { AI_CHAT_NEW_CHAT_WINDOW_COMMAND, ChatCommands } from '@theia/ai-chat-ui/lib/browser/chat-view-commands';
+import { AI_CHAT_NEW_CHAT_WINDOW_COMMAND, ChatCommands } from '@theia/ai-chat-ui/lib/browser/chat-view-commands.js';
 
 @injectable()
 export class CoderAgent extends AbstractStreamParsingChatAgent {

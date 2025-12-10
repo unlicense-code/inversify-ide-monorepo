@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { Disposable } from './disposable';
+import { Disposable } from './disposable.js';
 
 /**
  * Ths code in this file implements a list of listeners that can be invoked sequentially with a callback to handle
@@ -22,7 +22,7 @@ import { Disposable } from './disposable';
  */
 
 type Listener<T, U> = (e: T) => U;
-interface ListenerRegistration<T, U> {
+type ListenerRegistration<T, U> = {
     id: number,
     listener: Listener<T, U>;
 }

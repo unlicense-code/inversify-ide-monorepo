@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { LanguageModelRegistry, LanguageModelStatus, TokenUsageService } from '@theia/ai-core';
-import { AnthropicModel, DEFAULT_MAX_TOKENS } from './anthropic-language-model';
-import { AnthropicLanguageModelsManager, AnthropicModelDescription } from '../common';
+import { LanguageModelRegistry, LanguageModelStatus, TokenUsageService } from '@theia/ai-core/lib/common/index.js';
+import { AnthropicModel, DEFAULT_MAX_TOKENS } from './anthropic-language-model.js';
+import { AnthropicLanguageModelsManager, AnthropicModelDescription } from '../common/index.js';
 
 export class AnthropicLanguageModelsManagerImpl implements AnthropicLanguageModelsManager {
 

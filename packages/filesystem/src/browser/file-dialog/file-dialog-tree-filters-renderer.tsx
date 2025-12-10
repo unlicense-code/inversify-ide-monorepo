@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ReactRenderer } from '@theia/core/lib/browser/widgets/react-renderer';
-import { FileDialogTree } from './file-dialog-tree';
-import * as React from '@theia/core/shared/react';
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { ReactRenderer } from '@theia/core/lib/browser/index.js';
+import { FileDialogTree } from './file-dialog-tree.js';
+import * as React from 'react';
+import { inject, injectable } from 'inversify';
 
 export const FILE_TREE_FILTERS_LIST_CLASS = 'theia-FileTreeFiltersList';
 
@@ -36,12 +36,12 @@ export class FileDialogTreeFilters {
 }
 
 export const FileDialogTreeFiltersRendererFactory = Symbol('FileDialogTreeFiltersRendererFactory');
-export interface FileDialogTreeFiltersRendererFactory {
+export type FileDialogTreeFiltersRendererFactory = {
     (options: FileDialogTreeFiltersRendererOptions): FileDialogTreeFiltersRenderer;
 }
 
 export const FileDialogTreeFiltersRendererOptions = Symbol('FileDialogTreeFiltersRendererOptions');
-export interface FileDialogTreeFiltersRendererOptions {
+export type FileDialogTreeFiltersRendererOptions = {
     suppliedFilters: FileDialogTreeFilters;
     fileDialogTree: FileDialogTree;
 }

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,33 +14,33 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom.js';
 let disableJSDOM = enableJSDOM();
 
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 FrontendApplicationConfigProvider.set({});
 
-import { Container } from '@theia/core/shared/inversify';
-import { Git, Repository } from '../common';
-import { DugiteGit } from '../node/dugite-git';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { FileStat, FileChangesEvent } from '@theia/filesystem/lib/common/files';
+import { Container } from 'inversify';
+import { Git, Repository } from '../common/index.js';
+import { DugiteGit } from '../node/dugite-git.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
+import { FileStat, FileChangesEvent } from '@theia/filesystem/lib/common/files.js';
 import { Emitter, CommandService, Disposable } from '@theia/core';
-import { LocalStorageService, StorageService, LabelProvider, OpenerService } from '@theia/core/lib/browser';
-import { GitRepositoryProvider } from './git-repository-provider';
+import { LocalStorageService, StorageService, LabelProvider, OpenerService } from '@theia/core/lib/browser/index.js';
+import { GitRepositoryProvider } from './git-repository-provider.js';
 import * as sinon from 'sinon';
 import * as chai from 'chai';
-import { GitCommitMessageValidator } from './git-commit-message-validator';
-import { ScmService } from '@theia/scm/lib/browser/scm-service';
-import { ScmContextKeyService } from '@theia/scm/lib/browser/scm-context-key-service';
-import { ContextKeyService, ContextKeyServiceDummyImpl } from '@theia/core/lib/browser/context-key-service';
-import { GitScmProvider } from './git-scm-provider';
-import { createGitScmProviderFactory } from './git-frontend-module';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { GitErrorHandler } from './git-error-handler';
-import { GitPreferences } from '../common/git-preferences';
-import { GitRepositoryTracker } from './git-repository-tracker';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
+import { GitCommitMessageValidator } from './git-commit-message-validator.js';
+import { ScmService } from '@theia/scm/lib/browser/scm-service.js';
+import { ScmContextKeyService } from '@theia/scm/lib/browser/scm-context-key-service.js';
+import { ContextKeyService, ContextKeyServiceDummyImpl } from '@theia/core/lib/browser/context-key-service.js';
+import { GitScmProvider } from './git-scm-provider.js';
+import { createGitScmProviderFactory } from './git-frontend-module.js';
+import { EditorManager } from '@theia/editor/lib/browser/index.js';
+import { GitErrorHandler } from './git-error-handler.js';
+import { GitPreferences } from '../common/git-preferences.js';
+import { GitRepositoryTracker } from './git-repository-tracker.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
 const expect = chai.expect;
 
 disableJSDOM();

@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { MutableChatRequestModel } from '@theia/ai-chat';
-import { ToolProvider, ToolRequest } from '@theia/ai-core';
-import { inject, injectable, optional } from '@theia/core/shared/inversify';
-import { LIST_CHAT_CONTEXT_FUNCTION_ID, RESOLVE_CHAT_CONTEXT_FUNCTION_ID, UPDATE_CONTEXT_FILES_FUNCTION_ID } from '../common/context-functions';
-import { FILE_VARIABLE } from '@theia/ai-core/lib/browser/file-variable-contribution';
-import { ContextFileValidationService, FileValidationState } from '@theia/ai-chat/lib/browser/context-file-validation-service';
+import { MutableChatRequestModel } from '@theia/ai-chat/lib/common/index.js';
+import { ToolProvider, ToolRequest } from '@theia/ai-core/lib/common/index.js';
+import { inject, injectable, optional } from 'inversify';
+import { LIST_CHAT_CONTEXT_FUNCTION_ID, RESOLVE_CHAT_CONTEXT_FUNCTION_ID, UPDATE_CONTEXT_FILES_FUNCTION_ID } from '../common/context-functions.js';
+import { FILE_VARIABLE } from '@theia/ai-core/lib/browser/file-variable-contribution.js';
+import { ContextFileValidationService, FileValidationState } from '@theia/ai-chat/lib/browser/context-file-validation-service.js';
 
 @injectable()
 export class ListChatContext implements ToolProvider {

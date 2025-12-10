@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, interfaces } from '@theia/core/shared/inversify';
+import { injectable, inject, interfaces } from 'inversify';
 import { Command, CommandContribution, CommandRegistry, CommandHandler } from '@theia/core';
-import { FrontendApplicationContribution, LabelProviderContribution } from '@theia/core/lib/browser';
-import { SampleDynamicLabelProviderContribution } from './sample-dynamic-label-provider-contribution';
+import { FrontendApplicationContribution, LabelProviderContribution } from '@theia/core/lib/browser/index.js';
+import { SampleDynamicLabelProviderContribution } from './sample-dynamic-label-provider-contribution.js';
 
 export namespace ExampleLabelProviderCommands {
     const EXAMPLE_CATEGORY = 'Examples';

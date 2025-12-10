@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,7 +16,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export interface ApplicationError<C extends number, D> extends Error {
+export type ApplicationError<C extends number, D> = Error & {
     readonly code: C
     readonly data: D
     toJson(): ApplicationError.Literal<D>

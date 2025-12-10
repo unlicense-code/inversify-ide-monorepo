@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import * as cp from 'child_process';
-import * as fs from '@theia/core/shared/fs-extra';
+import * as fs from 'fs-extra';
 import * as path from 'path';
-import { FileUri } from '@theia/core/lib/node';
-import { HostedPluginSupport } from '@theia/plugin-ext/lib/hosted/node/hosted-plugin';
-import { LogType } from '@theia/plugin-ext/lib/common/types';
-import { ProcessUtils } from '@theia/core/lib/node/process-utils';
+import { FileUri } from '@theia/core/lib/node/index.js';
+import { HostedPluginSupport } from '@theia/plugin-ext/lib/hosted/node/hosted-plugin.js';
+import { LogType } from '@theia/plugin-ext/lib/common/types.js';
+import { ProcessUtils } from '@theia/core/lib/node/process-utils.js';
 
 export const HostedPluginsManager = Symbol('HostedPluginsManager');
 
-export interface HostedPluginsManager {
+export type HostedPluginsManager = {
 
     /**
      * Runs watcher script to recompile plugin on any changes along given path.

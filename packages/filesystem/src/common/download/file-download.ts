@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { isObject, type URI } from '@theia/core/lib/common';
+import { isObject, type URI } from '@theia/core/lib/common/index.js';
 
-export interface FileDownloadData {
+export type FileDownloadData = {
     readonly uris: string[];
 }
 
@@ -35,6 +35,6 @@ export namespace FileDownloadService {
 
 export const FileDownloadService = Symbol('FileDownloadService');
 
-export interface FileDownloadService {
+export type FileDownloadService = {
     download(uris: URI[], options?: FileDownloadService.DownloadOptions): Promise<void>;
 }

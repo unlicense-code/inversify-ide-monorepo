@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2024 Typefox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 
 import { RpcServer } from '@theia/core';
-import { ContainerOutputProvider } from './container-output-provider';
+import { ContainerOutputProvider } from './container-output-provider.js';
 import type { ContainerInspectInfo } from 'dockerode';
 
 // *****************************************************************************
@@ -22,30 +22,30 @@ export const RemoteContainerConnectionProviderPath = '/remote/container';
 
 export const RemoteContainerConnectionProvider = Symbol('RemoteContainerConnectionProvider');
 
-export interface ContainerConnectionOptions {
+export type ContainerConnectionOptions = {
     nodeDownloadTemplate?: string;
     lastContainerInfo?: LastContainerInfo
     devcontainerFile: string;
     workspacePath?: string;
 }
 
-export interface LastContainerInfo {
+export type LastContainerInfo = {
     id: string;
     lastUsed: number;
 }
 
-export interface ContainerConnectionResult {
+export type ContainerConnectionResult = {
     port: string;
     workspacePath: string;
     containerId: string;
 }
 
-export interface DevContainerFile {
+export type DevContainerFile = {
     name: string;
     path: string;
 }
 
-export interface RemoteContainerConnectionProvider extends RpcServer<ContainerOutputProvider> {
+export type RemoteContainerConnectionProvider = RpcServer<ContainerOutputProvider> & {
     connectToContainer(options: ContainerConnectionOptions): Promise<ContainerConnectionResult>;
     getDevContainerFiles(workspacePath: string): Promise<DevContainerFile[]>;
     getCurrentContainerInfo(port: number): Promise<ContainerInspectInfo | undefined>;

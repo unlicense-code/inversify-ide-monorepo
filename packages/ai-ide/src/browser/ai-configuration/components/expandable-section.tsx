@@ -13,10 +13,10 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-import * as React from '@theia/core/shared/react';
-import { codicon } from '@theia/core/lib/browser';
+import * as React from 'react';
+import { codicon } from '@theia/core/lib/browser/index.js';
 
-export interface ExpandableSectionProps {
+export type ExpandableSectionProps = {
     title: React.ReactNode;
     isExpanded: boolean;
     onToggle: () => void;

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, optional } from '@theia/core/shared/inversify';
-import { Git, Repository, Branch, BranchType, Tag, Remote, StashEntry } from '../common';
-import { GitRepositoryProvider } from './git-repository-provider';
-import { MessageService } from '@theia/core/lib/common/message-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { GitErrorHandler } from './git-error-handler';
-import { ProgressService } from '@theia/core/lib/common/progress-service';
-import URI from '@theia/core/lib/common/uri';
-import { nls } from '@theia/core/lib/common/nls';
-import { LabelProvider, QuickInputService, QuickPick, QuickPickItem } from '@theia/core/lib/browser';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
-import { FileStat } from '@theia/filesystem/lib/common/files';
+import { injectable, inject, optional } from 'inversify';
+import { Git, Repository, Branch, BranchType, Tag, Remote, StashEntry } from '../common/index.js';
+import { GitRepositoryProvider } from './git-repository-provider.js';
+import { MessageService } from '@theia/core/lib/common/message-service.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service.js';
+import { GitErrorHandler } from './git-error-handler.js';
+import { ProgressService } from '@theia/core/lib/common/progress-service.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { nls } from '@theia/core/lib/common/nls.js'
+import { LabelProvider, QuickInputService, QuickPick, QuickPickItem } from '@theia/core/lib/browser/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
+import { FileStat } from '@theia/filesystem/lib/common/files.js';
 
 export enum GitAction {
     PULL,

@@ -1,6 +1,7 @@
 {
   "name": "@theia/ai-ollama",
   "version": "1.66.0",
+  "type": "module",
   "description": "Theia - Ollama Integration",
   "dependencies": {
     "@theia/ai-core": "1.66.0",

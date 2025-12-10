@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2021 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,16 +15,12 @@
 // *****************************************************************************
 
 import { injectable } from 'inversify';
-import { nls } from '../../common/nls';
-import { LanguageInfo, Localization } from '../../common/i18n/localization';
-import { Disposable } from '../../common/disposable';
-import { isObject } from '../../common/types';
+import { nls } from '../../common/nls.js';
+import { LanguageInfo, Localization } from '../../common/i18n/localization.js';
+import { Disposable } from '../../common/disposable.js';
+import { isObject } from '../../common/types.js';
 
-/**
- * Localization data structure that contributes its localizations asynchronously.
- * Allows to load localizations on demand when requested by the user.
- */
-export interface LazyLocalization extends LanguageInfo {
+export type LazyLocalization = LanguageInfo & {
     getTranslations(): Promise<Record<string, string>>;
 }
 

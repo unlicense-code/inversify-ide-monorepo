@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2020 RedHat and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import { CommandRegistry, MenuModelRegistry, MenuPath } from '@theia/core/lib/common';
-import { TreeWidget, TreeProps, NodeProps, TREE_NODE_SEGMENT_GROW_CLASS, TREE_NODE_INFO_CLASS } from '@theia/core/lib/browser/tree';
-import { codicon, ContextMenuRenderer, HoverService } from '@theia/core/lib/browser';
-import { TimelineNode, TimelineTreeModel } from './timeline-tree-model';
-import { TimelineService } from './timeline-service';
-import { TimelineContextKeyService } from './timeline-context-key-service';
-import * as React from '@theia/core/shared/react';
-import { TimelineItem } from '../common/timeline-model';
+import { injectable, inject } from 'inversify';
+import { CommandRegistry, MenuModelRegistry, MenuPath } from '@theia/core/lib/common/index.js';
+import { TreeWidget, TreeProps, NodeProps, TREE_NODE_SEGMENT_GROW_CLASS, TREE_NODE_INFO_CLASS } from '@theia/core/lib/browser/tree/index.js';
+import { codicon, ContextMenuRenderer, HoverService } from '@theia/core/lib/browser/index.js';
+import { TimelineNode, TimelineTreeModel } from './timeline-tree-model.js';
+import { TimelineService } from './timeline-service.js';
+import { TimelineContextKeyService } from './timeline-context-key-service.js';
+import * as React from 'react';
+import { TimelineItem } from '../common/timeline-model.js';
 import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
-import { isThemeIcon } from '@theia/core/lib/common/theme';
+import { isThemeIcon } from '@theia/core/lib/common/theme.js';
 
 export const TIMELINE_ITEM_CONTEXT_MENU: MenuPath = ['timeline-item-context-menu'];
 

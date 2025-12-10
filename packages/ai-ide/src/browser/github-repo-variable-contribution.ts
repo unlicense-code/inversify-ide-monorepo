@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
+import { injectable, inject } from 'inversify';
 import { MaybePromise, nls } from '@theia/core';
 import {
     AIVariableContribution,
@@ -24,11 +24,11 @@ import {
     AIVariableContext,
     ResolvedAIVariable,
     AIVariable
-} from '@theia/ai-core/lib/common';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { FileService } from '@theia/filesystem/lib/browser/file-service';
+} from '@theia/ai-core/lib/common/index.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { FileService } from '@theia/filesystem/lib/browser/file-service.js';
 
-import { GitHubRepoService } from '../common/github-repo-protocol';
+import { GitHubRepoService } from '../common/github-repo-protocol.js';
 
 export const GITHUB_REPO_NAME_VARIABLE: AIVariable = {
     id: 'github-repo-name-provider',

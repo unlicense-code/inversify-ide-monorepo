@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 
 import { CommandContribution, CommandRegistry, MessageService, QuickInputService } from '@theia/core';
-import { inject, injectable, interfaces } from '@theia/core/shared/inversify';
-import { SampleBackendPreferencesService, sampleBackendPreferencesServicePath } from '../../common/preference-protocol';
-import { ServiceConnectionProvider } from '@theia/core/lib/browser';
+import { inject, injectable, interfaces } from 'inversify';
+import { SampleBackendPreferencesService, sampleBackendPreferencesServicePath } from '../../common/preference-protocol.js';
+import { ServiceConnectionProvider } from '@theia/core/lib/browser/index.js';
 
 @injectable()
 export class SamplePreferenceContribution implements CommandContribution {

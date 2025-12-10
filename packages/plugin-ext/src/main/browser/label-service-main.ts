@@ -14,12 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { LabelServiceMain } from '../../common/plugin-api-rpc';
-import { interfaces } from '@theia/core/shared/inversify';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { DefaultUriLabelProviderContribution, LabelProviderContribution } from '@theia/core/lib/browser';
-import { ContributionProvider } from '@theia/core/lib/common';
-import { ResourceLabelFormatter } from '@theia/core/lib/common/label-protocol';
+import { LabelServiceMain } from '../../common/plugin-api-rpc.js';
+import { interfaces } from 'inversify';
+import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable.js';
+import { DefaultUriLabelProviderContribution, LabelProviderContribution } from '@theia/core/lib/browser/index.js';
+import { ContributionProvider } from '@theia/core/lib/common/index.js';
+import { ResourceLabelFormatter } from '@theia/core/lib/common/label-protocol.js';
 
 export class LabelServiceMainImpl implements LabelServiceMain {
     private readonly resourceLabelFormatters = new Map<number, Disposable>();

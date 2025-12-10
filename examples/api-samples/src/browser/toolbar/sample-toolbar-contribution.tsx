@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { CommandContribution, CommandRegistry, CommandService, MenuContribution, MenuModelRegistry } from '@theia/core';
-import { LabelProvider, quickCommand, QuickInputService, QuickPickItem } from '@theia/core/lib/browser';
-import { inject, injectable, interfaces } from '@theia/core/shared/inversify';
-import * as React from '@theia/core/shared/react';
-import { quickFileOpen } from '@theia/file-search/lib/browser/quick-file-open';
-import { SearchInWorkspaceCommands } from '@theia/search-in-workspace/lib/browser/search-in-workspace-frontend-contribution';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { AbstractToolbarContribution } from '@theia/toolbar/lib/browser/abstract-toolbar-contribution';
-import { ToolbarMenus, ReactInteraction } from '@theia/toolbar/lib/browser/toolbar-constants';
-import { ToolbarContribution } from '@theia/toolbar/lib/browser/toolbar-interfaces';
-import { ToolbarDefaultsFactory } from '@theia/toolbar/lib/browser/toolbar-defaults';
-import { SampleToolbarDefaultsOverride } from './sample-toolbar-defaults-override';
+import { CommandContribution, CommandRegistry, CommandService, MenuContribution, MenuModelRegistry } from '@theia/core/lib/common/index.js';
+import { LabelProvider, quickCommand, QuickInputService, QuickPickItem } from '@theia/core/lib/browser/index.js';
+import { inject, injectable, interfaces } from 'inversify';
+import * as React from 'react';
+import { quickFileOpen } from '@theia/file-search/lib/browser/quick-file-open.js';
+import { SearchInWorkspaceCommands } from '@theia/search-in-workspace/lib/browser/search-in-workspace-frontend-contribution.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { AbstractToolbarContribution } from '@theia/toolbar/lib/browser/abstract-toolbar-contribution.js';
+import { ToolbarMenus, ReactInteraction } from '@theia/toolbar/lib/browser/toolbar-constants.js';
+import { ToolbarContribution } from '@theia/toolbar/lib/browser/toolbar-interfaces.js';
+import { ToolbarDefaultsFactory } from '@theia/toolbar/lib/browser/toolbar-defaults.js';
+import { SampleToolbarDefaultsOverride } from './sample-toolbar-defaults-override.js';
 import '../../../src/browser/toolbar/sample-toolbar-contribution.css';
 
 export const bindSampleToolbarContribution = (bind: interfaces.Bind, rebind: interfaces.Rebind) => {

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,15 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject } from '@theia/core/shared/inversify';
-import URI from '@theia/core/lib/common/uri';
-import { isObject, Mutable } from '@theia/core/lib/common';
-import { TreeNode, CompositeTreeNode, SelectableTreeNode, ExpandableTreeNode, TreeImpl } from '@theia/core/lib/browser';
-import { FileStat, Stat, FileType, FileOperationError, FileOperationResult } from '../../common/files';
-import { UriSelection } from '@theia/core/lib/common/selection';
-import { MessageService } from '@theia/core/lib/common/message-service';
-import { FileSelection } from '../file-selection';
-import { FileService } from '../file-service';
+import { injectable, inject } from 'inversify';
+import { MessageService, UriSelection, URI, isObject, Mutable } from '@theia/core';
+import { TreeNode, CompositeTreeNode, SelectableTreeNode, ExpandableTreeNode, TreeImpl } from '@theia/core/lib/browser/index.js';
+import { FileStat, Stat, FileType, FileOperationError, FileOperationResult } from '../../common/files.js';
+import { FileSelection } from '../file-selection.js';
+import { FileService } from '../file-service.js';
 
 @injectable()
 export class FileTree extends TreeImpl {
@@ -98,7 +95,7 @@ export class FileTree extends TreeImpl {
     }
 }
 
-export interface FileStatNode extends SelectableTreeNode, Mutable<UriSelection>, FileSelection {
+export type FileStatNode = SelectableTreeNode & Mutable<UriSelection> & FileSelection & {
 }
 export namespace FileStatNode {
     export function is(node: unknown): node is FileStatNode {

@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 Ericsson and others.
+// Copyright (C) 2026 AwesomeOS and Contributors.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,11 +14,11 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { enableJSDOM } from '../../browser/test/jsdom';
+import { enableJSDOM } from '../../browser/test/jsdom.js';
 let disableJSDOM = enableJSDOM();
 
-import { KeyCode, Key, KeyModifier, KeySequence } from './keys';
-import * as os from '../../common/os';
+import { KeyCode, Key, KeyModifier, KeySequence } from './keys.js';
+import * as os from '../../common/os.js';
 import * as chai from 'chai';
 import * as sinon from 'sinon';
 

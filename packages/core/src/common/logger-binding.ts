@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2025 TypeFox and others.
+// Copyright (C) 2025 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { interfaces } from 'inversify';
-import { ILogger, Logger, LoggerName, rootLoggerName } from './logger';
-import { LoggerWatcher } from './logger-watcher';
+import { ILogger, Logger, LoggerName, rootLoggerName } from './logger.js';
+import { LoggerWatcher } from './logger-watcher.js';
 
 export function bindCommonLogger(bind: interfaces.Bind): void {
     bind(LoggerName).toConstantValue(rootLoggerName);

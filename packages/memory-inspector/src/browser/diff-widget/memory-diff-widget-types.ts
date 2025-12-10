@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2021 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,21 +14,21 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { MemoryTable } from '../memory-widget/memory-table-widget';
-import { VariableDecoration } from '../utils/memory-widget-variable-utils';
+import { MemoryTable } from '../memory-widget/memory-table-widget.js';
+import { VariableDecoration } from '../utils/memory-widget-variable-utils.js';
 
 export enum DiffLabels {
     Before = 'before',
     After = 'after'
 }
 
-export interface RowData {
+export type RowData = {
     groups: React.ReactNode[];
     variables: VariableDecoration[];
     ascii: string;
 }
 
-export interface DiffRowOptions {
+export type DiffRowOptions = {
     beforeAddress: string;
     afterAddress: string;
     before: RowData;
@@ -37,7 +37,7 @@ export interface DiffRowOptions {
     isModified: boolean;
 }
 
-export interface DiffExtraColumnOptions extends Pick<MemoryTable.RowOptions, 'ascii' | 'variables'> {
+export type DiffExtraColumnOptions = Pick<MemoryTable.RowOptions, 'ascii' | 'variables'> & {
     afterAscii: string;
     afterVariables: VariableDecoration[];
     variables: VariableDecoration[];

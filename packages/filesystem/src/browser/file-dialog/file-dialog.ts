@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,27 +14,27 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { Message } from '@theia/core/shared/@lumino/messaging';
-import { Disposable, MaybeArray, nls } from '@theia/core/lib/common';
-import { AbstractDialog, DialogProps, setEnabled, createIconButton, Widget, codiconArray, Key, LabelProvider } from '@theia/core/lib/browser';
-import { FileStatNode } from '../file-tree';
-import { LocationListRenderer, LocationListRendererFactory } from '../location';
-import { FileDialogModel } from './file-dialog-model';
-import { FileDialogWidget } from './file-dialog-widget';
-import { FileDialogTreeFiltersRenderer, FileDialogTreeFilters, FileDialogTreeFiltersRendererFactory } from './file-dialog-tree-filters-renderer';
-import URI from '@theia/core/lib/common/uri';
-import { Panel } from '@theia/core/shared/@lumino/widgets';
-import * as DOMPurify from '@theia/core/shared/dompurify';
-import { FileDialogHiddenFilesToggleRenderer, HiddenFilesToggleRendererFactory } from './file-dialog-hidden-files-renderer';
+import { injectable, inject, postConstruct } from 'inversify';
+import { Message } from '@lumino/messaging';
+import { Disposable, MaybeArray, nls } from '@theia/core';
+import { AbstractDialog, DialogProps, setEnabled, createIconButton, Widget, codiconArray, Key, LabelProvider } from '@theia/core/lib/browser/index.js';
+import { FileStatNode } from '../file-tree/index.js';
+import { LocationListRenderer, LocationListRendererFactory } from '../location/index.js';
+import { FileDialogModel } from './file-dialog-model.js';
+import { FileDialogWidget } from './file-dialog-widget.js';
+import { FileDialogTreeFiltersRenderer, FileDialogTreeFilters, FileDialogTreeFiltersRendererFactory } from './file-dialog-tree-filters-renderer.js';
+import { URI } from '@theia/core';
+import { Panel } from '@lumino/widgets';
+import DOMPurify from 'dompurify';
+import { FileDialogHiddenFilesToggleRenderer, HiddenFilesToggleRendererFactory } from './file-dialog-hidden-files-renderer.js';
 
 export const OpenFileDialogFactory = Symbol('OpenFileDialogFactory');
-export interface OpenFileDialogFactory {
+export type OpenFileDialogFactory = {
     (props: OpenFileDialogProps): OpenFileDialog;
 }
 
 export const SaveFileDialogFactory = Symbol('SaveFileDialogFactory');
-export interface SaveFileDialogFactory {
+export type SaveFileDialogFactory = {
     (props: SaveFileDialogProps): SaveFileDialog;
 }
 

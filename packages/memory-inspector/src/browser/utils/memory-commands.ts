@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2021 Ericsson and others.
+ * Copyright (C) 2026 AwesomeOS and Contributors.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { Command } from '@theia/core';
-import { nls } from '@theia/core/lib/common/nls';
+import { nls } from '@theia/core/lib/common/nls.js'
 
 export const MemoryCommand: Command = { id: 'memory-inspector-command' };
 export const MemoryCategory = nls.localize('theia/memory-inspector/memoryCategory', 'Memory Inspector');

@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { MaybePromise, nls } from '@theia/core';
-import { injectable } from '@theia/core/shared/inversify';
-import { AIVariable, ResolvedAIVariable, AIVariableContribution, AIVariableResolver, AIVariableService, AIVariableResolutionRequest, AIVariableContext } from '@theia/ai-core';
-import { ChatSessionContext } from '@theia/ai-chat';
-import { CONTEXT_FILES_VARIABLE_ID } from './context-variables';
+import { injectable } from 'inversify';
+import { AIVariable, ResolvedAIVariable, AIVariableContribution, AIVariableResolver, AIVariableService, AIVariableResolutionRequest, AIVariableContext } from '@theia/ai-core/lib/common/index.js';
+import { ChatSessionContext } from '@theia/ai-chat/lib/common/index.js';
+import { CONTEXT_FILES_VARIABLE_ID } from './context-variables.js';
 
 export const CONTEXT_FILES_VARIABLE: AIVariable = {
     id: CONTEXT_FILES_VARIABLE_ID,

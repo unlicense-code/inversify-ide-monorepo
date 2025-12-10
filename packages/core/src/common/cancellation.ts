@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,11 +18,11 @@
  *  Licensed under the MIT License. See https://github.com/Microsoft/vscode/blob/master/LICENSE.txt for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Event, Emitter } from './event';
-import { isBoolean, isObject } from './types';
-import { Disposable } from './disposable';
+import { Event, Emitter } from './event.js';
+import { isBoolean, isObject } from './types.js';
+import { Disposable } from './disposable.js';
 
-export interface CancellationToken {
+export type CancellationToken = {
     readonly isCancellationRequested: boolean;
     /*
      * An event emitted when cancellation is requested

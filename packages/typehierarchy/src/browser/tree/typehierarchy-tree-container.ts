@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2019 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,13 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces, Container } from '@theia/core/shared/inversify';
-import { createTreeContainer, } from '@theia/core/lib/browser/tree';
-import { TypeHierarchyTree } from './typehierarchy-tree';
-import { TypeHierarchyTreeModel } from './typehierarchy-tree-model';
-import { TypeHierarchyTreeWidget } from './typehierarchy-tree-widget';
+import { interfaces } from 'inversify';
+import { createTreeContainer } from '@theia/core/lib/browser/tree/index.js';
+import { TypeHierarchyTree } from './typehierarchy-tree.js';
+import { TypeHierarchyTreeModel } from './typehierarchy-tree-model.js';
+import { TypeHierarchyTreeWidget } from './typehierarchy-tree-widget.js';
 
-function createHierarchyTreeContainer(parent: interfaces.Container): Container {
+function createHierarchyTreeContainer(parent: interfaces.Container): interfaces.Container {
     const child = createTreeContainer(parent, {
         tree: TypeHierarchyTree,
         model: TypeHierarchyTreeModel,

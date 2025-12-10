@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2017 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { injectable, inject } from 'inversify';
-import URI from '../common/uri';
-import { LabelProviderContribution, LabelProvider, DidChangeLabelEvent } from './label-provider';
-import { codicon } from './widgets';
+import URI from '../common/uri.js';
+import { LabelProviderContribution, LabelProvider, DidChangeLabelEvent } from './label-provider.js';
+import { codicon } from './widgets/index.js';
 
 export namespace DiffUris {
 

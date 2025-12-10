@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { interfaces } from '@theia/core/shared/inversify';
-import { MainMessageType, MainMessageOptions, MainMessageItem } from '../../common/plugin-api-rpc';
-import { ModalNotification, MessageType } from './dialogs/modal-notification';
-import { BasicMessageRegistryMainImpl } from '../common/basic-message-registry-main';
+import { interfaces } from 'inversify';
+import { MainMessageType, MainMessageOptions, MainMessageItem } from '../../common/plugin-api-rpc.js';
+import { ModalNotification, MessageType } from './dialogs/modal-notification.js';
+import { BasicMessageRegistryMainImpl } from '../common/basic-message-registry-main.js';
 
 /**
  * Message registry implementation that adds support for the model option via dialog in the browser.

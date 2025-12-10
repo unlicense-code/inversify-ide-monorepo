@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2023 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { Command, CommandHandler, Emitter, Event } from '@theia/core';
-import { inject, injectable } from '@theia/core/shared/inversify';
-import { WindowService, WindowReloadOptions } from '@theia/core/lib/browser/window/window-service';
+import { inject, injectable } from 'inversify';
+import { WindowService, WindowReloadOptions } from '@theia/core/lib/browser/window/window-service.js';
 
 export const RemoteRegistryContribution = Symbol('RemoteRegistryContribution');
 
-export interface RemoteRegistryContribution {
+export type RemoteRegistryContribution = {
     registerRemoteCommands(registry: RemoteRegistry): void;
 }
 

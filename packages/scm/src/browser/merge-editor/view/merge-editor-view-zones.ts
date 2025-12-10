@@ -14,18 +14,18 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable } from '@theia/core/shared/inversify';
+import { inject, injectable } from 'inversify';
 import { Disposable } from '@theia/core';
 import { Autorun, Observable } from '@theia/core/lib/common/observable';
 import * as monaco from '@theia/monaco-editor-core';
-import { MonacoEditorViewZone } from '@theia/monaco/lib/browser/monaco-editor-zone-widget';
-import { MergeEditor } from '../merge-editor';
-import { MergeRange } from '../model/merge-range';
-import { MergeRangeAction, MergeRangeActions } from './merge-range-actions';
-import { MergeEditorPane } from './merge-editor-panes';
-import { DiffSpacers, DiffSpacerService } from './diff-spacers';
+import { MonacoEditorViewZone } from '@theia/monaco/lib/browser/monaco-editor-zone-widget.js';
+import { MergeEditor } from '../merge-editor.js';
+import { MergeRange } from '../model/merge-range.js';
+import { MergeRangeAction, MergeRangeActions } from './merge-range-actions.js';
+import { MergeEditorPane } from './merge-editor-panes/index.js';
+import { DiffSpacers, DiffSpacerService } from './diff-spacers.js';
 
-export interface MergeEditorViewZone {
+export type MergeEditorViewZone = {
     create(ctx: MergeEditorViewZone.CreationContext): void;
 }
 
@@ -36,7 +36,7 @@ export namespace MergeEditorViewZone {
     }
 }
 
-export interface MergeEditorViewZones {
+export type MergeEditorViewZones = {
     readonly baseViewZones: readonly MergeEditorViewZone[];
     readonly side1ViewZones: readonly MergeEditorViewZone[];
     readonly side2ViewZones: readonly MergeEditorViewZone[];

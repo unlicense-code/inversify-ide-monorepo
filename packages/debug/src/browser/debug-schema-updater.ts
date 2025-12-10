@@ -1,5 +1,5 @@
 // *****************************************************************************
-// Copyright (C) 2018 TypeFox and others.
+// Copyright (C) 2026 AwesomeOS and Contributors
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { JsonSchemaRegisterContext, JsonSchemaContribution, JsonSchemaDataStore } from '@theia/core/lib/browser/json-schema-store';
-import { deepClone, nls } from '@theia/core/lib/common';
-import { IJSONSchema } from '@theia/core/lib/common/json-schema';
-import URI from '@theia/core/lib/common/uri';
-import { DebugService } from '../common/debug-service';
-import { debugPreferencesSchema } from '../common/debug-preferences';
-import { inputsSchema } from '@theia/variable-resolver/lib/browser/variable-input-schema';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { defaultCompound } from '../common/debug-compound';
-import { launchSchemaId } from '../common/launch-preferences';
+import { injectable, inject, postConstruct } from 'inversify';
+import { JsonSchemaRegisterContext, JsonSchemaContribution, JsonSchemaDataStore } from '@theia/core/lib/browser/json-schema-store.js';
+import { deepClone, nls } from '@theia/core/lib/common/index.js';
+import { IJSONSchema } from '@theia/core/lib/common/json-schema.js';
+import { URI } from '@theia/core/lib/common/uri.js';
+import { DebugService } from '../common/debug-service.js';
+import { debugPreferencesSchema } from '../common/debug-preferences.js';
+import { inputsSchema } from '@theia/variable-resolver/lib/browser/variable-input-schema.js';
+import { WorkspaceService } from '@theia/workspace/lib/browser/index.js';
+import { defaultCompound } from '../common/debug-compound.js';
+import { launchSchemaId } from '../common/launch-preferences.js';
 
 @injectable()
 export class DebugSchemaUpdater implements JsonSchemaContribution {

@@ -14,17 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { ChatRequest, MutableChatModel } from '@theia/ai-chat';
-import { AIChatInputConfiguration, AIChatInputWidget } from '@theia/ai-chat-ui/lib/browser/chat-input-widget';
-import { CHAT_VIEW_LANGUAGE_EXTENSION } from '@theia/ai-chat-ui/lib/browser/chat-view-language-contribution';
+import { ChatRequest, MutableChatModel } from '@theia/ai-chat/lib/common/index.js';
+import { AIChatInputConfiguration, AIChatInputWidget } from '@theia/ai-chat-ui/lib/browser/chat-input-widget.js';
+import { CHAT_VIEW_LANGUAGE_EXTENSION } from '@theia/ai-chat-ui/lib/browser/chat-view-language-contribution.js';
 import { generateUuid, URI } from '@theia/core';
-import { inject, injectable, optional, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable, optional, postConstruct } from 'inversify';
 
 export const AskAIInputConfiguration = Symbol('AskAIInputConfiguration');
-export interface AskAIInputConfiguration extends AIChatInputConfiguration { }
+export type AskAIInputConfiguration = AIChatInputConfiguration & { }
 
 export const AskAIInputArgs = Symbol('AskAIInputArgs');
-export interface AskAIInputArgs {
+export type AskAIInputArgs = {
     onSubmit: (request: ChatRequest) => void;
     onCancel: () => void;
 }
@@ -43,7 +43,7 @@ export class AskAIInputWidget extends AIChatInputWidget {
     protected readonly args: AskAIInputArgs | undefined;
 
     @inject(AskAIInputConfiguration) @optional()
-    protected override readonly configuration: AskAIInputConfiguration | undefined;
+    protected declare readonly configuration: AskAIInputConfiguration | undefined;
 
     protected readonly resourceId = generateUuid();
     protected override heightInLines = 3;
