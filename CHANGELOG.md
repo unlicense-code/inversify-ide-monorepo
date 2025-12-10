@@ -20,6 +20,7 @@ old behavior and the new view. Default is the old behavior. [#16604](https://git
   - added required `startFrame` parameter to `DebugThread.doUpdateFrames` method
 - [plugin-ext] `$setBadge` method removed from `WebviewsMain` interface and `WebviewsMainImpl`; badge-related fields removed from `WebviewView` interface and implementation; badge-related fields removed from `PluginViewWidget`; badge-related fields removed from `WebviewWidget`. Use the `BadgeService` instead of `BadgeWidget` interface implementation to show extension badges. [#16518](https://github.com/eclipse-theia/theia/pull/16518)
 - [scm] `ScmTabBarDecorator` and bindings removed. `ScmWidget` now contributes badge decorations via the `BadgeService`. [#16518](https://github.com/eclipse-theia/theia/pull/16518)
+- [ai-chat] `MutableChatRequestModel` and `MutableChatModel` now require an additional `ToolInvocationRegistry` constructor parameter. [#16736](https://https://github.com/eclipse-theia/theia/pull/16736)
 - [ai-core] objects returned by `AiSettingsService` settings retrievals marked readonly. To mutate a settings object, make a copy. [#16612](https://github.com/eclipse-theia/theia/pull/16612)
 
 ## 1.66.0 - 10/30/2025
