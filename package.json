@@ -59,6 +59,7 @@
     "yargs": "^15.3.1"
   },
   "scripts": {
+    "afterInstall": "npx node-gyp install && npx theia-patch && npx npm run -s compute-references && npx lerna run afterInstall",
     "all": "npm -s install && npm run -s lint && npm run -s build",
     "build": "npm run compile && npm run build:applications",
     "build:applications": "npm run build:browser && npm run build:browser-only && npm run build:electron",
@@ -78,8 +79,6 @@
     "lint": "lerna run lint",
     "lint:clean": "rimraf .eslintcache",
     "lint:fix": "lerna run lint -- --fix",
-    "preinstall": "node-gyp install",
-    "postinstall": "theia-patch && npm run -s compute-references && lerna run afterInstall",
     "publish:latest": "lerna publish --exact --yes",
     "publish:patch": "lerna publish --exact --yes --dist-tag patch",
     "publish:next": "lerna publish --canary preminor --exact --yes --preid next --dist-tag next && npm run -s publish:check next",
