@@ -21,7 +21,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import Ajv from 'ajv';
-import debounce = require('p-debounce');
+import debounce from 'p-debounce';
 import { postConstruct, injectable, inject } from 'inversify';
 import { JsonSchemaContribution, JsonSchemaDataStore, JsonSchemaRegisterContext } from '@theia/core/lib/browser/json-schema-store.js';
 import { deepClone, Emitter, nls } from '@theia/core/lib/common/index.js';

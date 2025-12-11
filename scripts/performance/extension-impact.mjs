@@ -25,7 +25,7 @@ import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const import.meta.dirname = dirname(__filename);
 const require = createRequire(import.meta.url);
 
 const env = Object.assign({}, process.env);
@@ -161,7 +161,7 @@ async function extensionImpact(extensions) {
 function preparePackageTemplate() {
     const core = require('../../packages/core/package.json');
     const version = core.version;
-    const content = readFileSync(resolve(__dirname, './base-package.json'), 'utf-8')
+    const content = readFileSync(resolve(import.meta.dirname, './base-package.json'), 'utf-8')
         .replace(/\{\{app\}\}/g, hostApp)
         .replace(/\{\{version\}\}/g, version);
     basePackage = JSON.parse(content);
@@ -237,11 +237,11 @@ async function calculateExtension(extensionQualifier) {
             case 'browser':
                 command = `concurrently --success first -k -r "cd scripts/performance && node browser-performance.mjs --name Browser --folder browser --runs ${runs}${url ? ' --url ' + url : ''}" `
                     + `"npm run start:browser | grep -v '.*'"`
-                cwd = resolve(__dirname, '../../');
+                cwd = resolve(import.meta.dirname, '../../');
                 break;
             case 'electron':
                 command = `node electron-performance.mjs  --name Electron --folder electron --runs ${runs}${workspace ? ' --workspace "' + workspace + '"' : ''}`
-                cwd = __dirname;
+                cwd = import.meta.dirname;
                 break;
             default:
                 console.log('Unknown host app:', hostApp);

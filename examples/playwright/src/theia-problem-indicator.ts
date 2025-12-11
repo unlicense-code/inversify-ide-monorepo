@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { ElementHandle } from '@playwright/test';
-import { TheiaStatusIndicator } from './theia-status-indicator';
+import { TheiaStatusIndicator } from './theia-status-indicator.js';
 
 export class TheiaProblemIndicator extends TheiaStatusIndicator {
     id = 'problem-marker-status';

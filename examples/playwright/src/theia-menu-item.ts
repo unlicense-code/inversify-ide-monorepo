@@ -16,7 +16,7 @@
 
 import { ElementHandle } from '@playwright/test';
 
-import { elementContainsClass, textContent } from './util';
+import { elementContainsClass, textContent } from './util.js';
 
 export class TheiaMenuItem {
 

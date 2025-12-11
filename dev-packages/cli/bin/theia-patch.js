@@ -16,22 +16,24 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 // @ts-check
-const path = require('path');
-const cp = require('child_process');
+import { createRequire } from 'module';
+import { join } from 'path';
+import { exec } from 'child_process';
 
+const require = createRequire(import.meta.url);
 const patchPackage = require.resolve('patch-package');
 console.log(`patch-package = ${patchPackage}`);
 
-const patchesDir = path.join('.', 'node_modules', '@theia', 'cli', 'patches');
+const patchesDir = join('.', 'node_modules', '@theia', 'cli', 'patches');
 
 console.log(`patchesdir = ${patchesDir}`);
 
 const env = Object.assign({}, process.env);
 
-const scriptProcess = cp.exec(`node "${patchPackage}" --patch-dir "${patchesDir}"`, {
+const scriptProcess = exec(`node "${patchPackage}" --patch-dir "${patchesDir}"`, {
     cwd: process.cwd(),
     env
 });
 
-scriptProcess.stdout.pipe(process.stdout);
-scriptProcess.stderr.pipe(process.stderr);
+scriptProcess.stdout?.pipe(process.stdout);
+scriptProcess.stderr?.pipe(process.stderr);

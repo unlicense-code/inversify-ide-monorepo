@@ -14,8 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 const vhost = require('vhost');
-import express = require('express');
+import express from 'express';
 import * as fs from 'fs-extra';
 import { lookup } from 'mime-types';
 import { injectable, inject, named } from 'inversify';

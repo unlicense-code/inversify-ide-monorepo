@@ -18,7 +18,7 @@ import { CommandContribution, CommandRegistry } from '@theia/core';
 import { inject, injectable, interfaces } from 'inversify';
 import { RemoteFileSystemProvider } from '@theia/filesystem/lib/common/remote-file-system-provider.js';
 import { FileSystemProviderCapabilities } from '@theia/filesystem/lib/common/files.js';
-import { MarkdownStringImpl } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownStringImpl } from '@theia/core/lib/common/markdown-rendering/index.js';
 
 @injectable()
 export class SampleFileSystemCapabilities implements CommandContribution {

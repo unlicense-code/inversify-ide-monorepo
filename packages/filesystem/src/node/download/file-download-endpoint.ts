@@ -18,7 +18,8 @@
 
 import * as url from 'url';
 import { injectable, inject, named } from 'inversify';
-import { json } from 'body-parser';
+import bodyParser from 'body-parser';
+const { json } = bodyParser;
 import { Application, Router } from 'express';
 import { BackendApplicationContribution } from '@theia/core/lib/node/index.js';
 import { FileUri } from '@theia/core/lib/node/index.js';

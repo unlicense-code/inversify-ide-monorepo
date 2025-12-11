@@ -17,7 +17,7 @@
 import { codicon, ReactWidget, StatefulWidget, Widget } from '@theia/core/lib/browser/index.js';
 import { injectable, postConstruct, unmanaged } from 'inversify';
 import * as React from 'react';
-import debounce = require('p-debounce');
+import debounce from 'p-debounce';
 import { Emitter } from '@theia/core';
 import { nls } from '@theia/core/lib/common/nls.js'
 

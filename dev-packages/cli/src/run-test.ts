@@ -18,7 +18,7 @@
 
 import * as net from 'net';
 import * as puppeteer from 'puppeteer-core';
-import newTestPage, { TestFileOptions } from './test-page';
+import newTestPage, { TestFileOptions } from './test-page.js';
 
 export type TestOptions = {
     start: () => Promise<net.AddressInfo>
@@ -69,6 +69,8 @@ export default async function runTest(options: TestOptions): Promise<void> {
                     testPage.coverage.stopJSCoverage(),
                     testPage.coverage.stopCSSCoverage(),
                 ]);
+                const { createRequire } = await import('module');
+                const require = createRequire(import.meta.url);
                 require('puppeteer-to-istanbul').write([...jsCoverage, ...cssCoverage]);
             }
             if (exit) {

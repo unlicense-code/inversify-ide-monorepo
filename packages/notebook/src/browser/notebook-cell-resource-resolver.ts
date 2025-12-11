@@ -16,7 +16,7 @@
 
 import { Event, Emitter, Resource, ResourceReadOptions, ResourceResolver, URI } from '@theia/core';
 import { inject, injectable } from 'inversify';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/index.js';
 import { CellUri } from '../common/index.js';
 import { NotebookService } from './service/notebook-service.js';
 import { NotebookCellModel } from './view-model/notebook-cell-model.js';

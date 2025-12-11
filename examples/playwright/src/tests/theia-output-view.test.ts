@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { expect, test } from '@playwright/test';
-import { TheiaOutputViewChannel } from '../theia-output-channel';
-import { TheiaApp } from '../theia-app';
-import { TheiaAppLoader } from '../theia-app-loader';
-import { TheiaOutputView } from '../theia-output-view';
+import { TheiaOutputViewChannel } from '../theia-output-channel.js';
+import { TheiaApp } from '../theia-app.js';
+import { TheiaAppLoader } from '../theia-app-loader.js';
+import { TheiaOutputView } from '../theia-output-view.js';
 
 let app: TheiaApp; let outputView: TheiaOutputView; let testChannel: TheiaOutputViewChannel;
 test.describe('Theia Output View', () => {

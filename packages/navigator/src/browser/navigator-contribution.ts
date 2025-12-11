@@ -73,7 +73,7 @@ import { nls } from '@theia/core/lib/common/nls.js';
 import { URI } from '@theia/core/lib/common/uri.js';
 import { UriAwareCommandHandler } from '@theia/core/lib/common/uri-command-handler.js';
 import { FileNavigatorCommands } from './file-navigator-commands.js';
-import { WorkspacePreferences } from '@theia/workspace/lib/common';
+import { WorkspacePreferences } from '@theia/workspace/lib/common/index.js';
 export { FileNavigatorCommands };
 
 /**

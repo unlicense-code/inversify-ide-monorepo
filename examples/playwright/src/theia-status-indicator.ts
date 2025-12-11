@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { ElementHandle } from '@playwright/test';
-import { TheiaPageObject } from './theia-page-object';
+import { TheiaPageObject } from './theia-page-object.js';
 
 export abstract class TheiaStatusIndicator extends TheiaPageObject {
     protected abstract id: string;

@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import { Locator } from '@playwright/test';
-import { TheiaApp } from './theia-app';
-import { TheiaEditor } from './theia-editor';
-import { TheiaNotebookCell } from './theia-notebook-cell';
-import { TheiaNotebookToolbar } from './theia-notebook-toolbar';
-import { TheiaQuickCommandPalette } from './theia-quick-command-palette';
-import { TheiaToolbarItem } from './theia-toolbar-item';
-import { normalizeId } from './util';
+import { TheiaApp } from './theia-app.js';
+import { TheiaEditor } from './theia-editor.js';
+import { TheiaNotebookCell } from './theia-notebook-cell.js';
+import { TheiaNotebookToolbar } from './theia-notebook-toolbar.js';
+import { TheiaQuickCommandPalette } from './theia-quick-command-palette.js';
+import { TheiaToolbarItem } from './theia-toolbar-item.js';
+import { normalizeId } from './util.js';
 
 export namespace NotebookCommands {
     export const SELECT_KERNEL_COMMAND = 'notebook.selectKernel';

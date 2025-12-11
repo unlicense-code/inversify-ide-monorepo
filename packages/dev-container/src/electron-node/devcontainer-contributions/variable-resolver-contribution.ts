@@ -14,14 +14,17 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { inject, injectable, interfaces, LazyServiceIdentifier } from 'inversify';
-import { DockerContainerService } from '../docker-container-service.js';
+import { inject, injectable, interfaces } from 'inversify';
+import type { DockerContainerService } from '../docker-container-service.js';
 
 export const VariableResolverContribution = Symbol('VariableResolverContribution');
 export type VariableResolverContribution = {
     canResolve(variable: string): boolean;
     resolve(variable: string): string;
 }
+
+// Export DockerContainerService symbol to break circular dependency
+export const DockerContainerServiceSymbol = Symbol('DockerContainerService');
 
 export function registerVariableResolverContributions(bind: interfaces.Bind): void {
     bind(VariableResolverContribution).to(LocalEnvVariableResolver).inSingletonScope();
@@ -42,7 +45,7 @@ export class LocalEnvVariableResolver implements VariableResolverContribution {
 
 @injectable()
 export class ContainerIdResolver implements VariableResolverContribution {
-    @inject(new LazyServiceIdentifier(() => DockerContainerService))
+    @inject(DockerContainerServiceSymbol)
         protected readonly dockerContainerService: DockerContainerService;
 
     canResolve(type: string): boolean {

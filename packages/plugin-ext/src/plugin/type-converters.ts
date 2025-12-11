@@ -32,7 +32,7 @@ import * as notebooks from '@theia/notebook/lib/common';
 import { CommandsConverter } from './command-registry.js';
 import { BinaryBuffer } from '@theia/core/lib/common/buffer.js';
 import { CellRange, isTextStreamMime } from '@theia/notebook/lib/common';
-import { MarkdownString as MarkdownStringDTO } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownString as MarkdownStringDTO } from '@theia/core/lib/common/markdown-rendering/index.js';
 
 import { TestItemDTO, TestMessageDTO, TestMessageStackFrameDTO } from '../common/test-types.js';
 import { PluginIconPath } from './plugin-icon-path.js';

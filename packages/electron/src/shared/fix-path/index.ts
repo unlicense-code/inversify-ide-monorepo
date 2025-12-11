@@ -14,14 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-Object.defineProperty(exports, '__esModule', { value: true });
-exports.electronRange = require('./package.json').peerDependencies.electron;
-try {
-    exports.electronVersion = require('electron/package.json').version;
-} catch (error) {
-    if (error.code === 'MODULE_NOT_FOUND') {
-        exports.electronVersion = undefined;
-    } else {
-        throw error;
-    }
-}
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+import fixPath from 'fix-path';
+const fixPathModule = require('fix-path') as typeof fixPath;
+export default fixPathModule;
+export * from 'fix-path';
+

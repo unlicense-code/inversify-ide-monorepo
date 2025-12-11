@@ -20,8 +20,8 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { injectable, inject, named } from 'inversify';
-import { ILogger } from '@theia/core/lib/common/';
-import { Process, IProcessExitEvent } from '@theia/process/lib/node';
+import { ILogger } from '@theia/core/lib/common/index.js';
+import { Process, IProcessExitEvent } from '@theia/process/lib/node/index.js';
 import { Task, TaskOptions } from '../task.js';
 import { TaskManager } from '../task-manager.js';
 import { ProcessType, ProcessTaskInfo } from '../../common/process/task-protocol.js';

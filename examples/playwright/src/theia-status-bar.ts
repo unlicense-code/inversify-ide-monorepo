@@ -16,9 +16,9 @@
 
 import { ElementHandle } from '@playwright/test';
 
-import { TheiaApp } from './theia-app';
-import { TheiaPageObject } from './theia-page-object';
-import { TheiaStatusIndicator } from './theia-status-indicator';
+import { TheiaApp } from './theia-app.js';
+import { TheiaPageObject } from './theia-page-object.js';
+import { TheiaStatusIndicator } from './theia-status-indicator.js';
 
 export class TheiaStatusBar extends TheiaPageObject {
 

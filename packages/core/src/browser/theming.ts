@@ -22,7 +22,7 @@ import { PreferenceSchemaService } from '../common/preferences/preference-schema
 import { Deferred } from '../common/promise-util.js';
 import { Theme, ThemeChangeEvent } from '../common/theme.js';
 import { FrontendApplicationConfigProvider } from './frontend-application-config-provider.js';
-import debounce = require('lodash.debounce');
+import debounce from 'lodash.debounce';
 import { PreferenceService } from '../common/preferences/index.js';
 
 const COLOR_THEME_PREFERENCE_KEY = 'workbench.colorTheme';

@@ -16,7 +16,7 @@
 
 import * as path from 'path';
 import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider.js';
-import { BackendApplicationContribution } from '@theia/core/lib/node';
+import { BackendApplicationContribution } from '@theia/core/lib/node/index.js';
 import { ContainerModule, interfaces } from 'inversify';
 import { ExtPluginApiProvider, HostedPluginServer, PluginHostEnvironmentVariable, PluginScanner } from '@theia/plugin-ext';
 import { HostedPluginSupport } from '@theia/plugin-ext/lib/hosted/node/hosted-plugin.js';
@@ -43,7 +43,7 @@ export function bindCommonHostedBackend(bind: interfaces.Bind): void {
     bind(BackendPluginHostableFilter).toConstantValue(isHeadlessPlugin);
 
     bind(HostedPluginProcessConfiguration).toConstantValue({
-        path: path.join(__dirname, 'plugin-host-headless'),
+        path: path.join(import.meta.dirname, 'plugin-host-headless'),
     });
 }
 
@@ -52,7 +52,7 @@ export function bindHeadlessHosted(bind: interfaces.Bind): void {
     bind(PluginScanner).toService(TheiaHeadlessPluginScanner);
     bind(SupportedHeadlessActivationEvents).toConstantValue(['*', 'onStartupFinished']);
 
-    bind(BackendApplicationContribution).toDynamicValue(({container}) => {
+    bind(BackendApplicationContribution).toDynamicValue(({ container }) => {
         let hostedPluginSupport: HeadlessHostedPluginSupport | undefined;
 
         return {

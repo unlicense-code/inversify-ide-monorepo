@@ -19,7 +19,7 @@ import { injectable, inject, postConstruct } from 'inversify';
 import { TreeSource, TreeElement } from '@theia/core/lib/browser/source-tree/tree-source.js';
 import { DebugThread } from '../model/debug-thread.js';
 import { DebugViewModel } from './debug-view-model.js';
-import debounce = require('p-debounce');
+import debounce from 'p-debounce';
 import { nls } from '@theia/core';
 
 @injectable()

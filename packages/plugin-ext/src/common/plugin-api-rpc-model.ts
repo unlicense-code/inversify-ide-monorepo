@@ -16,7 +16,7 @@
 
 import * as theia from '@theia/plugin';
 import type * as monaco from '@theia/monaco-editor-core';
-import { MarkdownString as MarkdownStringDTO } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownString as MarkdownStringDTO } from '@theia/core/lib/common/markdown-rendering/index.js';
 import { UriComponents } from './uri-components.js';
 import { CompletionItemTag, DocumentPasteEditKind, SnippetString } from '../plugin/types-impl.js';
 import { Event as TheiaEvent } from '@theia/core';

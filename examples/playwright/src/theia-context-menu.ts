@@ -16,8 +16,8 @@
 
 import { ElementHandle } from '@playwright/test';
 
-import { TheiaApp } from './theia-app';
-import { TheiaMenu } from './theia-menu';
+import { TheiaApp } from './theia-app.js';
+import { TheiaMenu } from './theia-menu.js';
 
 export class TheiaContextMenu extends TheiaMenu {
 

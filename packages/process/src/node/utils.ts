@@ -16,6 +16,9 @@
 
 import { isWindows } from '@theia/core';
 import * as os from 'os';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
 const stringArgv = require('string-argv');
 
 /**

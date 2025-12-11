@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import { ElementHandle } from '@playwright/test';
-import { TheiaApp } from './theia-app';
-import { TheiaDialog } from './theia-dialog';
-import { TheiaMenuItem } from './theia-menu-item';
-import { TheiaRenameDialog } from './theia-rename-dialog';
-import { TheiaTreeNode } from './theia-tree-node';
-import { TheiaView } from './theia-view';
-import { elementContainsClass, normalizeId, OSUtil } from './util';
+import { TheiaApp } from './theia-app.js';
+import { TheiaDialog } from './theia-dialog.js';
+import { TheiaMenuItem } from './theia-menu-item.js';
+import { TheiaRenameDialog } from './theia-rename-dialog.js';
+import { TheiaTreeNode } from './theia-tree-node.js';
+import { TheiaView } from './theia-view.js';
+import { elementContainsClass, normalizeId, OSUtil } from './util.js';
 
 const TheiaExplorerViewData = {
     tabSelector: '#shell-tab-explorer-view-container',

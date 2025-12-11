@@ -14,7 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as fs from 'fs-extra';
+import fsExtra from 'fs-extra';
+const fs = fsExtra;
 import { ApplicationPackage } from '@theia/application-package';
 
 export type GeneratorOptions = {

@@ -16,11 +16,11 @@
 
 import { Locator, PlaywrightWorkerArgs, expect, test } from '@playwright/test';
 import * as path from 'path';
-import { TheiaApp } from '../theia-app';
-import { TheiaAppLoader, TheiaPlaywrightTestConfig } from '../theia-app-loader';
-import { TheiaNotebookCell } from '../theia-notebook-cell';
-import { TheiaNotebookEditor } from '../theia-notebook-editor';
-import { TheiaWorkspace } from '../theia-workspace';
+import { TheiaApp } from '../theia-app.js';
+import { TheiaAppLoader, TheiaPlaywrightTestConfig } from '../theia-app-loader.js';
+import { TheiaNotebookCell } from '../theia-notebook-cell.js';
+import { TheiaNotebookEditor } from '../theia-notebook-editor.js';
+import { TheiaWorkspace } from '../theia-workspace.js';
 
 // See .github/workflows/playwright.yml for preferred python version
 const preferredKernel = process.env.CI ? 'Python 3.13' : 'Python 3';
@@ -354,7 +354,7 @@ async function firstCell(editor: TheiaNotebookEditor): Promise<TheiaNotebookCell
 }
 
 async function loadApp(args: TheiaPlaywrightTestConfig & PlaywrightWorkerArgs): Promise<TheiaApp> {
-    const ws = new TheiaWorkspace([path.resolve(__dirname, '../../src/tests/resources/notebook-files')]);
+    const ws = new TheiaWorkspace([path.resolve(import.meta.dirname, '../../src/tests/resources/notebook-files')]);
     const app = await TheiaAppLoader.load(args, ws);
     // auto-save are disabled using settings.json file
     // see examples/playwright/src/tests/resources/notebook-files/.theia/settings.json

@@ -15,15 +15,18 @@
 // *****************************************************************************
 
 import * as path from 'path';
-import * as fs from 'fs-extra';
+import fsExtra from 'fs-extra';
 import * as cp from 'child_process';
 import * as semver from 'semver';
+import { createRequire } from 'module';
+const fs = fsExtra;
+const require = createRequire(import.meta.url);
 import { ApplicationPackage, ApplicationPackageOptions } from '@theia/application-package';
-import { WebpackGenerator, FrontendGenerator, BackendGenerator } from './generator';
-import { ApplicationProcess } from './application-process';
-import { GeneratorOptions } from './generator/abstract-generator';
-import yargs = require('yargs');
-import { RollupGenerator } from './generator/rollup-generator';
+import { WebpackGenerator, FrontendGenerator, BackendGenerator } from './generator/index.js';
+import { ApplicationProcess } from './application-process.js';
+import { GeneratorOptions } from './generator/abstract-generator.js';
+import yargs from 'yargs';
+import { RollupGenerator } from './generator/rollup-generator.js';
 
 // Declare missing exports from `@types/semver@7`
 declare module 'semver' {
@@ -64,7 +67,7 @@ export class ApplicationPackageManager {
     constructor(options: ApplicationPackageOptions) {
         this.pck = new ApplicationPackage(options);
         this.process = new ApplicationProcess(this.pck, options.projectPath);
-        this.__process = new ApplicationProcess(this.pck, path.join(__dirname, '..'));
+        this.__process = new ApplicationProcess(this.pck, path.join(import.meta.dirname, '..'));
     }
 
     protected async remove(fsPath: string): Promise<void> {
@@ -109,12 +112,44 @@ export class ApplicationPackageManager {
     async copy(): Promise<void> {
         await fs.ensureDir(this.pck.lib('frontend'));
         await fs.copy(this.pck.frontend('index.html'), this.pck.lib('frontend', 'index.html'));
+        // Copy electron-main.cjs for electron apps (it's CommonJS, doesn't need bundling)
+        if (this.pck.isElectron()) {
+            await fs.ensureDir(this.pck.lib('backend'));
+            const electronMainSrc = this.pck.backend('electron-main.cjs');
+            const electronMainDest = this.pck.lib('backend', 'electron-main.cjs');
+            if (await fs.pathExists(electronMainSrc)) {
+                await fs.copy(electronMainSrc, electronMainDest);
+            }
+            // Copy native modules to backend/lib/node_modules for runtime access
+            await this.copyNativeModules();
+        }
+    }
+
+    protected async copyNativeModules(): Promise<void> {
+        const nativeModules = ['native-keymap'];
+        const backendLibPath = this.pck.lib('backend');
+        const nodeModulesPath = path.join(backendLibPath, 'node_modules');
+        
+        for (const moduleName of nativeModules) {
+            const sourcePath = path.join(this.pck.projectPath, 'node_modules', moduleName);
+            const destPath = path.join(nodeModulesPath, moduleName);
+            
+            if (await fs.pathExists(sourcePath)) {
+                try {
+                    await fs.ensureDir(path.dirname(destPath));
+                    await fs.copy(sourcePath, destPath, { overwrite: true });
+                    this.pck.log(`[ApplicationPackageManager] Copied native module: ${moduleName}`);
+                } catch (error) {
+                    this.pck.log(`[ApplicationPackageManager] Warning: Failed to copy ${moduleName}: ${error}`);
+                }
+            }
+        }
     }
 
     async build(args: string[] = [], options: GeneratorOptions = {}): Promise<void> {
         await this.generate(options);
         await this.copy();
-        
+
         // Use rollup instead of webpack for better memory efficiency
         const rollupConfigPath = this.pck.path('rollup.config.js');
         if (await fs.pathExists(rollupConfigPath)) {
@@ -146,25 +181,37 @@ export class ApplicationPackageManager {
             this.pck.log(`[ApplicationPackageManager] WARNING: Heap limit is ${currentHeapLimit} MB. Consider running with:`);
             this.pck.log(`[ApplicationPackageManager]   NODE_OPTIONS="--max-old-space-size=12288 --expose-gc" npm run build:browser`);
         }
-        
+
         // Try to enable GC if available
         if (!global.gc && process.env.NODE_OPTIONS && process.env.NODE_OPTIONS.includes('expose-gc')) {
             this.pck.log(`[ApplicationPackageManager] --expose-gc is in NODE_OPTIONS but GC not available. Process may need restart.`);
         }
-        
+
+        const { createRequire } = await import('module');
+        const { pathToFileURL } = await import('url');
+        const require = createRequire(import.meta.url);
         const rollup = require('rollup');
-        const configs = require(rollupConfigPath);
-        
+        // Try to load config as ES module first, fallback to CommonJS
+        let configs;
+        try {
+            const configUrl = pathToFileURL(rollupConfigPath).href;
+            const configModule = await import(configUrl);
+            configs = configModule.default || configModule;
+        } catch (e) {
+            // Fallback to CommonJS require if ES module import fails
+            configs = require(rollupConfigPath);
+        }
+
         // Handle both array and single config exports
         const configArray = Array.isArray(configs) ? configs : [configs];
-        
+
         this.pck.log(`[ApplicationPackageManager] Found ${configArray.length} rollup config(s) to build`);
-        
+
         for (let i = 0; i < configArray.length; i++) {
             const config = configArray[i];
             const configName = typeof config.input === 'string' ? config.input : `config-${i + 1}`;
             this.pck.log(`[ApplicationPackageManager] Building rollup config ${i + 1}/${configArray.length}: ${configName}`);
-            
+
             try {
                 // Rollup config structure: { input, output, plugins, ... }
                 const buildStartTime = Date.now();
@@ -172,12 +219,12 @@ export class ApplicationPackageManager {
                 this.pck.log(`[ApplicationPackageManager] Input: ${config.input}`);
                 this.pck.log(`[ApplicationPackageManager] Plugins: ${config.plugins?.length || 0}`);
                 this.pck.log(`[ApplicationPackageManager] External modules: ${Array.isArray(config.external) ? config.external.length : 'function'}`);
-                
+
                 // Track GC before build
                 if (global.gc) {
                     global.gc();
                 }
-                
+
                 let bundle: any;
                 try {
                     bundle = await rollup.rollup({
@@ -201,7 +248,7 @@ export class ApplicationPackageManager {
                         // Add performance hooks
                         perf: true
                     });
-                    
+
                     // Log bundle information
                     if (bundle && typeof bundle.getModuleIds === 'function') {
                         try {
@@ -218,22 +265,22 @@ export class ApplicationPackageManager {
                 } catch (error) {
                     throw error;
                 }
-                
+
                 const buildDuration = Date.now() - buildStartTime;
                 this.pck.log(`[ApplicationPackageManager] rollup.rollup() completed in ${buildDuration}ms`);
-                
+
                 // Handle both single output and array of outputs
                 const outputs = Array.isArray(config.output) ? config.output : [config.output];
                 this.pck.log(`[ApplicationPackageManager] Writing ${outputs.length} output(s) for config ${i + 1}...`);
-                
+
                 for (let j = 0; j < outputs.length; j++) {
                     const writeStartTime = Date.now();
                     const output = outputs[j];
-                    const outputFile = typeof output === 'object' && output.file ? output.file : 
-                                      typeof output === 'object' && output.dir ? output.dir : 
-                                      'unknown';
+                    const outputFile = typeof output === 'object' && output.file ? output.file :
+                        typeof output === 'object' && output.dir ? output.dir :
+                            'unknown';
                     this.pck.log(`[ApplicationPackageManager] Writing output ${j + 1}/${outputs.length} to ${outputFile}...`);
-                    
+
                     // Run GC before writing if available
                     if (global.gc && j === 0) {
                         global.gc();
@@ -248,8 +295,8 @@ export class ApplicationPackageManager {
                     }
                     // Check output file size if it exists
                     try {
-                        const fs = require('fs');
-                        if (fs.existsSync(outputFile)) {
+                        const { existsSync } = await import('fs');
+                        if (existsSync(outputFile)) {
                             const stats = fs.statSync(outputFile);
                             const sizeMB = (stats.size / 1024 / 1024).toFixed(2);
                             this.pck.log(`[ApplicationPackageManager] Output file size: ${sizeMB} MB`);
@@ -258,10 +305,10 @@ export class ApplicationPackageManager {
                         // Ignore file size check errors
                     }
                 }
-                
+
                 this.pck.log(`[ApplicationPackageManager] Closing bundle for config ${i + 1}...`);
                 await bundle.close();
-                
+
                 const totalDuration = Date.now() - buildStartTime;
                 this.pck.log(`[ApplicationPackageManager] Rollup config ${i + 1}/${configArray.length} completed successfully in ${totalDuration}ms`);
             } catch (error) {
@@ -272,7 +319,7 @@ export class ApplicationPackageManager {
                 throw error;
             }
         }
-        
+
         this.pck.log(`[ApplicationPackageManager] All rollup configs built successfully`);
     }
 
@@ -298,14 +345,14 @@ export class ApplicationPackageManager {
             if (!plugin || typeof plugin !== 'object') {
                 return plugin;
             }
-            
+
             // Create a wrapper object to avoid mutating the original plugin
             const wrappedPlugin: any = { ...plugin };
-            
+
             // Wrap buildStart hook
             const originalBuildStart = plugin.buildStart;
             if (originalBuildStart) {
-                wrappedPlugin.buildStart = async function(options: any) {
+                wrappedPlugin.buildStart = async function (options: any) {
                     if (typeof originalBuildStart === 'function') {
                         return originalBuildStart.call(this, options);
                     }
@@ -315,7 +362,7 @@ export class ApplicationPackageManager {
             // Wrap resolveId hook
             const originalResolveId = plugin.resolveId;
             if (originalResolveId) {
-                wrappedPlugin.resolveId = async function(id: string, importer: string | undefined) {
+                wrappedPlugin.resolveId = async function (id: string, importer: string | undefined) {
                     if (typeof originalResolveId === 'function') {
                         return originalResolveId.call(this, id, importer);
                     }
@@ -325,7 +372,7 @@ export class ApplicationPackageManager {
             // Wrap load hook
             const originalLoad = plugin.load;
             if (originalLoad) {
-                wrappedPlugin.load = async function(id: string) {
+                wrappedPlugin.load = async function (id: string) {
                     const result = typeof originalLoad === 'function' ? await originalLoad.call(this, id) : undefined;
                     return result;
                 };
@@ -334,7 +381,7 @@ export class ApplicationPackageManager {
             // Wrap transform hook
             const originalTransform = plugin.transform;
             if (originalTransform) {
-                wrappedPlugin.transform = async function(code: string, id: string) {
+                wrappedPlugin.transform = async function (code: string, id: string) {
                     if (typeof originalTransform === 'function') {
                         return originalTransform.call(this, code, id);
                     }
@@ -350,19 +397,31 @@ export class ApplicationPackageManager {
      * This prevents out-of-memory errors when building large applications.
      */
     protected async buildWebpackConfigsSequentially(webpackConfigPath: string, args: string[]): Promise<void> {
+        const { createRequire } = await import('module');
+        const { pathToFileURL } = await import('url');
+        const require = createRequire(import.meta.url);
         const webpack = require('webpack');
-        const configs = require(webpackConfigPath);
-        
+        // Try to load config as ES module first, fallback to CommonJS
+        let configs;
+        try {
+            const configUrl = pathToFileURL(webpackConfigPath).href;
+            const configModule = await import(configUrl);
+            configs = configModule.default || configModule;
+        } catch (e) {
+            // Fallback to CommonJS require if ES module import fails
+            configs = require(webpackConfigPath);
+        }
+
         // Handle both array and single config exports
         const configArray = Array.isArray(configs) ? configs : [configs];
-        
+
         this.pck.log(`[ApplicationPackageManager] Found ${configArray.length} webpack config(s) to build`);
-        
+
         for (let i = 0; i < configArray.length; i++) {
             const config = configArray[i];
             const configName = config.name || `config-${i + 1}`;
             this.pck.log(`[ApplicationPackageManager] Building webpack config ${i + 1}/${configArray.length}: ${configName}`);
-            
+
             await new Promise<void>((resolve, reject) => {
                 const compiler = webpack(config);
                 compiler.run((err: Error | null, stats: any) => {
@@ -386,7 +445,7 @@ export class ApplicationPackageManager {
                 });
             });
         }
-        
+
         this.pck.log(`[ApplicationPackageManager] All webpack configs built successfully`);
     }
 
@@ -426,16 +485,16 @@ export class ApplicationPackageManager {
 
         if (!this.pck.pck.main) {
             // Try the bundled electron app first
-            appPath = this.pck.lib('backend', 'electron-main.js');
+            appPath = this.pck.lib('backend', 'electron-main.cjs');
             if (!fs.existsSync(appPath)) {
                 // Fallback to the generated electron app in src-gen
-                appPath = this.pck.backend('electron-main.js');
+                appPath = this.pck.backend('electron-main.cjs');
             }
 
             console.warn(
                 `WARNING: ${this.pck.packagePath} does not have a "main" entry.\n` +
                 'Please add the following line:\n' +
-                '    "main": "lib/backend/electron-main.js"'
+                '    "main": "lib/backend/electron-main.cjs"'
             );
         }
 

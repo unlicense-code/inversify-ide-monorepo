@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { TheiaApp } from './theia-app';
-import { TheiaNotificationIndicator } from './theia-notification-indicator';
-import { TheiaPageObject } from './theia-page-object';
+import { TheiaApp } from './theia-app.js';
+import { TheiaNotificationIndicator } from './theia-notification-indicator.js';
+import { TheiaPageObject } from './theia-page-object.js';
 
 export class TheiaNotificationOverlay extends TheiaPageObject {
 

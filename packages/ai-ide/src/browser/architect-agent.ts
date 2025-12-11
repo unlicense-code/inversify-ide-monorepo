@@ -18,7 +18,7 @@ import { LanguageModelRequirement } from '@theia/ai-core/lib/common/index.js';
 import { inject, injectable } from 'inversify';
 import { architectSystemVariants } from '../common/architect-prompt-template.js';
 import { nls } from '@theia/core';
-import { MarkdownStringImpl } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownStringImpl } from '@theia/core/lib/common/markdown-rendering/index.js';
 import { AI_SUMMARIZE_SESSION_AS_TASK_FOR_CODER, AI_UPDATE_TASK_CONTEXT_COMMAND } from '../common/summarize-session-commands.js';
 
 @injectable()

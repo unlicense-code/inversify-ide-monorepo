@@ -14,12 +14,13 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-/**
- * Currently installed Electron version. `undefined` if Electron is not installed nor found.
- */
-export const electronVersion: string | undefined;
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const nativeKeymap = require('native-keymap');
+export default nativeKeymap;
+export * from 'native-keymap';
+// Re-export all named exports from native-keymap
+export const getCurrentKeyboardLayout = nativeKeymap.getCurrentKeyboardLayout;
+export const getKeyMap = nativeKeymap.getKeyMap;
+export const getKeyboardLayout = nativeKeymap.getKeyboardLayout;
 
-/**
- * Supported Electron version range.
- */
-export const electronRange: string;

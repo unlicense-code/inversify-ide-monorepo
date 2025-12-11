@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import cp = require('child_process');
-import fs = require('fs-extra');
-import path = require('path');
-import os = require('os');
+import * as cp from 'child_process';
+import fs from 'fs-extra';
+import * as path from 'path';
+import * as os from 'os';
 
 export type RebuildTarget = 'electron' | 'browser' | 'browser-only';
 

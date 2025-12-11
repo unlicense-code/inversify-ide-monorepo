@@ -14,9 +14,9 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 import { expect, FrameLocator, Locator } from '@playwright/test';
-import { TheiaApp } from './theia-app';
-import { TheiaMonacoEditor } from './theia-monaco-editor';
-import { TheiaPageObject } from './theia-page-object';
+import { TheiaApp } from './theia-app.js';
+import { TheiaMonacoEditor } from './theia-monaco-editor.js';
+import { TheiaPageObject } from './theia-page-object.js';
 
 export type CellStatus = 'success' | 'error' | 'waiting';
 

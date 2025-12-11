@@ -15,12 +15,14 @@
 // *****************************************************************************
 
 import {
-    ipcMain, BrowserWindow, Menu, MenuItemConstructorOptions, webContents, WebContents, session, shell, clipboard, IpcMainEvent
-} from '@theia/electron/shared/electron';
-import * as nativeKeymap from '@theia/electron/shared/native-keymap';
+    ipcMain, BrowserWindow, Menu, MenuItemConstructorOptions, webContents, session, shell, clipboard, IpcMainEvent
+} from '@theia/electron/shared/electron/index.js';
+import type { Menu as ElectronMenu, BrowserWindow as ElectronBrowserWindow, WebContents as ElectronWebContents } from 'electron';
+import * as nativeKeymap from '@theia/electron/shared/native-keymap/index.js';
 
 import { inject, injectable } from 'inversify';
 import { FrontendApplicationState, StopReason } from '../common/frontend-application-state.js';
+import { ThemeMode } from '../common/theme.js';
 import { ElectronSecurityToken } from '../electron-common/electron-token.js';
 import {
     CHANNEL_GET_SECURITY_TOKEN, CHANNEL_SET_MENU, MenuDto, CHANNEL_INVOKE_MENU, CHANNEL_FOCUS_WINDOW,
@@ -68,19 +70,19 @@ export class TheiaMainApi implements ElectronMainApplicationContribution {
     @inject(ElectronSecurityToken)
     protected electronSecurityToken: ElectronSecurityToken;
 
-    protected readonly openPopups = new Map<number, Menu>();
+    protected readonly openPopups = new Map<number, ElectronMenu>();
 
     onStart(application: ElectronMainApplication): MaybePromise<void> {
-        ipcMain.on(CHANNEL_WC_METADATA, event => {
+        ipcMain.on(CHANNEL_WC_METADATA, (event: IpcMainEvent) => {
             event.returnValue = event.sender.id.toString();
         });
 
         // electron security token
-        ipcMain.on(CHANNEL_GET_SECURITY_TOKEN, event => {
+        ipcMain.on(CHANNEL_GET_SECURITY_TOKEN, (event: IpcMainEvent) => {
             event.returnValue = this.electronSecurityToken.value;
         });
 
-        ipcMain.handle(CHANNEL_ATTACH_SECURITY_TOKEN, (event, endpoint) => session.defaultSession.cookies.set({
+        ipcMain.handle(CHANNEL_ATTACH_SECURITY_TOKEN, (event: IpcMainEvent, endpoint: string) => session.defaultSession.cookies.set({
             url: endpoint,
             name: ElectronSecurityToken,
             value: JSON.stringify(this.electronSecurityToken),
@@ -89,10 +91,10 @@ export class TheiaMainApi implements ElectronMainApplicationContribution {
         }));
 
         // application menu
-        ipcMain.on(CHANNEL_SET_MENU, (event, menuId: number, menu: MenuDto[]) => {
-            let electronMenu: Menu | null;
+        ipcMain.on(CHANNEL_SET_MENU, (event: IpcMainEvent, menuId: number, menu: MenuDto[]) => {
+            let electronMenu: ElectronMenu | null;
             if (menu) {
-                electronMenu = Menu.buildFromTemplate(this.fromMenuDto(event.sender, menuId, menu));
+                electronMenu = Menu.buildFromTemplate(this.fromMenuDto(event.sender, menuId, menu as InternalMenuDto[]));
             } else {
                 // eslint-disable-next-line no-null/no-null
                 electronMenu = null;
@@ -104,7 +106,7 @@ export class TheiaMainApi implements ElectronMainApplicationContribution {
             }
         });
 
-        ipcMain.on(CHANNEL_SET_MENU_BAR_VISIBLE, (event, visible: boolean, windowName: string | undefined) => {
+        ipcMain.on(CHANNEL_SET_MENU_BAR_VISIBLE, (event: IpcMainEvent, visible: boolean, windowName: string | undefined) => {
             let electronWindow;
             if (windowName) {
                 electronWindow = BrowserWindow.getAllWindows().find(win => win.webContents.mainFrame.name === windowName);
@@ -119,16 +121,16 @@ export class TheiaMainApi implements ElectronMainApplicationContribution {
         });
 
         // popup menu
-        ipcMain.handle(CHANNEL_OPEN_POPUP, (event, menuId, menu, x, y, windowName?: string) => {
+        ipcMain.handle(CHANNEL_OPEN_POPUP, (event: IpcMainEvent, menuId: number, menu: MenuDto, x: number, y: number, windowName?: string) => {
             const zoom = event.sender.getZoomFactor();
             // TODO: Remove the offset once Electron fixes https://github.com/electron/electron/issues/31641
             const offset = process.platform === 'win32' ? 0 : 2;
             // x and y values must be Ints or else there is a conversion error
             x = Math.round(x * zoom) + offset;
             y = Math.round(y * zoom) + offset;
-            const popup = Menu.buildFromTemplate(this.fromMenuDto(event.sender, menuId, menu));
+            const popup = Menu.buildFromTemplate(this.fromMenuDto(event.sender, menuId, Array.isArray(menu) ? menu as InternalMenuDto[] : [menu as InternalMenuDto]));
             this.openPopups.set(menuId, popup);
-            let electronWindow: BrowserWindow | undefined;
+            let electronWindow: ElectronBrowserWindow | undefined;
             if (windowName) {
                 electronWindow = BrowserWindow.getAllWindows().find(win => win.webContents.mainFrame.name === windowName);
             } else {
@@ -143,14 +145,14 @@ export class TheiaMainApi implements ElectronMainApplicationContribution {
             });
         });
 
-        ipcMain.handle(CHANNEL_CLOSE_POPUP, (event, handle) => {
+        ipcMain.handle(CHANNEL_CLOSE_POPUP, (event: IpcMainEvent, handle: number) => {
             if (this.openPopups.has(handle)) {
                 this.openPopups.get(handle)!.closePopup();
             }
         });
 
         // focus windows for secondary window support
-        ipcMain.on(CHANNEL_FOCUS_WINDOW, (event, windowName) => {
+        ipcMain.on(CHANNEL_FOCUS_WINDOW, (event: IpcMainEvent, windowName: string) => {
             const electronWindow = windowName
                 ? BrowserWindow.getAllWindows().find(win => win.webContents.mainFrame.name === windowName)
                 : BrowserWindow.fromWebContents(event.sender);
@@ -164,52 +166,52 @@ export class TheiaMainApi implements ElectronMainApplicationContribution {
             }
         });
 
-        ipcMain.on(CHANNEL_SHOW_ITEM_IN_FOLDER, (event, fsPath) => {
+        ipcMain.on(CHANNEL_SHOW_ITEM_IN_FOLDER, (event: IpcMainEvent, fsPath: string) => {
             shell.showItemInFolder(fsPath);
         });
 
-        ipcMain.on(CHANNEL_OPEN_WITH_SYSTEM_APP, (event, uri) => {
+        ipcMain.on(CHANNEL_OPEN_WITH_SYSTEM_APP, (event: IpcMainEvent, uri: string) => {
             shell.openExternal(uri);
         });
 
-        ipcMain.handle(CHANNEL_GET_TITLE_STYLE_AT_STARTUP, event => application.getTitleBarStyleAtStartup(event.sender));
+        ipcMain.handle(CHANNEL_GET_TITLE_STYLE_AT_STARTUP, (event: IpcMainEvent) => application.getTitleBarStyleAtStartup(event.sender));
 
-        ipcMain.on(CHANNEL_SET_TITLE_STYLE, (event, style) => application.setTitleBarStyle(event.sender, style));
+        ipcMain.on(CHANNEL_SET_TITLE_STYLE, (event: IpcMainEvent, style: string) => application.setTitleBarStyle(event.sender, style));
 
-        ipcMain.on(CHANNEL_SET_BACKGROUND_COLOR, (event, backgroundColor) => application.setBackgroundColor(event.sender, backgroundColor));
+        ipcMain.on(CHANNEL_SET_BACKGROUND_COLOR, (event: IpcMainEvent, backgroundColor: string) => application.setBackgroundColor(event.sender, backgroundColor));
 
-        ipcMain.on(CHANNEL_SET_THEME, (event, theme) => application.setTheme(theme));
+        ipcMain.on(CHANNEL_SET_THEME, (event: IpcMainEvent, theme: string) => application.setTheme(theme as ThemeMode));
 
-        ipcMain.on(CHANNEL_MINIMIZE, event => {
+        ipcMain.on(CHANNEL_MINIMIZE, (event: IpcMainEvent) => {
             BrowserWindow.fromWebContents(event.sender)?.minimize();
         });
 
-        ipcMain.on(CHANNEL_IS_MAXIMIZED, event => {
+        ipcMain.on(CHANNEL_IS_MAXIMIZED, (event: IpcMainEvent) => {
             event.returnValue = BrowserWindow.fromWebContents(event.sender)?.isMaximized();
         });
 
-        ipcMain.on(CHANNEL_MAXIMIZE, event => {
+        ipcMain.on(CHANNEL_MAXIMIZE, (event: IpcMainEvent) => {
             BrowserWindow.fromWebContents(event.sender)?.maximize();
         });
 
-        ipcMain.on(CHANNEL_UNMAXIMIZE, event => {
+        ipcMain.on(CHANNEL_UNMAXIMIZE, (event: IpcMainEvent) => {
             BrowserWindow.fromWebContents(event.sender)?.unmaximize();
         });
 
-        ipcMain.on(CHANNEL_CLOSE, event => {
+        ipcMain.on(CHANNEL_CLOSE, (event: IpcMainEvent) => {
             BrowserWindow.fromWebContents(event.sender)?.close();
         });
 
-        ipcMain.on(CHANNEL_RESTART, event => {
+        ipcMain.on(CHANNEL_RESTART, (event: IpcMainEvent) => {
             application.restart(event.sender);
         });
 
-        ipcMain.on(CHANNEL_TOGGLE_DEVTOOLS, event => {
+        ipcMain.on(CHANNEL_TOGGLE_DEVTOOLS, (event: IpcMainEvent) => {
             event.sender.toggleDevTools();
         });
 
-        ipcMain.on(CHANNEL_OPEN_DEVTOOLS_FOR_WINDOW, (event, windowName: string) => {
-            const electronWindow = BrowserWindow.getAllWindows().find(win => win.webContents.mainFrame.name === windowName);
+        ipcMain.on(CHANNEL_OPEN_DEVTOOLS_FOR_WINDOW, (event: IpcMainEvent, windowName: string) => {
+            const electronWindow = BrowserWindow.getAllWindows().find((win: ElectronBrowserWindow) => win.webContents.mainFrame.name === windowName);
             if (electronWindow) {
                 electronWindow.webContents.openDevTools();
             } else {
@@ -217,30 +219,30 @@ export class TheiaMainApi implements ElectronMainApplicationContribution {
             }
         });
 
-        ipcMain.on(CHANNEL_SET_ZOOM_LEVEL, (event, zoomLevel: number) => {
+        ipcMain.on(CHANNEL_SET_ZOOM_LEVEL, (event: IpcMainEvent, zoomLevel: number) => {
             event.sender.setZoomLevel(zoomLevel);
         });
 
-        ipcMain.handle(CHANNEL_GET_ZOOM_LEVEL, event => event.sender.getZoomLevel());
+        ipcMain.handle(CHANNEL_GET_ZOOM_LEVEL, (event: IpcMainEvent) => event.sender.getZoomLevel());
 
-        ipcMain.on(CHANNEL_TOGGLE_FULL_SCREEN, event => {
+        ipcMain.on(CHANNEL_TOGGLE_FULL_SCREEN, (event: IpcMainEvent) => {
             const win = BrowserWindow.fromWebContents(event.sender);
             if (win) {
                 win.setFullScreen(!win.isFullScreen());
             }
         });
-        ipcMain.on(CHANNEL_IS_FULL_SCREENABLE, event => {
+        ipcMain.on(CHANNEL_IS_FULL_SCREENABLE, (event: IpcMainEvent) => {
             event.returnValue = BrowserWindow.fromWebContents(event.sender)?.isFullScreenable();
         });
 
-        ipcMain.on(CHANNEL_IS_FULL_SCREEN, event => {
+        ipcMain.on(CHANNEL_IS_FULL_SCREEN, (event: IpcMainEvent) => {
             event.returnValue = BrowserWindow.fromWebContents(event.sender)?.isFullScreen();
         });
 
-        ipcMain.on(CHANNEL_READ_CLIPBOARD, event => {
+        ipcMain.on(CHANNEL_READ_CLIPBOARD, (event: IpcMainEvent) => {
             event.returnValue = clipboard.readText();
         });
-        ipcMain.on(CHANNEL_WRITE_CLIPBOARD, (event, text) => {
+        ipcMain.on(CHANNEL_WRITE_CLIPBOARD, (event: IpcMainEvent, text: string) => {
             clipboard.writeText(text);
         });
 
@@ -267,7 +269,7 @@ export class TheiaMainApi implements ElectronMainApplicationContribution {
         return true;
     }
 
-    fromMenuDto(sender: WebContents, menuId: number, menuDto: InternalMenuDto[]): MenuItemConstructorOptions[] {
+    fromMenuDto(sender: ElectronWebContents, menuId: number, menuDto: InternalMenuDto[]): MenuItemConstructorOptions[] {
         return menuDto.map(dto => {
             const result: MenuItemConstructorOptions = {
                 id: dto.id,
@@ -295,11 +297,11 @@ export class TheiaMainApi implements ElectronMainApplicationContribution {
 let nextReplyChannel: number = 0;
 
 export namespace TheiaRendererAPI {
-    export function sendWindowEvent(wc: WebContents, event: WindowEvent): void {
+    export function sendWindowEvent(wc: ElectronWebContents, event: WindowEvent): void {
         wc.send(CHANNEL_ON_WINDOW_EVENT, event);
     }
 
-    export function openUrl(wc: WebContents, url: string): Promise<boolean> {
+    export function openUrl(wc: ElectronWebContents, url: string): Promise<boolean> {
         return new Promise<boolean>(resolve => {
             const channelNr = nextReplyChannel++;
             const replyChannel = `openUrl${channelNr}`;
@@ -313,7 +315,7 @@ export namespace TheiaRendererAPI {
         });
     }
 
-    export function sendAboutToClose(wc: WebContents): Promise<void> {
+    export function sendAboutToClose(wc: ElectronWebContents): Promise<void> {
         return new Promise<void>(resolve => {
             const channelNr = nextReplyChannel++;
             const replyChannel = `aboutToClose${channelNr}`;
@@ -326,7 +328,7 @@ export namespace TheiaRendererAPI {
         });
     }
 
-    export function requestClose(wc: WebContents, stopReason: StopReason): Promise<boolean> {
+    export function requestClose(wc: ElectronWebContents, stopReason: StopReason): Promise<boolean> {
         const channelNr = nextReplyChannel++;
         const confirmChannel = `confirm-${channelNr}`;
         const cancelChannel = `cancel-${channelNr}`;
@@ -343,7 +345,7 @@ export namespace TheiaRendererAPI {
         }).finally(() => disposables.dispose());
     }
 
-    export function requestSecondaryClose(mainWindow: WebContents, secondaryWindow: WebContents): Promise<boolean> {
+    export function requestSecondaryClose(mainWindow: ElectronWebContents, secondaryWindow: ElectronWebContents): Promise<boolean> {
         const channelNr = nextReplyChannel++;
         const confirmChannel = `confirm-${channelNr}`;
         const cancelChannel = `cancel-${channelNr}`;
@@ -360,23 +362,23 @@ export namespace TheiaRendererAPI {
         }).finally(() => disposables.dispose());
     }
 
-    export function onRequestReload(wc: WebContents, handler: () => void): Disposable {
+    export function onRequestReload(wc: ElectronWebContents, handler: () => void): Disposable {
         return createWindowListener(wc, CHANNEL_REQUEST_RELOAD, handler);
     }
 
-    export function onApplicationStateChanged(wc: WebContents, handler: (state: FrontendApplicationState) => void): Disposable {
+    export function onApplicationStateChanged(wc: ElectronWebContents, handler: (state: FrontendApplicationState) => void): Disposable {
         return createWindowListener(wc, CHANNEL_APP_STATE_CHANGED, state => handler(state as FrontendApplicationState));
     }
 
-    export function onIpcData(handler: (sender: WebContents, data: Uint8Array) => void): Disposable {
+    export function onIpcData(handler: (sender: ElectronWebContents, data: Uint8Array) => void): Disposable {
         return createDisposableListener<IpcMainEvent>(ipcMain, CHANNEL_IPC_CONNECTION, (event, data) => handler(event.sender, data as Uint8Array));
     }
 
-    export function sendData(wc: WebContents, data: Uint8Array): void {
+    export function sendData(wc: ElectronWebContents, data: Uint8Array): void {
         wc.send(CHANNEL_IPC_CONNECTION, data);
     }
 
-    function createWindowListener(wc: WebContents, channel: string, handler: (...args: unknown[]) => unknown): Disposable {
+    function createWindowListener(wc: ElectronWebContents, channel: string, handler: (...args: unknown[]) => unknown): Disposable {
         return createDisposableListener<IpcMainEvent>(ipcMain, channel, (event, ...args) => {
             if (wc.id === event.sender.id) {
                 handler(...args);

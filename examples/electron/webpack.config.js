@@ -3,6 +3,9 @@
  * To reset delete this file and rerun theia build again.
  */
 // @ts-check
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
 const configs = require('./gen-webpack.config.js');
 const nodeConfig = require('./gen-webpack.node.config.js');
 
@@ -17,7 +20,7 @@ configs[0].module.rules.push({
 });
 
 
-module.exports = [
+export default [
     ...configs,
     nodeConfig.config
 ];

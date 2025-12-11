@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { injectable, postConstruct } from 'inversify';
-import { ElectronTokenValidator } from '@theia/core/lib/electron-node';
+import { ElectronTokenValidator } from '@theia/core/lib/electron-node/index.js';
 import { IncomingMessage } from 'http';
 import { MetricsBackendApplicationContribution } from '../node/metrics-backend-application-contribution.js';
 import { MaybePromise } from '@theia/core';

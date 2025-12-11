@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { ElementHandle } from '@playwright/test';
-import { TheiaPageObject } from './theia-page-object';
+import { TheiaPageObject } from './theia-page-object.js';
 
 export class TheiaDialog extends TheiaPageObject {
 

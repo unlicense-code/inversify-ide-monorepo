@@ -3,6 +3,7 @@
   "version": "1.66.0",
   "description": "System tests for Theia",
   "license": "EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/eclipse-theia/theia.git"

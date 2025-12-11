@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import express = require('express');
+import express from 'express';
 import { injectable, inject } from 'inversify';
 import { BackendApplicationContribution } from '../../node/index.js';
 import { ElectronTokenValidator } from './electron-token-validator.js';

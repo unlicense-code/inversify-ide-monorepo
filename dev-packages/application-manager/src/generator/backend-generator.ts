@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { EOL } from 'os';
-import { AbstractGenerator } from './abstract-generator';
+import { AbstractGenerator } from './abstract-generator.js';
 
 export class BackendGenerator extends AbstractGenerator {
 
@@ -28,14 +28,17 @@ export class BackendGenerator extends AbstractGenerator {
         await this.write(this.pck.backend('server.js'), this.compileServer(backendModules));
         await this.write(this.pck.backend('main.js'), this.compileMain(backendModules));
         if (this.pck.isElectron()) {
-            await this.write(this.pck.backend('electron-main.js'), this.compileElectronMain(this.pck.targetElectronMainModules));
+            await this.write(this.pck.backend('electron-main.cjs'), this.compileElectronMain(this.pck.targetElectronMainModules));
         }
     }
 
     protected compileElectronMain(electronMainModules?: Map<string, string>): string {
         return `// @ts-check
+// Minimal Electron wrapper - handles only Electron-specific initialization
+// All application logic is in main.js (ES module) which gets loaded via dynamic import
 
-require('reflect-metadata');
+const { resolve } = require('path');
+const { app } = require('electron');
 
 // Workaround for https://github.com/electron/electron/issues/9225. Chrome has an issue where
 // in certain locales (e.g. PL), image metrics are wrongly computed. We explicitly set the
@@ -46,54 +49,35 @@ if (process.env.LC_ALL) {
 }
 process.env.LC_NUMERIC = 'C';
 
+// Useful for Electron/NW.js apps as GUI apps on macOS doesn't inherit the \`$PATH\` define
+// in your dotfiles (.bashrc/.bash_profile/.zshrc/etc).
+// https://github.com/electron/electron/issues/550#issuecomment-162037357
+// https://github.com/eclipse-theia/theia/pull/3534#issuecomment-439689082
+// Import fix-path - it's a CommonJS package, require it directly
+const fixPath = require('fix-path');
+if (typeof fixPath === 'function') {
+    fixPath();
+} else if (fixPath && typeof fixPath.default === 'function') {
+    fixPath.default();
+}
+
+// Set up environment variables
+const theiaAppProjectPath = resolve(__dirname, '..', '..');
+process.env.THEIA_APP_PROJECT_PATH = theiaAppProjectPath;
+
+// Handle single instance lock (Electron-specific)
+const isSingleInstance = ${this.pck.props.backend.config.singleInstance === true ? 'true' : 'false'};
+if (isSingleInstance && !app.requestSingleInstanceLock(process.argv)) {
+    // There is another instance running, exit now. The other instance will request focus.
+    app.quit();
+    process.exit(0);
+}
+
+// Dynamically import the ES module main.js which contains all the application logic
 (async () => {
-    // Useful for Electron/NW.js apps as GUI apps on macOS doesn't inherit the \`$PATH\` define
-    // in your dotfiles (.bashrc/.bash_profile/.zshrc/etc).
-    // https://github.com/electron/electron/issues/550#issuecomment-162037357
-    // https://github.com/eclipse-theia/theia/pull/3534#issuecomment-439689082
-    (await require('@theia/core/electron-shared/fix-path')).default();
-
-    const { resolve } = require('path');
-    const theiaAppProjectPath = resolve(__dirname, '..', '..');
-    process.env.THEIA_APP_PROJECT_PATH = theiaAppProjectPath;
-    const { default: electronMainApplicationModule } = require('@theia/core/lib/electron-main/electron-main-application-module');
-    const { ElectronMainApplication, ElectronMainApplicationGlobals } = require('@theia/core/lib/electron-main/electron-main-application');
-    const { Container } = require('inversify');
-    const { app } = require('electron');
-
-    const config = ${this.prettyStringify(this.pck.props.frontend.config)};
-    const isSingleInstance = ${this.pck.props.backend.config.singleInstance === true ? 'true' : 'false'};
-
-    if (isSingleInstance && !app.requestSingleInstanceLock(process.argv)) {
-        // There is another instance running, exit now. The other instance will request focus.
-        app.quit();
-        return;
-    }
-    
-    const container = new Container();
-    container.load(electronMainApplicationModule);
-    container.bind(ElectronMainApplicationGlobals).toConstantValue({
-        THEIA_APP_PROJECT_PATH: theiaAppProjectPath,
-        THEIA_BACKEND_MAIN_PATH: resolve(__dirname, 'main.js'),
-        THEIA_FRONTEND_HTML_PATH: resolve(__dirname, '..', '..', 'lib', 'frontend', 'index.html'),
-        THEIA_SECONDARY_WINDOW_HTML_PATH: resolve(__dirname, '..', '..', 'lib', 'frontend', 'secondary-window.html')
-    });
-    
-    function load(raw) {
-        return Promise.resolve(raw.default).then(module =>
-            container.load(module)
-        );
-    }
-    
-    async function start() {
-        const application = container.get(ElectronMainApplication);
-        await application.start(config);
-    }
-
     try {
-${Array.from(electronMainModules?.values() ?? [], jsModulePath => `\
-        await load(require('${jsModulePath}'));`).join(EOL)}
-        await start();
+        // Import the ES module main.js - it handles all the actual application setup
+        await import('./main.js');
     } catch (reason) {
         if (typeof reason !== 'number') {
             console.error('Failed to start the electron application.');
@@ -102,7 +86,8 @@ ${Array.from(electronMainModules?.values() ?? [], jsModulePath => `\
             }
         }
         app.quit();
-    };
+        process.exit(1);
+    }
 })();
 `;
     }
@@ -180,7 +165,12 @@ ${Array.from(backendModules.values(), jsModulePath => `\
     }
 
     protected compileMain(backendModules: Map<string, string>): string {
-        return `// @ts-check
+        if (this.pck.isElectron()) {
+            // For Electron, generate ES module that sets up ElectronMainApplication
+            return this.compileElectronMainJs(backendModules);
+        } else {
+            // For browser, generate CommonJS that sets up BackendApplication
+            return `// @ts-check
 const { BackendApplicationConfigProvider } = require('@theia/core/lib/node/backend-application-config-provider');
 const main = require('@theia/core/lib/node/main');
 
@@ -198,6 +188,70 @@ serverAddress.then((addressInfo) => {
 });
 
 globalThis.serverAddress = serverAddress;
+`;
+        }
+    }
+
+    protected compileElectronMainJs(electronMainModules?: Map<string, string>): string {
+        return `// @ts-check
+// ES module for Electron - sets up ElectronMainApplication
+// This is imported by electron-main.cjs (minimal CommonJS wrapper)
+
+import 'reflect-metadata';
+import { BackendApplicationConfigProvider } from '@theia/core/lib/node/backend-application-config-provider.js';
+import { default as electronMainApplicationModule } from '@theia/core/lib/electron-main/electron-main-application-module.js';
+import { ElectronMainApplication, ElectronMainApplicationGlobals } from '@theia/core/lib/electron-main/electron-main-application.js';
+import { Container } from 'inversify';
+import { resolve } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = resolve(__filename, '..');
+
+BackendApplicationConfigProvider.set(${this.prettyStringify(this.pck.props.backend.config)});
+
+globalThis.extensionInfo = ${this.prettyStringify(this.pck.extensionPackages.map(({ name, version }) => ({ name, version })))};
+
+const theiaAppProjectPath = resolve(__dirname, '..', '..');
+const config = ${this.prettyStringify(this.pck.props.frontend.config)};
+
+const container = new Container();
+container.load(electronMainApplicationModule);
+container.bind(ElectronMainApplicationGlobals).toConstantValue({
+    THEIA_APP_PROJECT_PATH: theiaAppProjectPath,
+    THEIA_BACKEND_MAIN_PATH: resolve(__dirname, 'main.js'),
+    THEIA_FRONTEND_HTML_PATH: resolve(__dirname, '..', 'lib', 'frontend', 'index.html'),
+    THEIA_SECONDARY_WINDOW_HTML_PATH: resolve(__dirname, '..', 'lib', 'frontend', 'secondary-window.html')
+});
+
+function load(raw) {
+    return Promise.resolve(raw.default).then(module =>
+        container.load(module)
+    );
+}
+
+async function start() {
+    const application = container.get(ElectronMainApplication);
+    await application.start(config);
+}
+
+try {
+${Array.from(electronMainModules?.values() ?? [], jsModulePath => {
+            const modulePath = jsModulePath.endsWith('.js') ? jsModulePath : jsModulePath + '.js';
+            return `    await load(await import('${modulePath}'));`;
+        }).join('\n')}
+    await start();
+} catch (reason) {
+    if (typeof reason !== 'number') {
+        console.error('Failed to start the electron application.');
+        if (reason) {
+            console.error(reason);
+        }
+    }
+    const { app } = await import('electron');
+    app.quit();
+    process.exit(1);
+}
 `;
     }
 

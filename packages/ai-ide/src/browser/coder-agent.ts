@@ -19,7 +19,7 @@ import { CODER_SYSTEM_PROMPT_ID, getCoderAgentModePromptTemplate, getCoderPrompt
     from '../common/coder-replace-prompt-template.js';
 import { LanguageModelRequirement, PromptVariantSet } from '@theia/ai-core/lib/common/index.js';
 import { nls } from '@theia/core';
-import { MarkdownStringImpl } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownStringImpl } from '@theia/core/lib/common/markdown-rendering/index.js';
 import { AI_CHAT_NEW_CHAT_WINDOW_COMMAND, ChatCommands } from '@theia/ai-chat-ui/lib/browser/chat-view-commands.js';
 
 @injectable()

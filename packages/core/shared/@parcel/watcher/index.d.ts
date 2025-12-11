@@ -1,2 +1,3 @@
-import parcelWatcher = require('@parcel/watcher');
-export = parcelWatcher;
+import parcelWatcher from '@parcel/watcher';
+export default parcelWatcher;
+export * from '@parcel/watcher';

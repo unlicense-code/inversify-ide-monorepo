@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { ElementHandle } from '@playwright/test';
-import { TheiaApp } from './theia-app';
-import { TheiaPageObject } from './theia-page-object';
+import { TheiaApp } from './theia-app.js';
+import { TheiaPageObject } from './theia-page-object.js';
 
 export class TheiaToolbarItem extends TheiaPageObject {
     constructor(app: TheiaApp, protected element: ElementHandle<SVGElement | HTMLElement>) {

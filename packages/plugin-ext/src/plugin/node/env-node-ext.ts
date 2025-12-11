@@ -19,7 +19,7 @@ import * as mac from 'macaddress';
 import { EnvExtImpl } from '../env.js';
 import { createHash } from 'crypto';
 import { generateUuid } from '@theia/core';
-import fs = require('fs');
+import * as fs from 'fs';
 
 /**
  * Provides machineId using mac address. It's only possible on node side

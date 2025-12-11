@@ -27,7 +27,10 @@ import {
 
 } from '@theia/editor/lib/browser/editor-manager.js';
 import { WorkspaceCommands } from '@theia/workspace/lib/browser/index.js';
-import { Repository, Git, CommitWithChanges, GitFileChange, WorkingDirectoryStatus, GitFileStatus } from '../common/index.js';
+import {
+    Repository, Git, CommitWithChanges, GitFileChange,
+    WorkingDirectoryStatus, GitFileStatus
+} from '../common/index.js';
 import { GIT_RESOURCE_SCHEME } from './git-resource.js';
 import { GitErrorHandler } from './git-error-handler.js';
 import { EditorWidget } from '@theia/editor/lib/browser/index.js';

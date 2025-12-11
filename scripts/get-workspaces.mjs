@@ -32,21 +32,21 @@ function getWorkspaces() {
     const workspaces = packageJson.workspaces || [];
     const packages = [];
     const seen = new Set();
-    
+
     for (const workspacePattern of workspaces) {
         // Convert workspace pattern to glob pattern
         const globPattern = workspacePattern.replace(/\*\*/g, '**').replace(/\*/g, '*');
         const fullPattern = join(rootDir, globPattern, 'package.json');
-        
-        const matches = globSync(fullPattern, { 
+
+        const matches = globSync(fullPattern, {
             absolute: true,
             ignore: ['**/node_modules/**']
         });
-        
+
         for (const pkgJsonPath of matches) {
             if (seen.has(pkgJsonPath)) continue;
             seen.add(pkgJsonPath);
-            
+
             try {
                 const pkg = JSON.parse(readFileSync(pkgJsonPath, 'utf8'));
                 if (pkg.name) {
@@ -62,7 +62,7 @@ function getWorkspaces() {
             }
         }
     }
-    
+
     return packages.sort((a, b) => a.name.localeCompare(b.name));
 }
 
@@ -72,23 +72,23 @@ function getWorkspaces() {
 function buildGraph(packages) {
     const graph = {};
     const packageMap = new Map(packages.map(p => [p.name, p]));
-    
+
     for (const pkg of packages) {
         const pkgJsonPath = join(pkg.location, 'package.json');
         const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf8'));
-        
+
         const deps = [
             ...Object.keys(pkgJson.dependencies || {}),
             ...Object.keys(pkgJson.devDependencies || {}),
             ...Object.keys(pkgJson.peerDependencies || {})
         ];
-        
+
         // Filter to only include workspace packages
         const workspaceDeps = deps.filter(dep => packageMap.has(dep));
-        
+
         graph[pkg.name] = workspaceDeps;
     }
-    
+
     return graph;
 }
 

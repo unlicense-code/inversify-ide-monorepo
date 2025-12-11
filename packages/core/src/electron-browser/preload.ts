@@ -13,7 +13,7 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 //
-import { IpcRendererEvent, webUtils } from '@theia/electron/shared/electron';
+import { IpcRendererEvent, webUtils } from '@theia/electron/shared/electron/index.js';
 import { Disposable } from '../common/disposable.js';
 import { StopReason } from '../common/frontend-application-state.js';
 import { NativeKeyboardLayout } from '../common/keyboard/keyboard-layout-provider.js';

@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { inject, injectable, named } from 'inversify';
-import { Disposable, DisposableCollection, ILogger } from '@theia/core/lib/common/';
+import { Disposable, DisposableCollection, ILogger } from '@theia/core/lib/common/index.js';
 import {
     TaskClient,
     TaskExitedEvent,

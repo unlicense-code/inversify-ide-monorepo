@@ -22,7 +22,7 @@ import { AutoSaveMode, Saveable, SaveableSource, SaveableWidget, SaveOptions, Sa
 import { waitForClosed, Widget } from './widgets/index.js';
 import { FrontendApplicationContribution } from './frontend-application-contribution.js';
 import { FrontendApplication } from './frontend-application.js';
-import throttle = require('lodash.throttle');
+import throttle from 'lodash.throttle';
 
 @injectable()
 export class SaveableService implements FrontendApplicationContribution {

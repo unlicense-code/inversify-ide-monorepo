@@ -48,7 +48,7 @@ import { GitExecProvider } from './git-exec-provider.js';
 import { GitEnvProvider } from './env/git-env-provider.js';
 import { GitInit } from './init/git-init.js';
 
-import upath = require('upath');
+import upath from 'upath';
 
 /**
  * Parsing and converting raw Git output into Git model instances.

@@ -14,11 +14,12 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import * as fs from 'fs-extra';
+import fsExtra from 'fs-extra';
+const fs = fsExtra;
 import * as path from 'path';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import type { RawSourceMap } from 'source-map';
-import { ApplicationPackage } from '@theia/application-package/lib/application-package';
+import { ApplicationPackage } from '@theia/application-package/lib/application-package.js';
 
 const modulePackages: { dir: string, name?: string }[] = [];
 for (const extensionPackage of new ApplicationPackage({ projectPath: process.cwd() }).extensionPackages) {
@@ -50,7 +51,7 @@ function exposeModule(modulePackage: { dir: string, name?: string }, resourcePat
  */
 // TODO: webpack@5.36.2 is missing a `LoaderContext` interface so we'll use any in the meantime
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export = function (this: any, source: string, sourceMap?: RawSourceMap): string | undefined {
+export default function (this: any, source: string, sourceMap?: RawSourceMap): string | undefined {
     if (this.cacheable) {
         this.cacheable();
     }

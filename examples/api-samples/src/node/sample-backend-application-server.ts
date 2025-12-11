@@ -16,7 +16,7 @@
 
 import { injectable } from 'inversify';
 import { BackendApplicationServer } from '@theia/core/lib/node/index.js';
-import express = require('express');
+import express from 'express';
 
 @injectable()
 export class SampleBackendApplicationServer implements BackendApplicationServer {

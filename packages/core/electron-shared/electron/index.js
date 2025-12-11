@@ -1,1 +1,2 @@
-module.exports = require('@theia/electron/shared/electron');
+export * from '@theia/electron/shared/electron/index.js';
+export { default } from '@theia/electron/shared/electron/index.js';

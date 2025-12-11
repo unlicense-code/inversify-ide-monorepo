@@ -1,2 +1,3 @@
-import Ajv = require('ajv');
-export = Ajv;
+import Ajv from 'ajv';
+export default Ajv;
+export * from 'ajv';

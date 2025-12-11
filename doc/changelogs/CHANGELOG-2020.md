@@ -700,7 +700,7 @@ The default location remains the same: `~/.theia`, however it can be customized 
   // your-backend-application-module.ts:
 
   import { ContainerModule } from 'inversify';
-  import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
+  import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
   import { YourEnvVariableServer } from './your-env-variables-server';
 
   export default new ContainerModule((bind, unbind, isBound, rebind) => {

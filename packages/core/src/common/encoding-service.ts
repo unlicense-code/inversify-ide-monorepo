@@ -22,7 +22,8 @@
 /* eslint-disable no-null/no-null */
 
 import * as iconv from 'iconv-lite';
-import { Buffer } from 'safer-buffer';
+import saferBuffer from 'safer-buffer';
+const { Buffer } = saferBuffer;
 import { injectable } from 'inversify';
 import { BinaryBuffer, BinaryBufferReadableStream, BinaryBufferReadable } from './buffer.js';
 import { UTF8, UTF8_with_bom, UTF16be, UTF16le, UTF16be_BOM, UTF16le_BOM, UTF8_BOM } from './encodings.js';

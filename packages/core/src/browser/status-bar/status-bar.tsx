@@ -16,7 +16,7 @@
 
 import * as React from 'react';
 import { injectable, inject } from 'inversify';
-import debounce = require('lodash.debounce');
+import debounce from 'lodash.debounce';
 import { CancellationTokenSource, CommandService, nls } from '../../common/index.js';
 import { ReactWidget } from '../widgets/react-widget.js';
 import { FrontendApplicationStateService } from '../frontend-application-state.js';

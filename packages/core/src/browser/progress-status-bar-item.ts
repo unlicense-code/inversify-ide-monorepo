@@ -19,7 +19,7 @@ import { CancellationToken } from 'vscode-languageserver-protocol';
 import { ProgressClient, ProgressMessage, ProgressUpdate } from '../common/index.js';
 import { StatusBar, StatusBarAlignment } from './status-bar/index.js';
 import { Deferred } from '../common/promise-util.js';
-import throttle = require('lodash.throttle');
+import throttle from 'lodash.throttle';
 
 @injectable()
 export class ProgressStatusBarItem implements ProgressClient {

@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { expect, test } from '@playwright/test';
-import { TheiaApp } from '../theia-app';
-import { TheiaAppLoader } from '../theia-app-loader';
-import { TheiaNotificationIndicator } from '../theia-notification-indicator';
-import { TheiaProblemIndicator } from '../theia-problem-indicator';
-import { TheiaStatusBar } from '../theia-status-bar';
-import { TheiaToggleBottomIndicator } from '../theia-toggle-bottom-indicator';
+import { TheiaApp } from '../theia-app.js';
+import { TheiaAppLoader } from '../theia-app-loader.js';
+import { TheiaNotificationIndicator } from '../theia-notification-indicator.js';
+import { TheiaProblemIndicator } from '../theia-problem-indicator.js';
+import { TheiaStatusBar } from '../theia-status-bar.js';
+import { TheiaToggleBottomIndicator } from '../theia-toggle-bottom-indicator.js';
 
 test.describe('Theia Status Bar', () => {
 

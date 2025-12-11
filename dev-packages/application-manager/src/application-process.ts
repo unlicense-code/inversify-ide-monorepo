@@ -15,7 +15,8 @@
 // *****************************************************************************
 
 import * as path from 'path';
-import * as fs from 'fs-extra';
+import fsExtra from 'fs-extra';
+const fs = fsExtra;
 import * as cp from 'child_process';
 import { ApplicationPackage } from '@theia/application-package';
 

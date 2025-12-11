@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { TheiaDialog } from './theia-dialog';
+import { TheiaDialog } from './theia-dialog.js';
 
 export class TheiaAboutDialog extends TheiaDialog {
 

@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { TheiaApp } from './theia-app';
-import { TheiaView } from './theia-view';
+import { TheiaApp } from './theia-app.js';
+import { TheiaView } from './theia-view.js';
 
 const TheiaProblemsViewData = {
     tabSelector: '#shell-tab-problems',

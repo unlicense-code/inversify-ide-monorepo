@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { ElementHandle } from '@playwright/test';
-import { TheiaPageObject } from './theia-page-object';
-import { OSUtil, USER_KEY_TYPING_DELAY } from './util';
+import { TheiaPageObject } from './theia-page-object.js';
+import { OSUtil, USER_KEY_TYPING_DELAY } from './util.js';
 
 export class TheiaQuickCommandPalette extends TheiaPageObject {
 

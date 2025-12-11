@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { expect, test } from '@playwright/test';
-import { TheiaApp } from '../theia-app';
-import { TheiaAppLoader } from '../theia-app-loader';
-import { TheiaToolbar } from '../theia-toolbar';
+import { TheiaApp } from '../theia-app.js';
+import { TheiaAppLoader } from '../theia-app-loader.js';
+import { TheiaToolbar } from '../theia-toolbar.js';
 
 let app: TheiaApp;
 let toolbar: TheiaToolbar;

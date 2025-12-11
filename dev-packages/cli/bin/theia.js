@@ -1,22 +1,26 @@
 #!/usr/bin/env node
-const path = require('path');
-const fs = require('fs');
-const { execSync } = require('child_process');
+import { fileURLToPath, pathToFileURL } from 'url';
+import { dirname, join } from 'path';
+import { existsSync } from 'fs';
+import { execSync } from 'child_process';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Try to load from compiled lib first
-const libPath = path.join(__dirname, '../lib/theia');
-const srcPath = path.join(__dirname, '../src/theia.ts');
+const libPath = join(__dirname, '../lib/theia.js');
+const srcPath = join(__dirname, '../src/theia.ts');
 
-if (fs.existsSync(libPath + '.js')) {
-    require(libPath);
-} else if (fs.existsSync(srcPath)) {
+if (existsSync(libPath)) {
+    await import(pathToFileURL(libPath).href);
+} else if (existsSync(srcPath)) {
     // Try to compile on demand
     try {
-        const cliPackagePath = path.join(__dirname, '..');
+        const cliPackagePath = join(__dirname, '..');
         console.log('CLI not compiled. Compiling...');
         execSync('npm run compile', { cwd: cliPackagePath, stdio: 'inherit' });
-        if (fs.existsSync(libPath + '.js')) {
-            require(libPath);
+        if (existsSync(libPath)) {
+            await import(pathToFileURL(libPath).href);
         } else {
             throw new Error('Compilation failed');
         }

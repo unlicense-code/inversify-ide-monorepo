@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { expect, test } from '@playwright/test';
-import { TheiaApp } from '../theia-app';
-import { TheiaAppLoader } from '../theia-app-loader';
-import { TheiaProblemsView } from '../theia-problem-view';
+import { TheiaApp } from '../theia-app.js';
+import { TheiaAppLoader } from '../theia-app-loader.js';
+import { TheiaProblemsView } from '../theia-problem-view.js';
 
 test.describe('Theia Problems View', () => {
 

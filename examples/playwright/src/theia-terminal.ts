@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { ElementHandle } from '@playwright/test';
-import { TheiaApp } from './theia-app';
-import { TheiaContextMenu } from './theia-context-menu';
-import { TheiaMenu } from './theia-menu';
-import { TheiaView } from './theia-view';
+import { TheiaApp } from './theia-app.js';
+import { TheiaContextMenu } from './theia-context-menu.js';
+import { TheiaMenu } from './theia-menu.js';
+import { TheiaView } from './theia-view.js';
 
 export class TheiaTerminal extends TheiaView {
 

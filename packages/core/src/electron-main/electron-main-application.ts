@@ -23,7 +23,8 @@ import * as path from 'path';
 import { Argv } from 'yargs';
 import { AddressInfo } from 'net';
 import { promises as fs } from 'fs';
-import { existsSync, mkdirSync } from 'fs-extra';
+import fsExtra from 'fs-extra';
+const { existsSync, mkdirSync } = fsExtra;
 import { fork, ForkOptions } from 'child_process';
 import { DefaultTheme, ElectronFrontendApplicationConfig, FrontendApplicationConfig } from '@theia/application-package/lib/application-props.js';
 import URI from '../common/uri.js';
@@ -33,7 +34,6 @@ import { MaybePromise } from '../common/types.js';
 import { ContributionProvider } from '../common/contribution-provider.js';
 import { ElectronSecurityTokenService } from './electron-security-token-service.js';
 import { ElectronSecurityToken } from '../electron-common/electron-token.js';
-import Storage = require('electron-store');
 import { CancellationTokenSource, Disposable, DisposableCollection, Path, isOSX, isWindows } from '../common/index.js';
 import { DEFAULT_WINDOW_HASH, WindowSearchParams } from '../common/window.js';
 import { TheiaBrowserWindowOptions, TheiaElectronWindow, TheiaElectronWindowFactory } from './theia-electron-window.js';
@@ -47,7 +47,9 @@ import { backendGlobal } from '../node/backend-global.js';
 
 export { ElectronMainApplicationGlobals };
 
-const createYargs: (argv?: string[], cwd?: string) => Argv = require('yargs/yargs');
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Storage: new <T = any>(options?: any) => any = dynamicRequire('electron-store');
+const createYargs: (argv?: string[], cwd?: string) => Argv = dynamicRequire('yargs/yargs');
 
 export type ElectronMainCommandOptions = {
 

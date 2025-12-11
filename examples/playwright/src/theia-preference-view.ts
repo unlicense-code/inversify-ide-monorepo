@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { ElementHandle } from '@playwright/test';
-import { TheiaApp } from './theia-app';
-import { TheiaView } from './theia-view';
+import { TheiaApp } from './theia-app.js';
+import { TheiaView } from './theia-view.js';
 
 const TheiaSettingsViewData = {
     tabSelector: '#shell-tab-settings_widget',

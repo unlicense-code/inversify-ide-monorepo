@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import * as jsoncparser from 'jsonc-parser';
-import debounce = require('p-debounce');
+import debounce from 'p-debounce';
 import { inject, injectable, postConstruct } from 'inversify';
 import { URI } from '@theia/core/lib/common/uri.js';
 import { Emitter, Event } from '@theia/core/lib/common/event.js';

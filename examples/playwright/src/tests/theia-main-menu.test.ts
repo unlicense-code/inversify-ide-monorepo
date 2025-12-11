@@ -15,12 +15,12 @@
 // *****************************************************************************
 
 import { expect, test } from '@playwright/test';
-import { TheiaApp } from '../theia-app';
-import { TheiaAppLoader } from '../theia-app-loader';
-import { TheiaAboutDialog } from '../theia-about-dialog';
-import { TheiaMenuBar } from '../theia-main-menu';
-import { OSUtil } from '../util';
-import { TheiaExplorerView } from '../theia-explorer-view';
+import { TheiaApp } from '../theia-app.js';
+import { TheiaAppLoader } from '../theia-app-loader.js';
+import { TheiaAboutDialog } from '../theia-about-dialog.js';
+import { TheiaMenuBar } from '../theia-main-menu.js';
+import { OSUtil } from '../util.js';
+import { TheiaExplorerView } from '../theia-explorer-view.js';
 
 test.describe('Theia Main Menu', () => {
 

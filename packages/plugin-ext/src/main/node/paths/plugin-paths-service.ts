@@ -17,15 +17,16 @@
 import { injectable, inject } from 'inversify';
 import { URI } from '@theia/core/lib/common/uri.js';
 import * as path from 'path';
-import * as fs from 'fs-extra';
+import fsExtra from 'fs-extra';
 import { readdir } from 'fs/promises';
-import { remove } from 'fs-extra';
+const fs = fsExtra;
+const { remove } = fsExtra;
 import * as crypto from 'crypto';
 import { ILogger } from '@theia/core';
 import { FileUri } from '@theia/core/lib/node/index.js';
 import { PluginPaths } from './const.js';
 import { PluginPathsService } from '../../common/plugin-paths-protocol.js';
-import { UntitledWorkspaceService } from '@theia/workspace/lib/common';
+import { UntitledWorkspaceService } from '@theia/workspace/lib/common/index.js';
 import { EnvVariablesServer } from '@theia/core/lib/common/env-variables/index.js';
 import { PluginCliContribution } from '../plugin-cli-contribution.js';
 

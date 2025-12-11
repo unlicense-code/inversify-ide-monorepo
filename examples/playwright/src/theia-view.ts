@@ -16,11 +16,11 @@
 
 import { ElementHandle } from '@playwright/test';
 
-import { TheiaApp } from './theia-app';
-import { TheiaContextMenu } from './theia-context-menu';
-import { TheiaMenu } from './theia-menu';
-import { TheiaPageObject } from './theia-page-object';
-import { containsClass, isElementVisible, textContent } from './util';
+import { TheiaApp } from './theia-app.js';
+import { TheiaContextMenu } from './theia-context-menu.js';
+import { TheiaMenu } from './theia-menu.js';
+import { TheiaPageObject } from './theia-page-object.js';
+import { containsClass, isElementVisible, textContent } from './util.js';
 
 export type TheiaViewData = {
     tabSelector: string;

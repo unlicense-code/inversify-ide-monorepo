@@ -23,7 +23,7 @@ import { TimelineService } from './timeline-service.js';
 import { TimelineContextKeyService } from './timeline-context-key-service.js';
 import * as React from 'react';
 import { TimelineItem } from '../common/timeline-model.js';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/index.js';
 import { isThemeIcon } from '@theia/core/lib/common/theme.js';
 
 export const TIMELINE_ITEM_CONTEXT_MENU: MenuPath = ['timeline-item-context-menu'];

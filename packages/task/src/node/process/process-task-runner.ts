@@ -28,7 +28,7 @@ import {
     Process,
     TerminalProcessOptions,
     TaskTerminalProcessFactory,
-} from '@theia/process/lib/node';
+} from '@theia/process/lib/node/index.js';
 import {
     ShellQuotedString, ShellQuotingFunctions, BashQuotingFunctions, CmdQuotingFunctions, PowershellQuotingFunctions, createShellCommandLine, ShellQuoting,
 } from '@theia/process/lib/common/shell-quoting.js';

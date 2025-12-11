@@ -23,7 +23,7 @@ import filesystemBackendModule from '@theia/filesystem/lib/node/filesystem-backe
 import workspaceServer from '@theia/workspace/lib/node/workspace-backend-module.js';
 import { messagingBackendModule } from '@theia/core/lib/node/messaging/messaging-backend-module.js';
 import { ApplicationPackage } from '@theia/application-package';
-import { TerminalProcess } from '@theia/process/lib/node';
+import { TerminalProcess } from '@theia/process/lib/node/index.js';
 import { ProcessUtils } from '@theia/core/lib/node/process-utils.js';
 
 export function createTaskTestContainer(): Container {

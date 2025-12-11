@@ -17,7 +17,7 @@
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { ILogger } from '@theia/core';
-import { RawProcess, RawProcessFactory, RawProcessOptions } from '@theia/process/lib/node';
+import { RawProcess, RawProcessFactory, RawProcessOptions } from '@theia/process/lib/node/index.js';
 import { FileUri } from '@theia/core/lib/common/file-uri.js';
 import { URI } from '@theia/core/lib/common/uri.js';
 import { inject, injectable } from 'inversify';

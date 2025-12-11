@@ -1,2 +1,3 @@
-import React = require('react');
-export = React;
+import React from 'react';
+export default React;
+export * from 'react';

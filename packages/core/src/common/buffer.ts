@@ -21,7 +21,8 @@
 
 /* eslint-disable no-null/no-null */
 
-import { Buffer as SaferBuffer } from 'safer-buffer';
+import saferBuffer from 'safer-buffer';
+const SaferBuffer = saferBuffer.Buffer;
 import * as iconv from 'iconv-lite';
 import * as streams from './stream.js';
 

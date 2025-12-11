@@ -81,7 +81,11 @@ export default new ContainerModule((bind, _unbind, _isBound, rebind) => {
     bind(ConnectionContainerModule).toConstantValue(remoteConnectionModule);
 
     bind(BackendRemoteServiceImpl).toSelf().inSingletonScope();
-    rebind(BackendRemoteService).toService(BackendRemoteServiceImpl);
+    if (_isBound(BackendRemoteService)) {
+        rebind(BackendRemoteService).toService(BackendRemoteServiceImpl);
+    } else {
+        bind(BackendRemoteService).toService(BackendRemoteServiceImpl);
+    }
     bind(CliContribution).toService(BackendRemoteServiceImpl);
 
     bind(SSHIdentityFileCollector).toSelf().inSingletonScope();

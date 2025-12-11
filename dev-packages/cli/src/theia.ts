@@ -17,18 +17,20 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as temp from 'temp';
-import yargs from 'yargs';
-import yargsFactory from 'yargs/yargs';
+import yargs from 'yargs'
+import yargsFactory from 'yargs/yargs.js';
 import { ApplicationPackageManager, rebuild } from '@theia/application-manager';
 import { ApplicationProps, DEFAULT_SUPPORTED_API_VERSION } from '@theia/application-package';
-import checkDependencies from './check-dependencies';
-import downloadPlugins from './download-plugins';
-import runTest from './run-test';
+import checkDependencies from './check-dependencies.js';
+import downloadPlugins from './download-plugins.js';
+import runTest from './run-test.js';
 import { RateLimiter } from 'limiter';
 import { LocalizationManager, extract } from '@theia/localization-manager';
 import { NodeRequestService } from '@theia/request/lib/node-request-service.js';
 import { ExtensionIdMatchesFilterFactory, OVSX_RATE_LIMIT, OVSXClient, OVSXHttpClient, OVSXRouterClient, RequestContainsFilterFactory } from '@theia/ovsx-client';
 
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 const { executablePath } = require('puppeteer');
 
 process.on('unhandledRejection', (reason, promise) => {
@@ -105,7 +107,7 @@ function defineCommonOptions<T>(cli: yargs.Argv<T>): yargs.Argv<T & {
 }
 
 async function theiaCli(): Promise<void> {
-    const { version } = await fs.promises.readFile(path.join(__dirname, '../package.json'), 'utf8').then(JSON.parse);
+    const { version } = await fs.promises.readFile(path.join(import.meta.dirname, '../package.json'), 'utf8').then(JSON.parse);
     yargs.scriptName('theia').version(version);
     const projectPath = process.cwd();
     // Create a sub `yargs` parser to read `app-target` without

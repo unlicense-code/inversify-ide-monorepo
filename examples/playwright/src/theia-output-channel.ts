@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { ElementHandle } from '@playwright/test';
-import { TheiaOutputView } from './theia-output-view';
-import { TheiaPageObject } from './theia-page-object';
-import { isElementVisible } from './util';
-import { TheiaMonacoEditor } from './theia-monaco-editor';
+import { TheiaOutputView } from './theia-output-view.js';
+import { TheiaPageObject } from './theia-page-object.js';
+import { isElementVisible } from './util.js';
+import { TheiaMonacoEditor } from './theia-monaco-editor.js';
 
 export type TheiaOutputViewChannelData = {
     viewSelector: string;

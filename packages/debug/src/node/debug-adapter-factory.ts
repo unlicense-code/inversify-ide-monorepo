@@ -29,7 +29,7 @@ import {
     RawProcess,
     RawForkOptions,
     RawProcessOptions
-} from '@theia/process/lib/node';
+} from '@theia/process/lib/node/index.js';
 import {
     DebugAdapterExecutable,
     DebugAdapterSession,

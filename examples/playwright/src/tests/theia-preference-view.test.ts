@@ -15,9 +15,9 @@
 // *****************************************************************************
 
 import { expect, test } from '@playwright/test';
-import { TheiaApp } from '../theia-app';
-import { TheiaAppLoader } from '../theia-app-loader';
-import { DefaultPreferences, PreferenceIds, TheiaPreferenceView } from '../theia-preference-view';
+import { TheiaApp } from '../theia-app.js';
+import { TheiaAppLoader } from '../theia-app-loader.js';
+import { DefaultPreferences, PreferenceIds, TheiaPreferenceView } from '../theia-preference-view.js';
 
 test.describe('Preference View', () => {
 

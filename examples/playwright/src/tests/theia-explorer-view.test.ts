@@ -16,11 +16,11 @@
 
 import { expect, test } from '@playwright/test';
 import * as path from 'path';
-import { TheiaAppLoader } from '../theia-app-loader';
-import { TheiaApp } from '../theia-app';
-import { PreferenceIds, TheiaPreferenceView } from '../theia-preference-view';
-import { DOT_FILES_FILTER, TheiaExplorerView } from '../theia-explorer-view';
-import { TheiaWorkspace } from '../theia-workspace';
+import { TheiaAppLoader } from '../theia-app-loader.js';
+import { TheiaApp } from '../theia-app.js';
+import { PreferenceIds, TheiaPreferenceView } from '../theia-preference-view.js';
+import { DOT_FILES_FILTER, TheiaExplorerView } from '../theia-explorer-view.js';
+import { TheiaWorkspace } from '../theia-workspace.js';
 
 test.describe('Theia Explorer View', () => {
 
@@ -28,7 +28,7 @@ test.describe('Theia Explorer View', () => {
     let explorer: TheiaExplorerView;
 
     test.beforeAll(async ({ playwright, browser }) => {
-        const ws = new TheiaWorkspace([path.resolve(__dirname, '../../src/tests/resources/sample-files1')]);
+        const ws = new TheiaWorkspace([path.resolve(import.meta.dirname, '../../src/tests/resources/sample-files1')]);
         app = await TheiaAppLoader.load({ playwright, browser }, ws);
 
         if (app.isElectron) {

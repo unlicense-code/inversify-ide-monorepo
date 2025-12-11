@@ -16,7 +16,7 @@
 
 import * as fs from 'fs-extra';
 import { join, resolve } from 'path';
-import { OSUtil } from './util';
+import { OSUtil } from './util.js';
 
 export class TheiaWorkspace {
 

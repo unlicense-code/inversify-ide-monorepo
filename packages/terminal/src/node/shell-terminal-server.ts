@@ -20,7 +20,7 @@ import { ILogger } from '@theia/core/lib/common/logger.js';
 import { EnvironmentUtils } from '@theia/core/lib/node/environment-utils.js';
 import { BaseTerminalServer } from './base-terminal-server.js';
 import { ShellProcessFactory, getRootPath } from './shell-process.js';
-import { ProcessManager, TerminalProcess } from '@theia/process/lib/node';
+import { ProcessManager, TerminalProcess } from '@theia/process/lib/node/index.js';
 import { isWindows } from '@theia/core/lib/common/os.js';
 import * as cp from 'child_process';
 import {

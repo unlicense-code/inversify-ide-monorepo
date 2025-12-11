@@ -144,6 +144,11 @@ const resolveFromWorkspace = {
                         if (fs.existsSync(resolved)) {
                             return resolved;
                         }
+                        // If main doesn't have extension, try with .js
+                        const resolvedWithExt = resolved + '.js';
+                        if (fs.existsSync(resolvedWithExt)) {
+                            return resolvedWithExt;
+                        }
                     }
                 }
             }
@@ -222,8 +227,31 @@ const resolveFromWorkspace = {
                 if (fs.existsSync(possiblePath)) {
                     if (possiblePath.endsWith('package.json')) {
                         const pkg = require(possiblePath);
+                        let mainPath;
+                        // Check exports field first (ESM packages)
+                        if (pkg.exports) {
+                            const defaultExport = pkg.exports['.'] || pkg.exports['./'] || pkg.exports.default;
+                            if (defaultExport) {
+                                const exportPath = typeof defaultExport === 'string' ? defaultExport : (defaultExport.default || defaultExport.browser || defaultExport.module);
+                                if (exportPath) {
+                                    mainPath = path.resolve(path.dirname(possiblePath), exportPath);
+                                    if (fs.existsSync(mainPath)) {
+                                        return mainPath;
+                                    }
+                                }
+                            }
+                        }
+                        // Fall back to main/module fields
                         const main = pkg.main || pkg.module || 'index.js';
-                        return path.resolve(path.dirname(possiblePath), main);
+                        mainPath = path.resolve(path.dirname(possiblePath), main);
+                        // If main doesn't have extension, try with .js
+                        if (!fs.existsSync(mainPath)) {
+                            const mainWithExt = mainPath + '.js';
+                            if (fs.existsSync(mainWithExt)) {
+                                return mainWithExt;
+                            }
+                        }
+                        return mainPath;
                     }
                     if (fs.statSync(possiblePath).isFile()) {
                         return possiblePath;
@@ -280,6 +308,28 @@ const plugins = [
         minimize: isProduction,
         sourceMap: true
     }),
+    // Handle WASM files as assets - copy them to output and return URL
+    {
+        name: 'wasm-loader',
+        load(id) {
+            if (id.endsWith('.wasm')) {
+                const fs = require('fs');
+                const path = require('path');
+                // Copy WASM file to output directory
+                const wasmFileName = path.basename(id);
+                const wasmOutputPath = path.join(outputPath, wasmFileName);
+                try {
+                    fs.copyFileSync(id, wasmOutputPath);
+                } catch (e) {
+                    // Ignore if already exists or other errors
+                }
+                // Return code that loads the WASM file from the output directory
+                const relativePath = path.relative(outputPath, wasmOutputPath).replace(/\\/g, '/');
+                return `export default '${relativePath}';`;
+            }
+            return null;
+        }
+    },
     // TypeScript plugin removed - TypeScript files are already compiled to JavaScript
     // by tsc before this build step. Rollup processes the compiled .js files.
     copy({
@@ -319,8 +369,7 @@ const preloadConfig = (() => {
                 input: preloadPath,
                 output: {
                     file: path.join(outputPath, 'preload.js'),
-                    format: 'iife',
-                    name: 'TheiaPreload',
+                    format: 'es',
                     sourcemap: true
                 },
                 plugins: [
@@ -359,10 +408,9 @@ const configs = [
         input: path.resolve(__dirname, 'src-gen/frontend/index.js'),
         output: {
             file: path.join(outputPath, 'bundle.js'),
-            format: 'iife',
-            name: 'Theia',
+            format: 'es',
             sourcemap: true,
-            globals: {}
+            inlineDynamicImports: true
         },
         plugins: [
             ...plugins
@@ -412,8 +460,7 @@ const configs = [
         })(),
         output: {
             file: path.join(outputPath, 'editor.worker.js'),
-            format: 'iife',
-            name: 'EditorWorker',
+            format: 'es',
             sourcemap: true
         },
         plugins: [

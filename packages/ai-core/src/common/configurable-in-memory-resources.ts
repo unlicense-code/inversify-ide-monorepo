@@ -16,7 +16,7 @@
 
 import { injectable } from 'inversify';
 import { SyncReferenceCollection, Reference, ResourceResolver, Resource, Event, Emitter, URI } from '@theia/core';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/index.js';
 
 @injectable()
 /** For creating highly configurable in-memory resources */

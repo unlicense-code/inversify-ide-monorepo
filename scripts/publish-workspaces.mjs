@@ -20,9 +20,9 @@ const yes = args.includes('--yes');
 const distTag = args.find(arg => arg.startsWith('--dist-tag='))?.replace('--dist-tag=', '') || 'latest';
 
 const rootDir = join(__dirname, '..');
-const workspacesOutput = execSync('node scripts/get-workspaces.mjs --json', { 
-    cwd: rootDir, 
-    encoding: 'utf8' 
+const workspacesOutput = execSync('node scripts/get-workspaces.mjs --json', {
+    cwd: rootDir,
+    encoding: 'utf8'
 });
 const workspaces = JSON.parse(workspacesOutput);
 

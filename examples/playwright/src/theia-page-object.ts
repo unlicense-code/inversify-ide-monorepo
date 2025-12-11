@@ -16,7 +16,7 @@
 
 import { Page } from '@playwright/test';
 
-import { TheiaApp } from './theia-app';
+import { TheiaApp } from './theia-app.js';
 
 export abstract class TheiaPageObject {
 

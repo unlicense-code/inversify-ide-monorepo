@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { ElementHandle, Locator } from '@playwright/test';
-import { TheiaApp } from './theia-app';
-import { TheiaToolbar } from './theia-toolbar';
+import { TheiaApp } from './theia-app.js';
+import { TheiaToolbar } from './theia-toolbar.js';
 
 export class TheiaNotebookToolbar extends TheiaToolbar {
     public readonly locator: Locator;

@@ -16,7 +16,7 @@
 
 import { ContainerModule } from 'inversify';
 import { bindContributionProvider } from '@theia/core';
-import { ConnectionHandler, RpcConnectionHandler } from '@theia/core/lib/common/messaging';
+import { ConnectionHandler, RpcConnectionHandler } from '@theia/core/lib/common/messaging/index.js';
 import { BackendApplicationContribution } from '@theia/core/lib/node/index.js';
 import { bindProcessTaskRunnerModule } from './process/process-task-runner-backend-module.js';
 import { bindCustomTaskRunnerModule } from './custom/custom-task-runner-backend-module.js';

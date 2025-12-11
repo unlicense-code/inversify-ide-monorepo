@@ -16,9 +16,9 @@
 
 import { ElementHandle } from '@playwright/test';
 
-import { TheiaMenu } from './theia-menu';
-import { TheiaPageObject } from './theia-page-object';
-import { normalizeId, toTextContentArray } from './util';
+import { TheiaMenu } from './theia-menu.js';
+import { TheiaPageObject } from './theia-page-object.js';
+import { normalizeId, toTextContentArray } from './util.js';
 
 export class TheiaMainMenu extends TheiaMenu {
     override selector = '.lm-Menu.lm-MenuBar-menu';

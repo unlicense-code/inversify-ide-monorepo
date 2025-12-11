@@ -20,7 +20,7 @@ import * as theia from '@theia/plugin';
 import * as types from './types-impl.js';
 import * as model from '../common/plugin-api-rpc-model.js';
 import { MarkdownString } from './markdown-string.js';
-import { MarkdownString as MarkdownStringInterface } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownString as MarkdownStringInterface } from '@theia/core/lib/common/markdown-rendering/index.js';
 import { TaskDto } from '../common/plugin-api-rpc.js';
 
 describe('Type converters:', () => {

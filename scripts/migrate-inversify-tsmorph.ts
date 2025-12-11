@@ -17,7 +17,7 @@ import { Project, SyntaxKind, Node, ClassDeclaration, PropertyDeclaration, Const
 import * as path from 'path';
 import * as fs from 'fs';
 
-interface MigrationStats {
+type MigrationStats = {
     filesProcessed: number;
     filesModified: number;
     classesMigrated: number;
@@ -44,7 +44,7 @@ class InversifyMigrator {
 
         // Initialize ts-morph project
         this.project = new Project({
-            tsConfigFilePath: path.join(__dirname, '../tsconfig.json'),
+            tsConfigFilePath: path.join(import.meta.dirname, '../tsconfig.json'),
             skipAddingFilesFromTsConfig: true,
         });
     }
@@ -130,7 +130,7 @@ class InversifyMigrator {
 
         if (modified) {
             this.stats.filesModified++;
-            
+
             if (!this.dryRun) {
                 // Create backup
                 const backupPath = filePath + '.inversify-backup';
@@ -157,9 +157,9 @@ class InversifyMigrator {
 
         for (const importDecl of imports) {
             const moduleSpecifier = importDecl.getModuleSpecifierValue();
-            
-            if (moduleSpecifier.includes('inversify') || 
-                moduleSpecifier === '@theia/core/shared/inversify') {
+
+            if (moduleSpecifier.includes('inversify') ||
+                moduleSpecifier === 'inversify') {
                 importDecl.remove();
                 modified = true;
                 this.stats.decoratorsRemoved++;
@@ -180,11 +180,11 @@ class InversifyMigrator {
             for (const declaration of declarations) {
                 if (Node.isVariableDeclaration(declaration)) {
                     const initializer = declaration.getInitializer();
-                    
+
                     if (Node.isNewExpression(initializer)) {
                         const expression = initializer.getExpression();
-                        
-                        if (Node.isIdentifier(expression) && 
+
+                        if (Node.isIdentifier(expression) &&
                             expression.getText() === 'ContainerModule') {
                             modified = this.convertContainerModuleToFunction(
                                 sourceFile,
@@ -233,14 +233,14 @@ class InversifyMigrator {
         }
 
         // Create new function
-        const functionName = isDefaultExport 
+        const functionName = isDefaultExport
             ? `initialize${this.getModuleName(sourceFile)}`
             : `initialize${variableName.charAt(0).toUpperCase() + variableName.slice(1)}`;
 
         // Build function body by converting bind() calls to registry.registerSingleton()
         const statements = callbackBody.getStatements();
         const newStatements: string[] = [];
-        
+
         for (const stmt of statements) {
             if (Node.isExpressionStatement(stmt)) {
                 const expr = stmt.getExpression();
@@ -291,11 +291,11 @@ ${newStatements.map(s => '    ' + s).join('\n')}
 
         const serviceToken = args[0].getText();
         const chain = callExpr.getParent();
-        
+
         // Check for .toSelf().inSingletonScope() pattern
         if (Node.isPropertyAccessExpression(chain)) {
             const chainText = chain.getText();
-            
+
             if (chainText.includes('toSelf') && chainText.includes('inSingletonScope')) {
                 // Simple singleton registration
                 return `registry.registerSingleton(${serviceToken}, () => new ${serviceToken}(/* TODO: Add dependencies */));`;
@@ -339,8 +339,8 @@ ${newStatements.map(s => '    ' + s).join('\n')}
         const decorators = classDecl.getDecorators();
         return decorators.some(d => {
             const expr = d.getExpression();
-            return Node.isCallExpression(expr) && 
-                   expr.getExpression().getText() === 'injectable';
+            return Node.isCallExpression(expr) &&
+                expr.getExpression().getText() === 'injectable';
         });
     }
 
@@ -383,8 +383,8 @@ ${newStatements.map(s => '    ' + s).join('\n')}
             const decorators = prop.getDecorators();
             return decorators.some(d => {
                 const expr = d.getExpression();
-                return Node.isCallExpression(expr) && 
-                       expr.getExpression().getText() === 'inject';
+                return Node.isCallExpression(expr) &&
+                    expr.getExpression().getText() === 'inject';
             });
         });
     }
@@ -401,13 +401,13 @@ ${newStatements.map(s => '    ' + s).join('\n')}
 
         // Extract property information
         const constructorParams: string[] = [];
-        
+
         for (const prop of injectedProperties) {
             const decorators = prop.getDecorators();
             const injectDecorator = decorators.find(d => {
                 const expr = d.getExpression();
-                return Node.isCallExpression(expr) && 
-                       expr.getExpression().getText() === 'inject';
+                return Node.isCallExpression(expr) &&
+                    expr.getExpression().getText() === 'inject';
             });
 
             if (!injectDecorator) continue;
@@ -434,7 +434,7 @@ ${newStatements.map(s => '    ' + s).join('\n')}
             const paramModifiers = [];
             if (isProtected) paramModifiers.push('protected');
             if (isReadonly) paramModifiers.push('readonly');
-            
+
             const paramText = `${paramModifiers.join(' ')} ${name}${isOptional ? '?' : ''}: ${type}`.trim();
             constructorParams.push(paramText);
 
@@ -451,11 +451,11 @@ ${newStatements.map(s => '    ' + s).join('\n')}
             // Add new parameters to existing constructor
             const existingParams = constructor.getParameters();
             const existingParamTexts = existingParams.map(p => p.getText());
-            
+
             // Combine existing and new parameters
             const allParams = [...existingParamTexts, ...constructorParams];
             const paramsText = allParams.join(', ');
-            
+
             const body = constructor.getBody()?.getText() || '{}';
             constructor.replaceWithText(`constructor(${paramsText}) ${body}`);
         } else {
@@ -463,7 +463,7 @@ ${newStatements.map(s => '    ' + s).join('\n')}
             const paramsText = constructorParams.join(', ');
             const firstMember = classDecl.getMembers()[0];
             if (firstMember) {
-                firstMember.insertBeforeText(`constructor(${paramsText) {}\n\n    `);
+                firstMember.insertBeforeText(`constructor(${paramsText) { } \n\n    `);
             } else {
                 classDecl.addConstructor({
                     parameters: constructorParams.map(p => {
@@ -557,12 +557,12 @@ ${newStatements.map(s => '    ' + s).join('\n')}
      */
     private printStats(): void {
         console.log('\n📊 Migration Statistics:');
-        console.log(`  Files processed: ${this.stats.filesProcessed}`);
-        console.log(`  Files modified: ${this.stats.filesModified}`);
-        console.log(`  Classes migrated: ${this.stats.classesMigrated}`);
-        console.log(`  Modules migrated: ${this.stats.modulesMigrated}`);
-        console.log(`  Properties converted: ${this.stats.propertiesConverted}`);
-        console.log(`  Decorators removed: ${this.stats.decoratorsRemoved}`);
+        console.log(`  Files processed: ${ this.stats.filesProcessed } `);
+        console.log(`  Files modified: ${ this.stats.filesModified } `);
+        console.log(`  Classes migrated: ${ this.stats.classesMigrated } `);
+        console.log(`  Modules migrated: ${ this.stats.modulesMigrated } `);
+        console.log(`  Properties converted: ${ this.stats.propertiesConverted } `);
+        console.log(`  Decorators removed: ${ this.stats.decoratorsRemoved } `);
         
         if (this.dryRun) {
             console.log('\n⚠️  DRY RUN MODE - No files were modified');

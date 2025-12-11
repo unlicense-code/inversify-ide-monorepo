@@ -16,7 +16,10 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { glob } from 'glob';
+import { createRequire } from 'module';
+import globPkg from 'glob';
+const { glob } = globPkg;
+const require = createRequire(import.meta.url);
 import { create as logUpdater } from 'log-update';
 import * as chalk from 'chalk';
 

@@ -33,7 +33,7 @@ import {
 import { RPCProtocol } from '../common/rpc-protocol.js';
 import { isObject, mixin } from '../common/types.js';
 import { WorkspaceExtImpl } from './workspace.js';
-import cloneDeep = require('lodash.clonedeep');
+import cloneDeep from 'lodash.clonedeep';
 import { ILogService, LogLevel } from '@theia/monaco-editor-core/esm/vs/platform/log/common/log.js';
 
 const injectionRe = /\b__proto__\b|\bconstructor\.prototype\b/;

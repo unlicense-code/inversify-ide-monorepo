@@ -14,10 +14,10 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { TheiaApp } from './theia-app';
-import { TheiaOutputViewChannel } from './theia-output-channel';
-import { TheiaView } from './theia-view';
-import { normalizeId } from './util';
+import { TheiaApp } from './theia-app.js';
+import { TheiaOutputViewChannel } from './theia-output-channel.js';
+import { TheiaView } from './theia-view.js';
+import { normalizeId } from './util.js';
 
 const TheiaOutputViewData = {
     tabSelector: '#shell-tab-outputView',

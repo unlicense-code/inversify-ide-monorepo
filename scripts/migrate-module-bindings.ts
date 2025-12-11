@@ -16,7 +16,7 @@ class ModuleBindingMigrator {
 
     constructor() {
         this.project = new Project({
-            tsConfigFilePath: path.join(__dirname, '../tsconfig.json'),
+            tsConfigFilePath: path.join(import.meta.dirname, '../tsconfig.json'),
             skipAddingFilesFromTsConfig: true,
         });
     }
@@ -26,12 +26,12 @@ class ModuleBindingMigrator {
      */
     async migrateModule(modulePath: string): Promise<void> {
         const sourceFile = this.project.addSourceFileAtPath(modulePath);
-        
+
         console.log(`Migrating module: ${modulePath}`);
-        
+
         // Find ContainerModule export
         const containerModule = this.findContainerModule(sourceFile);
-        
+
         if (!containerModule) {
             console.log('  No ContainerModule found');
             return;
@@ -39,10 +39,10 @@ class ModuleBindingMigrator {
 
         // Convert to initialization function
         this.convertToInitializationFunction(sourceFile, containerModule);
-        
+
         // Add ServiceRegistry import
         this.addServiceRegistryImport(sourceFile);
-        
+
         // Save
         sourceFile.saveSync();
         console.log('  ✅ Module migrated');
@@ -53,7 +53,7 @@ class ModuleBindingMigrator {
      */
     private findContainerModule(sourceFile: SourceFile): VariableDeclaration | null {
         const exports = sourceFile.getExportedDeclarations();
-        
+
         for (const declarations of exports.values()) {
             for (const decl of declarations) {
                 if (Node.isVariableDeclaration(decl)) {
@@ -67,7 +67,7 @@ class ModuleBindingMigrator {
                 }
             }
         }
-        
+
         return null;
     }
 
@@ -101,14 +101,14 @@ class ModuleBindingMigrator {
         // Determine function name
         const isDefaultExport = variableDecl.getParent()?.getKind() === SyntaxKind.ExportAssignment;
         const moduleName = this.getModuleName(sourceFile);
-        const functionName = isDefaultExport 
+        const functionName = isDefaultExport
             ? `initialize${moduleName}`
             : `initialize${variableDecl.getName()}`;
 
         // Convert bind statements
         const statements = callbackBody.getStatements();
         const convertedStatements: string[] = [];
-        
+
         for (const stmt of statements) {
             if (Node.isExpressionStatement(stmt)) {
                 const expr = stmt.getExpression();
@@ -158,11 +158,11 @@ ${convertedStatements.map(s => '    ' + s).join('\n')}
         }
 
         const serviceToken = args[0].getText();
-        
+
         // Get the full chain (bind(...).toSelf().inSingletonScope())
         let current: Node = callExpr;
         const chain: string[] = [];
-        
+
         while (current) {
             const parent = current.getParent();
             if (Node.isPropertyAccessExpression(parent)) {
@@ -224,7 +224,7 @@ ${convertedStatements.map(s => '    ' + s).join('\n')}
      */
     private findToServiceCall(callExpr: CallExpression): CallExpression | null {
         let current: Node = callExpr;
-        
+
         while (current) {
             const parent = current.getParent();
             if (Node.isCallExpression(parent)) {
@@ -235,7 +235,7 @@ ${convertedStatements.map(s => '    ' + s).join('\n')}
             }
             current = parent;
         }
-        
+
         return null;
     }
 
@@ -244,7 +244,7 @@ ${convertedStatements.map(s => '    ' + s).join('\n')}
      */
     private findConstantValueCall(callExpr: CallExpression): CallExpression | null {
         let current: Node = callExpr;
-        
+
         while (current) {
             const parent = current.getParent();
             if (Node.isCallExpression(parent)) {
@@ -255,7 +255,7 @@ ${convertedStatements.map(s => '    ' + s).join('\n')}
             }
             current = parent;
         }
-        
+
         return null;
     }
 
@@ -265,7 +265,7 @@ ${convertedStatements.map(s => '    ' + s).join('\n')}
     private convertDynamicValue(callExpr: CallExpression, serviceToken: string): string {
         // Find the toDynamicValue call and extract the factory function
         let current: Node = callExpr;
-        
+
         while (current) {
             const parent = current.getParent();
             if (Node.isCallExpression(parent)) {
@@ -277,14 +277,14 @@ ${convertedStatements.map(s => '    ' + s).join('\n')}
                         const factoryText = factoryArg.getText()
                             .replace(/ctx\.container\.get\(/g, 'registry.get(')
                             .replace(/ctx\.container/g, 'registry');
-                        
+
                         return `registry.registerSingleton(${serviceToken}, () => ${factoryText});`;
                     }
                 }
             }
             current = parent;
         }
-        
+
         return `// TODO: Convert toDynamicValue for ${serviceToken}`;
     }
 
@@ -294,7 +294,7 @@ ${convertedStatements.map(s => '    ' + s).join('\n')}
     private convertFactory(callExpr: CallExpression, serviceToken: string): string {
         // Similar to toDynamicValue but returns a factory function
         let current: Node = callExpr;
-        
+
         while (current) {
             const parent = current.getParent();
             if (Node.isCallExpression(parent)) {
@@ -305,14 +305,14 @@ ${convertedStatements.map(s => '    ' + s).join('\n')}
                         const factoryText = factoryArg.getText()
                             .replace(/ctx\.container\.get\(/g, 'registry.get(')
                             .replace(/ctx\.container/g, 'registry');
-                        
+
                         return `registry.registerSingleton(${serviceToken}, () => ${factoryText});`;
                     }
                 }
             }
             current = parent;
         }
-        
+
         return `// TODO: Convert toFactory for ${serviceToken}`;
     }
 
@@ -323,7 +323,7 @@ ${convertedStatements.map(s => '    ' + s).join('\n')}
         // rebind is similar to bind but replaces existing binding
         // In our case, we can just use registerSingleton (it will overwrite)
         const chain = callExpr.getParent()?.getText() || '';
-        
+
         if (chain.includes('toService')) {
             const toServiceCall = this.findToServiceCall(callExpr);
             if (toServiceCall) {
@@ -331,7 +331,7 @@ ${convertedStatements.map(s => '    ' + s).join('\n')}
                 return `registry.registerSingleton(${serviceToken}, () => registry.get(${targetService}));`;
             }
         }
-        
+
         return `// TODO: Convert rebind for ${serviceToken}`;
     }
 
@@ -341,7 +341,7 @@ ${convertedStatements.map(s => '    ' + s).join('\n')}
     private addServiceRegistryImport(sourceFile: SourceFile): void {
         // Check if import already exists
         const imports = sourceFile.getImportDeclarations();
-        const hasImport = imports.some(imp => 
+        const hasImport = imports.some(imp =>
             imp.getModuleSpecifierValue().includes('service-registry')
         );
 
@@ -376,7 +376,7 @@ async function main() {
     }
 
     const migrator = new ModuleBindingMigrator();
-    
+
     try {
         await migrator.migrateModule(modulePath);
         console.log('\n✅ Module migration complete!');

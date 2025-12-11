@@ -1,2 +1,3 @@
-import throttle = require('lodash.throttle');
-export = throttle;
+import throttle from 'lodash.throttle';
+export default throttle;
+export * from 'lodash.throttle';

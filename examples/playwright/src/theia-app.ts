@@ -15,15 +15,15 @@
 // *****************************************************************************
 
 import { Page } from '@playwright/test';
-import { TheiaEditor } from './theia-editor';
-import { DOT_FILES_FILTER, TheiaExplorerView } from './theia-explorer-view';
-import { TheiaMenuBar } from './theia-main-menu';
-import { TheiaPreferenceScope, TheiaPreferenceView } from './theia-preference-view';
-import { TheiaQuickCommandPalette } from './theia-quick-command-palette';
-import { TheiaStatusBar } from './theia-status-bar';
-import { TheiaTerminal } from './theia-terminal';
-import { TheiaView } from './theia-view';
-import { TheiaWorkspace } from './theia-workspace';
+import { TheiaEditor } from './theia-editor.js';
+import { DOT_FILES_FILTER, TheiaExplorerView } from './theia-explorer-view.js';
+import { TheiaMenuBar } from './theia-main-menu.js';
+import { TheiaPreferenceScope, TheiaPreferenceView } from './theia-preference-view.js';
+import { TheiaQuickCommandPalette } from './theia-quick-command-palette.js';
+import { TheiaStatusBar } from './theia-status-bar.js';
+import { TheiaTerminal } from './theia-terminal.js';
+import { TheiaView } from './theia-view.js';
+import { TheiaWorkspace } from './theia-workspace.js';
 
 export interface TheiaAppData {
     loadingSelector: string;

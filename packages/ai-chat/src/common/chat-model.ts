@@ -30,7 +30,7 @@ import {
     ToolUseMessage
 } from '@theia/ai-core/lib/common/index.js';
 import { ArrayUtils, CancellationToken, CancellationTokenSource, Command, Disposable, DisposableCollection, Emitter, Event, generateUuid, URI } from '@theia/core';
-import { MarkdownString, MarkdownStringImpl } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownString, MarkdownStringImpl } from '@theia/core/lib/common/markdown-rendering/index.js';
 import { Position } from 'vscode-languageserver-protocol';
 import { ChangeSet, ChangeSetElement, ChangeSetImpl, ChatUpdateChangeSetEvent } from './change-set.js';
 import { ChatAgentLocation } from './chat-agents.js';

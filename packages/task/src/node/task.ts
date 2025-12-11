@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { injectable, unmanaged } from 'inversify';
-import { ILogger, Disposable, DisposableCollection, Emitter, Event, MaybePromise } from '@theia/core/lib/common/';
+import { ILogger, Disposable, DisposableCollection, Emitter, Event, MaybePromise } from '@theia/core/lib/common/index.js';
 import { TaskInfo, TaskExitedEvent, TaskConfiguration, TaskOutputEvent, ManagedTask, ManagedTaskManager } from '../common/task-protocol.js';
 export type TaskOptions = {
     /** The task label */

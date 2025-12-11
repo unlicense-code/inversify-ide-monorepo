@@ -21,7 +21,7 @@ import { delay, githubReporting, isLCP, lcp, measure } from './common-performanc
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const import.meta.dirname = dirname(__filename);
 
 const workspacePath = resolve('./workspace');
 const profilesPath = './profiles/';
@@ -83,7 +83,7 @@ let runs = 10;
     }
 
     // Verify that the application exists
-    const indexHTML = resolve(__dirname, '../../examples/browser/src-gen/frontend/index.html');
+    const indexHTML = resolve(import.meta.dirname, '../../examples/browser/src-gen/frontend/index.html');
     if (!existsSync(indexHTML)) {
         console.error('Browser example app does not exist. Please build it before running this script.');
         process.exit(1);

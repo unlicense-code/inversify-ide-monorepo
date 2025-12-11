@@ -15,7 +15,7 @@
 // *****************************************************************************
 
 import { Mutable } from '@theia/core';
-import { MarkdownStringImpl as BaseMarkdownString, MarkdownString as MarkdownStringInterface, MarkdownStringTrustedOptions } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownStringImpl as BaseMarkdownString, MarkdownString as MarkdownStringInterface, MarkdownStringTrustedOptions } from '@theia/core/lib/common/markdown-rendering/index.js';
 import * as pluginAPI from '@theia/plugin';
 import { es5ClassCompat } from '../common/types.js';
 import { URI } from './types-impl.js';

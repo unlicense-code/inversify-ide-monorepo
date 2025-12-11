@@ -16,11 +16,11 @@
 
 import { injectable } from 'inversify';
 
-import { ElectronMainApplication, ElectronMainApplicationContribution } from '@theia/core/lib/electron-main';
+import { ElectronMainApplication, ElectronMainApplicationContribution } from '@theia/core/lib/electron-main/index.js';
 import { MaybePromise } from '@theia/core';
 import { CHANNEL_SHOW_OPEN, CHANNEL_SHOW_SAVE, OpenDialogOptions, SaveDialogOptions } from '../electron-common/electron-api.js';
 import { ipcMain, OpenDialogOptions as ElectronOpenDialogOptions, SaveDialogOptions as ElectronSaveDialogOptions, BrowserWindow, dialog }
-    from '@theia/core/electron-shared/electron';
+    from '@theia/core/electron-shared/electron/index.js';
 
 @injectable()
 export class ElectronApi implements ElectronMainApplicationContribution {

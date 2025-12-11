@@ -17,7 +17,7 @@
 import { Event, Emitter } from '../../common/event.js';
 import { Disposable, DisposableCollection } from '../../common/disposable.js';
 
-import debounce = require('lodash.debounce');
+import debounce from 'lodash.debounce';
 
 export type SearchBoxDebounceOptions = {
 

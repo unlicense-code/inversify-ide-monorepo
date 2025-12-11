@@ -14,7 +14,7 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-export * from './webpack-generator';
-export * from './rollup-generator';
-export * from './frontend-generator';
-export * from './backend-generator';
+export * from './webpack-generator.js';
+export * from './rollup-generator.js';
+export * from './frontend-generator.js';
+export * from './backend-generator.js';

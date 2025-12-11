@@ -23,16 +23,16 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const traceConfigTemplate = JSON.parse(readFileSync(join(__dirname, 'electron-trace-config.json'), 'utf8'));
+const import.meta.dirname = dirname(__filename);
+const traceConfigTemplate = JSON.parse(readFileSync(join(import.meta.dirname, 'electron-trace-config.json'), 'utf8'));
 import { exit } from 'process';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const import.meta.dirname = dirname(__filename);
 
-const basePath = resolve(__dirname, '../..');
-const profilesPath = resolve(__dirname, './profiles/');
+const basePath = resolve(import.meta.dirname, '../..');
+const profilesPath = resolve(import.meta.dirname, './profiles/');
 const electronExample = resolve(basePath, 'examples/electron');
 const theia = resolve(electronExample, 'node_modules/.bin/theia');
 

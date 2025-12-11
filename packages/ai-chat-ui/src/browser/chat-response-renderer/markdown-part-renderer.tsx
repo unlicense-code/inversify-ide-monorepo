@@ -26,7 +26,7 @@ import * as React from 'react';
 import markdownit from 'markdown-it';
 import * as markdownitemoji from 'markdown-it-emoji';
 import DOMPurify from 'dompurify';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/index.js';
 import { OpenerService, open } from '@theia/core/lib/browser/index.js';
 import { URI } from '@theia/core';
 

@@ -16,17 +16,17 @@
 
 import { expect, test } from '@playwright/test';
 import * as path from 'path';
-import { TheiaApp } from '../theia-app';
-import { TheiaAppLoader } from '../theia-app-loader';
-import { TheiaWorkspace } from '../theia-workspace';
-import { TheiaTerminal } from '../theia-terminal';
+import { TheiaApp } from '../theia-app.js';
+import { TheiaAppLoader } from '../theia-app-loader.js';
+import { TheiaWorkspace } from '../theia-workspace.js';
+import { TheiaTerminal } from '../theia-terminal.js';
 
 let app: TheiaApp;
 
 test.describe('Theia Terminal View', () => {
 
     test.beforeAll(async ({ playwright, browser }) => {
-        const ws = new TheiaWorkspace([path.resolve(__dirname, '../../src/tests/resources/sample-files1')]);
+        const ws = new TheiaWorkspace([path.resolve(import.meta.dirname, '../../src/tests/resources/sample-files1')]);
         app = await TheiaAppLoader.load({ playwright, browser }, ws);
     });
 

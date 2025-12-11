@@ -30,7 +30,7 @@ import { DebugStackFrame } from './model/debug-stack-frame.js';
 import { DebugSource } from './model/debug-source.js';
 import { DebugBreakpoint, DebugBreakpointOptions } from './model/debug-breakpoint.js';
 import { DebugSourceBreakpoint } from './model/debug-source-breakpoint.js';
-import debounce = require('p-debounce');
+import debounce from 'p-debounce';
 import { URI } from '@theia/core/lib/common/uri.js';
 import { BreakpointManager } from './breakpoint/breakpoint-manager.js';
 import { DebugConfigurationSessionOptions, InternalDebugSessionOptions, TestRunReference } from './debug-session-options.js';

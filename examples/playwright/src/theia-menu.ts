@@ -16,9 +16,9 @@
 
 import { ElementHandle } from '@playwright/test';
 
-import { TheiaMenuItem } from './theia-menu-item';
-import { TheiaPageObject } from './theia-page-object';
-import { isDefined } from './util';
+import { TheiaMenuItem } from './theia-menu-item.js';
+import { TheiaPageObject } from './theia-page-object.js';
+import { isDefined } from './util.js';
 
 export class TheiaMenu extends TheiaPageObject {
 

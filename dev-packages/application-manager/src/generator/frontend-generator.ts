@@ -17,7 +17,7 @@
 /* eslint-disable @typescript-eslint/indent */
 
 import { EOL } from 'os';
-import { AbstractGenerator, GeneratorOptions } from './abstract-generator';
+import { AbstractGenerator, GeneratorOptions } from './abstract-generator.js';
 import { existsSync, readFileSync } from 'fs';
 
 export class FrontendGenerator extends AbstractGenerator {
@@ -55,7 +55,7 @@ export class FrontendGenerator extends AbstractGenerator {
 
 <body>
     <div class="theia-preload">${this.compileIndexPreload(frontendModules)}</div>
-    <script type="text/javascript" src="./bundle.js" charset="utf-8"></script>
+    <script type="module" src="./bundle.js" charset="utf-8"></script>
 </body>
 
 </html>`;
@@ -74,7 +74,7 @@ export class FrontendGenerator extends AbstractGenerator {
 // @ts-check
 import 'reflect-metadata';
 import { Container } from 'inversify';
-import { ServiceRegistry } from '@theia/core/lib/common/service-registry';
+import { ServiceRegistry } from '@theia/core/lib/common/service-registry.js';
 import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider.js';
 
 FrontendApplicationConfigProvider.set(${this.prettyStringify(this.pck.props.frontend.config)});
@@ -126,9 +126,11 @@ function load(container, registry, jsModule) {
 
 async function preload(container, registry) {
     try {
-${Array.from(frontendPreloadModules.values(), jsModulePath => `\
-        await load(container, registry, import('${jsModulePath}'));`).join(EOL)}
-        const { Preloader } = await import('@theia/core/lib/browser/preload/preloader');
+${Array.from(frontendPreloadModules.values(), jsModulePath => {
+            const pathWithExt = jsModulePath.startsWith('@theia/') && !jsModulePath.match(/\.(js|json|mjs|ts|tsx)$/) ? jsModulePath + '.js' : jsModulePath;
+            return `        await load(container, registry, import('${pathWithExt}'));`;
+        }).join(EOL)}
+        const { Preloader } = await import('@theia/core/lib/browser/preload/preloader.js');
         // Try registry first, fallback to container
         let preloader;
         try {
@@ -156,33 +158,35 @@ module.exports = (async () => {
 
     // Load core modules - these still use ContainerModule for now
     const { messagingFrontendModule } = require('@theia/core/lib/${this.pck.isBrowser() || this.pck.isBrowserOnly()
-                ? 'browser/messaging/messaging-frontend-module'
-                : 'electron-browser/messaging/electron-messaging-frontend-module'}');
+                ? 'browser/messaging/messaging-frontend-module.js'
+                : 'electron-browser/messaging/electron-messaging-frontend-module.js'}');
     container.load(messagingFrontendModule);
-    ${this.ifBrowserOnly(`const { messagingFrontendOnlyModule } = require('@theia/core/lib/browser-only/messaging/messaging-frontend-only-module');
+    ${this.ifBrowserOnly(`const { messagingFrontendOnlyModule } = require('@theia/core/lib/browser-only/messaging/messaging-frontend-only-module.js');
     container.load(messagingFrontendOnlyModule);`)}
 
     await preload(container, registry);
 
     ${this.ifMonaco(() => `
-    const { MonacoInit } = require('@theia/monaco/lib/browser/monaco-init');
+    const { MonacoInit } = require('@theia/monaco/lib/browser/monaco-init.js');
     `)};
 
     const { FrontendApplication } = require('@theia/core/lib/browser/index.js');
-    const { frontendApplicationModule } = require('@theia/core/lib/browser/frontend-application-module');    
-    const { loggerFrontendModule } = require('@theia/core/lib/browser/logger-frontend-module');
+    const { frontendApplicationModule } = require('@theia/core/lib/browser/frontend-application-module.js');    
+    const { loggerFrontendModule } = require('@theia/core/lib/browser/logger-frontend-module.js');
 
     container.load(frontendApplicationModule);
-    ${this.pck.ifBrowserOnly(`const { frontendOnlyApplicationModule } = await import('@theia/core/lib/browser-only/frontend-only-application-module');
+    ${this.pck.ifBrowserOnly(`const { frontendOnlyApplicationModule } = await import('@theia/core/lib/browser-only/frontend-only-application-module.js');
     container.load(frontendOnlyApplicationModule);`)}
     
     container.load(loggerFrontendModule);
-    ${this.ifBrowserOnly(`const { loggerFrontendOnlyModule } = await import('@theia/core/lib/browser-only/logger-frontend-only-module');
+    ${this.ifBrowserOnly(`const { loggerFrontendOnlyModule } = await import('@theia/core/lib/browser-only/logger-frontend-only-module.js');
     container.load(loggerFrontendOnlyModule);`)}
 
     try {
-${Array.from(frontendModules.values(), jsModulePath => `\
-        await load(container, registry, import('${jsModulePath}'));`).join(EOL)}
+${Array.from(frontendModules.values(), jsModulePath => {
+                    const pathWithExt = jsModulePath.startsWith('@theia/') && !jsModulePath.match(/\.(js|json|mjs|ts|tsx)$/) ? jsModulePath + '.js' : jsModulePath;
+                    return `        await load(container, registry, import('${pathWithExt}'));`;
+                }).join(EOL)}
         ${this.ifMonaco(() => `
         MonacoInit.init(container);
         `)};
@@ -254,12 +258,14 @@ import 'reflect-metadata';
 import { Container } from 'inversify';
 
 export default Promise.resolve().then(async () => {
-    const { frontendApplicationModule } = await import('@theia/core/lib/browser/frontend-application-module');
+    const { frontendApplicationModule } = await import('@theia/core/lib/browser/frontend-application-module.js');
     const container = new Container();
     container.load(frontendApplicationModule);
-${Array.from(secondaryWindowModules.values(), jsModulePath => `\
-    const module = await import('${jsModulePath}');
-    container.load(module.default);`).join(EOL)}
+${Array.from(secondaryWindowModules.values(), jsModulePath => {
+            const pathWithExt = jsModulePath.startsWith('@theia/') && !jsModulePath.match(/\.(js|json|mjs|ts|tsx)$/) ? jsModulePath + '.js' : jsModulePath;
+            return `    const module = await import('${pathWithExt}');
+    container.load(module.default);`;
+        }).join(EOL)}
 });
 `;
     }
@@ -268,7 +274,10 @@ ${Array.from(secondaryWindowModules.values(), jsModulePath => `\
         return `\
 // @ts-check
 (async () => {
-${Array.from(this.pck.preloadModules.values(), path => `    (await import('${path}')).preload();`).join(EOL)}
+${Array.from(this.pck.preloadModules.values(), path => {
+            const pathWithExt = path.startsWith('@theia/') && !path.match(/\.(js|json|mjs|ts|tsx)$/) ? path + '.js' : path;
+            return `    (await import('${pathWithExt}')).preload();`;
+        }).join(EOL)}
 })();
 `;
     }

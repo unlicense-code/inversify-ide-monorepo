@@ -16,7 +16,7 @@
 
 import { injectable, inject, named } from 'inversify';
 import { ILogger, Channel } from '@theia/core/lib/common/index.js';
-import { TerminalProcess, ProcessManager } from '@theia/process/lib/node';
+import { TerminalProcess, ProcessManager } from '@theia/process/lib/node/index.js';
 import { terminalsPath } from '../common/terminal-protocol.js';
 import { MessagingService } from '@theia/core/lib/node/messaging/messaging-service.js';
 import { StringBufferingStream } from './buffering-stream.js';

@@ -1,1 +1,1 @@
-module.exports = require('@theia/electron/shared/fix-path');
+export { default } from '@theia/electron/shared/fix-path/index.js';

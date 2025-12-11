@@ -28,7 +28,7 @@ import { RemoteCliContribution } from '@theia/core/lib/node/remote/remote-cli-co
 import { ProfileFileModificationContribution } from './devcontainer-contributions/profile-file-modification-contribution.js';
 import { DevContainerWorkspaceHandler } from './dev-container-workspace-handler.js';
 import { WorkspaceHandlerContribution } from '@theia/workspace/lib/node/default-workspace-server.js';
-import { registerVariableResolverContributions, VariableResolverContribution } from './devcontainer-contributions/variable-resolver-contribution.js';
+import { registerVariableResolverContributions, VariableResolverContribution, DockerContainerServiceSymbol } from './devcontainer-contributions/variable-resolver-contribution.js';
 import { DockerComposeService } from './docker-compose/compose-service.js';
 
 export const remoteConnectionModule = ConnectionContainerModule.create(({ bind, bindBackendService }) => {
@@ -53,6 +53,7 @@ export const remoteConnectionModule = ConnectionContainerModule.create(({ bind, 
 
 export default new ContainerModule((bind, unbind, isBound, rebind) => {
     bind(DockerContainerService).toSelf().inSingletonScope();
+    bind(DockerContainerServiceSymbol).toService(DockerContainerService);
     bind(ConnectionContainerModule).toConstantValue(remoteConnectionModule);
 
     bind(DockerComposeService).toSelf().inSingletonScope();

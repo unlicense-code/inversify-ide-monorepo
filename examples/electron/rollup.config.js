@@ -3,10 +3,13 @@
  * To reset delete this file and rerun theia build again.
  */
 // @ts-check
-const configs = require('./gen-rollup.config.js');
-const nodeConfig = require('./gen-rollup.node.config.js');
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
-module.exports = [
+const configs = require('./gen-rollup.config.cjs');
+const nodeConfig = require('./gen-rollup.node.config.cjs');
+
+export default [
     ...configs,
     nodeConfig
 ];

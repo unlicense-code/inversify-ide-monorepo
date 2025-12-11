@@ -18,7 +18,7 @@
 import { CancellationToken, Emitter, Event, URI } from '@theia/core';
 import { Range, Location, CancellationTokenSource } from 'vscode-languageserver-protocol';
 
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/index.js';
 import { SimpleObservableCollection, TreeCollection, observableProperty } from '@theia/test/lib/common/collections.js';
 import {
     TestController, TestExecutionState, TestFailure, TestItem,

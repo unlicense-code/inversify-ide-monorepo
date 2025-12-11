@@ -44,7 +44,9 @@ export namespace CancellationToken {
 
     export const None: CancellationToken = Object.freeze({
         isCancellationRequested: false,
-        onCancellationRequested: Event.None
+        get onCancellationRequested(): Event<void> {
+            return Event.None;
+        }
     });
 
     export const Cancelled: CancellationToken = Object.freeze({

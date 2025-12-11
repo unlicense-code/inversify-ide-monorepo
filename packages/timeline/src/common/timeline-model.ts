@@ -23,7 +23,7 @@
 import { Command, Disposable, Event } from '@theia/core/lib/common/index.js';
 import { URI } from 'vscode-uri';
 import { ThemeIcon } from '@theia/core/lib/common/theme.js';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/index.js';
 import { AccessibilityInformation } from '@theia/core/lib/common/accessibility.js';
 
 export type TimelineItem = {

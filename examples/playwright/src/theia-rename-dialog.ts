@@ -14,8 +14,8 @@
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
 
-import { TheiaDialog } from './theia-dialog';
-import { USER_KEY_TYPING_DELAY } from './util';
+import { TheiaDialog } from './theia-dialog.js';
+import { USER_KEY_TYPING_DELAY } from './util.js';
 
 export class TheiaRenameDialog extends TheiaDialog {
 

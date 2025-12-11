@@ -17,7 +17,7 @@
 import { injectable, inject, named } from 'inversify';
 import * as os from 'os';
 import { ILogger } from '@theia/core/lib/common/logger.js';
-import { TerminalProcess, TerminalProcessOptions, ProcessManager, MultiRingBuffer } from '@theia/process/lib/node';
+import { TerminalProcess, TerminalProcessOptions, ProcessManager, MultiRingBuffer } from '@theia/process/lib/node/index.js';
 import { isWindows, isOSX } from '@theia/core/lib/common/index.js';
 import { URI } from '@theia/core/lib/common/uri.js';
 import { FileUri } from '@theia/core/lib/common/file-uri.js';

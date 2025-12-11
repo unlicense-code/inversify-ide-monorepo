@@ -13,9 +13,9 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 
-import { TheiaApp } from './theia-app';
-import { TheiaView } from './theia-view';
-import { normalizeId } from './util';
+import { TheiaApp } from './theia-app.js';
+import { TheiaView } from './theia-view.js';
+import { normalizeId } from './util.js';
 
 const TheiaWelcomeViewData = {
     tabSelector: normalizeId('#shell-tab-getting.started.widget'),

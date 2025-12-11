@@ -18,7 +18,7 @@ import * as React from 'react';
 import { DeclaredEventsEventListenerObject, useMarkdownRendering } from './chat-response-renderer/markdown-part-renderer.js';
 import { OpenerService } from '@theia/core/lib/browser/index.js';
 import { ChatSuggestion, ChatSuggestionCallback } from '@theia/ai-chat/lib/common/index.js';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/index.js';
 
 type ChatInputAgentSuggestionsProps = {
     suggestions: readonly ChatSuggestion[];

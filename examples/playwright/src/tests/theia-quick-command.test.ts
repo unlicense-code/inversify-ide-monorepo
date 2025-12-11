@@ -15,13 +15,13 @@
 // *****************************************************************************
 
 import { expect, test } from '@playwright/test';
-import { TheiaAppLoader } from '../theia-app-loader';
-import { TheiaAboutDialog } from '../theia-about-dialog';
-import { TheiaApp } from '../theia-app';
-import { TheiaExplorerView } from '../theia-explorer-view';
-import { TheiaNotificationIndicator } from '../theia-notification-indicator';
-import { TheiaNotificationOverlay } from '../theia-notification-overlay';
-import { TheiaQuickCommandPalette } from '../theia-quick-command-palette';
+import { TheiaAppLoader } from '../theia-app-loader.js';
+import { TheiaAboutDialog } from '../theia-about-dialog.js';
+import { TheiaApp } from '../theia-app.js';
+import { TheiaExplorerView } from '../theia-explorer-view.js';
+import { TheiaNotificationIndicator } from '../theia-notification-indicator.js';
+import { TheiaNotificationOverlay } from '../theia-notification-overlay.js';
+import { TheiaQuickCommandPalette } from '../theia-quick-command-palette.js';
 
 test.describe('Theia Quick Command', () => {
 

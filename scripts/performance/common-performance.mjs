@@ -44,7 +44,7 @@ import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const import.meta.dirname = dirname(__filename);
 
 const performanceTag = braceText('Performance');
 export const lcp = 'Largest Contentful Paint (LCP)';
@@ -132,7 +132,7 @@ function prec(value, precision = 3) {
  * @param {PerformanceResult} result the performance result to report
  */
 function githubResult(result) {
-    const resultsFile = resolve(__dirname, '../..', 'performance-result.json');
+    const resultsFile = resolve(import.meta.dirname, '../..', 'performance-result.json');
 
     // We append to any previous results that there may have been from another script
     const previousResults = existsSync(resultsFile) ? JSON.parse(readFileSync(resultsFile, 'utf-8')) : [];

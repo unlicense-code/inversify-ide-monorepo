@@ -2,6 +2,7 @@
   "name": "@theia/application-manager",
   "version": "1.66.0",
   "description": "Theia application manager API.",
+  "type": "module",
   "publishConfig": {
     "access": "public"
   },

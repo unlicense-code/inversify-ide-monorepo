@@ -70,7 +70,7 @@ describe('Editors', function () {
 The application is always bundled. Bundles exposing application modules via `theia` namespace.
 One can access a module with `window.theia.moduleName`, where `moduleName`
 is the absolute path to a module file relative to a containing package.
-For instance `editor-manager.js` can be accessed with `window.theia['@theia/editor/lib/browser/editor-manager']`.
+For instance `editor-manager.js` can be accessed with `window.theia['@theia/editor/lib/browser/editor-manager.js']`.
 Testing framework as well injects `require` function to lookup modules.
 It can be useful with enabled typescript checks for js files to write statically checked code.
 
@@ -85,8 +85,8 @@ describe('Editors', function () {
 
     const { assert } = chai;
 
-    const { EditorManager } = require('@theia/editor/lib/browser/editor-manager');
-    const Uri = require('@theia/core/lib/common/uri');
+    const { EditorManager } = require('@theia/editor/lib/browser/editor-manager.js');
+    const Uri = require('@theia/core/lib/common/uri.js');
     const { WorkspaceService } = require('@theia/workspace/lib/browser/workspace-service');
 
     /** @type {import('inversify').Container} */
@@ -117,8 +117,8 @@ describe('Editors', function () {
 
     const { assert } = chai;
 
-    const { EditorManager } = require('@theia/editor/lib/browser/editor-manager');
-    const Uri = require('@theia/core/lib/common/uri');
+    const { EditorManager } = require('@theia/editor/lib/browser/editor-manager.js');
+    const Uri = require('@theia/core/lib/common/uri.js');
     const { WorkspaceService } = require('@theia/workspace/lib/browser/workspace-service');
 
     /** @type {import('inversify').Container} */

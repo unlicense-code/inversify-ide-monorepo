@@ -24,7 +24,7 @@ import {
     TerminalProcessFactory,
     Process,
     TerminalProcessOptions,
-} from '@theia/process/lib/node';
+} from '@theia/process/lib/node/index.js';
 
 /**
  * Task runner that runs a task as a pseudoterminal open.

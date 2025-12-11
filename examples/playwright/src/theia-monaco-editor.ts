@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { ElementHandle, Locator } from '@playwright/test';
-import { TheiaPageObject } from './theia-page-object';
-import { TheiaApp } from './theia-app';
+import { TheiaPageObject } from './theia-page-object.js';
+import { TheiaApp } from './theia-app.js';
 
 /**
  * Monaco editor page object.

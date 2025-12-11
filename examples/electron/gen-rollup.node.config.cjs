@@ -10,11 +10,36 @@ const json = require('@rollup/plugin-json');
 
 const outputPath = path.resolve(__dirname, 'lib', 'backend');
 
+// Plugin to add .js extensions to @theia/ imports
+const addJsExtension = {
+    name: 'add-js-extension',
+    renderChunk(code) {
+        // Add .js extension to @theia/ package imports that don't already have an extension
+        const importRegex = /import\s+.*?\s+from\s+['"]([^'"]+)['"]/g;
+        let modifiedCode = code;
+        let match;
+        
+        while ((match = importRegex.exec(code)) !== null) {
+            const importPath = match[1];
+            // Only process @theia/ package imports
+            if (importPath.startsWith('@theia/')) {
+                // Skip if it already has an extension
+                if (!importPath.match(/\.(js|json|mjs|ts|tsx)$/)) {
+                    const newImportPath = importPath + '.js';
+                    modifiedCode = modifiedCode.replace(match[0], match[0].replace(importPath, newImportPath));
+                }
+            }
+        }
+        
+        return { code: modifiedCode, map: null };
+    }
+};
+
 const config = {
     input: path.resolve(__dirname, 'src-gen/backend/main.js'),
     output: {
         file: path.join(outputPath, 'main.js'),
-        format: 'cjs',
+        format: 'es',
         sourcemap: true
     },
     external: (id) => {
@@ -30,7 +55,8 @@ const config = {
             extensions: ['.js', '.json']
         }),
         commonjs(),
-        json()
+        json(),
+        addJsExtension
         // TypeScript plugin removed - TypeScript files are already compiled to JavaScript
         // by tsc before this build step. Rollup processes the compiled .js files.
     ],

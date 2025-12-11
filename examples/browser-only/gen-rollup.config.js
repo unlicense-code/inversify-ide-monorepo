@@ -369,8 +369,7 @@ const preloadConfig = (() => {
                 input: preloadPath,
                 output: {
                     file: path.join(outputPath, 'preload.js'),
-                    format: 'iife',
-                    name: 'TheiaPreload',
+                    format: 'es',
                     sourcemap: true
                 },
                 plugins: [
@@ -409,10 +408,8 @@ const configs = [
         input: path.resolve(__dirname, 'src-gen/frontend/index.js'),
         output: {
             file: path.join(outputPath, 'bundle.js'),
-            format: 'iife',
-            name: 'Theia',
+            format: 'es',
             sourcemap: true,
-            globals: {},
             inlineDynamicImports: true
         },
         plugins: [
@@ -463,8 +460,7 @@ const configs = [
         })(),
         output: {
             file: path.join(outputPath, 'editor.worker.js'),
-            format: 'iife',
-            name: 'EditorWorker',
+            format: 'es',
             sourcemap: true
         },
         plugins: [

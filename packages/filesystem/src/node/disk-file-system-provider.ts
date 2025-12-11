@@ -65,7 +65,8 @@ import { BinaryBuffer } from '@theia/core';
 import { ReadableStreamEvents, newWriteableStream } from '@theia/core';
 import { CancellationToken } from '@theia/core';
 import { readFileIntoStream } from '../common/io.js';
-import { Mode } from 'stat-mode';
+import statMode from 'stat-mode';
+const { Mode } = statMode;
 
 export namespace DiskFileSystemProvider {
     export interface StatAndLink {

@@ -16,10 +16,10 @@
 
 import { ElementHandle, Locator } from '@playwright/test';
 
-import { TheiaApp } from './theia-app';
-import { TheiaEditor } from './theia-editor';
-import { normalizeId } from './util';
-import { TheiaMonacoEditor } from './theia-monaco-editor';
+import { TheiaApp } from './theia-app.js';
+import { TheiaEditor } from './theia-editor.js';
+import { normalizeId } from './util.js';
+import { TheiaMonacoEditor } from './theia-monaco-editor.js';
 
 export class TheiaTextEditor extends TheiaEditor {
 

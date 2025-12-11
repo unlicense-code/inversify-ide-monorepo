@@ -19,7 +19,7 @@ import { ContributionProvider } from '../../common/index.js';
 import { CorePreferences } from '../../common/core-preferences.js';
 import { FrontendApplicationContribution } from '../frontend-application-contribution.js';
 import { DefaultWindowService } from './default-window-service.js';
-import assert = require('assert');
+import assert from 'assert';
 
 describe('DefaultWindowService', () => {
     class TestFrontendApplicationContribution implements FrontendApplicationContribution {

@@ -13,10 +13,10 @@
 //
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 // *****************************************************************************
-
 import * as paths from 'path';
-import * as fs from 'fs-extra';
-import { AbstractGenerator } from './abstract-generator';
+import fsExtra from 'fs-extra';
+const fs = fsExtra;
+import { AbstractGenerator } from './abstract-generator.js';
 
 export class WebpackGenerator extends AbstractGenerator {
 
@@ -65,7 +65,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { MonacoWebpackPlugin } = require('@theia/native-webpack-plugin/lib/monaco-webpack-plugins.js');
 
-const outputPath = path.resolve(__dirname, 'lib', 'frontend');
+const outputPath = path.resolve(import.meta.dirname, 'lib', 'frontend');
 const { mode, staticCompression }  = yargs.option('mode', {
     description: "Mode to use",
     choices: ["development", "production"],
@@ -82,18 +82,18 @@ const plugins = [
         patterns: [
             {
                 // copy secondary window html file to lib folder
-                from: path.resolve(__dirname, 'src-gen/frontend/secondary-window.html')
+                from: path.resolve(import.meta.dirname, 'src-gen/frontend/secondary-window.html')
             }${this.ifPackage('@theia/plugin-ext', `,
             {
                 // copy webview files to lib folder
-                from: path.join(resolvePackagePath('@theia/plugin-ext', __dirname), '..', 'src', 'main', 'browser', 'webview', 'pre'),
-                to: path.resolve(__dirname, 'lib', 'webview', 'pre')
+                from: path.join(resolvePackagePath('@theia/plugin-ext', import.meta.dirname), '..', 'src', 'main', 'browser', 'webview', 'pre'),
+                to: path.resolve(import.meta.dirname, 'lib', 'webview', 'pre')
             }`)}
             ${this.ifPackage('@theia/plugin-ext-vscode', `,
             {
                 // copy frontend plugin host files
-                from: path.join(resolvePackagePath('@theia/plugin-ext-vscode', __dirname), '..', 'lib', 'node', 'context', 'plugin-vscode-init-fe.js'),
-                to: path.resolve(__dirname, 'lib', 'frontend', 'context', 'plugin-vscode-init-fe.js')
+                from: path.join(resolvePackagePath('@theia/plugin-ext-vscode', import.meta.dirname), '..', 'lib', 'node', 'context', 'plugin-vscode-init-fe.js'),
+                to: path.resolve(import.meta.dirname, 'lib', 'frontend', 'context', 'plugin-vscode-init-fe.js')
             }`)}
         ]
     }),
@@ -113,7 +113,7 @@ module.exports = [{
     plugins,
     devtool: 'source-map',
     entry: {
-        bundle: path.resolve(__dirname, 'src-gen/frontend/index.js'),
+        bundle: path.resolve(import.meta.dirname, 'src-gen/frontend/index.js'),
         ${this.ifMonaco(() => "'editor.worker': '@theia/monaco-editor-core/esm/vs/editor/editor.worker.js'")}
     },
     output: {
@@ -250,7 +250,7 @@ module.exports = [{
     ],
     devtool: 'source-map',
     entry: {
-        "secondary-window": path.resolve(__dirname, 'src-gen/frontend/secondary-index.js'),
+        "secondary-window": path.resolve(import.meta.dirname, 'src-gen/frontend/secondary-index.js'),
     },
     output: {
         filename: '[name].js',
@@ -299,7 +299,7 @@ module.exports = [{
     mode,
     devtool: 'source-map',
     entry: {
-        "preload": path.resolve(__dirname, 'src-gen/frontend/preload.js'),
+        "preload": path.resolve(import.meta.dirname, 'src-gen/frontend/preload.js'),
     },
     output: {
         filename: '[name].js',
@@ -413,14 +413,14 @@ const config = {
     node: {
         global: false,
         __filename: false,
-        __dirname: false
+        import.meta.dirname: false
     },
     resolve: {
         extensions: ['.js', '.json', '.wasm', '.node'],
     },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'lib', 'backend'),
+        path: path.resolve(import.meta.dirname, 'lib', 'backend'),
         devtoolModuleFilenameTemplate: 'webpack:///[absolute-resource-path]?[loaders]',
     },${this.ifElectron(`
     externals: {

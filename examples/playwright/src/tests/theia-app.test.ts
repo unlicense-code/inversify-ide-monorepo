@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { expect, test } from '@playwright/test';
-import { TheiaAppLoader } from '../theia-app-loader';
-import { TheiaApp } from '../theia-app';
+import { TheiaAppLoader } from '../theia-app-loader.js';
+import { TheiaApp } from '../theia-app.js';
 
 test.describe('Theia Application', () => {
     let app: TheiaApp;

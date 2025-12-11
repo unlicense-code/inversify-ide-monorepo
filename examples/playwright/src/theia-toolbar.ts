@@ -15,8 +15,8 @@
 // *****************************************************************************
 
 import { ElementHandle } from '@playwright/test';
-import { TheiaPageObject } from './theia-page-object';
-import { TheiaToolbarItem } from './theia-toolbar-item';
+import { TheiaPageObject } from './theia-page-object.js';
+import { TheiaToolbarItem } from './theia-toolbar-item.js';
 
 export class TheiaToolbar extends TheiaPageObject {
     selector = 'div#main-toolbar.lm-TabBar-toolbar';

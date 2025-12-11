@@ -1,2 +1,3 @@
-import markdownitemoji = require('markdown-it-emoji');
-export = markdownitemoji;
+import markdownitemoji from 'markdown-it-emoji';
+export default markdownitemoji;
+export * from 'markdown-it-emoji';

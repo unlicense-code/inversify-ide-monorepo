@@ -13,5 +13,6 @@
       "push": false,
       "gitTagVersion": false
     }
-  }
+  },
+  "_comment": "DEPRECATED: This file is kept for version reference only. The project now uses native npm workspaces. See scripts/get-workspaces.mjs and scripts/run-workspaces.mjs for replacements."
 }

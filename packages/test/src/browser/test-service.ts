@@ -17,7 +17,7 @@
 import { CancellationToken, ContributionProvider, Disposable, Emitter, Event, QuickPickService, isObject, nls } from '@theia/core/lib/common/index.js';
 import { CancellationTokenSource, Location, Range, Position, DocumentUri } from 'vscode-languageserver-protocol';
 import { CollectionDelta, TreeDelta } from '../common/tree-delta.js';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/index.js';
 import { URI } from '@theia/core/lib/common/uri.js';
 import { inject, injectable, named, postConstruct } from 'inversify';
 import { groupBy } from '../common/collections.js';

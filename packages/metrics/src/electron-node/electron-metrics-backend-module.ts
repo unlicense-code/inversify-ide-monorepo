@@ -16,7 +16,7 @@
 
 import { ContainerModule } from 'inversify';
 import { MetricsElectronTokenValidator } from './electron-token-validator.js';
-import { ElectronTokenValidator } from '@theia/core/lib/electron-node';
+import { ElectronTokenValidator } from '@theia/core/lib/electron-node/index.js';
 
 export default new ContainerModule((bind, unbind, isBound, rebind) => {
     bind(MetricsElectronTokenValidator).toSelf().inSingletonScope();

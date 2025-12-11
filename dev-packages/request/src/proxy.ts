@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { parse as parseUrl, Url } from 'url';
-import HttpProxyAgentModule = require('http-proxy-agent');
-import HttpsProxyAgentModule = require('https-proxy-agent');
+import HttpProxyAgentModule from 'http-proxy-agent';
+import HttpsProxyAgentModule from 'https-proxy-agent';
 
 const HttpProxyAgent = HttpProxyAgentModule as any;
 const HttpsProxyAgent = HttpsProxyAgentModule as any;

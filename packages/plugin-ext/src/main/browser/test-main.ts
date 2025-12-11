@@ -22,7 +22,7 @@ import { TestExecutionProgressService } from '@theia/test/lib/browser/test-execu
 import { AccumulatingTreeDeltaEmitter, CollectionDelta, DeltaKind, TreeDelta, TreeDeltaBuilder } from '@theia/test/lib/common/tree-delta.js';
 import { Emitter, Location, Range } from 'vscode-languageserver-protocol';
 import { Range as PluginRange, Location as PluginLocation } from '../../common/plugin-api-rpc-model.js';
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/index.js';
 import { CancellationToken, Disposable, Event, URI } from '@theia/core';
 import { MAIN_RPC_CONTEXT, TestControllerUpdate, TestingExt, TestingMain } from '../../common/index.js';
 import { RPCProtocol } from '../../common/rpc-protocol.js';

@@ -109,9 +109,9 @@ jobs:
           git config --local user.email "eclipse-theia-bot@eclipse.org"
           git config --local user.name "eclipse-theia-bot"
 
-          # Get the version from lerna.json after publishing
-          VERSION=$(node -p "require('./lerna.json').version")
-          echo "Lerna Version: $VERSION"
+          # Get the version from a workspace package (prefer @theia/core)
+          VERSION=$(node -p "const ws = require('child_process').execSync('node scripts/get-workspaces.mjs --json', {encoding:'utf8'}); const pkgs = JSON.parse(ws); const core = pkgs.find(p => p.name === '@theia/core') || pkgs[0]; core.version")
+          echo "Version: $VERSION"
 
           # First commit: Update packages/core/README.md
           if git diff --name-only | grep -q "packages/core/README.md"; then

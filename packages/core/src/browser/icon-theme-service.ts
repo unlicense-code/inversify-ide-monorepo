@@ -19,7 +19,7 @@ import { Emitter } from '../common/event.js';
 import { Disposable, DisposableCollection } from '../common/disposable.js';
 import { LabelProviderContribution, DidChangeLabelEvent } from './label-provider.js';
 import { FrontendApplicationConfigProvider } from './frontend-application-config-provider.js';
-import debounce = require('lodash.debounce');
+import debounce from 'lodash.debounce';
 import { PreferenceSchemaService } from '../common/preferences/preference-schema.js';
 import { PreferenceService } from '../common/preferences/index.js';
 

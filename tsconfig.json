@@ -1,0 +1,34 @@
+{
+  "extends": "./configs/base.tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "src",
+    "outDir": "out"
+  },
+  "include": [
+    "packages/electron/**/*.ts"
+  ],
+  "references": [
+    {
+      "path": "./packages/ai-ide"
+    },
+    {
+      "path": "./packages/ai-chat"
+    },
+    {
+      "path": "./packages/ai-chat-ui"
+    },
+    {
+      "path": "./packages/ai-core"
+    },
+    {
+      "path": "./packages/ai-mcp"
+    },
+    {
+      "path": "./packages/core"
+    },
+    {
+      "path": "./packages/debug"
+    }
+  ]
+}

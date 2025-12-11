@@ -22,32 +22,32 @@ const __dirname = dirname(__filename);
 
 function migrateFile(filePath) {
     console.log(`Migrating: ${filePath}`);
-    
+
     let content = readFileSync(filePath, 'utf8');
     const originalContent = content;
-    
+
     // 1. Remove @injectable() decorator
     content = content.replace(/@injectable\(\)\s*\n/g, '');
-    
+
     // 2. Remove @postConstruct() decorator and method
     content = content.replace(/@postConstruct\(\)\s*\n\s*protected\s+init\(\):\s*void\s*\{[^}]*\}/g, '');
-    
+
     // 3. Remove inversify imports (but keep the file for manual review)
     content = content.replace(/import\s+.*from\s+['"]@theia\/core\/shared\/inversify['"];?\n/g, '');
-    
+
     // 4. Convert @inject() properties to constructor parameters
     // This is complex and may need manual adjustment
     const injectPattern = /@inject\(([^)]+)\)\s*\n\s*(protected\s+)?(readonly\s+)?(\w+):\s*(\w+);/g;
-    
+
     // Note: Full conversion requires AST parsing - this is a simplified version
     // Manual review required for complex cases
-    
+
     if (content !== originalContent) {
         // Backup original
         const backupPath = filePath + '.inversify-backup';
         writeFileSync(backupPath, originalContent);
         console.log(`  Backup created: ${backupPath}`);
-        
+
         // Write migrated content
         writeFileSync(filePath, content);
         console.log(`  Migrated: ${filePath}`);
@@ -59,11 +59,11 @@ function migrateFile(filePath) {
 
 function findTypeScriptFiles(dir, fileList = []) {
     const files = readdirSync(dir);
-    
+
     files.forEach(file => {
         const filePath = join(dir, file);
         const stat = statSync(filePath);
-        
+
         if (stat.isDirectory()) {
             // Skip node_modules and other build directories
             if (!['node_modules', 'lib', 'dist', '.git'].includes(file)) {
@@ -73,7 +73,7 @@ function findTypeScriptFiles(dir, fileList = []) {
             fileList.push(filePath);
         }
     });
-    
+
     return fileList;
 }
 
@@ -91,7 +91,7 @@ if (stat.isDirectory()) {
     console.log(`Scanning directory: ${targetPath}`);
     const files = findTypeScriptFiles(targetPath);
     console.log(`Found ${files.length} TypeScript files`);
-    
+
     files.forEach(file => {
         try {
             migrateFile(file);

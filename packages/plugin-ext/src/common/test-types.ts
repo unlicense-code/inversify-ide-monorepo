@@ -23,7 +23,7 @@
 
 /* eslint-disable import/no-extraneous-dependencies */
 
-import { MarkdownString } from '@theia/core/lib/common/markdown-rendering';
+import { MarkdownString } from '@theia/core/lib/common/markdown-rendering/index.js';
 import { UriComponents } from './uri-components.js';
 import { Location, Range } from './plugin-api-rpc-model.js';
 import { isObject } from '@theia/core';

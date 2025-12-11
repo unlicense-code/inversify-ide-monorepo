@@ -123,7 +123,7 @@ After automated migration, you need to:
 
 ### Before:
 ```typescript
-import { injectable, inject } from '@theia/core/shared/inversify';
+import { injectable, inject } from 'inversify';
 
 @injectable()
 export class WorkspaceService {

@@ -18,7 +18,7 @@ import { injectable, inject, named, interfaces, Container } from 'inversify';
 import { ContributionProvider, ConnectionHandler, bindContributionProvider, servicesPath } from '../../common/index.js';
 import { MessagingService } from './messaging-service.js';
 import { ConnectionContainerModule } from './connection-container-module.js';
-import Route = require('route-parser');
+import Route from 'route-parser';
 import { Channel, ChannelMultiplexer } from '../../common/message-rpc/channel.js';
 import { FrontendConnectionService } from './frontend-connection-service.js';
 import { BackendApplicationContribution } from '../backend-application.js';

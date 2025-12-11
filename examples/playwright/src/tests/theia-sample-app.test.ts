@@ -15,10 +15,10 @@
 // *****************************************************************************
 
 import { expect, test } from '@playwright/test';
-import { TheiaApp } from '../theia-app';
-import { TheiaAppLoader } from '../theia-app-loader';
-import { TheiaToolbar } from '../theia-toolbar';
-import { TheiaWorkspace } from '../theia-workspace';
+import { TheiaApp } from '../theia-app.js';
+import { TheiaAppLoader } from '../theia-app-loader.js';
+import { TheiaToolbar } from '../theia-toolbar.js';
+import { TheiaWorkspace } from '../theia-workspace.js';
 
 class TheiaSampleApp extends TheiaApp {
     protected toolbar = new TheiaToolbar(this);

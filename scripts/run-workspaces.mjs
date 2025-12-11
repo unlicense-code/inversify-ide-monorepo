@@ -24,24 +24,24 @@ const scopePattern = args.find(arg => arg.startsWith('--scope='))?.replace('--sc
 const ignorePattern = args.find(arg => arg.startsWith('--ignore='))?.replace('--ignore=', '') || null;
 const parallel = args.includes('--parallel');
 const stream = args.includes('--stream');
-const scriptArgs = args.slice(1).filter(arg => 
-    !arg.startsWith('--scope=') && 
-    !arg.startsWith('--ignore=') && 
-    arg !== '--parallel' && 
+const scriptArgs = args.slice(1).filter(arg =>
+    !arg.startsWith('--scope=') &&
+    !arg.startsWith('--ignore=') &&
+    arg !== '--parallel' &&
     arg !== '--stream'
 );
 
 const rootDir = join(__dirname, '..');
-const workspacesOutput = execSync('node scripts/get-workspaces.mjs --json', { 
-    cwd: rootDir, 
-    encoding: 'utf8' 
+const workspacesOutput = execSync('node scripts/get-workspaces.mjs --json', {
+    cwd: rootDir,
+    encoding: 'utf8'
 });
 const workspaces = JSON.parse(workspacesOutput);
 
 // Get dependency graph for topological sorting
-const depGraphOutput = execSync('node scripts/get-workspaces.mjs --json --graph', { 
-    cwd: rootDir, 
-    encoding: 'utf8' 
+const depGraphOutput = execSync('node scripts/get-workspaces.mjs --json --graph', {
+    cwd: rootDir,
+    encoding: 'utf8'
 });
 const depGraph = JSON.parse(depGraphOutput);
 
@@ -54,7 +54,7 @@ function topologicalSort(packages, graph) {
     const visited = new Set();
     const visiting = new Set();
     const result = [];
-    
+
     function visit(name) {
         if (visiting.has(name)) {
             // Circular dependency detected, but continue anyway
@@ -63,14 +63,14 @@ function topologicalSort(packages, graph) {
         if (visited.has(name)) {
             return;
         }
-        
+
         const pkg = packageMap.get(name);
         if (!pkg) {
             return;
         }
-        
+
         visiting.add(name);
-        
+
         // Visit dependencies first
         const deps = graph[name] || [];
         for (const dep of deps) {
@@ -78,27 +78,27 @@ function topologicalSort(packages, graph) {
                 visit(dep);
             }
         }
-        
+
         visiting.delete(name);
         visited.add(name);
         result.push(pkg);
     }
-    
+
     for (const pkg of packages) {
         if (!visited.has(pkg.name)) {
             visit(pkg.name);
         }
     }
-    
+
     return result;
 }
 
 function matchesPattern(name, pattern) {
     if (!pattern) return true;
-    
+
     // Handle multiple patterns separated by comma
     const patterns = pattern.split(',').map(p => p.trim());
-    
+
     return patterns.some(p => {
         // Handle glob-like patterns
         if (p.includes('{')) {
@@ -108,12 +108,12 @@ function matchesPattern(name, pattern) {
             }).replace(/\*/g, '.*');
             return new RegExp(`^${regex}$`).test(name);
         }
-        
+
         // Handle negation
         if (p.startsWith('!')) {
             return !name.includes(p.substring(1));
         }
-        
+
         // Simple substring match
         return name.includes(p);
     });
@@ -126,7 +126,7 @@ const filteredWorkspaces = workspaces.filter(pkg => {
     if (ignorePattern && matchesPattern(pkg.name, ignorePattern)) {
         return false;
     }
-    
+
     // Check if package has the script
     const pkgJsonPath = join(pkg.location, 'package.json');
     if (!existsSync(pkgJsonPath)) {
@@ -149,7 +149,7 @@ if (script === 'compile') {
     let changed = true;
     let iterations = 0;
     const maxIterations = 10; // Prevent infinite loops
-    
+
     while (changed && iterations < maxIterations) {
         changed = false;
         iterations++;
@@ -180,7 +180,7 @@ if (script === 'compile') {
             }
         }
     }
-    
+
     const sorted = topologicalSort(filteredWorkspaces, depGraph);
     filteredWorkspaces.length = 0;
     filteredWorkspaces.push(...sorted);
@@ -196,15 +196,15 @@ if (parallel) {
         const cmd = `npm run ${script}${scriptArgs.length > 0 ? ' -- ' + scriptArgs.join(' ') : ''}`;
         return { pkg, cmd };
     });
-    
+
     const results = commands.map(({ pkg, cmd }) => {
         try {
             if (stream) {
                 console.log(`[${pkg.name}] Running: ${cmd}`);
             }
-            execSync(cmd, { 
-                cwd: pkg.location, 
-                stdio: stream ? 'inherit' : 'pipe' 
+            execSync(cmd, {
+                cwd: pkg.location,
+                stdio: stream ? 'inherit' : 'pipe'
             });
             return { pkg, success: true };
         } catch (error) {
@@ -214,7 +214,7 @@ if (parallel) {
             return { pkg, success: false, error };
         }
     });
-    
+
     const failed = results.filter(r => !r.success);
     if (failed.length > 0) {
         console.error(`\nFailed in ${failed.length} workspace(s):`);
@@ -229,9 +229,9 @@ if (parallel) {
             console.log(`[${pkg.name}] Running: ${cmd}`);
         }
         try {
-            execSync(cmd, { 
-                cwd: pkg.location, 
-                stdio: stream ? 'inherit' : 'pipe' 
+            execSync(cmd, {
+                cwd: pkg.location,
+                stdio: stream ? 'inherit' : 'pipe'
             });
         } catch (error) {
             console.error(`Failed in ${pkg.name}`);

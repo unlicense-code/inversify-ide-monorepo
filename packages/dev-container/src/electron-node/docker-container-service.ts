@@ -16,7 +16,7 @@
 
 import { ContributionProvider, MaybePromise, URI } from '@theia/core';
 import { inject, injectable, named } from 'inversify';
-import { WorkspaceServer } from '@theia/workspace/lib/common';
+import { WorkspaceServer } from '@theia/workspace/lib/common/index.js';
 import * as fs from 'fs-extra';
 import * as Docker from 'dockerode';
 import { ContainerConnectionOptions } from '../electron-common/remote-container-connection-provider.js';

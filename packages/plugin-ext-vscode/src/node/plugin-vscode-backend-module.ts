@@ -23,7 +23,7 @@ import { PluginVsCodeDirectoryHandler } from './plugin-vscode-directory-handler.
 import { VsCodePluginScanner } from './scanner-vscode.js';
 import { PluginVsCodeCliContribution } from './plugin-vscode-cli-contribution.js';
 import { CliContribution } from '@theia/core/lib/node/index.js';
-import { PluginHostEnvironmentVariable } from '@theia/plugin-ext/lib/common';
+import { PluginHostEnvironmentVariable } from '@theia/plugin-ext/lib/common/index.js';
 import { PluginVSCodeEnvironment } from '../common/plugin-vscode-environment.js';
 import { PluginVSCodeDeployerParticipant } from './plugin-vscode-deployer-participant.js';
 import { LocalVSIXFilePluginDeployerResolver } from './local-vsix-file-plugin-deployer-resolver.js';
